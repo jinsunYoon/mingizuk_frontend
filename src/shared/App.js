@@ -9,13 +9,13 @@ import Main from '../pages/Main';
 // import Counter from '../pages/Counter';
 
 const App = () => {
-	return (
-		<>
-			<ConnectedRouter history={createBrowserHistory()}>
-				<Route path="/" exact component={Main}></Route>
-			</ConnectedRouter>
-		</>
-	);
+    return (
+        <>
+            <ConnectedRouter history={createBrowserHistory()}>
+                <Route path="/" exact component={Main}></Route>
+            </ConnectedRouter>
+        </>
+    );
 };
 
 export default App;

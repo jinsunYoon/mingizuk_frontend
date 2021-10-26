@@ -1,7 +1,12 @@
-import React from 'react';
+import React from 'react'
+import Modal from '../components/Modal'
 
 const Main = () => {
-    return <></>;
-};
+    return (
+        <div>
+            <Modal />
+        </div>
+    )
+}
 
-export default Main;
+export default Main
