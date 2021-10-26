@@ -48,7 +48,7 @@ const FlexColumnEl = styled.div`
     justify-content: ${(props) => props._justify};
     align-items: ${(props) => props._align};
     ${(props) => (props._margin ? `margin:${props._margin}` : '')};
-    ${(props) => (props._padding ? `_padding:${props._padding}` : '')};
+    ${(props) => (props._padding ? `padding:${props._padding}` : '')};
     ${(props) => (props._others ? props._others : '')};
 `
 
