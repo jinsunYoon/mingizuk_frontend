@@ -2,11 +2,7 @@ import React from 'react'
 import { FlexRow, FlexColumn, SubTitle, Title, Input } from '../elements/index'
 
 const Main = () => {
-    return (
-        <div>
-            <Modal />
-        </div>
-    )
+    return <div></div>
 }
 
 export default Main
