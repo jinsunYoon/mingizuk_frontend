@@ -2,12 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Input = (props) => {
-    const { _onChange, _ph, _label, _others } = props
+    const { _onChange, _ph, _others } = props
     const styles = { _others }
 
     return (
         <>
-            <label style={{ marginLeft: '0.8rem' }}>{_label}</label>
             <InputEl {...styles} placeholder={_ph} onChange={_onChange} />
         </>
     )
@@ -16,7 +15,6 @@ const Input = (props) => {
 Input.defaultProps = {
     _onChange: () => {},
     _ph: '내용을 입력하세요.',
-    _label: '',
     _others: false,
 }
 
