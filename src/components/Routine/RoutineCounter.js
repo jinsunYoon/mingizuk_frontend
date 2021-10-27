@@ -1,13 +1,17 @@
 import React from 'react'
+import styled from 'styled-components'
+import { useDispatch, useSelector } from 'react-redux'
 import { FlexRow, Text } from '../../elements/index'
 import Icon from '../../components/icons/Icon'
+import { addCount, minusCount } from '../../redux/modules/updateRoutine'
 
-const RoutineCounter = (props) => {
-    const { countList } = props
+const RoutineCounter = () => {
+    const dispatch = useDispatch()
+    const countSet = useSelector((state) => state.updateAction.actions)
 
     return (
         <>
-            {countList.map((count, idx) => (
+            {countSet?.map((count, idx) => (
                 <FlexRow
                     _width="85vw"
                     _height="56px"
@@ -17,7 +21,7 @@ const RoutineCounter = (props) => {
                     _border="none"
                     _others="border-bottom:1px solid lightgray"
                 >
-                    <Text _others="width:50vw">{count}</Text>
+                    <Text _others="width:50vw">{count.actionName}</Text>
                     <FlexRow _width="132px" _border="none">
                         <FlexRow
                             _width="96px"
@@ -26,27 +30,27 @@ const RoutineCounter = (props) => {
                             _bgColor="none"
                             _others="border-radius:5px"
                         >
-                            <FlexRow
-                                _width="32px"
-                                _height="28px"
-                                _border="none"
+                            <CountBtn
+                                onClick={() => {
+                                    dispatch(minusCount(count.actionName))
+                                }}
                             >
                                 <Icon icon="hyphen-minus" size="9.33px" />
-                            </FlexRow>
+                            </CountBtn>
                             <FlexRow
                                 _width="32px"
                                 _height="28px"
                                 _border="none"
                             >
-                                0
+                                {count.actionCount}
                             </FlexRow>
-                            <FlexRow
-                                _width="32px"
-                                _height="28px"
-                                _border="none"
+                            <CountBtn
+                                onClick={() => {
+                                    dispatch(addCount(count.actionName))
+                                }}
                             >
                                 <Icon icon="add-plus" size="9.33px" />
-                            </FlexRow>
+                            </CountBtn>
                         </FlexRow>
                         <FlexRow _width="40px" _height="32px" _border="none">
                             <Icon icon="close-x" size="14px" />
@@ -58,14 +62,16 @@ const RoutineCounter = (props) => {
     )
 }
 
-RoutineCounter.defaultProps = {
-    countList: [
-        '앉았다 일어나기',
-        '목돌리기',
-        '허리돌리기',
-        '무릎 돌리기',
-        '스쿼트',
-    ],
-}
+RoutineCounter.defaultProps = {}
+
+const CountBtn = styled.button`
+    width: 28px;
+    height: 28px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+`
 
 export default RoutineCounter
