@@ -9,18 +9,18 @@ import {
     ButtonOutlined,
     Text,
 } from '../elements/index'
-import {Modal, Header, Footer} from '../components/index'
+import { CharacterModal, Header, Footer } from '../components/index'
 
 const Main = (props) => {
     return (
         <React.Fragment>
-            <Header/>
+            <Header />
             <FlexColumn
-                _width={'360px'}
+                _width={'100vw'}
                 _height={'100%'}
                 _padding={'1rem'}
-                _margin={'1rem 0rem'}
-                _others={'border: 1px solid red; box-sizing: border-box;'}
+                _others={'box-sizing: border-box;'}
+                _border={'none'}
             >
                 {/* <Text _fontSize={'1.5rem'} _color={'black'} _padding={'0px'}>
                     오늘의{' '}
@@ -29,7 +29,7 @@ const Main = (props) => {
                     </span>
                     을 이루세요!
                 </Text> */}
-                <Modal />
+                <CharacterModal />
                 <FlexColumn _align={'start'} _width={'100%'} _border={'none'}>
                     {' '}
                     <Text
@@ -43,7 +43,7 @@ const Main = (props) => {
                         _width={'100%'}
                         _height={'100px'}
                         _others={
-                            'border : 1px solid gray; box-sizing: border-box; background-color: #C4C4C4;'
+                            'box-sizing: border-box; background-color: #C4C4C4;'
                         }
                     >
                         <ButtonOutlined
@@ -56,7 +56,7 @@ const Main = (props) => {
                     </FlexRow>
                 </FlexColumn>
             </FlexColumn>
-            <Footer/>
+            <Footer />
         </React.Fragment>
     )
 }
