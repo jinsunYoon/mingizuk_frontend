@@ -5,14 +5,14 @@ import { createBrowserHistory } from 'history';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 
 // * import slices
-import counterSlice from './modules/counterSlice';
+import counterSlice from './store';
 
 export const history = createBrowserHistory();
 
 // * reducers
 const reducer = combineReducers({
     router: connectRouter(history),
-    counter: counterSlice.reducer,
+    // counter: counterSlice.reducer,
 });
 
 const middlewares = [];

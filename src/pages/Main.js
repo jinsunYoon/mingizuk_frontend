@@ -1,11 +1,13 @@
 import React from 'react'
-import Modal from '../components/Modal'
+import { FlexRow, FlexColumn, SubTitle, Title, Input } from '../elements/index'
+import {Header, Footer} from '../components/index'
 
 const Main = () => {
     return (
-        <div>
-            <Modal />
-        </div>
+    <>
+        <Header/>
+        <Footer/>
+    </>
     )
 }
 
