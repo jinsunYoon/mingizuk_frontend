@@ -7,6 +7,7 @@ const ButtonFill = (props) => {
 		_width,
 		_fontSize,
 		_margin,
+		_padding,
 		_bgColor,
 		_color,
 		_bradius,
@@ -18,6 +19,7 @@ const ButtonFill = (props) => {
 		_width,
 		_fontSize,
 		_margin,
+		_padding,
 		_bgColor,
 		_color,
 		_bradius,
@@ -37,7 +39,7 @@ const ButtonFill = (props) => {
 ButtonFill.defaultProps = {
 	children: '이건버튼',
 	_width: '6rem',
-	padding: '2rem',
+	_padding: '2rem',
 	_fontSize: '1rem',
 	_margin: '0.5rem',
 	_bgColor: 'black',
@@ -51,6 +53,7 @@ const ElButton = styled.button`
 	width: ${(props) => props._width};
 	font-size: ${(props) => props._fontSize};
 	margin: ${(props) => props._margin};
+	padding:${(props) => props._padding};
 	background-color: ${(props) => props._bgColor};
 	color: ${(props) => props._color};
 	border-radius: ${(props) => props._bradius};

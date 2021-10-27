@@ -14,6 +14,7 @@ const FlexRow = (props) => {
         _others,
         _bgColor,
     } = props
+    
     const styles = {
         _width,
         _height,
@@ -35,7 +36,7 @@ const FlexRow = (props) => {
 FlexRow.defaultProps = {
     children: null,
     _width: '10rem',
-    _height: '10rem',
+    _height: '',
     _justify: 'center',
     _align: 'center',
     _margin: false,

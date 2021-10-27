@@ -9,11 +9,12 @@ import {
     ButtonOutlined,
     Text,
 } from '../elements/index'
-import { Modal } from '../components/index'
+import {Modal, Header, Footer} from '../components/index'
 
 const Main = (props) => {
     return (
         <React.Fragment>
+            <Header/>
             <FlexColumn
                 _width={'360px'}
                 _height={'100%'}
@@ -55,6 +56,7 @@ const Main = (props) => {
                     </FlexRow>
                 </FlexColumn>
             </FlexColumn>
+            <Footer/>
         </React.Fragment>
     )
 }
