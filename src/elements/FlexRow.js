@@ -14,7 +14,7 @@ const FlexRow = (props) => {
         _others,
         _bgColor,
     } = props
-    
+
     const styles = {
         _width,
         _height,
