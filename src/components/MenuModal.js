@@ -1,8 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
 import { FlexColumn, FlexRow, Text, ButtonOutlined } from '../elements'
 import { AccountCircleRounded } from '@material-ui/icons'
 import { Footer } from '../components/index'
+import { history } from '../redux/store'
 
 const MenuModal = () => {
     const [modalStatus, setModalStatue] = React.useState(false)
@@ -80,30 +80,55 @@ const MenuModal = () => {
                                     _align={'start'}
                                     _border={'none'}
                                 >
-                                    <Text
-                                        _fontSize={'0.9rem'}
-                                        _fontWeight={'700'}
-                                        _padding={'1rem 0px 0px 0px'}
+                                    <ButtonOutlined
+                                        _border={'none'}
+                                        _padding={'0px'}
                                         _margin={'0px'}
+                                        _width={'false'}
+                                        _onClick={() => {
+                                            history.push('/mypage')
+                                            window.location.reload()
+                                        }}
                                     >
-                                        마이페이지
-                                    </Text>
-                                    <Text
-                                        _fontSize={'0.9rem'}
-                                        _fontWeight={'700'}
-                                        _padding={'1rem 0px 0px 0px'}
+                                        <Text
+                                            _fontSize={'0.9rem'}
+                                            _fontWeight={'700'}
+                                            _padding={'1rem 0px 0px 0px'}
+                                            _margin={'0px'}
+                                        >
+                                            마이페이지
+                                        </Text>
+                                    </ButtonOutlined>
+                                    <ButtonOutlined
+                                        _border={'none'}
+                                        _padding={'0px'}
                                         _margin={'0px'}
+                                        _width={'false'}
                                     >
-                                        어쩌고저쩌고
-                                    </Text>
-                                    <Text
-                                        _fontSize={'0.9rem'}
-                                        _fontWeight={'700'}
-                                        _padding={'1rem 0px 0px 0px'}
+                                        <Text
+                                            _fontSize={'0.9rem'}
+                                            _fontWeight={'700'}
+                                            _padding={'1rem 0px 0px 0px'}
+                                            _margin={'0px'}
+                                        >
+                                            어쩌고저쩌고
+                                        </Text>
+                                    </ButtonOutlined>
+                                    <ButtonOutlined
+                                        _border={'none'}
+                                        _padding={'0px'}
                                         _margin={'0px'}
+                                        _width={'false'}
                                     >
-                                        다른메뉴
-                                    </Text>
+                                        <Text
+                                            _fontSize={'0.9rem'}
+                                            _fontWeight={'700'}
+                                            _padding={'1rem 0px 0px 0px'}
+                                            _margin={'0px'}
+                                        >
+                                            다른메뉴
+                                        </Text>
+                                    </ButtonOutlined>
                                 </FlexColumn>
                                 <Footer />
                             </FlexColumn>
