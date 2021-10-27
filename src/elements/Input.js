@@ -13,6 +13,7 @@ const Input = (props) => {
 }
 
 Input.defaultProps = {
+    _onSubmit: () => {},
     _onChange: () => {},
     _ph: '내용을 입력하세요.',
     _others: false,
