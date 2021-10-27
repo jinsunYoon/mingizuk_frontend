@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { ButtonFill, FlexRow, Text } from '../elements/index'
 import { CancelRounded } from '@material-ui/icons'
 
@@ -7,7 +8,7 @@ const CharacterModal = (props) => {
     return (
         <React.Fragment>
             {modalStatus && (
-                <FlexRow>
+                <FlexRow _border={'none'}>
                     <div
                         style={{
                             width: '100vw',
@@ -24,20 +25,7 @@ const CharacterModal = (props) => {
                             }
                         }}
                     ></div>
-                    <div
-                        style={{
-                            width: '300px',
-                            height: '30rem',
-                            padding: '1rem',
-                            boxSizing: 'border-box',
-                            borderRadius: '10px',
-                            backgroundColor: '#fff',
-                            opacity: '0.95',
-                            position: 'fixed',
-                            top: '4.3rem',
-                            left: '1.8rem',
-                        }}
-                    >
+                    <Modal>
                         <button
                             style={{
                                 position: 'absolute',
@@ -62,11 +50,11 @@ const CharacterModal = (props) => {
                                 <br /> 나올 화면입니다
                             </Text>
                         </FlexRow>
-                    </div>
+                    </Modal>
                 </FlexRow>
             )}
             <ButtonFill
-                _width={'330px'}
+                _width={'100%'}
                 _color={'black'}
                 _padding={'0px'}
                 _margin={'0px 0px 1rem 0px'}
@@ -86,5 +74,43 @@ const CharacterModal = (props) => {
         </React.Fragment>
     )
 }
+
+const Modal = styled.div`
+    width: 300px;
+    height: 30rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: #fff;
+    opacity: 0.95;
+    position: fixed;
+    top: 4.3rem;
+    left: 1.8rem;
+    @media screen and (max-width: 280px) {
+        width: 233px;
+        left: 1.5rem;
+    }
+    @media screen and (min-width: 281px) and (max-width: 320px) {
+        width: 263px;
+    }
+    @media screen and (min-width: 361px) and (max-width: 375px) {
+        width: 318px;
+    }
+    @media screen and (min-width: 376px) and (max-width: 414px) {
+        width: 353px;
+    }
+    @media screen and (min-width: 415px) and (max-width: 540px) {
+        width: 460px;
+        left: 2.5rem;
+    }
+    @media screen and (min-width: 700px) and (max-width: 768px) {
+        width: 673px;
+        left: 3rem;
+    }
+    @media screen and (min-width: 1000px) and (max-width: 1280px) {
+        width: 897px;
+        left: 4rem;
+    }
+`
 
 export default CharacterModal

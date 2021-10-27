@@ -1,15 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FlexColumn, FlexRow, Text } from '../elements'
-import Icon from './icons/Icon'
+import { FlexColumn, FlexRow, Text, ButtonOutlined } from '../elements'
 import { AccountCircleRounded } from '@material-ui/icons'
+import { Footer } from '../components/index'
 
 const MenuModal = () => {
     const [modalStatus, setModalStatue] = React.useState(false)
     return (
         <React.Fragment>
             {modalStatus && (
-                <FlexRow>
+                <FlexRow _border={'none'}>
                     <div
                         style={{
                             width: '100vw',
@@ -70,62 +70,58 @@ const MenuModal = () => {
                                 </Text>
                             </FlexRow>
                             <FlexColumn
-                                _height={'false'}
+                                _height={'100vh'}
                                 _align={'start'}
+                                _justify={'space-between'}
                                 _border={'none'}
                             >
-                                <Text
-                                    _fontSize={'0.9rem'}
-                                    _fontWeight={'700'}
-                                    _padding={'1rem 0px 0px 0px'}
-                                    _margin={'0px'}
+                                <FlexColumn
+                                    _height={'false'}
+                                    _align={'start'}
+                                    _border={'none'}
                                 >
-                                    마이페이지
-                                </Text>
-                                <Text
-                                    _fontSize={'0.9rem'}
-                                    _fontWeight={'700'}
-                                    _padding={'1rem 0px 0px 0px'}
-                                    _margin={'0px'}
-                                >
-                                    어쩌고저쩌고
-                                </Text>
-                                <Text
-                                    _fontSize={'0.9rem'}
-                                    _fontWeight={'700'}
-                                    _padding={'1rem 0px 0px 0px'}
-                                    _margin={'0px'}
-                                >
-                                    다른메뉴
-                                </Text>
+                                    <Text
+                                        _fontSize={'0.9rem'}
+                                        _fontWeight={'700'}
+                                        _padding={'1rem 0px 0px 0px'}
+                                        _margin={'0px'}
+                                    >
+                                        마이페이지
+                                    </Text>
+                                    <Text
+                                        _fontSize={'0.9rem'}
+                                        _fontWeight={'700'}
+                                        _padding={'1rem 0px 0px 0px'}
+                                        _margin={'0px'}
+                                    >
+                                        어쩌고저쩌고
+                                    </Text>
+                                    <Text
+                                        _fontSize={'0.9rem'}
+                                        _fontWeight={'700'}
+                                        _padding={'1rem 0px 0px 0px'}
+                                        _margin={'0px'}
+                                    >
+                                        다른메뉴
+                                    </Text>
+                                </FlexColumn>
+                                <Footer />
                             </FlexColumn>
                         </FlexColumn>
                     </div>
                 </FlexRow>
             )}
-            <button
-                style={{
-                    margin: '0px',
-                    padding: '0px',
-                    width: '1.5rem',
-                    height: '1.5rem',
-                    position: 'absolute',
-                    background: 'none',
-                    border: 'none',
-                    top: '0.6rem',
-                    left: '1rem',
-                    cursor: 'pointer',
-                }}
-                onClick={() => {
+            <ButtonOutlined
+                navIcon
+                _icon={'nav-menu'}
+                _onClick={() => {
                     {
                         modalStatus
                             ? setModalStatue(false)
                             : setModalStatue(true)
                     }
                 }}
-            >
-                <Icon icon={'nav-menu'} size={24} />
-            </button>
+            />
         </React.Fragment>
     )
 }

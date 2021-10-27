@@ -9,12 +9,12 @@ import {
     ButtonOutlined,
     Text,
 } from '../elements/index'
-import { CharacterModal, Header, Footer } from '../components/index'
+import { CharacterModal } from '../components/index'
+import { history } from '../redux/store'
 
 const Main = (props) => {
     return (
         <React.Fragment>
-            <Header />
             <FlexColumn
                 _width={'100vw'}
                 _height={'100%'}
@@ -50,13 +50,16 @@ const Main = (props) => {
                             _width={'100%'}
                             _color={'black'}
                             _border={'none'}
+                            _onClick={() => {
+                                history.push('/routine/mypage')
+                                window.location.reload()
+                            }}
                         >
                             당신의 루틴을 설정해보세요!
                         </ButtonOutlined>
                     </FlexRow>
                 </FlexColumn>
             </FlexColumn>
-            <Footer />
         </React.Fragment>
     )
 }
