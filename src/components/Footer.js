@@ -1,15 +1,15 @@
 import React from 'react'
 import {ButtonFill, ButtonOutlined, FlexColumn, FlexRow, Img, Input, SubTitle, Text, Title} from '../elements/index'
 
-const Header = () => {
+
+const Footer = () => {
     return (
         <>
-            <FlexRow _justify="space-between">
-                <div>로고</div>
-                <ButtonOutlined>메뉴바</ButtonOutlined>
+            <FlexRow> 
+                <div>푸터</div> 
             </FlexRow>
         </>
     )
 }
 
-export default Header
+export default Footer

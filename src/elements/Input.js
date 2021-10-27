@@ -25,7 +25,8 @@ const InputEl = styled.input`
     padding-left: 0.8rem;
     width: 20rem;
     height: 3rem;
-    border: 1px solid lightgray;
+    border: 1px solid li
+    ghtgray;
     ${(props) => (props._others ? props._others : '')};
 `
 

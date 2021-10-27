@@ -1,12 +1,13 @@
 import React from 'react'
 import { FlexRow, FlexColumn, SubTitle, Title, Input } from '../elements/index'
-import MyRoutine from '../pages/RoutineSetting/MyRoutine'
+import {Header, Footer} from '../components/index'
 
 const Main = () => {
     return (
-        <>
-            <MyRoutine />
-        </>
+    <>
+        <Header/>
+        <Footer/>
+    </>
     )
 }
 
