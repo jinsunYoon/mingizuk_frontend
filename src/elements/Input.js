@@ -16,7 +16,7 @@ const Input = (props) => {
 Input.defaultProps = {
     _onChange: () => {},
     _ph: '내용을 입력하세요.',
-    _label: '인풋창 입니다.',
+    _label: '',
     _others: false,
 }
 
