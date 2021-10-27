@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { decrement, increment } from '../redux/modules/counterSlice';
+// import { decrement, increment } from '../redux/modules/counterSlice';
 
 export default function Counter() {
 	const count = useSelector((state) => state.counter.value);
