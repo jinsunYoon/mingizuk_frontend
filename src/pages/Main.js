@@ -29,7 +29,7 @@ const Main = (props) => {
                     을 이루세요!
                 </Text> */}
                 <Modal />
-                <FlexColumn _align={'start'} _width={'100%'}>
+                <FlexColumn _align={'start'} _width={'100%'} _border={'none'}>
                     {' '}
                     <Text
                         _fontSize={'1rem'}
