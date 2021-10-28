@@ -32,7 +32,7 @@ const getUser = createAction(GET_USER, (user)=>(user));
                 })
                 .then((res) => {
                     window.alert('회원가입을 축하드립니다.')
-                    history.replace('/login');
+                    // history.replace('/login');
                 })
                 .catch((err) => {
                     window.alert('이미 존재하는 아이디입니다.')
