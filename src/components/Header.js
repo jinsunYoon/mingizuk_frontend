@@ -13,7 +13,8 @@ import {
 import { MenuModal } from '../components/index'
 import { history } from '../redux/store'
 
-const Header = () => {
+const Header = (props) => {
+    const { name } = props
     return (
         <React.Fragment>
             <div
@@ -35,15 +36,20 @@ const Header = () => {
                             history.push('/')
                             window.location.reload()
                         }}
+                        _width="200px"
                     >
                         <Text _fontSize={'1rem'} _fontWeight={'700'}>
-                            밍기적
+                            {name}
                         </Text>
                     </ButtonOutlined>
                 </FlexColumn>
             </div>
         </React.Fragment>
     )
+}
+
+Header.defaultProps = {
+    name: '밍기적',
 }
 
 export default Header

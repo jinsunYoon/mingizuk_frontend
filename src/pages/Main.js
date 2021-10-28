@@ -9,12 +9,13 @@ import {
     ButtonOutlined,
     Text,
 } from '../elements/index'
-import { CharacterModal } from '../components/index'
+import { CharacterModal, Header } from '../components/index'
 import { history } from '../redux/store'
 
 const Main = (props) => {
     return (
         <React.Fragment>
+            <Header />
             <FlexColumn
                 _width={'100vw'}
                 _height={'100%'}
