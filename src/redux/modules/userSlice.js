@@ -17,10 +17,6 @@ const userSlice = createSlice({
     extraReducers: {
         // * login
         [loginMD.fulfilled]: (state, { payload }) => {
-            // const accessToken = payload.data.accessToken
-            // const refreshToken = payload.data.refreshToken
-            // sessionStorage.setItem('accessToken', accessToken)
-            // sessionStorage.setItem('refreshToken', refreshToken)
             state.isLogin = true
         },
         [loginMD.pending]: (state, { payload }) => {},
