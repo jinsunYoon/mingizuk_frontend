@@ -1,10 +1,12 @@
 import React from 'react'
+import { useHistory } from 'react-router'
 import styled from 'styled-components'
 import Icon from '../../components/icons/Icon'
 import { ButtonFill, ButtonOutlined } from '../../elements/index'
 
 const RoutineTemplate = (props) => {
-    const { children, button, addBtn } = props
+    const { children, button, addBtn, _onClick_ } = props
+    const history = useHistory()
     return (
         <>
             <MobileGrid>{children}</MobileGrid>
@@ -14,6 +16,7 @@ const RoutineTemplate = (props) => {
                     _height="48px"
                     _padding="16px 24px"
                     _margin="0"
+                    _onClick={props._onClick_}
                 >
                     {button}
                 </ButtonFill>
@@ -24,6 +27,9 @@ const RoutineTemplate = (props) => {
                         _bradius="56px"
                         _others="height:56px;box-shadow: 0px 2px 0px 0px #000000;"
                         _border="1px solid #020202"
+                        _onClick={() => {
+                            history.push('/routine/add')
+                        }}
                     >
                         <Icon icon="add-plus" size="21px" />
                     </ButtonOutlined>
@@ -36,6 +42,7 @@ const RoutineTemplate = (props) => {
 RoutineTemplate.defaultProps = {
     button: '버튼 적기',
     addBtn: false,
+    _onClick_: () => {},
 }
 
 const MobileGrid = styled.section`
