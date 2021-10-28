@@ -51,6 +51,12 @@ const loginAPI = (data) => {
     })
 }
 
+const logoutAPI = (data) => {
+    console.log(data, "잘넘어오나?")
+    return instance.get('/api/auth/logout', {
+    })
+}
+
 // * ------------------------------------------------
 
 // routine
@@ -78,8 +84,10 @@ const myRoutineDeleteAPI = (routineId) => {
 export {
     signupAPI,
     loginAPI,
+    logoutAPI,
     myRoutinePresetAPI,
     myRoutineCreateAPI,
     myRoutineListAPI,
     myRoutineDeleteAPI,
 }
+

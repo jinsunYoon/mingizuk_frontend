@@ -1,7 +1,7 @@
 // * basic import
 import React from 'react'
 import { ConnectedRouter } from 'connected-react-router'
-import { createBrowserHistory } from 'history'
+import { history } from '../redux/store'
 import { Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
