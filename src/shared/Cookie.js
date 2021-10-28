@@ -23,7 +23,7 @@ const deleteCookie = () => {
 }
 
 // 아이디에서 jwt토큰 받아오는 함수
-const getIdFromToken = () => {
+const getToken = () => {
     const token = getCookie('token');
     if(!token){
         window.alert('로그인을 해주세요!')
@@ -38,5 +38,5 @@ const getIdFromToken = () => {
     return login_user_id;
 };
 
-export { getCookie, setCookie, deleteCookie, getIdFromToken }
+export { getCookie, setCookie, deleteCookie, getToken }
 
