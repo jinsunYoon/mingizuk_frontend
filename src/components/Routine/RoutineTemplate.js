@@ -1,12 +1,11 @@
 import React from 'react'
-import { useHistory } from 'react-router'
 import styled from 'styled-components'
 import Icon from '../../components/icons/Icon'
 import { ButtonFill, ButtonOutlined } from '../../elements/index'
+import { history } from '../../redux/store'
 
 const RoutineTemplate = (props) => {
     const { children, button, addBtn, _onClick_ } = props
-    const history = useHistory()
     return (
         <>
             <MobileGrid>{children}</MobileGrid>
@@ -28,6 +27,7 @@ const RoutineTemplate = (props) => {
                         _others="height:56px;box-shadow: 0px 2px 0px 0px #000000;"
                         _border="1px solid #020202"
                         _onClick={() => {
+                            console.log('dd')
                             history.push('/routine/add')
                         }}
                     >
@@ -53,6 +53,7 @@ const MobileGrid = styled.section`
     width: 100vw;
     padding: 0 16px 0 16px;
     min-height: 636px;
+    cursor: not-allowed;
 `
 const BtnPos = styled.div`
     position: fixed;
@@ -61,7 +62,7 @@ const BtnPos = styled.div`
     justify-content: center;
     align-items: center;
     bottom: 30px;
-    z-index: -1;
+    z-index: 0;
 `
 
 export default RoutineTemplate
