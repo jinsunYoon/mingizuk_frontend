@@ -19,8 +19,8 @@ instance.interceptors.request.use(async (config) => {
 // interceptor를 통한 response 설정
 instance.interceptors.response.use(
     async (response) => {
-        console.log(response)
         window.alert(response.data.msg)
+        const tokens = response.data
         return response
     },
     async (error) => {
@@ -34,7 +34,7 @@ instance.interceptors.response.use(
 
 // user API
 const signupAPI = (data) => {
-    instance.post('/api/auth/signup', {
+    return instance.post('/api/auth/signup', {
         userEmail: data.userEmail,
         nickName: data.nickName,
         userPw: data.userPw,
@@ -42,4 +42,11 @@ const signupAPI = (data) => {
     })
 }
 
-export { signupAPI }
+const loginAPI = (data) => {
+    return instance.post('/api/auth/local', {
+        userEmail: data.userEmail,
+        userPw: data.userPw,
+    })
+}
+
+export { signupAPI, loginAPI }

@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import thunkMiddleware from 'redux-thunk'
 
 // * import slices
 import routineSlice from './modules/routine'
@@ -19,7 +20,7 @@ const reducer = combineReducers({
     user: userSlice.reducer,
 })
 
-const middlewares = []
+const middlewares = [thunkMiddleware]
 const env = process.env.NODE_ENV
 
 if (env === 'development') {
@@ -29,7 +30,7 @@ if (env === 'development') {
 
 const store = configureStore({
     reducer,
-    middleware: [...middlewares, ...getDefaultMiddleware()],
+    middleware: [...middlewares],
     devTools: env !== 'production',
 })
 

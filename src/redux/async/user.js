@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { signupAPI } from '../../shared/api'
+import { loginAPI, signupAPI } from '../../shared/api'
 
 export const signupMD = createAsyncThunk(
     'user/signup',
@@ -10,6 +10,19 @@ export const signupMD = createAsyncThunk(
                 console.log('>>', response)
                 return response.data
             }
+        } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const loginMD = createAsyncThunk(
+    'user/login',
+    async (data, thunkAPI) => {
+        try {
+            const response = await loginAPI(data)
+            return response
         } catch (err) {
             console.log(err)
             return thunkAPI.rejectWithValue(err)
