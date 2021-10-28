@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Icon from '../components/icons/Icon'
 
 const ButtonOutlined = (props) => {
     const {
@@ -12,6 +13,8 @@ const ButtonOutlined = (props) => {
         _bradius,
         _onClick,
         _others,
+        navIcon,
+        _icon,
     } = props
 
     const styles = {
@@ -23,6 +26,17 @@ const ButtonOutlined = (props) => {
         _bradius,
         _onClick,
         _others,
+        _icon,
+    }
+
+    if (navIcon) {
+        return (
+            <React.Fragment>
+                <NavIcon onClick={_onClick}>
+                    <Icon icon={_icon} size={24} />
+                </NavIcon>
+            </React.Fragment>
+        )
     }
 
     return (
@@ -36,6 +50,7 @@ const ButtonOutlined = (props) => {
 
 ButtonOutlined.defaultProps = {
     children: '이건버튼',
+    _icon: '',
     _width: '6rem',
     padding: '2rem',
     _fontSize: '1rem',
@@ -57,6 +72,19 @@ const ElButton = styled.button`
     border: ${(props) => props._border};
     ${(props) => props._others};
     background: none;
+    cursor: pointer;
+`
+
+const NavIcon = styled.div`
+    margin: 0px;
+    padding: 0px;
+    width: 1.5rem;
+    height: 1.5rem;
+    position: fixed;
+    background: none;
+    border: none;
+    top: 0.6rem;
+    left: 1rem;
     cursor: pointer;
 `
 

@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 /* 유저모듈 입니다 (로그인, 회원가입 로직) - immer, redux-actions 이용 */
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import instance from '../../shared/api';
+=======
+/* 유저모듈 입니다 (로그인, 회원가입 로직) */
+
+import { createReducer, createAction, createSlice } from '@reduxjs/toolkit'
+>>>>>>> 6232f6477bcafe755ecc9c8733578a02c3f09d2c
 
 const initialState = {
     userEmail: null,
@@ -10,15 +16,20 @@ const initialState = {
 }
 
 // action types
+<<<<<<< HEAD
 const LOG_IN = 'LOG_IN';
 const LOG_OUT = 'LOG_OUT';
 const GET_USER = 'GET_USER';
+=======
+const LOG_IN = 'LOG_IN'
+const LOG_OUT = 'LOG_OUT'
+const GET_USER = 'GET_USER'
+>>>>>>> 6232f6477bcafe755ecc9c8733578a02c3f09d2c
 
 // action creators
 const logIn = createAction(LOG_IN, (user)=>(user));
 const logOut = createAction(LOG_OUT, (user)=>(user));
 const getUser = createAction(GET_USER, (user)=>(user));
-
 
 // middlewares
     // 회원가입
@@ -95,5 +106,48 @@ const actionCreators = {
     logOut,
     getUser,
 
+<<<<<<< HEAD
+=======
+// 회원가입
+const gethSignup = (userEmail, nickName, userPw, userPwChk) => {
+    return (dispatch, getState, { history }) => {}
+}
+
+// 로그인
+const getLogin = (userEmail, userPw) => {
+    return () => {}
+}
+
+// 소셜로그인
+const getNaver = () => {
+    return () => {}
+}
+
+const getKakao = () => {
+    return () => {}
+}
+
+const getGoogle = () => {
+    return () => {}
+}
+
+// 로그아웃
+// const getLogout = (header:{ accessToken:(token), refreshToken:(token) }) => {
+//     return (() => {
+
+//     })
+// }
+
+// 로그인 유저 확인
+// const getMe = (header:{ accessToken:(token), refreshToken:(token) }) => {
+//     return (() => {
+
+//     })
+// }
+
+// 회원탈퇴
+const deleteBye = () => {
+    return () => {}
+>>>>>>> 6232f6477bcafe755ecc9c8733578a02c3f09d2c
 }
 export { actionCreators }
