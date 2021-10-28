@@ -1,26 +1,41 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { FlexColumn, FlexRow, Text } from '../../elements/index'
+import {
+    myRoutinePresetMD,
+    myRoutineListMD,
+    myRoutineDeleteMD,
+} from '../../redux/async/routine'
 import Icon from '../icons/Icon'
 
 const RoutineDesc = (props) => {
+    const dispatch = useDispatch()
     const { myRoutine, select, recommendRoutine } = props
     const [desc, setDesc] = React.useState('first')
+    const preset = useSelector((state) => state.routine.presetRoutine)
+    const myset = useSelector((state) => state.routine.myRoutine)
 
     React.useEffect(() => {
         if (select === 'first') {
             setDesc('myRoutine')
         } else if (select === 'second') {
+            console.log('secondfffe')
             setDesc('recommendRoutine')
         } else {
             setDesc('myRoutine')
         }
-    })
+    }, [select])
+
+    React.useEffect(() => {
+        dispatch(myRoutinePresetMD())
+        dispatch(myRoutineListMD())
+    }, [])
 
     return (
         <>
             {desc === 'myRoutine' && (
                 <FlexColumn _border="none" _width="320px">
-                    {myRoutine.map((routine, idx) => (
+                    {myset?.map((routine, idx) => (
                         <FlexRow _width="85vw" _border="none" key={idx}>
                             <FlexColumn
                                 key={idx}
@@ -30,9 +45,13 @@ const RoutineDesc = (props) => {
                                 _others="border-bottom:1px solid lightgray"
                                 _align="flex-start"
                             >
-                                <Text _fontWeight="600">{routine.key}</Text>
+                                <Text _fontWeight="600">
+                                    {routine?.routineName}
+                                </Text>
                                 <Text _fontSize="11px" _margin="5px 0 0 0">
-                                    {routine.value}
+                                    {routine?.Actions?.map(
+                                        (action, idx) => action.actionName
+                                    )}
                                 </Text>
                             </FlexColumn>
                             <FlexRow
@@ -43,7 +62,13 @@ const RoutineDesc = (props) => {
                                 _others="border-bottom:1px solid lightgray"
                             >
                                 <Icon icon="create" size="12px"></Icon>
-                                <Icon icon="close-x" size="14px"></Icon>
+                                <Icon
+                                    _onClick={() =>
+                                        dispatch(myRoutineDeleteMD(routine.id))
+                                    }
+                                    icon="close-x"
+                                    size="14px"
+                                ></Icon>
                             </FlexRow>
                         </FlexRow>
                     ))}
@@ -51,7 +76,7 @@ const RoutineDesc = (props) => {
             )}
             {desc === 'recommendRoutine' && (
                 <FlexColumn _border="none" _width="320px">
-                    {recommendRoutine.map((routine, idx) => (
+                    {preset?.map((routine, idx) => (
                         <FlexRow _width="85vw" _border="none" key={idx}>
                             <FlexColumn
                                 key={idx}
@@ -61,9 +86,13 @@ const RoutineDesc = (props) => {
                                 _others="border-bottom:1px solid lightgray"
                                 _align="flex-start"
                             >
-                                <Text _fontWeight="600">{routine.key}</Text>
+                                <Text _fontWeight="600">
+                                    {routine?.routineName}
+                                </Text>
                                 <Text _fontSize="11px" _margin="5px 0 0 0">
-                                    {routine.value}
+                                    {routine?.Actions?.map(
+                                        (action, idx) => action.actionName
+                                    )}
                                 </Text>
                             </FlexColumn>
                             <FlexRow

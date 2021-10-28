@@ -9,7 +9,7 @@ const actionSlice = createSlice({
     initialState: initialState,
     reducers: {
         addAction: (state, action) => {
-            state.actions.push({ actionName: action.payload, actionCount: 0 })
+            state.actions.push({ actionName: action.payload, actionCnt: 0 })
         },
         minusAction: (state, action) => {
             const result = state.actions.filter(
@@ -21,13 +21,13 @@ const actionSlice = createSlice({
             const ref = state.actions.findIndex(
                 (act) => act.actionName === action.payload
             )
-            state.actions[ref].actionCount = state.actions[ref].actionCount + 1
+            state.actions[ref].actionCnt = state.actions[ref].actionCnt + 1
         },
         minusCount: (state, action) => {
             const ref = state.actions.findIndex(
                 (act) => act.actionName === action.payload
             )
-            state.actions[ref].actionCount = state.actions[ref].actionCount - 1
+            state.actions[ref].actionCnt = state.actions[ref].actionCnt - 1
         },
     },
 })

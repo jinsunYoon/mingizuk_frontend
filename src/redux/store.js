@@ -6,7 +6,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import thunkMiddleware from 'redux-thunk'
 
 // * import slices
-import routineSlice from './modules/routine'
+import routineSlice from './modules/routineSlice'
 import actionSlice from './modules/updateRoutine'
 import userSlice from './modules/userSlice'
 
