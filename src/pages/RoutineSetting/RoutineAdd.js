@@ -14,11 +14,13 @@ const RoutineAdd = () => {
 
     return (
         <>
-            <Header name="내 루틴 추가하기 ( 1 / 2 )" />
             <RoutineTemplate
                 button={selectNum}
                 _onClick_={() => history.push('/routine/count')}
             >
+                <div style={{ zIndex: '4' }}>
+                    <Header name="내 루틴 추가하기 ( 1 / 2 )" />
+                </div>
                 <ToggleTab firstValue={'스트레칭'} secondValue={'맨몸 운동'} />
                 <RoutineSelect select={status} />
             </RoutineTemplate>

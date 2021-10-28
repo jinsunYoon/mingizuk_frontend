@@ -16,7 +16,7 @@ const MenuModal = () => {
         return (
             <React.Fragment>
                 {modalStatus && (
-                    <FlexRow _border={'none'}>
+                    <FlexRow _border={'none'} _others="z-index:5">
                         <div
                             style={{
                                 width: '100vw',
@@ -84,8 +84,9 @@ const MenuModal = () => {
                                             borderRadius: '50px',
                                             cursor: 'pointer',
                                         }}
-                                        _onClick={()=>{logoutMD}}    
-
+                                        _onClick={() => {
+                                            logoutMD
+                                        }}
                                     />
                                 </FlexRow>
                                 <FlexColumn
