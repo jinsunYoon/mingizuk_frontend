@@ -1,13 +1,22 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 import { FlexRow } from '.'
 import Icon from '../components/icons/Icon'
+import { addAction, minusAction } from '../redux/modules/updateRoutine'
 
-const Check = () => {
+const Check = (props) => {
     const [check, setCheck] = React.useState(false)
+    const dispatch = useDispatch()
+    const value = props.value
+
     return (
         <div
-            onClick={() => {
+            onClick={(e) => {
                 !check ? setCheck(true) : setCheck(false)
+                !check
+                    ? dispatch(addAction(value))
+                    : dispatch(minusAction(value))
             }}
         >
             {check ? (

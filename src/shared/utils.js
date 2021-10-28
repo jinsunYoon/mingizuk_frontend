@@ -1,8 +1,15 @@
-export const getToken = async () => {
-	const token = localStorage.getItem('token');
-	if (token) {
-		return `Bearer ${token}`;
-	} else {
-		return null;
-	}
-};
+const getToken = () => {
+    const accessToken = sessionStorage.getItem('accessToken')
+    const refreshToken = sessionStorage.getItem('refreshToken')
+    if (accessToken) {
+        let tokens = {
+            accessToken: `Bearer ${accessToken}`,
+            refreshToken: `Bearer ${refreshToken}`,
+        }
+        return tokens
+    }
+
+    return null
+}
+
+export { getToken }

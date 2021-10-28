@@ -1,20 +1,20 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-// history
+import { useHistory } from 'react-router'
 import { Header } from '../../components'
 import RoutineSelect from '../../components/Routine/RoutineSelect'
 import RoutineTemplate from '../../components/Routine/RoutineTemplate'
 import ToggleTab from '../../components/ToggleTab'
-import { history } from '../../redux/store'
 
-const RoutineAdd = () => {
+const RoutineUpdate = () => {
+    const history = useHistory()
     const status = useSelector((state) => state.routine.myPage)
     const selectList = useSelector((state) => state.updateAction.actions)
     const selectNum = ` 선택 완료 ( ${selectList.length} / 전체 )`
 
     return (
         <>
-            <Header name="내 루틴 추가하기 ( 1 / 2 )" />
+            <Header name="내 루틴 수정하기 ( 1 / 2 )" />
             <RoutineTemplate
                 button={selectNum}
                 _onClick_={() => history.push('/routine/count')}
@@ -26,4 +26,4 @@ const RoutineAdd = () => {
     )
 }
 
-export default RoutineAdd
+export default RoutineUpdate
