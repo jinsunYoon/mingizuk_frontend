@@ -20,6 +20,7 @@ const userSlice = createSlice({
             const refreshToken = payload.data.refreshToken
             sessionStorage.setItem('accessToken', accessToken)
             sessionStorage.setItem('refreshToken', refreshToken)
+            state.isLogin = true
         },
         [loginMD.pending]: (state, { payload }) => {},
         [loginMD.rejected]: (state, { payload: errorMessage }) => {},

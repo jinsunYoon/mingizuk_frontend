@@ -42,7 +42,7 @@ const RoutineCounter = () => {
                                 _height="28px"
                                 _border="none"
                             >
-                                {count.actionCount}
+                                {count.actionCnt}
                             </FlexRow>
                             <CountBtn
                                 onClick={() => {

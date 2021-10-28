@@ -4,9 +4,11 @@ import RoutineTemplate from '../../components/Routine/RoutineTemplate'
 import ToggleTab from '../../components/ToggleTab'
 import RoutineDesc from '../../components/Routine/RoutineDesc'
 import { Header } from '../../components'
+import { getToken } from '../../shared/utils'
 
 const MyRoutine = () => {
     const status = useSelector((state) => state.routine.myPage)
+    console.log(status)
 
     return (
         <>

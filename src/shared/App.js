@@ -3,6 +3,7 @@ import React from 'react'
 import { ConnectedRouter } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 import { Route } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 // * pages
 import Main from '../pages/Main'
@@ -12,14 +13,12 @@ import MyRoutine from '../pages/RoutineSetting/MyRoutine'
 import RoutineAdd from '../pages/RoutineSetting/RoutineAdd'
 import RoutineCount from '../pages/RoutineSetting/RoutineCount'
 
-import { Header } from '../components/index'
-
-// import Counter from '../pages/Counter';
+import { history } from '../redux/store'
 
 const App = () => {
     return (
         <>
-            <ConnectedRouter history={createBrowserHistory()}>
+            <ConnectedRouter history={history}>
                 <Route path="/" exact component={Main}></Route>
                 <Route path="/login" exact component={Login}></Route>
                 <Route path="/signup" exact component={Signup}></Route>
