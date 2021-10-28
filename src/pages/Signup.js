@@ -77,12 +77,28 @@ const Signup = (props) => {
 
     return (
         <>
-            <FlexRow _width="100%" _justify="center" _border="none">
-                <FlexColumn _width="360px" _height="" _border="none">
-                    <SubTitle _margin="3rem">회원가입</SubTitle>
+            <FlexRow 
+                _width="100%" 
+                _justify="center" 
+                _border="none"
+            >
+                <FlexColumn 
+                    _width="360px" 
+                    _height="" 
+                    _border="none"
+                >
+                    <SubTitle 
+                        _margin="5rem"
+                    >
+                        회원가입
+                    </SubTitle>
 
                     <div>
-                        <Text _margin="1rem 0 0.3rem">닉네임</Text>
+                        <Text 
+                            _margin="1rem 0 0.3rem"
+                        >
+                            닉네임
+                        </Text>
                         <Input
                             _ph="어떻게 불러드릴까요?"
                             _onChange={(e) => setNickName(e.target.value)}
@@ -90,7 +106,11 @@ const Signup = (props) => {
                     </div>
 
                     <div>
-                        <Text _margin="1rem 0 0.3rem">이메일</Text>
+                        <Text 
+                            _margin="1rem 0 0.3rem"
+                        >
+                            이메일
+                        </Text>
                         <Input
                             _ph="로그인할 이메일을 입력해주세요!"
                             _onChange={(e) => setEmail(e.target.value)}
@@ -98,7 +118,11 @@ const Signup = (props) => {
                     </div>
 
                     <div>
-                        <Text _margin="1rem 0 0.3rem">비밀번호</Text>
+                        <Text 
+                            _margin="1rem 0 0.3rem"
+                        >
+                            비밀번호
+                        </Text>
                         <Input
                             _type="password"
                             _ph="비밀번호를 입력해주세요!"
@@ -107,7 +131,11 @@ const Signup = (props) => {
                     </div>
 
                     <div>
-                        <Text _margin="1rem 0 0.3rem">비밀번호 재확인</Text>
+                        <Text 
+                            _margin="1rem 0 0.3rem"
+                        >
+                                비밀번호 재확인
+                        </Text>
                         <Input
                             _type="password"
                             _ph="비밀번호를 다시 해주세요!"
