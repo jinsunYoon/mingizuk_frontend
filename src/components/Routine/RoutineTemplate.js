@@ -61,6 +61,7 @@ const BtnPos = styled.div`
     justify-content: center;
     align-items: center;
     bottom: 30px;
+    z-index: -1;
 `
 
 export default RoutineTemplate
