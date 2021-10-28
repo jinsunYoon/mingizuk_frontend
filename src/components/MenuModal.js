@@ -5,6 +5,7 @@ import { ExitToAppRounded } from '@material-ui/icons'
 import { Footer } from '../components/index'
 import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
+import { logoutMD } from '../redux/async/user'
 
 const MenuModal = () => {
     const is_login = useSelector((state) => state.user.isLogin)
@@ -83,9 +84,8 @@ const MenuModal = () => {
                                             borderRadius: '50px',
                                             cursor: 'pointer',
                                         }}
-                                        // onClick={()=>{
+                                        _onClick={()=>{logoutMD}}    
 
-                                        // }}
                                     />
                                 </FlexRow>
                                 <FlexColumn

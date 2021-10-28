@@ -12,7 +12,6 @@ import {
 } from '../elements/index'
 import { MenuModal } from '../components/index'
 import { history } from '../redux/store'
-import { logoutMD } from '../redux/async/user'
 
 const Header = (props) => {
     const { name } = props
@@ -44,11 +43,6 @@ const Header = (props) => {
                         </Text>
                     </ButtonOutlined>
                 </FlexColumn>
-                <ButtonOutlined
-                    _onClick={()=>{logoutMD}}    
-                >
-                    로그아웃
-                </ButtonOutlined>
             </div>
         </React.Fragment>
     )
