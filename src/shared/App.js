@@ -19,7 +19,6 @@ import { Header } from '../components/index'
 const App = () => {
     return (
         <>
-            <Header />
             <ConnectedRouter history={createBrowserHistory()}>
                 <Route path="/" exact component={Main}></Route>
                 <Route path="/login" exact component={Login}></Route>
