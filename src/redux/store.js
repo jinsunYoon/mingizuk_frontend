@@ -7,6 +7,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 // * import slices
 import routineSlice from './modules/routine'
 import actionSlice from './modules/updateRoutine'
+import userSlice from './modules/userSlice'
 
 export const history = createBrowserHistory()
 
@@ -15,6 +16,7 @@ const reducer = combineReducers({
     router: connectRouter(history),
     routine: routineSlice.reducer,
     updateAction: actionSlice.reducer,
+    user: userSlice.reducer,
 })
 
 const middlewares = []

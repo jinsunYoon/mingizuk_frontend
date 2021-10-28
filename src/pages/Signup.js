@@ -11,9 +11,12 @@ import {
     Title,
 } from '../elements/index'
 import { useDispatch, useSelector } from 'react-redux'
+import { signupMD } from '../redux/async/user'
+import dotenv from 'dotenv'
 // import { actionCreator as userActions } from '../redux/modules/user'
 
 const Signup = (props) => {
+    dotenv.config()
     const dispatch = useDispatch()
 
     const [nickName, setNickName] = useState('')
@@ -23,56 +26,44 @@ const Signup = (props) => {
 
     const onClickSignup = () => {
         //유효성검사
-        let emailExp =
-            /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/
-        let pwExp = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,16}$/
+        // let emailExp =
+        //     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/
+        // let pwExp = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,16}$/
 
-        if (
-            userEmail === '' ||
-            userPw === '' ||
-            nickName === '' ||
-            userPwChk === ''
-        ) {
-            window.alert('빈칸이 있습니다! 다 채워주세요!')
-            return
-        }
-<<<<<<< HEAD
-        if(emailExp.test(userEmail)){
-            window.alert('아이디가 이메일 형식에 맞지않습니다. 확인해주세요!')
-            return;
-        }
+        // if (
+        //     userEmail === '' ||
+        //     userPw === '' ||
+        //     nickName === '' ||
+        //     userPwChk === ''
+        // ) {
+        //     window.alert('빈칸이 있습니다! 다 채워주세요!')
+        //     return
+        // }
+        // if (emailExp.test(userEmail)) {
+        //     window.alert('아이디가 이메일 형식에 맞지않습니다!')
+        //     return
+        // }
 
-        if(7< userPw.length<17 ,pwExp.test(userPw)){
-            window.alert('8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요!')
-            return;
-        }
+        // if ((7 < userPw.length < 17, pwExp.test(userPw))) {
+        //     window.alert('8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.')
+        //     return
+        // }
 
-        if(userPw !== userPwChk){
-            alert('비밀번호가 틀립니다. 확인해주세요!')
-            return;
-        }
+        // if (userPw !== userPwChk) {
+        //     alert('비밀번호가 틀립니다. 확인해주세요.')
+        //     return
+        // }
 
-        dispatch(userActions.user.getSignup(userEmail, nickName, userPw, userPwChk))        
-=======
-        if (emailExp.test(userEmail)) {
-            window.alert('아이디가 이메일 형식에 맞지않습니다!')
-            return
+        // dispatch(
+        //     userActions.user.getSignup(userEmail, nickName, userPw, userPwChk)
+        // )
+        const data = {
+            userEmail: 'a1saadd324534@naver.com',
+            nickName: 'a1sdffd32345',
+            userPw: '*aaa123456789',
+            userPwChk: '*aaa123456789',
         }
-
-        if ((7 < userPw.length < 17, pwExp.test(userPw))) {
-            window.alert('8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.')
-            return
-        }
-
-        if (userPw !== userPwChk) {
-            alert('비밀번호가 틀립니다. 확인해주세요.')
-            return
-        }
-
-        dispatch(
-            userActions.user.getSignup(userEmail, nickName, userPw, userPwChk)
-        )
->>>>>>> 6232f6477bcafe755ecc9c8733578a02c3f09d2c
+        dispatch(signupMD(data))
     }
     /*(미완)
     //값이 입력되지 않았을시, 버튼 비활성화
