@@ -29,7 +29,9 @@ const Login = () => {
         <>
             <FlexRow _width="100%" _justify="center" _border="none">
                 <FlexColumn _width="360px" _height="" _border="none">
-                    <SubTitle _margin="3rem">로그인</SubTitle>
+                    <SubTitle _margin="5rem">
+                        로그인
+                    </SubTitle>
                     <div>
                         <Text _margin="1rem">아이디</Text>
                         <Input

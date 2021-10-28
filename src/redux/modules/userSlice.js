@@ -1,5 +1,5 @@
 import { createSlice, isFulfilled } from '@reduxjs/toolkit'
-import { signupMD, loginMD } from '../async/user'
+import { signupMD, loginMD, logoutMD } from '../async/user'
 import { history } from '../store'
 
 const initialState = {
@@ -19,6 +19,13 @@ const userSlice = createSlice({
         [loginMD.fulfilled]: (state, { payload }) => {
             state.isLogin = true
         },
+        // * logout
+        [logoutMD.fulfilled]: (state,{ payload }) => {
+            const accessToken = payload.data.accessToken
+            const refreshToken = payload.data.refreshToken
+            sessionStorage.removeItem('accessToken', accessToken)
+            sessionStorage.removeItem('refreshToken', refreshToken)
+        },
         [loginMD.pending]: (state, { payload }) => {},
         [loginMD.rejected]: (state, { payload: errorMessage }) => {},
         [signupMD.fulfilled]: (state, { payload }) => {},
@@ -26,4 +33,4 @@ const userSlice = createSlice({
 })
 
 export const { userReducer } = userSlice.actions
-export default userSlice
+export default userSlice;
