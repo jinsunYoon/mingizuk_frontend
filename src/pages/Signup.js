@@ -26,7 +26,7 @@ const Signup = (props) => {
 
     const onClickSignup = () => {
         let emailExp = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.-]+)/
-        let pwExp = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,16}$/
+        let pwExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/
 
         if (
             userEmail === '' ||
@@ -42,12 +42,13 @@ const Signup = (props) => {
             return
         }
 
-        // if ((7 < userPw.length < 17, pwExp.test(userPw))) {
-        //     window.alert(
-        //         '비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요!'
-        //     )
-        //     return
-        // }
+        if (userPw.length <8 || userPw.length > 17) {
+            window.alert('비밀번호는 8~16자 사용하세요!')
+        }
+        else if(!pwExp.test(userPw)){
+            window.alert('영문 소문자, 숫자, 특수문자를 사용하세요!')
+            return;
+        }
 
         if (userPw !== userPwChk) {
             alert('비밀번호가 틀립니다. 확인해주세요!')

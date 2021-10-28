@@ -49,4 +49,10 @@ const loginAPI = (data) => {
     })
 }
 
-export { signupAPI, loginAPI }
+const logoutAPI = (data) => {
+    console.log(data, "잘넘어오나?")
+    return instance.get('/api/auth/logout', {
+    })
+}
+
+export { signupAPI, loginAPI, logoutAPI }
