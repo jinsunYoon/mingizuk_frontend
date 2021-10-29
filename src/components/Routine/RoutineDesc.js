@@ -9,6 +9,8 @@ import {
 } from '../../redux/async/routine'
 import Icon from '../icons/Icon'
 import { updateRoutine } from '../../redux/modules/routineSlice'
+import { setAction } from '../../redux/modules/mainRoutine'
+
 
 const RoutineDesc = (props) => {
     const dispatch = useDispatch()
@@ -16,7 +18,7 @@ const RoutineDesc = (props) => {
     const [desc, setDesc] = React.useState('first')
     const preset = useSelector((state) => state.routine.presetRoutine)
     const myset = useSelector((state) => state.routine.myRoutine)
-
+    
     React.useEffect(() => {
         if (select === 'first') {
             setDesc('myRoutine')
@@ -38,10 +40,9 @@ const RoutineDesc = (props) => {
             {desc === 'myRoutine' && (
                 <FlexColumn _border="none" _width="320px">
                     {myset?.map((routine, idx) => (
-                        <div
-                            onClick={() => {
-                                console.log(routine.id)
-                            }}
+                        <div onClick={()=>{
+                            console.log(routine?.routineName)
+                        }}
                         >
                             <FlexRow _width="85vw" _border="none" key={idx}>
                                 <FlexColumn
@@ -95,6 +96,14 @@ const RoutineDesc = (props) => {
             {desc === 'recommendRoutine' && (
                 <FlexColumn _border="none" _width="320px">
                     {preset?.map((routine, idx) => (
+                        <div onClick={
+                            ()=>{
+                                const data = {name:routine?.routineName, actions:routine.Actions}
+                                console.log(data)
+                                dispatch(setAction(data))
+                                
+                            }
+                        }>
                         <FlexRow _width="85vw" _border="none" key={idx}>
                             <FlexColumn
                                 key={idx}
@@ -127,6 +136,7 @@ const RoutineDesc = (props) => {
                                 <Icon icon="close-x" size="14px" /> */}
                             </FlexRow>
                         </FlexRow>
+                        </div>
                     ))}
                 </FlexColumn>
             )}

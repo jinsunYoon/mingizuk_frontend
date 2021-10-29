@@ -5,10 +5,12 @@ import { createBrowserHistory } from 'history'
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import thunkMiddleware from 'redux-thunk'
 
+
 // * import slices
 import routineSlice from './modules/routineSlice'
 import actionSlice from './modules/updateRoutine'
 import userSlice from './modules/userSlice'
+import mainRoutineSlice from './modules/mainRoutine'
 
 export const history = createBrowserHistory()
 
@@ -18,6 +20,7 @@ const reducer = combineReducers({
     routine: routineSlice.reducer,
     updateAction: actionSlice.reducer,
     user: userSlice.reducer,
+    setAction: mainRoutineSlice.reducer,
 })
 
 const middlewares = [thunkMiddleware]
