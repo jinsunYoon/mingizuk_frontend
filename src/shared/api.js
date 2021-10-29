@@ -33,13 +33,8 @@ instance.interceptors.response.use(
         console.log(response)
         return response
     },
-    async (error) => {
-        // const {
-        //     response: { status },
-        // } = error
-        console.log(error)
-        // window.alert(error.response.data.msg)
-    }
+    async (error) => { console.log(error); 
+        window.alert(error.response.data.msg) }
 )
 
 instanceSign.interceptors.response.use(
@@ -70,9 +65,8 @@ const loginAPI = (data) => {
     })
 }
 
-const logoutAPI = (data) => {
-    console.log(data, '잘넘어오나?')
-    return instance.get('/api/auth/logout', {})
+const logoutAPI = () => {
+    return instance.get('/api/auth/logout')
 }
 
 // * ------------------------------------------------
@@ -97,6 +91,7 @@ const myRoutineListAPI = () => {
 
 const myRoutineDeleteAPI = (routineId) => {
     return instance.delete(`/api/routines/:${routineId}`)
+    
 }
 
 export {

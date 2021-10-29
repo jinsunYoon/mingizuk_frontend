@@ -37,10 +37,10 @@ export const loginMD = createAsyncThunk(
 )
 
 export const logoutMD = createAsyncThunk(
-    'user/logout',
+    'user/logoutz',
     async (data, thunkAPI) => {
         try {
-            const response = await logoutAPI(data)
+            const response = await logoutAPI()
             return response
         } catch (err) {
             console.log(err)
