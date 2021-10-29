@@ -32,7 +32,7 @@ const RoutineSelect = (props) => {
                             <Text _fontSize="11px" _margin="10px 0">
                                 {routine}
                             </Text>
-                            <Check value={routine} type="stretching" />
+                            <Check value={routine} />
                         </FlexRow>
                     ))}
                 </FlexColumn>
@@ -51,7 +51,7 @@ const RoutineSelect = (props) => {
                             <Text _fontSize="11px" _margin="10px 0">
                                 {routine}
                             </Text>
-                            <Check value={routine} type="body_exercise" />
+                            <Check />
                         </FlexRow>
                     ))}
                 </FlexColumn>

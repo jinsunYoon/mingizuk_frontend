@@ -9,14 +9,15 @@ const Check = (props) => {
     const [check, setCheck] = React.useState(false)
     const dispatch = useDispatch()
     const value = props.value
+    const type = props.type
 
     return (
         <div
             onClick={(e) => {
                 !check ? setCheck(true) : setCheck(false)
                 !check
-                    ? dispatch(addAction(value))
-                    : dispatch(minusAction(value))
+                    ? dispatch(addAction({ value, type }))
+                    : dispatch(minusAction({ value, type }))
             }}
         >
             {check ? (

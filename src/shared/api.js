@@ -34,11 +34,8 @@ instance.interceptors.response.use(
         return response
     },
     async (error) => {
-        // const {
-        //     response: { status },
-        // } = error
         console.log(error)
-        // window.alert(error.response.data.msg)
+        window.alert(error.response.data.msg)
     }
 )
 
@@ -83,7 +80,6 @@ const myRoutinePresetAPI = () => {
 }
 
 const myRoutineCreateAPI = (data) => {
-    console.log(getToken())
     return instance.post('/api/routines', {
         routineName: data.routineName,
         actions: data.actions,
@@ -96,7 +92,16 @@ const myRoutineListAPI = () => {
 }
 
 const myRoutineDeleteAPI = (routineId) => {
-    return instance.delete(`/api/routines/:${routineId}`)
+    return instance.delete(`/api/routines/${routineId}`)
+}
+
+const myRoutineUpdateAPI = (data) => {
+    console.log(data)
+    return instance.put(`/api/routines/${data.routineId}`, {
+        routineName: data.routineName,
+        actions: data.actions,
+        isMain: data.isMain,
+    })
 }
 
 export {
@@ -107,4 +112,5 @@ export {
     myRoutineCreateAPI,
     myRoutineListAPI,
     myRoutineDeleteAPI,
+    myRoutineUpdateAPI,
 }
