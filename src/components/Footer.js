@@ -53,7 +53,7 @@ const Footer = () => {
                 >
                     Back
                 </Text>
-                <Text _color={'gray'}>김영우 임성찬 양주혁</Text>
+                <Text _color={'gray'}>김영우 양주혁 임성찬</Text>
                 <Text
                     _padding={'1rem 0px 0px 0px'}
                     _fontWeight={'700'}
@@ -61,7 +61,7 @@ const Footer = () => {
                 >
                     Designer
                 </Text>
-                <Text _color={'gray'}>김예진 김수빈</Text>
+                <Text _color={'gray'}>김수빈 김예진</Text>
             </FlexColumn>
         </>
     )
