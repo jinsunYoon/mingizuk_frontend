@@ -9,12 +9,18 @@ const actionSlice = createSlice({
     initialState: initialState,
     reducers: {
         addAction: (state, action) => {
-            state.actions.push({ actionName: action.payload, actionCnt: 0 })
+            state.actions.push({
+                actionName: action.payload.value,
+                actionCnt: 0,
+                actionType: action.payload.type,
+            })
         },
         minusAction: (state, action) => {
+            console.log(action.payload.value)
             const result = state.actions.filter(
-                (act) => act.actionName !== action.payload
+                (act) => act.actionName !== action.payload.value
             )
+            console.log(result)
             state.actions = result
         },
         addCount: (state, action) => {
@@ -27,13 +33,18 @@ const actionSlice = createSlice({
             const ref = state.actions.findIndex(
                 (act) => act.actionName === action.payload
             )
-            state.actions[ref].actionCnt = state.actions[ref].actionCnt - 1
+            if (state.actions[ref].actionCnt > 0) {
+                state.actions[ref].actionCnt = state.actions[ref].actionCnt - 1
+            }
+        },
+        resetAction: (state, action) => {
+            state.actions = []
         },
     },
 })
 
 //* reducer export
-export const { addAction, minusAction, addCount, minusCount } =
+export const { addAction, minusAction, addCount, minusCount, resetAction } =
     actionSlice.actions
 
 //* slice export

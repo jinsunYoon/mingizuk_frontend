@@ -34,7 +34,6 @@ const Header = (props) => {
                         _border={'none'}
                         _onClick={() => {
                             history.push('/')
-                            window.location.reload()
                         }}
                         _width="200px"
                     >

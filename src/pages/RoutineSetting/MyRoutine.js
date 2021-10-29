@@ -5,6 +5,7 @@ import ToggleTab from '../../components/ToggleTab'
 import RoutineDesc from '../../components/Routine/RoutineDesc'
 import { Header } from '../../components'
 import { getToken } from '../../shared/utils'
+import { history } from '../../redux/store'
 
 const MyRoutine = () => {
     const status = useSelector((state) => state.routine.myPage)
@@ -12,7 +13,11 @@ const MyRoutine = () => {
 
     return (
         <>
-            <RoutineTemplate button="메인 루틴으로 설정하기" addBtn="true">
+            <RoutineTemplate
+                button="메인 루틴으로 설정하기"
+                _onClick_={() => history.push('/')}
+                addBtn="true"
+            >
                 <div style={{ zIndex: '3' }}>
                     <Header name="루틴 설정하기" />
                 </div>

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { loginAPI, signupAPI, logoutAPI } from '../../shared/api'
+import { loginAPI, signupAPI, logoutAPI, loginCheckAPI } from '../../shared/api'
 import { history } from '../store'
 
 export const signupMD = createAsyncThunk(
@@ -37,11 +37,27 @@ export const loginMD = createAsyncThunk(
 )
 
 export const logoutMD = createAsyncThunk(
-    'user/logoutz',
+    'user/logout',
     async (data, thunkAPI) => {
         try {
             const response = await logoutAPI()
             return response
+        } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const loginCheckMD = createAsyncThunk(
+    'user/loginCheck',
+    async (data, thunkAPI) => {
+        try {
+            const response = await loginCheckAPI()
+            if (response) {
+                console.log('로긴체크MD', response)
+                return response
+            }
         } catch (err) {
             console.log(err)
             return thunkAPI.rejectWithValue(err)

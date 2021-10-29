@@ -33,8 +33,10 @@ instance.interceptors.response.use(
         console.log(response)
         return response
     },
-    async (error) => { console.log(error); 
-        window.alert(error.response.data.msg) }
+    async (error) => {
+        console.log(error)
+        window.alert(error.response.data.msg)
+    }
 )
 
 instanceSign.interceptors.response.use(
@@ -69,6 +71,10 @@ const logoutAPI = () => {
     return instance.get('/api/auth/logout')
 }
 
+const loginCheckAPI = () => {
+    return instance.get('/api/auth/me')
+}
+
 // * ------------------------------------------------
 
 // routine
@@ -77,7 +83,6 @@ const myRoutinePresetAPI = () => {
 }
 
 const myRoutineCreateAPI = (data) => {
-    console.log(getToken())
     return instance.post('/api/routines', {
         routineName: data.routineName,
         actions: data.actions,
@@ -90,16 +95,26 @@ const myRoutineListAPI = () => {
 }
 
 const myRoutineDeleteAPI = (routineId) => {
-    return instance.delete(`/api/routines/:${routineId}`)
-    
+    return instance.delete(`/api/routines/${routineId}`)
+}
+
+const myRoutineUpdateAPI = (data) => {
+    console.log(data)
+    return instance.put(`/api/routines/${data.routineId}`, {
+        routineName: data.routineName,
+        actions: data.actions,
+        isMain: data.isMain,
+    })
 }
 
 export {
     signupAPI,
     loginAPI,
     logoutAPI,
+    loginCheckAPI,
     myRoutinePresetAPI,
     myRoutineCreateAPI,
     myRoutineListAPI,
     myRoutineDeleteAPI,
+    myRoutineUpdateAPI,
 }

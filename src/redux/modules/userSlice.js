@@ -1,14 +1,14 @@
 import { createSlice, isFulfilled } from '@reduxjs/toolkit'
 import { getToken } from '../../shared/utils'
-import { signupMD, loginMD, logoutMD } from '../async/user'
+import { signupMD, loginMD, logoutMD, loginCheckMD } from '../async/user'
 import { history } from '../store'
+import { useDispatch } from 'react-redux'
 
 const initialState = {
     isLogin: false,
 }
 
 const userSlice = createSlice({
-    
     name: 'user',
     initialState: initialState,
     reducers: {
@@ -26,7 +26,7 @@ const userSlice = createSlice({
             sessionStorage.setItem('refreshToken', refreshToken)
             state.isLogin = true
         },
-    
+
         // * logout
         [logoutMD.fulfilled]: (state, { payload }) => {
             const accessToken = getToken().accessToken
@@ -35,8 +35,13 @@ const userSlice = createSlice({
             sessionStorage.removeItem('refreshToken')
             state.isLogin = false
         },
-        [loginMD.pending]: (state, { payload }) => {
+
+        // * loginCheck
+        [loginCheckMD.fulfilled]: (state, { payload }) => {
+            state.isLogin = true
         },
+
+        [loginMD.pending]: (state, { payload }) => {},
         [loginMD.rejected]: (state, { payload: errorMessage }) => {},
         [signupMD.fulfilled]: (state, { payload }) => {},
     },

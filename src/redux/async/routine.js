@@ -4,7 +4,9 @@ import {
     myRoutineCreateAPI,
     myRoutineListAPI,
     myRoutineDeleteAPI,
+    myRoutineUpdateAPI,
 } from '../../shared/api'
+import { history } from '../store'
 
 export const myRoutinePresetMD = createAsyncThunk(
     'routine/preset',
@@ -30,6 +32,8 @@ export const myRoutineCreateMD = createAsyncThunk(
             const response = await myRoutineCreateAPI(data)
             if (response) {
                 console.log(response)
+                window.alert('루틴이 추가되었습니다.')
+                history.push('/routine/mypage')
                 return response
             }
         } catch (err) {
@@ -60,6 +64,23 @@ export const myRoutineDeleteMD = createAsyncThunk(
         try {
             const response = await myRoutineDeleteAPI(routineId)
             if (response) {
+                return routineId
+            }
+        } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const myRoutineUpdateMD = createAsyncThunk(
+    'routine/update',
+    async (data, thunkAPI) => {
+        try {
+            const response = await myRoutineUpdateAPI(data)
+            if (response) {
+                window.alert('루틴이 수정되었습니다.')
+                history.push('/routine/mypage')
                 return response
             }
         } catch (err) {
