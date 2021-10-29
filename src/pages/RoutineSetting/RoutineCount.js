@@ -5,6 +5,7 @@ import RoutineCounter from '../../components/Routine/RoutineCounter'
 import { Input } from '../../elements/index'
 import { Header } from '../../components'
 import { myRoutineCreateMD } from '../../redux/async/routine'
+import { resetAction } from '../../redux/modules/updateRoutine'
 
 const RoutineCount = () => {
     const dispatch = useDispatch()
@@ -18,6 +19,7 @@ const RoutineCount = () => {
             isMain: false,
         }
         dispatch(myRoutineCreateMD(data))
+        dispatch(resetAction())
     }
     return (
         <>

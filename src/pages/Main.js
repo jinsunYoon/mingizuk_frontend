@@ -25,8 +25,8 @@ const Main = (props) => {
 
     const is_login = useSelector((state) => state.user.isLogin)
     const presetRoutine = useSelector((state) => state.setAction.mainRoutine)
-    console.log('프리셋', presetRoutine)
     const num = presetRoutine?.actions?.length - 1
+
 
     if (is_login) {
         return (
@@ -91,6 +91,7 @@ const Main = (props) => {
                             _others={'box-sizing: border-box;'}
                             _justify={'space-around'}
                         >
+
                             {presetRoutine?.actions?.map((routine, idx) => {
                                 return (
                                     <>
