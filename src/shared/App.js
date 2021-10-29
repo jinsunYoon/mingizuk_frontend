@@ -12,6 +12,8 @@ import Signup from '../pages/Signup'
 import MyRoutine from '../pages/RoutineSetting/MyRoutine'
 import RoutineAdd from '../pages/RoutineSetting/RoutineAdd'
 import RoutineCount from '../pages/RoutineSetting/RoutineCount'
+import RoutineUpdate from '../pages/RoutineSetting/RoutineUpdate'
+import RoutineUpdateCount from '../pages/RoutineSetting/RoutineUpdateCount'
 import NotFound from '../pages/NotFound'
 
 const App = () => {
@@ -28,6 +30,16 @@ const App = () => {
                         path="/routine/count"
                         exact
                         component={RoutineCount}
+                    />
+                    <Route
+                        path="/routine/update"
+                        exact
+                        component={RoutineUpdate}
+                    />
+                    <Route
+                        path="/routine/update/count"
+                        exact
+                        component={RoutineUpdateCount}
                     />
                     <Route path="*" component={NotFound} />
                 </Switch>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { history } from '../../redux/store'
 import { FlexColumn, FlexRow, Text } from '../../elements/index'
 import {
     myRoutinePresetMD,
@@ -7,11 +8,13 @@ import {
     myRoutineDeleteMD,
 } from '../../redux/async/routine'
 import Icon from '../icons/Icon'
+import { updateRoutine } from '../../redux/modules/routineSlice'
 import { setAction } from '../../redux/modules/mainRoutine'
+
 
 const RoutineDesc = (props) => {
     const dispatch = useDispatch()
-    const { myRoutine, select, recommendRoutine } = props
+    const { select } = props
     const [desc, setDesc] = React.useState('first')
     const preset = useSelector((state) => state.routine.presetRoutine)
     const myset = useSelector((state) => state.routine.myRoutine)
@@ -66,11 +69,21 @@ const RoutineDesc = (props) => {
                                     _border="none"
                                     _others="border-bottom:1px solid lightgray"
                                 >
-                                    <Icon icon="create" size="12px"></Icon>
+                                    <div
+                                        onClick={() => {
+                                            dispatch(updateRoutine(routine.id))
+                                            history.push('/routine/update')
+                                        }}
+                                    >
+                                        <Icon icon="create" size="12px" />
+                                    </div>
                                     <Icon
-                                        _onClick={() =>
-                                            dispatch(myRoutineDeleteMD(routine.id))
-                                        }
+                                        _onClick={() => {
+                                            console.log('delete')
+                                            dispatch(
+                                                myRoutineDeleteMD(routine.id)
+                                            )
+                                        }}
                                         icon="close-x"
                                         size="14px"
                                     ></Icon>
@@ -103,14 +116,13 @@ const RoutineDesc = (props) => {
                                 <Text _fontWeight="600">
                                     {routine?.routineName}
                                 </Text>
-                                <div onClick={()=>{console.log(routine.Actions)}}>
-                                <Text _fontSize="11px" _margin="5px 0 0 0">
-                                    {routine?.Actions?.map(
-                                        (action, idx) => action.actionName
-                                    )}
-                                </Text>
+                                <div>
+                                    <Text _fontSize="11px" _margin="5px 0 0 0">
+                                        {routine?.Actions?.map(
+                                            (action, idx) => action.actionName
+                                        )}
+                                    </Text>
                                 </div>
-
                             </FlexColumn>
                             <FlexRow
                                 _width="42px"
@@ -119,8 +131,9 @@ const RoutineDesc = (props) => {
                                 _border="none"
                                 _others="border-bottom:1px solid lightgray"
                             >
-                                <Icon icon="create" size="12px"></Icon>
-                                <Icon icon="close-x" size="14px"></Icon>
+                                {/* <Icon icon="create" size="12px" />
+
+                                <Icon icon="close-x" size="14px" /> */}
                             </FlexRow>
                         </FlexRow>
                         </div>

@@ -1,10 +1,15 @@
 import React from 'react'
 import Check from '../../elements/Check'
 import { FlexColumn, FlexRow, Text } from '../../elements/index'
+import { useDispatch, useSelector } from 'react-redux'
 
-const RoutineSelect = (props) => {
-    const { stretching, body_exercise, select } = props
+const RoutineUpdateSelect = (props) => {
+    const { body_exercise, select } = props
     const [desc, setDesc] = React.useState('first')
+    const myset = useSelector((state) => state.routine.myRoutine)
+    const myRoutineId = useSelector((state) => state.routine.updateRoutineRef)
+    const myRoutineRef = myset?.filter((set) => set.id === myRoutineId)[0]
+        .Actions
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -16,11 +21,13 @@ const RoutineSelect = (props) => {
         }
     })
 
+    console.log(myRoutineRef)
+
     return (
         <>
             {desc === 'stretching' && (
                 <FlexColumn _border="none" _width="85vw">
-                    {stretching.map((routine, idx) => (
+                    {myRoutineRef.map((routine, idx) => (
                         <FlexRow
                             _width="85vw"
                             _height="60px"
@@ -30,9 +37,9 @@ const RoutineSelect = (props) => {
                             key={idx}
                         >
                             <Text _fontSize="11px" _margin="10px 0">
-                                {routine}
+                                {routine.actionName}
                             </Text>
-                            <Check value={routine} type="stretching" />
+                            <Check value={routine.actionName} />
                         </FlexRow>
                     ))}
                 </FlexColumn>
@@ -51,7 +58,7 @@ const RoutineSelect = (props) => {
                             <Text _fontSize="11px" _margin="10px 0">
                                 {routine}
                             </Text>
-                            <Check value={routine} type="body_exercise" />
+                            <Check />
                         </FlexRow>
                     ))}
                 </FlexColumn>
@@ -60,16 +67,9 @@ const RoutineSelect = (props) => {
     )
 }
 
-RoutineSelect.defaultProps = {
-    stretching: [
-        '앉았다 일어나기',
-        '목 돌리기',
-        '어깨 돌리기',
-        '허리 돌리기',
-        '무릎 돌리기',
-    ],
+RoutineUpdateSelect.defaultProps = {
     body_exercise: ['스쿼트', '런지', '플랭크', '푸쉬업'],
     select: 'first',
 }
 
-export default RoutineSelect
+export default RoutineUpdateSelect

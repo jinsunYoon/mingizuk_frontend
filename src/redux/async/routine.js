@@ -4,7 +4,9 @@ import {
     myRoutineCreateAPI,
     myRoutineListAPI,
     myRoutineDeleteAPI,
+    myRoutineUpdateAPI,
 } from '../../shared/api'
+import { history } from '../store'
 
 export const myRoutinePresetMD = createAsyncThunk(
     'routine/preset',
@@ -60,6 +62,22 @@ export const myRoutineDeleteMD = createAsyncThunk(
         try {
             const response = await myRoutineDeleteAPI(routineId)
             if (response) {
+                return response
+            }
+        } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const myRoutineUpdateMD = createAsyncThunk(
+    'routine/update',
+    async (data, thunkAPI) => {
+        try {
+            const response = await myRoutineUpdateAPI(data)
+            if (response) {
+                history.push('/routine/mypage')
                 return response
             }
         } catch (err) {

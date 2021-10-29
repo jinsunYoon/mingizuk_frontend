@@ -9,7 +9,11 @@ const actionSlice = createSlice({
     initialState: initialState,
     reducers: {
         addAction: (state, action) => {
-            state.actions.push({ actionName: action.payload, actionCnt: 0 })
+            state.actions.push({
+                actionName: action.payload.value,
+                actionCnt: 0,
+                actionType: action.payload.type,
+            })
         },
         minusAction: (state, action) => {
             const result = state.actions.filter(
@@ -29,11 +33,14 @@ const actionSlice = createSlice({
             )
             state.actions[ref].actionCnt = state.actions[ref].actionCnt - 1
         },
+        resetAction: (state, action) => {
+            state.actions = []
+        },
     },
 })
 
 //* reducer export
-export const { addAction, minusAction, addCount, minusCount } =
+export const { addAction, minusAction, addCount, minusCount, resetAction } =
     actionSlice.actions
 
 //* slice export

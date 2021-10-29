@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Input = (props) => {
-    const { _onChange, _ph, _others, _type, _width, _fontSize } = props
-    const styles = { _others,  _width, _fontSize }
+    const { _onChange, _ph, _value, _others, _type, _width, _fontSize } = props
+    const styles = { _others, _width, _fontSize }
 
     return (
         <>
@@ -12,6 +12,7 @@ const Input = (props) => {
                 {...styles}
                 placeholder={_ph}
                 onChange={_onChange}
+                // value={_value}
             />
         </>
     )
@@ -23,8 +24,9 @@ Input.defaultProps = {
     _ph: '내용을 입력하세요.',
     _others: false,
     _type: 'text',
-    _width: '20rem',    
+    _width: '20rem',
     _fontSize: '',
+    // _value: ,
 }
 
 const InputEl = styled.input`
@@ -39,4 +41,4 @@ const InputEl = styled.input`
     ${(props) => (props._others ? props._others : '')};
 `
 
-export default Input;
+export default Input
