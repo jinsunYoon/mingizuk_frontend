@@ -19,7 +19,6 @@ const Input = (props) => {
 }
 
 Input.defaultProps = {
-    _onSubmit: () => {},
     _onChange: () => {},
     _ph: '내용을 입력하세요.',
     _others: false,
@@ -39,6 +38,7 @@ const InputEl = styled.input`
     border: 1px solid li ghtgray;
     font-size: ${(props) => props._fontSize};
     ${(props) => (props._others ? props._others : '')};
+    ${(props) => (props._type ? props._type : '')};
 `
 
 export default Input
