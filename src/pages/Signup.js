@@ -65,6 +65,10 @@ const Signup = (props) => {
         }
         dispatch(signupMD(data))
     }
+
+    const handleKeypress = (e) => {
+        if (e.key === 'Enter') onClickSignup()
+    }
     /*(미완)
     //값이 입력되지 않았을시, 버튼 비활성화
         if(
