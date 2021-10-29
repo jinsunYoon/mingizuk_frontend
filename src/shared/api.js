@@ -3,7 +3,7 @@ import { getToken } from './utils'
 
 // Axios 인스턴스 설정
 const instance = axios.create({
-    baseURL: 'http://15.164.93.207',
+    baseURL: 'http://13.125.110.160',
 })
 
 // interceptor를 통한 header 설정
@@ -11,7 +11,6 @@ instance.interceptors.request.use(async (config) => {
     config.headers['content-type'] = 'application/json; charset=utf-8'
     config.headers['X-Requested-With'] = 'XMLHttpRequest'
     config.headers['Accept'] = '*/*'
-    //getToken는 로컬 스토리지에 토큰이 있다면 반환한다 없다면 null 값 반환
     config.headers['accessToken'] = await getToken().accessToken
     config.headers['refreshToken'] = await getToken().refreshToken
     return config
@@ -36,7 +35,7 @@ instance.interceptors.response.use(
 
 // user API
 const signupAPI = (data) => {
-    return instance.post('/api/auth/signup', {
+    return axios.post('/api/auth/signup', {
         userEmail: data.userEmail,
         nickName: data.nickName,
         userPw: data.userPw,
@@ -45,16 +44,15 @@ const signupAPI = (data) => {
 }
 
 const loginAPI = (data) => {
-    return instance.post('/api/auth/local', {
+    return axios.post('http://13.125.110.160/api/auth/local', {
         userEmail: data.userEmail,
         userPw: data.userPw,
     })
 }
 
 const logoutAPI = (data) => {
-    console.log(data, "잘넘어오나?")
-    return instance.get('/api/auth/logout', {
-    })
+    console.log(data, '잘넘어오나?')
+    return instance.get('/api/auth/logout', {})
 }
 
 // * ------------------------------------------------
@@ -90,4 +88,3 @@ export {
     myRoutineListAPI,
     myRoutineDeleteAPI,
 }
-

@@ -12,6 +12,7 @@ import Signup from '../pages/Signup'
 import MyRoutine from '../pages/RoutineSetting/MyRoutine'
 import RoutineAdd from '../pages/RoutineSetting/RoutineAdd'
 import RoutineCount from '../pages/RoutineSetting/RoutineCount'
+import NotFound from '../pages/NotFound'
 
 const App = () => {
     return (
@@ -23,6 +24,7 @@ const App = () => {
                 <Route path="/routine/mypage" exact component={MyRoutine} />
                 <Route path="/routine/add" exact component={RoutineAdd} />
                 <Route path="/routine/count" exact component={RoutineCount} />
+                <Route path="*" component={NotFound} />
             </ConnectedRouter>
         </>
     )

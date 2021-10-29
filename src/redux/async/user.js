@@ -21,13 +21,14 @@ export const signupMD = createAsyncThunk(
 export const loginMD = createAsyncThunk(
     'user/login',
     async (data, thunkAPI) => {
+        console.log('1', data)
         try {
             const response = await loginAPI(data)
-            const accessToken = response.data.accessToken
-            const refreshToken = response.data.refreshToken
-            sessionStorage.setItem('accessToken', accessToken)
-            sessionStorage.setItem('refreshToken', refreshToken)
-            return response, history.push('/')
+            history.push('/')
+            if (response) {
+                console.log(response)
+                return response
+            }
         } catch (err) {
             console.log(err)
             return thunkAPI.rejectWithValue(err)
@@ -38,10 +39,10 @@ export const loginMD = createAsyncThunk(
 export const logoutMD = createAsyncThunk(
     'user/logout',
     async (data, thunkAPI) => {
-        try{
+        try {
             const response = await logoutAPI(data)
             return response
-        } catch (err){
+        } catch (err) {
             console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
