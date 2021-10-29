@@ -43,7 +43,10 @@ const routineSlice = createSlice({
         },
         // * ----
         [myRoutineDeleteMD.fulfilled]: (state, { payload }) => {
-            console.log(payload)
+            const result = state.myRoutine.filter(
+                (routine) => routine.id !== payload
+            )
+            state.myRoutine = result
         },
         // * ----
         [myRoutineUpdateMD.fulfilled]: (state, { payload }) => {

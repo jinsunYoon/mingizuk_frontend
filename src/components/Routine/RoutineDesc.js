@@ -37,11 +37,16 @@ const RoutineDesc = (props) => {
     return (
         <>
             {desc === 'myRoutine' && (
-                <FlexColumn _border="none" _width="320px">
+                <FlexColumn _border="none" _width="320px" _height="70px">
                     {myset?.map((routine, idx) => (
                         <div
                             onClick={() => {
-                                console.log(routine?.routineName)
+                                const data = {
+                                    name: routine?.routineName,
+                                    actions: routine.Actions,
+                                }
+                                console.log(data)
+                                dispatch(setAction(data))
                             }}
                         >
                             <FlexRow _width="85vw" _border="none" key={idx}>
