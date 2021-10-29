@@ -77,168 +77,203 @@ const Main = (props) => {
                             _others={'box-sizing: border-box;'}
                             _justify={'space-around'}
                         >
-                            <FlexColumn
-                                _width={'2.8rem'}
-                                _height={'100%'}
+                            <ButtonOutlined
                                 _border={'none'}
+                                _margin={'none'}
+                                _padding={'none'}
+                                _width={'false'}
                             >
-                                <FlexRow
-                                    _width={'2rem'}
-                                    _height={'2rem'}
-                                    _bgColor={'lightgray'}
+                                <FlexColumn
+                                    _width={'2.8rem'}
+                                    _height={'100%'}
                                     _border={'none'}
-                                    _margin={'10px 0px 0px 0px'}
-                                    _others={'border-radius:1rem'}
-                                ></FlexRow>
-                                <FlexRow
-                                    _width={'1rem'}
-                                    _height={'1rem'}
-                                    _bgColor={'black'}
-                                    _border={'none'}
-                                    _margin={'-40px -25px 20px 0px'}
-                                    _others={'border-radius:1rem;'}
                                 >
-                                    <Text _color={'#fff'}>5</Text>
-                                </FlexRow>
-                                <Text
-                                    _margin={'5px 0px 0px 0px'}
-                                    _fontSize={'0.75rem'}
-                                >
-                                    앉았다 일어나기
-                                </Text>
-                            </FlexColumn>
+                                    <FlexRow
+                                        _width={'2rem'}
+                                        _height={'2rem'}
+                                        _bgColor={'lightgray'}
+                                        _border={'none'}
+                                        _margin={'10px 0px 0px 0px'}
+                                        _others={'border-radius:1rem'}
+                                    ></FlexRow>
+                                    <FlexRow
+                                        _width={'1rem'}
+                                        _height={'1rem'}
+                                        _bgColor={'black'}
+                                        _border={'none'}
+                                        _margin={'-40px -25px 20px 0px'}
+                                        _others={'border-radius:1rem;'}
+                                    >
+                                        <Text _color={'#fff'}>5</Text>
+                                    </FlexRow>
+                                    <Text
+                                        _margin={'5px 0px 0px 0px'}
+                                        _fontSize={'0.75rem'}
+                                    >
+                                        앉았다 일어나기
+                                    </Text>
+                                </FlexColumn>
+                            </ButtonOutlined>
                             <FlexRow _border={'none'} _width={'0.625rem'}>
                                 <Icon icon={'chevron-right'} size={24} />
                             </FlexRow>
-                            <FlexColumn
-                                _width={'2.8rem'}
-                                _height={'100%'}
+                            <ButtonOutlined
                                 _border={'none'}
+                                _margin={'none'}
+                                _padding={'none'}
+                                _width={'false'}
                             >
-                                <FlexRow
-                                    _width={'2rem'}
-                                    _height={'2rem'}
-                                    _bgColor={'lightgray'}
+                                <FlexColumn
+                                    _width={'2.8rem'}
+                                    _height={'100%'}
                                     _border={'none'}
-                                    _margin={'10px 0px 0px 0px'}
-                                    _others={'border-radius:1rem'}
-                                ></FlexRow>
-                                <FlexRow
-                                    _width={'1rem'}
-                                    _height={'1rem'}
-                                    _bgColor={'black'}
-                                    _border={'none'}
-                                    _margin={'-40px -25px 20px 0px'}
-                                    _others={'border-radius:1rem;'}
                                 >
-                                    <Text _color={'#fff'}>5</Text>
-                                </FlexRow>
-                                <Text
-                                    _margin={'5px 0px 0px 0px'}
-                                    _fontSize={'0.75rem'}
-                                >
-                                    앉았다 일어나기
-                                </Text>
-                            </FlexColumn>
+                                    <FlexRow
+                                        _width={'2rem'}
+                                        _height={'2rem'}
+                                        _bgColor={'lightgray'}
+                                        _border={'none'}
+                                        _margin={'10px 0px 0px 0px'}
+                                        _others={'border-radius:1rem'}
+                                    ></FlexRow>
+                                    <FlexRow
+                                        _width={'1rem'}
+                                        _height={'1rem'}
+                                        _bgColor={'black'}
+                                        _border={'none'}
+                                        _margin={'-40px -25px 20px 0px'}
+                                        _others={'border-radius:1rem;'}
+                                    >
+                                        <Text _color={'#fff'}>5</Text>
+                                    </FlexRow>
+                                    <Text
+                                        _margin={'5px 0px 0px 0px'}
+                                        _fontSize={'0.75rem'}
+                                    >
+                                        앉았다 일어나기
+                                    </Text>
+                                </FlexColumn>
+                            </ButtonOutlined>
                             <FlexRow _border={'none'} _width={'0.625rem'}>
                                 <Icon icon={'chevron-right'} size={24} />
                             </FlexRow>
-                            <FlexColumn
-                                _width={'2.8rem'}
-                                _height={'100%'}
+                            <ButtonOutlined
                                 _border={'none'}
+                                _margin={'none'}
+                                _padding={'none'}
+                                _width={'false'}
                             >
-                                <FlexRow
-                                    _width={'2rem'}
-                                    _height={'2rem'}
-                                    _bgColor={'lightgray'}
+                                <FlexColumn
+                                    _width={'2.8rem'}
+                                    _height={'100%'}
                                     _border={'none'}
-                                    _margin={'10px 0px 0px 0px'}
-                                    _others={'border-radius:1rem'}
-                                ></FlexRow>
-                                <FlexRow
-                                    _width={'1rem'}
-                                    _height={'1rem'}
-                                    _bgColor={'black'}
-                                    _border={'none'}
-                                    _margin={'-40px -25px 20px 0px'}
-                                    _others={'border-radius:1rem;'}
                                 >
-                                    <Text _color={'#fff'}>5</Text>
-                                </FlexRow>
-                                <Text
-                                    _margin={'5px 0px 0px 0px'}
-                                    _fontSize={'0.75rem'}
-                                >
-                                    앉았다 일어나기
-                                </Text>
-                            </FlexColumn>
+                                    <FlexRow
+                                        _width={'2rem'}
+                                        _height={'2rem'}
+                                        _bgColor={'lightgray'}
+                                        _border={'none'}
+                                        _margin={'10px 0px 0px 0px'}
+                                        _others={'border-radius:1rem'}
+                                    ></FlexRow>
+                                    <FlexRow
+                                        _width={'1rem'}
+                                        _height={'1rem'}
+                                        _bgColor={'black'}
+                                        _border={'none'}
+                                        _margin={'-40px -25px 20px 0px'}
+                                        _others={'border-radius:1rem;'}
+                                    >
+                                        <Text _color={'#fff'}>5</Text>
+                                    </FlexRow>
+                                    <Text
+                                        _margin={'5px 0px 0px 0px'}
+                                        _fontSize={'0.75rem'}
+                                    >
+                                        앉았다 일어나기
+                                    </Text>
+                                </FlexColumn>
+                            </ButtonOutlined>
                             <FlexRow _border={'none'} _width={'0.625rem'}>
                                 <Icon icon={'chevron-right'} size={24} />
                             </FlexRow>
-                            <FlexColumn
-                                _width={'2.8rem'}
-                                _height={'100%'}
+                            <ButtonOutlined
                                 _border={'none'}
+                                _margin={'none'}
+                                _padding={'none'}
+                                _width={'false'}
                             >
-                                <FlexRow
-                                    _width={'2rem'}
-                                    _height={'2rem'}
-                                    _bgColor={'lightgray'}
+                                <FlexColumn
+                                    _width={'2.8rem'}
+                                    _height={'100%'}
                                     _border={'none'}
-                                    _margin={'10px 0px 0px 0px'}
-                                    _others={'border-radius:1rem'}
-                                ></FlexRow>
-                                <FlexRow
-                                    _width={'1rem'}
-                                    _height={'1rem'}
-                                    _bgColor={'black'}
-                                    _border={'none'}
-                                    _margin={'-40px -25px 20px 0px'}
-                                    _others={'border-radius:1rem;'}
                                 >
-                                    <Text _color={'#fff'}>5</Text>
-                                </FlexRow>
-                                <Text
-                                    _margin={'5px 0px 0px 0px'}
-                                    _fontSize={'0.75rem'}
-                                >
-                                    앉았다 일어나기
-                                </Text>
-                            </FlexColumn>
+                                    <FlexRow
+                                        _width={'2rem'}
+                                        _height={'2rem'}
+                                        _bgColor={'lightgray'}
+                                        _border={'none'}
+                                        _margin={'10px 0px 0px 0px'}
+                                        _others={'border-radius:1rem'}
+                                    ></FlexRow>
+                                    <FlexRow
+                                        _width={'1rem'}
+                                        _height={'1rem'}
+                                        _bgColor={'black'}
+                                        _border={'none'}
+                                        _margin={'-40px -25px 20px 0px'}
+                                        _others={'border-radius:1rem;'}
+                                    >
+                                        <Text _color={'#fff'}>5</Text>
+                                    </FlexRow>
+                                    <Text
+                                        _margin={'5px 0px 0px 0px'}
+                                        _fontSize={'0.75rem'}
+                                    >
+                                        앉았다 일어나기
+                                    </Text>
+                                </FlexColumn>
+                            </ButtonOutlined>
                             <FlexRow _border={'none'} _width={'0.625rem'}>
                                 <Icon icon={'chevron-right'} size={24} />
                             </FlexRow>
-                            <FlexColumn
-                                _width={'2.8rem'}
-                                _height={'100%'}
+                            <ButtonOutlined
                                 _border={'none'}
+                                _margin={'none'}
+                                _padding={'none'}
+                                _width={'false'}
                             >
-                                <FlexRow
-                                    _width={'2rem'}
-                                    _height={'2rem'}
-                                    _bgColor={'lightgray'}
+                                <FlexColumn
+                                    _width={'2.8rem'}
+                                    _height={'100%'}
                                     _border={'none'}
-                                    _margin={'10px 0px 0px 0px'}
-                                    _others={'border-radius:1rem'}
-                                ></FlexRow>
-                                <FlexRow
-                                    _width={'1rem'}
-                                    _height={'1rem'}
-                                    _bgColor={'black'}
-                                    _border={'none'}
-                                    _margin={'-40px -25px 20px 0px'}
-                                    _others={'border-radius:1rem;'}
                                 >
-                                    <Text _color={'#fff'}>5</Text>
-                                </FlexRow>
-                                <Text
-                                    _margin={'5px 0px 0px 0px'}
-                                    _fontSize={'0.75rem'}
-                                >
-                                    앉았다 일어나기
-                                </Text>
-                            </FlexColumn>
+                                    <FlexRow
+                                        _width={'2rem'}
+                                        _height={'2rem'}
+                                        _bgColor={'lightgray'}
+                                        _border={'none'}
+                                        _margin={'10px 0px 0px 0px'}
+                                        _others={'border-radius:1rem'}
+                                    ></FlexRow>
+                                    <FlexRow
+                                        _width={'1rem'}
+                                        _height={'1rem'}
+                                        _bgColor={'black'}
+                                        _border={'none'}
+                                        _margin={'-40px -25px 20px 0px'}
+                                        _others={'border-radius:1rem;'}
+                                    >
+                                        <Text _color={'#fff'}>5</Text>
+                                    </FlexRow>
+                                    <Text
+                                        _margin={'5px 0px 0px 0px'}
+                                        _fontSize={'0.75rem'}
+                                    >
+                                        앉았다 일어나기
+                                    </Text>
+                                </FlexColumn>
+                            </ButtonOutlined>
                         </FlexRow>
                     </FlexColumn>
                 </FlexColumn>
