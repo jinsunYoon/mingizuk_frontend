@@ -26,6 +26,7 @@ const Main = (props) => {
     const is_login = useSelector((state) => state.user.isLogin)
     const presetRoutine = useSelector((state) => state.setAction.mainRoutine)
     console.log('프리셋', presetRoutine)
+    const num = presetRoutine?.actions?.length - 1
 
     if (is_login) {
         return (
@@ -138,7 +139,7 @@ const Main = (props) => {
                                                 </Text>
                                             </FlexColumn>
                                         </ButtonOutlined>
-                                        {idx !== 4 && (
+                                        {idx < num && (
                                             <FlexRow
                                                 _border={'none'}
                                                 _width={'0.625rem'}
