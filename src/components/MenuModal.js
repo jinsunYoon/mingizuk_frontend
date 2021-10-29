@@ -84,7 +84,9 @@ const MenuModal = () => {
                                             borderRadius: '50px',
                                             cursor: 'pointer',
                                         }}
-                                        _onClick={()=>{logoutMD}}    
+                                        _onClick={()=>{logoutMD
+                                            console.log('logout잘되니?')
+                                        }}    
 
                                     />
                                 </FlexRow>
