@@ -22,8 +22,10 @@ const RoutineCount = () => {
     }
     return (
         <>
-            <Header name="내 루틴 추가하기 ( 2 / 2 )" />
             <RoutineTemplate button="수정 완료" _onClick_={addRoutine}>
+                <div style={{ zIndex: '3' }}>
+                    <Header name="내 루틴 추가하기 ( 2 / 2 )" />
+                </div>
                 <Input
                     _onChange={(e) => setName(e.target.value)}
                     _others="width:85vw;height=40px;margin-top:8px"

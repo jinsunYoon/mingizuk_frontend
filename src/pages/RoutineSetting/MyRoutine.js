@@ -12,8 +12,10 @@ const MyRoutine = () => {
 
     return (
         <>
-            <Header name="루틴 설정하기" />
             <RoutineTemplate button="메인 루틴으로 설정하기" addBtn="true">
+                <div style={{ zIndex: '3' }}>
+                    <Header name="루틴 설정하기" />
+                </div>
                 <ToggleTab
                     firstValue={'내 루틴'}
                     secondValue={'추천 루틴'}

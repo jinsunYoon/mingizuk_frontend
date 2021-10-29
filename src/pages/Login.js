@@ -27,38 +27,62 @@ const Login = () => {
 
     return (
         <>
-            <FlexRow _width="100%" _justify="center" _border="none">
-                <FlexColumn _width="360px" _height="" _border="none">
-                    <SubTitle _margin="5rem">
+            <FlexRow 
+                _width="100vw"
+                _justify="center" 
+                _border="none"
+            >
+                <FlexColumn 
+                    _width="70vw"
+                    _height="100vh"
+                    _border="none"
+                >
+                    <SubTitle 
+                        _margin="0 0 1rem 0"
+                    >
                         로그인
                     </SubTitle>
-                    <div>
-                        <Text _margin="1rem">아이디</Text>
+                        <Text 
+                            _margin="1rem"
+                        >
+                            아이디
+                        </Text>
                         <Input
+                            _width='100%'
                             _ph="아이디를 입력해주세요."
                             _onChange={(e) => setId(e.target.value)}
                         />
-                    </div>
-                    <div>
-                        <Text _margin="1rem">비밀번호</Text>
+                        <Text 
+                            _margin="1rem"
+                        >
+                            비밀번호
+                        </Text>
                         <Input
+                            _width='100%'
                             _ph="비밀번호를 입력해주세요."
                             _onChange={(e) => setPwd(e.target.value)}
                             _type="password"
                         />
-                    </div>
                     <ButtonFill
-                        _width="91%"
+                        _width='100%'
                         _margin="5rem 0 0.5rem"
                         _padding="1rem"
                         _onClick={emailLogin}
                     >
                         이메일로 로그인하기
                     </ButtonFill>
-                    <ButtonFill _width="91%" _margin="0.5rem" _padding="1rem">
+                    <ButtonFill 
+                        _width="100%" 
+                        _margin="0.5rem" 
+                        _padding="1rem"
+                    >
                         카카오톡으로 로그인하기
                     </ButtonFill>
-                    <ButtonFill _width="91%" _margin="0.5rem" _padding="1rem">
+                    <ButtonFill 
+                        _width="100%" 
+                        _margin="0.5rem" 
+                        _padding="1rem"
+                    >
                         페이스북으로 로그인하기
                     </ButtonFill>
                 </FlexColumn>

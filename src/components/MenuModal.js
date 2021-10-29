@@ -8,15 +8,16 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logoutMD } from '../redux/async/user'
 
 const MenuModal = () => {
+    const dispatch = useDispatch()
     const is_login = useSelector((state) => state.user.isLogin)
-
+    const logout = () => { dispatch(logoutMD()) }
     const [modalStatus, setModalStatue] = React.useState(false)
 
     if (is_login) {
         return (
             <React.Fragment>
                 {modalStatus && (
-                    <FlexRow _border={'none'}>
+                    <FlexRow _border={'none'} _others="z-index:5">
                         <div
                             style={{
                                 width: '100vw',
@@ -75,6 +76,7 @@ const MenuModal = () => {
                                         </span>{' '}
                                         님
                                     </Text>
+                                    <div onClick={logout}>
                                     <ExitToAppRounded
                                         style={{
                                             marginLeft: '2.7rem',
@@ -84,9 +86,8 @@ const MenuModal = () => {
                                             borderRadius: '50px',
                                             cursor: 'pointer',
                                         }}
-                                        _onClick={()=>{logoutMD}}    
-
-                                    />
+                                        />
+                                    </div>
                                 </FlexRow>
                                 <FlexColumn
                                     _height={'100vh'}
