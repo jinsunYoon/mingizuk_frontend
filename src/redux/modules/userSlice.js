@@ -17,20 +17,26 @@ const userSlice = createSlice({
     extraReducers: {
         // * login
         [loginMD.fulfilled]: (state, { payload }) => {
+            const accessToken = payload.data.accessToken
+            const refreshToken = payload.data.refreshToken
+            sessionStorage.setItem('accessToken', accessToken)
+            sessionStorage.setItem('refreshToken', refreshToken)
             state.isLogin = true
         },
         // * logout
-        [logoutMD.fulfilled]: (state,{ payload }) => {
+        [logoutMD.fulfilled]: (state, { payload }) => {
             const accessToken = payload.data.accessToken
             const refreshToken = payload.data.refreshToken
             sessionStorage.removeItem('accessToken', accessToken)
             sessionStorage.removeItem('refreshToken', refreshToken)
         },
-        [loginMD.pending]: (state, { payload }) => {},
+        [loginMD.pending]: (state, { payload }) => {
+            console.log(payload)
+        },
         [loginMD.rejected]: (state, { payload: errorMessage }) => {},
         [signupMD.fulfilled]: (state, { payload }) => {},
     },
 })
 
 export const { userReducer } = userSlice.actions
-export default userSlice;
+export default userSlice
