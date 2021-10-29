@@ -13,7 +13,6 @@ import MyRoutine from '../pages/RoutineSetting/MyRoutine'
 import RoutineAdd from '../pages/RoutineSetting/RoutineAdd'
 import RoutineCount from '../pages/RoutineSetting/RoutineCount'
 
-import { history } from '../redux/store'
 
 const App = () => {
     return (
@@ -30,4 +29,4 @@ const App = () => {
     )
 }
 
-export default App
+export default App;
