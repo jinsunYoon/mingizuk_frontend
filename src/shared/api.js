@@ -5,6 +5,9 @@ import { getToken } from './utils'
 const instance = axios.create({
     baseURL: 'http://13.125.110.160',
 })
+const instanceSign = axios.create({
+    baseURL: 'http://13.125.110.160',
+})
 
 // interceptor를 통한 header 설정
 instance.interceptors.request.use(async (config) => {
@@ -13,6 +16,12 @@ instance.interceptors.request.use(async (config) => {
     config.headers['Accept'] = '*/*'
     config.headers['accessToken'] = await getToken().accessToken
     config.headers['refreshToken'] = await getToken().refreshToken
+    return config
+})
+instanceSign.interceptors.request.use(async (config) => {
+    config.headers['content-type'] = 'application/json; charset=utf-8'
+    config.headers['X-Requested-With'] = 'XMLHttpRequest'
+    config.headers['Accept'] = '*/*'
     return config
 })
 
@@ -33,9 +42,20 @@ instance.interceptors.response.use(
     }
 )
 
+instanceSign.interceptors.response.use(
+    async (response) => {
+        console.log(response)
+        return response
+    },
+    async (error) => {
+        console.log(error)
+        window.alert(error.response.data.msg)
+    }
+)
+
 // user API
 const signupAPI = (data) => {
-    return axios.post('/api/auth/signup', {
+    return instanceSign.post('/api/auth/signup', {
         userEmail: data.userEmail,
         nickName: data.nickName,
         userPw: data.userPw,
@@ -44,7 +64,7 @@ const signupAPI = (data) => {
 }
 
 const loginAPI = (data) => {
-    return axios.post('http://13.125.110.160/api/auth/local', {
+    return instanceSign.post('/api/auth/local', {
         userEmail: data.userEmail,
         userPw: data.userPw,
     })
