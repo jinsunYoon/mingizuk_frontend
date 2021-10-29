@@ -11,14 +11,13 @@ import Icon from '../icons/Icon'
 import { updateRoutine } from '../../redux/modules/routineSlice'
 import { setAction } from '../../redux/modules/mainRoutine'
 
-
 const RoutineDesc = (props) => {
     const dispatch = useDispatch()
     const { select } = props
     const [desc, setDesc] = React.useState('first')
     const preset = useSelector((state) => state.routine.presetRoutine)
     const myset = useSelector((state) => state.routine.myRoutine)
-    
+
     React.useEffect(() => {
         if (select === 'first') {
             setDesc('myRoutine')
@@ -40,9 +39,10 @@ const RoutineDesc = (props) => {
             {desc === 'myRoutine' && (
                 <FlexColumn _border="none" _width="320px">
                     {myset?.map((routine, idx) => (
-                        <div onClick={()=>{
-                            console.log(routine?.routineName)
-                        }}
+                        <div
+                            onClick={() => {
+                                console.log(routine?.routineName)
+                            }}
                         >
                             <FlexRow _width="85vw" _border="none" key={idx}>
                                 <FlexColumn
@@ -79,10 +79,17 @@ const RoutineDesc = (props) => {
                                     </div>
                                     <Icon
                                         _onClick={() => {
-                                            console.log('delete')
-                                            dispatch(
-                                                myRoutineDeleteMD(routine.id)
-                                            )
+                                            const answer =
+                                                window.confirm(
+                                                    '해당 루틴을 삭제하시겠습니까 ?'
+                                                )
+                                            if (answer) {
+                                                dispatch(
+                                                    myRoutineDeleteMD(
+                                                        routine.id
+                                                    )
+                                                )
+                                            } else return
                                         }}
                                         icon="close-x"
                                         size="14px"
@@ -96,46 +103,52 @@ const RoutineDesc = (props) => {
             {desc === 'recommendRoutine' && (
                 <FlexColumn _border="none" _width="320px">
                     {preset?.map((routine, idx) => (
-                        <div onClick={
-                            ()=>{
-                                const data = {name:routine?.routineName, actions:routine.Actions}
+                        <div
+                            onClick={() => {
+                                const data = {
+                                    name: routine?.routineName,
+                                    actions: routine.Actions,
+                                }
                                 console.log(data)
                                 dispatch(setAction(data))
-                                
-                            }
-                        }>
-                        <FlexRow _width="85vw" _border="none" key={idx}>
-                            <FlexColumn
-                                key={idx}
-                                _width="85vw"
-                                _height="77px"
-                                _border="none"
-                                _others="border-bottom:1px solid lightgray"
-                                _align="flex-start"
-                            >
-                                <Text _fontWeight="600">
-                                    {routine?.routineName}
-                                </Text>
-                                <div>
-                                    <Text _fontSize="11px" _margin="5px 0 0 0">
-                                        {routine?.Actions?.map(
-                                            (action, idx) => action.actionName
-                                        )}
+                            }}
+                        >
+                            <FlexRow _width="85vw" _border="none" key={idx}>
+                                <FlexColumn
+                                    key={idx}
+                                    _width="85vw"
+                                    _height="77px"
+                                    _border="none"
+                                    _others="border-bottom:1px solid lightgray"
+                                    _align="flex-start"
+                                >
+                                    <Text _fontWeight="600">
+                                        {routine?.routineName}
                                     </Text>
-                                </div>
-                            </FlexColumn>
-                            <FlexRow
-                                _width="42px"
-                                _height="77px"
-                                _justify="space-between"
-                                _border="none"
-                                _others="border-bottom:1px solid lightgray"
-                            >
-                                {/* <Icon icon="create" size="12px" />
+                                    <div>
+                                        <Text
+                                            _fontSize="11px"
+                                            _margin="5px 0 0 0"
+                                        >
+                                            {routine?.Actions?.map(
+                                                (action, idx) =>
+                                                    action.actionName
+                                            )}
+                                        </Text>
+                                    </div>
+                                </FlexColumn>
+                                <FlexRow
+                                    _width="42px"
+                                    _height="77px"
+                                    _justify="space-between"
+                                    _border="none"
+                                    _others="border-bottom:1px solid lightgray"
+                                >
+                                    {/* <Icon icon="create" size="12px" />
 
                                 <Icon icon="close-x" size="14px" /> */}
+                                </FlexRow>
                             </FlexRow>
-                        </FlexRow>
                         </div>
                     ))}
                 </FlexColumn>
