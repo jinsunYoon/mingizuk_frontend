@@ -16,9 +16,11 @@ const actionSlice = createSlice({
             })
         },
         minusAction: (state, action) => {
+            console.log(action.payload.value)
             const result = state.actions.filter(
-                (act) => act.actionName !== action.payload
+                (act) => act.actionName !== action.payload.value
             )
+            console.log(result)
             state.actions = result
         },
         addCount: (state, action) => {
@@ -31,7 +33,9 @@ const actionSlice = createSlice({
             const ref = state.actions.findIndex(
                 (act) => act.actionName === action.payload
             )
-            state.actions[ref].actionCnt = state.actions[ref].actionCnt - 1
+            if (state.actions[ref].actionCnt > 0) {
+                state.actions[ref].actionCnt = state.actions[ref].actionCnt - 1
+            }
         },
         resetAction: (state, action) => {
             state.actions = []

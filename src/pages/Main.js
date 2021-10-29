@@ -25,12 +25,10 @@ const Main = (props) => {
 
     const is_login = useSelector((state) => state.user.isLogin)
     const presetRoutine = useSelector((state) => state.setAction.mainRoutine)
-    console.log(presetRoutine, presetRoutine?.name )
 
     if (is_login) {
         return (
             <React.Fragment>
-
                 <Header />
                 <FlexColumn
                     _width={'100vw'}
@@ -88,6 +86,7 @@ const Main = (props) => {
                             _others={'box-sizing: border-box;'}
                             _justify={'space-around'}
                         >
+                            {/* * --------------------- */}
                             <ButtonOutlined
                                 _border={'none'}
                                 _margin={'none'}
@@ -125,6 +124,7 @@ const Main = (props) => {
                                     </Text>
                                 </FlexColumn>
                             </ButtonOutlined>
+                            {/* * --------------------- */}
                             <FlexRow _border={'none'} _width={'0.625rem'}>
                                 <Icon icon={'chevron-right'} size={24} />
                             </FlexRow>
@@ -201,7 +201,7 @@ const Main = (props) => {
                                         _margin={'5px 0px 0px 0px'}
                                         _fontSize={'0.75rem'}
                                     >
-                                    {/* {presetRoutine?.actions[2]?.actionName} */}
+                                        {/* {presetRoutine?.actions[2]?.actionName} */}
                                     </Text>
                                 </FlexColumn>
                             </ButtonOutlined>
@@ -242,7 +242,6 @@ const Main = (props) => {
                                         _fontSize={'0.75rem'}
                                     >
                                         {/* {presetRoutine?.actions[3]?.actionName} */}
-                                        
                                     </Text>
                                 </FlexColumn>
                             </ButtonOutlined>
