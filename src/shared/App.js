@@ -13,7 +13,10 @@ import MyRoutine from '../pages/RoutineSetting/MyRoutine'
 import RoutineAdd from '../pages/RoutineSetting/RoutineAdd'
 import RoutineCount from '../pages/RoutineSetting/RoutineCount'
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2a3d76fc2fca366d0671db71225ec43db0b5bfce
 const App = () => {
     return (
         <>
