@@ -53,7 +53,15 @@ const Footer = () => {
                 >
                     Back
                 </Text>
-                <Text _color={'gray'}>김영우 김정호 양주혁</Text>
+                <Text _color={'gray'}>김영우 임성찬 양주혁</Text>
+                <Text
+                    _padding={'1rem 0px 0px 0px'}
+                    _fontWeight={'700'}
+                    _color={'gray'}
+                >
+                    Designer
+                </Text>
+                <Text _color={'gray'}>김예진 김수빈</Text>
             </FlexColumn>
         </>
     )

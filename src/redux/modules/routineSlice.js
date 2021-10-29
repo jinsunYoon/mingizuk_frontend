@@ -4,12 +4,14 @@ import {
     myRoutinePresetMD,
     myRoutineListMD,
     myRoutineDeleteMD,
+    myRoutineUpdateMD,
 } from '../async/routine'
 
 const initialState = {
     myPage: '',
     presetRoutine: [],
     myRoutine: [],
+    updateRoutineRef: '',
 }
 
 const routineSlice = createSlice({
@@ -18,6 +20,9 @@ const routineSlice = createSlice({
     reducers: {
         changeMyPageModal: (state, action) => {
             state.myPage = action.payload
+        },
+        updateRoutine: (state, action) => {
+            state.updateRoutineRef = action.payload
         },
     },
     extraReducers: {
@@ -40,11 +45,15 @@ const routineSlice = createSlice({
         [myRoutineDeleteMD.fulfilled]: (state, { payload }) => {
             console.log(payload)
         },
+        // * ----
+        [myRoutineUpdateMD.fulfilled]: (state, { payload }) => {
+            console.log(payload)
+        },
     },
 })
 
 //* reducer export
-export const { changeMyPageModal } = routineSlice.actions
+export const { changeMyPageModal, updateRoutine } = routineSlice.actions
 
 //* slice export
 export default routineSlice

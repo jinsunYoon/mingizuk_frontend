@@ -17,7 +17,6 @@ const RoutineCount = () => {
             actions: actionSet,
             isMain: false,
         }
-        console.log('1', data)
         dispatch(myRoutineCreateMD(data))
     }
     return (
@@ -29,6 +28,7 @@ const RoutineCount = () => {
                 <Input
                     _onChange={(e) => setName(e.target.value)}
                     _others="width:85vw;height=40px;margin-top:8px"
+                    _value={name}
                 />
                 <RoutineCounter />
             </RoutineTemplate>
