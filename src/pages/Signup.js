@@ -119,8 +119,9 @@ const Signup = (props) => {
                 <ButtonFill
                     _width="100%"
                     _margin="3rem"
-                    _padding="1rem"
+                    _padding="0.8rem"
                     _onClick={onClickSignup}
+                    _bgColor="#333"
                 >
                     회원가입하기
                 </ButtonFill>
