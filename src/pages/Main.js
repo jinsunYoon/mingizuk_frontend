@@ -90,7 +90,7 @@ const Main = (props) => {
                             _others={'box-sizing: border-box;'}
                             _justify={'space-around'}
                         >
-                            {presetRoutine.actions.map((routine, idx) => {
+                            {presetRoutine?.actions?.map((routine, idx) => {
                                 return (
                                     <>
                                         <ButtonOutlined
