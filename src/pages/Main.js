@@ -14,7 +14,15 @@ import Icon from '../components/icons/Icon'
 import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 
+import { loginCheckMD } from '../redux/async/user'
+
 const Main = (props) => {
+    const dispatch = useDispatch()
+
+    React.useEffect(() => {
+        dispatch(loginCheckMD())
+    }, [])
+
     const is_login = useSelector((state) => state.user.isLogin)
 
     if (is_login) {
