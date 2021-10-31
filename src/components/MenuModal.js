@@ -2,10 +2,14 @@ import React from 'react'
 import { FlexColumn, FlexRow, Text, ButtonOutlined } from '../elements'
 import { AccountCircleRounded } from '@material-ui/icons'
 import { ExitToAppRounded } from '@material-ui/icons'
+
 import { Footer } from '../components/index'
+import  Mypage  from '../pages/Mypage'
+
 import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { logoutMD } from '../redux/async/user'
+
 
 const MenuModal = () => {
     const dispatch = useDispatch()
@@ -106,7 +110,7 @@ const MenuModal = () => {
                                             _margin={'0px'}
                                             _width={'false'}
                                             _onClick={() => {
-                                                history.push('/mypage')
+                                                history.push('/users')
                                             }}
                                         >
                                             <Text
