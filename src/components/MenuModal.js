@@ -4,7 +4,6 @@ import { AccountCircleRounded } from '@material-ui/icons'
 import { ExitToAppRounded } from '@material-ui/icons'
 
 import { Footer } from '../components/index'
-import  Mypage  from '../pages/Mypage'
 
 import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
