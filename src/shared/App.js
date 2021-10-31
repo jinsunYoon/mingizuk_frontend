@@ -15,7 +15,8 @@ import RoutineCount from '../pages/RoutineSetting/RoutineCount'
 import RoutineUpdate from '../pages/RoutineSetting/RoutineUpdate'
 import RoutineUpdateCount from '../pages/RoutineSetting/RoutineUpdateCount'
 import NotFound from '../pages/NotFound'
-import Mypage from '../pages/Mypage'
+import Mypage from '../pages/MyPage'
+import ProfileUpdate from '../pages/ProfileUpdate'
 
 const App = () => {
     return (
@@ -43,6 +44,7 @@ const App = () => {
                         component={RoutineUpdateCount}
                     />
                     <Route path="/users" exact component={Mypage}/>
+                    <Route path="/users/info" exact component={ProfileUpdate}/>
                     <Route path="*" component={NotFound} />
                 </Switch>
             </ConnectedRouter>
