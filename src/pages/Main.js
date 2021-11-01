@@ -126,6 +126,7 @@ const Main = (props) => {
             </TimeWarp>
             <FlexColumn
                 _width={'100vw'}
+                _height={'100%'}
                 _padding={'1rem'}
                 _others={'box-sizing: border-box;'}
                 _border={'none'}

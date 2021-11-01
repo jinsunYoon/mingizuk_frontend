@@ -15,7 +15,7 @@ import RoutineCount from '../pages/RoutineSetting/RoutineCount'
 import RoutineUpdate from '../pages/RoutineSetting/RoutineUpdate'
 import RoutineUpdateCount from '../pages/RoutineSetting/RoutineUpdateCount'
 import NotFound from '../pages/NotFound'
-import Mypage from '../pages/MyPage'
+import Mypage from '../pages/Mypage'
 import ProfileUpdate from '../pages/ProfileUpdate'
 import MyCollection from '../pages/MyCollection'
 import History from '../pages/History'
@@ -48,9 +48,13 @@ const App = () => {
                         exact
                         component={RoutineUpdateCount}
                     />
-                    <Route path="/users" exact component={Mypage}/>
-                    <Route path="/users/info" exact component={ProfileUpdate}/>
-                    <Route path="/users/collection" exact component={MyCollection}/>
+                    <Route path="/users" exact component={Mypage} />
+                    <Route path="/users/info" exact component={ProfileUpdate} />
+                    <Route
+                        path="/users/collection"
+                        exact
+                        component={MyCollection}
+                    />
                     <Route path="/moim" exact component={MoimMain} />
                     <Route path="/moim/write" exact component={MoimWrite} />
                     <Route path="*" component={NotFound} />

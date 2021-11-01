@@ -1,14 +1,21 @@
 import { createSlice, isFulfilled } from '@reduxjs/toolkit'
 import { getToken } from '../../shared/utils'
-import { signupMD, loginMD, logoutMD, loginCheckMD, userInfoMD, kakaoLoginMD, } from '../async/user'
+import {
+    signupMD,
+    loginMD,
+    logoutMD,
+    loginCheckMD,
+    userInfoMD,
+    kakaoLoginMD,
+} from '../async/user'
 import { history } from '../store'
 import { useDispatch } from 'react-redux'
 
 const initialState = {
     isLogin: false,
     userInfo: {
-        nickName:'',
-        userPw:''
+        nickName: '',
+        userPw: '',
     },
 }
 
@@ -20,7 +27,6 @@ const userSlice = createSlice({
             state.isLogin = payload
             //일반 리덕스
         },
-        
     },
 
     extraReducers: {
@@ -55,10 +61,11 @@ const userSlice = createSlice({
         [loginMD.rejected]: (state, { payload: errorMessage }) => {},
         [signupMD.fulfilled]: (state, { payload }) => {},
 
-      // * userInfo
-        [userInfoMD.fulfilled]:(state, {payload}) => {
-            console.log(payload,'payload')
+        // * userInfo
+        [userInfoMD.fulfilled]: (state, { payload }) => {
+            console.log(payload, 'payload')
             //state.userInfo.userPw = payload.data.user.userPw
+        },
 
         // * loginCheck
         [kakaoLoginMD.pending]: (state, { payload }) => {},
@@ -67,10 +74,7 @@ const userSlice = createSlice({
             console.log(payload)
         },
     },
-    
 })
-
-
 
 export const { userReducer } = userSlice.actions
 export default userSlice
