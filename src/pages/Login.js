@@ -11,7 +11,7 @@ import {
     Text,
     Title,
 } from '../elements/index'
-import { loginMD, signupMD } from '../redux/async/user'
+import { kakaoLoginMD, loginMD, signupMD } from '../redux/async/user'
 import { history } from '../redux/store'
 import ChatBubbleOutlinedIcon from '@mui/icons-material/ChatBubbleOutlined'
 
@@ -71,6 +71,7 @@ const Login = () => {
                         _padding="0.8rem"
                         _bgColor="#fef01b"
                         _color="#964b00"
+                        _onClick={() => dispatch(kakaoLoginMD())}
                     >
                         카카오톡으로 로그인하기
                     </ButtonFill>
