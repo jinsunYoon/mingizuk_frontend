@@ -33,6 +33,8 @@ const ImgEl = styled.img`
     src: ${(props) => props._src};
     ${(props) => (props._bradius ? `border-radius:${props._bradius}` : '')};
     ${(props) => (props._others ? props._others : '')};
-`
+    width: ${(props) => props._margin};
+
+    `
 
 export default Img
