@@ -12,8 +12,9 @@ const UpdateCheck = (props) => {
     React.useEffect(() => {
         if (pre_select === true) {
             setCheck(true)
+            dispatch(addAction({ value, type }))
         }
-    }, [pre_select])
+    }, [])
 
     return (
         <div
