@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
     ButtonFill,
@@ -17,8 +17,10 @@ import ChatBubbleOutlinedIcon from '@mui/icons-material/ChatBubbleOutlined'
 
 const Login = () => {
     const dispatch = useDispatch()
-    const [id, setId] = React.useState()
-    const [pwd, setPwd] = React.useState()
+    const [id, setId] = useState()
+    const [pwd, setPwd] = useState()
+    //const [disabled, setDisabled] = useState(true)
+
     const emailLogin = () => {
         const data = {
             userEmail: id,
@@ -26,25 +28,54 @@ const Login = () => {
         }
         dispatch(loginMD(data))
     }
+    /* 로그인 버튼 비활성화(미완)
+    
+    useEffect(() => {
+        if(id !== '' && pwd !==''){
+            return setDisabled(false);
+        }
+            setDisabled(true)
+        }, []);
+    */
 
     return (
         <>
-            <FlexRow _width="100vw" _justify="center" _border="none">
-                <FlexColumn _width="70vw" _height="100vh" _border="none">
-                    <SubTitle _margin="0 0 1rem 0">로그인</SubTitle>
-                    <Text _margin="1rem">아이디</Text>
+            <FlexRow 
+                _width="100vw"
+                _justify="center" 
+                _border="none"
+            >
+                <FlexColumn 
+                    _width="70vw"
+                    _height="100vh"
+                    _border="none"
+                >
+                    <SubTitle 
+                        _margin="0 0 1rem 0"
+                    >
+                        로그인
+                    </SubTitle>
+                    <Text 
+                            _margin="1rem"
+                        >
+                            아이디
+                    </Text>
                     <Input
-                        _width="100%"
-                        _ph="아이디를 입력해주세요."
+                        _width='100%'
+                            _ph="아이디를 입력해주세요."
                         _onChange={(e) => setId(e.target.value)}
                     />
-                    <Text _margin="1rem">비밀번호</Text>
+                    <Text 
+                            _margin="1rem"
+                        >
+                            비밀번호
+                    </Text>
                     <Input
-                        _width="100%"
-                        _ph="비밀번호를 입력해주세요."
-                        _onChange={(e) => setPwd(e.target.value)}
-                        _type="password"
-                    />
+                        _width='100%'
+                            _ph="비밀번호를 입력해주세요."
+                            _onChange={(e) => setPwd(e.target.value)}
+                            _type="password"
+                        />
                     <ButtonFill
                         _bgColor="#333"
                         _width="100%"
@@ -56,6 +87,7 @@ const Login = () => {
                     >
                         회원가입 하러가기
                     </ButtonFill>
+
                     <ButtonFill
                         _width="100%"
                         _margin="0.3rem"
@@ -85,8 +117,8 @@ const Login = () => {
                     </ButtonFill>
                 </FlexColumn>
             </FlexRow>
-        </>
-    )
+            </>
+        )
 }
 
 export default Login

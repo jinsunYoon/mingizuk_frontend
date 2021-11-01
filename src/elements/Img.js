@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Img = (props) => {
-    const { _width, _height, _src, _bradius, _others } = props
+    const { _width, _height, _src, _bradius, _others} = props
 
     const styles = {
         _width,
@@ -33,6 +33,7 @@ const ImgEl = styled.img`
     background-size: cover;
     ${(props) => (props._bradius ? `border-radius:${props._bradius}` : '')};
     ${(props) => (props._others ? props._others : '')};
-`
+    width: ${(props) => props._margin};
+    `
 
 export default Img

@@ -45,11 +45,13 @@ FlexRow.defaultProps = {
     _others: false,
     _bgColor: '#fff',
     _border: '1px solid lightgray',
+
 }
 
 const FlexRowEl = styled.div`
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap; 
     width: ${(props) => props._width};
     height: ${(props) => props._height};
     justify-content: ${(props) => props._justify};

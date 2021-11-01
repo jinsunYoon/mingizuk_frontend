@@ -75,6 +75,17 @@ const loginCheckAPI = () => {
     return instance.get('/api/auth/me')
 }
 
+// *---------------------------------------------
+
+// mypage
+
+const userInfoAPI = (data) => {
+    return instance.put('/api/users/info', {
+        nickName: data.nickName,
+        userPw: data.userPw,
+    })
+}
+
 const kakaoAPI = () => {
     return axios.get('http://13.125.110.160/api/auth/kakao')
 }
@@ -117,6 +128,7 @@ export {
     logoutAPI,
     kakaoAPI,
     loginCheckAPI,
+    userInfoAPI,
     myRoutinePresetAPI,
     myRoutineCreateAPI,
     myRoutineListAPI,
