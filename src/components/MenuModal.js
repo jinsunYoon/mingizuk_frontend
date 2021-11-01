@@ -125,6 +125,9 @@ const MenuModal = () => {
                                             _padding={'0px'}
                                             _margin={'0px'}
                                             _width={'false'}
+                                            _onClick={() => {
+                                                history.push('/history')
+                                            }}
                                         >
                                             <Text
                                                 _fontSize={'0.9rem'}
@@ -132,7 +135,7 @@ const MenuModal = () => {
                                                 _padding={'1rem 0px 0px 0px'}
                                                 _margin={'0px'}
                                             >
-                                                어쩌고저쩌고
+                                                히스토리
                                             </Text>
                                         </ButtonOutlined>
                                         <ButtonOutlined
@@ -140,6 +143,9 @@ const MenuModal = () => {
                                             _padding={'0px'}
                                             _margin={'0px'}
                                             _width={'false'}
+                                            _onClick={() => {
+                                                history.push('/moim')
+                                            }}
                                         >
                                             <Text
                                                 _fontSize={'0.9rem'}
@@ -147,7 +153,7 @@ const MenuModal = () => {
                                                 _padding={'1rem 0px 0px 0px'}
                                                 _margin={'0px'}
                                             >
-                                                다른메뉴
+                                                모임 게시판
                                             </Text>
                                         </ButtonOutlined>
                                     </FlexColumn>
