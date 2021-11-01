@@ -8,6 +8,7 @@ import {
     Img,
 } from '../elements/index'
 import { CancelRounded } from '@material-ui/icons'
+
 import { useSelector } from 'react-redux'
 
 const CompleteActionModal = (props) => {
@@ -23,71 +24,78 @@ const CompleteActionModal = (props) => {
     const num = presetRoutine?.actions?.length - 1
 
     return (
-        <FlexRow _border={'none'}>
-            <div
-                style={{
-                    width: '100vw',
-                    height: '100vh',
-                    backgroundColor: 'black',
-                    opacity: '0.3',
-                    position: 'fixed',
-                    top: '0',
-                    left: '0',
-                }}
-                onClick={() => {
-                    {
-                        modalStatus && setModalStatue(false)
-                    }
-                }}
-            ></div>
-            <Modal>
-                <button
-                    style={{
-                        position: 'absolute',
-                        right: '1rem',
-                        border: 'none',
-                        background: 'none',
-                        cursor: 'pointer',
-                    }}
-                    onClick={() => {
-                        modalStatus && setModalStatue(false)
-                    }}
-                >
-                    <CancelRounded />
-                </button>
-                <Text _fontSize={'2rem'} _margin={'1.5rem 0px 0.5rem 0px'}>
-                    {actionName}
-                </Text>
-                <Img
-                    _src={ImgSrc}
-                    _width={'13rem'}
-                    _height={'18rem'}
-                    _bradius={'0px'}
-                    _others={'background-color:#fff'}
-                ></Img>
-                <ButtonOutlined
-                    _width={'13rem'}
-                    _margin={'1rem 0px 0px 0px'}
-                    _padding={'0px'}
-                    _onClick={() => {
-                        {
-                            setImgSrc(
-                                'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming.gif'
-                            )
-                            setactionBtn('화이팅 !')
-                            setTimeout(function () {
-                                setactionBtn('완료하기 !')
-                                CompleteModal
-                                    ? setCompleteModal(false)
-                                    : setCompleteModal(true)
-                            }, 5000)
-                        }
-                    }}
-                >
-                    <Text _padding={'0.7rem 0px'}>{actionBtn}</Text>
-                </ButtonOutlined>
-            </Modal>
-        </FlexRow>
+        <React.Fragment>
+            {modalStatus && (
+                <FlexRow _border={'none'}>
+                    <div
+                        style={{
+                            width: '100vw',
+                            height: '100vh',
+                            backgroundColor: 'black',
+                            opacity: '0.3',
+                            position: 'fixed',
+                            top: '0',
+                            left: '0',
+                        }}
+                        onClick={() => {
+                            {
+                                modalStatus && setModalStatue(false)
+                            }
+                        }}
+                    ></div>
+                    <Modal>
+                        <button
+                            style={{
+                                position: 'absolute',
+                                right: '1rem',
+                                border: 'none',
+                                background: 'none',
+                                cursor: 'pointer',
+                            }}
+                            onClick={() => {
+                                modalStatus && setModalStatue(false)
+                            }}
+                        >
+                            <CancelRounded />
+                        </button>
+                        <Text
+                            _fontSize={'2rem'}
+                            _margin={'1.5rem 0px 0.5rem 0px'}
+                        >
+                            {actionName}
+                        </Text>
+                        <Img
+                            _src={ImgSrc}
+                            _width={'13rem'}
+                            _height={'18rem'}
+                            _bradius={'0px'}
+                            _others={'background-color:#fff'}
+                        ></Img>
+                        <ButtonOutlined
+                            _width={'13rem'}
+                            _margin={'1rem 0px 0px 0px'}
+                            _padding={'0px'}
+                            _onClick={() => {
+                                {
+                                    setImgSrc(
+                                        'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming.gif'
+                                    )
+                                    setactionBtn('화이팅 !')
+                                    setTimeout(function () {
+                                        setactionBtn('완료하기 !')
+                                        CompleteModal
+                                            ? setCompleteModal(false)
+                                            : setCompleteModal(true)
+                                    }, 5000)
+                                }
+                            }}
+                        >
+                            <Text _padding={'0.7rem 0px'}>{actionBtn}</Text>
+                        </ButtonOutlined>
+                    </Modal>
+                </FlexRow>
+            )}
+        </React.Fragment>
     )
 }
 
