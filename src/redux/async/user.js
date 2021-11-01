@@ -1,5 +1,6 @@
+import { Iron } from '@mui/icons-material'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { loginAPI, signupAPI, logoutAPI, loginCheckAPI } from '../../shared/api'
+import { loginAPI, signupAPI, logoutAPI, loginCheckAPI, userInfoAPI } from '../../shared/api'
 import { history } from '../store'
 
 export const signupMD = createAsyncThunk(
@@ -59,6 +60,22 @@ export const loginCheckMD = createAsyncThunk(
                 return response
             }
         } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const userInfoMD = createAsyncThunk(
+    'user/info',
+    async (data, thunkAPI) => {
+        try{
+            const response = await userInfoAPI(data)
+            if(response){
+                console.log('userInfoMd', response)
+                return response
+            }
+        } catch(err) {
             console.log(err)
             return thunkAPI.rejectWithValue(err)
         }

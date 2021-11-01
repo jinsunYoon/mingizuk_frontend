@@ -75,6 +75,20 @@ const loginCheckAPI = () => {
     return instance.get('/api/auth/me')
 }
 
+// *---------------------------------------------
+
+// mypage
+
+const userInfoAPI = (data) => {
+    return instance.put('/api/users/info', {
+        nickName: data.nickName,
+        userPw: data.userPw,
+    })
+}
+
+
+
+
 // * ------------------------------------------------
 
 // routine
@@ -112,6 +126,7 @@ export {
     loginAPI,
     logoutAPI,
     loginCheckAPI,
+    userInfoAPI,
     myRoutinePresetAPI,
     myRoutineCreateAPI,
     myRoutineListAPI,

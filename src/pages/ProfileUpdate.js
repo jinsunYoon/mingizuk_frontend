@@ -1,5 +1,6 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { userInfoMD} from '../redux/async/user'
 // import history from '../redux/store'
 
 //* components
@@ -21,33 +22,65 @@ import {
 
 //* style
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { useHistory } from 'react-router';
-
-
 
 const ProfileUpdate = () => {
     const history = useHistory()
+    const dispatch = useDispatch()
+
+    const [newNickName, setNewNickName] = useState('')
+    const [newPwd, setNewPwd] = useState('')
+ 
+    const nickName = useSelector((state) => state.user.userInfo.nickName)
+
     return(
         <>
             <Header name="프로필수정"/>
-            <FlexColumn _width="100%" _height="400px" _border="none">
+            <FlexColumn _width="100%" _height="600px" _border="none">
+                <Text>
+                    프로필
+                </Text>
                 <label for="profile">
-                    <AccountCircleIcon style={{fontSize:'150px', color:'grey' }}/>
+                    <AccountCircleIcon 
+                        style={{fontSize:'120px', color:'grey', margin:'10px'}}
+                    />
                 </label>
-                <input type="file" id="profile" 
+                <input type="file" 
+                        id="profile" 
                         style={{
                             position:'absolute',
-                            top:'-99999px'}}
+                            top:'-99999px'
+                        }}
                 />
-                <Input _ph="" _width="70%"/>
-                <Text _padding="10px 0 50px">프로필사진과 닉네임을 입력해주세요.</Text>
+                <Text _margin="10px">   
+                    닉네임
+                </Text>
+                <Input _ph={nickName} 
+                        _width="60%" 
+                        _onChange={(e)=>setNewNickName(e.target.value)}
+                        
+                />
+
+                <Text _margin="30px 0 10px">
+                    비밀번호
+                </Text>
+                <Input _ph="변경하실 비밀번호를 입력해주세요" 
+                        _margin="30px" 
+                        _type="password" 
+                        _width="60%"
+                        _onChange={(e)=>setNewPwd(e.target.value)}
+                />
 
                 <ButtonFill
-                    _width="70%" 
+                    _width="40%" 
                     _padding="10px"
+                    _margin="100px 0 0"
                     _bgColor="grey"
-                    _onClick={()=>{history.push('/users')}}
+                    _onClick={()=>{
+                        history.push('/users')
+                        dispatch(userInfoMD(newNickName))
+                        console.log(newNickName)
+                    }}
                 >
                     완료
                 </ButtonFill>     

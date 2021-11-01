@@ -63,7 +63,8 @@ const Signup = (props) => {
             userPw: userPw,
             userPwChk: userPwChk,
         }
-        dispatch(signupMD(data))
+        dispatch(signupMD(data));
+
     }
 
     const handleKeypress = (e) => {

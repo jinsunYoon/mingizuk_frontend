@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import {history} from '../redux/store'
+import { useSelector } from 'react-redux'
 
 //* components
 import { 
@@ -23,7 +24,11 @@ import Icon from '../components/icons/Icon'
 
 const MyPage =(props) => {
     const [userInfo, setUserInfo] = useState('')
-    const contentBox = 'box-sizing: content-box'
+    const nickName = useSelector((state)=> state.user.userInfo.nickName)
+    const pwd = useSelector((state) => state.user.userInfo.userPw)
+
+    console.log(nickName,"nickname")
+    
     return(
         <>
             <Header name="마이페이지"/>
@@ -37,7 +42,7 @@ const MyPage =(props) => {
                     />
                     <FlexColumn _height="3rem" _width="200px" _border="none" >
                         <Text _fontSize="16px" _margin="0 10px 0">
-                            닉네임
+                            {nickName}
                         </Text>
                         <ButtonOutlined _padding="0" _margin="0" _width="auto" _border="none"
                                         _onClick={()=>{history.push('/users/info')}}

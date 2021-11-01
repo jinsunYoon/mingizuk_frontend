@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {
     ButtonFill,
     ButtonOutlined,
@@ -10,7 +11,9 @@ import {
     Text,
     Title,
 } from '../elements/index'
+
 import { MenuModal } from '../components/index'
+
 import { history } from '../redux/store'
 
 const Header = (props) => {
