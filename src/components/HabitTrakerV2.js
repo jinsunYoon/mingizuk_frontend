@@ -21,14 +21,6 @@ const HabitTrakerV2 = () => {
         <>
             {monthMap.map((day, idx) => (
                 <DayBox
-                    // onMouseOver={(day) => {
-                    //     setTipState(true)
-                    //     setDay(day)
-                    // }}
-                    // onMouseLeave={(day) => {
-                    //     setTipState(false)
-                    //     setDay(day)
-                    // }}
                     onClick={() => {
                         !modalState
                             ? dispatch(chageMyHabitModal(true))
