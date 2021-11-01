@@ -69,18 +69,6 @@ const Signup = (props) => {
     const handleKeypress = (e) => {
         if (e.key === 'Enter') onClickSignup()
     }
-    /*(미완)
-    //값이 입력되지 않았을시, 버튼 비활성화
-        if(
-            state.nickName !== '' &&
-            state.userEmail !== '' &&
-            state.userPw !== '' &&
-            state.userpwChk !== ''
-        ){
-            dispatch(userActions.getSignup)
-        }  
-    };
-    */
 
     return (
         <FlexRow _width="100vw" _justify="center" _border="none">
