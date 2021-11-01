@@ -54,13 +54,14 @@ const CharacterModal = (props) => {
                 </FlexRow>
             )}
             <ButtonFill
-                _width={'100%'}
+                _width={'200px'}
                 _color={'black'}
                 _padding={'0px'}
                 _margin={'0px 0px 1rem 0px'}
                 _others={
-                    'border : 1px solid gray; background-color: #C4C4C4; box-sizing: border-box; height: 330px;'
+                    'border : 1px solid gray; background-color: #C4C4C4; box-sizing: border-box; height: 200px;'
                 }
+                _bradius="50%"
                 _onClick={() => {
                     {
                         modalStatus
@@ -69,7 +70,7 @@ const CharacterModal = (props) => {
                     }
                 }}
             >
-                당신의 첫 캐릭터를 뽑아주세요
+                캐릭터를 뽑아주세요
             </ButtonFill>
         </React.Fragment>
     )
