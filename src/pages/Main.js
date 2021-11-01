@@ -9,7 +9,11 @@ import {
     ButtonOutlined,
     Text,
 } from '../elements/index'
-import { CharacterModal, Header } from '../components/index'
+import {
+    CharacterModal,
+    CompleteActionModal,
+    Header,
+} from '../components/index'
 import Icon from '../components/icons/Icon'
 import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
@@ -93,68 +97,7 @@ const Main = (props) => {
                             _others={'box-sizing: border-box;'}
                             _justify={'space-around'}
                         >
-                            {presetRoutine?.actions?.map((routine, idx) => {
-                                return (
-                                    <>
-                                        <ButtonOutlined
-                                            _border={'none'}
-                                            _margin={'none'}
-                                            _padding={'none'}
-                                            _width={'false'}
-                                        >
-                                            <FlexColumn
-                                                _width={'2.8rem'}
-                                                _height={'100%'}
-                                                _border={'none'}
-                                            >
-                                                <FlexRow
-                                                    _width={'2rem'}
-                                                    _height={'2rem'}
-                                                    _bgColor={'lightgray'}
-                                                    _border={'none'}
-                                                    _margin={'10px 0px 0px 0px'}
-                                                    _others={
-                                                        'border-radius:1rem'
-                                                    }
-                                                ></FlexRow>
-                                                <FlexRow
-                                                    _width={'1rem'}
-                                                    _height={'1rem'}
-                                                    _bgColor={'black'}
-                                                    _border={'none'}
-                                                    _margin={
-                                                        '-40px -25px 20px 0px'
-                                                    }
-                                                    _others={
-                                                        'border-radius:1rem;'
-                                                    }
-                                                >
-                                                    <Text _color={'#fff'}>
-                                                        5
-                                                    </Text>
-                                                </FlexRow>
-                                                <Text
-                                                    _margin={'5px 0px 0px 0px'}
-                                                    _fontSize={'0.75rem'}
-                                                >
-                                                    {routine?.actionName}
-                                                </Text>
-                                            </FlexColumn>
-                                        </ButtonOutlined>
-                                        {idx < num && (
-                                            <FlexRow
-                                                _border={'none'}
-                                                _width={'0.625rem'}
-                                            >
-                                                <Icon
-                                                    icon={'chevron-right'}
-                                                    size={24}
-                                                />
-                                            </FlexRow>
-                                        )}
-                                    </>
-                                )
-                            })}
+                            <CompleteActionModal />
                         </FlexRow>
                     </FlexColumn>
                     <div
