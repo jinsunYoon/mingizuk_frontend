@@ -28,7 +28,7 @@ const CompleteActionModal = (props) => {
     const num = presetRoutine?.actions?.length - 1
 
     return (
-        <React.Fragment>
+        <div style={{ display: 'flex', zIndex: '2' }}>
             {modal && (
                 <FlexRow _border={'none'}>
                     <div
@@ -148,7 +148,7 @@ const CompleteActionModal = (props) => {
                     </>
                 )
             })}
-        </React.Fragment>
+        </div>
     )
 }
 
