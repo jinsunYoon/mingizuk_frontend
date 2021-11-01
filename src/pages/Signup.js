@@ -69,20 +69,7 @@ const Signup = (props) => {
     const handleKeypress = (e) => {
         if (e.key === 'Enter') onClickSignup()
     }
-    /*(미완)
-    //값이 입력되지 않았을시, 버튼 비활성화
-        if(
-            state.nickName !== '' &&
-            state.userEmail !== '' &&
-            state.userPw !== '' &&
-            state.userpwChk !== ''
-        ){
-            dispatch(userActions.getSignup)
-        }  
-    };
-    */
-
-    return (
+        return (
         <FlexRow _width="100vw" _justify="center" _border="none">
             <FlexColumn _width="70vw" _height="100vh" _border="none">
                 <SubTitle _margin="0 0 1rem 0">회원가입</SubTitle>
@@ -115,7 +102,7 @@ const Signup = (props) => {
                     _ph="비밀번호를 다시 입력해주세요."
                     _onChange={(e) => setUserPwChk(e.target.value)}
                 />
-
+        
                 <ButtonFill
                     _width="100%"
                     _margin="3rem"
