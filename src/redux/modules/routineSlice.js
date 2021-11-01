@@ -12,6 +12,7 @@ const initialState = {
     presetRoutine: [],
     myRoutine: [],
     updateRoutineRef: '',
+    habitModal: false,
 }
 
 const routineSlice = createSlice({
@@ -23,6 +24,9 @@ const routineSlice = createSlice({
         },
         updateRoutine: (state, action) => {
             state.updateRoutineRef = action.payload
+        },
+        chageMyHabitModal: (state, action) => {
+            state.habitModal = action.payload
         },
     },
     extraReducers: {
@@ -56,7 +60,8 @@ const routineSlice = createSlice({
 })
 
 //* reducer export
-export const { changeMyPageModal, updateRoutine } = routineSlice.actions
+export const { changeMyPageModal, updateRoutine, chageMyHabitModal } =
+    routineSlice.actions
 
 //* slice export
 export default routineSlice

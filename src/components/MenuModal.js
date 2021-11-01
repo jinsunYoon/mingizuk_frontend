@@ -10,7 +10,9 @@ import { logoutMD } from '../redux/async/user'
 const MenuModal = () => {
     const dispatch = useDispatch()
     const is_login = useSelector((state) => state.user.isLogin)
-    const logout = () => { dispatch(logoutMD()) }
+    const logout = () => {
+        dispatch(logoutMD())
+    }
     const [modalStatus, setModalStatue] = React.useState(false)
 
     if (is_login) {
@@ -77,15 +79,15 @@ const MenuModal = () => {
                                         님
                                     </Text>
                                     <div onClick={logout}>
-                                    <ExitToAppRounded
-                                        style={{
-                                            marginLeft: '2.7rem',
-                                            color: '#c1c1c1',
-                                            fontSize: '27px',
-                                            background: '#fff',
-                                            borderRadius: '50px',
-                                            cursor: 'pointer',
-                                        }}
+                                        <ExitToAppRounded
+                                            style={{
+                                                marginLeft: '2.7rem',
+                                                color: '#c1c1c1',
+                                                fontSize: '27px',
+                                                background: '#fff',
+                                                borderRadius: '50px',
+                                                cursor: 'pointer',
+                                            }}
                                         />
                                     </div>
                                 </FlexRow>
