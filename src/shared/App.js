@@ -15,6 +15,7 @@ import RoutineCount from '../pages/RoutineSetting/RoutineCount'
 import RoutineUpdate from '../pages/RoutineSetting/RoutineUpdate'
 import RoutineUpdateCount from '../pages/RoutineSetting/RoutineUpdateCount'
 import NotFound from '../pages/NotFound'
+import History from '../pages/History'
 
 const App = () => {
     return (
@@ -26,6 +27,7 @@ const App = () => {
                     <Route path="/signup" exact component={Signup}></Route>
                     <Route path="/routine/mypage" exact component={MyRoutine} />
                     <Route path="/routine/add" exact component={RoutineAdd} />
+                    <Route path="/history" exact component={History} />
                     <Route
                         path="/routine/count"
                         exact

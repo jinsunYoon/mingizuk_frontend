@@ -26,6 +26,7 @@ const Header = (props) => {
                     position: 'sticky',
                     top: '0',
                     left: '0',
+                    zIndex: 3,
                 }}
             >
                 <FlexColumn _width={'100%'} _height={'100%'} _border={'none'}>

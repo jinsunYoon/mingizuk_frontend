@@ -37,7 +37,7 @@ const ExpGauge = styled.div`
     width: 20vw;
     height: inherit;
     background-color: blue;
-    z-index: 2;
+    z-index: 1;
     position: absolute;
 `
 

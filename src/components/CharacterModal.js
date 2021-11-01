@@ -89,6 +89,7 @@ const Modal = styled.div`
     position: fixed;
     top: 4.3rem;
     left: 1.8rem;
+    z-index: 3;
     @media screen and (max-width: 280px) {
         width: 233px;
         left: 1.5rem;
