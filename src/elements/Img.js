@@ -7,14 +7,13 @@ const Img = (props) => {
     const styles = {
         _width,
         _height,
-        _src,
         _bradius,
         _others,
     }
 
     return (
         <>
-            <ImgEl {...styles} />
+            <ImgEl {...styles} src={_src} />
         </>
     )
 }
@@ -30,7 +29,8 @@ Img.defaultProps = {
 const ImgEl = styled.img`
     width: ${(props) => props._width};
     height: ${(props) => props._height};
-    src: ${(props) => props._src};
+    background-image: url(${(props) => props._src});
+    background-size: cover;
     ${(props) => (props._bradius ? `border-radius:${props._bradius}` : '')};
     ${(props) => (props._others ? props._others : '')};
     width: ${(props) => props._margin};

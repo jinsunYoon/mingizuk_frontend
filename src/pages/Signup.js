@@ -70,7 +70,8 @@ const Signup = (props) => {
     const handleKeypress = (e) => {
         if (e.key === 'Enter') onClickSignup()
     }
-        return (
+
+    return (
         <FlexRow _width="100vw" _justify="center" _border="none">
             <FlexColumn _width="70vw" _height="100vh" _border="none">
                 <SubTitle _margin="0 0 1rem 0">회원가입</SubTitle>

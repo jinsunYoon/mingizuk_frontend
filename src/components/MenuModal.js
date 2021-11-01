@@ -13,7 +13,9 @@ import { logoutMD } from '../redux/async/user'
 const MenuModal = () => {
     const dispatch = useDispatch()
     const is_login = useSelector((state) => state.user.isLogin)
-    const logout = () => { dispatch(logoutMD()) }
+    const logout = () => {
+        dispatch(logoutMD())
+    }
     const [modalStatus, setModalStatue] = React.useState(false)
 
     if (is_login) {
@@ -80,15 +82,15 @@ const MenuModal = () => {
                                         님
                                     </Text>
                                     <div onClick={logout}>
-                                    <ExitToAppRounded
-                                        style={{
-                                            marginLeft: '2.7rem',
-                                            color: '#c1c1c1',
-                                            fontSize: '27px',
-                                            background: '#fff',
-                                            borderRadius: '50px',
-                                            cursor: 'pointer',
-                                        }}
+                                        <ExitToAppRounded
+                                            style={{
+                                                marginLeft: '2.7rem',
+                                                color: '#c1c1c1',
+                                                fontSize: '27px',
+                                                background: '#fff',
+                                                borderRadius: '50px',
+                                                cursor: 'pointer',
+                                            }}
                                         />
                                     </div>
                                 </FlexRow>
@@ -126,6 +128,9 @@ const MenuModal = () => {
                                             _padding={'0px'}
                                             _margin={'0px'}
                                             _width={'false'}
+                                            _onClick={() => {
+                                                history.push('/history')
+                                            }}
                                         >
                                             <Text
                                                 _fontSize={'0.9rem'}
@@ -133,7 +138,7 @@ const MenuModal = () => {
                                                 _padding={'1rem 0px 0px 0px'}
                                                 _margin={'0px'}
                                             >
-                                                어쩌고저쩌고
+                                                히스토리
                                             </Text>
                                         </ButtonOutlined>
                                         <ButtonOutlined
@@ -141,6 +146,9 @@ const MenuModal = () => {
                                             _padding={'0px'}
                                             _margin={'0px'}
                                             _width={'false'}
+                                            _onClick={() => {
+                                                history.push('/moim')
+                                            }}
                                         >
                                             <Text
                                                 _fontSize={'0.9rem'}
@@ -148,7 +156,7 @@ const MenuModal = () => {
                                                 _padding={'1rem 0px 0px 0px'}
                                                 _margin={'0px'}
                                             >
-                                                다른메뉴
+                                                모임 게시판
                                             </Text>
                                         </ButtonOutlined>
                                     </FlexColumn>

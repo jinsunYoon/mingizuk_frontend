@@ -13,6 +13,7 @@ const FlexColumn = (props) => {
         _bgColor,
         _border,
         _others,
+        _onClick,
     } = props
 
     const styles = {
@@ -28,7 +29,9 @@ const FlexColumn = (props) => {
     }
     return (
         <>
-            <FlexColumnEl {...styles}>{children}</FlexColumnEl>
+            <FlexColumnEl {...styles} onClick={_onClick}>
+                {children}
+            </FlexColumnEl>
         </>
     )
 }
@@ -44,6 +47,7 @@ FlexColumn.defaultProps = {
     _border: '1px solid lightgray',
     _bgColor: '#fff',
     _others: '',
+    _onClick: () => {},
 }
 
 const FlexColumnEl = styled.div`

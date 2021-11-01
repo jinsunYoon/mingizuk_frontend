@@ -1,11 +1,28 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ButtonFill, FlexRow, Text } from '../elements/index'
+import {
+    ButtonOutlined,
+    FlexRow,
+    FlexColumn,
+    Text,
+    Img,
+} from '../elements/index'
 import { CancelRounded } from '@material-ui/icons'
-import LevelBar from './LevelBar'
 
-const CharacterModal = (props) => {
+import { useSelector } from 'react-redux'
+
+const CompleteActionModal = (props) => {
     const [modalStatus, setModalStatue] = React.useState(false)
+    const [actionName, setActionName] = React.useState('')
+    const [ImgSrc, setImgSrc] = React.useState(
+        'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming.JPG'
+    )
+    const [actionBtn, setactionBtn] = React.useState('시작 !')
+    const [CompleteModal, setCompleteModal] = React.useState(false)
+    const presetRoutine = useSelector((state) => state.setAction.mainRoutine)
+    console.log('state', actionName)
+    const num = presetRoutine?.actions?.length - 1
+
     return (
         <React.Fragment>
             {modalStatus && (
@@ -41,39 +58,43 @@ const CharacterModal = (props) => {
                         >
                             <CancelRounded />
                         </button>
-                        <FlexRow
-                            _border={'none'}
-                            _width={'100%'}
-                            _height={'100%'}
+                        <Text
+                            _fontSize={'2rem'}
+                            _margin={'1.5rem 0px 0.5rem 0px'}
                         >
-                            <Text _fontSize={'2rem'} _margin={'0px'}>
-                                캐릭터 뽑기가
-                                <br /> 나올 화면입니다
-                            </Text>
-                        </FlexRow>
+                            {actionName}
+                        </Text>
+                        <Img
+                            _src={ImgSrc}
+                            _width={'13rem'}
+                            _height={'18rem'}
+                            _bradius={'0px'}
+                            _others={'background-color:#fff'}
+                        ></Img>
+                        <ButtonOutlined
+                            _width={'13rem'}
+                            _margin={'1rem 0px 0px 0px'}
+                            _padding={'0px'}
+                            _onClick={() => {
+                                {
+                                    setImgSrc(
+                                        'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming.gif'
+                                    )
+                                    setactionBtn('화이팅 !')
+                                    setTimeout(function () {
+                                        setactionBtn('완료하기 !')
+                                        CompleteModal
+                                            ? setCompleteModal(false)
+                                            : setCompleteModal(true)
+                                    }, 5000)
+                                }
+                            }}
+                        >
+                            <Text _padding={'0.7rem 0px'}>{actionBtn}</Text>
+                        </ButtonOutlined>
                     </Modal>
                 </FlexRow>
             )}
-            <ButtonFill
-                _width={'200px'}
-                _color={'black'}
-                _padding={'0px'}
-                _margin={'0px 0px 1rem 0px'}
-                _others={
-                    'border : 1px solid gray; background-color: #C4C4C4; box-sizing: border-box; height: 200px;'
-                }
-                _bradius="50%"
-                _onClick={() => {
-                    {
-                        modalStatus
-                            ? setModalStatue(false)
-                            : setModalStatue(true)
-                    }
-                }}
-            >
-                캐릭터를 뽑아주세요
-            </ButtonFill>
-            <LevelBar />
         </React.Fragment>
     )
 }
@@ -85,11 +106,12 @@ const Modal = styled.div`
     box-sizing: border-box;
     border-radius: 10px;
     background-color: #fff;
-    opacity: 0.95;
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     top: 4.3rem;
     left: 1.8rem;
-    z-index: 3;
     @media screen and (max-width: 280px) {
         width: 233px;
         left: 1.5rem;
@@ -117,4 +139,4 @@ const Modal = styled.div`
     }
 `
 
-export default CharacterModal
+export default CompleteActionModal

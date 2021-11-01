@@ -86,8 +86,9 @@ const userInfoAPI = (data) => {
     })
 }
 
-
-
+const kakaoAPI = () => {
+    return axios.get('http://13.125.110.160/api/auth/kakao')
+}
 
 // * ------------------------------------------------
 
@@ -125,6 +126,7 @@ export {
     signupAPI,
     loginAPI,
     logoutAPI,
+    kakaoAPI,
     loginCheckAPI,
     userInfoAPI,
     myRoutinePresetAPI,
