@@ -19,6 +19,10 @@ import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { loginCheckMD } from '../redux/async/user'
+import Time from '../elements/Time'
+import styled from 'styled-components'
+import HabitTrakerV2 from '../components/HabitTrakerV2'
+import { chageMyHabitModal } from '../redux/modules/routineSlice'
 
 const Main = (props) => {
     const dispatch = useDispatch()
@@ -29,6 +33,7 @@ const Main = (props) => {
 
     const is_login = useSelector((state) => state.user.isLogin)
     const presetRoutine = useSelector((state) => state.setAction.mainRoutine)
+    const num = presetRoutine?.actions?.length - 1
 
     if (is_login) {
         return (
@@ -41,18 +46,17 @@ const Main = (props) => {
                     _others={'box-sizing: border-box;'}
                     _border={'none'}
                 >
-                    {/* <Text _fontSize={'1.5rem'} _color={'black'} _padding={'0px'}>
-                    오늘의{' '}
-                    <span style={{ fontWeight: '700', color: '#2baffd' }}>
-                        밍기적
-                    </span>
-                    을 이루세요!
-                </Text> */}
+                    <TimeWarp>
+                        <Time />
+                    </TimeWarp>
                     <CharacterModal />
                     <FlexColumn
                         _align={'start'}
                         _width={'100%'}
                         _border={'none'}
+                        _onClick={() => {
+                            dispatch(chageMyHabitModal(false))
+                        }}
                     >
                         {' '}
                         <FlexRow _width={'false'} _border={'none'}>
@@ -96,6 +100,19 @@ const Main = (props) => {
                             <CompleteActionModal />
                         </FlexRow>
                     </FlexColumn>
+                    <div
+                        onClick={() => {
+                            dispatch(chageMyHabitModal(false))
+                        }}
+                    >
+                        <SubTitle>Habit Traker</SubTitle>
+                        <Text _fontSize="13px">
+                            <Time _format="YYYY, MM" type="num" />
+                        </Text>
+                    </div>
+                    <HabitTrakerWarp>
+                        <HabitTrakerV2 />
+                    </HabitTrakerWarp>
                 </FlexColumn>
             </React.Fragment>
         )
@@ -104,20 +121,15 @@ const Main = (props) => {
     return (
         <React.Fragment>
             <Header />
+            <TimeWarp>
+                <Time _format="MM.DD" />
+            </TimeWarp>
             <FlexColumn
                 _width={'100vw'}
-                _height={'100%'}
                 _padding={'1rem'}
                 _others={'box-sizing: border-box;'}
                 _border={'none'}
             >
-                {/* <Text _fontSize={'1.5rem'} _color={'black'} _padding={'0px'}>
-                    오늘의{' '}
-                    <span style={{ fontWeight: '700', color: '#2baffd' }}>
-                        밍기적
-                    </span>
-                    을 이루세요!
-                </Text> */}
                 <CharacterModal />
                 <FlexColumn _align={'start'} _width={'100%'} _border={'none'}>
                     {' '}
@@ -167,5 +179,25 @@ const Main = (props) => {
         </React.Fragment>
     )
 }
+
+const TimeWarp = styled.div`
+    width: 100vw;
+    height: 24px;
+    margin: 16px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+const HabitTrakerWarp = styled.section`
+    box-sizing: content-box;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 180px;
+`
 
 export default Main

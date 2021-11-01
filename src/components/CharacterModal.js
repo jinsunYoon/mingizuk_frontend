@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { ButtonFill, FlexRow, Text } from '../elements/index'
 import { CancelRounded } from '@material-ui/icons'
+import LevelBar from './LevelBar'
 
 const CharacterModal = (props) => {
     const [modalStatus, setModalStatue] = React.useState(false)
@@ -54,13 +55,14 @@ const CharacterModal = (props) => {
                 </FlexRow>
             )}
             <ButtonFill
-                _width={'100%'}
+                _width={'200px'}
                 _color={'black'}
                 _padding={'0px'}
                 _margin={'0px 0px 1rem 0px'}
                 _others={
-                    'border : 1px solid gray; background-color: #C4C4C4; box-sizing: border-box; height: 330px;'
+                    'border : 1px solid gray; background-color: #C4C4C4; box-sizing: border-box; height: 200px;'
                 }
+                _bradius="50%"
                 _onClick={() => {
                     {
                         modalStatus
@@ -69,8 +71,9 @@ const CharacterModal = (props) => {
                     }
                 }}
             >
-                당신의 첫 캐릭터를 뽑아주세요
+                캐릭터를 뽑아주세요
             </ButtonFill>
+            <LevelBar />
         </React.Fragment>
     )
 }
@@ -86,6 +89,7 @@ const Modal = styled.div`
     position: fixed;
     top: 4.3rem;
     left: 1.8rem;
+    z-index: 3;
     @media screen and (max-width: 280px) {
         width: 233px;
         left: 1.5rem;

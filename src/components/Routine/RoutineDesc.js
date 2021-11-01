@@ -40,6 +40,7 @@ const RoutineDesc = (props) => {
                 <FlexColumn _border="none" _width="320px" _height="70px">
                     {myset?.map((routine, idx) => (
                         <div
+                            key={idx}
                             onClick={() => {
                                 const data = {
                                     name: routine?.routineName,

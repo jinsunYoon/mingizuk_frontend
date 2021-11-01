@@ -7,14 +7,13 @@ const Img = (props) => {
     const styles = {
         _width,
         _height,
-        _src,
         _bradius,
         _others,
     }
 
     return (
         <>
-            <ImgEl {...styles} />
+            <ImgEl {...styles} src={_src} />
         </>
     )
 }

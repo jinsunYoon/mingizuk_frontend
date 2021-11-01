@@ -1,6 +1,12 @@
 import { createSlice, isFulfilled } from '@reduxjs/toolkit'
 import { getToken } from '../../shared/utils'
-import { signupMD, loginMD, logoutMD, loginCheckMD } from '../async/user'
+import {
+    signupMD,
+    loginMD,
+    logoutMD,
+    loginCheckMD,
+    kakaoLoginMD,
+} from '../async/user'
 import { history } from '../store'
 import { useDispatch } from 'react-redux'
 
@@ -44,6 +50,13 @@ const userSlice = createSlice({
         [loginMD.pending]: (state, { payload }) => {},
         [loginMD.rejected]: (state, { payload: errorMessage }) => {},
         [signupMD.fulfilled]: (state, { payload }) => {},
+
+        // * loginCheck
+        [kakaoLoginMD.pending]: (state, { payload }) => {},
+        [kakaoLoginMD.rejected]: (state, { payload }) => {},
+        [kakaoLoginMD.fulfilled]: (state, { payload }) => {
+            console.log(payload)
+        },
     },
 })
 

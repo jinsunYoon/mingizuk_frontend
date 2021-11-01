@@ -27,7 +27,6 @@ const RoutineTemplate = (props) => {
                         _others="height:56px;box-shadow: 0px 2px 0px 0px #000000;"
                         _border="1px solid #020202"
                         _onClick={() => {
-                            console.log('dd')
                             history.push('/routine/add')
                         }}
                     >

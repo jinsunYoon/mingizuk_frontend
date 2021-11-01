@@ -15,6 +15,9 @@ import RoutineCount from '../pages/RoutineSetting/RoutineCount'
 import RoutineUpdate from '../pages/RoutineSetting/RoutineUpdate'
 import RoutineUpdateCount from '../pages/RoutineSetting/RoutineUpdateCount'
 import NotFound from '../pages/NotFound'
+import History from '../pages/History'
+import MoimMain from '../pages/MoimPages/MoimMain'
+import MoimWrite from '../pages/MoimPages/MoimWrite'
 
 const App = () => {
     return (
@@ -26,6 +29,7 @@ const App = () => {
                     <Route path="/signup" exact component={Signup}></Route>
                     <Route path="/routine/mypage" exact component={MyRoutine} />
                     <Route path="/routine/add" exact component={RoutineAdd} />
+                    <Route path="/history" exact component={History} />
                     <Route
                         path="/routine/count"
                         exact
@@ -41,6 +45,8 @@ const App = () => {
                         exact
                         component={RoutineUpdateCount}
                     />
+                    <Route path="/moim" exact component={MoimMain} />
+                    <Route path="/moim/write" exact component={MoimWrite} />
                     <Route path="*" component={NotFound} />
                 </Switch>
             </ConnectedRouter>
