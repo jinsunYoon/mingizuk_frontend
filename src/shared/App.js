@@ -15,9 +15,9 @@ import RoutineCount from '../pages/RoutineSetting/RoutineCount'
 import RoutineUpdate from '../pages/RoutineSetting/RoutineUpdate'
 import RoutineUpdateCount from '../pages/RoutineSetting/RoutineUpdateCount'
 import NotFound from '../pages/NotFound'
-import Mypage from '../pages/MyPage'
-import ProfileUpdate from '../pages/ProfileUpdate'
-import MyCollection from '../pages/MyCollection'
+import Mypage from '../pages/MyPages/MyPage'
+import MyProfileUpdate from '../pages/MyPages/MyProfileUpdate'
+import MyCollection from '../pages/MyPages/MyCollection'
 import History from '../pages/History'
 import MoimMain from '../pages/MoimPages/MoimMain'
 import MoimWrite from '../pages/MoimPages/MoimWrite'
@@ -25,7 +25,7 @@ import MoimDetail from '../pages/MoimPages/MoimDetail'
 import Backend from '../pages/Backend'
 
 const App = () => {
-    
+
     return (
         <>
             <ConnectedRouter history={history}>
@@ -52,7 +52,7 @@ const App = () => {
                         component={RoutineUpdateCount}
                     />
                     <Route path="/users" exact component={Mypage} />
-                    <Route path="/users/info" exact component={ProfileUpdate} />
+                    <Route path="/users/info" exact component={MyProfileUpdate} />
                     <Route
                         path="/users/collection"
                         exact
