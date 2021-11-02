@@ -9,7 +9,6 @@ import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { logoutMD } from '../redux/async/user'
 
-
 const MenuModal = () => {
     const dispatch = useDispatch()
     const is_login = useSelector((state) => state.user.isLogin)
@@ -221,29 +220,57 @@ const MenuModal = () => {
                             _height={'100%'}
                             _justify={'start'}
                         >
-                            <FlexRow
-                                _border={'none'}
-                                _others={'padding-bottom:5px; '}
-                            >
-                                <Text _color={'gray'} _margin={'1rem 0px'}>
-                                    로그인 후 이용해주세요.
-                                </Text>
-                            </FlexRow>
                             <FlexColumn
                                 _height={'100vh'}
                                 _justify={'space-between'}
                                 _border={'none'}
                             >
-                                <ButtonOutlined
-                                    _margin={'0px'}
-                                    _onClick={() => {
-                                        history.push('/login')
-                                    }}
+                                <FlexColumn
+                                    _border={'none'}
+                                    _others={'padding-bottom:5px; '}
+                                    _height={'false'}
                                 >
-                                    <Text _margin={'0px'} _padding={'0px'}>
-                                        로그인 하기
+                                    <FlexColumn
+                                        _border={'none'}
+                                        _others={
+                                            'border-bottom: 1px solid lightgray'
+                                        }
+                                        _height={'false'}
+                                    >
+                                        <Text
+                                            _color={'gray'}
+                                            _margin={'1rem 0px'}
+                                        >
+                                            로그인 후 이용해주세요.
+                                        </Text>
+                                        <ButtonOutlined
+                                            _margin={'0px 0px 1rem 0px'}
+                                            _onClick={() => {
+                                                history.push('/login')
+                                            }}
+                                        >
+                                            <Text
+                                                _margin={'0px'}
+                                                _padding={'0px'}
+                                            >
+                                                로그인 하기
+                                            </Text>
+                                        </ButtonOutlined>
+                                    </FlexColumn>
+                                    <Text _color={'gray'} _margin={'1rem 0px'}>
+                                        아직 회원가입 전이라면?
                                     </Text>
-                                </ButtonOutlined>
+                                    <ButtonOutlined
+                                        _margin={'0px'}
+                                        _onClick={() => {
+                                            history.push('/signup')
+                                        }}
+                                    >
+                                        <Text _margin={'0px'} _padding={'0px'}>
+                                            회원가입 하기
+                                        </Text>
+                                    </ButtonOutlined>
+                                </FlexColumn>
                                 <Footer />
                             </FlexColumn>
                         </FlexColumn>

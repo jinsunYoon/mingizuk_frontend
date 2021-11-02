@@ -149,7 +149,7 @@ const Main = (props) => {
                                 _padding={'none'}
                                 _border={'none'}
                                 _onClick={() => {
-                                    history.push('/routine/mypage')
+                                    window.alert('로그인 후 이용해주세요.')
                                 }}
                             >
                                 <Icon icon={'create'} size={20} />
@@ -168,8 +168,7 @@ const Main = (props) => {
                             _color={'black'}
                             _border={'none'}
                             _onClick={() => {
-                                history.push('/routine/mypage')
-                                window.location.reload()
+                                window.alert('로그인 후 이용해주세요.')
                             }}
                         >
                             당신의 루틴을 설정해보세요!
