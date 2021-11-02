@@ -99,7 +99,7 @@ const MyPage =(props) => {
                 <ButtonOutlined
                     _margin="20px"
                     _width="100%"
-                    _onClick={()=>history.push('/users/moim')}
+                    _onClick={()=>history.push('/moim')}
                     _border="none"
                     _padding="30px"
                     _color="#000"

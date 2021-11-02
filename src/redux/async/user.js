@@ -80,8 +80,8 @@ export const userInfoMD = createAsyncThunk(
             console.log('<<', data)
             const response = await userInfoAPI(data)
             if (response) {
-                console.log('userInfoMd', response)
-                return response
+                console.log('userInfoMd', data)
+                return data
             }
         } catch (err) {
             console.log(err)

@@ -63,8 +63,8 @@ const userSlice = createSlice({
 
         // * userInfo
         [userInfoMD.fulfilled]: (state, { payload }) => {
-            console.log(payload, 'payload')
-            //state.userInfo.userPw = payload.data.user.userPw
+            state.userInfo.nickName = payload.newNickName
+            state.userInfo.userPw = payload.userPw
         },
 
         // * loginCheck
