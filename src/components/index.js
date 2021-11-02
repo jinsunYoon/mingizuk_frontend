@@ -7,7 +7,7 @@ import ToogleTab from './ToggleTab'
 import CollectionItem from './collection/CollectionItem'
 import CollectionList from './collection/CollectionList'
 import CompleteActionModal from './CompleteActionModal'
-
+import Complete from './Complete'
 export {
     Header,
     Footer,
@@ -18,4 +18,5 @@ export {
     CollectionItem,
     CollectionList,
     CompleteActionModal,
+    Complete,
 }

@@ -1,15 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import {
-    ButtonOutlined,
-    FlexRow,
-    FlexColumn,
-    Text,
-    Img,
-} from '../elements/index'
+import { ButtonOutlined, FlexRow, Text, Img } from '../elements/index'
 import { CancelRounded } from '@material-ui/icons'
 import Icon from '../components/icons/Icon'
 import { useSelector, useDispatch } from 'react-redux'
+import { actionCompleteMD } from '../redux/async/actionComplete'
 import {
     setActionBtn,
     setActionName,
@@ -17,21 +12,38 @@ import {
     setImgSrc,
     setCompleteBtn,
     setDefaultBtn,
+    setActionId,
+    setRoutineId,
 } from '../redux/modules/completeSlice'
 
 const CompleteActionModal = (props) => {
     const dispatch = useDispatch()
 
     const [success, setsuccess] = React.useState('false')
-    const modalImg = useSelector((state) => state.setModal.ImgSrc)
-    const modalActionName = useSelector((state) => state.setModal.actionName)
-    const modalActionBtn = useSelector((state) => state.setModal.actionBtn)
-    const modalCompleteBtn = useSelector((state) => state.setModal.completeBtn)
-    const modalDefaultBtn = useSelector((state) => state.setModal.defaultBtn)
+    const modalImg = useSelector((state) => state.actionComplete.ImgSrc)
+    const modalActionName = useSelector(
+        (state) => state.actionComplete.actionName
+    )
+    const modalActionBtn = useSelector(
+        (state) => state.actionComplete.actionBtn
+    )
+    const modalCompleteBtn = useSelector(
+        (state) => state.actionComplete.completeBtn
+    )
+    const modalDefaultBtn = useSelector(
+        (state) => state.actionComplete.defaultBtn
+    )
+    const modalActionId = useSelector((state) => state.actionComplete.actionId)
+    const modalRoutineId = useSelector(
+        (state) => state.actionComplete.routineId
+    )
 
     const successAction = () => {
         dispatch(setDefaultBtn(false))
         dispatch(setCompleteBtn(true))
+        const data = [modalActionId, modalRoutineId]
+        console.log('아이디', data)
+        dispatch(actionCompleteMD(data))
         dispatch(setActionName('성공!'))
         dispatch(
             setImgSrc(

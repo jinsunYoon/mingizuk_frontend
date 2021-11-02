@@ -77,6 +77,16 @@ const loginCheckAPI = () => {
 
 // *---------------------------------------------
 
+//mainpage
+
+const actionCompleteAPI = (data) => {
+    console.log('이거 api 데이터', data)
+    return instance.put('/api/users/action', {
+        actionId: data[0],
+        routineId: data[1],
+    })
+}
+
 // mypage
 
 const userInfoAPI = (data) => {
@@ -145,4 +155,5 @@ export {
     myRoutineDeleteAPI,
     myRoutineUpdateAPI,
     moimCreateAPI,
+    actionCompleteAPI,
 }

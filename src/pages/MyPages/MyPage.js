@@ -1,12 +1,12 @@
 import React, { Component, useState } from 'react';
-import {history} from '../redux/store'
+import { history } from '../../redux/store'
 import { useSelector } from 'react-redux'
 
 //* components
 import { 
     Header, 
     NavBar
-} from '../components/index'
+} from '../../components/index'
 
 //* elements
 import {
@@ -15,14 +15,14 @@ import {
     Img,
     Text,
     ButtonOutlined,
-} from '../elements/index'
+} from '../../elements/index'
 
 //* sytle
 import styled from 'styled-components'
-import Icon from '../components/icons/Icon'
+import Icon from '../../components/icons/Icon'
 
 
-const MyPage =(props) => {
+const MyPage = (props) => {
     const [userInfo, setUserInfo] = useState('')
     const nickName = useSelector((state)=> state.user.userInfo.nickName)
     const pwd = useSelector((state) => state.user.userInfo.userPw)
