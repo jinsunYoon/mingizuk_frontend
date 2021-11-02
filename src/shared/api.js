@@ -3,10 +3,10 @@ import { getToken } from './utils'
 
 // Axios 인스턴스 설정
 const instance = axios.create({
-    baseURL: 'http://13.125.110.160',
+    baseURL: 'http://52.79.237.95',
 })
 const instanceSign = axios.create({
-    baseURL: 'http://13.125.110.160',
+    baseURL: 'http://52.79.237.95',
 })
 
 // interceptor를 통한 header 설정
@@ -80,9 +80,10 @@ const loginCheckAPI = () => {
 // mypage
 
 const userInfoAPI = (data) => {
+    console.log(data)
     return instance.put('/api/users/info', {
-        nickName: data.nickName,
-        userPw: data.userPw,
+        nickName: data.newNickName,
+        userPw: data.newPwd,
     })
 }
 

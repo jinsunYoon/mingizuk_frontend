@@ -77,6 +77,7 @@ export const userInfoMD = createAsyncThunk(
     'user/info',
     async (data, thunkAPI) => {
         try {
+            console.log('<<', data)
             const response = await userInfoAPI(data)
             if (response) {
                 console.log('userInfoMd', response)
