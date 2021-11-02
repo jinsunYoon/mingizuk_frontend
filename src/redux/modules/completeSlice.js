@@ -23,10 +23,13 @@ const completeSlice = createSlice({
         setActionName: (state, { payload }) => {
             state.actionName = payload
         },
-        setcompleteBtn: (state, { payload }) => {
+        setActionBtn: (state, { payload }) => {
+            state.actionBtn = payload
+        },
+        setCompleteBtn: (state, { payload }) => {
             state.completeBtn = payload
         },
-        setdefaultBtn: (state, { payload }) => {
+        setDefaultBtn: (state, { payload }) => {
             state.defaultBtn = payload
         },
     },
@@ -38,8 +41,8 @@ export const {
     setImgSrc,
     setActionName,
     setActionBtn,
-    setcompleteBtn,
-    setdefaultBtn,
+    setCompleteBtn,
+    setDefaultBtn,
 } = completeSlice.actions
 
 //* slice export
