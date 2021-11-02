@@ -63,12 +63,14 @@ const Signup = (props) => {
             userPw: userPw,
             userPwChk: userPwChk,
         }
-        dispatch(signupMD(data));
-
+        dispatch(signupMD(data))
     }
 
-    const handleKeypress = (e) => {
-        if (e.key === 'Enter') onClickSignup()
+    // enter키 이벤트
+    const onKeyPress = (e) => {
+        if (e.key == 'Enter') {
+            onClickSignup()
+        }
     }
 
     return (
@@ -102,9 +104,10 @@ const Signup = (props) => {
                     _width="100%"
                     _type="password"
                     _ph="비밀번호를 다시 입력해주세요."
+                    _onKeyPress={onKeyPress}
                     _onChange={(e) => setUserPwChk(e.target.value)}
                 />
-        
+
                 <ButtonFill
                     _width="100%"
                     _margin="3rem"

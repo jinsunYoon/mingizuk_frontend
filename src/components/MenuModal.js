@@ -16,8 +16,7 @@ const MenuModal = () => {
         dispatch(logoutMD())
     }
     const [modalStatus, setModalStatue] = React.useState(false)
-    const nickName = useSelector((state)=>state.user.userInfo.nickName)
-
+    const nickName = useSelector((state) => state.user.userInfo.nickName)
 
     if (is_login) {
         return (
@@ -61,31 +60,36 @@ const MenuModal = () => {
                                 _justify={'start'}
                             >
                                 <FlexRow
-                                    _justify={'start'}
+                                    _justify={'space-between'}
                                     _border={'none'}
                                     _others={
                                         'padding-bottom:5px; border-bottom:1px solid #dbdbdb'
                                     }
                                 >
-                                    <AccountCircleRounded
-                                        style={{
-                                            marginRight: '10px',
-                                            color: '#6dddd0',
-                                            fontSize: '27px',
-                                            background: '#fff',
-                                            borderRadius: '50px',
-                                        }}
-                                    />
-                                    <Text _margin={'0px'} _padding={'0px'}>
-                                        <span style={{ fontWeight: '700' }}>
-                                            {nickName}
-                                        </span>{' '}
-                                        님
-                                    </Text>
+                                    <FlexRow
+                                        _border={'none'}
+                                        _width={'false'}
+                                        _justify={'start'}
+                                    >
+                                        <AccountCircleRounded
+                                            style={{
+                                                marginRight: '10px',
+                                                color: '#6dddd0',
+                                                fontSize: '27px',
+                                                background: '#fff',
+                                                borderRadius: '50px',
+                                            }}
+                                        />
+                                        <Text _margin={'0px'} _padding={'0px'}>
+                                            <span style={{ fontWeight: '700' }}>
+                                                {nickName}
+                                            </span>{' '}
+                                            님
+                                        </Text>
+                                    </FlexRow>
                                     <div onClick={logout}>
                                         <ExitToAppRounded
                                             style={{
-                                                marginLeft: '2.7rem',
                                                 color: '#c1c1c1',
                                                 fontSize: '27px',
                                                 background: '#fff',

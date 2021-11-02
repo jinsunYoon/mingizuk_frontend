@@ -38,6 +38,13 @@ const Login = () => {
         }, []);
     */
 
+    // enter키 이벤트
+    const onKeyPress = (e) => {
+        if (e.key == 'Enter') {
+            emailLogin()
+        }
+    }
+
     return (
         <>
             <FlexRow _width="100vw" _justify="center" _border="none">
@@ -55,6 +62,7 @@ const Login = () => {
                         _ph="비밀번호를 입력해주세요."
                         _onChange={(e) => setPwd(e.target.value)}
                         _type="password"
+                        _onKeyPress={onKeyPress}
                     />
                     <ButtonFill
                         _width="100%"
