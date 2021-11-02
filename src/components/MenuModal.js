@@ -16,6 +16,8 @@ const MenuModal = () => {
         dispatch(logoutMD())
     }
     const [modalStatus, setModalStatue] = React.useState(false)
+    const nickName = useSelector((state)=>state.user.userInfo.nickName)
+
 
     if (is_login) {
         return (
@@ -76,7 +78,7 @@ const MenuModal = () => {
                                     />
                                     <Text _margin={'0px'} _padding={'0px'}>
                                         <span style={{ fontWeight: '700' }}>
-                                            밍기적
+                                            {nickName}
                                         </span>{' '}
                                         님
                                     </Text>
