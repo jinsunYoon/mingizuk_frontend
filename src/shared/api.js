@@ -115,11 +115,20 @@ const myRoutineDeleteAPI = (routineId) => {
 }
 
 const myRoutineUpdateAPI = (data) => {
-    console.log(data)
     return instance.put(`/api/routines/${data.routineId}`, {
         routineName: data.routineName,
         actions: data.actions,
         isMain: data.isMain,
+    })
+}
+
+// *-----------------------------------------------------
+
+// moim
+const moimCreateAPI = (data) => {
+    return instance.post('api/moims', {
+        title: data.title,
+        contents: data.contents,
     })
 }
 
@@ -135,4 +144,5 @@ export {
     myRoutineListAPI,
     myRoutineDeleteAPI,
     myRoutineUpdateAPI,
+    moimCreateAPI,
 }

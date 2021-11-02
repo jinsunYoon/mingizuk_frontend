@@ -18,7 +18,6 @@ import {
     setCompleteBtn,
     setDefaultBtn,
 } from '../redux/modules/completeSlice'
-import { CompleteAfter } from '../components/index'
 
 const CompleteActionModal = (props) => {
     const dispatch = useDispatch()
@@ -72,11 +71,6 @@ const CompleteActionModal = (props) => {
 
     return (
         <>
-            {success && (
-                <div style={{ display: 'flex', zIndex: '30' }}>
-                    <CompleteAfter />
-                </div>
-            )}
             <FlexRow _border={'none'}>
                 <div
                     style={{

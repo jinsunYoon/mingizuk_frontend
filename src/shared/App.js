@@ -22,6 +22,7 @@ import History from '../pages/History'
 import MoimMain from '../pages/MoimPages/MoimMain'
 import MoimWrite from '../pages/MoimPages/MoimWrite'
 import Backend from '../pages/Backend'
+import { NavBar } from '../components'
 
 const App = () => {
     return (
@@ -62,6 +63,7 @@ const App = () => {
                     <Route path="*" component={NotFound} />
                 </Switch>
             </ConnectedRouter>
+            <NavBar />
         </>
     )
 }
