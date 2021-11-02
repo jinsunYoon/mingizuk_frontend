@@ -4,15 +4,33 @@ import { Input, FlexRow, Text } from '../../elements/index'
 import Icon from '../../components/icons/Icon'
 import { useDispatch, useSelector } from 'react-redux'
 import { moimCreateMD } from '../../redux/async/moim'
+import config from '../../shared/aws_config'
+import { uploadFile } from 'react-s3'
 
 const MoimWritePost = () => {
-    require('dotenv').config()
-    console.log(process.env.REACT_APP_TEST) //YOU_API_KEY
     const dispatch = useDispatch()
     const [title, setTitle] = React.useState('')
     const [contents, setContents] = React.useState('')
+    const [selectedFile, setSelectedFile] = React.useState(null)
+    const [imgSrc, setImgSrc] = React.useState('')
     const data = { title, contents }
+
+    // * upload S3
+    const handleFileInput = (e) => {
+        setSelectedFile(e.target.files[0])
+    }
+    const handleUpload = async (file) => {
+        if (selectedFile !== null) {
+            uploadFile(file, config)
+                .then((data) => {
+                    setImgSrc(data.location)
+                })
+                .catch((err) => console.error(err))
+        } else return
+    }
+
     const upload = () => {
+        handleUpload(selectedFile)
         dispatch(moimCreateMD(data))
     }
 
@@ -31,8 +49,9 @@ const MoimWritePost = () => {
                 _border="none"
             >
                 <IconBtn>
-                    <Icon icon="color-palette" size="20px" />
-                    <Text _fontSize="14px">사진</Text>
+                    <input type="file" onChange={handleFileInput} />
+                    {/* <Icon icon="color-palette" size="20px" />
+                    <Text _fontSize="14px">사진</Text> */}
                 </IconBtn>
                 <IconBtn>
                     <Text _fontSize="14px">위치</Text>

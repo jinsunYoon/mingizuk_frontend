@@ -1,7 +1,7 @@
 import React from 'react'
 import HistoryGraph from '../components/HistoryGraph'
 import RoutineTemplate from '../components/Routine/RoutineTemplate'
-import { FlexColumn, Title } from '../elements'
+import { ActiveUnderLine, FlexColumn, Title } from '../elements'
 import { history } from '../redux/store'
 import Header from '../components/Header'
 
