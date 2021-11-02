@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 import { ButtonFill, FlexRow, Text } from '../elements/index'
 import { CancelRounded } from '@material-ui/icons'
 import LevelBar from './LevelBar'
 
 const CharacterModal = (props) => {
     const [modalStatus, setModalStatue] = React.useState(false)
+    const is_login = useSelector((state) => state.user.isLogin)
     return (
         <React.Fragment>
             {modalStatus && (
@@ -65,15 +67,15 @@ const CharacterModal = (props) => {
                 _bradius="50%"
                 _onClick={() => {
                     {
-                        modalStatus
-                            ? setModalStatue(false)
-                            : setModalStatue(true)
+                        is_login
+                            ? setModalStatue(true)
+                            : window.alert('로그인 후 이용해주세요.')
                     }
                 }}
             >
                 캐릭터를 뽑아주세요
             </ButtonFill>
-            <LevelBar />
+            {is_login && <LevelBar />}
         </React.Fragment>
     )
 }
