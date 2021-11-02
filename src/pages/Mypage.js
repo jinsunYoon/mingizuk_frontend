@@ -27,31 +27,61 @@ const MyPage =(props) => {
     const nickName = useSelector((state)=> state.user.userInfo.nickName)
     const pwd = useSelector((state) => state.user.userInfo.userPw)
 
-    console.log(nickName,"nickname")
+    console.log(nickName,">>nickname")
+    console.log(pwd,'>>pwd')
     
     return(
         <>
             <Header name="마이페이지"/>
-            <FlexColumn _width="100%"  _border="none">
-                <FlexRow  _width="250px"  _border="none" _margin="100px 0 20px">
+            <FlexColumn 
+                _width="100%"  
+                _border="none"
+            >
+                <FlexRow  
+                    _width="250px"  
+                    _border="none" 
+                    _margin="100px 0 20px"
+                >
                     <Img 
                         _src="file.mk.co.kr/meet/neds/2021/09/image_readtop_2021_914472_16325446274794777.jpg"
                         _width="43px" 
                         _height="43px"
                         _bradius="50%"
                     />
-                    <FlexColumn _height="3rem" _width="200px" _border="none" >
-                        <Text _fontSize="16px" _margin="0 10px 0">
+                    <FlexColumn 
+                        _height="3rem" 
+                        _width="200px" 
+                        _border="none" 
+                    >
+                        <Text 
+                            _fontSize="16px" 
+                            _margin="0 10px 0"
+                        >
                             {nickName}
                         </Text>
-                        <ButtonOutlined _padding="0" _margin="0" _width="auto" _border="none"
-                                        _onClick={()=>{history.push('/users/info')}}
+                        <ButtonOutlined 
+                            _padding="0" 
+                            _margin="0" 
+                            _width="auto" 
+                            _border="none"
+                            _onClick={()=>{history.push('/users/info')}}
                         >
-                            <FlexRow _border="none" _justify="Start" _width="auto">
-                                <Text _fontSize="13px" _color="grey">
+                            <FlexRow 
+                                _border="none" 
+                                _justify="Start" 
+                                _width="auto"
+                            >
+                                <Text 
+                                    _fontSize="13px" 
+                                    _color="grey"
+                                >
                                     회원정보수정하기
                                 </Text>
-                                <Icon icon="create" size="12px" color="grey"/>
+                                <Icon 
+                                    icon="create" 
+                                    size="12px" 
+                                    color="grey"
+                                />
                             </FlexRow>
                         </ButtonOutlined>
                     </FlexColumn>                       
