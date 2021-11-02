@@ -22,6 +22,7 @@ import History from '../pages/History'
 import MoimMain from '../pages/MoimPages/MoimMain'
 import MoimWrite from '../pages/MoimPages/MoimWrite'
 import MoimDetail from '../pages/MoimPages/MoimDetail'
+import Backend from '../pages/Backend'
 
 const App = () => {
     
@@ -60,6 +61,7 @@ const App = () => {
                     <Route path="/moim" exact component={MoimMain} />
                     <Route path="/moim/write" exact component={MoimWrite} />
                     <Route path="/moim/detail" exact component={MoimDetail} />                    
+                    <Route path="/backend" exact component={Backend} />
                     <Route path="*" component={NotFound} />
                 </Switch>
             </ConnectedRouter>

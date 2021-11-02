@@ -7,95 +7,21 @@ import {
     Text,
     Img,
 } from '../elements/index'
-import { CancelRounded } from '@material-ui/icons'
 import Icon from '../components/icons/Icon'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-    setActionBtn,
-    setActionName,
-    setModal,
-    setImgSrc,
-} from '../redux/modules/completeSlice'
+import { setActionName, setModal } from '../redux/modules/completeSlice'
+import { Complete } from '../components/index'
 
 const CompleteActionModal = (props) => {
     const dispatch = useDispatch()
 
     const modal = useSelector((state) => state.setModal.modalStatus)
-    const modalImg = useSelector((state) => state.setModal.ImgSrc)
-    const modalActionName = useSelector((state) => state.setModal.actionName)
-    const modalactionBtn = useSelector((state) => state.setModal.actionBtn)
     const presetRoutine = useSelector((state) => state.setAction.mainRoutine)
     const num = presetRoutine?.actions?.length - 1
 
     return (
         <div style={{ display: 'flex', zIndex: '2' }}>
-            {modal && (
-                <FlexRow _border={'none'}>
-                    <div
-                        style={{
-                            width: '100vw',
-                            height: '100vh',
-                            backgroundColor: 'black',
-                            opacity: '0.3',
-                            position: 'fixed',
-                            top: '0',
-                            left: '0',
-                        }}
-                        onClick={() => {
-                            dispatch(setModal(false))
-                        }}
-                    ></div>
-                    <ModalEl>
-                        <button
-                            style={{
-                                position: 'absolute',
-                                right: '1rem',
-                                border: 'none',
-                                background: 'none',
-                                cursor: 'pointer',
-                            }}
-                            onClick={() => {
-                                dispatch(setModal(false))
-                            }}
-                        >
-                            <CancelRounded />
-                        </button>
-                        <Text
-                            _fontSize={'2rem'}
-                            _margin={'1.5rem 0px 0.5rem 0px'}
-                        >
-                            {modalActionName}
-                        </Text>
-                        <Img
-                            _src={modalImg}
-                            _width={'13rem'}
-                            _height={'18rem'}
-                            _bradius={'0px'}
-                            _others={'background-color:#fff'}
-                        ></Img>
-                        <ButtonOutlined
-                            _width={'13rem'}
-                            _margin={'1rem 0px 0px 0px'}
-                            _padding={'0px'}
-                            _onClick={() => {
-                                dispatch(
-                                    setImgSrc(
-                                        'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming.gif'
-                                    )
-                                )
-                                dispatch(setActionBtn('화이팅 !'))
-                                setTimeout(function () {
-                                    dispatch(setActionBtn('완료하기 !'))
-                                }, 5000)
-                            }}
-                        >
-                            <Text _padding={'0.7rem 0px'}>
-                                {modalactionBtn}
-                            </Text>
-                        </ButtonOutlined>
-                    </ModalEl>
-                </FlexRow>
-            )}
+            {modal && <Complete />}
             {presetRoutine?.actions?.map((routine, idx) => {
                 return (
                     <>

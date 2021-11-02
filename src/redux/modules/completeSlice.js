@@ -1,3 +1,4 @@
+import { Tune } from '@material-ui/icons'
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
@@ -5,6 +6,8 @@ const initialState = {
     ImgSrc: 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming.JPG',
     actionName: '',
     actionBtn: '시작 !',
+    completeBtn: false,
+    defaultBtn: true,
 }
 
 const completeSlice = createSlice({
@@ -23,12 +26,24 @@ const completeSlice = createSlice({
         setActionBtn: (state, { payload }) => {
             state.actionBtn = payload
         },
+        setCompleteBtn: (state, { payload }) => {
+            state.completeBtn = payload
+        },
+        setDefaultBtn: (state, { payload }) => {
+            state.defaultBtn = payload
+        },
     },
 })
 
 //* reducer export
-export const { setModal, setImgSrc, setActionName, setActionBtn } =
-    completeSlice.actions
+export const {
+    setModal,
+    setImgSrc,
+    setActionName,
+    setActionBtn,
+    setCompleteBtn,
+    setDefaultBtn,
+} = completeSlice.actions
 
 //* slice export
 export default completeSlice
