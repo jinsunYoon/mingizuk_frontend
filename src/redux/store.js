@@ -21,7 +21,7 @@ const reducer = combineReducers({
     updateAction: actionSlice.reducer,
     user: userSlice.reducer,
     setAction: mainRoutineSlice.reducer,
-    setModal: completeSlice.reducer,
+    actionComplete: completeSlice.reducer,
 })
 
 const middlewares = [thunkMiddleware]

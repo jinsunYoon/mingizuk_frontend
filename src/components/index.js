@@ -8,7 +8,6 @@ import CollectionItem from './collection/CollectionItem'
 import CollectionList from './collection/CollectionList'
 import CompleteActionModal from './CompleteActionModal'
 import Complete from './Complete'
-import CompleteAfter from './CompleteAfter'
 export {
     Header,
     Footer,
@@ -20,5 +19,4 @@ export {
     CollectionList,
     CompleteActionModal,
     Complete,
-    CompleteAfter,
 }

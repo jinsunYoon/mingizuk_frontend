@@ -9,13 +9,18 @@ import {
 } from '../elements/index'
 import Icon from '../components/icons/Icon'
 import { useSelector, useDispatch } from 'react-redux'
-import { setActionName, setModal } from '../redux/modules/completeSlice'
+import {
+    setActionName,
+    setModal,
+    setActionId,
+    setRoutineId,
+} from '../redux/modules/completeSlice'
 import { Complete } from '../components/index'
 
 const CompleteActionModal = (props) => {
     const dispatch = useDispatch()
 
-    const modal = useSelector((state) => state.setModal.modalStatus)
+    const modal = useSelector((state) => state.actionComplete.modalStatus)
     const presetRoutine = useSelector((state) => state.setAction.mainRoutine)
     const num = presetRoutine?.actions?.length - 1
 
@@ -33,6 +38,8 @@ const CompleteActionModal = (props) => {
                             _onClick={() => {
                                 dispatch(setModal(true))
                                 dispatch(setActionName(routine?.actionName))
+                                dispatch(setActionId(routine?.id))
+                                dispatch(setRoutineId(routine?.routineId))
                             }}
                         >
                             <FlexColumn
