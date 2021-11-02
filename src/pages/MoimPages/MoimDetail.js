@@ -50,7 +50,7 @@ const MoimDetail = () => {
                 </SmallBox>
                 <SmallBox>
                     <Icon icon={'message'} size="20px" />
-                    댓글{data.commentCount}개
+                    댓글 {data.commentCount}개
                 </SmallBox>
             </EtcBox>
             </DetailBox>
