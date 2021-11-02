@@ -21,6 +21,7 @@ import MyCollection from '../pages/MyCollection'
 import History from '../pages/History'
 import MoimMain from '../pages/MoimPages/MoimMain'
 import MoimWrite from '../pages/MoimPages/MoimWrite'
+import Backend from '../pages/Backend'
 
 const App = () => {
     return (
@@ -57,6 +58,7 @@ const App = () => {
                     />
                     <Route path="/moim" exact component={MoimMain} />
                     <Route path="/moim/write" exact component={MoimWrite} />
+                    <Route path="/backend" exact component={Backend} />
                     <Route path="*" component={NotFound} />
                 </Switch>
             </ConnectedRouter>
