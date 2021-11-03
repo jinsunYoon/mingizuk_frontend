@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { history } from '../../redux/store'
-import { FlexColumn, FlexRow, Text } from '../../elements/index'
+import { FlexColumn, FlexRow, Text, ButtonFill } from '../../elements/index'
 import {
     myRoutinePresetMD,
     myRoutineListMD,
@@ -16,6 +16,7 @@ const RoutineDesc = (props) => {
     const dispatch = useDispatch()
     const { select } = props
     const [desc, setDesc] = React.useState('first')
+    const [mainBtnStatus, setMainBtnStatus] = React.useState(false)
     const preset = useSelector((state) => state.routine.presetRoutine)
     const myset = useSelector((state) => state.routine.myRoutine)
     console.log('마이셋', myset)
@@ -54,88 +55,18 @@ const RoutineDesc = (props) => {
                                 }
                             }}
                         >
-                            <FlexRow _width="85vw" _border="none" key={idx}>
-                                <FlexColumn
-                                    key={idx}
-                                    _width="85vw"
-                                    _height="77px"
-                                    _border="none"
-                                    _others="border-bottom:1px solid lightgray"
-                                    _align="flex-start"
-                                >
-                                    <Text _fontWeight="600">
-                                        {routine?.routineName}
-                                    </Text>
-                                    <Text _fontSize="11px" _margin="5px 0 0 0">
-                                        {routine?.Actions?.map(
-                                            (action, idx) => action.actionName
-                                        )}
-                                    </Text>
-                                </FlexColumn>
-                                <FlexRow
-                                    _width="42px"
-                                    _height="77px"
-                                    _justify="space-between"
-                                    _border="none"
-                                    _others="border-bottom:1px solid lightgray"
-                                >
-                                    <div
-                                        onClick={() => {
-                                            dispatch(updateRoutine(routine.id))
-                                            history.push('/routine/update')
-                                        }}
+                                <FlexRow _width="85vw" _border="none" key={idx}>
+                                    <FlexColumn
+                                        key={idx}
+                                        _width="85vw"
+                                        _height="77px"
+                                        _border="none"
+                                        _others="border-bottom:1px solid lightgray"
+                                        _align="flex-start"
                                     >
-                                        <Icon icon="create" size="12px" />
-                                    </div>
-                                    <Icon
-                                        _onClick={() => {
-                                            const answer =
-                                                window.confirm(
-                                                    '해당 루틴을 삭제하시겠습니까 ?'
-                                                )
-                                            if (answer) {
-                                                dispatch(
-                                                    myRoutineDeleteMD(
-                                                        routine.id
-                                                    )
-                                                )
-                                            } else return
-                                        }}
-                                        icon="close-x"
-                                        size="14px"
-                                    ></Icon>
-                                </FlexRow>
-                            </FlexRow>
-                        </div>
-                    ))}
-                </FlexColumn>
-            )}
-            {desc === 'recommendRoutine' && (
-                <FlexColumn _border="none" _width="320px">
-                    {preset?.map((routine, idx) => (
-                        <div
-                            onClick={() => {
-                                const data = {
-                                    name: routine?.routineName,
-                                    actions: routine.Actions,
-                                }
-                                console.log(data)
-                                dispatch(setAction(data))
-                            }}
-                        >
-                            <FlexRow _width="85vw" _border="none" key={idx}>
-                                <FlexColumn
-                                    key={idx}
-                                    _width="85vw"
-                                    _height="77px"
-                                    _border="none"
-                                    _others="border-bottom:1px solid lightgray"
-                                    _align="flex-start"
-                                >
-                                    <Text _fontWeight="600">
-                                        {routine?.routineName}
-                                    </Text>
-                                    <div>
+                                        <Text _fontWeight="600">
+                                            {routine?.routineName}
+                                        </Text>
                                         <Text
                                             _fontSize="11px"
                                             _margin="5px 0 0 0"
@@ -145,49 +76,121 @@ const RoutineDesc = (props) => {
                                                     action.actionName
                                             )}
                                         </Text>
-                                    </div>
-                                </FlexColumn>
-                                <FlexRow
-                                    _width="42px"
-                                    _height="77px"
-                                    _justify="space-between"
-                                    _border="none"
-                                    _others="border-bottom:1px solid lightgray"
-                                >
-                                    {/* <Icon icon="create" size="12px" />
+                                    </FlexColumn>
+                                    <FlexRow
+                                        _width="42px"
+                                        _height="77px"
+                                        _justify="space-between"
+                                        _border="none"
+                                        _others="border-bottom:1px solid lightgray"
+                                    >
+                                        <div
+                                            onClick={() => {
+                                                dispatch(
+                                                    updateRoutine(routine.id)
+                                                )
+                                                history.push('/routine/update')
+                                            }}
+                                        >
+                                            <Icon icon="create" size="12px" />
+                                        </div>
+                                        <Icon
+                                            _onClick={() => {
+                                                const answer =
+                                                    window.confirm(
+                                                        '해당 루틴을 삭제하시겠습니까 ?'
+                                                    )
+                                                if (answer) {
+                                                    dispatch(
+                                                        myRoutineDeleteMD(
+                                                            routine.id
+                                                        )
+                                                    )
+                                                } else return
+                                            }}
+                                            icon="close-x"
+                                            size="14px"
+                                        ></Icon>
+                                    </FlexRow>
+                                </FlexRow>
+                            </div>
+                        ))}
+                </FlexColumn>
+            )}
+            {desc === 'recommendRoutine' && (
+                <FlexColumn _border="none" _width="320px">
+                    {preset.length > 0 &&
+                        preset?.map((routine, idx) => (
+                            <div
+                                onClick={() => {
+                                    const data = {
+                                        name: routine?.routineName,
+                                        actions: routine.Actions,
+                                    }
+                                    setMainBtnStatus(true)
+                                    dispatch(setAction(data))
+                                }}
+                            >
+                                <FlexRow _width="85vw" _border="none" key={idx}>
+                                    <FlexColumn
+                                        key={idx}
+                                        _width="85vw"
+                                        _height="77px"
+                                        _border="none"
+                                        _others="border-bottom:1px solid lightgray"
+                                        _align="flex-start"
+                                    >
+                                        <Text _fontWeight="600">
+                                            {routine?.routineName}
+                                        </Text>
+                                        <div>
+                                            <Text
+                                                _fontSize="11px"
+                                                _margin="5px 0 0 0"
+                                            >
+                                                {routine?.Actions?.map(
+                                                    (action, idx) =>
+                                                        action.actionName
+                                                )}
+                                            </Text>
+                                        </div>
+                                    </FlexColumn>
+                                    <FlexRow
+                                        _width="42px"
+                                        _height="77px"
+                                        _justify="space-between"
+                                        _border="none"
+                                        _others="border-bottom:1px solid lightgray"
+                                    >
+                                        {/* <Icon icon="create" size="12px" />
 
                                 <Icon icon="close-x" size="14px" /> */}
+                                    </FlexRow>
                                 </FlexRow>
-                            </FlexRow>
-                        </div>
-                    ))}
+                            </div>
+                        ))}
                 </FlexColumn>
+            )}
+            {mainBtnStatus && (
+                <ButtonFill
+                    _width="217px"
+                    _height="48px"
+                    _padding="16px 24px"
+                    _margin="0"
+                    _others="position:fixed;bottom: 80px;"
+                    _onClick={() => {
+                        setMainBtnStatus(false)
+                        history.push('/')
+                    }}
+                >
+                    메인 루틴으로 설정하기
+                </ButtonFill>
             )}
         </>
     )
 }
 
 RoutineDesc.defaultProps = {
-    myRoutine: [
-        {
-            key: '회사에서',
-            value: '허리돌리기/어깨 돌리기/앉았다 일어나기/목 돌리기 ',
-        },
-        {
-            key: '회사에서',
-            value: '허리돌리기/어깨 돌리기/앉았다 일어나기/목 돌리기 ',
-        },
-    ],
-    recommendRoutine: [
-        {
-            key: '집에서',
-            value: '허리돌리기/어깨 돌리기/앉았다 일어나기/목 돌리기 ',
-        },
-        {
-            key: '집에서',
-            value: '허리돌리기/어깨 돌리기/앉았다 일어나기/목 돌리기 ',
-        },
-    ],
     select: 'first',
 }
 

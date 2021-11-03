@@ -5,20 +5,22 @@ import { ButtonFill, ButtonOutlined } from '../../elements/index'
 import { history } from '../../redux/store'
 
 const RoutineTemplate = (props) => {
-    const { children, button, addBtn, _onClick_ } = props
+    const { children, button, addBtn, _onClick_, is_button } = props
     return (
         <>
             <MobileGrid>{children}</MobileGrid>
             <BtnPos>
-                <ButtonFill
-                    _width="217px"
-                    _height="48px"
-                    _padding="16px 24px"
-                    _margin="0"
-                    _onClick={props._onClick_}
-                >
-                    {button}
-                </ButtonFill>
+                {is_button === true && (
+                    <ButtonFill
+                        _width="217px"
+                        _height="48px"
+                        _padding="16px 24px"
+                        _margin="0"
+                        _onClick={props._onClick_}
+                    >
+                        {button}
+                    </ButtonFill>
+                )}
                 {addBtn && (
                     <ButtonOutlined
                         _width="56px"
@@ -42,6 +44,7 @@ RoutineTemplate.defaultProps = {
     button: '버튼 적기',
     addBtn: false,
     _onClick_: () => {},
+    is_button: true,
 }
 
 const MobileGrid = styled.section`
@@ -60,8 +63,9 @@ const BtnPos = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 30px;
+    bottom: 80px;
     z-index: 0;
+    left: 38vw;
 `
 
 export default RoutineTemplate

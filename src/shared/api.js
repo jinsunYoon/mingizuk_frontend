@@ -91,6 +91,9 @@ const getMainRoutineAPI = () => {
     return instance.get('/api/users/mainRoutine')
 }
 
+
+// *---------------------------------------------------
+
 // mypage
 
 const userInfoAPI = (data) => {
@@ -104,6 +107,35 @@ const userInfoAPI = (data) => {
 const kakaoAPI = () => {
     return axios.get('http://13.125.110.160/api/auth/kakao')
 }
+
+
+// *----------------------------------------------------
+// mymoim
+const myMoimCreateAPI = (data) => {
+    console.log(data)
+    return instance.post('/api/users/moims', {
+        userType: 1,
+    })
+}
+
+const myMoimJoinAPI = (data) => {
+    console.log(data)
+    return instance.post('/api/users/moims', {
+        usertype: 0,
+    })
+}
+
+const myMoimCommentAPI = (data) => {
+    console.log(data)
+    return instance.get('/api/users/comments')
+}
+
+const myMoimLikeAPI=(data)=>{
+    console.log(data)
+    return instance.get('/api/moim/like')
+}
+
+
 
 // * ------------------------------------------------
 
@@ -142,6 +174,7 @@ const setmainRoutineAPI = (data) => {
     })
 }
 
+
 // *-----------------------------------------------------
 
 // moim
@@ -151,6 +184,34 @@ const moimCreateAPI = (data) => {
         contents: data.contents,
     })
 }
+
+const moimReadAPI = () => {
+    return instance.get('/api/moims')
+}
+
+const moimDeleteAPI = (moimId) => {
+    return instance.delete(`/api/moims/${moimId}`)
+}
+
+const moimDetailAPI = (moimId) => {
+    return instance.get(`/api/moims/${moimId}`)
+}
+
+const moimCreateReviewAPI = (data) => {
+    return instance.post(`/api/comments/${data.moimId}`, {
+        contents: data.contents,
+    })
+}
+
+const moimDeleteReviewAPI = (commentId) => {
+    return instance.delete(`/api/comments/${commentId}`)
+}
+
+const moimUpdateReviewAPI = (data) => {
+    return instance.put(`/api/comments/${data.commentId}`, {
+        contents: data.contents,
+    })
+} 
 
 export {
     signupAPI,
@@ -164,8 +225,18 @@ export {
     myRoutineListAPI,
     myRoutineDeleteAPI,
     myRoutineUpdateAPI,
+    myMoimCreateAPI,
+    myMoimJoinAPI,
+    myMoimCommentAPI,
+    myMoimLikeAPI,
     moimCreateAPI,
     actionCompleteAPI,
+    moimReadAPI,
+    moimDeleteAPI,
+    moimDetailAPI,
+    moimCreateReviewAPI,
+    moimDeleteReviewAPI,
+    moimUpdateReviewAPI,
     getMainRoutineAPI,
     setmainRoutineAPI,
 }
