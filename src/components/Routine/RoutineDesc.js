@@ -6,6 +6,7 @@ import {
     myRoutinePresetMD,
     myRoutineListMD,
     myRoutineDeleteMD,
+    setMainRoutineMD,
 } from '../../redux/async/routine'
 import Icon from '../icons/Icon'
 import { updateRoutine } from '../../redux/modules/routineSlice'
@@ -17,6 +18,7 @@ const RoutineDesc = (props) => {
     const [desc, setDesc] = React.useState('first')
     const preset = useSelector((state) => state.routine.presetRoutine)
     const myset = useSelector((state) => state.routine.myRoutine)
+    console.log('마이셋', myset)
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -42,12 +44,14 @@ const RoutineDesc = (props) => {
                         <div
                             key={idx}
                             onClick={() => {
-                                const data = {
-                                    name: routine?.routineName,
-                                    actions: routine.Actions,
+                                if (routine.Actions.length > 0) {
+                                    const data = {
+                                        routineId:
+                                            routine?.Actions[0].routineId,
+                                    }
+                                    console.log('루틴아이디', data)
+                                    dispatch(setMainRoutineMD(data))
                                 }
-                                console.log(data)
-                                dispatch(setAction(data))
                             }}
                         >
                             <FlexRow _width="85vw" _border="none" key={idx}>

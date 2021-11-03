@@ -11,6 +11,7 @@ const initialState = {
     actionBtn: '시작 !',
     completeBtn: false,
     defaultBtn: true,
+    finDate: false,
 }
 
 const completeSlice = createSlice({
@@ -41,11 +42,14 @@ const completeSlice = createSlice({
         setDefaultBtn: (state, { payload }) => {
             state.defaultBtn = payload
         },
+        setFinDate: (state, { payload }) => {
+            state.finDate = payload
+        },
     },
 
     extraReducers: {
-        [actionCompleteMD.fulfilled]: (state, { payload }) => {
-            console.log('리듀서풀필드', state.payload)
+        [actionCompleteMD.fulfilled]: (state, action) => {
+            console.log('리듀서풀필드', action)
         },
     },
 })
@@ -60,6 +64,7 @@ export const {
     setActionBtn,
     setCompleteBtn,
     setDefaultBtn,
+    setFinDate,
 } = completeSlice.actions
 
 //* slice export
