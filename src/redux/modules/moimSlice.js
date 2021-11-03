@@ -17,7 +17,8 @@ const initialState = {
 const moimSlice = createSlice({
     name: 'moim',
     initialState: initialState,
-    reducers: {},
+    reducers: {
+    },
     extraReducers: {
         [moimCreateMD.fulfilled]: (state, { payload }) => {
             console.log(payload)

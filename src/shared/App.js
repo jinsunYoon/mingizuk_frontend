@@ -22,6 +22,7 @@ import History from '../pages/History'
 import MoimMain from '../pages/MoimPages/MoimMain'
 import MoimWrite from '../pages/MoimPages/MoimWrite'
 import MoimDetail from '../pages/MoimPages/MoimDetail'
+import MyMoim from '../pages/MyPages/MyMoim'
 import Backend from '../pages/Backend'
 import { NavBar } from '../components'
 
@@ -62,6 +63,8 @@ const App = () => {
                         exact
                         component={MyCollection}
                     />
+                    <Route path="/users/moim" exact component={MyMoim}/>
+                    
                     <Route path="/moim" exact component={MoimMain} />
                     <Route path="/moim/write" exact component={MoimWrite} />
                     <Route
@@ -70,6 +73,7 @@ const App = () => {
                         component={MoimDetail}
                     />
                     <Route path="/backend" exact component={Backend} />
+                    
                     <Route path="*" component={NotFound} />
                 </Switch>
             </ConnectedRouter>
