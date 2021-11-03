@@ -26,6 +26,7 @@ const moimSlice = createSlice({
             console.log(payload)
         },
         [moimReadMD.fulfilled]: (state, { payload }) => {
+            console.log(payload)
             state.moim_all = payload.data.allMoims
         },
         [moimReadMD.rejected]: (state, { payload }) => {
@@ -39,8 +40,10 @@ const moimSlice = createSlice({
         },
         [moimDetailMD.fulfilled]: (state, { payload }) => {
             state.moim_detail = payload.data.targetMoim
+            console.log(payload)
         },
         [moimReviewCreateMD.fulfilled]: (state, { payload }) => {
+            console.log(payload)
             state.moim_detail.Comments.push({ contents: payload.contents })
         },
         [moimDeleteReviewMD.fulfilled]: (state, { payload }) => {

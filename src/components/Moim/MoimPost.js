@@ -9,7 +9,6 @@ const MoimPost = () => {
     return (
         <>
             <PostDesc />
-            <PostImg />
             <PlusBtn
                 onClick={() => {
                     history.push('/moim/write')

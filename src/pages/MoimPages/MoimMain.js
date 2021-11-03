@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { NavBar } from '../../components'
 import Header from '../../components/Header'
 import MoimPost from '../../components/Moim/MoimPost'
 import MoimTemplate from '../../components/Moim/MoimTemplate'
@@ -19,6 +20,7 @@ const MoimMain = () => {
             <MoimTemplate>
                 <MoimPost />
             </MoimTemplate>
+            <NavBar />
         </>
     )
 }

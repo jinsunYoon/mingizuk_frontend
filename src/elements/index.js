@@ -8,6 +8,8 @@ import Input from './Input'
 import Title from './Title'
 import SubTitle from './SubTitle'
 import Text from './Text'
+import GoBack from './GoBack'
+import LikeBtn from './Moim/LikeBtn'
 
 export {
     ButtonFill,
@@ -20,4 +22,6 @@ export {
     SubTitle,
     Text,
     ActiveUnderLine,
+    GoBack,
+    LikeBtn,
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import swal from 'sweetalert'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { Text, FlexRow } from '..'
+import { Text, FlexRow, LikeBtn } from '..'
 import Icon from '../../components/icons/Icon'
 import { moimDeleteMD } from '../../redux/async/moim'
 import { history } from '../../redux/store'
@@ -30,34 +30,38 @@ const PostDesc = () => {
 
     return (
         <>
-            {post_data_all?.map((data, idx) => (
-                <div
-                    key={idx}
-                    onClick={() => {
-                        history.push(`/moim/detail/${data.id}`)
-                    }}
-                >
-                    <CloseBtn onClick={() => deletePost(data.id)}>X</CloseBtn>
-                    <PostDescBox>
-                        <Text _fontWeight="700" _fontSize="16px">
-                            {data?.title}
-                        </Text>
-                        <TextBox>작성자</TextBox>
-                        <TextBox>{data?.createdAt}</TextBox>
-                        <TextBox>참여자 {data?.MoimUsers?.length}명</TextBox>
-                    </PostDescBox>
-                    <EtcBox>
-                        <SmallBox>
-                            <Icon icon={'favorite'} size="20px" /> 좋아요
-                            {data?.Likes?.length}개
-                        </SmallBox>
-                        <SmallBox>
-                            <Icon icon={'message'} size="20px" />
-                            댓글{data?.Comments?.length}개
-                        </SmallBox>
-                    </EtcBox>
-                </div>
-            ))}
+            {post_data_all.length > 0 &&
+                post_data_all?.map((data, idx) => (
+                    <div key={idx}>
+                        <CloseBtn onClick={() => deletePost(data?.id)}>
+                            X
+                        </CloseBtn>
+                        <PostDescBox
+                            onClick={() => {
+                                history.push(`/moim/detail/${data?.id}`)
+                            }}
+                        >
+                            <Text _fontWeight="700" _fontSize="16px">
+                                {data?.title}
+                            </Text>
+                            <TextBox>작성자</TextBox>
+                            <TextBox>{data?.createdAt}</TextBox>
+                            <TextBox>
+                                참여자 {data?.MoimUsers?.length}명
+                            </TextBox>
+                        </PostDescBox>
+                        <EtcBox>
+                            <SmallBox>
+                                <LikeBtn /> 좋아요
+                                {data?.Likes?.length}개
+                            </SmallBox>
+                            <SmallBox>
+                                <Icon icon={'message'} size="20px" />
+                                댓글{data?.Comments?.length}개
+                            </SmallBox>
+                        </EtcBox>
+                    </div>
+                ))}
         </>
     )
 }

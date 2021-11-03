@@ -1,25 +1,37 @@
 import React from 'react'
 import Header from '../../components/Header'
 import { NavBar } from '../../components'
-import { Text, Input, ButtonFill, FlexRow } from '../../elements'
+import { Text, LikeBtn, ButtonFill, FlexRow } from '../../elements'
 import styled from 'styled-components'
 import Icon from '../../components/icons/Icon'
 import { useSelector, useDispatch } from 'react-redux'
-import { moimDetailMD } from '../../redux/async/moim'
+import { moimDetailMD, moimReviewCreateMD } from '../../redux/async/moim'
 import MoimReview from '../../components/Moim/MoimReview'
 
 const MoimDetail = (props) => {
-    const post_id = props.match.params.id.slice(1)
+    const post_id = props.match.params.id
     const dispatch = useDispatch()
+
     const post_data = useSelector((state) => state.moim.moim_detail)
     // const user_id = useSelector((state)=>state.user.userInfo.)
     React.useEffect(() => {
         dispatch(moimDetailMD(post_id))
     }, [post_id])
 
+    // * commnet create
+    const [contents, setContents] = React.useState('')
+    const commitsubmit = () => {
+        const data = {
+            moimId: post_id,
+            contents,
+        }
+        dispatch(moimReviewCreateMD(data))
+        setContents('')
+    }
+
     return (
         <>
-            <Header name="모임" />
+            <Header name="모임" type="back" />
             <DetailBox>
                 <TitleBox>
                     <div>
@@ -38,7 +50,7 @@ const MoimDetail = (props) => {
                 <JoinBtn>모임참여하기</JoinBtn>
                 <EtcBox>
                     <SmallBox>
-                        <Icon icon={'favorite'} size="20px" /> 좋아요
+                        <LikeBtn /> 좋아요
                         {post_data?.Likes?.length}개
                     </SmallBox>
                     <SmallBox>
@@ -48,6 +60,27 @@ const MoimDetail = (props) => {
                 </EtcBox>
                 <MoimReview moimId={post_id} />
             </DetailBox>
+            <FlexRow
+                _width="100vw"
+                _border="none"
+                _others="position:fixed;bottom:0"
+                _margin="10px 0"
+            >
+                <ReviewInput
+                    placeholder="댓글을 입력해주세요"
+                    onChange={(e) => {
+                        setContents(e.target.value)
+                    }}
+                    value={contents}
+                ></ReviewInput>
+                <SubmitBtn
+                    onClick={() => {
+                        commitsubmit()
+                    }}
+                >
+                    등록
+                </SubmitBtn>
+            </FlexRow>
         </>
     )
 }
@@ -59,7 +92,7 @@ const TitleBox = styled.div`
 `
 
 const ContentBox = styled.div`
-    height: 50vh;
+    height: 300px;
     padding: 10px;
 `
 
@@ -101,6 +134,20 @@ const EtcBox = styled.div`
     border-bottom: 1px solid lightgray;
     border-top: 1px solid lightgray;
     margin-bottom: 10px;
+`
+
+const ReviewInput = styled.input`
+    width: 280px;
+    height: 40px;
+    padding-left: 10px;
+`
+
+const SubmitBtn = styled.button`
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    margin-left: 5px;
 `
 
 export default MoimDetail

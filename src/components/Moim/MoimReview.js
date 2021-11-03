@@ -13,15 +13,7 @@ const MoimReview = (props) => {
     const dispatch = useDispatch()
     const review = useSelector((state) => state.moim.moim_detail.Comments)
     const { moimId } = props
-    const [contents, setContents] = React.useState('')
-    const commitsubmit = () => {
-        const data = {
-            moimId,
-            contents,
-        }
-        dispatch(moimReviewCreateMD(data))
-        setContents('')
-    }
+
     const deleteReview = (reviewId) => {
         const data = {
             moimId: moimId,
@@ -76,6 +68,7 @@ const MoimReview = (props) => {
                     <CloseBtn
                         onClick={() => {
                             deleteReview(review?.id)
+                            console.log('deleteid', review?.id)
                         }}
                     >
                         X
@@ -84,22 +77,6 @@ const MoimReview = (props) => {
                     <Text>{review?.contents}</Text>
                 </ReviewBox>
             ))}
-            <FlexRow _width="80vw" _border="none">
-                <ReviewInput
-                    placeholder="댓글을 입력해주세요"
-                    onChange={(e) => {
-                        setContents(e.target.value)
-                    }}
-                    value={contents}
-                ></ReviewInput>
-                <button
-                    onClick={() => {
-                        commitsubmit()
-                    }}
-                >
-                    등록
-                </button>
-            </FlexRow>
         </>
     )
 }
@@ -111,11 +88,6 @@ const ReviewBox = styled.article`
     align-items: flex-start;
     padding-left: 15px;
     border: 1px solid lightgray;
-`
-
-const ReviewInput = styled.input`
-    width: 70vw;
-    height: 40px;
 `
 
 const CloseBtn = styled.button`
