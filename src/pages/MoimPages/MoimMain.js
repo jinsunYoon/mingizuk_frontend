@@ -4,6 +4,7 @@ import MoimPost from '../../components/Moim/MoimPost'
 import MoimTemplate from '../../components/Moim/MoimTemplate'
 
 const MoimMain = () => {
+    
     return (
         <>
             <div style={{ zIndex: '3' }}>

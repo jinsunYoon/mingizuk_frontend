@@ -1,12 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { moimCreateMD } from '../async/moim'
 
-const initialState = {}
+const initialState = {
+    
+}
 
 const moimSlice = createSlice({
     name: 'moim',
     initialState: initialState,
-    reducers: {},
+    reducers: {
+    },
     extraReducers: {
         [moimCreateMD.fulfilled]: (state, { payload }) => {
             console.log(payload)

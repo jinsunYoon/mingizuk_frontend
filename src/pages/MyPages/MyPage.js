@@ -99,12 +99,12 @@ const MyPage = (props) => {
                 <ButtonOutlined
                     _margin="20px"
                     _width="100%"
-                    _onClick={()=>history.push('/moim')}
+                    _onClick={()=>history.push('/users/moim')}
                     _border="none"
                     _padding="30px"
                     _color="#000"
                 >
-                내 모임
+                    내 모임
                 </ButtonOutlined>
             </FlexColumn>
             <NavBar/>
