@@ -27,7 +27,7 @@ const Header = (props) => {
                     position: 'sticy',
                     top: '0',
                     left: '0',
-                    zIndex: 3,
+                    zIndex: '5',
                 }}
             >
                 <FlexRow _width={'100%'} _height={'100%'} _border={'none'}>

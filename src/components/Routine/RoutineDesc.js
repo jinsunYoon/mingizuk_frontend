@@ -167,19 +167,25 @@ const RoutineDesc = (props) => {
                 </FlexColumn>
             )}
             {mainBtnStatus && (
-                <ButtonFill
-                    _width="217px"
-                    _height="48px"
-                    _padding="16px 24px"
-                    _margin="0"
-                    _others="position:fixed;bottom: 80px;"
-                    _onClick={() => {
-                        setMainBtnStatus(false)
-                        history.push('/')
+                <div
+                    style={{
+                        zIndex: '3',
                     }}
                 >
-                    메인 루틴으로 설정하기
-                </ButtonFill>
+                    <ButtonFill
+                        _width="217px"
+                        _height="48px"
+                        _padding="16px 24px"
+                        _margin="0"
+                        _others="position:fixed;bottom: 80px;"
+                        _onClick={() => {
+                            console.log('눌림?')
+                            history.push('/')
+                        }}
+                    >
+                        메인 루틴으로 설정하기
+                    </ButtonFill>
+                </div>
             )}
         </>
     )
