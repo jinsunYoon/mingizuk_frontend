@@ -11,6 +11,7 @@ import {
 
 const MoimReview = (props) => {
     const dispatch = useDispatch()
+    const loginNickName = useSelector((state) => state.user.userInfo.nickName)
     const review = useSelector((state) => state.moim.moim_detail.Comments)
     const { moimId } = props
 
@@ -56,26 +57,32 @@ const MoimReview = (props) => {
 
     return (
         <>
-            {review?.map((review, idx) => (
-                <ReviewBox key={idx}>
-                    <UpdateBtn
-                        onClick={() => {
-                            updateReview(review?.id)
-                        }}
-                    >
-                        u
-                    </UpdateBtn>
-                    <CloseBtn
-                        onClick={() => {
-                            deleteReview(review?.id)
-                            console.log('deleteid', review?.id)
-                        }}
-                    >
-                        X
-                    </CloseBtn>
-                    <Text>리뷰 작성자</Text>
-                    <Text>{review?.contents}</Text>
-                </ReviewBox>
+            {review?.map((rev, idx) => (
+                <ScrollY>
+                    <ReviewBox key={idx}>
+                        {loginNickName === rev?.User?.nickName && (
+                            <div>
+                                <UpdateBtn
+                                    onClick={() => {
+                                        updateReview(rev?.id)
+                                    }}
+                                >
+                                    u
+                                </UpdateBtn>
+                                <CloseBtn
+                                    onClick={() => {
+                                        deleteReview(rev?.id)
+                                    }}
+                                >
+                                    X
+                                </CloseBtn>
+                            </div>
+                        )}
+
+                        <Text>{rev?.User?.nickName}</Text>
+                        <Text>{rev?.contents}</Text>
+                    </ReviewBox>
+                </ScrollY>
             ))}
         </>
     )
@@ -111,6 +118,24 @@ const UpdateBtn = styled.button`
     border: none;
     right: 50px;
     margin: 10px;
+`
+
+const ScrollY = styled.div`
+    display: grid;
+    height: 50px;
+    --column-count: 1;
+    overflow-y: auto;
+    grid-template-rows: repeat(1, auto);
+    scroll-padding: 0px 24px;
+    scroll-snap-type: y mandatory;
+    grid-auto-flow: row;
+    gap: 12px;
+    row-gap: 12px;
+    column-gap: 12px;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `
 
 export default MoimReview

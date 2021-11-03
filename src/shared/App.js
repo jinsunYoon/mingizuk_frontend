@@ -25,8 +25,14 @@ import MoimDetail from '../pages/MoimPages/MoimDetail'
 import MyMoim from '../pages/MyPages/MyMoim'
 import Backend from '../pages/Backend'
 import { NavBar } from '../components'
+import { loginCheckMD } from '../redux/async/user'
 
 const App = () => {
+    const dispatch = useDispatch()
+    React.useEffect(() => {
+        dispatch(loginCheckMD())
+    }, [])
+
     return (
         <>
             <ConnectedRouter history={history}>
@@ -63,8 +69,8 @@ const App = () => {
                         exact
                         component={MyCollection}
                     />
-                    <Route path="/users/moim" exact component={MyMoim}/>
-                    
+                    <Route path="/users/moim" exact component={MyMoim} />
+
                     <Route path="/moim" exact component={MoimMain} />
                     <Route path="/moim/write" exact component={MoimWrite} />
                     <Route
@@ -73,7 +79,7 @@ const App = () => {
                         component={MoimDetail}
                     />
                     <Route path="/backend" exact component={Backend} />
-                    
+
                     <Route path="*" component={NotFound} />
                 </Switch>
             </ConnectedRouter>
