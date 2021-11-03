@@ -45,6 +45,7 @@ const RoutineDesc = (props) => {
                         <div
                             key={idx}
                             onClick={() => {
+                                setMainBtnStatus(true)
                                 if (routine.Actions.length > 0) {
                                     const data = {
                                         routineId:
@@ -55,66 +56,60 @@ const RoutineDesc = (props) => {
                                 }
                             }}
                         >
-                                <FlexRow _width="85vw" _border="none" key={idx}>
-                                    <FlexColumn
-                                        key={idx}
-                                        _width="85vw"
-                                        _height="77px"
-                                        _border="none"
-                                        _others="border-bottom:1px solid lightgray"
-                                        _align="flex-start"
+                            <FlexRow _width="85vw" _border="none" key={idx}>
+                                <FlexColumn
+                                    key={idx}
+                                    _width="85vw"
+                                    _height="77px"
+                                    _border="none"
+                                    _others="border-bottom:1px solid lightgray"
+                                    _align="flex-start"
+                                >
+                                    <Text _fontWeight="600">
+                                        {routine?.routineName}
+                                    </Text>
+                                    <Text _fontSize="11px" _margin="5px 0 0 0">
+                                        {routine?.Actions?.map(
+                                            (action, idx) => action.actionName
+                                        )}
+                                    </Text>
+                                </FlexColumn>
+                                <FlexRow
+                                    _width="42px"
+                                    _height="77px"
+                                    _justify="space-between"
+                                    _border="none"
+                                    _others="border-bottom:1px solid lightgray"
+                                >
+                                    <div
+                                        onClick={() => {
+                                            dispatch(updateRoutine(routine.id))
+                                            history.push('/routine/update')
+                                        }}
                                     >
-                                        <Text _fontWeight="600">
-                                            {routine?.routineName}
-                                        </Text>
-                                        <Text
-                                            _fontSize="11px"
-                                            _margin="5px 0 0 0"
-                                        >
-                                            {routine?.Actions?.map(
-                                                (action, idx) =>
-                                                    action.actionName
-                                            )}
-                                        </Text>
-                                    </FlexColumn>
-                                    <FlexRow
-                                        _width="42px"
-                                        _height="77px"
-                                        _justify="space-between"
-                                        _border="none"
-                                        _others="border-bottom:1px solid lightgray"
-                                    >
-                                        <div
-                                            onClick={() => {
-                                                dispatch(
-                                                    updateRoutine(routine.id)
+                                        <Icon icon="create" size="12px" />
+                                    </div>
+                                    <Icon
+                                        _onClick={() => {
+                                            const answer =
+                                                window.confirm(
+                                                    '해당 루틴을 삭제하시겠습니까 ?'
                                                 )
-                                                history.push('/routine/update')
-                                            }}
-                                        >
-                                            <Icon icon="create" size="12px" />
-                                        </div>
-                                        <Icon
-                                            _onClick={() => {
-                                                const answer =
-                                                    window.confirm(
-                                                        '해당 루틴을 삭제하시겠습니까 ?'
+                                            if (answer) {
+                                                dispatch(
+                                                    myRoutineDeleteMD(
+                                                        routine.id
                                                     )
-                                                if (answer) {
-                                                    dispatch(
-                                                        myRoutineDeleteMD(
-                                                            routine.id
-                                                        )
-                                                    )
-                                                } else return
-                                            }}
-                                            icon="close-x"
-                                            size="14px"
-                                        ></Icon>
-                                    </FlexRow>
+                                                )
+                                            } else return
+                                        }}
+                                        icon="close-x"
+                                        size="14px"
+                                    ></Icon>
                                 </FlexRow>
-                            </div>
-                        ))}
+                            </FlexRow>
+                        </div>
+                    ))}
                 </FlexColumn>
             )}
             {desc === 'recommendRoutine' && (
