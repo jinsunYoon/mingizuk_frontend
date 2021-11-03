@@ -87,7 +87,13 @@ const actionCompleteAPI = (data) => {
     })
 }
 
+const getMainRoutineAPI = () => {
+    return instance.get('/api/users/mainRoutine')
+}
+
+
 // *---------------------------------------------------
+
 // mypage
 
 const userInfoAPI = (data) => {
@@ -162,7 +168,11 @@ const myRoutineUpdateAPI = (data) => {
     })
 }
 
-
+const setmainRoutineAPI = (data) => {
+    return instance.put('/api/users/mainRoutine', {
+        routineId: data.routineId,
+    })
+}
 
 
 // *-----------------------------------------------------
@@ -227,4 +237,6 @@ export {
     moimCreateReviewAPI,
     moimDeleteReviewAPI,
     moimUpdateReviewAPI,
+    getMainRoutineAPI,
+    setmainRoutineAPI,
 }

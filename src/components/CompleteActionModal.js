@@ -14,6 +14,7 @@ import {
     setModal,
     setActionId,
     setRoutineId,
+    setFinDate,
 } from '../redux/modules/completeSlice'
 import { Complete } from '../components/index'
 
@@ -21,13 +22,13 @@ const CompleteActionModal = (props) => {
     const dispatch = useDispatch()
 
     const modal = useSelector((state) => state.actionComplete.modalStatus)
-    const presetRoutine = useSelector((state) => state.setAction.mainRoutine)
-    const num = presetRoutine?.actions?.length - 1
+    const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
+    const num = mainRoutine?.Actions?.length - 1
 
     return (
         <div style={{ display: 'flex', zIndex: '2' }}>
             {modal && <Complete />}
-            {presetRoutine?.actions?.map((routine, idx) => {
+            {mainRoutine?.Actions?.map((routine, idx) => {
                 return (
                     <>
                         <ButtonOutlined
@@ -40,6 +41,7 @@ const CompleteActionModal = (props) => {
                                 dispatch(setActionName(routine?.actionName))
                                 dispatch(setActionId(routine?.id))
                                 dispatch(setRoutineId(routine?.routineId))
+                                dispatch(setFinDate(routine?.finDate))
                             }}
                         >
                             <FlexColumn

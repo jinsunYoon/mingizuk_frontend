@@ -19,6 +19,7 @@ import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { loginCheckMD } from '../redux/async/user'
+import { getMainRoutineMD } from '../redux/async/routine'
 import Time from '../elements/Time'
 import styled from 'styled-components'
 import HabitTrakerV2 from '../components/HabitTrakerV2'
@@ -29,11 +30,11 @@ const Main = (props) => {
 
     React.useEffect(() => {
         dispatch(loginCheckMD())
+        dispatch(getMainRoutineMD())
     }, [])
 
     const is_login = useSelector((state) => state.user.isLogin)
-    const presetRoutine = useSelector((state) => state.setAction.mainRoutine)
-    const num = presetRoutine?.actions?.length - 1
+    const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
 
     if (is_login) {
         return (
@@ -86,7 +87,7 @@ const Main = (props) => {
                             _margin={'0px 0px 0.2rem 0px'}
                         >
                             <span style={{ fontWeight: '700' }}>
-                                {presetRoutine?.name}
+                                {mainRoutine?.routineName}
                             </span>{' '}
                             하는 날! 오늘도 화이팅!
                         </Text>

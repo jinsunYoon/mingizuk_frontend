@@ -6,6 +6,7 @@ import {
     myRoutinePresetMD,
     myRoutineListMD,
     myRoutineDeleteMD,
+    setMainRoutineMD,
 } from '../../redux/async/routine'
 import Icon from '../icons/Icon'
 import { updateRoutine } from '../../redux/modules/routineSlice'
@@ -18,6 +19,7 @@ const RoutineDesc = (props) => {
     const [mainBtnStatus, setMainBtnStatus] = React.useState(false)
     const preset = useSelector((state) => state.routine.presetRoutine)
     const myset = useSelector((state) => state.routine.myRoutine)
+    console.log('마이셋', myset)
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -39,19 +41,20 @@ const RoutineDesc = (props) => {
         <>
             {desc === 'myRoutine' && (
                 <FlexColumn _border="none" _width="320px" _height="70px">
-                    {myset.length > 0 &&
-                        myset?.map((routine, idx) => (
-                            <div
-                                key={idx}
-                                onClick={() => {
+                    {myset?.map((routine, idx) => (
+                        <div
+                            key={idx}
+                            onClick={() => {
+                                if (routine.Actions.length > 0) {
                                     const data = {
-                                        name: routine?.routineName,
-                                        actions: routine.Actions,
+                                        routineId:
+                                            routine?.Actions[0].routineId,
                                     }
-                                    setMainBtnStatus(true)
-                                    dispatch(setAction(data))
-                                }}
-                            >
+                                    console.log('루틴아이디', data)
+                                    dispatch(setMainRoutineMD(data))
+                                }
+                            }}
+                        >
                                 <FlexRow _width="85vw" _border="none" key={idx}>
                                     <FlexColumn
                                         key={idx}
