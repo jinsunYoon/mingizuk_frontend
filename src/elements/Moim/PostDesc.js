@@ -44,7 +44,9 @@ const PostDesc = () => {
                             <Text _fontWeight="700" _fontSize="16px">
                                 {data?.title}
                             </Text>
-                            <TextBox>작성자</TextBox>
+                            <TextBox>
+                                {data?.MoimUsers[0]?.User?.nickName}
+                            </TextBox>
                             <TextBox>{data?.createdAt}</TextBox>
                             <TextBox>
                                 참여자 {data?.MoimUsers?.length}명

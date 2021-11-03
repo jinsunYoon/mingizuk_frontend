@@ -12,11 +12,13 @@ const MoimDetail = (props) => {
     const post_id = props.match.params.id
     const dispatch = useDispatch()
 
+    const user_nick = useSelector((state) => state.user.userInfo.nickName)
     const post_data = useSelector((state) => state.moim.moim_detail)
-    // const user_id = useSelector((state)=>state.user.userInfo.)
+
     React.useEffect(() => {
         dispatch(moimDetailMD(post_id))
-    }, [post_id])
+    }, [])
+    console.log('>>', user_nick)
 
     // * commnet create
     const [contents, setContents] = React.useState('')
@@ -37,7 +39,12 @@ const MoimDetail = (props) => {
                     <div>
                         <Text _fontSize="16px">{post_data?.title}</Text>
                         <Text _fontSize="11px" _color="#8f8f8f">
-                            {post_data?.createdAt} 작성자 닉필요
+                            {post_data?.createdAt}
+                        </Text>
+                        <Text _fontSize="11px" _color="#8f8f8f">
+                            작성자 :{' '}
+                            {Object.keys(post_data).length > 0 &&
+                                post_data?.MoimUsers[0]?.User.nickName}
                         </Text>
                     </div>
                     <Text _fontSize="11px">
@@ -47,7 +54,10 @@ const MoimDetail = (props) => {
                 <ContentBox>
                     <Text _fontSize="14px">{post_data?.contents}</Text>
                 </ContentBox>
-                <JoinBtn>모임참여하기</JoinBtn>
+                {Object.keys(post_data).length > 0 &&
+                    user_nick !== post_data?.MoimUsers[0]?.User.nickName && (
+                        <JoinBtn>모임참여하기</JoinBtn>
+                    )}
                 <EtcBox>
                     <SmallBox>
                         <LikeBtn /> 좋아요

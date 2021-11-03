@@ -113,7 +113,6 @@ export const moimUpdateReviewMD = createAsyncThunk(
     'moim/reviewUpdate',
     async (data, thunkAPI) => {
         try {
-            console.log(data)
             const response = await moimUpdateReviewAPI(data)
             if (response) {
                 Swal.fire('리뷰를 수정하였습니다.')
