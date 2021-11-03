@@ -36,7 +36,9 @@ Input.defaultProps = {
     _type: 'text',
     _width: '20rem',
     _fontSize: '',
-    // _value: ,
+    // _value: (e) => {
+    //     e.target.value
+    // },
 }
 
 const InputEl = styled.input`

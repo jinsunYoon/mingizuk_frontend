@@ -27,7 +27,6 @@ import Backend from '../pages/Backend'
 import { NavBar } from '../components'
 
 const App = () => {
-
     return (
         <>
             <ConnectedRouter history={history}>
@@ -54,7 +53,11 @@ const App = () => {
                         component={RoutineUpdateCount}
                     />
                     <Route path="/users" exact component={Mypage} />
-                    <Route path="/users/info" exact component={MyProfileUpdate} />
+                    <Route
+                        path="/users/info"
+                        exact
+                        component={MyProfileUpdate}
+                    />
                     <Route
                         path="/users/collection"
                         exact
@@ -64,13 +67,17 @@ const App = () => {
                     
                     <Route path="/moim" exact component={MoimMain} />
                     <Route path="/moim/write" exact component={MoimWrite} />
-                    <Route path="/moim/detail" exact component={MoimDetail} />                    
+                    <Route
+                        path="/moim/detail/:id"
+                        exact
+                        component={MoimDetail}
+                    />
                     <Route path="/backend" exact component={Backend} />
                     
                     <Route path="*" component={NotFound} />
                 </Switch>
             </ConnectedRouter>
-            <NavBar />
+            {/* <NavBar /> */}
         </>
     )
 }

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import RoutineTemplate from '../../components/Routine/RoutineTemplate'
 import ToggleTab from '../../components/ToggleTab'
 import RoutineDesc from '../../components/Routine/RoutineDesc'
-import { Header } from '../../components'
+import { Header, NavBar } from '../../components'
 import { getToken } from '../../shared/utils'
 import { history } from '../../redux/store'
 
@@ -16,6 +16,7 @@ const MyRoutine = () => {
             <RoutineTemplate
                 button="메인 루틴으로 설정하기"
                 _onClick_={() => history.push('/')}
+                is_button="false"
                 addBtn="true"
             >
                 <div style={{ zIndex: '3' }}>
@@ -27,6 +28,7 @@ const MyRoutine = () => {
                     select={status}
                 />
                 <RoutineDesc select={status} />
+                <NavBar />
             </RoutineTemplate>
         </>
     )

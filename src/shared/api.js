@@ -175,9 +175,33 @@ const moimCreateAPI = (data) => {
     })
 }
 
+const moimReadAPI = () => {
+    return instance.get('/api/moims')
+}
 
+const moimDeleteAPI = (moimId) => {
+    return instance.delete(`/api/moims/${moimId}`)
+}
 
+const moimDetailAPI = (moimId) => {
+    return instance.get(`/api/moims/${moimId}`)
+}
 
+const moimCreateReviewAPI = (data) => {
+    return instance.post(`/api/comments/${data.moimId}`, {
+        contents: data.contents,
+    })
+}
+
+const moimDeleteReviewAPI = (commentId) => {
+    return instance.delete(`/api/comments/${commentId}`)
+}
+
+const moimUpdateReviewAPI = (data) => {
+    return instance.put(`/api/comments/${data.commentId}`, {
+        contents: data.contents,
+    })
+} 
 
 export {
     signupAPI,
@@ -197,4 +221,10 @@ export {
     myMoimLikeAPI,
     moimCreateAPI,
     actionCompleteAPI,
+    moimReadAPI,
+    moimDeleteAPI,
+    moimDetailAPI,
+    moimCreateReviewAPI,
+    moimDeleteReviewAPI,
+    moimUpdateReviewAPI,
 }

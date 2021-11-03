@@ -1,37 +1,69 @@
 import React from 'react'
+import swal from 'sweetalert'
+import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { Text, FlexRow } from '..'
+import { Text, FlexRow, LikeBtn } from '..'
 import Icon from '../../components/icons/Icon'
+import { moimDeleteMD } from '../../redux/async/moim'
+import { history } from '../../redux/store'
 
 const PostDesc = () => {
-    const data = {
-        title: '주 2회 공원 걷기 모임',
-        writer: 'kyuung',
-        people: 8,
-        publisedDate: '2021.10.11',
-        likeCount: 5,
-        commentCount: 3,
+    const dispatch = useDispatch()
+    const post_data_all = useSelector((state) => state.moim.moim_all)
+    console.log(post_data_all)
+
+    const deletePost = (data) => {
+        swal({
+            title: '게시글을 지우시겠습니까 ?',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                dispatch(moimDeleteMD(data))
+                swal('게시글이 지워졌습니다.', {
+                    icon: 'success',
+                })
+            } else return
+        })
     }
+
     return (
         <>
-            <PostDescBox>
-                <Text _fontWeight="700" _fontSize="16px">
-                    {data.title}
-                </Text>
-                <TextBox>{data.writer}</TextBox>
-                <TextBox>{data.publisedDate}</TextBox>
-                <TextBox>참여자 {data.people}명</TextBox>
-            </PostDescBox>
-            <EtcBox>
-                <SmallBox>
-                    <Icon icon={'favorite'} size="20px" /> 좋아요
-                    {data.likeCount}개
-                </SmallBox>
-                <SmallBox>
-                    <Icon icon={'message'} size="20px" />
-                    댓글{data.commentCount}개
-                </SmallBox>
-            </EtcBox>
+            {post_data_all.length > 0 &&
+                post_data_all?.map((data, idx) => (
+                    <div key={idx}>
+                        <CloseBtn onClick={() => deletePost(data?.id)}>
+                            X
+                        </CloseBtn>
+                        <PostDescBox
+                            onClick={() => {
+                                history.push(`/moim/detail/${data?.id}`)
+                            }}
+                        >
+                            <Text _fontWeight="700" _fontSize="16px">
+                                {data?.title}
+                            </Text>
+                            <TextBox>
+                                {data?.MoimUsers[0]?.User?.nickName}
+                            </TextBox>
+                            <TextBox>{data?.createdAt}</TextBox>
+                            <TextBox>
+                                참여자 {data?.MoimUsers?.length}명
+                            </TextBox>
+                        </PostDescBox>
+                        <EtcBox>
+                            <SmallBox>
+                                <LikeBtn /> 좋아요
+                                {data?.Likes?.length}개
+                            </SmallBox>
+                            <SmallBox>
+                                <Icon icon={'message'} size="20px" />
+                                댓글{data?.Comments?.length}개
+                            </SmallBox>
+                        </EtcBox>
+                    </div>
+                ))}
         </>
     )
 }
@@ -70,6 +102,18 @@ const TextBox = styled.div`
     justify-items: center;
     color: lightgray;
     font-size: 14px;
+`
+
+const CloseBtn = styled.button`
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    right: 20px;
+    margin: 10px;
 `
 
 export default PostDesc
