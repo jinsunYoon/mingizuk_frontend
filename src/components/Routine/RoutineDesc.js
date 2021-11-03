@@ -20,6 +20,7 @@ const RoutineDesc = (props) => {
     const preset = useSelector((state) => state.routine.presetRoutine)
     const myset = useSelector((state) => state.routine.myRoutine)
     console.log('마이셋', myset)
+    console.log(mainBtnStatus)
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -45,7 +46,9 @@ const RoutineDesc = (props) => {
                         <div
                             key={idx}
                             onClick={() => {
-                                setMainBtnStatus(true)
+                                !mainBtnStatus
+                                    ? setMainBtnStatus(true)
+                                    : setMainBtnStatus(false)
                                 if (routine.Actions.length > 0) {
                                     const data = {
                                         routineId:
@@ -118,11 +121,13 @@ const RoutineDesc = (props) => {
                         preset?.map((routine, idx) => (
                             <div
                                 onClick={() => {
+                                    !mainBtnStatus
+                                        ? setMainBtnStatus(true)
+                                        : setMainBtnStatus(false)
                                     const data = {
                                         name: routine?.routineName,
                                         actions: routine.Actions,
                                     }
-                                    setMainBtnStatus(true)
                                     dispatch(setAction(data))
                                 }}
                             >
@@ -177,9 +182,8 @@ const RoutineDesc = (props) => {
                         _height="48px"
                         _padding="16px 24px"
                         _margin="0"
-                        _others="position:fixed;bottom: 80px;"
+                        _others="position:fixed;bottom: 80px;right:25vw;"
                         _onClick={() => {
-                            console.log('눌림?')
                             history.push('/')
                         }}
                     >

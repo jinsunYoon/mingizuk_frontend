@@ -26,7 +26,7 @@ const RoutineTemplate = (props) => {
                         _width="56px"
                         _margin="0"
                         _bradius="56px"
-                        _others="height:56px;box-shadow: 0px 2px 0px 0px #000000;"
+                        _others="height:56px;box-shadow: 0px 2px 0px 0px #000000;position:fixed;bottom:80px;right:20px;"
                         _border="1px solid #020202"
                         _onClick={() => {
                             history.push('/routine/add')
@@ -65,7 +65,6 @@ const BtnPos = styled.div`
     align-items: center;
     bottom: 80px;
     z-index: 0;
-    left: 38vw;
 `
 
 export default RoutineTemplate

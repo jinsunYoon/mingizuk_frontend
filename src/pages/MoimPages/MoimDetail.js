@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../../components/Header'
 import { NavBar } from '../../components'
-import { Text, LikeBtn, ButtonFill, FlexRow } from '../../elements'
+import { Text, LikeBtn, ButtonFill, FlexRow, FlexColumn } from '../../elements'
 import styled from 'styled-components'
 import Icon from '../../components/icons/Icon'
 import { useSelector, useDispatch } from 'react-redux'
@@ -68,8 +68,10 @@ const MoimDetail = (props) => {
                         댓글 {post_data?.Comments?.length}개
                     </SmallBox>
                 </EtcBox>
-                <MoimReview moimId={post_id} />
             </DetailBox>
+            <div style={{ marginBottom: '60px', width: '100vw' }}>
+                <MoimReview moimId={post_id} />
+            </div>
             <FlexRow
                 _width="100vw"
                 _border="none"
@@ -102,7 +104,7 @@ const TitleBox = styled.div`
 `
 
 const ContentBox = styled.div`
-    height: 300px;
+    height: 280px;
     padding: 10px;
 `
 

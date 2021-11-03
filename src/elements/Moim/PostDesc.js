@@ -10,7 +10,8 @@ import { history } from '../../redux/store'
 const PostDesc = () => {
     const dispatch = useDispatch()
     const post_data_all = useSelector((state) => state.moim.moim_all)
-    console.log(post_data_all)
+    const loginNickName = useSelector((state) => state.user.userInfo.nickName)
+    console.log(loginNickName)
 
     const deletePost = (data) => {
         swal({
@@ -33,9 +34,18 @@ const PostDesc = () => {
             {post_data_all.length > 0 &&
                 post_data_all?.map((data, idx) => (
                     <div key={idx}>
-                        <CloseBtn onClick={() => deletePost(data?.id)}>
-                            X
-                        </CloseBtn>
+                        {Object.keys(post_data_all).length > 0 &&
+                            data?.MoimUsers[0]?.User?.nickName ===
+                                loginNickName && (
+                                <CloseBtn
+                                    onClick={() => {
+                                        deletePost(data?.id)
+                                    }}
+                                >
+                                    X
+                                </CloseBtn>
+                            )}
+
                         <PostDescBox
                             onClick={() => {
                                 history.push(`/moim/detail/${data?.id}`)
