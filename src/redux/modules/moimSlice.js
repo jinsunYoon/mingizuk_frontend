@@ -44,7 +44,10 @@ const moimSlice = createSlice({
         },
         [moimReviewCreateMD.fulfilled]: (state, { payload }) => {
             console.log(payload)
-            state.moim_detail.Comments.push({ contents: payload.contents })
+            state.moim_detail.Comments.push({
+                contents: payload.data.contents,
+                id: payload.response.data.newCommentId,
+            })
         },
         [moimDeleteReviewMD.fulfilled]: (state, { payload }) => {
             const refReviews = state.moim_detail.Comments.filter(

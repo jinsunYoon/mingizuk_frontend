@@ -83,9 +83,9 @@ export const moimReviewCreateMD = createAsyncThunk(
             const response = await moimCreateReviewAPI(data)
             if (response) {
                 Swal.fire('리뷰를 작성하였습니다.')
-                return data
+                const _data = { response, data }
+                return _data
             }
-            s
         } catch (err) {
             console.log(err)
             return thunkAPI.rejectWithValue(err)
