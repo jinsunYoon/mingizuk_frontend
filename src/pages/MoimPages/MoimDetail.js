@@ -1,108 +1,144 @@
 import React from 'react'
 import Header from '../../components/Header'
 import { NavBar } from '../../components'
-import { Text } from '../../elements'
+import { Text, LikeBtn, ButtonFill, FlexRow } from '../../elements'
 import styled from 'styled-components'
 import Icon from '../../components/icons/Icon'
+import { useSelector, useDispatch } from 'react-redux'
+import { moimDetailMD, moimReviewCreateMD } from '../../redux/async/moim'
+import MoimReview from '../../components/Moim/MoimReview'
 
+const MoimDetail = (props) => {
+    const post_id = props.match.params.id
+    const dispatch = useDispatch()
 
+    const user_nick = useSelector((state) => state.user.userInfo.nickName)
+    const post_data = useSelector((state) => state.moim.moim_detail)
 
-    const data = {
-        title: '주 2회 공원 걷기 모임',
-        writer: 'kyuung',
-        people: 8,
-        publisedDate: '2021.10.11',
-        likeCount: 5,
-        commentCount: 3,
-        contents:'서울 한강에서 매주 수,금 걷기운동 하실분 구합니다!'
+    React.useEffect(() => {
+        dispatch(moimDetailMD(post_id))
+    }, [])
+    console.log('>>', user_nick)
+
+    // * commnet create
+    const [contents, setContents] = React.useState('')
+    const commitsubmit = () => {
+        const data = {
+            moimId: post_id,
+            contents,
+        }
+        dispatch(moimReviewCreateMD(data))
+        setContents('')
     }
 
-const MoimDetail = () => {
     return (
         <>
-            <Header name="모임"/>
+            <Header name="모임" type="back" />
             <DetailBox>
                 <TitleBox>
                     <div>
-                        <Text _fontSize='16px'>
-                            {data.title}
+                        <Text _fontSize="16px">{post_data?.title}</Text>
+                        <Text _fontSize="11px" _color="#8f8f8f">
+                            {post_data?.createdAt}
                         </Text>
                         <Text _fontSize="11px" _color="#8f8f8f">
-                            {data.publisedDate}  {data.writer}
+                            작성자 :{' '}
+                            {Object.keys(post_data).length > 0 &&
+                                post_data?.MoimUsers[0]?.User.nickName}
                         </Text>
                     </div>
                     <Text _fontSize="11px">
-                        참여자 : {data.people}
+                        참여자 : {post_data?.MoimUsers?.length}
                     </Text>
                 </TitleBox>
                 <ContentBox>
-                    <Text _fontSize="14px">
-                        {data.contents}
-                    </Text>
+                    <Text _fontSize="14px">{post_data?.contents}</Text>
                 </ContentBox>
-                <JoinBtn>
-                    모임참여하기
-                </JoinBtn>
+                {Object.keys(post_data).length > 0 &&
+                    user_nick !== post_data?.MoimUsers[0]?.User.nickName && (
+                        <JoinBtn>모임참여하기</JoinBtn>
+                    )}
                 <EtcBox>
-                <SmallBox>
-                    <Icon icon={'favorite'} size="20px" /> 좋아요
-                    {data.likeCount}개
-                </SmallBox>
-                <SmallBox>
-                    <Icon icon={'message'} size="20px" />
-                    댓글 {data.commentCount}개
-                </SmallBox>
-            </EtcBox>
+                    <SmallBox>
+                        <LikeBtn /> 좋아요
+                        {post_data?.Likes?.length}개
+                    </SmallBox>
+                    <SmallBox>
+                        <Icon icon={'message'} size="20px" />
+                        댓글 {post_data?.Comments?.length}개
+                    </SmallBox>
+                </EtcBox>
+                <MoimReview moimId={post_id} />
             </DetailBox>
-            <NavBar/>
+            <FlexRow
+                _width="100vw"
+                _border="none"
+                _others="position:fixed;bottom:0"
+                _margin="10px 0"
+            >
+                <ReviewInput
+                    placeholder="댓글을 입력해주세요"
+                    onChange={(e) => {
+                        setContents(e.target.value)
+                    }}
+                    value={contents}
+                ></ReviewInput>
+                <SubmitBtn
+                    onClick={() => {
+                        commitsubmit()
+                    }}
+                >
+                    등록
+                </SubmitBtn>
+            </FlexRow>
         </>
     )
 }
 
 const TitleBox = styled.div`
-    display:flex;
+    display: flex;
     justify-content: space-between;
-    padding:10px
+    padding: 10px;
 `
 
 const ContentBox = styled.div`
-    height:50vh;
-    padding:10px;
+    height: 300px;
+    padding: 10px;
 `
 
 const JoinBtn = styled.button`
-    width:101px;
-    height:29px;
-    background-color:#c4c4c4;
-    margin:0 auto;
-    border:none;
-    font-size:11px;
-    position:absolute;
+    width: 101px;
+    height: 29px;
+    background-color: #c4c4c4;
+    margin: 0 auto;
+    border: none;
+    font-size: 11px;
+    position: absolute;
     left: 15px;
-    top: 273px
+    top: 273px;
 `
 
 const DetailBox = styled.div`
-    margin:5vw auto;
-    width:90vw;
-    height:80vh;
-    border:1px solid #c4c4c4;
-    position:relative;
+    margin: 5vw auto;
+    width: 90vw;
+    height: 100%;
+    border: 1px solid #c4c4c4;
+    position: relative;
 `
 const SmallBox = styled.div`
     display: flex;
     height: inherit;
-    margin:0 10px 0;
+    margin: 0 10px 0;
     justify-content: center;
     align-items: center;
-    font-size:11px;
+    font-size: 11px;
     color: #8f8f8f;
 `
 
 const EtcBox = styled.div`
     display: flex;
-    flex-direction:row;
-    text-align:left;
+    flex-direction: row;
+    text-align: left;
     width: 90vw;
     height: 45px;
     border-bottom: 1px solid lightgray;
@@ -110,7 +146,18 @@ const EtcBox = styled.div`
     margin-bottom: 10px;
 `
 
+const ReviewInput = styled.input`
+    width: 280px;
+    height: 40px;
+    padding-left: 10px;
+`
 
-
+const SubmitBtn = styled.button`
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    margin-left: 5px;
+`
 
 export default MoimDetail

@@ -5,9 +5,7 @@ import {
     ButtonOutlined,
     FlexColumn,
     FlexRow,
-    Img,
-    Input,
-    SubTitle,
+    GoBack,
     Text,
     Title,
 } from '../elements/index'
@@ -17,7 +15,7 @@ import { MenuModal } from '../components/index'
 import { history } from '../redux/store'
 
 const Header = (props) => {
-    const { name } = props
+    const { name, type } = props
     return (
         <React.Fragment>
             <div
@@ -26,14 +24,15 @@ const Header = (props) => {
                     height: '2.85rem',
                     borderBottom: '1px solid black',
                     borderTop: '1px solid black',
-                    position: 'sticky',
+                    position: 'sticy',
                     top: '0',
                     left: '0',
                     zIndex: 3,
                 }}
             >
-                <FlexColumn _width={'100%'} _height={'100%'} _border={'none'}>
-                    <MenuModal />
+                <FlexRow _width={'100%'} _height={'100%'} _border={'none'}>
+                    {type === 'menu' && <MenuModal />}
+                    {type === 'back' && <GoBack />}
                     <ButtonOutlined
                         _border={'none'}
                         _onClick={() => {
@@ -45,7 +44,7 @@ const Header = (props) => {
                             {name}
                         </Text>
                     </ButtonOutlined>
-                </FlexColumn>
+                </FlexRow>
             </div>
         </React.Fragment>
     )
@@ -53,6 +52,7 @@ const Header = (props) => {
 
 Header.defaultProps = {
     name: '밍기적',
+    type: 'menu',
 }
 
 export default Header
