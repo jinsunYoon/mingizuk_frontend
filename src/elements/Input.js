@@ -5,25 +5,37 @@ const Input = (props) => {
     const {
         _onChange,
         _ph,
-        _value,
         _others,
         _type,
         _width,
         _fontSize,
         _onKeyPress,
+        _valueType,
+        _value,
     } = props
     const styles = { _others, _width, _fontSize }
 
     return (
         <>
-            <InputEl
-                type={_type}
-                {...styles}
-                placeholder={_ph}
-                onChange={_onChange}
-                onKeyPress={_onKeyPress}
-                // value={_value}
-            />
+            {_valueType === 'defaultValue' && (
+                <InputEl
+                    type={_type}
+                    {...styles}
+                    placeholder={_ph}
+                    onChange={_onChange}
+                    onKeyPress={_onKeyPress}
+                />
+            )}
+            {_valueType === 'customValue' && (
+                <InputEl
+                    type={_type}
+                    {...styles}
+                    placeholder={_ph}
+                    onChange={_onChange}
+                    onKeyPress={_onKeyPress}
+                    value={_value}
+                />
+            )}
         </>
     )
 }
@@ -36,9 +48,8 @@ Input.defaultProps = {
     _type: 'text',
     _width: '20rem',
     _fontSize: '',
-    // _value: (e) => {
-    //     e.target.value
-    // },
+    _valueType: 'defaultValue',
+    _value: '',
 }
 
 const InputEl = styled.input`

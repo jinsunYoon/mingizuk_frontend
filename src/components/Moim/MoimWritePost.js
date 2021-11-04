@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Input, FlexRow, Text } from '../../elements/index'
-import MoimAddressModal from './MoimAddressModal'
+import Icon from '../../components/icons/Icon'
 import { useDispatch, useSelector } from 'react-redux'
 import { moimCreateMD } from '../../redux/async/moim'
 import config from '../../shared/aws_config'
@@ -57,7 +57,10 @@ const MoimWritePost = () => {
                     {/* <Icon icon="color-palette" size="20px" />
                     <Text _fontSize="14px">사진</Text> */}
                 </IconBtn>
-                <MoimAddressModal />
+                <IconBtn>
+                    <Text _fontSize="14px">위치</Text>
+                    <Icon icon="place-location" size="20px" />
+                </IconBtn>
             </FlexRow>
             <FlexRow
                 _width="80vw"

@@ -110,13 +110,13 @@ const kakaoAPI = () => {
 
 // mymoim
 const myMoimCreateAPI = (data) => {
-    console.log(data,'이거 api데이터')
-    return instance.post('/api/users/moims', {userType:1})
+    console.log(data, '이거 api데이터')
+    return instance.post('/api/users/moims', { userType: 1 })
 }
 
 const myMoimJoinAPI = (data) => {
     return instance.post('/api/users/moims', {
-        userType: 0
+        userType: 0,
     })
 }
 
@@ -196,6 +196,19 @@ const moimDetailAPI = (moimId) => {
     return instance.get(`/api/moims/${moimId}`)
 }
 
+const moimLikeAPI = (moimId) => {
+    console.log(moimId)
+    return instance.post(`/api/moim/like/${moimId}`)
+}
+
+const moimUnlikeAPI = (moimId) => {
+    return instance.delete(`/api/moim/like/${moimId}`)
+}
+
+const moimJoinAPI = (data) => {
+    return instance.post(`/api/moims/${data.moimId}`)
+}
+
 const moimCreateReviewAPI = (data) => {
     return instance.post(`/api/comments/${data.moimId}`, {
         contents: data.contents,
@@ -239,4 +252,7 @@ export {
     getMainRoutineAPI,
     setmainRoutineAPI,
     moimUpdateAPI,
+    moimLikeAPI,
+    moimUnlikeAPI,
+    moimJoinAPI,
 }

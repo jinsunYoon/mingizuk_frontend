@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Header from '../../components/Header'
 import MoimTemplate from '../../components/Moim/MoimTemplate'
-import MoimUpdateWrite from '../../components/Moim/MoimWritePost'
+import MoimUpdateWrite from '../../components/Moim/MoimUpdateWrite'
 import { FlexColumn } from '../../elements'
 
 const MoimUpdate = () => {
