@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import Icon from '../../components/icons/Icon'
 import styled from 'styled-components';
-
 import { Text } from '../../elements/index'
 import { NavBar } from '../../components/index'
 import { myMoimLikeMD } from '../../redux/async/myMoim';

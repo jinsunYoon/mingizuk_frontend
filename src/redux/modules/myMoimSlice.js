@@ -7,7 +7,7 @@ import {
 } from '../async/myMoim';
 
 const initialState = {
-    my_moim: {},
+    my_moim: [],
     my_like: [],
     my_comment_list: [],
 }
@@ -19,9 +19,12 @@ const myMoimSlice = createSlice({
     },
 
     extraReducers: {
-        [myMoimCreateMD.fulfilled]: (state, { payload }) => {
+        [myMoimCreateMD.fulfilled]: (state, action) => {
+            state.my_moim = action.payload
+            console.log(state.my_moim,'mymoiimcreateMD 뭐찍힘?')
         },
         [myMoimCreateMD.rejected]: (state, { payload }) => {
+            console.log('errormsg')
         },
 
         [myMoimJoinMD.fulfilled]: (state, { payload }) => {
@@ -30,6 +33,7 @@ const myMoimSlice = createSlice({
         },
 
         [myMoimLikeMD.fulfilled]: (state, { payload }) => {
+            console.log(payload, 'mylikemd 잘넘어오나?')
             state.my_like = payload.data.myLikes
         },
         [myMoimLikeMD.rejected]: (state, { payload }) => {

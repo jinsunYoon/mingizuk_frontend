@@ -8,7 +8,6 @@ import { myMoimCommentMD } from '../../redux/async/myMoim';
 const MyComment = () => {
     const dispatch = useDispatch();
     const comment_list = useSelector((state)=>state.myMoim.my_comment_list)
-    
     console.log(comment_list, 'comment_list state에서 가져오는값')
 
     React.useEffect(()=>{

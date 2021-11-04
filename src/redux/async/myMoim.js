@@ -11,10 +11,9 @@ export const myMoimCreateMD = createAsyncThunk(
     'users/moims',
     async(data, thunkAPI) => {
         try{
-            console.log(data)
             const response = await myMoimCreateAPI(data)
             if(response){
-                console.log(response)
+                console.log(response,'>>>>>>>check')
                 return response
             }
         } catch (err) {
@@ -62,6 +61,7 @@ export const myMoimCommentMD = createAsyncThunk(
     async(data, thunkAPI) => {
         try{
             const response = await myMoimCommentAPI()
+            console.log(response)
             if(response){
                 return response
             }
