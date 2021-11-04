@@ -1,52 +1,56 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import styled from 'styled-components';
+import Icon from '../../components/icons/Icon';
+
 import { Text } from '../../elements/index'
 import { NavBar } from '../../components/index'
-
 import { myMoimCreateMD } from '../../redux/async/myMoim'
+import { userInfoAPI } from '../../shared/api';
 
 const MyCreate = () => {
     const dispatch = useDispatch()
-    const my_moim_create = useSelector(state => state?.myMoim?.my_moim)
-    console.log(my_moim_create,'moimcreate뭐찍히냐?')
+    const my_moim_create = useSelector((state) => state.myMoim.my_moim)
+    console.log(my_moim_create,'my_moim_create?')
     
     useEffect(() => {
-        const data = {userType:1}
-        dispatch(myMoimCreateMD(data))
+        dispatch(myMoimCreateMD())
     }, [])
 
     return(
-         <>
-        {/* <PostBox>
-            <TitleBox>
-                <div>
-                    <Text 
-                        _fontSize="16px"
-                    >
-                        {data.title}
-                    </Text>
-                    <Text 
-                        _fontSize="11px" 
-                        _color="#8f8f8f"
-                        _align="left"
-                        >
-                        {data.publisedDate} {data.writer}
-                    </Text>
-                </div>
-                <Text _fontSize="11px">참여자 : {data.people}</Text>
-            </TitleBox>
-            <EtcBox>
-                <SmallBox>
-                    <Icon icon={'favorite'} size="20px" /> 좋아요
-                    {data.likeCount}개
-                </SmallBox>
-                <SmallBox>
-                    <Icon icon={'message'} size="20px" />
-                    댓글 {data.commentCount}개
-                </SmallBox>
-            </EtcBox>
-        </PostBox> */}
+        <>
+        {
+            my_moim_create?.map((i, idx) => (
+              <PostBox key={idx}>
+
+    <TitleBox>
+        <div>
+            <Text 
+                _fontSize="11px" 
+                _color="#8f8f8f"
+                _align="left"
+                >
+                {i?.Moim?.contents} 
+                {/* {User.nickName} */}
+            </Text>
+        </div>
+        
+    </TitleBox>
+    <EtcBox>
+        <SmallBox>
+            <Icon icon={'favorite'} size="20px" /> 
+            좋아요
+            {/* {data.likeCount}개 */}
+        </SmallBox>
+        <SmallBox>
+            <Icon icon={'message'} size="20px" />
+            {/* 댓글 {data.commentCount}개 */}
+        </SmallBox>
+    </EtcBox>
+    </PostBox>
+        ))
+        }
         <NavBar/>
         </>
     )

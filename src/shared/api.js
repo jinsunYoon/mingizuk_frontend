@@ -113,12 +113,12 @@ const kakaoAPI = () => {
 // mymoim
 const myMoimCreateAPI = (data) => {
     console.log(data,'이거 api데이터')
-    return instance.post('/api/users/moims', data)
+    return instance.post('/api/users/moims', {userType:1})
 }
 
 const myMoimJoinAPI = (data) => {
     return instance.post('/api/users/moims', {
-        usertype: 0,
+        userType: 0
     })
 }
 
