@@ -1,14 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { myMoimCreateAPI, myMoimJoinAPI, myMoimCommentAPI, myMoimLikeAPI} from '../../shared/api'
+import { 
+    myMoimCreateAPI, 
+    myMoimJoinAPI, 
+    myMoimCommentAPI, 
+    myMoimLikeAPI
+} from '../../shared/api'
+
 
 export const myMoimCreateMD = createAsyncThunk(
     'users/moims',
     async(data, thunkAPI) => {
         try{
-            console.log(data)
             const response = await myMoimCreateAPI(data)
             if(response){
-                console.log(response)
+                console.log(response,'>>>>>>>check')
                 return response
             }
         } catch (err) {
@@ -23,9 +28,9 @@ export const myMoimJoinMD = createAsyncThunk(
     async(data, thunkAPI) => {
         try{
             console.log(data)
-            const response = await myMoimCreateAPI(data)
+            const response = await myMoimJoinAPI(data)
             if(response){
-                console.log(response)
+                console.log(response, '>>>마이모임조인 리스폰스')
                 return response
             }
         }catch(err) {
@@ -39,10 +44,9 @@ export const myMoimLikeMD = createAsyncThunk(
     'users/moim/like',
     async(data, thunkAPI) => {
         try{
-            console.log(data)
-            const response = await myMoimLikeAPI(data)
+            const response = await myMoimLikeAPI()
             if(response){
-                console.log(response)
+                console.log(response,'>>>라이크 리스폰스')
                 return response
             }
         }catch(err){
@@ -56,10 +60,9 @@ export const myMoimCommentMD = createAsyncThunk(
     'user/comments',
     async(data, thunkAPI) => {
         try{
-            console.log(data)
-            const response = await myMoimCommentAPI(data)
+            const response = await myMoimCommentAPI()
+            console.log(response)
             if(response){
-                console.log(response)
                 return response
             }
         }catch(err){

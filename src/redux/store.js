@@ -12,6 +12,7 @@ import userSlice from './modules/userSlice'
 import mainRoutineSlice from './modules/mainRoutine'
 import completeSlice from './modules/completeSlice'
 import moimSlice from './modules/moimSlice'
+import myMoimSlice from './modules/myMoimSlice'
 
 export const history = createBrowserHistory()
 
@@ -25,6 +26,7 @@ const reducer = combineReducers({
     setModal: completeSlice.reducer,
     moim: moimSlice.reducer,
     actionComplete: completeSlice.reducer,
+    myMoim: myMoimSlice.reducer,
 })
 
 const middlewares = [thunkMiddleware]

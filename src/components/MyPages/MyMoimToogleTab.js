@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { ActiveUnderLine, FlexRow } from '../../elements';
-import { changeMyPageModal } from '../../redux/modules/routineSlice';
 import MyCreate from '../MyPages/MyCreate';
 import MyJoin from '../MyPages/MyJoin';
 import MyLike from '../MyPages/MyLike';
@@ -12,6 +11,7 @@ import { myMoimCreateMD, myMoimJoinMD, myMoimLikeMD, myMoimCommentMD } from '../
 const MyMoimToogleTab = () => {
     const [tabState,setTabState] = useState('')
     const dispatch = useDispatch()
+    
 
     return(
         <>
@@ -19,7 +19,7 @@ const MyMoimToogleTab = () => {
                 {
                     tabState === 'a'
                     ?
-                    <ActiveUnderLine  active={true} _onClick={()=>{setTabState('a')}}>
+                    <ActiveUnderLine  active={true} _onClick={()=>{setTabState('a') && dispatch(myMoimCreateMD())}}>
                     내가 개설한 모임
                     </ActiveUnderLine>
                     :
@@ -30,7 +30,7 @@ const MyMoimToogleTab = () => {
                 {
                     tabState === 'b'
                     ?
-                    <ActiveUnderLine active={true} _onClick={()=>{setTabState('b')}}>
+                    <ActiveUnderLine active={true} _onClick={()=>{setTabState('b') && dispatch(myMoimJoinMD())}}>
                         내가 참가한 모임
                     </ActiveUnderLine>
                     :
@@ -41,7 +41,7 @@ const MyMoimToogleTab = () => {
                 {
                     tabState === 'c'
                     ?
-                    <ActiveUnderLine active={true} _onClick={()=>{setTabState('c')}}>
+                    <ActiveUnderLine active={true} _onClick={()=>{setTabState('c') && dispatch(myMoimLikeMD())}}>
                         좋아요 한 모임
                     </ActiveUnderLine>
                     :
@@ -52,7 +52,7 @@ const MyMoimToogleTab = () => {
                 {
                     tabState === 'd'
                     ?
-                    <ActiveUnderLine  active={true} _onClick={()=>{setTabState('d')}}>
+                    <ActiveUnderLine  active={true} _onClick={()=>{setTabState('d') && dispatch(myMoimCommentMD(data))}}>
                         내가 단 댓글
                     </ActiveUnderLine>
                     :
@@ -63,10 +63,10 @@ const MyMoimToogleTab = () => {
 
             </ToogleBox>
             <div style={{zIndex:10}}>
-                {tabState === 'a' && <MyCreate/> && dispatch(myMoimCreateMD())}
-                {tabState === 'b' && <MyJoin/> && dispatch(myMoimJoinMD())}
-                {tabState === 'c' && <MyLike/> && dispatch(myMoimLikeMD())}
-                {tabState === 'd' && <MyComment/> && dispatch(myMoimCommentMD())}
+                {tabState === 'a' && <MyCreate/>}
+                {tabState === 'b' && <MyJoin/>}
+                {tabState === 'c' && <MyLike/>}
+                {tabState === 'd' && <MyComment/> }
             </div>
         </>
     )
