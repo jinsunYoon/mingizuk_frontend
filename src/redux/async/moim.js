@@ -4,9 +4,13 @@ import {
     moimReadAPI,
     moimDeleteAPI,
     moimDetailAPI,
+    moimJoinAPI,
     moimCreateReviewAPI,
     moimDeleteReviewAPI,
     moimUpdateReviewAPI,
+    moimUpdateAPI,
+    moimLikeAPI,
+    moimUnlikeAPI,
 } from '../../shared/api'
 import { history } from '../store'
 import swal from 'sweetalert'
@@ -46,6 +50,22 @@ export const moimReadMD = createAsyncThunk(
     }
 )
 
+export const moimUpdateMD = createAsyncThunk(
+    'moim/update',
+    async (data, thunkAPI) => {
+        try {
+            const response = await moimUpdateAPI(data)
+            if (response) {
+                console.log(response)
+                return data
+            }
+        } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
 export const moimDeleteMD = createAsyncThunk(
     'moim/delete',
     async (data, thunkAPI) => {
@@ -67,6 +87,53 @@ export const moimDetailMD = createAsyncThunk(
         try {
             const response = await moimDetailAPI(data)
             if (response) {
+                return response
+            }
+        } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const moimLikeMD = createAsyncThunk(
+    'moim/like',
+    async (data, thunkAPI) => {
+        try {
+            console.log(data)
+            const response = await moimLikeAPI(data)
+            if (response) {
+                return response
+            }
+        } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const moimUnlikeMD = createAsyncThunk(
+    'moim/like',
+    async (data, thunkAPI) => {
+        try {
+            const response = await moimUnlikeAPI(data)
+            if (response) {
+                return response
+            }
+        } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const moimJoinMD = createAsyncThunk(
+    'moim/join',
+    async (data, thunkAPI) => {
+        try {
+            const response = await moimJoinAPI(data)
+            if (response) {
+                console.log('join', response, data)
                 return response
             }
         } catch (err) {

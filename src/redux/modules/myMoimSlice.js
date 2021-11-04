@@ -18,15 +18,17 @@ const myMoimSlice = createSlice({
     reducers: {},
 
     extraReducers: {
-        [myMoimCreateMD.fulfilled]: (state, action) => {
+        [myMoimCreateMD.fulfilled]: (state, {payload}) => {
             console.log('>>>>>>>>>>')
-            state.my_moim = action.payload
+            state.my_moim = payload.data.allMyMoim
         },
         [myMoimCreateMD.rejected]: (state, { payload }) => {
             console.log('errormsg')
         },
 
-        [myMoimJoinMD.fulfilled]: (state, { payload }) => {},
+        [myMoimJoinMD.fulfilled]: (state, { payload }) => {
+
+        },
         [myMoimJoinMD.rejected]: (state, { payload }) => {},
 
         [myMoimLikeMD.fulfilled]: (state, { payload }) => {
@@ -36,6 +38,7 @@ const myMoimSlice = createSlice({
         [myMoimLikeMD.rejected]: (state, { payload }) => {},
 
         [myMoimCommentMD.fulfilled]: (state, { payload }) => {
+            console.log('<><>')
             state.my_comment_list = payload.data.myCommentList
         },
         [myMoimCommentMD.rejected]: (state, { payload }) => {},

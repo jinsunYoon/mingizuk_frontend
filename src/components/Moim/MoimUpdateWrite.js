@@ -3,18 +3,25 @@ import styled from 'styled-components'
 import { Input, FlexRow, Text } from '../../elements/index'
 import Icon from '../../components/icons/Icon'
 import { useDispatch, useSelector } from 'react-redux'
-import { moimCreateMD } from '../../redux/async/moim'
+import { moimUpdateMD } from '../../redux/async/moim'
 import config from '../../shared/aws_config'
 import { uploadFile } from 'react-s3'
 
-const MoimWritePost = () => {
+const MoimUpdateWrite = () => {
     const dispatch = useDispatch()
-    const [title, setTitle] = React.useState('')
-    const [contents, setContents] = React.useState('')
-    const [selectedFile, setSelectedFile] = React.useState(null)
-    const [imgSrc, setImgSrc] = React.useState('')
+    // * 이전요소들
+    const refPost = useSelector((state) => state.moim.moim_ref_update)
+    const beforeTitle = refPost?.title
+    const beforeContent = refPost?.contents
+    const beforeImgSrc = refPost?.imgSrc
+    const moimId = refPost?.id
 
-    // * upload S3
+    // * update 할 요소들
+    const [title, setTitle] = React.useState(beforeTitle)
+    const [contents, setContents] = React.useState(beforeContent)
+    const [selectedFile, setSelectedFile] = React.useState(null)
+
+    // * upload S3 & update
     const handleFileInput = (e) => {
         setSelectedFile(e.target.files[0])
     }
@@ -22,19 +29,23 @@ const MoimWritePost = () => {
         if (selectedFile !== null) {
             uploadFile(file, config)
                 .then((data) => {
-                    const req = { title, contents, imgSrc: data.location }
-                    dispatch(moimCreateMD(req))
+                    const req = {
+                        title,
+                        contents,
+                        imgSrc: data.location,
+                        moimId,
+                    }
+                    dispatch(moimUpdateMD(req))
                 })
                 .catch((err) => console.error(err))
         } else return
     }
-
-    const upload = () => {
+    const update = () => {
         if (selectedFile !== null) {
             handleUpload(selectedFile)
         } else {
-            const req = { title, contents, imgSrc: null }
-            dispatch(moimCreateMD(req))
+            const req = { title, contents, imgSrc: beforeImgSrc, moimId }
+            dispatch(moimUpdateMD(req))
         }
     }
 
@@ -44,8 +55,13 @@ const MoimWritePost = () => {
                 _ph="제목을 입력하세요"
                 _width="80vw"
                 _onChange={(e) => setTitle(e.target.value)}
+                _valueType="customValue"
+                _value={title}
             />
-            <ContentsBox onChange={(e) => setContents(e.target.value)} />
+            <ContentsBox
+                onChange={(e) => setContents(e.target.value)}
+                value={contents}
+            />
             <FlexRow
                 _width="80vw"
                 _height="40px"
@@ -69,7 +85,7 @@ const MoimWritePost = () => {
                 _border="none"
             >
                 <IconBtn>취소</IconBtn>
-                <IconBtn onClick={() => upload()}>업로드</IconBtn>
+                <IconBtn onClick={() => update()}>수정하기</IconBtn>
             </FlexRow>
         </>
     )
@@ -92,4 +108,4 @@ const IconBtn = styled.button`
     margin: 0 5px;
 `
 
-export default MoimWritePost
+export default MoimUpdateWrite

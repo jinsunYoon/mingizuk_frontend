@@ -88,9 +88,8 @@ const actionCompleteAPI = (data) => {
 }
 
 const getMainRoutineAPI = () => {
-    return instance.get('/api/users/mainRoutine')
+    return instance.get('/api/main/ongoing')
 }
-
 
 // *---------------------------------------------------
 
@@ -107,18 +106,17 @@ const kakaoAPI = () => {
     return axios.get('http://13.125.110.160/api/auth/kakao')
 }
 
-
 // *----------------------------------------------------
 
 // mymoim
 const myMoimCreateAPI = (data) => {
-    console.log(data,'이거 api데이터')
-    return instance.post('/api/users/moims', data)
+    console.log(data, '이거 api데이터')
+    return instance.post('/api/users/moims', { userType: 1 })
 }
 
 const myMoimJoinAPI = (data) => {
     return instance.post('/api/users/moims', {
-        usertype: 0,
+        userType: 0,
     })
 }
 
@@ -126,11 +124,9 @@ const myMoimCommentAPI = () => {
     return instance.get('/api/users/comments')
 }
 
-const myMoimLikeAPI=()=>{
+const myMoimLikeAPI = () => {
     return instance.get('/api/moim/like')
 }
-
-
 
 // * ------------------------------------------------
 
@@ -169,7 +165,6 @@ const setmainRoutineAPI = (data) => {
     })
 }
 
-
 // *-----------------------------------------------------
 
 // moim
@@ -177,11 +172,20 @@ const moimCreateAPI = (data) => {
     return instance.post('api/moims', {
         title: data.title,
         contents: data.contents,
+        imgSrc: data.imgSrc,
     })
 }
 
 const moimReadAPI = () => {
     return instance.get('/api/moims')
+}
+
+const moimUpdateAPI = (data) => {
+    return instance.put(`/api/moims/${data.moimId}`, {
+        title: data.title,
+        contents: data.contents,
+        imgSrc: data.imgSrc,
+    })
 }
 
 const moimDeleteAPI = (moimId) => {
@@ -190,6 +194,19 @@ const moimDeleteAPI = (moimId) => {
 
 const moimDetailAPI = (moimId) => {
     return instance.get(`/api/moims/${moimId}`)
+}
+
+const moimLikeAPI = (moimId) => {
+    console.log(moimId)
+    return instance.post(`/api/moim/like/${moimId}`)
+}
+
+const moimUnlikeAPI = (moimId) => {
+    return instance.delete(`/api/moim/like/${moimId}`)
+}
+
+const moimJoinAPI = (data) => {
+    return instance.post(`/api/moims/${data.moimId}`)
 }
 
 const moimCreateReviewAPI = (data) => {
@@ -206,7 +223,7 @@ const moimUpdateReviewAPI = (data) => {
     return instance.put(`/api/comments/${data.commentId}`, {
         contents: data.contents,
     })
-} 
+}
 
 export {
     signupAPI,
@@ -234,4 +251,8 @@ export {
     moimUpdateReviewAPI,
     getMainRoutineAPI,
     setmainRoutineAPI,
+    moimUpdateAPI,
+    moimLikeAPI,
+    moimUnlikeAPI,
+    moimJoinAPI,
 }

@@ -30,7 +30,7 @@ const MyMoimToogleTab = () => {
                 {
                     tabState === 'b'
                     ?
-                    <ActiveUnderLine active={true} _onClick={()=>{setTabState('b') && dispatch(myMoimJoinMD())}}>
+                    <ActiveUnderLine active={true} _onClick={()=>{setTabState('b')}}>
                         내가 참가한 모임
                     </ActiveUnderLine>
                     :
@@ -41,7 +41,7 @@ const MyMoimToogleTab = () => {
                 {
                     tabState === 'c'
                     ?
-                    <ActiveUnderLine active={true} _onClick={()=>{setTabState('c') && dispatch(myMoimLikeMD())}}>
+                    <ActiveUnderLine active={true} _onClick={()=>{setTabState('c')}}>
                         좋아요 한 모임
                     </ActiveUnderLine>
                     :
@@ -52,7 +52,7 @@ const MyMoimToogleTab = () => {
                 {
                     tabState === 'd'
                     ?
-                    <ActiveUnderLine  active={true} _onClick={()=>{setTabState('d') && dispatch(myMoimCommentMD(data))}}>
+                    <ActiveUnderLine  active={true} _onClick={()=>{setTabState('d') && dispatch(myMoimCreateMD()) }}>
                         내가 단 댓글
                     </ActiveUnderLine>
                     :
@@ -60,7 +60,6 @@ const MyMoimToogleTab = () => {
                         내가 단 댓글
                     </ActiveUnderLine>
                 }
-
             </ToogleBox>
             <div style={{zIndex:10}}>
                 {tabState === 'a' && <MyCreate/>}

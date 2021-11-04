@@ -2,7 +2,11 @@ import { createSlice } from '@reduxjs/toolkit'
 import {
     moimCreateMD,
     moimReadMD,
+    moimUpdateMD,
     moimDeleteMD,
+    moimLikeMD,
+    moimUnlikeMD,
+    moimJoinMD,
     moimDetailMD,
     moimReviewCreateMD,
     moimDeleteReviewMD,
@@ -12,12 +16,16 @@ import {
 const initialState = {
     moim_all: {},
     moim_detail: {},
+    moim_ref_update: {},
 }
 
 const moimSlice = createSlice({
     name: 'moim',
     initialState: initialState,
     reducers: {
+        moimUpdate: (state, action) => {
+            state.moim_ref_update = action.payload
+        },
     },
     extraReducers: {
         [moimCreateMD.fulfilled]: (state, { payload }) => {
@@ -33,6 +41,9 @@ const moimSlice = createSlice({
         [moimReadMD.rejected]: (state, { payload }) => {
             console.log(payload)
         },
+        [moimUpdateMD.fulfilled]: (state, { payload }) => {
+            console.log(payload)
+        },
         [moimDeleteMD.fulfilled]: (state, { payload }) => {
             const ref_moim_post = state.moim_all.filter(
                 (post) => post.id !== payload
@@ -41,6 +52,15 @@ const moimSlice = createSlice({
         },
         [moimDetailMD.fulfilled]: (state, { payload }) => {
             state.moim_detail = payload.data.targetMoim
+            console.log(payload)
+        },
+        [moimLikeMD.fulfilled]: (state, { payload }) => {
+            console.log(payload)
+        },
+        [moimUnlikeMD.fulfilled]: (state, { payload }) => {
+            console.log(payload)
+        },
+        [moimJoinMD.fulfilled]: (state, { payload }) => {
             console.log(payload)
         },
         [moimReviewCreateMD.fulfilled]: (state, { payload }) => {
@@ -66,7 +86,7 @@ const moimSlice = createSlice({
 })
 
 //* reducer export
-// export const {}
+export const { moimUpdate } = moimSlice.actions
 
 //* slice export
 export default moimSlice

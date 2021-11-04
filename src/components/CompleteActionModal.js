@@ -58,14 +58,21 @@ const CompleteActionModal = (props) => {
                                     _others={'border-radius:1rem'}
                                 ></FlexRow>
                                 <FlexRow
-                                    _width={'1rem'}
+                                    _width={'false'}
                                     _height={'1rem'}
                                     _bgColor={'black'}
                                     _border={'none'}
                                     _margin={'-40px -25px 20px 0px'}
-                                    _others={'border-radius:1rem;'}
+                                    _others={
+                                        'border-radius:1rem; min-width:1rem;'
+                                    }
                                 >
-                                    <Text _color={'#fff'}>5</Text>
+                                    <Text
+                                        _color={'#fff'}
+                                        _padding={'0px 3px 0px 3px'}
+                                    >
+                                        {routine?.actionCnt}
+                                    </Text>
                                 </FlexRow>
                                 <Text
                                     _margin={'5px 0px 0px 0px'}

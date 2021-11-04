@@ -26,6 +26,7 @@ import MyMoim from '../pages/MyPages/MyMoim'
 import Backend from '../pages/Backend'
 import { NavBar } from '../components'
 import { loginCheckMD } from '../redux/async/user'
+import MoimUpdate from '../pages/MoimPages/MoimUpdate'
 
 const App = () => {
     const dispatch = useDispatch()
@@ -73,6 +74,7 @@ const App = () => {
 
                     <Route path="/moim" exact component={MoimMain} />
                     <Route path="/moim/write" exact component={MoimWrite} />
+                    <Route path="/moim/update" exact component={MoimUpdate} />
                     <Route
                         path="/moim/detail/:id"
                         exact

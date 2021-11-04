@@ -20,7 +20,6 @@ const RoutineDesc = (props) => {
     const preset = useSelector((state) => state.routine.presetRoutine)
     const myset = useSelector((state) => state.routine.myRoutine)
     console.log('마이셋', myset)
-    console.log(mainBtnStatus)
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -46,9 +45,7 @@ const RoutineDesc = (props) => {
                         <div
                             key={idx}
                             onClick={() => {
-                                !mainBtnStatus
-                                    ? setMainBtnStatus(true)
-                                    : setMainBtnStatus(false)
+                                setMainBtnStatus(true)
                                 if (routine.Actions.length > 0) {
                                     const data = {
                                         routineId:
@@ -121,14 +118,15 @@ const RoutineDesc = (props) => {
                         preset?.map((routine, idx) => (
                             <div
                                 onClick={() => {
-                                    !mainBtnStatus
-                                        ? setMainBtnStatus(true)
-                                        : setMainBtnStatus(false)
-                                    const data = {
-                                        name: routine?.routineName,
-                                        actions: routine.Actions,
+                                    setMainBtnStatus(true)
+                                    if (routine.Actions.length > 0) {
+                                        const data = {
+                                            routineId:
+                                                routine?.Actions[0].routineId,
+                                        }
+                                        console.log('프리셋루틴아이디', data)
+                                        dispatch(setMainRoutineMD(data))
                                     }
-                                    dispatch(setAction(data))
                                 }}
                             >
                                 <FlexRow _width="85vw" _border="none" key={idx}>
