@@ -1,12 +1,18 @@
 import React from 'react'
 import Header from '../../components/Header'
+import { history } from '../../redux/store'
 import { NavBar } from '../../components'
-import { Text, LikeBtn, ButtonFill, FlexRow, FlexColumn } from '../../elements'
+import { Text, LikeBtn, ButtonFill, FlexRow, Img } from '../../elements'
 import styled from 'styled-components'
 import Icon from '../../components/icons/Icon'
 import { useSelector, useDispatch } from 'react-redux'
-import { moimDetailMD, moimReviewCreateMD } from '../../redux/async/moim'
+import {
+    moimDetailMD,
+    moimReviewCreateMD,
+    moimDeleteMD,
+} from '../../redux/async/moim'
 import MoimReview from '../../components/Moim/MoimReview'
+import { moimUpdate } from '../../redux/modules/moimSlice'
 
 const MoimDetail = (props) => {
     const post_id = props.match.params.id
@@ -18,7 +24,25 @@ const MoimDetail = (props) => {
     React.useEffect(() => {
         dispatch(moimDetailMD(post_id))
     }, [])
-    console.log('>>', user_nick)
+    console.log(post_data)
+
+    // * post delete
+    const deletePost = (data) => {
+        swal({
+            title: '게시글을 지우시겠습니까 ?',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                dispatch(moimDeleteMD(data))
+                swal('게시글이 지워졌습니다.', {
+                    icon: 'success',
+                })
+                history.push('/moim')
+            } else return
+        })
+    }
 
     // * commnet create
     const [contents, setContents] = React.useState('')
@@ -36,6 +60,27 @@ const MoimDetail = (props) => {
             <Header name="모임" type="back" />
             <DetailBox>
                 <TitleBox>
+                    {Object.keys(post_data).length > 0 &&
+                        post_data.MoimUsers[0].User.nickName === user_nick && (
+                            <div>
+                                <CloseBtn
+                                    onClick={() => {
+                                        console.log('deleteclick')
+                                        deletePost(post_data?.id)
+                                    }}
+                                >
+                                    x
+                                </CloseBtn>
+                                <button
+                                    onClick={() => {
+                                        dispatch(moimUpdate(post_data))
+                                        history.push('/moim/update')
+                                    }}
+                                >
+                                    u
+                                </button>
+                            </div>
+                        )}
                     <div>
                         <Text _fontSize="16px">{post_data?.title}</Text>
                         <Text _fontSize="11px" _color="#8f8f8f">
@@ -53,6 +98,9 @@ const MoimDetail = (props) => {
                 </TitleBox>
                 <ContentBox>
                     <Text _fontSize="14px">{post_data?.contents}</Text>
+                    {post_data?.imgSrc !== null && (
+                        <Img _src={post_data?.imgSrc} />
+                    )}
                 </ContentBox>
                 {Object.keys(post_data).length > 0 &&
                     user_nick !== post_data?.MoimUsers[0]?.User.nickName && (
@@ -160,6 +208,18 @@ const SubmitBtn = styled.button`
     border-radius: 5px;
     border: none;
     margin-left: 5px;
+`
+
+const CloseBtn = styled.button`
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    right: 20px;
+    margin: 10px;
 `
 
 export default MoimDetail

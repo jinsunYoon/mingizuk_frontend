@@ -172,11 +172,20 @@ const moimCreateAPI = (data) => {
     return instance.post('api/moims', {
         title: data.title,
         contents: data.contents,
+        imgSrc: data.imgSrc,
     })
 }
 
 const moimReadAPI = () => {
     return instance.get('/api/moims')
+}
+
+const moimUpdateAPI = (data) => {
+    return instance.put(`/api/moims/${data.moimId}`, {
+        title: data.title,
+        contents: data.contents,
+        imgSrc: data.imgSrc,
+    })
 }
 
 const moimDeleteAPI = (moimId) => {
@@ -229,4 +238,5 @@ export {
     moimUpdateReviewAPI,
     getMainRoutineAPI,
     setmainRoutineAPI,
+    moimUpdateAPI,
 }

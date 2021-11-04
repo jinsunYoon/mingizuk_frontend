@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import {
     moimCreateMD,
     moimReadMD,
+    moimUpdateMD,
     moimDeleteMD,
     moimDetailMD,
     moimReviewCreateMD,
@@ -12,12 +13,16 @@ import {
 const initialState = {
     moim_all: {},
     moim_detail: {},
+    moim_ref_update: {},
 }
 
 const moimSlice = createSlice({
     name: 'moim',
     initialState: initialState,
     reducers: {
+        moimUpdate: (state, action) => {
+            state.moim_ref_update = action.payload
+        },
     },
     extraReducers: {
         [moimCreateMD.fulfilled]: (state, { payload }) => {
@@ -31,6 +36,9 @@ const moimSlice = createSlice({
             state.moim_all = payload.data.allMoims
         },
         [moimReadMD.rejected]: (state, { payload }) => {
+            console.log(payload)
+        },
+        [moimUpdateMD.fulfilled]: (state, { payload }) => {
             console.log(payload)
         },
         [moimDeleteMD.fulfilled]: (state, { payload }) => {
@@ -66,7 +74,7 @@ const moimSlice = createSlice({
 })
 
 //* reducer export
-// export const {}
+export const { moimUpdate } = moimSlice.actions
 
 //* slice export
 export default moimSlice

@@ -36,6 +36,7 @@ const myMoimSlice = createSlice({
         [myMoimLikeMD.rejected]: (state, { payload }) => {},
 
         [myMoimCommentMD.fulfilled]: (state, { payload }) => {
+            console.log('<><>')
             state.my_comment_list = payload.data.myCommentList
         },
         [myMoimCommentMD.rejected]: (state, { payload }) => {},

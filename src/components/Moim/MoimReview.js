@@ -58,8 +58,8 @@ const MoimReview = (props) => {
     return (
         <>
             {review?.map((rev, idx) => (
-                <ScrollY>
-                    <ReviewBox key={idx}>
+                <ScrollY key={idx}>
+                    <ReviewBox>
                         {loginNickName === rev?.User?.nickName && (
                             <div>
                                 <UpdateBtn
