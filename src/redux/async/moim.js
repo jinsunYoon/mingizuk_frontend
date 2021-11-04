@@ -7,6 +7,7 @@ import {
     moimCreateReviewAPI,
     moimDeleteReviewAPI,
     moimUpdateReviewAPI,
+    moimUpdateAPI,
 } from '../../shared/api'
 import { history } from '../store'
 import swal from 'sweetalert'
@@ -38,6 +39,22 @@ export const moimReadMD = createAsyncThunk(
             const response = await moimReadAPI()
             if (response) {
                 return response
+            }
+        } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const moimUpdateMD = createAsyncThunk(
+    'moim/update',
+    async (data, thunkAPI) => {
+        try {
+            const response = await moimUpdateAPI(data)
+            if (response) {
+                console.log(response)
+                return data
             }
         } catch (err) {
             console.log(err)

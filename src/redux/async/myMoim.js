@@ -58,7 +58,7 @@ export const myMoimLikeMD = createAsyncThunk(
 )
 
 export const myMoimCommentMD = createAsyncThunk(
-    'user/comments',
+    'myMoim/comments',
     async (data, thunkAPI) => {
         try {
             const response = await myMoimCommentAPI()

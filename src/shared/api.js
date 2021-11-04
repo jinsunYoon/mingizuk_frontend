@@ -91,7 +91,6 @@ const getMainRoutineAPI = () => {
     return instance.get('/api/users/mainRoutine')
 }
 
-
 // *---------------------------------------------------
 
 // mypage
@@ -107,12 +106,11 @@ const kakaoAPI = () => {
     return axios.get('http://13.125.110.160/api/auth/kakao')
 }
 
-
 // *----------------------------------------------------
 
 // mymoim
 const myMoimCreateAPI = (data) => {
-    console.log(data,'이거 api데이터')
+    console.log(data, '이거 api데이터')
     return instance.post('/api/users/moims', data)
 }
 
@@ -126,11 +124,9 @@ const myMoimCommentAPI = () => {
     return instance.get('/api/users/comments')
 }
 
-const myMoimLikeAPI=()=>{
+const myMoimLikeAPI = () => {
     return instance.get('/api/moim/like')
 }
-
-
 
 // * ------------------------------------------------
 
@@ -169,7 +165,6 @@ const setmainRoutineAPI = (data) => {
     })
 }
 
-
 // *-----------------------------------------------------
 
 // moim
@@ -177,11 +172,20 @@ const moimCreateAPI = (data) => {
     return instance.post('api/moims', {
         title: data.title,
         contents: data.contents,
+        imgSrc: data.imgSrc,
     })
 }
 
 const moimReadAPI = () => {
     return instance.get('/api/moims')
+}
+
+const moimUpdateAPI = (data) => {
+    return instance.put(`/api/moims/${data.moimId}`, {
+        title: data.title,
+        contents: data.contents,
+        imgSrc: data.imgSrc,
+    })
 }
 
 const moimDeleteAPI = (moimId) => {
@@ -206,7 +210,7 @@ const moimUpdateReviewAPI = (data) => {
     return instance.put(`/api/comments/${data.commentId}`, {
         contents: data.contents,
     })
-} 
+}
 
 export {
     signupAPI,
@@ -234,4 +238,5 @@ export {
     moimUpdateReviewAPI,
     getMainRoutineAPI,
     setmainRoutineAPI,
+    moimUpdateAPI,
 }
