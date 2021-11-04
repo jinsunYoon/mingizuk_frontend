@@ -1,37 +1,14 @@
-import React, { Component, useState } from 'react';
-import {history} from '../redux/store'
+import React from 'react'
 
 //* components
-import { 
-    Header, 
-    NavBar,
-    ColectionItem,
-    CollectionList
-} from '../components/index'
-
-//* elements
-import {
-    FlexColumn,
-    FlexRow,
-    Img,
-    Text,
-    ButtonOutlined,
-} from '../elements/index'
-
-//* sytle
-import styled from 'styled-components'
-import Icon from '../components/icons/Icon'
-
-
+import { CollectionList } from '../components/index'
 
 const MyCollection = () => {
-    
-    return(
+    return (
         <>
-            <CollectionList/>
+            <CollectionList />
         </>
     )
 }
 
-export default MyCollection;
-
+export default MyCollection

@@ -2,18 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
     ButtonFill,
-    ButtonOutlined,
     FlexColumn,
     FlexRow,
-    Img,
     Input,
     SubTitle,
     Text,
-    Title,
 } from '../elements/index'
-import { kakaoLoginMD, loginMD, signupMD } from '../redux/async/user'
+import { kakaoLoginMD, loginMD } from '../redux/async/user'
 import { history } from '../redux/store'
-import ChatBubbleOutlinedIcon from '@mui/icons-material/ChatBubbleOutlined'
 
 const Login = () => {
     const dispatch = useDispatch()

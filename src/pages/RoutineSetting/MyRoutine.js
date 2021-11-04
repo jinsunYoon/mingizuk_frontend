@@ -4,7 +4,6 @@ import RoutineTemplate from '../../components/Routine/RoutineTemplate'
 import ToggleTab from '../../components/ToggleTab'
 import RoutineDesc from '../../components/Routine/RoutineDesc'
 import { Header, NavBar } from '../../components'
-import { getToken } from '../../shared/utils'
 import { history } from '../../redux/store'
 
 const MyRoutine = () => {
