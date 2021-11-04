@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import PostDesc from '../../elements/Moim/PostDesc'
-import PostImg from '../../elements/Moim/PostImg'
 import { history } from '../../redux/store'
 
 const MoimPost = () => {

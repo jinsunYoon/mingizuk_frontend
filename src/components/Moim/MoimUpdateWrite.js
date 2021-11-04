@@ -1,18 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Input, FlexRow, Text } from '../../elements/index'
-import MoimAddressModal from './MoimAddressModal'
+import Icon from '../../components/icons/Icon'
 import { useDispatch, useSelector } from 'react-redux'
-import { moimCreateMD } from '../../redux/async/moim'
+import { moimUpdateMD } from '../../redux/async/moim'
 import config from '../../shared/aws_config'
 import { uploadFile } from 'react-s3'
 
-const MoimWritePost = () => {
+const MoimUpdateWrite = () => {
     const dispatch = useDispatch()
+    const refPostData = useSelector((state) => state.moim.moim_ref_update)
     const [title, setTitle] = React.useState('')
     const [contents, setContents] = React.useState('')
     const [selectedFile, setSelectedFile] = React.useState(null)
-    const [imgSrc, setImgSrc] = React.useState('')
+
+    console.log('>>', refPostData)
 
     // * upload S3
     const handleFileInput = (e) => {
@@ -23,18 +25,18 @@ const MoimWritePost = () => {
             uploadFile(file, config)
                 .then((data) => {
                     const req = { title, contents, imgSrc: data.location }
-                    dispatch(moimCreateMD(req))
+                    dispatch(moimUpdateMD(req))
                 })
                 .catch((err) => console.error(err))
         } else return
     }
 
-    const upload = () => {
+    const update = () => {
         if (selectedFile !== null) {
             handleUpload(selectedFile)
         } else {
             const req = { title, contents, imgSrc: null }
-            dispatch(moimCreateMD(req))
+            dispatch(moimUpdateMD(req))
         }
     }
 
@@ -57,7 +59,10 @@ const MoimWritePost = () => {
                     {/* <Icon icon="color-palette" size="20px" />
                     <Text _fontSize="14px">사진</Text> */}
                 </IconBtn>
-                <MoimAddressModal />
+                <IconBtn>
+                    <Text _fontSize="14px">위치</Text>
+                    <Icon icon="place-location" size="20px" />
+                </IconBtn>
             </FlexRow>
             <FlexRow
                 _width="80vw"
@@ -66,7 +71,7 @@ const MoimWritePost = () => {
                 _border="none"
             >
                 <IconBtn>취소</IconBtn>
-                <IconBtn onClick={() => upload()}>업로드</IconBtn>
+                <IconBtn onClick={() => update()}>수정하기</IconBtn>
             </FlexRow>
         </>
     )
@@ -89,4 +94,4 @@ const IconBtn = styled.button`
     margin: 0 5px;
 `
 
-export default MoimWritePost
+export default MoimUpdateWrite

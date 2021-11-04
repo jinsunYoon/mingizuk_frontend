@@ -1,38 +1,34 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 import { Text } from '../../elements/index'
 import { NavBar } from '../../components/index'
-import { useSelector, useDispatch } from 'react-redux';
-import { myMoimCommentMD } from '../../redux/async/myMoim';
+import { useSelector, useDispatch } from 'react-redux'
+import { myMoimCommentMD } from '../../redux/async/myMoim'
 
 const MyComment = () => {
-    const dispatch = useDispatch();
-    const comment_list = useSelector((state)=>state.myMoim.my_comment_list)
+    const dispatch = useDispatch()
+    const comment_list = useSelector((state) => state.myMoim.my_comment_list)
     console.log(comment_list, 'comment_list state에서 가져오는값')
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         dispatch(myMoimCommentMD())
-    },[])
+    }, [])
 
-    return(
-         <>
-         {
-         comment_list?.map((comment_list, idx) => (
-            <PostBox key={idx}>
-                <TitleBox>
-                    <Text _fontSize="16px">
-                        {comment_list?.contents}
-                    </Text>
-                    <Text _fontSize="11px">
-                        {comment_list?.createdAt?.split(['T'])[0]}
-                    </Text>
-                </TitleBox>
-            </PostBox>
-         ))}
-        <NavBar/>
+    return (
+        <>
+            {comment_list?.map((comment_list, idx) => (
+                <PostBox key={idx}>
+                    <TitleBox>
+                        <Text _fontSize="16px">{comment_list?.contents}</Text>
+                        <Text _fontSize="11px">
+                            {comment_list?.createdAt?.split(['T'])[0]}
+                        </Text>
+                    </TitleBox>
+                </PostBox>
+            ))}
+            <NavBar />
         </>
     )
-
 }
 
 const TitleBox = styled.div`
@@ -49,4 +45,4 @@ const PostBox = styled.div`
     position: relative;
 `
 
-export default MyComment;
+export default MyComment
