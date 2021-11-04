@@ -95,7 +95,6 @@ const getMainRoutineAPI = () => {
 // *---------------------------------------------------
 
 // mypage
-
 const userInfoAPI = (data) => {
     console.log(data)
     return instance.put('/api/users/info', {
@@ -110,28 +109,25 @@ const kakaoAPI = () => {
 
 
 // *----------------------------------------------------
+
 // mymoim
-const myMoimCreateAPI = (data) => {
-    console.log(data)
+const myMoimCreateAPI = () => {
     return instance.post('/api/users/moims', {
         userType: 1,
     })
 }
 
-const myMoimJoinAPI = (data) => {
-    console.log(data)
+const myMoimJoinAPI = () => {
     return instance.post('/api/users/moims', {
         usertype: 0,
     })
 }
 
-const myMoimCommentAPI = (data) => {
-    console.log(data)
+const myMoimCommentAPI = () => {
     return instance.get('/api/users/comments')
 }
 
-const myMoimLikeAPI=(data)=>{
-    console.log(data)
+const myMoimLikeAPI=()=>{
     return instance.get('/api/moim/like')
 }
 

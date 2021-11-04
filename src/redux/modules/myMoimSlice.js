@@ -1,30 +1,49 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { myMoimCreateMD, myMoimJoinMD, myMoimLikeMD, myMoimCommentsMD } from '../async/myMoim';
+import { 
+    myMoimCreateMD, 
+    myMoimJoinMD, 
+    myMoimLikeMD, 
+    myMoimCommentMD 
+} from '../async/myMoim';
 
 const initialState = {
-
+    my_moim: {},
+    my_like: [],
+    my_comment_list: [],
 }
 
 const myMoimSlice = createSlice({
     name:'myMoim',
     initialState: initialState,
-    reducers: {},
+    reducers: {
+    },
+
     extraReducers: {
         [myMoimCreateMD.fulfilled]: (state, { payload }) => {
-            console.log(state, 'mymoimcreate state값 잘 넘어가??')
-            console.log(payload, 'mymoimcreate payload값 잘 넘어가??')
         },
+        [myMoimCreateMD.rejected]: (state, { payload }) => {
+        },
+
         [myMoimJoinMD.fulfilled]: (state, { payload }) => {
-            console.log(state, 'mymoimjoin')
-            console.log(payload, '페이로드')
         },
+        [myMoimJoinMD.rejected]: (state, { payload }) => {
+        },
+
         [myMoimLikeMD.fulfilled]: (state, { payload }) => {
-            console.log(payload)
+            console.log(payload,'>>>라이크리듀서')
+            state.my_like = payload.myLikes
         },
-        [myMoimCommentsMD.fulfilled]: (state,{payload}) => {
-            console.log(payload)
+        [myMoimLikeMD.rejected]: (state, { payload }) => {
+        },
+
+        [myMoimCommentMD.fulfilled]: (state, { payload }) => {
+            console.log(payload,'>>>payload')
+            state.my_comment_list = payload.data.myCommentList
+        },
+        [myMoimCommentMD.rejected]: (state,{ payload }) => {
         }
     }   
 })
 
 
+export default myMoimSlice;
