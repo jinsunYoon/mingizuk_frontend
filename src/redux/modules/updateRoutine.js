@@ -9,14 +9,30 @@ const actionSlice = createSlice({
     initialState: initialState,
     reducers: {
         addAction: (state, action) => {
+            let testArray = []
+            // * 중복처리
             state.actions.push({
                 actionName: action.payload.value,
                 actionCnt: 0,
                 actionType: action.payload.type,
             })
+
+            state.actions.map((act, idx) => {
+                testArray.push(act.actionName)
+            })
+            const matchFilter = testArray.filter(
+                (test) => test === action.payload.value
+            )
+            if (matchFilter.length > 1) {
+                const ref = state.actions.findIndex(
+                    (act) => act.actionName === action.payload.value
+                )
+                const refItem = state.actions[ref]
+                const result = state.actions.filter((act) => act !== refItem)
+                state.actions = result
+            }
         },
         minusAction: (state, action) => {
-            console.log(action.payload.value)
             const result = state.actions.filter(
                 (act) => act.actionName !== action.payload.value
             )

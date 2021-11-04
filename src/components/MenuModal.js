@@ -2,7 +2,9 @@ import React from 'react'
 import { FlexColumn, FlexRow, Text, ButtonOutlined } from '../elements'
 import { AccountCircleRounded } from '@material-ui/icons'
 import { ExitToAppRounded } from '@material-ui/icons'
+
 import { Footer } from '../components/index'
+
 import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { logoutMD } from '../redux/async/user'
@@ -10,8 +12,11 @@ import { logoutMD } from '../redux/async/user'
 const MenuModal = () => {
     const dispatch = useDispatch()
     const is_login = useSelector((state) => state.user.isLogin)
-    const logout = () => { dispatch(logoutMD()) }
+    const logout = () => {
+        dispatch(logoutMD())
+    }
     const [modalStatus, setModalStatue] = React.useState(false)
+    const nickName = useSelector((state) => state.user.userInfo.nickName)
 
     if (is_login) {
         return (
@@ -55,37 +60,42 @@ const MenuModal = () => {
                                 _justify={'start'}
                             >
                                 <FlexRow
-                                    _justify={'start'}
+                                    _justify={'space-between'}
                                     _border={'none'}
                                     _others={
                                         'padding-bottom:5px; border-bottom:1px solid #dbdbdb'
                                     }
                                 >
-                                    <AccountCircleRounded
-                                        style={{
-                                            marginRight: '10px',
-                                            color: '#6dddd0',
-                                            fontSize: '27px',
-                                            background: '#fff',
-                                            borderRadius: '50px',
-                                        }}
-                                    />
-                                    <Text _margin={'0px'} _padding={'0px'}>
-                                        <span style={{ fontWeight: '700' }}>
-                                            밍기적
-                                        </span>{' '}
-                                        님
-                                    </Text>
+                                    <FlexRow
+                                        _border={'none'}
+                                        _width={'false'}
+                                        _justify={'start'}
+                                    >
+                                        <AccountCircleRounded
+                                            style={{
+                                                marginRight: '10px',
+                                                color: '#6dddd0',
+                                                fontSize: '27px',
+                                                background: '#fff',
+                                                borderRadius: '50px',
+                                            }}
+                                        />
+                                        <Text _margin={'0px'} _padding={'0px'}>
+                                            <span style={{ fontWeight: '700' }}>
+                                                {nickName}
+                                            </span>{' '}
+                                            님
+                                        </Text>
+                                    </FlexRow>
                                     <div onClick={logout}>
-                                    <ExitToAppRounded
-                                        style={{
-                                            marginLeft: '2.7rem',
-                                            color: '#c1c1c1',
-                                            fontSize: '27px',
-                                            background: '#fff',
-                                            borderRadius: '50px',
-                                            cursor: 'pointer',
-                                        }}
+                                        <ExitToAppRounded
+                                            style={{
+                                                color: '#c1c1c1',
+                                                fontSize: '27px',
+                                                background: '#fff',
+                                                borderRadius: '50px',
+                                                cursor: 'pointer',
+                                            }}
                                         />
                                     </div>
                                 </FlexRow>
@@ -106,7 +116,7 @@ const MenuModal = () => {
                                             _margin={'0px'}
                                             _width={'false'}
                                             _onClick={() => {
-                                                history.push('/mypage')
+                                                history.push('/users')
                                             }}
                                         >
                                             <Text
@@ -123,6 +133,9 @@ const MenuModal = () => {
                                             _padding={'0px'}
                                             _margin={'0px'}
                                             _width={'false'}
+                                            _onClick={() => {
+                                                history.push('/history')
+                                            }}
                                         >
                                             <Text
                                                 _fontSize={'0.9rem'}
@@ -130,7 +143,7 @@ const MenuModal = () => {
                                                 _padding={'1rem 0px 0px 0px'}
                                                 _margin={'0px'}
                                             >
-                                                어쩌고저쩌고
+                                                히스토리
                                             </Text>
                                         </ButtonOutlined>
                                         <ButtonOutlined
@@ -138,6 +151,9 @@ const MenuModal = () => {
                                             _padding={'0px'}
                                             _margin={'0px'}
                                             _width={'false'}
+                                            _onClick={() => {
+                                                history.push('/moim')
+                                            }}
                                         >
                                             <Text
                                                 _fontSize={'0.9rem'}
@@ -145,7 +161,7 @@ const MenuModal = () => {
                                                 _padding={'1rem 0px 0px 0px'}
                                                 _margin={'0px'}
                                             >
-                                                다른메뉴
+                                                모임 게시판
                                             </Text>
                                         </ButtonOutlined>
                                     </FlexColumn>
@@ -210,29 +226,57 @@ const MenuModal = () => {
                             _height={'100%'}
                             _justify={'start'}
                         >
-                            <FlexRow
-                                _border={'none'}
-                                _others={'padding-bottom:5px; '}
-                            >
-                                <Text _color={'gray'} _margin={'1rem 0px'}>
-                                    로그인 후 이용해주세요.
-                                </Text>
-                            </FlexRow>
                             <FlexColumn
                                 _height={'100vh'}
                                 _justify={'space-between'}
                                 _border={'none'}
                             >
-                                <ButtonOutlined
-                                    _margin={'0px'}
-                                    _onClick={() => {
-                                        history.push('/login')
-                                    }}
+                                <FlexColumn
+                                    _border={'none'}
+                                    _others={'padding-bottom:5px; '}
+                                    _height={'false'}
                                 >
-                                    <Text _margin={'0px'} _padding={'0px'}>
-                                        로그인 하기
+                                    <FlexColumn
+                                        _border={'none'}
+                                        _others={
+                                            'border-bottom: 1px solid lightgray'
+                                        }
+                                        _height={'false'}
+                                    >
+                                        <Text
+                                            _color={'gray'}
+                                            _margin={'1rem 0px'}
+                                        >
+                                            로그인 후 이용해주세요.
+                                        </Text>
+                                        <ButtonOutlined
+                                            _margin={'0px 0px 1rem 0px'}
+                                            _onClick={() => {
+                                                history.push('/login')
+                                            }}
+                                        >
+                                            <Text
+                                                _margin={'0px'}
+                                                _padding={'0px'}
+                                            >
+                                                로그인 하기
+                                            </Text>
+                                        </ButtonOutlined>
+                                    </FlexColumn>
+                                    <Text _color={'gray'} _margin={'1rem 0px'}>
+                                        아직 회원가입 전이라면?
                                     </Text>
-                                </ButtonOutlined>
+                                    <ButtonOutlined
+                                        _margin={'0px'}
+                                        _onClick={() => {
+                                            history.push('/signup')
+                                        }}
+                                    >
+                                        <Text _margin={'0px'} _padding={'0px'}>
+                                            회원가입 하기
+                                        </Text>
+                                    </ButtonOutlined>
+                                </FlexColumn>
                                 <Footer />
                             </FlexColumn>
                         </FlexColumn>

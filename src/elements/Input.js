@@ -2,7 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Input = (props) => {
-    const { _onChange, _ph, _value, _others, _type, _width, _fontSize } = props
+    const {
+        _onChange,
+        _ph,
+        _value,
+        _others,
+        _type,
+        _width,
+        _fontSize,
+        _onKeyPress,
+    } = props
     const styles = { _others, _width, _fontSize }
 
     return (
@@ -12,6 +21,7 @@ const Input = (props) => {
                 {...styles}
                 placeholder={_ph}
                 onChange={_onChange}
+                onKeyPress={_onKeyPress}
                 // value={_value}
             />
         </>
@@ -20,12 +30,15 @@ const Input = (props) => {
 
 Input.defaultProps = {
     _onChange: () => {},
+    _onKeyPress: () => {},
     _ph: '내용을 입력하세요.',
     _others: false,
     _type: 'text',
     _width: '20rem',
     _fontSize: '',
-    // _value: ,
+    // _value: (e) => {
+    //     e.target.value
+    // },
 }
 
 const InputEl = styled.input`

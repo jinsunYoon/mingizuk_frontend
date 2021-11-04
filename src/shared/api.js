@@ -3,10 +3,10 @@ import { getToken } from './utils'
 
 // Axios 인스턴스 설정
 const instance = axios.create({
-    baseURL: 'http://13.125.110.160',
+    baseURL: 'http://52.79.237.95',
 })
 const instanceSign = axios.create({
-    baseURL: 'http://13.125.110.160',
+    baseURL: 'http://52.79.237.95',
 })
 
 // interceptor를 통한 header 설정
@@ -75,6 +75,63 @@ const loginCheckAPI = () => {
     return instance.get('/api/auth/me')
 }
 
+// *---------------------------------------------
+
+//mainpage
+
+const actionCompleteAPI = (data) => {
+    console.log('이거 api 데이터', data)
+    return instance.put('/api/users/action', {
+        actionId: data[0],
+        routineId: data[1],
+    })
+}
+
+const getMainRoutineAPI = () => {
+    return instance.get('/api/users/mainRoutine')
+}
+
+
+// *---------------------------------------------------
+
+// mypage
+const userInfoAPI = (data) => {
+    console.log(data)
+    return instance.put('/api/users/info', {
+        nickName: data.newNickName,
+        userPw: data.newPwd,
+    })
+}
+
+const kakaoAPI = () => {
+    return axios.get('http://13.125.110.160/api/auth/kakao')
+}
+
+
+// *----------------------------------------------------
+
+// mymoim
+const myMoimCreateAPI = (data) => {
+    console.log(data,'이거 api데이터')
+    return instance.post('/api/users/moims', data)
+}
+
+const myMoimJoinAPI = (data) => {
+    return instance.post('/api/users/moims', {
+        usertype: 0,
+    })
+}
+
+const myMoimCommentAPI = () => {
+    return instance.get('/api/users/comments')
+}
+
+const myMoimLikeAPI=()=>{
+    return instance.get('/api/moim/like')
+}
+
+
+
 // * ------------------------------------------------
 
 // routine
@@ -99,7 +156,6 @@ const myRoutineDeleteAPI = (routineId) => {
 }
 
 const myRoutineUpdateAPI = (data) => {
-    console.log(data)
     return instance.put(`/api/routines/${data.routineId}`, {
         routineName: data.routineName,
         actions: data.actions,
@@ -107,14 +163,75 @@ const myRoutineUpdateAPI = (data) => {
     })
 }
 
+const setmainRoutineAPI = (data) => {
+    return instance.put('/api/users/mainRoutine', {
+        routineId: data.routineId,
+    })
+}
+
+
+// *-----------------------------------------------------
+
+// moim
+const moimCreateAPI = (data) => {
+    return instance.post('api/moims', {
+        title: data.title,
+        contents: data.contents,
+    })
+}
+
+const moimReadAPI = () => {
+    return instance.get('/api/moims')
+}
+
+const moimDeleteAPI = (moimId) => {
+    return instance.delete(`/api/moims/${moimId}`)
+}
+
+const moimDetailAPI = (moimId) => {
+    return instance.get(`/api/moims/${moimId}`)
+}
+
+const moimCreateReviewAPI = (data) => {
+    return instance.post(`/api/comments/${data.moimId}`, {
+        contents: data.contents,
+    })
+}
+
+const moimDeleteReviewAPI = (commentId) => {
+    return instance.delete(`/api/comments/${commentId}`)
+}
+
+const moimUpdateReviewAPI = (data) => {
+    return instance.put(`/api/comments/${data.commentId}`, {
+        contents: data.contents,
+    })
+} 
+
 export {
     signupAPI,
     loginAPI,
     logoutAPI,
+    kakaoAPI,
     loginCheckAPI,
+    userInfoAPI,
     myRoutinePresetAPI,
     myRoutineCreateAPI,
     myRoutineListAPI,
     myRoutineDeleteAPI,
     myRoutineUpdateAPI,
+    myMoimCreateAPI,
+    myMoimJoinAPI,
+    myMoimCommentAPI,
+    myMoimLikeAPI,
+    moimCreateAPI,
+    actionCompleteAPI,
+    moimReadAPI,
+    moimDeleteAPI,
+    moimDetailAPI,
+    moimCreateReviewAPI,
+    moimDeleteReviewAPI,
+    moimUpdateReviewAPI,
+    getMainRoutineAPI,
+    setmainRoutineAPI,
 }

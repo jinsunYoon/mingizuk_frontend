@@ -52,7 +52,7 @@ ButtonOutlined.defaultProps = {
     children: '이건버튼',
     _icon: '',
     _width: '6rem',
-    padding: '2rem',
+    _padding: '1.5rem',
     _fontSize: '1rem',
     _margin: '0.5rem',
     _border: '1px solid lightgray',
@@ -73,6 +73,7 @@ const ElButton = styled.button`
     ${(props) => props._others};
     background: none;
     cursor: pointer;
+    padding:${(props) => props._padding};
 `
 
 const NavIcon = styled.div`

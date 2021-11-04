@@ -15,8 +15,24 @@ import RoutineCount from '../pages/RoutineSetting/RoutineCount'
 import RoutineUpdate from '../pages/RoutineSetting/RoutineUpdate'
 import RoutineUpdateCount from '../pages/RoutineSetting/RoutineUpdateCount'
 import NotFound from '../pages/NotFound'
+import Mypage from '../pages/MyPages/MyPage'
+import MyProfileUpdate from '../pages/MyPages/MyProfileUpdate'
+import MyCollection from '../pages/MyPages/MyCollection'
+import History from '../pages/History'
+import MoimMain from '../pages/MoimPages/MoimMain'
+import MoimWrite from '../pages/MoimPages/MoimWrite'
+import MoimDetail from '../pages/MoimPages/MoimDetail'
+import MyMoim from '../pages/MyPages/MyMoim'
+import Backend from '../pages/Backend'
+import { NavBar } from '../components'
+import { loginCheckMD } from '../redux/async/user'
 
 const App = () => {
+    const dispatch = useDispatch()
+    React.useEffect(() => {
+        dispatch(loginCheckMD())
+    }, [])
+
     return (
         <>
             <ConnectedRouter history={history}>
@@ -26,6 +42,7 @@ const App = () => {
                     <Route path="/signup" exact component={Signup}></Route>
                     <Route path="/routine/mypage" exact component={MyRoutine} />
                     <Route path="/routine/add" exact component={RoutineAdd} />
+                    <Route path="/history" exact component={History} />
                     <Route
                         path="/routine/count"
                         exact
@@ -41,9 +58,32 @@ const App = () => {
                         exact
                         component={RoutineUpdateCount}
                     />
+                    <Route path="/users" exact component={Mypage} />
+                    <Route
+                        path="/users/info"
+                        exact
+                        component={MyProfileUpdate}
+                    />
+                    <Route
+                        path="/users/collection"
+                        exact
+                        component={MyCollection}
+                    />
+                    <Route path="/users/moim" exact component={MyMoim} />
+
+                    <Route path="/moim" exact component={MoimMain} />
+                    <Route path="/moim/write" exact component={MoimWrite} />
+                    <Route
+                        path="/moim/detail/:id"
+                        exact
+                        component={MoimDetail}
+                    />
+                    <Route path="/backend" exact component={Backend} />
+
                     <Route path="*" component={NotFound} />
                 </Switch>
             </ConnectedRouter>
+            {/* <NavBar /> */}
         </>
     )
 }

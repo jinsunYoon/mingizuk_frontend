@@ -5,29 +5,30 @@ import { ButtonFill, ButtonOutlined } from '../../elements/index'
 import { history } from '../../redux/store'
 
 const RoutineTemplate = (props) => {
-    const { children, button, addBtn, _onClick_ } = props
+    const { children, button, addBtn, _onClick_, is_button } = props
     return (
         <>
             <MobileGrid>{children}</MobileGrid>
             <BtnPos>
-                <ButtonFill
-                    _width="217px"
-                    _height="48px"
-                    _padding="16px 24px"
-                    _margin="0"
-                    _onClick={props._onClick_}
-                >
-                    {button}
-                </ButtonFill>
+                {is_button === true && (
+                    <ButtonFill
+                        _width="217px"
+                        _height="48px"
+                        _padding="16px 24px"
+                        _margin="0"
+                        _onClick={props._onClick_}
+                    >
+                        {button}
+                    </ButtonFill>
+                )}
                 {addBtn && (
                     <ButtonOutlined
                         _width="56px"
                         _margin="0"
                         _bradius="56px"
-                        _others="height:56px;box-shadow: 0px 2px 0px 0px #000000;"
+                        _others="height:56px;box-shadow: 0px 2px 0px 0px #000000;position:fixed;bottom:80px;right:20px;"
                         _border="1px solid #020202"
                         _onClick={() => {
-                            console.log('dd')
                             history.push('/routine/add')
                         }}
                     >
@@ -43,6 +44,7 @@ RoutineTemplate.defaultProps = {
     button: '버튼 적기',
     addBtn: false,
     _onClick_: () => {},
+    is_button: true,
 }
 
 const MobileGrid = styled.section`
@@ -61,7 +63,7 @@ const BtnPos = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 30px;
+    bottom: 80px;
     z-index: 0;
 `
 

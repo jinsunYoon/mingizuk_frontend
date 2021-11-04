@@ -9,24 +9,32 @@ import {
     ButtonOutlined,
     Text,
 } from '../elements/index'
-import { CharacterModal, Header } from '../components/index'
+import {
+    CharacterModal,
+    CompleteActionModal,
+    Header,
+} from '../components/index'
 import Icon from '../components/icons/Icon'
 import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { loginCheckMD } from '../redux/async/user'
+import { getMainRoutineMD } from '../redux/async/routine'
+import Time from '../elements/Time'
+import styled from 'styled-components'
+import HabitTrakerV2 from '../components/HabitTrakerV2'
+import { chageMyHabitModal } from '../redux/modules/routineSlice'
 
 const Main = (props) => {
     const dispatch = useDispatch()
 
     React.useEffect(() => {
         dispatch(loginCheckMD())
+        dispatch(getMainRoutineMD())
     }, [])
 
     const is_login = useSelector((state) => state.user.isLogin)
-    const presetRoutine = useSelector((state) => state.setAction.mainRoutine)
-    const num = presetRoutine?.actions?.length - 1
-
+    const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
 
     if (is_login) {
         return (
@@ -39,18 +47,17 @@ const Main = (props) => {
                     _others={'box-sizing: border-box;'}
                     _border={'none'}
                 >
-                    {/* <Text _fontSize={'1.5rem'} _color={'black'} _padding={'0px'}>
-                    오늘의{' '}
-                    <span style={{ fontWeight: '700', color: '#2baffd' }}>
-                        밍기적
-                    </span>
-                    을 이루세요!
-                </Text> */}
+                    <TimeWarp>
+                        <Time />
+                    </TimeWarp>
                     <CharacterModal />
                     <FlexColumn
                         _align={'start'}
                         _width={'100%'}
                         _border={'none'}
+                        _onClick={() => {
+                            dispatch(chageMyHabitModal(false))
+                        }}
                     >
                         {' '}
                         <FlexRow _width={'false'} _border={'none'}>
@@ -80,7 +87,7 @@ const Main = (props) => {
                             _margin={'0px 0px 0.2rem 0px'}
                         >
                             <span style={{ fontWeight: '700' }}>
-                                {presetRoutine?.name}
+                                {mainRoutine?.routineName}
                             </span>{' '}
                             하는 날! 오늘도 화이팅!
                         </Text>
@@ -91,71 +98,22 @@ const Main = (props) => {
                             _others={'box-sizing: border-box;'}
                             _justify={'space-around'}
                         >
-
-                            {presetRoutine?.actions?.map((routine, idx) => {
-                                return (
-                                    <>
-                                        <ButtonOutlined
-                                            _border={'none'}
-                                            _margin={'none'}
-                                            _padding={'none'}
-                                            _width={'false'}
-                                        >
-                                            <FlexColumn
-                                                _width={'2.8rem'}
-                                                _height={'100%'}
-                                                _border={'none'}
-                                            >
-                                                <FlexRow
-                                                    _width={'2rem'}
-                                                    _height={'2rem'}
-                                                    _bgColor={'lightgray'}
-                                                    _border={'none'}
-                                                    _margin={'10px 0px 0px 0px'}
-                                                    _others={
-                                                        'border-radius:1rem'
-                                                    }
-                                                ></FlexRow>
-                                                <FlexRow
-                                                    _width={'1rem'}
-                                                    _height={'1rem'}
-                                                    _bgColor={'black'}
-                                                    _border={'none'}
-                                                    _margin={
-                                                        '-40px -25px 20px 0px'
-                                                    }
-                                                    _others={
-                                                        'border-radius:1rem;'
-                                                    }
-                                                >
-                                                    <Text _color={'#fff'}>
-                                                        5
-                                                    </Text>
-                                                </FlexRow>
-                                                <Text
-                                                    _margin={'5px 0px 0px 0px'}
-                                                    _fontSize={'0.75rem'}
-                                                >
-                                                    {routine?.actionName}
-                                                </Text>
-                                            </FlexColumn>
-                                        </ButtonOutlined>
-                                        {idx < num && (
-                                            <FlexRow
-                                                _border={'none'}
-                                                _width={'0.625rem'}
-                                            >
-                                                <Icon
-                                                    icon={'chevron-right'}
-                                                    size={24}
-                                                />
-                                            </FlexRow>
-                                        )}
-                                    </>
-                                )
-                            })}
+                            <CompleteActionModal />
                         </FlexRow>
                     </FlexColumn>
+                    <div
+                        onClick={() => {
+                            dispatch(chageMyHabitModal(false))
+                        }}
+                    >
+                        <SubTitle>Habit Traker</SubTitle>
+                        <Text _fontSize="13px">
+                            <Time _format="YYYY, MM" type="num" />
+                        </Text>
+                    </div>
+                    <HabitTrakerWarp>
+                        <HabitTrakerV2 />
+                    </HabitTrakerWarp>
                 </FlexColumn>
             </React.Fragment>
         )
@@ -164,6 +122,9 @@ const Main = (props) => {
     return (
         <React.Fragment>
             <Header />
+            <TimeWarp>
+                <Time _format="MM.DD" />
+            </TimeWarp>
             <FlexColumn
                 _width={'100vw'}
                 _height={'100%'}
@@ -171,13 +132,6 @@ const Main = (props) => {
                 _others={'box-sizing: border-box;'}
                 _border={'none'}
             >
-                {/* <Text _fontSize={'1.5rem'} _color={'black'} _padding={'0px'}>
-                    오늘의{' '}
-                    <span style={{ fontWeight: '700', color: '#2baffd' }}>
-                        밍기적
-                    </span>
-                    을 이루세요!
-                </Text> */}
                 <CharacterModal />
                 <FlexColumn _align={'start'} _width={'100%'} _border={'none'}>
                     {' '}
@@ -196,7 +150,7 @@ const Main = (props) => {
                                 _padding={'none'}
                                 _border={'none'}
                                 _onClick={() => {
-                                    history.push('/routine/mypage')
+                                    window.alert('로그인 후 이용해주세요.')
                                 }}
                             >
                                 <Icon icon={'create'} size={20} />
@@ -215,8 +169,7 @@ const Main = (props) => {
                             _color={'black'}
                             _border={'none'}
                             _onClick={() => {
-                                history.push('/routine/mypage')
-                                window.location.reload()
+                                window.alert('로그인 후 이용해주세요.')
                             }}
                         >
                             당신의 루틴을 설정해보세요!
@@ -227,5 +180,25 @@ const Main = (props) => {
         </React.Fragment>
     )
 }
+
+const TimeWarp = styled.div`
+    width: 100vw;
+    height: 24px;
+    margin: 16px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+const HabitTrakerWarp = styled.section`
+    box-sizing: content-box;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 180px;
+`
 
 export default Main

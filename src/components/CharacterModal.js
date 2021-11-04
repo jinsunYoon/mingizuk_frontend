@@ -1,10 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 import { ButtonFill, FlexRow, Text } from '../elements/index'
 import { CancelRounded } from '@material-ui/icons'
+import LevelBar from './LevelBar'
 
 const CharacterModal = (props) => {
     const [modalStatus, setModalStatue] = React.useState(false)
+    const is_login = useSelector((state) => state.user.isLogin)
     return (
         <React.Fragment>
             {modalStatus && (
@@ -54,23 +57,25 @@ const CharacterModal = (props) => {
                 </FlexRow>
             )}
             <ButtonFill
-                _width={'100%'}
+                _width={'200px'}
                 _color={'black'}
                 _padding={'0px'}
                 _margin={'0px 0px 1rem 0px'}
                 _others={
-                    'border : 1px solid gray; background-color: #C4C4C4; box-sizing: border-box; height: 330px;'
+                    'border : 1px solid gray; background-color: #C4C4C4; box-sizing: border-box; height: 200px;'
                 }
+                _bradius="50%"
                 _onClick={() => {
                     {
-                        modalStatus
-                            ? setModalStatue(false)
-                            : setModalStatue(true)
+                        is_login
+                            ? setModalStatue(true)
+                            : window.alert('로그인 후 이용해주세요.')
                     }
                 }}
             >
-                당신의 첫 캐릭터를 뽑아주세요
+                캐릭터를 뽑아주세요
             </ButtonFill>
+            {is_login && <LevelBar />}
         </React.Fragment>
     )
 }
@@ -86,6 +91,7 @@ const Modal = styled.div`
     position: fixed;
     top: 4.3rem;
     left: 1.8rem;
+    z-index: 3;
     @media screen and (max-width: 280px) {
         width: 233px;
         left: 1.5rem;
