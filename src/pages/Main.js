@@ -97,7 +97,6 @@ const Main = (props) => {
                             _height={'6.25rem'}
                             _border={'1px solid gray'}
                             _others={'box-sizing: border-box;'}
-                            _justify={'space-around'}
                         >
                             <CompleteActionModal />
                         </FlexRow>
@@ -176,7 +175,7 @@ const Main = (props) => {
                                 _color={'black'}
                                 _border={'none'}
                                 _onClick={() => {
-                                    window.alert('로그인 후 이용해주세요.')
+                                    history.push('/routine/mypage')
                                 }}
                             >
                                 당신의 루틴을 설정해보세요!
