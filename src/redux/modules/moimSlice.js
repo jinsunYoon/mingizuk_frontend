@@ -4,6 +4,9 @@ import {
     moimReadMD,
     moimUpdateMD,
     moimDeleteMD,
+    moimLikeMD,
+    moimUnlikeMD,
+    moimJoinMD,
     moimDetailMD,
     moimReviewCreateMD,
     moimDeleteReviewMD,
@@ -49,6 +52,15 @@ const moimSlice = createSlice({
         },
         [moimDetailMD.fulfilled]: (state, { payload }) => {
             state.moim_detail = payload.data.targetMoim
+            console.log(payload)
+        },
+        [moimLikeMD.fulfilled]: (state, { payload }) => {
+            console.log(payload)
+        },
+        [moimUnlikeMD.fulfilled]: (state, { payload }) => {
+            console.log(payload)
+        },
+        [moimJoinMD.fulfilled]: (state, { payload }) => {
             console.log(payload)
         },
         [moimReviewCreateMD.fulfilled]: (state, { payload }) => {

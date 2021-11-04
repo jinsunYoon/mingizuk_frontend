@@ -60,7 +60,6 @@ const MyMoimToogleTab = () => {
                         내가 단 댓글
                     </ActiveUnderLine>
                 }
-
             </ToogleBox>
             <div style={{zIndex:10}}>
                 {tabState === 'a' && <MyCreate/>}
