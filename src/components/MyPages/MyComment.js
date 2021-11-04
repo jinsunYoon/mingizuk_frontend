@@ -42,7 +42,7 @@ const PostBox = styled.div`
     width: 90vw;
     height: auto;
     border: 1px solid #c4c4c4;
-    position: relative;
+     position: relative;
 `
 
 export default MyComment

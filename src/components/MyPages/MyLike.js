@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components';
+import Icon from '../../components/icons/Icon';
 import { Text } from '../../elements/index'
 import { NavBar } from '../../components/index'
 import { myMoimLikeMD } from '../../redux/async/myMoim';
@@ -9,7 +10,7 @@ import { myMoimLikeMD } from '../../redux/async/myMoim';
 const MyLike = () => {
     const dispatch = useDispatch()
     const like_list = useSelector((state)=>state.myMoim.my_like)
-    console.log(like_list)
+    console.log(like_list , '좋아요 따른 리스트')
 
    React.useEffect(()=>{
         dispatch(myMoimLikeMD())
@@ -19,8 +20,7 @@ const MyLike = () => {
     // 모임좋아요기능 끝나면, 마이모임좋아요기능 추가하기!
     return(
          <>
-         
-        {/* <PostBox>
+        <PostBox>
             <TitleBox>
                 <div>
                     <Text 
@@ -33,11 +33,13 @@ const MyLike = () => {
                         _color="#8f8f8f"
                         _align="left"
                         >
-                        {data.publisedDate} {data.writer}
+                        {data.publisedDate} 
+                        {data.writer}
                     </Text>
                 </div>
                 <Text _fontSize="11px">참여자 : {data.people}</Text>
             </TitleBox>
+        
             <EtcBox>
                 <SmallBox>
                     <Icon icon={'favorite'} size="20px" /> 좋아요
@@ -48,7 +50,7 @@ const MyLike = () => {
                     댓글 {data.commentCount}개
                 </SmallBox>
             </EtcBox>
-        </PostBox> */}
+        </PostBox>
         <NavBar/>
         </>
     )

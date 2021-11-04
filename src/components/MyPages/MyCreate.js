@@ -1,60 +1,60 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
-import styled from 'styled-components';
-import Icon from '../../components/icons/Icon';
+import styled from 'styled-components'
+import Icon from '../../components/icons/Icon'
 
 import { Text } from '../../elements/index'
 import { NavBar } from '../../components/index'
-import { myMoimCreateMD } from '../../redux/async/myMoim'
-import { userInfoAPI } from '../../shared/api';
+import { myMoimCreateMD} from '../../redux/async/myMoim'
 
 const MyCreate = () => {
     const dispatch = useDispatch()
-    const my_moim_create = useSelector((state) => state.myMoim.my_moim)
-    console.log(my_moim_create,'my_moim_create?')
-    
+    const create_list = useSelector((state) => state.myMoim.my_moim)
+
+    console.log(create_list, 'my_moim_create?')
+
     useEffect(() => {
         dispatch(myMoimCreateMD())
     }, [])
 
-    return(
-        <>
-        {
-            my_moim_create?.map((i, idx) => (
-              <PostBox key={idx}>
-
-    <TitleBox>
-        <div>
-            <Text 
-                _fontSize="11px" 
-                _color="#8f8f8f"
-                _align="left"
-                >
-                {i?.Moim?.contents} 
-                {/* {User.nickName} */}
-            </Text>
-        </div>
-        
-    </TitleBox>
-    <EtcBox>
-        <SmallBox>
-            <Icon icon={'favorite'} size="20px" /> 
-            좋아요
-            {/* {data.likeCount}개 */}
-        </SmallBox>
-        <SmallBox>
-            <Icon icon={'message'} size="20px" />
-            {/* 댓글 {data.commentCount}개 */}
-        </SmallBox>
-    </EtcBox>
-    </PostBox>
-        ))
-        }
-        <NavBar/>
-        </>
+    return (
+        <> 
+            {
+            create_list?.map((i, idx) => (
+                <PostBox>
+                    <TitleBox key={idx}>
+                        <div>
+                            <Text>
+                                {i?.Moim?.contents}
+                            </Text>
+                            <Text
+                            _fontSize="11px"
+                            _color="#8f8f8f"
+                            _align="left"
+                            >
+                                {i?.createdAt?.split(['T'])[0]}
+                            </Text>
+                        </div>
+                        <Text>
+                            {i?.User?.nickName}
+                        </Text>
+                    </TitleBox>
+                    <EtcBox>
+                        <SmallBox>
+                            <Icon icon={'favorite'} size="20px" />
+                            좋아요 {}
+                        </SmallBox>
+                        <SmallBox>
+                            <Icon icon={'message'} size="20px" />
+                            댓글 {}개
+                        </SmallBox>
+                    </EtcBox>
+                </PostBox>
+            ))}
+            <NavBar />
+            </>
     )
-
 }
 
 const TitleBox = styled.div`
@@ -90,4 +90,4 @@ const EtcBox = styled.div`
     border-top: 1px solid lightgray;
 `
 
-export default MyCreate;
+export default MyCreate

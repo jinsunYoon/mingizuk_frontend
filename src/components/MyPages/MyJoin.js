@@ -1,13 +1,15 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 
 import Icon from '../../components/icons/Icon';
 import styled from 'styled-components';
 
 import { Text } from '../../elements/index'
 import { NavBar } from '../../components/index'
+import { myMoimLikeMD } from '../../redux/async/myMoim';
 
 const MyJoin = () => {
-    const data = useSelector((state)=>state)
+    const data = useSelector((state)=>state.myMoim.my_moim)
     console.log(state, '스테이트값')
 
     return(
@@ -24,8 +26,10 @@ const MyJoin = () => {
                 _fontSize="11px" 
                 _color="#8f8f8f"
                 _align="left"
-                >
-                {data.publisedDate} {data.writer}
+            >
+                {data.publisedDate}
+
+                {data.writer}
             </Text>
         </div>
         <Text _fontSize="11px">참여자 : {data.people}</Text>
