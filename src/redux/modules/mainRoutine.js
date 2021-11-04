@@ -3,6 +3,7 @@ import { getMainRoutineMD, setMainRoutineMD } from '../async/routine'
 
 const initialState = {
     mainRoutine: [],
+    isMain: '',
 }
 
 const mainRoutineSlice = createSlice({
@@ -16,7 +17,12 @@ const mainRoutineSlice = createSlice({
 
     extraReducers: {
         [getMainRoutineMD.fulfilled]: (state, action) => {
-            state.mainRoutine = action.payload.data.mainRoutine
+            // state.mainRoutine = action.payload.data.mainRoutine
+            if (action) {
+                state.mainRoutine = action?.payload?.data?.users[0]?.Routines[0]
+                state.isMain =
+                    action?.payload?.data?.users[0]?.Routines[0]?.isMain
+            }
         },
         [setMainRoutineMD.fulfilled]: (state, action) => {
             console.log('셋메인루틴풀필드', action)
