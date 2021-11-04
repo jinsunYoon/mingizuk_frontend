@@ -25,7 +25,7 @@ export const myMoimCreateMD = createAsyncThunk(
 
 // ! 여기부터는 수정하지 않았습니다 !
 export const myMoimJoinMD = createAsyncThunk(
-    'users/moims',
+    'myMoim/myJoin',
     async (data, thunkAPI) => {
         try {
             console.log(data)
@@ -42,7 +42,7 @@ export const myMoimJoinMD = createAsyncThunk(
 )
 
 export const myMoimLikeMD = createAsyncThunk(
-    'users/moim/like',
+    'myMoim/Like',
     async (data, thunkAPI) => {
         try {
             const response = await myMoimLikeAPI()
@@ -58,7 +58,7 @@ export const myMoimLikeMD = createAsyncThunk(
 )
 
 export const myMoimCommentMD = createAsyncThunk(
-    'myMoim/comments',
+    'myMoim/comment',
     async (data, thunkAPI) => {
         try {
             const response = await myMoimCommentAPI()
