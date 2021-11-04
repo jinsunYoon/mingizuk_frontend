@@ -9,14 +9,19 @@ import { uploadFile } from 'react-s3'
 
 const MoimUpdateWrite = () => {
     const dispatch = useDispatch()
-    const refPostData = useSelector((state) => state.moim.moim_ref_update)
-    const [title, setTitle] = React.useState('')
-    const [contents, setContents] = React.useState('')
+    // * 이전요소들
+    const refPost = useSelector((state) => state.moim.moim_ref_update)
+    const beforeTitle = refPost?.title
+    const beforeContent = refPost?.contents
+    const beforeImgSrc = refPost?.imgSrc
+    const moimId = refPost?.id
+
+    // * update 할 요소들
+    const [title, setTitle] = React.useState(beforeTitle)
+    const [contents, setContents] = React.useState(beforeContent)
     const [selectedFile, setSelectedFile] = React.useState(null)
 
-    console.log('>>', refPostData)
-
-    // * upload S3
+    // * upload S3 & update
     const handleFileInput = (e) => {
         setSelectedFile(e.target.files[0])
     }
@@ -24,18 +29,22 @@ const MoimUpdateWrite = () => {
         if (selectedFile !== null) {
             uploadFile(file, config)
                 .then((data) => {
-                    const req = { title, contents, imgSrc: data.location }
+                    const req = {
+                        title,
+                        contents,
+                        imgSrc: data.location,
+                        moimId,
+                    }
                     dispatch(moimUpdateMD(req))
                 })
                 .catch((err) => console.error(err))
         } else return
     }
-
     const update = () => {
         if (selectedFile !== null) {
             handleUpload(selectedFile)
         } else {
-            const req = { title, contents, imgSrc: null }
+            const req = { title, contents, imgSrc: beforeImgSrc, moimId }
             dispatch(moimUpdateMD(req))
         }
     }
@@ -46,8 +55,13 @@ const MoimUpdateWrite = () => {
                 _ph="제목을 입력하세요"
                 _width="80vw"
                 _onChange={(e) => setTitle(e.target.value)}
+                _valueType="customValue"
+                _value={title}
             />
-            <ContentsBox onChange={(e) => setContents(e.target.value)} />
+            <ContentsBox
+                onChange={(e) => setContents(e.target.value)}
+                value={contents}
+            />
             <FlexRow
                 _width="80vw"
                 _height="40px"

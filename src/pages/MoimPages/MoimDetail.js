@@ -10,6 +10,7 @@ import {
     moimDetailMD,
     moimReviewCreateMD,
     moimDeleteMD,
+    moimJoinMD,
 } from '../../redux/async/moim'
 import MoimReview from '../../components/Moim/MoimReview'
 import { moimUpdate } from '../../redux/modules/moimSlice'
@@ -24,7 +25,6 @@ const MoimDetail = (props) => {
     React.useEffect(() => {
         dispatch(moimDetailMD(post_id))
     }, [])
-    console.log(post_data)
 
     // * post delete
     const deletePost = (data) => {
@@ -53,6 +53,11 @@ const MoimDetail = (props) => {
         }
         dispatch(moimReviewCreateMD(data))
         setContents('')
+    }
+
+    // * join Moim
+    const join = (data) => {
+        dispatch(moimJoinMD(data))
     }
 
     return (
@@ -104,11 +109,22 @@ const MoimDetail = (props) => {
                 </ContentBox>
                 {Object.keys(post_data).length > 0 &&
                     user_nick !== post_data?.MoimUsers[0]?.User.nickName && (
-                        <JoinBtn>모임참여하기</JoinBtn>
+                        <JoinBtn
+                            onClick={() => {
+                                const data = {
+                                    moimId: post_data?.id,
+                                    userId: post_data?.MoimUsers[0]?.userId,
+                                }
+                                join(data)
+                            }}
+                        >
+                            모임참여하기
+                        </JoinBtn>
                     )}
                 <EtcBox>
                     <SmallBox>
-                        <LikeBtn /> 좋아요
+                        // ! like btn
+                        <LikeBtn moim_id={post_data?.id} /> 좋아요
                         {post_data?.Likes?.length}개
                     </SmallBox>
                     <SmallBox>
