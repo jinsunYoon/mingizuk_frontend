@@ -30,14 +30,12 @@ const myMoimSlice = createSlice({
         },
 
         [myMoimLikeMD.fulfilled]: (state, { payload }) => {
-            console.log(payload,'>>>라이크리듀서')
-            state.my_like = payload.myLikes
+            state.my_like = payload.data.myLikes
         },
         [myMoimLikeMD.rejected]: (state, { payload }) => {
         },
 
         [myMoimCommentMD.fulfilled]: (state, { payload }) => {
-            console.log(payload,'>>>payload')
             state.my_comment_list = payload.data.myCommentList
         },
         [myMoimCommentMD.rejected]: (state,{ payload }) => {
