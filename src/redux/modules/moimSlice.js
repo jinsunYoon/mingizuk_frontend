@@ -69,7 +69,7 @@ const moimSlice = createSlice({
             console.log(payload)
         },
         [moimUnlikeMD.fulfilled]: (state, { payload }) => {
-            console.log(payload)
+            // state.moim_detail.Likes = state.moim_detail.Likes.pop()
             console.log(state, '<><><><>')
         },
         [moimJoinMD.fulfilled]: (state, { payload }) => {
