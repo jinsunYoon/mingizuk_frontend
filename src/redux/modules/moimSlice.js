@@ -17,8 +17,6 @@ const initialState = {
     moim_all: {},
     moim_detail: {},
     moim_ref_update: {},
-    marker: '',
-    addressName: '',
 }
 
 const moimSlice = createSlice({
@@ -27,12 +25,6 @@ const moimSlice = createSlice({
     reducers: {
         moimUpdate: (state, action) => {
             state.moim_ref_update = action.payload
-        },
-        setMarker: (state, action) => {
-            state.marker = action.payload
-        },
-        setAddressName: (state, action) => {
-            state.addressName = action.payload
         },
     },
     extraReducers: {
@@ -94,7 +86,7 @@ const moimSlice = createSlice({
 })
 
 //* reducer export
-export const { moimUpdate, setMarker, setAddressName } = moimSlice.actions
+export const { moimUpdate } = moimSlice.actions
 
 //* slice export
 export default moimSlice
