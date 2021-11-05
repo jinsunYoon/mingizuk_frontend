@@ -82,8 +82,9 @@ const loginCheckAPI = () => {
 const actionCompleteAPI = (data) => {
     console.log('이거 api 데이터', data)
     return instance.put('/api/users/action', {
-        actionId: data[0],
-        routineId: data[1],
+        actionId: data.actionId,
+        routineId: data.routineId,
+        isReset: 0,
     })
 }
 
