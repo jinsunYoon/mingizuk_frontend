@@ -11,11 +11,7 @@ const MoimWrite = () => {
                 <Header name="모임 글쓰기" type="back" />
             </div>
             <MoimTemplate>
-                <FlexColumn
-                    _width="90vw"
-                    _height={'100%'}
-                    _padding={'1rem 0px'}
-                >
+                <FlexColumn _width="90vw" _height="80vh">
                     <MoimWritePost />
                 </FlexColumn>
             </MoimTemplate>

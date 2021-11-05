@@ -59,7 +59,7 @@ const InputEl = styled.input`
     padding-left: 0.8rem;
     height: 3rem;
     width: ${(props) => props._width};
-    border: 1px solid lightgray;
+    border: 1px solid li ghtgray;
     font-size: ${(props) => props._fontSize};
     ${(props) => (props._others ? props._others : '')};
     ${(props) => (props._type ? props._type : '')};
