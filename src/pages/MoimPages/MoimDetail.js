@@ -11,9 +11,11 @@ import {
     moimReviewCreateMD,
     moimDeleteMD,
     moimJoinMD,
+    moimLikeMD,
 } from '../../redux/async/moim'
 import MoimReview from '../../components/Moim/MoimReview'
 import { moimUpdate } from '../../redux/modules/moimSlice'
+import { darkScrollbar } from '@mui/material'
 
 const MoimDetail = (props) => {
     const post_id = props.match.params.id
@@ -21,9 +23,11 @@ const MoimDetail = (props) => {
 
     const user_nick = useSelector((state) => state.user.userInfo.nickName)
     const post_data = useSelector((state) => state.moim.moim_detail)
+    console.log(post_data?.Likes, '좋아요개수')
 
     React.useEffect(() => {
         dispatch(moimDetailMD(post_id))
+        post_data?.Likes?.length
     }, [])
 
     // * post delete
@@ -123,9 +127,8 @@ const MoimDetail = (props) => {
                     )}
                 <EtcBox>
                     <SmallBox>
-                        // ! like btn
-                        <LikeBtn moim_id={post_data?.id} /> 
-                        좋아요 {post_data?.Likes?.length}개
+                        <LikeBtn moim_id={post_data?.id}/>
+                        좋아요 {(post_data?.Likes)?.length}개
                     </SmallBox>
                     <SmallBox>
                         <Icon icon={'message'} size="20px" />
