@@ -16,8 +16,8 @@ import {
 const CompleteActionModal = (props) => {
     const dispatch = useDispatch()
 
-    const [success, setsuccess] = React.useState('false')
     const modalImg = useSelector((state) => state.actionComplete.ImgSrc)
+    const [modalDeleteBtn, setModalDeleteBtn] = React.useState(false)
     const modalActionName = useSelector(
         (state) => state.actionComplete.actionName
     )
@@ -46,6 +46,9 @@ const CompleteActionModal = (props) => {
             )
         )
         dispatch(setActionBtn('닫기'))
+        dispatch(setDefaultBtn(false))
+        dispatch(setCompleteBtn(false))
+        setModalDeleteBtn(true)
     }
 
     const changeBtn = () => {
@@ -60,6 +63,7 @@ const CompleteActionModal = (props) => {
                 dispatch(setActionBtn('완료하기 !'))
                 dispatch(setDefaultBtn(false))
                 dispatch(setCompleteBtn(true))
+                setModalDeleteBtn(false)
             }, 5000)
         }
     }
@@ -74,6 +78,7 @@ const CompleteActionModal = (props) => {
         dispatch(setActionBtn('시작 !'))
         dispatch(setDefaultBtn(true))
         dispatch(setCompleteBtn(false))
+        setModalDeleteBtn(false)
     }
 
     return (
@@ -139,6 +144,19 @@ const CompleteActionModal = (props) => {
                             _padding={'0px'}
                             _onClick={() => {
                                 successAction()
+                            }}
+                        >
+                            <Text _padding={'0.7rem 0px'}>
+                                {modalActionBtn}
+                            </Text>
+                        </ButtonOutlined>
+                    )}
+                    {modalDeleteBtn && (
+                        <ButtonOutlined
+                            _width={'13rem'}
+                            _margin={'1rem 0px 0px 0px'}
+                            _padding={'0px'}
+                            _onClick={() => {
                                 modalActionBtn == '닫기' && changeFalse()
                             }}
                         >
