@@ -1,21 +1,15 @@
 import React, { useState } from 'react'
 import {
     ButtonFill,
-    ButtonOutlined,
     FlexColumn,
     FlexRow,
-    Img,
     Input,
     SubTitle,
     Text,
-    Title,
 } from '../elements/index'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { signupMD } from '../redux/async/user'
 import dotenv from 'dotenv'
-import { Autorenew } from '@material-ui/icons'
-// import { actionCreator as userActions } from '../redux/modules/user'
-import styled from 'styled-components'
 
 const Signup = (props) => {
     dotenv.config()

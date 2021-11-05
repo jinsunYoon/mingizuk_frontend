@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { userInfoMD } from '../redux/async/user'
-// import history from '../redux/store'
 
 //* components
 import { Header, NavBar } from '../components/index'

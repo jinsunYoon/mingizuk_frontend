@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { ButtonOutlined, FlexRow, Text, Img } from '../elements/index'
 import { CancelRounded } from '@material-ui/icons'
-import Icon from '../components/icons/Icon'
 import { useSelector, useDispatch } from 'react-redux'
 import { actionCompleteMD } from '../redux/async/actionComplete'
 import {
@@ -12,8 +11,6 @@ import {
     setImgSrc,
     setCompleteBtn,
     setDefaultBtn,
-    setActionId,
-    setRoutineId,
 } from '../redux/modules/completeSlice'
 
 const CompleteActionModal = (props) => {

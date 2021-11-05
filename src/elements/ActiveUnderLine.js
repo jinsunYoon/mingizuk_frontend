@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FlexRow } from '.'
 
 const ActiveUnderLine = (props) => {
     const { active, children, _onClick } = props
