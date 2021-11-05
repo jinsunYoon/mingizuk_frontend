@@ -180,6 +180,7 @@ const moimReadAPI = () => {
 }
 
 const moimUpdateAPI = (data) => {
+    
     return instance.put(`/api/moims/${data.moimId}`, {
         title: data.title,
         contents: data.contents,
@@ -196,7 +197,6 @@ const moimDetailAPI = (moimId) => {
 }
 
 const moimLikeAPI = (moimId) => {
-    console.log(moimId)
     return instance.post(`/api/moim/like/${moimId}`)
 }
 
