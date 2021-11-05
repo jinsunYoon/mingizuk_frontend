@@ -3,9 +3,6 @@ import {
     FlexRow,
     FlexColumn,
     SubTitle,
-    Title,
-    Input,
-    ButtonFill,
     ButtonOutlined,
     Text,
 } from '../elements/index'

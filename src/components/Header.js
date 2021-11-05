@@ -1,14 +1,6 @@
 import React from 'react'
 
-import {
-    ButtonFill,
-    ButtonOutlined,
-    FlexColumn,
-    FlexRow,
-    GoBack,
-    Text,
-    Title,
-} from '../elements/index'
+import { ButtonOutlined, FlexRow, GoBack, Text } from '../elements/index'
 
 import { MenuModal } from '../components/index'
 
