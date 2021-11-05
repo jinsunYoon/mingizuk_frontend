@@ -1,0 +1,9 @@
+@import '../shared/common.scss';
+@import '../shared/modules/buttons.module.scss';
+@import '../routine/layouts.module.scss';
+
+.next-btn {
+    @include primary-btn();
+    @include text-style-14(16px, 0.15px, $white);
+    transform: translateX(0);
+}

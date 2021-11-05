@@ -8,7 +8,8 @@
     background-color: $primary;
     bottom: 0;
     border: none;
-    @include pos-center-x();
+    position: fixed;
+    transform: translateX(-50%);
 }
 
 @mixin add-btn() {
@@ -18,7 +19,7 @@
     background-color: $primary;
     color: $white;
     bottom: 87px;
-    position: absolute;
+    position: fixed;
     right: 10%;
     border: none;
     font-size: 35px;

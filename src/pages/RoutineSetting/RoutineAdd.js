@@ -1,11 +1,11 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 // history
 import { Header } from '../../components'
 import RoutineSelect from '../../components/Routine/RoutineSelect'
-import RoutineTemplate from '../../components/Routine/RoutineTemplate'
 import ToggleTab from '../../components/ToggleTab'
 import { history } from '../../redux/store'
+import '../../styles/routine/add-routine.scss'
 
 const RoutineAdd = () => {
     const status = useSelector((state) => state.routine.myPage)
@@ -14,16 +14,21 @@ const RoutineAdd = () => {
 
     return (
         <>
-            <RoutineTemplate
-                button={selectNum}
-                _onClick_={() => history.push('/routine/count')}
-            >
-                <div style={{ zIndex: '4' }}>
-                    <Header name="내 루틴 추가하기 ( 1 / 2 )" />
-                </div>
+            <div style={{ zIndex: '4' }}>
+                <Header name="내 루틴 추가하기 ( 1 / 2 )" />
+            </div>
+            <section className="container">
                 <ToggleTab firstValue={'스트레칭'} secondValue={'맨몸 운동'} />
+                <h3>액션을 선택 해주세요.</h3>
+                <span>(최대 5개)</span>
                 <RoutineSelect select={status} />
-            </RoutineTemplate>
+                <button
+                    className="next-btn"
+                    onClick={() => history.push('/routine/count')}
+                >
+                    {selectNum}
+                </button>
+            </section>
         </>
     )
 }

@@ -1,8 +1,13 @@
 import React from 'react'
-import Check from '../../elements/Check'
-import { FlexColumn, FlexRow, Text } from '../../elements/index'
+import clsx from 'clsx'
+import { useDispatch } from 'react-redux'
+import { addAction, minusAction } from '../../redux/modules/updateRoutine'
+import '../../styles/routine/add-routine.scss'
+import ICheck from '../../styles/shared/icon/ICheck'
 
 const RoutineSelect = (props) => {
+    const dispatch = useDispatch()
+    const [check, setCheck] = React.useState(false)
     const { stretching, body_exercise, select } = props
     const [desc, setDesc] = React.useState('first')
 
@@ -16,45 +21,60 @@ const RoutineSelect = (props) => {
         }
     })
 
+    const changeActions = (data) => {
+        !check ? setCheck(true) : setCheck(false)
+        !check ? dispatch(addAction(data)) : dispatch(minusAction(data))
+    }
+
     return (
         <>
             {desc === 'stretching' && (
-                <FlexColumn _border="none" _width="85vw">
+                <section className="routine-container">
                     {stretching.map((routine, idx) => (
-                        <FlexRow
-                            _width="85vw"
-                            _height="60px"
-                            _border="none"
-                            _justify="space-between"
-                            _others="border-bottom:1px solid lightgray"
+                        <button
+                            className="routine"
                             key={idx}
+                            onClick={(e) => {
+                                {
+                                    changeActions({
+                                        value: routine,
+                                        type: 'stretching',
+                                    })
+                                    !check
+                                        ? (e.currentTarget.style.color =
+                                              '#6B76FF')
+                                        : (e.currentTarget.style.color =
+                                              '#000000')
+                                }
+                            }}
                         >
-                            <Text _fontSize="11px" _margin="10px 0">
-                                {routine}
-                            </Text>
-                            <Check value={routine} type="stretching" />
-                        </FlexRow>
+                            <span>{routine}</span>
+                            <ICheck size="16px" color="lightgray" />
+                        </button>
                     ))}
-                </FlexColumn>
+                </section>
             )}
             {desc === 'body_exercise' && (
-                <FlexColumn _border="none" _width="85vw">
+                <section className="routine-container">
                     {body_exercise.map((routine, idx) => (
-                        <FlexRow
-                            _width="85vw"
-                            _height="60px"
-                            _border="none"
-                            _justify="space-between"
-                            _others="border-bottom:1px solid lightgray"
+                        <button
+                            className="routine"
                             key={idx}
+                            onClick={(e) => {
+                                changeActions({
+                                    value: routine,
+                                    type: 'body_exercise',
+                                })
+                                !check
+                                    ? (e.currentTarget.style.color = '#6B76FF')
+                                    : (e.currentTarget.style.color = '#000000')
+                            }}
                         >
-                            <Text _fontSize="11px" _margin="10px 0">
-                                {routine}
-                            </Text>
-                            <Check value={routine} type="body_exercise" />
-                        </FlexRow>
+                            <span>{routine}</span>
+                            <ICheck size="16px" color="lightgray" />
+                        </button>
                     ))}
-                </FlexColumn>
+                </section>
             )}
         </>
     )

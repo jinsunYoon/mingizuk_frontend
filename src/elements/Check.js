@@ -1,9 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
-import { FlexRow } from '.'
-import Icon from '../components/icons/Icon'
 import { addAction, minusAction } from '../redux/modules/updateRoutine'
+import ICheck from '../styles/shared/icon/ICheck'
 
 const Check = (props) => {
     const [check, setCheck] = React.useState(false)
@@ -21,22 +19,9 @@ const Check = (props) => {
             }}
         >
             {check ? (
-                <FlexRow
-                    _width="18px"
-                    _height="18px"
-                    _bgColor="#020202"
-                    border="none"
-                    _others="border-radius:2px"
-                >
-                    <Icon size="16px" icon="done-check" color="#fff" />
-                </FlexRow>
+                <ICheck size="16px" fill="#6B76FF" />
             ) : (
-                <FlexRow
-                    _width="18px"
-                    _height="18px"
-                    _border="2px solid #020202"
-                    _others="border-radius:2px"
-                ></FlexRow>
+                <ICheck size="16px" fill="#A5ABB0" />
             )}
         </div>
     )
