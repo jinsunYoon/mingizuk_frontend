@@ -36,10 +36,8 @@ const CompleteActionModal = (props) => {
     )
 
     const successAction = () => {
-        dispatch(setDefaultBtn(false))
-        dispatch(setCompleteBtn(true))
-        const data = [modalActionId, modalRoutineId]
-        console.log('아이디', data)
+        const data = { actionId: modalActionId, routineId: modalRoutineId }
+        console.log('액션컴플리트데이터', data)
         dispatch(actionCompleteMD(data))
         dispatch(setActionName('성공!'))
         dispatch(

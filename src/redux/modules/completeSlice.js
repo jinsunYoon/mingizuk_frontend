@@ -12,6 +12,7 @@ const initialState = {
     completeBtn: false,
     defaultBtn: true,
     finDate: false,
+    result: [],
 }
 
 const completeSlice = createSlice({
@@ -49,7 +50,8 @@ const completeSlice = createSlice({
 
     extraReducers: {
         [actionCompleteMD.fulfilled]: (state, action) => {
-            console.log('리듀서풀필드', action)
+            console.log('완료풀필드', action.payload?.data?.result)
+            state.result = action.payload?.data?.result
         },
     },
 })
