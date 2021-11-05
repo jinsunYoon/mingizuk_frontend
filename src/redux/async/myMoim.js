@@ -13,7 +13,7 @@ export const myMoimCreateMD = createAsyncThunk(
         try {
             const response = await myMoimCreateAPI(data)
             if (response) {
-                console.log(response, '>>>>>>>check')
+                console.log(response, '>>>>>>>마이모임생성 리스폰스')
                 return response
             }
         } catch (err) {
@@ -47,7 +47,7 @@ export const myMoimLikeMD = createAsyncThunk(
         try {
             const response = await myMoimLikeAPI()
             if (response) {
-                console.log(response, '>>>라이크 리스폰스')
+                console.log(response, '>>>마이라이크 리스폰스')
                 return response
             }
         } catch (err) {
@@ -64,6 +64,7 @@ export const myMoimCommentMD = createAsyncThunk(
             const response = await myMoimCommentAPI()
             console.log(response)
             if (response) {
+                console.log(response, '>>>마이코멘트 리스폰스')
                 return response
             }
         } catch (err) {

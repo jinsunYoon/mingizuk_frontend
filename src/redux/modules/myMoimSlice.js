@@ -19,29 +19,35 @@ const myMoimSlice = createSlice({
 
     extraReducers: {
         [myMoimCreateMD.fulfilled]: (state, {payload}) => {
-            console.log('>>>>>>>>>>')
             state.my_moim = payload.data.allMyMoim
+            console.log(state.my_moim,'???????????????')
         },
         [myMoimCreateMD.rejected]: (state, { payload }) => {
             console.log('errormsg')
         },
 
         [myMoimJoinMD.fulfilled]: (state, { payload }) => {
-
+            state.my_join = payload.data.allMyMoim 
+            console.log(state.my_join,'join??????')
         },
-        [myMoimJoinMD.rejected]: (state, { payload }) => {},
+        [myMoimJoinMD.rejected]: (state, { payload }) => {
+            console.log('errormsg')
+        },
 
         [myMoimLikeMD.fulfilled]: (state, { payload }) => {
-            console.log(payload, 'mylikemd 잘넘어오나?')
+            console.log(payload, 'mylikeMD?RF')
             state.my_like = payload.data.myLikes
         },
-        [myMoimLikeMD.rejected]: (state, { payload }) => {},
+        [myMoimLikeMD.rejected]: (state, { payload }) => {
+            console.log('errormsg')
+        },
 
         [myMoimCommentMD.fulfilled]: (state, { payload }) => {
-            console.log('<><>')
             state.my_comment_list = payload.data.myCommentList
         },
-        [myMoimCommentMD.rejected]: (state, { payload }) => {},
+        [myMoimCommentMD.rejected]: (state, { payload }) => {
+            console.log('errormsg')
+        },
     },
 })
 

@@ -115,9 +115,7 @@ const myMoimCreateAPI = (data) => {
 }
 
 const myMoimJoinAPI = (data) => {
-    return instance.post('/api/users/moims', {
-        userType: 0,
-    })
+    return instance.post('/api/users/moims', { userType: 0 })
 }
 
 const myMoimCommentAPI = () => {

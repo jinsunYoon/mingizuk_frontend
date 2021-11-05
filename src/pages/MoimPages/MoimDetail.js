@@ -124,8 +124,8 @@ const MoimDetail = (props) => {
                 <EtcBox>
                     <SmallBox>
                         // ! like btn
-                        <LikeBtn moim_id={post_data?.id} /> 좋아요
-                        {post_data?.Likes?.length}개
+                        <LikeBtn moim_id={post_data?.id} /> 
+                        좋아요 {post_data?.Likes?.length}개
                     </SmallBox>
                     <SmallBox>
                         <Icon icon={'message'} size="20px" />
