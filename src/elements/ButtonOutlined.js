@@ -8,6 +8,7 @@ const ButtonOutlined = (props) => {
         _width,
         _fontSize,
         _margin,
+        _padding,
         _border,
         _color,
         _bradius,
@@ -21,6 +22,7 @@ const ButtonOutlined = (props) => {
         _width,
         _fontSize,
         _margin,
+        _padding,
         _border,
         _color,
         _bradius,
@@ -73,7 +75,7 @@ const ElButton = styled.button`
     ${(props) => props._others};
     background: none;
     cursor: pointer;
-    padding:${(props) => props._padding};
+    padding: ${(props) => props._padding};
 `
 
 const NavIcon = styled.div`
