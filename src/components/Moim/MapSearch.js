@@ -46,7 +46,7 @@ const MapSearch = () => {
             >
                 <FlexRow _width={'100%'}>
                     <Input
-                        _ph="검색어를 입력하세요"
+                        _ph="모임을 할 장소를 검색해주세요!"
                         _onChange={onChange}
                         _value={InputText}
                         _others={'border:none; outline: none'}

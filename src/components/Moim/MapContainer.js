@@ -70,7 +70,7 @@ const MapContainer = ({ searchPlace }) => {
             kakao.maps.event.addListener(marker, 'click', function () {
                 infowindow.setContent(
                     `<div style="padding:5px;font-size:12px;border-bottom:1px solid lightgray">
-                    ${getMarker}
+                    ${place.place_name}
                     </div>`
                 )
                 infowindow.open(map, marker)
