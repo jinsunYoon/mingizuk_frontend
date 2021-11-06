@@ -1,0 +1,12 @@
+@import '../shared/common.scss';
+
+.history-title {
+    @include flexbox(between, center);
+    width: 100%;
+    height: 48px;
+    background-color: $white;
+    h3,
+    button {
+        color: $text-gray;
+    }
+}

@@ -1,23 +1,57 @@
 import React from 'react'
-import Moment from 'react-moment'
-import styled from 'styled-components'
+import '../styles/routine/history.scss'
 import { BarChart, Bar } from 'recharts'
 import moment from 'moment'
+import { sub, format } from 'date-fns'
 import { finRoutinesActionsMD } from '../redux/async/routine'
 import { useDispatch, useSelector } from 'react-redux'
 
 const HistoryGraph = () => {
     const dispatch = useDispatch()
+    const [week, setWeek] = React.useState(1)
     React.useEffect(() => {
         dispatch(finRoutinesActionsMD())
     }, [])
+
+    //* setting datas
     const finActions = useSelector((state) => state.routine.finActions)
     const finRoutines = useSelector((state) => state.routine.finRoutines)
-    const today = moment().format('YYYY-MM-DD')
+    const today = new Date()
+    const joinDate = new Date(2021, 11, 10)
 
-    console.log(finActions, finRoutines)
-
-    console.log(today)
+    // * settign dates
+    const seven_days = []
+    // for (let n = 1; n < 8; n++) {
+    //     seven_days.push(
+    //         format(
+    //             sub(joinDate, {
+    //                 years: 0,
+    //                 months: 0,
+    //                 weeks: 0,
+    //                 days: 4,
+    //                 hours: 0,
+    //                 minutes: 0,
+    //                 seconds: 0,
+    //             }),
+    //             'yyyy-MM-dd HH:mm:ss.SSS'
+    //         )
+    //     )
+    // }
+    console.log(
+        '>>>',
+        format(
+            sub(joinDate, {
+                years: 0,
+                months: 0,
+                weeks: 0,
+                days: 4,
+                hours: 0,
+                minutes: 0,
+                seconds: 0,
+            }),
+            'yyyy-MM-dd HH:mm:ss.SSS'
+        )
+    )
 
     // * rechart example
     const data = []
@@ -31,7 +65,13 @@ const HistoryGraph = () => {
     }
     return (
         <>
-            <SemiPosition>
+            <section className="history-title">
+                <button onClick={() => setWeek(week - 1)}>왼</button>
+                <h3>밍기적 {week}주차</h3>
+                <button onClick={() => setWeek(week + 1)}>오</button>
+            </section>
+            <section>
+                <p>밍기적 시작한지 n일째 되는 날</p>
                 <BarChart width={310} height={250} data={data}>
                     <Bar
                         dataKey="Action"
@@ -41,14 +81,9 @@ const HistoryGraph = () => {
                         barSize={20}
                     />
                 </BarChart>
-            </SemiPosition>
+            </section>
         </>
     )
 }
-
-const SemiPosition = styled.div`
-    position: relative;
-    right: 3.5vw;
-`
 
 export default HistoryGraph

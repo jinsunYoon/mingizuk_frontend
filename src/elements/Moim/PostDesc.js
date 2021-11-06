@@ -92,7 +92,16 @@ const PostDesc = () => {
                         )}
                         <EtcBox>
                             <SmallBox>
-                                <LikeBtn /> 좋아요
+                                <Icon
+                                    icon="favorite"
+                                    size="20px"
+                                    color={likeColor}
+                                    _onClick={() => {
+                                        confirm === -1
+                                            ? dispatch(moimLikeMD(moim_id))
+                                            : dispatch(moimUnlikeMD(moim_id))
+                                    }}
+                                />
                                 {data?.Likes?.length}개
                             </SmallBox>
                             <SmallBox>

@@ -60,13 +60,27 @@ const routineSlice = createSlice({
             console.log(payload)
         },
         [finRoutinesActionsMD.fulfilled]: (state, { payload }) => {
-            const finActions = payload.data.finActions
-            const a = finActions.map((action) => Object.values(action))
-            const b = a.map((action) => action[1])
-            // const finActionstwo = finActions.
-            console.log('>>>', b)
-            // state.finActions = payload.data.finActions
-            // state.finRoutines = payload.data.finRoutines
+            let actions = []
+            let routins = []
+            const _action_data1 = payload.data.finActions.map((action) =>
+                Object.values(action)
+            )
+            _action_data1.map((action) =>
+                actions.push({
+                    actionId: action[1][0].id,
+                    date: action[1][0].date.slice(0, 10),
+                })
+            )
+            state.finActions = actions
+
+            payload.data.finRoutines[0].RoutineFins.map((routine) =>
+                routins.push({
+                    routineId: routine.id,
+                    date: routine.date.slice(0, 10),
+                    cycle: routine.cycle,
+                })
+            )
+            state.finRoutines = routins
         },
     },
 })

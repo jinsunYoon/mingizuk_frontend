@@ -4,13 +4,12 @@ import Icon from '../../components/icons/Icon'
 import { moimLikeMD, moimUnlikeMD } from '../../redux/async/moim'
 
 const LikeBtn = (props) => {
-    const { moim_id, likeUsers } = props
+    const { moim_id } = props
     const [likeColor, setLikeColor] = useState('lightgray')
 
     const user_id = useSelector((state) => state.user.userInfo.userID)
     const likeUsers = useSelector((state) => state.moim.moim_detail.Likes)
 
-    const { moim_id } = props
     const dispatch = useDispatch()
 
     const confirm = likeUsers?.findIndex(
