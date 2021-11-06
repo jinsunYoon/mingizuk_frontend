@@ -113,7 +113,7 @@ export const moimLikeMD = createAsyncThunk(
 )
 
 export const moimUnlikeMD = createAsyncThunk(
-    'moim/like',
+    'moim/unlike',
     async (data, thunkAPI) => {
         try {
             const response = await moimUnlikeAPI(data)
