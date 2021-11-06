@@ -23,7 +23,9 @@ const MoimDetail = (props) => {
 
     const user_nick = useSelector((state) => state.user.userInfo.nickName)
     const post_data = useSelector((state) => state.moim.moim_detail)
-    console.log(post_data?.Likes, '좋아요개수')
+    const like_id = useSelector((state) => state.user.userInfo.userID)
+    console.log(post_data, '모임 게시물 정보')
+    console.log(like_id, "라이크아이디")
 
     React.useEffect(() => {
         dispatch(moimDetailMD(post_id))

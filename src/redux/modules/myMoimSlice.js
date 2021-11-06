@@ -40,6 +40,8 @@ const myMoimSlice = createSlice({
         },
         [myMoimLikeMD.rejected]: (state, { payload }) => {
             console.log('errormsg')
+            console.log(payload, 'mylikeMD?RF')
+
         },
 
         [myMoimCommentMD.fulfilled]: (state, { payload }) => {
