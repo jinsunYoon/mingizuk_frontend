@@ -88,6 +88,11 @@ const actionCompleteAPI = (data) => {
     })
 }
 
+const actionRestartAPI = (routineId) => {
+    console.log('이거 api 데이터', routineId)
+    return instance.post(`/api/routines/create/${routineId}`)
+}
+
 const getMainRoutineAPI = () => {
     return instance.get('/api/main/ongoing')
 }
@@ -180,7 +185,6 @@ const moimReadAPI = () => {
 }
 
 const moimUpdateAPI = (data) => {
-    
     return instance.put(`/api/moims/${data.moimId}`, {
         title: data.title,
         contents: data.contents,
@@ -254,4 +258,5 @@ export {
     moimLikeAPI,
     moimUnlikeAPI,
     moimJoinAPI,
+    actionRestartAPI,
 }
