@@ -102,7 +102,6 @@ export const moimLikeMD = createAsyncThunk(
         try {
             const response = await moimLikeAPI(data)
             if (response) {
-                console.log('md', response)
                 return response
             }
         } catch (err) {
@@ -113,7 +112,7 @@ export const moimLikeMD = createAsyncThunk(
 )
 
 export const moimUnlikeMD = createAsyncThunk(
-    'moim/like',
+    'moim/unlike',
     async (data, thunkAPI) => {
         try {
             const response = await moimUnlikeAPI(data)

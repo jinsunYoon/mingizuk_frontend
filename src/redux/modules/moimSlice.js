@@ -60,17 +60,23 @@ const moimSlice = createSlice({
         },
         [moimDetailMD.fulfilled]: (state, { payload }) => {
             state.moim_detail = payload.data.targetMoim
-            console.log(payload)
         },
-        [moimLikeMD.fulfilled]: (state, action) => {
-            state.moim_detail.Likes.push(action.payload?.data?.result)
-            console.log(state, '>>>>>>>>>>>>>')
-            //state.moim_detail.Likes = state.moim_deatil.Likes.push(payload.data.result)
-            console.log(payload)
+        [moimLikeMD.fulfilled]: (state, { payload }) => {
+            const likeUser = payload.data.msg.slice(0, 1)
+            state.moim_detail.Likes.push({ userId: Number(likeUser) })
         },
         [moimUnlikeMD.fulfilled]: (state, { payload }) => {
-            // state.moim_detail.Likes = state.moim_detail.Likes.pop()
-            console.log(state, '<><><><>')
+            const likeUser = state.moim_detail.Likes
+            console.log(likeUser, 'likeuser')
+
+            const unlikeUser = payload.data.msg.slice(0, 1)
+            console.log(Number(unlikeUser), '언라이크아이디???????>>>>')
+            // delete filter 아닌것 반환
+            const result = state.moim_detail.Likes.filter(
+                (likeUser) => likeUser.userId !== Number(unlikeUser)
+            )
+            // 다시넣기
+            state.moim_detail.Likes = result
         },
         [moimJoinMD.fulfilled]: (state, { payload }) => {
             console.log(payload)
