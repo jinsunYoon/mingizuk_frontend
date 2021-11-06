@@ -1,7 +1,7 @@
 import React from 'react'
 import UpdateCheck from '../../elements/UpdateCheck'
-import { FlexColumn, FlexRow, Text } from '../../elements/index'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+// import '../../styles/routine/add-routine.scss'
 
 const RoutineUpdateSelect = (props) => {
     const { body_exercise, stretching, select } = props
@@ -48,19 +48,10 @@ const RoutineUpdateSelect = (props) => {
     return (
         <>
             {desc === 'stretching' && (
-                <FlexColumn _border="none" _width="85vw">
+                <section className="routine-container">
                     {stretching.map((routine, idx) => (
-                        <FlexRow
-                            _width="85vw"
-                            _height="60px"
-                            _border="none"
-                            _justify="space-between"
-                            _others="border-bottom:1px solid lightgray"
-                            key={idx}
-                        >
-                            <Text _fontSize="11px" _margin="10px 0">
-                                {routine}
-                            </Text>
+                        <button className="routine" key={idx}>
+                            <span>{routine}</span>
                             {getStretchingIdx.find((n) => n === idx) !==
                             undefined ? (
                                 <UpdateCheck
@@ -74,24 +65,15 @@ const RoutineUpdateSelect = (props) => {
                                     type="stretching"
                                 />
                             )}
-                        </FlexRow>
+                        </button>
                     ))}
-                </FlexColumn>
+                </section>
             )}
             {desc === 'body_exercise' && (
-                <FlexColumn _border="none" _width="85vw">
+                <section className="routine-container">
                     {body_exercise.map((routine, idx) => (
-                        <FlexRow
-                            _width="85vw"
-                            _height="60px"
-                            _border="none"
-                            _justify="space-between"
-                            _others="border-bottom:1px solid lightgray"
-                            key={idx}
-                        >
-                            <Text _fontSize="11px" _margin="10px 0">
-                                {routine}
-                            </Text>
+                        <button className="routine" key={idx}>
+                            <span>{routine}</span>
                             {getBodyExerciseIdx.find((n) => n === idx) !==
                             undefined ? (
                                 <UpdateCheck
@@ -105,9 +87,9 @@ const RoutineUpdateSelect = (props) => {
                                     type="body_exercise"
                                 />
                             )}
-                        </FlexRow>
+                        </button>
                     ))}
-                </FlexColumn>
+                </section>
             )}
         </>
     )
