@@ -6,7 +6,11 @@ import { moimLikeMD, moimUnlikeMD } from '../../redux/async/moim'
 const LikeBtn = (props) => {
     const { moim_id, likeUsers } = props
     const [likeColor, setLikeColor] = useState('lightgray')
+
     const user_id = useSelector((state) => state.user.userInfo.userID)
+    const likeUsers = useSelector((state) => state.moim.moim_detail.Likes)
+
+    const { moim_id } = props
     const dispatch = useDispatch()
 
     const confirm = likeUsers?.findIndex(
@@ -14,18 +18,12 @@ const LikeBtn = (props) => {
     )
 
     React.useEffect(() => {
-        likeUsers?.findIndex((likeuser) => likeuser?.userId === user_id) === -1
-            ? setLikeColor('lightgray')
-            : setLikeColor('red')
-    }, [likeUsers])
-
-    console.log(
-        likeUsers?.findIndex((likeuser) => likeuser?.userId === user_id)
-    )
-    console.log(user_id)
+        confirm === -1 ? setLikeColor('lightgray') : setLikeColor('red')
+    }, [confirm])
 
     return (
         <>
+            {confirm === -1 ? <p>없다 </p> : <p>있다</p>}
             <Icon
                 icon="favorite"
                 size="20px"
