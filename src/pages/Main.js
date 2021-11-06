@@ -11,6 +11,7 @@ import {
     CompleteActionModal,
     Header,
 } from '../components/index'
+import { setResult } from '../redux/modules/completeSlice'
 import Icon from '../components/icons/Icon'
 import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
@@ -28,6 +29,9 @@ const Main = (props) => {
     React.useEffect(() => {
         dispatch(loginCheckMD())
         dispatch(getMainRoutineMD())
+        // const actionFins = mainRoutine?.Actions?.ActionFins?.map(
+        //     (fin, idx) => {}
+        // )
     }, [])
 
     const is_login = useSelector((state) => state.user.isLogin)
