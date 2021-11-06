@@ -5,6 +5,7 @@ import {
     myRoutineListMD,
     myRoutineDeleteMD,
     myRoutineUpdateMD,
+    finRoutinesActionsMD,
 } from '../async/routine'
 
 const initialState = {
@@ -13,6 +14,8 @@ const initialState = {
     myRoutine: [],
     updateRoutineRef: '',
     habitModal: false,
+    finActions: {},
+    finRoutines: {},
 }
 
 const routineSlice = createSlice({
@@ -55,6 +58,15 @@ const routineSlice = createSlice({
         // * ----
         [myRoutineUpdateMD.fulfilled]: (state, { payload }) => {
             console.log(payload)
+        },
+        [finRoutinesActionsMD.fulfilled]: (state, { payload }) => {
+            const finActions = payload.data.finActions
+            const a = finActions.map((action) => Object.values(action))
+            const b = a.map((action) => action[1])
+            // const finActionstwo = finActions.
+            console.log('>>>', b)
+            // state.finActions = payload.data.finActions
+            // state.finRoutines = payload.data.finRoutines
         },
     },
 })

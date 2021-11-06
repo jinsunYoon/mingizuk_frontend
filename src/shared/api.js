@@ -18,6 +18,7 @@ instance.interceptors.request.use(async (config) => {
     config.headers['refreshToken'] = await getToken().refreshToken
     return config
 })
+
 instanceSign.interceptors.request.use(async (config) => {
     config.headers['content-type'] = 'application/json; charset=utf-8'
     config.headers['X-Requested-With'] = 'XMLHttpRequest'
@@ -202,7 +203,6 @@ const moimDetailAPI = (moimId) => {
 
 const moimLikeAPI = (moimId) => {
     return instance.post(`/api/moim/like/${moimId}`)
-
 }
 
 const moimUnlikeAPI = (moimId) => {
@@ -227,6 +227,11 @@ const moimUpdateReviewAPI = (data) => {
     return instance.put(`/api/comments/${data.commentId}`, {
         contents: data.contents,
     })
+}
+
+// * history , habittraker
+const finRoutinesActionsAPI = () => {
+    return instance.get('/api/main/trackerHistory')
 }
 
 export {
@@ -260,4 +265,5 @@ export {
     moimUnlikeAPI,
     moimJoinAPI,
     actionRestartAPI,
+    finRoutinesActionsAPI,
 }
