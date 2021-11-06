@@ -60,13 +60,10 @@ const moimSlice = createSlice({
         },
         [moimDetailMD.fulfilled]: (state, { payload }) => {
             state.moim_detail = payload.data.targetMoim
-            console.log(payload)
         },
         [moimLikeMD.fulfilled]: (state, action) => {
-            state.moim_detail.Likes.push(action.payload?.data?.result)
-            console.log(state, '>>>>>>>>>>>>>')
-            //state.moim_detail.Likes = state.moim_deatil.Likes.push(payload.data.result)
-            console.log(payload)
+            const likeUser = action.payload.data.msg.slice(0, 1)
+            state.moim_detail.Likes.push(likeUser)
         },
         [moimUnlikeMD.fulfilled]: (state, { payload }) => {
             console.log(payload)
