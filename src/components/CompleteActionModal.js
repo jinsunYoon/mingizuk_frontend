@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import {
     ButtonOutlined,
     FlexRow,
@@ -15,8 +14,10 @@ import {
     setActionId,
     setRoutineId,
     setFinDate,
+    setResult,
 } from '../redux/modules/completeSlice'
 import { Complete } from '../components/index'
+import { actionRestartMD } from '../redux/async/actionComplete'
 
 const CompleteActionModal = (props) => {
     const dispatch = useDispatch()
@@ -31,92 +32,110 @@ const CompleteActionModal = (props) => {
         result?.length
     )
 
-    // if (mainRoutine?.Actions?.length == result?.length) {
+    if (mainRoutine?.Actions?.length == result?.length) {
+        return (
+            <div style={{ display: 'flex', zIndex: '2' }}>
+                <FlexColumn
+                    _width={'100%'}
+                    _height={'100%'}
+                    _color={'black'}
+                    _border={'none'}
+                    _others={'min-height:6.25rem'}
+                >
+                    <Text _fontSize={'1.2rem'} _fontWeight={'700'}>
+                        루틴을 끝마치셨습니다 축하드립니다~!
+                    </Text>
+                    <FlexRow _border={'none'} _width={'none'}>
+                        <ButtonOutlined
+                            _width={'false'}
+                            _fontSize={'0.9rem'}
+                            _onClick={() => {
+                                const routineId =
+                                    mainRoutine.Actions.length > 0 &&
+                                    mainRoutine.Actions[0].routineId
+                                console.log('루틴아이디', routineId)
+                                dispatch(actionRestartMD(routineId))
+                                dispatch(setResult([]))
+                            }}
+                        >
+                            현재 루틴 재시작 하기
+                        </ButtonOutlined>
+                        <ButtonOutlined _width={'false'} _fontSize={'0.9rem'}>
+                            새 루틴 지정하기
+                        </ButtonOutlined>
+                    </FlexRow>
+                </FlexColumn>
+            </div>
+        )
+    }
+
     return (
-        <div style={{ display: 'flex', zIndex: '2' }}>
-            <FlexColumn
-                _width={'100%'}
-                _height={'false'}
-                _color={'black'}
-                _border={'none'}
-            >
-                <Text>루틴을 끝마치셨습니다 축하드립니다~!</Text>
-                <FlexRow _border={'none'} _width={'none'}>
-                    <ButtonOutlined>현재 루틴 재시작 하기</ButtonOutlined>
-                    <ButtonOutlined>새 루틴 지정하기</ButtonOutlined>
-                </FlexRow>
-            </FlexColumn>
+        <div style={{ display: 'flex', zIndex: '2', minHeight: '6.25rem' }}>
+            {modal && <Complete />}
+            {mainRoutine?.Actions?.map((routine, idx) => {
+                return (
+                    <>
+                        <ButtonOutlined
+                            _border={'none'}
+                            _margin={'none'}
+                            _padding={'none'}
+                            _width={'false'}
+                            _onClick={() => {
+                                dispatch(setModal(true))
+                                dispatch(setActionName(routine?.actionName))
+                                dispatch(setActionId(routine?.id))
+                                dispatch(setRoutineId(routine?.routineId))
+                                dispatch(setFinDate(routine?.finDate))
+                            }}
+                        >
+                            <FlexColumn
+                                _width={'2.8rem'}
+                                _height={'100%'}
+                                _border={'none'}
+                            >
+                                <FlexRow
+                                    _width={'2rem'}
+                                    _height={'2rem'}
+                                    _bgColor={'lightgray'}
+                                    _border={'none'}
+                                    _margin={'10px 0px 0px 0px'}
+                                    _others={'border-radius:1rem'}
+                                ></FlexRow>
+                                <FlexRow
+                                    _width={'false'}
+                                    _height={'1rem'}
+                                    _bgColor={'black'}
+                                    _border={'none'}
+                                    _margin={'-40px -25px 20px 0px'}
+                                    _others={
+                                        'border-radius:1rem; min-width:1rem;'
+                                    }
+                                >
+                                    <Text
+                                        _color={'#fff'}
+                                        _padding={'0px 3px 0px 3px'}
+                                    >
+                                        {routine?.actionCnt}
+                                    </Text>
+                                </FlexRow>
+                                <Text
+                                    _margin={'5px 0px 0px 0px'}
+                                    _fontSize={'0.75rem'}
+                                >
+                                    {routine?.actionName}
+                                </Text>
+                            </FlexColumn>
+                        </ButtonOutlined>
+                        {idx < num && (
+                            <FlexRow _border={'none'} _width={'0.625rem'}>
+                                <Icon icon={'chevron-right'} size={24} />
+                            </FlexRow>
+                        )}
+                    </>
+                )
+            })}
         </div>
     )
-    // }
-
-    // return (
-    //     <div style={{ display: 'flex', zIndex: '2' }}>
-    //         {modal && <Complete />}
-    //         {mainRoutine?.Actions?.map((routine, idx) => {
-    //             return (
-    //                 <>
-    //                     <ButtonOutlined
-    //                         _border={'none'}
-    //                         _margin={'none'}
-    //                         _padding={'none'}
-    //                         _width={'false'}
-    //                         _onClick={() => {
-    //                             dispatch(setModal(true))
-    //                             dispatch(setActionName(routine?.actionName))
-    //                             dispatch(setActionId(routine?.id))
-    //                             dispatch(setRoutineId(routine?.routineId))
-    //                             dispatch(setFinDate(routine?.finDate))
-    //                         }}
-    //                     >
-    //                         <FlexColumn
-    //                             _width={'2.8rem'}
-    //                             _height={'100%'}
-    //                             _border={'none'}
-    //                         >
-    //                             <FlexRow
-    //                                 _width={'2rem'}
-    //                                 _height={'2rem'}
-    //                                 _bgColor={'lightgray'}
-    //                                 _border={'none'}
-    //                                 _margin={'10px 0px 0px 0px'}
-    //                                 _others={'border-radius:1rem'}
-    //                             ></FlexRow>
-    //                             <FlexRow
-    //                                 _width={'false'}
-    //                                 _height={'1rem'}
-    //                                 _bgColor={'black'}
-    //                                 _border={'none'}
-    //                                 _margin={'-40px -25px 20px 0px'}
-    //                                 _others={
-    //                                     'border-radius:1rem; min-width:1rem;'
-    //                                 }
-    //                             >
-    //                                 <Text
-    //                                     _color={'#fff'}
-    //                                     _padding={'0px 3px 0px 3px'}
-    //                                 >
-    //                                     {routine?.actionCnt}
-    //                                 </Text>
-    //                             </FlexRow>
-    //                             <Text
-    //                                 _margin={'5px 0px 0px 0px'}
-    //                                 _fontSize={'0.75rem'}
-    //                             >
-    //                                 {routine?.actionName}
-    //                             </Text>
-    //                         </FlexColumn>
-    //                     </ButtonOutlined>
-    //                     {idx < num && (
-    //                         <FlexRow _border={'none'} _width={'0.625rem'}>
-    //                             <Icon icon={'chevron-right'} size={24} />
-    //                         </FlexRow>
-    //                     )}
-    //                 </>
-    //             )
-    //         })}
-    //     </div>
-    // )
 }
 
 export default CompleteActionModal

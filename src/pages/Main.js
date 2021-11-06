@@ -32,6 +32,7 @@ const Main = (props) => {
 
     const is_login = useSelector((state) => state.user.isLogin)
     const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
+    console.log('메인루틴', mainRoutine)
     const isMain = useSelector((state) => state.setAction.isMain)
 
     if (is_login && isMain) {
@@ -91,8 +92,6 @@ const Main = (props) => {
                         </Text>
                         <FlexRow
                             _width={'100%'}
-                            _height={'6.25rem'}
-                            _border={'1px solid gray'}
                             _others={'box-sizing: border-box;'}
                         >
                             <CompleteActionModal />
@@ -162,7 +161,6 @@ const Main = (props) => {
                         </FlexRow>
                         <FlexRow
                             _width={'100%'}
-                            _height={'100px'}
                             _others={
                                 'box-sizing: border-box; background-color: #C4C4C4;'
                             }
@@ -171,6 +169,7 @@ const Main = (props) => {
                                 _width={'100%'}
                                 _color={'black'}
                                 _border={'none'}
+                                _others={'min-height:6.25rem'}
                                 _onClick={() => {
                                     history.push('/routine/mypage')
                                 }}
@@ -237,15 +236,15 @@ const Main = (props) => {
                     </FlexRow>
                     <FlexRow
                         _width={'100%'}
-                        _height={'100px'}
                         _others={
-                            'box-sizing: border-box; background-color: #C4C4C4;'
+                            'box-sizing: border-box; background-color: #C4C4C4; min-height=6.25rem'
                         }
                     >
                         <ButtonOutlined
                             _width={'100%'}
                             _color={'black'}
                             _border={'none'}
+                            _others={'min-height:6.25rem'}
                             _onClick={() => {
                                 window.alert('로그인 후 이용해주세요.')
                             }}
