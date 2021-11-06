@@ -202,6 +202,7 @@ const moimDetailAPI = (moimId) => {
 
 const moimLikeAPI = (moimId) => {
     return instance.post(`/api/moim/like/${moimId}`)
+
 }
 
 const moimUnlikeAPI = (moimId) => {

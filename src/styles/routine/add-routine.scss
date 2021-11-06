@@ -26,3 +26,15 @@
         margin: 15px 0;
     }
 }
+
+.title {
+    @include column-flexbox(center, start);
+    width: 100%;
+    h3 {
+        @include text-style-18(16px, auto, black);
+        margin-bottom: 8px;
+    }
+    span {
+        @include text-style-12(16px, auto, $text-gray);
+    }
+}

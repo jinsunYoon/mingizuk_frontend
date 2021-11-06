@@ -1,6 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { FlexRow } from '.'
+import { useDispatch } from 'react-redux'
 import Icon from '../components/icons/Icon'
 import { addAction, minusAction } from '../redux/modules/updateRoutine'
 
@@ -18,7 +17,7 @@ const UpdateCheck = (props) => {
 
     return (
         <div
-            onClick={(e) => {
+            onClick={() => {
                 !check ? setCheck(true) : setCheck(false)
                 !check
                     ? dispatch(addAction({ value, type }))
@@ -26,22 +25,9 @@ const UpdateCheck = (props) => {
             }}
         >
             {check ? (
-                <FlexRow
-                    _width="18px"
-                    _height="18px"
-                    _bgColor="#020202"
-                    border="none"
-                    _others="border-radius:2px"
-                >
-                    <Icon size="16px" icon="done-check" color="#fff" />
-                </FlexRow>
+                <Icon size="16px" icon="done-check" color="#6B76FF" />
             ) : (
-                <FlexRow
-                    _width="18px"
-                    _height="18px"
-                    _border="2px solid #020202"
-                    _others="border-radius:2px"
-                ></FlexRow>
+                <Icon size="16px" icon="done-check" color="#A5ABB0" />
             )}
         </div>
     )
