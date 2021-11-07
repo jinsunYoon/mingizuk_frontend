@@ -2,8 +2,9 @@ import React from 'react'
 import '../styles/routine/history.scss'
 import { BarChart, Bar } from 'recharts'
 import moment from 'moment'
-import { sub, format } from 'date-fns'
+import { format, addDays, isWithinInterval } from 'date-fns'
 import { finRoutinesActionsMD } from '../redux/async/routine'
+import { history } from '../redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 
 const HistoryGraph = () => {
@@ -16,42 +17,21 @@ const HistoryGraph = () => {
     //* setting datas
     const finActions = useSelector((state) => state.routine.finActions)
     const finRoutines = useSelector((state) => state.routine.finRoutines)
-    const today = new Date()
-    const joinDate = new Date(2021, 11, 10)
+    const today = format(new Date('2021, 11, 20'), 'yyyy-MM-dd') // * 예시로 넣어놓은 값이다.
+    const joinDate = new Date() // * 예시로 넣어놓은 값이다.
 
     // * settign dates
-    const seven_days = []
-    // for (let n = 1; n < 8; n++) {
-    //     seven_days.push(
-    //         format(
-    //             sub(joinDate, {
-    //                 years: 0,
-    //                 months: 0,
-    //                 weeks: 0,
-    //                 days: 4,
-    //                 hours: 0,
-    //                 minutes: 0,
-    //                 seconds: 0,
-    //             }),
-    //             'yyyy-MM-dd HH:mm:ss.SSS'
-    //         )
-    //     )
-    // }
-    console.log(
-        '>>>',
-        format(
-            sub(joinDate, {
-                years: 0,
-                months: 0,
-                weeks: 0,
-                days: 4,
-                hours: 0,
-                minutes: 0,
-                seconds: 0,
-            }),
-            'yyyy-MM-dd HH:mm:ss.SSS'
-        )
-    )
+    let history_date = []
+    React.useEffect(() => {
+        let j = 7
+        while (history_date.findIndex((day) => day === today) === -1) {
+            for (let i = 0; i < j; i++) {
+                history_date.push(format(addDays(joinDate, i), 'yyyy-MM-dd'))
+            }
+            j = j + 7
+        }
+        console.log('>>>', history_date)
+    }, [])
 
     // * rechart example
     const data = []
