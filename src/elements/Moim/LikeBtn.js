@@ -11,6 +11,7 @@ const LikeBtn = (props) => {
 
     return (
         <>
+            {confirm === -1 ? <p>{confirm}</p> : <p>{confirm}</p>}
             <Icon
                 icon="favorite"
                 size="20px"
