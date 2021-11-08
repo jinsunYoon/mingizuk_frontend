@@ -109,7 +109,15 @@ const userInfoAPI = (data) => {
 }
 
 const kakaoAPI = () => {
-    return axios.get('http://13.125.110.160/api/auth/kakao')
+    return axios.get('http://52.79.237.95/api/auth/kakao')
+}
+
+const naverAPI = () => {
+    return axios.get('http://52.79.237.95/api/auth/naver')
+}
+
+const googleAPI = () => {
+    return axios.get('http://52.79.237.95/api/auth/google')
 }
 
 // *----------------------------------------------------
@@ -202,7 +210,6 @@ const moimDetailAPI = (moimId) => {
 
 const moimLikeAPI = (moimId) => {
     return instance.post(`/api/moim/like/${moimId}`)
-
 }
 
 const moimUnlikeAPI = (moimId) => {
@@ -260,4 +267,6 @@ export {
     moimUnlikeAPI,
     moimJoinAPI,
     actionRestartAPI,
+    naverAPI,
+    googleAPI,
 }
