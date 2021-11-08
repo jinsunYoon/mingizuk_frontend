@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addAction, minusAction } from '../redux/modules/updateRoutine'
-import ICheck from '../styles/shared/icon/ICheck'
+import Icon from '../components/icons/Icon'
 
 const Check = (props) => {
     const [check, setCheck] = React.useState(false)
@@ -19,9 +19,9 @@ const Check = (props) => {
             }}
         >
             {check ? (
-                <ICheck size="16px" fill="#6B76FF" />
+                <Icon size="16px" color="#6B76FF" icon="check" />
             ) : (
-                <ICheck size="16px" fill="#A5ABB0" />
+                <Icon size="16px" color="#A5ABB0" icon="check" />
             )}
         </div>
     )
