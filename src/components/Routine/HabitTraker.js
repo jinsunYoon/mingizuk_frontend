@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import clsx from 'clsx'
 import '../../styles/routine/habit-traker.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { finRoutinesActionsMD } from '../../redux/async/routine'
@@ -59,7 +60,21 @@ const HabitTraker = () => {
                 ))}
                 <section className="day-container">
                     {monthMap.map((day, idx) => (
-                        <div className="habit-box-dark" key={idx} />
+                        <div>
+                            {day.date === 1 && (
+                                <span className="first-day">1일</span>
+                            )}
+                            <div
+                                className={clsx(
+                                    'habit-box-dark',
+                                    day.actions.length !== 0 && 'habit-action'
+                                )}
+                                key={idx}
+                            />
+                            {day.date === Number(lastDay) && (
+                                <span className="last-day">{lastDay}일</span>
+                            )}
+                        </div>
                     ))}
                 </section>
             </section>
