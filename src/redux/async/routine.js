@@ -7,6 +7,7 @@ import {
     myRoutineUpdateAPI,
     getMainRoutineAPI,
     setmainRoutineAPI,
+    finRoutinesActionsAPI,
 } from '../../shared/api'
 import { history } from '../store'
 
@@ -114,6 +115,21 @@ export const setMainRoutineMD = createAsyncThunk(
             const response = await setmainRoutineAPI(data)
             if (response) {
                 console.log(response)
+                return response
+            }
+        } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const finRoutinesActionsMD = createAsyncThunk(
+    'routine/getFins',
+    async (data, thunkAPI) => {
+        try {
+            const response = await finRoutinesActionsAPI(data)
+            if (response) {
                 return response
             }
         } catch (err) {

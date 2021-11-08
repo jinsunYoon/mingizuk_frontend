@@ -24,8 +24,6 @@ const MoimDetail = (props) => {
     const user_nick = useSelector((state) => state.user.userInfo.nickName)
     const post_data = useSelector((state) => state.moim.moim_detail)
     const like_id = useSelector((state) => state.user.userInfo.userID)
-    console.log(post_data, '모임 게시물 정보')
-    console.log(like_id, "라이크아이디")
 
     React.useEffect(() => {
         dispatch(moimDetailMD(post_id))
@@ -129,8 +127,11 @@ const MoimDetail = (props) => {
                     )}
                 <EtcBox>
                     <SmallBox>
-                        <LikeBtn moim_id={post_data?.id}/>
-                        좋아요 {(post_data?.Likes)?.length}개
+                        <LikeBtn
+                            moim_id={post_data?.id}
+                            likeUsers={post_data?.Likes}
+                        />
+                        좋아요 {post_data?.Likes?.length}개
                     </SmallBox>
                     <SmallBox>
                         <Icon icon={'message'} size="20px" />
