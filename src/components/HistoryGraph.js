@@ -12,56 +12,67 @@ const HistoryGraph = () => {
     React.useEffect(() => {
         dispatch(finRoutinesActionsMD())
     }, [])
+    const graphActionData = []
 
     //* setting data from server
-    const [week, setWeek] = React.useState(1)
-    const finActions = useSelector((state) => state.routine.fin)
-    const finRoutines = useSelector((state) => state.routine.fin)
+    const finActions = useSelector((state) => state.routine.fin.finActions)
+    const finRoutines = useSelector((state) => state.routine.fin.finRoutines)
     const joinDate = useSelector((state) => state.routine.fin.joinDate)
     const daylength = moment(joinDate).fromNow().slice(0, 1)
+    console.log('&&', finActions, finRoutines)
 
     const [startDay, setStartDay] = React.useState(0)
+    const [week, setWeek] = React.useState(1)
 
     // * history에 쓰일 날짜들 전부
     const getHistory = () => {
         let history_date = []
         if (daylength % 7 !== 0) {
             for (let i = 0; i < Number(daylength) + (daylength % 7) + 1; i++) {
-                history_date.push(
-                    format(
+                history_date.push({
+                    date: format(
                         addDays(new Date(joinDate.slice(0, 10)), i),
                         'yyyy-MM-dd'
-                    )
-                )
+                    ),
+                    actions: [],
+                })
             }
         } else {
             for (let i = 0; i < Number(daylength); i++) {
-                history_date.push(
-                    format(
+                history_date.push({
+                    date: format(
                         addDays(new Date(joinDate.slice(0, 10)), i),
                         'yyyy-MM-dd'
-                    )
-                )
+                    ),
+                    actions: [],
+                })
             }
         }
         return history_date
     }
 
-    const actionCount = [1, 6, 4, 6, 7, 11, 2]
-    // * 1주차 초기 설정 값
+    // * action 값 넣어주기
     const initialDate = () => {
         let _inital = []
         let history = getHistory()
-        for (let i = 0; i < 7; i++) {
-            _inital.push({
-                name: history[i]?.slice(5, 10)?.replace('-', '/'),
-                Action: actionCount[i],
+
+        history.forEach((data) => {
+            const idx = finActions?.findIndex(({ date }) => date === data.date)
+            if (idx !== -1) {
+                data.actions = finActions[idx]?.actions
+            }
+        })
+
+        history.map((data) =>
+            graphActionData.push({
+                name: data.date.slice(5, 10).replace('-', '/'),
+                actionCtn: data.actions.length,
             })
-        }
+        )
+
         return _inital
     }
-
-    const data = initialDate()
+    initialDate()
 
     return (
         <>
@@ -71,10 +82,10 @@ const HistoryGraph = () => {
                 <button onClick={() => {}}>오</button>
             </section>
             <section>
-                <BarChart width={320} height={250} data={data}>
-                    <XAxis dataKey="name" />
+                <BarChart width={340} height={250} data={graphActionData}>
+                    <XAxis dataKey="name" axisLine={false} />
                     <Bar
-                        dataKey="Action"
+                        dataKey="actionCtn"
                         radius={[10, 10, 10, 10]}
                         fill="#6B76FF"
                         background="#eee"

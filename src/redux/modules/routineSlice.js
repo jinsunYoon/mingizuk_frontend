@@ -63,34 +63,38 @@ const routineSlice = createSlice({
             console.log(payload)
         },
         [finRoutinesActionsMD.fulfilled]: (state, { payload }) => {
-            console.log('-', payload.data)
             const data = payload.data
+            const finActions = data.finActions
+            let actionsWithDate = []
 
-            const action_name = data?.finActions?.map(
-                (action) => action.actionName
-            )
-            const action_cnt = data?.finActions?.map(
-                (action) => action.actionCnt
-            )
-            const action_fins = data?.finActions?.map((action) => {
-                action.ActionFins
+            // ! actions
+            // * kind of dates
+            const dates = []
+            finActions.forEach(({ ActionFins }) => {
+                const actionDates = ActionFins.map(({ date }) =>
+                    date.slice(0, 10)
+                )
+                dates.push(actionDates)
             })
+            let setDates = new Set(dates.flat())
+            setDates = [...setDates]
+            for (const date of setDates) {
+                actionsWithDate.push({ date, actions: [] })
+            }
 
-            const routine_name = data?.finRoutines?.map((routine) => {
-                routine?.routineName
+            // * { date:'2021-11-11' , actions:[action1, action2...]
+            finActions.forEach(({ actionName, ActionFins }) => {
+                const actionDates = ActionFins.map(({ date }) =>
+                    setDates.findIndex((day) => day === date.slice(0, 10))
+                )
+                actionDates.map((idx) =>
+                    actionsWithDate[idx].actions.push(actionName)
+                )
             })
-
-            const routine_fins = data?.finRoutines?.map((routine) => {
-                routine?.RoutineFins
-            })
+            console.log('final', actionsWithDate)
 
             state.fin.joinDate = data.finUser.createdAt
-            state.fin.finRoutines = { name: routine_name, dates: routine_fins }
-            state.fin.finActions = {
-                name: action_name,
-                count: action_cnt,
-                dates: action_fins,
-            }
+            state.fin.finActions = actionsWithDate
         },
     },
 })
