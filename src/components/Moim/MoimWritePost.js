@@ -1,4 +1,5 @@
-import React from 'react'
+/*global kakao*/
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Input, FlexRow, Text } from '../../elements/index'
 import Icon from '../../components/icons/Icon'
@@ -6,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { moimCreateMD } from '../../redux/async/moim'
 import config from '../../shared/aws_config'
 import { uploadFile } from 'react-s3'
+import MapSearch from './MapSearch'
 
 const MoimWritePost = () => {
     const dispatch = useDispatch()
@@ -49,7 +51,7 @@ const MoimWritePost = () => {
             <FlexRow
                 _width="80vw"
                 _height="40px"
-                _margin="20px 0 0 0"
+                _margin="20px 0 10px 0"
                 _border="none"
             >
                 <IconBtn>
@@ -57,11 +59,8 @@ const MoimWritePost = () => {
                     {/* <Icon icon="color-palette" size="20px" />
                     <Text _fontSize="14px">사진</Text> */}
                 </IconBtn>
-                <IconBtn>
-                    <Text _fontSize="14px">위치</Text>
-                    <Icon icon="place-location" size="20px" />
-                </IconBtn>
             </FlexRow>
+            <MapSearch />
             <FlexRow
                 _width="80vw"
                 _height="20px"
@@ -85,7 +84,6 @@ const IconBtn = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
     height: 25px;
     border: none;
     border-radius: 10px;

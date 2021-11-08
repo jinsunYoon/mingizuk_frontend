@@ -1,0 +1,74 @@
+@import '../constants/colors';
+@import '../mixins/flexbox.scss';
+@import '../mixins/position.scss';
+
+@mixin primary-btn() {
+    width: 100vw;
+    height: 56px;
+    background-color: $primary;
+    bottom: 0;
+    border: none;
+    position: fixed;
+    transform: translateX(-50%);
+}
+
+@mixin add-btn() {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: $primary;
+    color: $white;
+    bottom: 87px;
+    position: fixed;
+    right: 10%;
+    border: none;
+    font-size: 35px;
+}
+
+// %btn-base {
+//     @include flexbox;
+//     width: 1
+// }
+
+// %btn-base {
+//     @include inline-flexbox;
+//     padding: 0 8px;
+//     font-weight: 500;
+
+//     &:disabled {
+//         background-color: $gray;
+//         color: #999999;
+//         cursor: not-allowed;
+//     }
+// }
+
+// .btn-primary {
+//     @extend %btn-base;
+//     color: $white;
+//     border: none;
+//     &:not(:disabled):hover {
+//         background-color: #979fff;
+//     }
+// }
+
+// .btn-secondary {
+//     @extend %btn-base;
+//     background-color: $white;
+//     color: $primary;
+//     border: 1px solid $primary;
+//     border-radius: 8px;
+//     &:not(:disabled):hover {
+//         border: 1px solid $primary;
+//         background-color: #f0f1ff;
+//     }
+// }
+
+// .btn-tertiary {
+//     @extend %btn-base;
+//     border-radius: 8px;
+//     color: $white;
+//     border: none;
+//     &:not(:disabled):hover {
+//         background-color: #979fff;
+//     }
+// }

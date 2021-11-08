@@ -18,6 +18,7 @@ instance.interceptors.request.use(async (config) => {
     config.headers['refreshToken'] = await getToken().refreshToken
     return config
 })
+
 instanceSign.interceptors.request.use(async (config) => {
     config.headers['content-type'] = 'application/json; charset=utf-8'
     config.headers['X-Requested-With'] = 'XMLHttpRequest'
@@ -82,9 +83,15 @@ const loginCheckAPI = () => {
 const actionCompleteAPI = (data) => {
     console.log('이거 api 데이터', data)
     return instance.put('/api/users/action', {
-        actionId: data[0],
-        routineId: data[1],
+        actionId: data.actionId,
+        routineId: data.routineId,
+        isReset: 0,
     })
+}
+
+const actionRestartAPI = (routineId) => {
+    console.log('이거 api 데이터', routineId)
+    return instance.post(`/api/routines/create/${routineId}`)
 }
 
 const getMainRoutineAPI = () => {
@@ -103,7 +110,15 @@ const userInfoAPI = (data) => {
 }
 
 const kakaoAPI = () => {
-    return axios.get('http://13.125.110.160/api/auth/kakao')
+    return axios.get('http://52.79.237.95/api/auth/kakao')
+}
+
+const naverAPI = () => {
+    return axios.get('http://52.79.237.95/api/auth/naver')
+}
+
+const googleAPI = () => {
+    return axios.get('http://52.79.237.95/api/auth/google')
 }
 
 // *----------------------------------------------------
@@ -115,9 +130,7 @@ const myMoimCreateAPI = (data) => {
 }
 
 const myMoimJoinAPI = (data) => {
-    return instance.post('/api/users/moims', {
-        userType: 0,
-    })
+    return instance.post('/api/users/moims', { userType: 0 })
 }
 
 const myMoimCommentAPI = () => {
@@ -197,7 +210,6 @@ const moimDetailAPI = (moimId) => {
 }
 
 const moimLikeAPI = (moimId) => {
-    console.log(moimId)
     return instance.post(`/api/moim/like/${moimId}`)
 }
 
@@ -223,6 +235,11 @@ const moimUpdateReviewAPI = (data) => {
     return instance.put(`/api/comments/${data.commentId}`, {
         contents: data.contents,
     })
+}
+
+// * history , habittraker
+const finRoutinesActionsAPI = () => {
+    return instance.get('/api/main/trackerHistory')
 }
 
 export {
@@ -255,4 +272,8 @@ export {
     moimLikeAPI,
     moimUnlikeAPI,
     moimJoinAPI,
+    actionRestartAPI,
+    naverAPI,
+    googleAPI,
+    finRoutinesActionsAPI,
 }

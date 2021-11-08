@@ -1,14 +1,6 @@
 import React from 'react'
 
-import {
-    ButtonFill,
-    ButtonOutlined,
-    FlexColumn,
-    FlexRow,
-    GoBack,
-    Text,
-    Title,
-} from '../elements/index'
+import { ButtonOutlined, FlexRow, GoBack, Text } from '../elements/index'
 
 import { MenuModal } from '../components/index'
 
@@ -21,26 +13,31 @@ const Header = (props) => {
             <div
                 style={{
                     width: '100vw',
-                    height: '2.85rem',
-                    borderBottom: '1px solid black',
-                    borderTop: '1px solid black',
-                    position: 'sticy',
+                    height: '3rem',
+                    borderTop: '1px solid #B8B8B8',
+                    position: 'fixed',
                     top: '0',
                     left: '0',
                     zIndex: '5',
                 }}
             >
-                <FlexRow _width={'100%'} _height={'100%'} _border={'none'}>
+                <FlexRow _width={'100vw'} _height={'100%'} _border={'none'}>
                     {type === 'menu' && <MenuModal />}
                     {type === 'back' && <GoBack />}
                     <ButtonOutlined
+                        _others={'position: fixed;'}
                         _border={'none'}
+                        _width={'70%'}
                         _onClick={() => {
                             history.push('/')
                         }}
-                        _width="200px"
                     >
-                        <Text _fontSize={'1rem'} _fontWeight={'700'}>
+                        <Text
+                            _fontSize={'1rem'}
+                            _fontWeight={'700'}
+                            _color={'#6B76FF'}
+                            _font={"'Montserrat', sans-serif"}
+                        >
                             {name}
                         </Text>
                     </ButtonOutlined>
@@ -51,7 +48,7 @@ const Header = (props) => {
 }
 
 Header.defaultProps = {
-    name: '밍기적',
+    name: 'Mingizuk',
     type: 'menu',
 }
 

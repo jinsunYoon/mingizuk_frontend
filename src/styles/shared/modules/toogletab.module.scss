@@ -1,0 +1,10 @@
+@import '../common.scss';
+
+.toggle-tab {
+    @include flexbox();
+    width: 100vw;
+    height: 200px;
+    border: none;
+    z-index: 3;
+    background-color: $white;
+}

@@ -1,10 +1,10 @@
 import { Tune } from '@material-ui/icons'
 import { createSlice } from '@reduxjs/toolkit'
-import { actionCompleteMD } from '../async/actionComplete'
+import { actionCompleteMD, actionRestartMD } from '../async/actionComplete'
 
 const initialState = {
     modalStatus: false,
-    ImgSrc: 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming.JPG',
+    ImgSrc: 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming2.jpg',
     actionName: '',
     actionId: '',
     routineId: '',
@@ -12,6 +12,7 @@ const initialState = {
     completeBtn: false,
     defaultBtn: true,
     finDate: false,
+    result: [],
 }
 
 const completeSlice = createSlice({
@@ -45,11 +46,18 @@ const completeSlice = createSlice({
         setFinDate: (state, { payload }) => {
             state.finDate = payload
         },
+        setResult: (state, { payload }) => {
+            state.result = payload
+        },
     },
 
     extraReducers: {
         [actionCompleteMD.fulfilled]: (state, action) => {
-            console.log('리듀서풀필드', action)
+            console.log('완료풀필드', action?.payload?.data?.result)
+            state.result.push(action?.payload?.data?.result)
+        },
+        [actionRestartMD.fulfilled]: (state, action) => {
+            console.log('리스타트풀필드', action.payload)
         },
     },
 })
@@ -65,6 +73,7 @@ export const {
     setCompleteBtn,
     setDefaultBtn,
     setFinDate,
+    setResult,
 } = completeSlice.actions
 
 //* slice export

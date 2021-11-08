@@ -7,6 +7,8 @@ import {
     loginCheckAPI,
     userInfoAPI,
     kakaoAPI,
+    naverAPI,
+    googleAPI,
 } from '../../shared/api'
 import { history } from '../store'
 
@@ -95,6 +97,38 @@ export const kakaoLoginMD = createAsyncThunk(
     async (data, thunkAPI) => {
         try {
             const response = await kakaoAPI()
+            if (response) {
+                console.log(response)
+                return response
+            }
+        } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const naverLoginMD = createAsyncThunk(
+    'user/naver',
+    async (data, thunkAPI) => {
+        try {
+            const response = await naverAPI()
+            if (response) {
+                console.log(response)
+                return response
+            }
+        } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const googleLoginMD = createAsyncThunk(
+    'user/google',
+    async (data, thunkAPI) => {
+        try {
+            const response = await googleAPI()
             if (response) {
                 console.log(response)
                 return response

@@ -1,21 +1,17 @@
 import React, { useState } from 'react'
 import {
     ButtonFill,
-    ButtonOutlined,
     FlexColumn,
     FlexRow,
-    Img,
     Input,
     SubTitle,
     Text,
-    Title,
 } from '../elements/index'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import {history} from '../redux/store'
 import { signupMD } from '../redux/async/user'
 import dotenv from 'dotenv'
-import { Autorenew } from '@material-ui/icons'
-// import { actionCreator as userActions } from '../redux/modules/user'
-import styled from 'styled-components'
+import '../styles/auth/auth.scss'
 
 const Signup = (props) => {
     dotenv.config()
@@ -74,51 +70,37 @@ const Signup = (props) => {
     }
 
     return (
-        <FlexRow _width="100vw" _justify="center" _border="none">
-            <FlexColumn _width="70vw" _height="100vh" _border="none">
-                <SubTitle _margin="0 0 1rem 0">회원가입</SubTitle>
-                <Text _margin="2rem 0 1rem">닉네임</Text>
-                <Input
-                    _width="100%"
-                    _ph="어떻게 불러드릴까요?"
-                    _onChange={(e) => setNickName(e.target.value)}
+        <div className="auth-layout">
+            <div className="logo">Minggijeok</div>
+            <div className="input-container">
+                <input
+                    placeholder="닉네임을 입력하세요."
+                    onChange={(e) => setNickName(e.target.value)}
                 />
-
-                <Text _margin="1rem 0 0.3rem">이메일</Text>
-                <Input
-                    _width="100%"
-                    _ph="로그인할 이메일을 입력해주세요."
-                    _onChange={(e) => setEmail(e.target.value)}
+                <input
+                    placeholder="이메일을 입력해주세요."
+                    onChange={(e) => setEmail(e.target.value)}
                 />
-
-                <Text _margin="1rem 0 0.3rem">비밀번호</Text>
-                <Input
-                    _width="100%"
-                    _type="password"
-                    _ph="비밀번호를 입력해주세요."
-                    _onChange={(e) => setUserPw(e.target.value)}
+                <input
+                    type="password"
+                    placeholder="비밀번호를 입력해주세요."
+                    onChange={(e) => setUserPw(e.target.value)}
                 />
-
-                <Text _margin="1rem 0 0.3rem">비밀번호 재확인</Text>
-                <Input
-                    _width="100%"
-                    _type="password"
-                    _ph="비밀번호를 다시 입력해주세요."
-                    _onKeyPress={onKeyPress}
-                    _onChange={(e) => setUserPwChk(e.target.value)}
+                <input
+                    placeholder="비밀번호를 다시 입력해주세요."
+                    onKeyPress={onKeyPress}
+                    onChange={(e) => setUserPwChk(e.target.value)}
                 />
-
-                <ButtonFill
-                    _width="100%"
-                    _margin="3rem"
-                    _padding="0.8rem"
-                    _onClick={onClickSignup}
-                    _bgColor="#333"
-                >
+            </div>
+            <div className="btn-container">
+                <button className="signup-btn" onClick={onClickSignup}>
                     회원가입하기
-                </ButtonFill>
-            </FlexColumn>
-        </FlexRow>
+                </button>
+                <button className="main-btn" onClick= {()=>{history.push('/')}}>
+                    메인으로가기
+                </button>
+            </div>
+        </div>
     )
 }
 

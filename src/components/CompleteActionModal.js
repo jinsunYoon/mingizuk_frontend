@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import {
     ButtonOutlined,
     FlexRow,
@@ -15,8 +14,10 @@ import {
     setActionId,
     setRoutineId,
     setFinDate,
+    setResult,
 } from '../redux/modules/completeSlice'
 import { Complete } from '../components/index'
+import { actionRestartMD } from '../redux/async/actionComplete'
 
 const CompleteActionModal = (props) => {
     const dispatch = useDispatch()
@@ -24,18 +25,71 @@ const CompleteActionModal = (props) => {
     const modal = useSelector((state) => state.actionComplete.modalStatus)
     const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
     const num = mainRoutine?.Actions?.length - 1
+    const result = useSelector((state) => state.actionComplete.result)
+    console.log(
+        '메인루틴, result',
+        mainRoutine?.Actions?.length,
+        result?.length
+    )
+
+    if (mainRoutine?.Actions?.length == result?.length) {
+        return (
+            <div style={{ display: 'flex', zIndex: '2' }}>
+                <FlexColumn
+                    _width={'100%'}
+                    _height={'100%'}
+                    _color={'black'}
+                    _border={'none'}
+                    _others={'min-height:6.25rem'}
+                >
+                    <Text _fontSize={'1.2rem'} _fontWeight={'700'}>
+                        루틴을 끝마치셨습니다 축하드립니다~!
+                    </Text>
+                    <FlexRow _border={'none'} _width={'none'}>
+                        <ButtonOutlined
+                            _width={'false'}
+                            _fontSize={'0.9rem'}
+                            _onClick={() => {
+                                const routineId =
+                                    mainRoutine.Actions.length > 0 &&
+                                    mainRoutine.Actions[0].routineId
+                                console.log('루틴아이디', routineId)
+                                dispatch(actionRestartMD(routineId))
+                                dispatch(setResult([]))
+                            }}
+                        >
+                            현재 루틴 재시작 하기
+                        </ButtonOutlined>
+                        <ButtonOutlined _width={'false'} _fontSize={'0.9rem'}>
+                            새 루틴 지정하기
+                        </ButtonOutlined>
+                    </FlexRow>
+                </FlexColumn>
+            </div>
+        )
+    }
 
     return (
-        <div style={{ display: 'flex', zIndex: '2' }}>
+        <div
+            style={{
+                display: 'flex',
+                zIndex: '2',
+                minHeight: '6.25rem',
+                width: '100%',
+                height: false,
+                justifyContent: 'space-around',
+            }}
+        >
             {modal && <Complete />}
             {mainRoutine?.Actions?.map((routine, idx) => {
                 return (
                     <>
                         <ButtonOutlined
                             _border={'none'}
-                            _margin={'none'}
-                            _padding={'none'}
-                            _width={'false'}
+                            _margin={'0px'}
+                            _padding={'0px'}
+                            _width={'100%'}
+                            _others={'height:false'}
                             _onClick={() => {
                                 dispatch(setModal(true))
                                 dispatch(setActionName(routine?.actionName))
@@ -45,19 +99,21 @@ const CompleteActionModal = (props) => {
                             }}
                         >
                             <FlexColumn
-                                _width={'2.8rem'}
+                                _width={'100%'}
                                 _height={'100%'}
                                 _border={'none'}
+                                _padding={'0.7rem 0px 0px 0px'}
+                                _justify={'start'}
                             >
                                 <FlexRow
-                                    _width={'2rem'}
-                                    _height={'2rem'}
+                                    _width={'2.5rem'}
+                                    _height={'2.5rem'}
                                     _bgColor={'lightgray'}
                                     _border={'none'}
-                                    _margin={'10px 0px 0px 0px'}
-                                    _others={'border-radius:1rem'}
+                                    // _margin={'10px 0px 0px 0px'}
+                                    _others={'border-radius:2.5rem'}
                                 ></FlexRow>
-                                <FlexRow
+                                {/* <FlexRow
                                     _width={'false'}
                                     _height={'1rem'}
                                     _bgColor={'black'}
@@ -73,65 +129,36 @@ const CompleteActionModal = (props) => {
                                     >
                                         {routine?.actionCnt}
                                     </Text>
-                                </FlexRow>
-                                <Text
-                                    _margin={'5px 0px 0px 0px'}
-                                    _fontSize={'0.75rem'}
-                                >
-                                    {routine?.actionName}
-                                </Text>
+                                </FlexRow> */}
+                                {routine?.actionName?.length > 5 ? (
+                                    <Text
+                                        _margin={'5px 0px 0px 0px'}
+                                        _fontSize={'0.75rem'}
+                                    >
+                                        {routine?.actionName?.split(' ')[0]}{' '}
+                                        <br />{' '}
+                                        {routine?.actionName?.split(' ')[1]}
+                                    </Text>
+                                ) : (
+                                    <Text
+                                        _margin={'5px 0px 0px 0px'}
+                                        _fontSize={'0.75rem'}
+                                    >
+                                        {routine?.actionName}
+                                    </Text>
+                                )}
                             </FlexColumn>
                         </ButtonOutlined>
-                        {idx < num && (
+                        {/* {idx < num && (
                             <FlexRow _border={'none'} _width={'0.625rem'}>
                                 <Icon icon={'chevron-right'} size={24} />
                             </FlexRow>
-                        )}
+                        )} */}
                     </>
                 )
             })}
         </div>
     )
 }
-
-const ModalEl = styled.div`
-    width: 300px;
-    height: 30rem;
-    padding: 1rem;
-    box-sizing: border-box;
-    border-radius: 10px;
-    background-color: #fff;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    top: 4.3rem;
-    left: 1.8rem;
-    @media screen and (max-width: 280px) {
-        width: 233px;
-        left: 1.5rem;
-    }
-    @media screen and (min-width: 281px) and (max-width: 320px) {
-        width: 263px;
-    }
-    @media screen and (min-width: 361px) and (max-width: 375px) {
-        width: 318px;
-    }
-    @media screen and (min-width: 376px) and (max-width: 414px) {
-        width: 353px;
-    }
-    @media screen and (min-width: 415px) and (max-width: 540px) {
-        width: 460px;
-        left: 2.5rem;
-    }
-    @media screen and (min-width: 700px) and (max-width: 768px) {
-        width: 673px;
-        left: 3rem;
-    }
-    @media screen and (min-width: 1000px) and (max-width: 1280px) {
-        width: 897px;
-        left: 4rem;
-    }
-`
 
 export default CompleteActionModal

@@ -13,7 +13,7 @@ const Time = (props) => {
 
     if (type === 'every') {
         return (
-            <Text _fontSize="16px" _fontWeight="700">
+            <Text _fontSize="0.875rem" _fontWeight="500" _padding={'1rem'}>
                 <Moment format={_format}>{new Date()}</Moment> ({getDay()})
             </Text>
         )
@@ -21,7 +21,7 @@ const Time = (props) => {
 
     if (type === 'num') {
         return (
-            <Text _fontSize="16px" _fontWeight="700">
+            <Text _fontSize="0.875rem" _fontWeight="500" _padding={'1rem'}>
                 <Moment format={_format}>{new Date()}</Moment>월
             </Text>
         )

@@ -4,28 +4,21 @@ import RoutineTemplate from '../components/Routine/RoutineTemplate'
 import { ActiveUnderLine, FlexColumn, Title } from '../elements'
 import { history } from '../redux/store'
 import Header from '../components/Header'
+import ToggleTab from '../components/ToggleTab'
+import '../styles/routine/history.scss'
 
 const History = () => {
     return (
         <>
-            <div style={{ zIndex: '3' }}>
-                <Header name="히스토리" />
-            </div>
-            <RoutineTemplate
-                _onClick_={() => {
-                    history.push('/')
-                }}
-                button="메인으로"
-            >
-                <FlexColumn
-                    _width="100vw"
-                    _height="100vh"
-                    _justify="space-between"
-                    _padding="5rem 0 20rem 0 "
-                >
-                    <HistoryGraph />
-                </FlexColumn>
-            </RoutineTemplate>
+            <Header name="통계" />
+            <ToggleTab
+                firstValue={'액션'}
+                secondValue={'루틴'}
+                select={status}
+            />
+            <section className="history-container">
+                <HistoryGraph />
+            </section>
         </>
     )
 }

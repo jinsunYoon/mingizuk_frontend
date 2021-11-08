@@ -3,14 +3,15 @@ import swal from 'sweetalert'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Text, FlexRow, LikeBtn, Img } from '..'
-import Icon from '../../components/icons/Icon'
-import { moimDeleteMD } from '../../redux/async/moim'
+import { moimDeleteMD, moimLikeMD, moimUnlikeMD } from '../../redux/async/moim'
 import { history } from '../../redux/store'
+import Icon from '../../components/icons/Icon'
 
 const PostDesc = () => {
     const dispatch = useDispatch()
     const post_data_all = useSelector((state) => state.moim.moim_all)
     const loginNickName = useSelector((state) => state.user.userInfo.nickName)
+    const loginuserID = useSelector((state) => state.user.userInfo.userID)
 
     const deletePost = (data) => {
         swal({
@@ -92,7 +93,29 @@ const PostDesc = () => {
                         )}
                         <EtcBox>
                             <SmallBox>
-                                <LikeBtn /> 좋아요
+
+                                {data?.Likes?.findIndex(
+                                    (user) => user?.userId === loginuserID
+                                ) === -1 ? (
+                                    <Icon
+                                        icon="favorite"
+                                        size="20px"
+                                        color="lightgray"
+                                        // _onClick={() => {
+                                        //     dispatch(moimLikeMD(data?.id))
+                                        // }}
+                                    />
+                                ) : (
+                                    <Icon
+                                        icon="favorite"
+                                        size="20px"
+                                        color="red"
+                                        // _onClick={() => {
+                                        //     dispatch(moimUnlikeMD(data?.id))
+                                        // }}
+                                    />
+                                )}
+                                좋아요
                                 {data?.Likes?.length}개
                             </SmallBox>
                             <SmallBox>

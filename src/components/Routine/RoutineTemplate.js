@@ -8,7 +8,7 @@ const RoutineTemplate = (props) => {
     const { children, button, addBtn, _onClick_, is_button } = props
     return (
         <>
-            <MobileGrid>{children}</MobileGrid>
+            <MobileGrid className="container">{children}</MobileGrid>
             <BtnPos>
                 {is_button === true && (
                     <ButtonFill

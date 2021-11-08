@@ -2,10 +2,10 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Header } from '../../components'
 import RoutineUpdateSelect from '../../components/Routine/RoutineUpdateSelect'
-import RoutineTemplate from '../../components/Routine/RoutineTemplate'
 import ToggleTab from '../../components/ToggleTab'
 import { myRoutineListMD } from '../../redux/async/routine'
 import { history } from '../../redux/store'
+import '../../styles/routine/add-routine.scss'
 
 const RoutineUpdate = () => {
     const dispatch = useDispatch()
@@ -19,14 +19,19 @@ const RoutineUpdate = () => {
 
     return (
         <>
-            <Header name="내 루틴 수정하기 ( 1 / 2 )" />
-            <RoutineTemplate
-                button={selectNum}
-                _onClick_={() => history.push('/routine/update/count')}
-            >
+            <div style={{ zIndex: '4' }}>
+                <Header name="내 루틴 수정하기 ( 1 / 2 )" />
+            </div>
+            <section className="container">
                 <ToggleTab firstValue={'스트레칭'} secondValue={'맨몸 운동'} />
                 <RoutineUpdateSelect select={status} />
-            </RoutineTemplate>
+                <button
+                    className="next-btn"
+                    onClick={() => history.push('/routine/update/count')}
+                >
+                    {selectNum}
+                </button>
+            </section>
         </>
     )
 }

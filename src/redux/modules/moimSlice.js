@@ -17,6 +17,8 @@ const initialState = {
     moim_all: {},
     moim_detail: {},
     moim_ref_update: {},
+    marker: '',
+    addressName: '',
 }
 
 const moimSlice = createSlice({
@@ -25,6 +27,12 @@ const moimSlice = createSlice({
     reducers: {
         moimUpdate: (state, action) => {
             state.moim_ref_update = action.payload
+        },
+        setMarker: (state, action) => {
+            state.marker = action.payload
+        },
+        setAddressName: (state, action) => {
+            state.addressName = action.payload
         },
     },
     extraReducers: {
@@ -55,10 +63,21 @@ const moimSlice = createSlice({
             console.log(payload)
         },
         [moimLikeMD.fulfilled]: (state, { payload }) => {
-            console.log(payload)
+            const likeUser = payload.data.msg.slice(0, 1)
+            state.moim_detail.Likes.push({ userId: Number(likeUser) })
         },
         [moimUnlikeMD.fulfilled]: (state, { payload }) => {
-            console.log(payload)
+            const likeUser = state.moim_detail.Likes
+            console.log(likeUser, 'likeuser')
+
+            const unlikeUser = payload.data.msg.slice(0, 1)
+            console.log(Number(unlikeUser), '언라이크아이디???????>>>>')
+            // delete filter 아닌것 반환
+            const result = state.moim_detail.Likes.filter(
+                (likeUser) => likeUser.userId !== Number(unlikeUser)
+            )
+            // 다시넣기
+            state.moim_detail.Likes = result
         },
         [moimJoinMD.fulfilled]: (state, { payload }) => {
             console.log(payload)
@@ -86,7 +105,7 @@ const moimSlice = createSlice({
 })
 
 //* reducer export
-export const { moimUpdate } = moimSlice.actions
+export const { moimUpdate, setMarker, setAddressName } = moimSlice.actions
 
 //* slice export
 export default moimSlice

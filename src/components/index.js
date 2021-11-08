@@ -9,6 +9,7 @@ import CollectionList from './MyPages/CollectionList'
 import CompleteActionModal from './CompleteActionModal'
 import Complete from './Complete'
 import MyMoimToogleTab from './MyPages/MyMoimToogleTab'
+import LevelBar from './LevelBar'
 export {
     Header,
     Footer,
@@ -20,5 +21,6 @@ export {
     CollectionList,
     CompleteActionModal,
     Complete,
-    MyMoimToogleTab
+    MyMoimToogleTab,
+    LevelBar,
 }

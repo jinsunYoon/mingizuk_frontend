@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { ActiveUnderLine, FlexRow } from '../../elements';
-import MyCreate from '../MyPages/MyCreate';
-import MyJoin from '../MyPages/MyJoin';
-import MyLike from '../MyPages/MyLike';
-import MyComment from '../MyPages/MyComment'
+import MyCreate from './MyCreatedMoims';
+import MyJoin from './MyJoinedMoims';
+import MyLike from './MyLikedMoims';
+import MyComment from './MyCommentMoims'
 import { myMoimCreateMD, myMoimJoinMD, myMoimLikeMD, myMoimCommentMD } from '../../redux/async/myMoim';
 
 const MyMoimToogleTab = () => {
@@ -52,7 +52,7 @@ const MyMoimToogleTab = () => {
                 {
                     tabState === 'd'
                     ?
-                    <ActiveUnderLine  active={true} _onClick={()=>{setTabState('d') && dispatch(myMoimCreateMD()) }}>
+                    <ActiveUnderLine  active={true} _onClick={()=>{setTabState('d')}}>
                         내가 단 댓글
                     </ActiveUnderLine>
                     :
