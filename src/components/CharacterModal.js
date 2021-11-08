@@ -20,6 +20,7 @@ const CharacterModal = (props) => {
                             position: 'fixed',
                             top: '0',
                             left: '0',
+                            zIndex: '3',
                         }}
                         onClick={() => {
                             {
@@ -28,7 +29,7 @@ const CharacterModal = (props) => {
                         }}
                     ></div>
                     <Modal>
-                        <button
+                        {/* <button
                             style={{
                                 position: 'absolute',
                                 right: '1rem',
@@ -41,7 +42,7 @@ const CharacterModal = (props) => {
                             }}
                         >
                             <CancelRounded />
-                        </button>
+                        </button> */}
                         <FlexRow
                             _border={'none'}
                             _width={'100%'}
@@ -87,17 +88,17 @@ const CharacterModal = (props) => {
 }
 
 const Modal = styled.div`
-    width: 300px;
-    height: 30rem;
+    width: 100vw;
+    height: 29.5rem;
     padding: 1rem;
     box-sizing: border-box;
-    border-radius: 10px;
+    border-top-left-radius: 1.25rem;
+    border-top-right-radius: 1.25rem;
     background-color: #fff;
-    opacity: 0.95;
     position: fixed;
-    top: 4.3rem;
-    left: 1.8rem;
-    z-index: 3;
+    bottom: 0;
+    left: 0;
+    z-index: 4;
     @media screen and (max-width: 280px) {
         width: 233px;
         left: 1.5rem;
