@@ -14,8 +14,11 @@ const initialState = {
     myRoutine: [],
     updateRoutineRef: '',
     habitModal: false,
-    finActions: {},
-    finRoutines: {},
+    fin: {
+        finActions: [],
+        finRoutines: [],
+        joinDate: '',
+    },
 }
 
 const routineSlice = createSlice({
@@ -60,27 +63,34 @@ const routineSlice = createSlice({
             console.log(payload)
         },
         [finRoutinesActionsMD.fulfilled]: (state, { payload }) => {
-            let actions = []
-            let routins = []
-            const _action_data1 = payload.data.finActions.map((action) =>
-                Object.values(action)
-            )
-            _action_data1.map((action) =>
-                actions.push({
-                    actionId: action[1][0].id,
-                    date: action[1][0].date.slice(0, 10),
-                })
-            )
-            state.finActions = actions
+            console.log('-', payload.data)
+            const data = payload.data
 
-            payload.data.finRoutines[0].RoutineFins.map((routine) =>
-                routins.push({
-                    routineId: routine.id,
-                    date: routine.date.slice(0, 10),
-                    cycle: routine.cycle,
-                })
+            const action_name = data?.finActions?.map(
+                (action) => action.actionName
             )
-            state.finRoutines = routins
+            const action_cnt = data?.finActions?.map(
+                (action) => action.actionCnt
+            )
+            const action_fins = data?.finActions?.map((action) => {
+                action.ActionFins
+            })
+
+            const routine_name = data?.finRoutines?.map((routine) => {
+                routine?.routineName
+            })
+
+            const routine_fins = data?.finRoutines?.map((routine) => {
+                routine?.RoutineFins
+            })
+
+            state.fin.joinDate = data.finUser.createdAt
+            state.fin.finRoutines = { name: routine_name, dates: routine_fins }
+            state.fin.finActions = {
+                name: action_name,
+                count: action_cnt,
+                dates: action_fins,
+            }
         },
     },
 })

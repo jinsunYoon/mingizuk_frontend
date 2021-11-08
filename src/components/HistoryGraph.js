@@ -1,58 +1,78 @@
 import React from 'react'
 import '../styles/routine/history.scss'
-import { BarChart, Bar } from 'recharts'
-import moment from 'moment'
+import { BarChart, Bar, XAxis, Legend, Tooltip } from 'recharts'
 import { format, addDays, isWithinInterval } from 'date-fns'
 import { finRoutinesActionsMD } from '../redux/async/routine'
-import { history } from '../redux/store'
 import { useDispatch, useSelector } from 'react-redux'
+import moment from 'moment'
 
 const HistoryGraph = () => {
+    // * get data from server
     const dispatch = useDispatch()
-    const [week, setWeek] = React.useState(1)
     React.useEffect(() => {
         dispatch(finRoutinesActionsMD())
     }, [])
 
-    //* setting datas
-    const finActions = useSelector((state) => state.routine.finActions)
-    const finRoutines = useSelector((state) => state.routine.finRoutines)
-    const today = format(new Date('2021, 11, 20'), 'yyyy-MM-dd') // * 예시로 넣어놓은 값이다.
-    const joinDate = new Date() // * 예시로 넣어놓은 값이다.
+    //* setting data from server
+    const [week, setWeek] = React.useState(1)
+    const finActions = useSelector((state) => state.routine.fin)
+    const finRoutines = useSelector((state) => state.routine.fin)
+    const joinDate = useSelector((state) => state.routine.fin.joinDate)
+    const daylength = moment(joinDate).fromNow().slice(0, 1)
 
-    // * settign dates
-    let history_date = []
-    React.useEffect(() => {
-        let j = 7
-        while (history_date.findIndex((day) => day === today) === -1) {
-            for (let i = 0; i < j; i++) {
-                history_date.push(format(addDays(joinDate, i), 'yyyy-MM-dd'))
+    const [startDay, setStartDay] = React.useState(0)
+
+    // * history에 쓰일 날짜들 전부
+    const getHistory = () => {
+        let history_date = []
+        if (daylength % 7 !== 0) {
+            for (let i = 0; i < Number(daylength) + (daylength % 7) + 1; i++) {
+                history_date.push(
+                    format(
+                        addDays(new Date(joinDate.slice(0, 10)), i),
+                        'yyyy-MM-dd'
+                    )
+                )
             }
-            j = j + 7
+        } else {
+            for (let i = 0; i < Number(daylength); i++) {
+                history_date.push(
+                    format(
+                        addDays(new Date(joinDate.slice(0, 10)), i),
+                        'yyyy-MM-dd'
+                    )
+                )
+            }
         }
-        console.log('>>>', history_date)
-    }, [])
-
-    // * rechart example
-    const data = []
+        return history_date
+    }
 
     const actionCount = [1, 6, 4, 6, 7, 11, 2]
-    for (let i = 0; i < 7; i++) {
-        data.unshift({
-            name: moment().subtract(i, 'days').format('MM/DD'),
-            Action: actionCount[i],
-        })
+    // * 1주차 초기 설정 값
+    const initialDate = () => {
+        let _inital = []
+        let history = getHistory()
+        for (let i = 0; i < 7; i++) {
+            _inital.push({
+                name: history[i]?.slice(5, 10)?.replace('-', '/'),
+                Action: actionCount[i],
+            })
+        }
+        return _inital
     }
+
+    const data = initialDate()
+
     return (
         <>
             <section className="history-title">
-                <button onClick={() => setWeek(week - 1)}>왼</button>
+                <button onClick={() => {}}>왼</button>
                 <h3>밍기적 {week}주차</h3>
-                <button onClick={() => setWeek(week + 1)}>오</button>
+                <button onClick={() => {}}>오</button>
             </section>
             <section>
-                <p>밍기적 시작한지 n일째 되는 날</p>
-                <BarChart width={310} height={250} data={data}>
+                <BarChart width={320} height={250} data={data}>
+                    <XAxis dataKey="name" />
                     <Bar
                         dataKey="Action"
                         radius={[10, 10, 10, 10]}
