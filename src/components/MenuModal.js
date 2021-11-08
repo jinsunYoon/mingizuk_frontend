@@ -22,7 +22,7 @@ const MenuModal = () => {
         return (
             <React.Fragment>
                 {modalStatus && (
-                    <FlexRow _border={'none'} _others="z-index:5">
+                    <FlexRow _border={'none'}>
                         <div
                             style={{
                                 width: '100vw',

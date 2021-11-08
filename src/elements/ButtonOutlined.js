@@ -73,14 +73,12 @@ const ElButton = styled.button`
     ${(props) => props._others};
     background: none;
     cursor: pointer;
-    padding:${(props) => props._padding};
+    padding: ${(props) => props._padding};
 `
 
 const NavIcon = styled.div`
     margin: 0px;
     padding: 0px;
-    width: 1.5rem;
-    height: 1.5rem;
     position: fixed;
     background: none;
     border: none;

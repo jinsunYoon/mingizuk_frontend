@@ -42,7 +42,7 @@ const CompleteActionModal = (props) => {
         dispatch(setActionName('성공!'))
         dispatch(
             setImgSrc(
-                'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/mingsuccess.jpg'
+                'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming2.jpg'
             )
         )
         dispatch(setActionBtn('닫기'))
@@ -54,7 +54,7 @@ const CompleteActionModal = (props) => {
     const changeBtn = () => {
         dispatch(
             setImgSrc(
-                'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming.gif'
+                'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming2.gif'
             )
         )
         if (modalActionBtn == '시작 !') {
@@ -72,7 +72,7 @@ const CompleteActionModal = (props) => {
         dispatch(setModal(false))
         dispatch(
             setImgSrc(
-                'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming.JPG'
+                'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming2.jpg'
             )
         )
         dispatch(setActionBtn('시작 !'))
@@ -99,7 +99,7 @@ const CompleteActionModal = (props) => {
                     }}
                 ></div>
                 <ModalEl>
-                    <button
+                    {/* <button
                         style={{
                             position: 'absolute',
                             right: '1rem',
@@ -112,14 +112,14 @@ const CompleteActionModal = (props) => {
                         }}
                     >
                         <CancelRounded />
-                    </button>
+                    </button> */}
                     <Text _fontSize={'2rem'} _margin={'1.5rem 0px 0.5rem 0px'}>
                         {modalActionName}
                     </Text>
                     <Img
                         _src={modalImg}
                         _width={'13rem'}
-                        _height={'18rem'}
+                        _height={'13rem'}
                         _bradius={'0px'}
                         _others={'background-color:#fff'}
                     ></Img>
@@ -172,18 +172,19 @@ const CompleteActionModal = (props) => {
 }
 
 const ModalEl = styled.div`
-    width: 300px;
-    height: 30rem;
+    width: 100vw;
+    height: 29.5rem;
     padding: 1rem;
     box-sizing: border-box;
-    border-radius: 10px;
+    border-top-left-radius: 1.25rem;
+    border-top-right-radius: 1.25rem;
     background-color: #fff;
     position: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
-    top: 4.3rem;
-    left: 1.8rem;
+    bottom: 0;
+    left: 0;
     @media screen and (max-width: 280px) {
         width: 233px;
         left: 1.5rem;

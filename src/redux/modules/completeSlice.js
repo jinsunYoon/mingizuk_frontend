@@ -4,7 +4,7 @@ import { actionCompleteMD, actionRestartMD } from '../async/actionComplete'
 
 const initialState = {
     modalStatus: false,
-    ImgSrc: 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming.JPG',
+    ImgSrc: 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming2.jpg',
     actionName: '',
     actionId: '',
     routineId: '',

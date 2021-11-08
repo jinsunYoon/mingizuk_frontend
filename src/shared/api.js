@@ -110,7 +110,15 @@ const userInfoAPI = (data) => {
 }
 
 const kakaoAPI = () => {
-    return axios.get('http://13.125.110.160/api/auth/kakao')
+    return axios.get('http://52.79.237.95/api/auth/kakao')
+}
+
+const naverAPI = () => {
+    return axios.get('http://52.79.237.95/api/auth/naver')
+}
+
+const googleAPI = () => {
+    return axios.get('http://52.79.237.95/api/auth/google')
 }
 
 // *----------------------------------------------------
@@ -265,5 +273,7 @@ export {
     moimUnlikeAPI,
     moimJoinAPI,
     actionRestartAPI,
+    naverAPI,
+    googleAPI,
     finRoutinesActionsAPI,
 }
