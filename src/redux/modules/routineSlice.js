@@ -14,8 +14,11 @@ const initialState = {
     myRoutine: [],
     updateRoutineRef: '',
     habitModal: false,
-    finActions: {},
-    finRoutines: {},
+    fin: {
+        finActions: [],
+        finRoutines: [],
+        joinDate: '',
+    },
 }
 
 const routineSlice = createSlice({
@@ -60,13 +63,34 @@ const routineSlice = createSlice({
             console.log(payload)
         },
         [finRoutinesActionsMD.fulfilled]: (state, { payload }) => {
-            const finActions = payload.data.finActions
-            const a = finActions.map((action) => Object.values(action))
-            const b = a.map((action) => action[1])
-            // const finActionstwo = finActions.
-            console.log('>>>', b)
-            // state.finActions = payload.data.finActions
-            // state.finRoutines = payload.data.finRoutines
+            console.log('-', payload.data)
+            const data = payload.data
+
+            const action_name = data?.finActions?.map(
+                (action) => action.actionName
+            )
+            const action_cnt = data?.finActions?.map(
+                (action) => action.actionCnt
+            )
+            const action_fins = data?.finActions?.map((action) => {
+                action.ActionFins
+            })
+
+            const routine_name = data?.finRoutines?.map((routine) => {
+                routine?.routineName
+            })
+
+            const routine_fins = data?.finRoutines?.map((routine) => {
+                routine?.RoutineFins
+            })
+
+            state.fin.joinDate = data.finUser.createdAt
+            state.fin.finRoutines = { name: routine_name, dates: routine_fins }
+            state.fin.finActions = {
+                name: action_name,
+                count: action_cnt,
+                dates: action_fins,
+            }
         },
     },
 })
