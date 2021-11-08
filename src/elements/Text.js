@@ -11,6 +11,7 @@ const Text = (props) => {
         _margin,
         _padding,
         _others,
+        _font,
     } = props
 
     const styles = {
@@ -21,6 +22,7 @@ const Text = (props) => {
         _margin,
         _padding,
         _others,
+        _font,
     }
 
     return (
@@ -38,6 +40,7 @@ Text.defaultProps = {
     _align: 'center',
     _margin: false,
     _padding: false,
+    _font: "'Noto Sans KR', sans-serif;",
     others: '',
 }
 
@@ -48,6 +51,7 @@ const ElText = styled.div`
     text-align: ${(props) => props._align};
     margin: ${(props) => props._margin};
     padding: ${(props) => props._padding};
+    font-family: ${(props) => props._font};
     ${(props) => props.others};
 `
 

@@ -70,16 +70,26 @@ const CompleteActionModal = (props) => {
     }
 
     return (
-        <div style={{ display: 'flex', zIndex: '2', minHeight: '6.25rem' }}>
+        <div
+            style={{
+                display: 'flex',
+                zIndex: '2',
+                minHeight: '6.25rem',
+                width: '100%',
+                height: false,
+                justifyContent: 'space-around',
+            }}
+        >
             {modal && <Complete />}
             {mainRoutine?.Actions?.map((routine, idx) => {
                 return (
                     <>
                         <ButtonOutlined
                             _border={'none'}
-                            _margin={'none'}
-                            _padding={'none'}
-                            _width={'false'}
+                            _margin={'0px'}
+                            _padding={'0px'}
+                            _width={'100%'}
+                            _others={'height:false'}
                             _onClick={() => {
                                 dispatch(setModal(true))
                                 dispatch(setActionName(routine?.actionName))
@@ -89,19 +99,21 @@ const CompleteActionModal = (props) => {
                             }}
                         >
                             <FlexColumn
-                                _width={'2.8rem'}
+                                _width={'100%'}
                                 _height={'100%'}
                                 _border={'none'}
+                                _padding={'0.7rem 0px 0px 0px'}
+                                _justify={'start'}
                             >
                                 <FlexRow
-                                    _width={'2rem'}
-                                    _height={'2rem'}
+                                    _width={'2.5rem'}
+                                    _height={'2.5rem'}
                                     _bgColor={'lightgray'}
                                     _border={'none'}
-                                    _margin={'10px 0px 0px 0px'}
-                                    _others={'border-radius:1rem'}
+                                    // _margin={'10px 0px 0px 0px'}
+                                    _others={'border-radius:2.5rem'}
                                 ></FlexRow>
-                                <FlexRow
+                                {/* <FlexRow
                                     _width={'false'}
                                     _height={'1rem'}
                                     _bgColor={'black'}
@@ -117,20 +129,31 @@ const CompleteActionModal = (props) => {
                                     >
                                         {routine?.actionCnt}
                                     </Text>
-                                </FlexRow>
-                                <Text
-                                    _margin={'5px 0px 0px 0px'}
-                                    _fontSize={'0.75rem'}
-                                >
-                                    {routine?.actionName}
-                                </Text>
+                                </FlexRow> */}
+                                {routine?.actionName?.length > 5 ? (
+                                    <Text
+                                        _margin={'5px 0px 0px 0px'}
+                                        _fontSize={'0.75rem'}
+                                    >
+                                        {routine?.actionName?.split(' ')[0]}{' '}
+                                        <br />{' '}
+                                        {routine?.actionName?.split(' ')[1]}
+                                    </Text>
+                                ) : (
+                                    <Text
+                                        _margin={'5px 0px 0px 0px'}
+                                        _fontSize={'0.75rem'}
+                                    >
+                                        {routine?.actionName}
+                                    </Text>
+                                )}
                             </FlexColumn>
                         </ButtonOutlined>
-                        {idx < num && (
+                        {/* {idx < num && (
                             <FlexRow _border={'none'} _width={'0.625rem'}>
                                 <Icon icon={'chevron-right'} size={24} />
                             </FlexRow>
-                        )}
+                        )} */}
                     </>
                 )
             })}
