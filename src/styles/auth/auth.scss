@@ -2,25 +2,31 @@
 
 .auth-layout {
     @include flexbox();
-    width: 100%;
-    padding: 70px 16px;
-    border: none;
+    width: 100vw;
     flex-direction: column;
+    justify-content: center;
+}
 
-    .logo {
-        color: $primary;
-        font-weight: bold;
-        font-size: 24px;
-        letter-spacing: 0.15px;
-        line-height: 24px;
-        padding: 12px;
-        margin-bottom:30px;
-    }
+.logo {
+    color: $primary;
+    font-weight: bold;
+    font-size: 24px;
+    letter-spacing: 0.15px;
+    line-height: 24px;
+    padding: 12px;
+    margin-top: 30px;
+}
+
+.contents {
+    //==================== > 100%로 하면 안예뻐서 일단 width px로 줌 
+    width: 320px; //mobile small
+    padding: 30px 16px;
+    border: none;
 
     .input-container {
         @include flexbox();
         flex-direction: column;
-        width: 328px;
+        width: 100%;
 
         input {
             width: 100%;
@@ -50,11 +56,11 @@
 }
 
 .btn-container {
-    width: 328px;
+    width: 100%;
 
     .login-btn {
         @include auth-button($primary, $white);
-        margin-top:30px;
+        margin-top: 30px;
     }
 
     .kakao-btn {
@@ -70,7 +76,7 @@
 
     .signup-btn {
         @include auth-button($primary, $white);
-        margin-top:30px;
+        margin-top: 30px;
     }
 
     .main-btn {
@@ -79,14 +85,18 @@
 }
 
 .slogin-title {
+    //====================media query================ :: 720이상 width 변경
     @include flexbox();
+
     hr {
-        width: 109px;
+        width: 30%; //mobile small
         color: gray;
     }
     h3 {
+        width: 40%; 
         color: $text-gray;
         font-size: 14px;
         padding: 16px;
+        text-align: center;
     }
 }
