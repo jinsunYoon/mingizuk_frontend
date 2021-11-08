@@ -3,7 +3,14 @@ import IcomoonReact from 'icomoon-react'
 import iconSet from './selection.json'
 
 const Icon = (props) => {
-    const { color, size = '100%', icon, className = '', _onClick, _text } = props
+    const {
+        color,
+        size = '100%',
+        icon,
+        className = '',
+        _onClick,
+        _text,
+    } = props
     return (
         <div onClick={_onClick}>
             <IcomoonReact
@@ -11,6 +18,7 @@ const Icon = (props) => {
                 color={color}
                 size={size}
                 icon={icon}
+                className={className}
             >
                 <div>{_text}</div>
             </IcomoonReact>
