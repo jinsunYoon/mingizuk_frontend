@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { useDispatch } from 'react-redux'
 import { addAction, minusAction } from '../../redux/modules/updateRoutine'
 import '../../styles/routine/add-routine.scss'
-import ICheck from '../../styles/shared/icon/ICheck'
+import Icon from '../icons/Icon'
 
 const RoutineSelect = (props) => {
     const dispatch = useDispatch()
@@ -49,7 +49,7 @@ const RoutineSelect = (props) => {
                             }}
                         >
                             <span>{routine}</span>
-                            <ICheck size="16px" color="lightgray" />
+                            <Icon size="16px" color="lightgray" icon="check" />
                         </button>
                     ))}
                 </section>
@@ -71,7 +71,7 @@ const RoutineSelect = (props) => {
                             }}
                         >
                             <span>{routine}</span>
-                            <ICheck size="16px" color="lightgray" />
+                            <Icon size="16px" color="lightgray" icon="check" />
                         </button>
                     ))}
                 </section>
