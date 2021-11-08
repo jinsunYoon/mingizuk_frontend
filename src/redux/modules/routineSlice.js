@@ -65,10 +65,11 @@ const routineSlice = createSlice({
         [finRoutinesActionsMD.fulfilled]: (state, { payload }) => {
             const data = payload.data
             const finActions = data.finActions
+            const finRoutines = data.finRoutines
             let actionsWithDate = []
+            let routienWithDate = []
 
-            // ! actions
-            // * kind of dates
+            // * kind of dates (action & routine)
             const dates = []
             finActions.forEach(({ ActionFins }) => {
                 const actionDates = ActionFins.map(({ date }) =>
@@ -78,10 +79,14 @@ const routineSlice = createSlice({
             })
             let setDates = new Set(dates.flat())
             setDates = [...setDates]
+
+            // * setting routine / action
             for (const date of setDates) {
                 actionsWithDate.push({ date, actions: [] })
+                routienWithDate.push({ date, routines: [] })
             }
 
+            // ! actions
             // * { date:'2021-11-11' , actions:[action1, action2...]
             finActions.forEach(({ actionName, ActionFins }) => {
                 const actionDates = ActionFins.map(({ date }) =>
@@ -91,10 +96,20 @@ const routineSlice = createSlice({
                     actionsWithDate[idx].actions.push(actionName)
                 )
             })
-            console.log('final', actionsWithDate)
+
+            // ! routines
+            finRoutines.forEach(({ routineName, RoutineFins }) => {
+                const routineDates = RoutineFins.map(({ date }) =>
+                    setDates.findIndex((day) => day === date.slice(0, 10))
+                )
+                routineDates.map((idx) =>
+                    routienWithDate[idx].routines.push(routineName)
+                )
+            })
 
             state.fin.joinDate = data.finUser.createdAt
             state.fin.finActions = actionsWithDate
+            state.fin.finRoutines = routienWithDate
         },
     },
 })

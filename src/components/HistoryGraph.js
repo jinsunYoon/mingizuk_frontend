@@ -1,6 +1,6 @@
 import React from 'react'
 import '../styles/routine/history.scss'
-import { BarChart, Bar, XAxis, Legend, Tooltip } from 'recharts'
+import { BarChart, Bar, XAxis, Label, Tooltip, LabelList } from 'recharts'
 import { format, addDays, isWithinInterval } from 'date-fns'
 import { finRoutinesActionsMD } from '../redux/async/routine'
 import { useDispatch, useSelector } from 'react-redux'
@@ -76,22 +76,29 @@ const HistoryGraph = () => {
 
     return (
         <>
-            <section className="history-title">
-                <button onClick={() => {}}>왼</button>
-                <h3>밍기적 {week}주차</h3>
-                <button onClick={() => {}}>오</button>
-            </section>
-            <section>
-                <BarChart width={340} height={250} data={graphActionData}>
-                    <XAxis dataKey="name" axisLine={false} />
-                    <Bar
-                        dataKey="actionCtn"
-                        radius={[10, 10, 10, 10]}
-                        fill="#6B76FF"
-                        background="#eee"
-                        barSize={20}
-                    />
-                </BarChart>
+            <section className="graph-group">
+                <section className="graph-title">
+                    <button onClick={() => {}}>-</button>
+                    <h3>밍기적 {week}주차</h3>
+                    <button onClick={() => {}}>+</button>
+                </section>
+                <section className="graph-container">
+                    <p className="graph-desc">
+                        밍기적 시작한지 <span>{daylength}</span>일 째 되는 날
+                    </p>
+                    <BarChart width={340} height={250} data={graphActionData}>
+                        <XAxis dataKey="name" axisLine={false} />
+                        <Bar
+                            dataKey="actionCtn"
+                            radius={[10, 10, 10, 10]}
+                            fill="#6B76FF"
+                            background="#eee"
+                            barSize={20}
+                        >
+                            <LabelList dataKey="actionCtn" position="top" />
+                        </Bar>
+                    </BarChart>
+                </section>
             </section>
         </>
     )
