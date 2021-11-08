@@ -9,6 +9,7 @@ import { loginCheckMD } from '../redux/async/user'
 // * pages
 import Main from '../pages/Main'
 import { NavBar } from '../components'
+import NoLogin from '../pages/MyPages/NoLogin'
 const Login = lazy(() => import('../pages/Login'))
 const Signup = lazy(() => import('../pages/Signup'))
 const MyRoutine = lazy(() => import('../pages/RoutineSetting/MyRoutine'))
@@ -84,7 +85,11 @@ const App = () => {
                             component={MyCollection}
                         />
                         <Route path="/users/moim" exact component={MyMoim} />
-
+                        <Route
+                            path="/users/moim/nologin"
+                            exact
+                            component={NoLogin}
+                        />
                         <Route path="/moim" exact component={MoimMain} />
                         <Route path="/moim/write" exact component={MoimWrite} />
                         <Route

@@ -1,0 +1,23 @@
+//mymoim
+@import '../shared/common.scss';
+
+//MyMoimToogleTab.js
+.toogle-layout {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+
+    @include toogle {
+        width: 480px;
+        display: block;
+    }
+}
+.toogle-container {
+    overflow-x: scroll;
+}
+
+//MyMoim.js
+.mymoim-layout {
+    width: 100%;
+}

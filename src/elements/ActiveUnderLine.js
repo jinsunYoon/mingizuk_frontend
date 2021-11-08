@@ -18,10 +18,13 @@ ActiveUnderLine.defaultProps = {
 }
 
 const ActiveUnderLineEl = styled.button`
-    width: 120px;
+    min-width: 120px;
     height: 48px;
     background-color: #fff;
     border: none;
-    ${(props) => (props.active ? `border-bottom: 2px solid #6B76FF;` : ``)}
+    ${(props) =>
+        props.active
+            ? `border-bottom: 2px solid #6B76FF;`
+            : `border-bottom: 2px solid none;`}
 `
 export default ActiveUnderLine

@@ -3,8 +3,10 @@
 @import './mixins/text-style.scss';
 @import './constants/colors';
 @import './modules/buttons.module.scss';
+@import './mixins/mediaqury.scss';
 
 * {
     box-sizing: border-box;
     margin: 0;
+    padding: 0;
 }
