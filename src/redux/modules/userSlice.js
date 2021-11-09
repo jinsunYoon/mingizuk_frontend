@@ -9,7 +9,6 @@ import {
     kakaoLoginMD,
 } from '../async/user'
 import { history } from '../store'
-import { useDispatch } from 'react-redux'
 
 const initialState = {
     isLogin: false,
@@ -56,7 +55,7 @@ const userSlice = createSlice({
             state.userInfo.userEmail = payload.data.user.userEmail
             state.userInfo.nickName = payload.data.user.nickName
             state.userInfo.userPw = payload.data.user.userPw
-        state.userInfo.userID = payload.data.user.id
+            state.userInfo.userID = payload.data.user.id
             console.log(payload, '이거 페이로드 확인')
         },
 
