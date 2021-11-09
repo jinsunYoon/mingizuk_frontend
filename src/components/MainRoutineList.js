@@ -6,7 +6,7 @@ import {
     Text,
     Img,
 } from '../elements/index'
-import Icon from '../components/icons/Icon'
+import Icon from './icons/Icon'
 import { useSelector, useDispatch } from 'react-redux'
 import {
     setActionName,
@@ -16,10 +16,10 @@ import {
     setFinDate,
     setResult,
 } from '../redux/modules/completeSlice'
-import { Complete } from '../components/index'
+import { Complete } from './index'
 import { actionRestartMD } from '../redux/async/actionComplete'
 
-const CompleteActionModal = (props) => {
+const MainRoutineList = (props) => {
     const dispatch = useDispatch()
 
     const modal = useSelector((state) => state.actionComplete.modalStatus)
@@ -161,4 +161,4 @@ const CompleteActionModal = (props) => {
     )
 }
 
-export default CompleteActionModal
+export default MainRoutineList
