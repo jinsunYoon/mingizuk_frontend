@@ -1,3 +1,4 @@
+// ! TODO 가입 하루 지나기 전에 moment로 인한 에러 처리 해야 함
 import React from 'react'
 import '../styles/routine/history.scss'
 import { BarChart, Bar, XAxis, Label, Tooltip, LabelList } from 'recharts'
@@ -18,11 +19,22 @@ const HistoryGraph = () => {
     const finActions = useSelector((state) => state.routine.fin.finActions)
     const finRoutines = useSelector((state) => state.routine.fin.finRoutines)
     const joinDate = useSelector((state) => state.routine.fin.joinDate)
+    // const dayLengthCalculate = () => {
+    //     let result = ''
+    //     const day = moment(joinDate).fromNow()
+    //     if (day.includes('day')) {
+    //         result = moment(joinDate).fromNow().slice(0, 1)
+    //     } else {
+    //         result = 1
+    //     }
+    //     return result
+    // }
     const daylength = moment(joinDate).fromNow().slice(0, 1)
     console.log('&&', finActions, finRoutines)
 
     const [startDay, setStartDay] = React.useState(0)
     const [week, setWeek] = React.useState(1)
+    console.log('>>', joinDate, moment(joinDate).fromNow())
 
     // * history에 쓰일 날짜들 전부
     const getHistory = () => {
