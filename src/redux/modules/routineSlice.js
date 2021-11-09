@@ -14,8 +14,11 @@ const initialState = {
     myRoutine: [],
     updateRoutineRef: '',
     habitModal: false,
-    finActions: {},
-    finRoutines: {},
+    fin: {
+        finActions: [],
+        finRoutines: [],
+        joinDate: '',
+    },
 }
 
 const routineSlice = createSlice({
@@ -60,13 +63,53 @@ const routineSlice = createSlice({
             console.log(payload)
         },
         [finRoutinesActionsMD.fulfilled]: (state, { payload }) => {
-            const finActions = payload.data.finActions
-            const a = finActions.map((action) => Object.values(action))
-            const b = a.map((action) => action[1])
-            // const finActionstwo = finActions.
-            console.log('>>>', b)
-            // state.finActions = payload.data.finActions
-            // state.finRoutines = payload.data.finRoutines
+            const data = payload.data
+            const finActions = data.finActions
+            const finRoutines = data.finRoutines
+            let actionsWithDate = []
+            let routienWithDate = []
+
+            // * kind of dates (action & routine)
+            const dates = []
+            finActions.forEach(({ ActionFins }) => {
+                const actionDates = ActionFins.map(({ date }) =>
+                    date.slice(0, 10)
+                )
+                dates.push(actionDates)
+            })
+            let setDates = new Set(dates.flat())
+            setDates = [...setDates]
+
+            // * setting routine / action
+            for (const date of setDates) {
+                actionsWithDate.push({ date, actions: [] })
+                routienWithDate.push({ date, routines: [] })
+            }
+
+            // ! actions
+            // * { date:'2021-11-11' , actions:[action1, action2...]
+            finActions.forEach(({ actionName, ActionFins }) => {
+                const actionDates = ActionFins.map(({ date }) =>
+                    setDates.findIndex((day) => day === date.slice(0, 10))
+                )
+                actionDates.map((idx) =>
+                    actionsWithDate[idx].actions.push(actionName)
+                )
+            })
+
+            // ! routines
+            finRoutines.forEach(({ routineName, RoutineFins }) => {
+                const routineDates = RoutineFins.map(({ date }) =>
+                    setDates.findIndex((day) => day === date.slice(0, 10))
+                )
+                routineDates.map((idx) =>
+                    routienWithDate[idx].routines.push(routineName)
+                )
+            })
+
+            state.fin.joinDate = data.finUser.createdAt
+            state.fin.finActions = actionsWithDate
+            state.fin.finRoutines = routienWithDate
         },
     },
 })

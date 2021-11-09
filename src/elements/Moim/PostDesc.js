@@ -93,6 +93,7 @@ const PostDesc = () => {
                         )}
                         <EtcBox>
                             <SmallBox>
+
                                 {data?.Likes?.findIndex(
                                     (user) => user?.userId === loginuserID
                                 ) === -1 ? (

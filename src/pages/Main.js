@@ -21,9 +21,9 @@ import { loginCheckMD } from '../redux/async/user'
 import { getMainRoutineMD } from '../redux/async/routine'
 import Time from '../elements/Time'
 import styled from 'styled-components'
-import HabitTrakerV2 from '../components/HabitTrakerV2'
 import { chageMyHabitModal } from '../redux/modules/routineSlice'
 import ActionStart from '../components/ActionStart'
+import HabitTraker from '../components/Routine/HabitTraker'
 
 const Main = (props) => {
     const dispatch = useDispatch()
@@ -153,14 +153,8 @@ const Main = (props) => {
                             dispatch(chageMyHabitModal(false))
                         }}
                     >
-                        <SubTitle>Habit Traker</SubTitle>
-                        <Text _fontSize="13px">
-                            <Time _format="YYYY, MM" type="num" />
-                        </Text>
+                        <HabitTraker />
                     </div>
-                    <HabitTrakerWarp>
-                        <HabitTrakerV2 />
-                    </HabitTrakerWarp>
                 </FlexColumn>
             </React.Fragment>
         )
@@ -270,14 +264,8 @@ const Main = (props) => {
                             dispatch(chageMyHabitModal(false))
                         }}
                     >
-                        <SubTitle>Habit Traker</SubTitle>
-                        <Text _fontSize="13px">
-                            <Time _format="YYYY, MM" type="num" />
-                        </Text>
+                        <HabitTraker />
                     </div>
-                    <HabitTrakerWarp>
-                        <HabitTrakerV2 />
-                    </HabitTrakerWarp>
                 </FlexColumn>
             </React.Fragment>
         )
