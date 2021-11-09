@@ -22,6 +22,7 @@ const ActiveUnderLineEl = styled.button`
     height: 48px;
     background-color: #fff;
     border: none;
+    font-size: 14px;
     ${(props) =>
         props.active
             ? `border-bottom: 2px solid #6B76FF;`

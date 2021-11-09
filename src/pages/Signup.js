@@ -88,6 +88,7 @@ const Signup = (props) => {
                         onChange={(e) => setUserPw(e.target.value)}
                     />
                     <input
+                        type="password"
                         placeholder="비밀번호를 다시 입력해주세요."
                         onKeyPress={onKeyPress}
                         onChange={(e) => setUserPwChk(e.target.value)}

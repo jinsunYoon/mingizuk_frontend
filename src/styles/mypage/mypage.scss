@@ -2,10 +2,7 @@
 @import '../shared/common.scss';
 
 .mypage-layout {
-    @include flexbox();
-    width: 100vw;
-    flex-direction: column;
-    align-content: center;
+    @include container()
 }
 //================= > contents에 미디어쿼리 적용
 .contents {
