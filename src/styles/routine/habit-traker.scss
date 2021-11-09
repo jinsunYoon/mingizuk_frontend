@@ -1,0 +1,72 @@
+@import '../shared/common.scss';
+
+.habit-box {
+    width: 24px;
+    height: 24px;
+    background-color: #f9f9f9;
+    margin: 4px;
+    border-radius: 4px;
+}
+
+.habit-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    width: 90vw;
+    height: 130px;
+    place-items: center center;
+    margin: 0;
+    background-color: $white;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    padding-top: 15px;
+}
+
+.day-container {
+    position: absolute;
+    padding-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    width: 90vw;
+    height: 130px;
+    place-items: center center;
+    margin: 0;
+    background-color: $white;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    .first-day {
+        font-size: 12px;
+        position: absolute;
+        top: 4px;
+        left: 7px;
+        color: $text-gray;
+    }
+    .last-day {
+        font-size: 12px;
+        position: absolute;
+        right: 7px;
+        color: $text-gray;
+    }
+}
+
+.habit-box-dark {
+    width: 24px;
+    height: 24px;
+    background-color: $gray;
+    margin: 4px;
+    border-radius: 4px;
+}
+
+.habit-title {
+    @include text-style-18(16px, auto);
+    width: 141px;
+    height: 16px;
+    margin: 30px 0;
+}
+
+.habit-action {
+    background-color: #c4c8ff;
+}
+.habit-routine {
+    background-color: $primary;
+}

@@ -13,6 +13,7 @@ const ButtonFill = (props) => {
         _bradius,
         _onClick,
         _others,
+        _cursor,
     } = props
 
     const styles = {
@@ -25,6 +26,7 @@ const ButtonFill = (props) => {
         _bradius,
         _onClick,
         _others,
+        _cursor,
     }
 
     return (
@@ -46,6 +48,7 @@ ButtonFill.defaultProps = {
     _color: '#fff',
     _bradius: '3px',
     _others: '',
+    _cursor: 'pointer',
     _onClick: () => {},
 }
 
@@ -60,7 +63,7 @@ const ElButton = styled.button`
     background-color: ${(props) => props._bgColor};
     ${(props) => props._others};
     border: none;
-    cursor: pointer;
+    cursor: ${(props) => props._cursor};
 `
 
 export default ButtonFill

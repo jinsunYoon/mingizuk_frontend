@@ -18,6 +18,7 @@ instance.interceptors.request.use(async (config) => {
     config.headers['refreshToken'] = await getToken().refreshToken
     return config
 })
+
 instanceSign.interceptors.request.use(async (config) => {
     config.headers['content-type'] = 'application/json; charset=utf-8'
     config.headers['X-Requested-With'] = 'XMLHttpRequest'
@@ -236,6 +237,11 @@ const moimUpdateReviewAPI = (data) => {
     })
 }
 
+// * history , habittraker
+const finRoutinesActionsAPI = () => {
+    return instance.get('/api/main/trackerHistory')
+}
+
 export {
     signupAPI,
     loginAPI,
@@ -269,4 +275,5 @@ export {
     actionRestartAPI,
     naverAPI,
     googleAPI,
+    finRoutinesActionsAPI,
 }

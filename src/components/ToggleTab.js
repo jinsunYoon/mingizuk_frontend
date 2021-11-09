@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ActiveUnderLine } from '../elements/index'
 import { FlexRow, Text } from '../elements/index'
 import { changeMyPageModal } from '../redux/modules/routineSlice'
+import '../styles/shared/modules/toogletab.module.scss'
 
 const ToggleTab = (props) => {
     const dispatch = useDispatch()
@@ -25,11 +26,12 @@ const ToggleTab = (props) => {
 
     return (
         <FlexRow
-            _width="320px"
+            _width="100vw"
             _border="none"
-            _margin="0 0 20px 0"
+            _margin="3.5rem 0 0 0"
             _others="z-index:1;"
-            _height="70px"
+            _height="48px"
+            _align="flex-end"
         >
             {myTab ? (
                 <ActiveUnderLine

@@ -9,7 +9,6 @@ import {
     kakaoLoginMD,
 } from '../async/user'
 import { history } from '../store'
-import { useDispatch } from 'react-redux'
 
 const initialState = {
     isLogin: false,

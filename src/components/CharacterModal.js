@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-import { ButtonFill, FlexRow, Text } from '../elements/index'
+import { ButtonOutlined, FlexRow, Text } from '../elements/index'
 import { CancelRounded } from '@material-ui/icons'
-import LevelBar from './LevelBar'
 
 const CharacterModal = (props) => {
     const [modalStatus, setModalStatue] = React.useState(false)
@@ -21,6 +20,7 @@ const CharacterModal = (props) => {
                             position: 'fixed',
                             top: '0',
                             left: '0',
+                            zIndex: '3',
                         }}
                         onClick={() => {
                             {
@@ -29,7 +29,7 @@ const CharacterModal = (props) => {
                         }}
                     ></div>
                     <Modal>
-                        <button
+                        {/* <button
                             style={{
                                 position: 'absolute',
                                 right: '1rem',
@@ -42,7 +42,7 @@ const CharacterModal = (props) => {
                             }}
                         >
                             <CancelRounded />
-                        </button>
+                        </button> */}
                         <FlexRow
                             _border={'none'}
                             _width={'100%'}
@@ -56,42 +56,49 @@ const CharacterModal = (props) => {
                     </Modal>
                 </FlexRow>
             )}
-            <ButtonFill
-                _width={'200px'}
-                _color={'black'}
-                _padding={'0px'}
-                _margin={'0px 0px 1rem 0px'}
-                _others={
-                    'border : 1px solid gray; background-color: #C4C4C4; box-sizing: border-box; height: 200px;'
-                }
-                _bradius="50%"
-                _onClick={() => {
-                    {
-                        is_login
-                            ? setModalStatue(true)
-                            : window.alert('로그인 후 이용해주세요.')
-                    }
-                }}
+            <FlexRow
+                _width={'7.5rem'}
+                _height={'7.5rem'}
+                _bgColor={'#DEDEDE'}
+                _margin={'1rem 0px'}
+                _others={'border-radius: 50%'}
             >
-                캐릭터를 뽑아주세요
-            </ButtonFill>
-            {is_login && <LevelBar />}
+                <ButtonOutlined
+                    _width={'7.5rem'}
+                    _padding={'0px'}
+                    _margin={'0px'}
+                    _border={'2px dashed #B8C0C4'}
+                    _others={'height: 7.5rem;'}
+                    _bradius="50%"
+                    _onClick={() => {
+                        {
+                            is_login
+                                ? setModalStatue(true)
+                                : window.alert('로그인 후 이용해주세요.')
+                        }
+                    }}
+                >
+                    <Text _fontSize={'2.25rem'} _color={'#B8C0C4'}>
+                        +
+                    </Text>
+                </ButtonOutlined>
+            </FlexRow>
         </React.Fragment>
     )
 }
 
 const Modal = styled.div`
-    width: 300px;
-    height: 30rem;
+    width: 100vw;
+    height: 29.5rem;
     padding: 1rem;
     box-sizing: border-box;
-    border-radius: 10px;
+    border-top-left-radius: 1.25rem;
+    border-top-right-radius: 1.25rem;
     background-color: #fff;
-    opacity: 0.95;
     position: fixed;
-    top: 4.3rem;
-    left: 1.8rem;
-    z-index: 3;
+    bottom: 0;
+    left: 0;
+    z-index: 4;
     @media screen and (max-width: 280px) {
         width: 233px;
         left: 1.5rem;

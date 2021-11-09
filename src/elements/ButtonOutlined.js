@@ -15,6 +15,7 @@ const ButtonOutlined = (props) => {
         _others,
         navIcon,
         _icon,
+        _cursor,
     } = props
 
     const styles = {
@@ -27,6 +28,7 @@ const ButtonOutlined = (props) => {
         _onClick,
         _others,
         _icon,
+        _cursor,
     }
 
     if (navIcon) {
@@ -59,6 +61,7 @@ ButtonOutlined.defaultProps = {
     _color: 'gray',
     _bradius: '3px',
     _others: '',
+    _cursor: 'pointer',
     _onClick: () => {},
 }
 
@@ -72,15 +75,13 @@ const ElButton = styled.button`
     border: ${(props) => props._border};
     ${(props) => props._others};
     background: none;
-    cursor: pointer;
-    padding:${(props) => props._padding};
+    cursor: ${(props) => props._cursor};
+    padding: ${(props) => props._padding};
 `
 
 const NavIcon = styled.div`
     margin: 0px;
     padding: 0px;
-    width: 1.5rem;
-    height: 1.5rem;
     position: fixed;
     background: none;
     border: none;
