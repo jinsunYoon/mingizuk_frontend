@@ -13,6 +13,7 @@ const initialState = {
     defaultBtn: true,
     finDate: false,
     result: [],
+    fakeResult: [],
 }
 
 const completeSlice = createSlice({
@@ -49,6 +50,12 @@ const completeSlice = createSlice({
         setResult: (state, { payload }) => {
             state.result = payload
         },
+        setFakeResult: (state, { payload }) => {
+            state.fakeResult.push(payload)
+        },
+        setFakeResultClear: (state, { payload }) => {
+            state.fakeResult = payload
+        },
     },
 
     extraReducers: {
@@ -74,6 +81,8 @@ export const {
     setDefaultBtn,
     setFinDate,
     setResult,
+    setFakeResult,
+    setFakeResultClear,
 } = completeSlice.actions
 
 //* slice export
