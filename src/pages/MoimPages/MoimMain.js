@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { NavBar } from '../../components'
 import Header from '../../components/Header'
 import MoimPost from '../../components/Moim/MoimPost'
-import MoimTemplate from '../../components/Moim/MoimTemplate'
 import { moimReadMD } from '../../redux/async/moim'
 import '../../styles/moim/moim-main.scss'
 

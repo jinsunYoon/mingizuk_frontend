@@ -19,36 +19,30 @@ const HistoryGraph = () => {
     const finActions = useSelector((state) => state.routine.fin.finActions)
     const finRoutines = useSelector((state) => state.routine.fin.finRoutines)
     const joinDate = useSelector((state) => state.routine.fin.joinDate)
-    // const dayLengthCalculate = () => {
-    //     let result = ''
-    //     const day = moment(joinDate).fromNow()
-    //     if (day.includes('day')) {
-    //         result = moment(joinDate).fromNow().slice(0, 1)
-    //     } else {
-    //         result = 1
-    //     }
-    //     return result
-    // }
-    const daylength = moment(joinDate).fromNow().slice(0, 1)
+    const daylength = 2
     console.log('&&', finActions, finRoutines)
 
     const [startDay, setStartDay] = React.useState(0)
     const [week, setWeek] = React.useState(1)
-    console.log('>>', joinDate, moment(joinDate).fromNow())
+    console.log('>>', joinDate)
 
     // * history에 쓰일 날짜들 전부
     const getHistory = () => {
         let history_date = []
         if (daylength % 7 !== 0) {
-            for (let i = 0; i < Number(daylength) + (daylength % 7) + 1; i++) {
-                history_date.push({
-                    date: format(
-                        addDays(new Date(joinDate.slice(0, 10)), i),
-                        'yyyy-MM-dd'
-                    ),
-                    actions: [],
-                })
+            while (daylength % 7 === 0) {
+                daylength = daylength + 1
+                console.log('<<', daylength)
             }
+            // for (let i = 0; i < Number(daylength) + (daylength % 7) + 1; i++) {
+            //     history_date.push({
+            //         date: format(
+            //             addDays(new Date(joinDate.slice(0, 10)), i),
+            //             'yyyy-MM-dd'
+            //         ),
+            //         actions: [],
+            //     })
+            // }
         } else {
             for (let i = 0; i < Number(daylength); i++) {
                 history_date.push({
@@ -84,7 +78,11 @@ const HistoryGraph = () => {
 
         return _inital
     }
-    initialDate()
+
+    if (joinDate) {
+        initialDate()
+        console.log('<<', getHistory())
+    }
 
     return (
         <>
