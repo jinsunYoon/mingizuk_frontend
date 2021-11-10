@@ -8,46 +8,44 @@ import { Text } from '../../elements/index'
 import { NavBar } from '../index'
 import { myMoimCreateMD } from '../../redux/async/myMoim'
 
-const MyCreate = () => {
+const MyCreatedMoims = () => {
     const dispatch = useDispatch()
     const create_list = useSelector((state) => state.myMoim.my_moim)
 
-    console.log(create_list)
+    console.log(create_list, 'createlist?????')
     useEffect(() => {
         dispatch(myMoimCreateMD())
     }, [])
 
     return (
         <>
-            {create_list?.map((i, idx) => (
-                <PostBox
-                    onClick={() => history.push(`/moim/detail/${i.moimId}`)}
-                >
-                    <TitleBox key={idx}>
-                        <div>
-                            <Text _align="left">{i?.Moim?.title}</Text>
-                            <Text
-                                _fontSize="11px"
-                                _color="#8f8f8f"
-                                _align="left"
-                            >
-                                {i?.createdAt?.split(['T'])[0]}
-                            </Text>
+            <section className="mymoim-contents">
+                {create_list?.map((i, idx) => (
+                    <div
+                        className="postbox"
+                        onClick={() => history.push(`/moim/detail/${i.moimId}`)}
+                    >
+                        <div className="titlebox" key={idx}>
+                            <div>
+                                <span className="location">{}</span>
+                                <span className="title">{i?.Moim?.title}</span>
+                                <span className="date">{i?.createdAt?.split(['T'])[0]}</span>
+                            </div>
                         </div>
-                    </TitleBox>
-                    <EtcBox>
-                        <SmallBox>
-                            <Icon icon={'favorite'} size="20px" />
-                            좋아요 {(i?.Moim?.Likes).length}
-                        </SmallBox>
-                        <SmallBox>
-                            <Icon icon={'message'} size="20px" />
-                            댓글 {(i?.Moim?.Comments).length}개
-                        </SmallBox>
-                    </EtcBox>
-                </PostBox>
-            ))}
-            <NavBar />
+                        <div className="ectbox">
+                            <div className="smallbox">
+                                <Icon icon={'favorite'} size="20px" />
+                                좋아요 {(i?.Moim?.Likes).length}
+                            </div>
+                            <div className="">
+                                <Icon icon={'message'} size="20px" />
+                                댓글 {(i?.Moim?.Comments).length}개
+                            </div>
+                        </div>
+                    </div>
+                ))}
+                <NavBar />
+            </section>
         </>
     )
 }
@@ -85,4 +83,4 @@ const EtcBox = styled.div`
     border-top: 1px solid lightgray;
 `
 
-export default MyCreate
+export default MyCreatedMoims

@@ -185,31 +185,6 @@ const ModalEl = styled.div`
     align-items: center;
     bottom: 0;
     left: 0;
-    @media screen and (max-width: 280px) {
-        width: 233px;
-        left: 1.5rem;
-    }
-    @media screen and (min-width: 281px) and (max-width: 320px) {
-        width: 263px;
-    }
-    @media screen and (min-width: 361px) and (max-width: 375px) {
-        width: 318px;
-    }
-    @media screen and (min-width: 376px) and (max-width: 414px) {
-        width: 353px;
-    }
-    @media screen and (min-width: 415px) and (max-width: 540px) {
-        width: 460px;
-        left: 2.5rem;
-    }
-    @media screen and (min-width: 700px) and (max-width: 768px) {
-        width: 673px;
-        left: 3rem;
-    }
-    @media screen and (min-width: 1000px) and (max-width: 1280px) {
-        width: 897px;
-        left: 4rem;
-    }
 `
 
 export default CompleteActionModal

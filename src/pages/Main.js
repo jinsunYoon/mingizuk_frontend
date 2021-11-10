@@ -8,7 +8,7 @@ import {
 } from '../elements/index'
 import {
     CharacterModal,
-    CompleteActionModal,
+    MainRoutineList,
     Header,
     LevelBar,
 } from '../components/index'
@@ -22,6 +22,7 @@ import { getMainRoutineMD } from '../redux/async/routine'
 import Time from '../elements/Time'
 import styled from 'styled-components'
 import { chageMyHabitModal } from '../redux/modules/routineSlice'
+import ActionStart from '../components/ActionStart'
 import HabitTraker from '../components/Routine/HabitTraker'
 
 const Main = (props) => {
@@ -143,17 +144,8 @@ const Main = (props) => {
                                     />
                                 </Text>
                             </FlexRow>
-                            <CompleteActionModal />
-                            <ButtonOutlined
-                                _width={'13rem'}
-                                _others={'height:3rem'}
-                                _margin={'0.5rem 0 1rem 0'}
-                                _border={'1px solid #6B76FF'}
-                                _color={'#6B76FF'}
-                                _bradius={'0.5rem'}
-                            >
-                                시작하기
-                            </ButtonOutlined>
+                            <MainRoutineList />
+                            <ActionStart />
                         </FlexColumn>
                     </FlexColumn>
                     <div

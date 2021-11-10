@@ -18,6 +18,7 @@ const Icon = (props) => {
                 color={color}
                 size={size}
                 icon={icon}
+                className={className}
             >
                 <div>{_text}</div>
             </IcomoonReact>

@@ -8,7 +8,7 @@ import {
     Text,
 } from '../elements/index'
 import { useDispatch } from 'react-redux'
-import {history} from '../redux/store'
+import { history } from '../redux/store'
 import { signupMD } from '../redux/async/user'
 import dotenv from 'dotenv'
 import '../styles/auth/auth.scss'
@@ -71,35 +71,43 @@ const Signup = (props) => {
 
     return (
         <div className="auth-layout">
-            <div className="logo">Minggijeok</div>
-            <div className="input-container">
-                <input
-                    placeholder="닉네임을 입력하세요."
-                    onChange={(e) => setNickName(e.target.value)}
-                />
-                <input
-                    placeholder="이메일을 입력해주세요."
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="비밀번호를 입력해주세요."
-                    onChange={(e) => setUserPw(e.target.value)}
-                />
-                <input
-                    placeholder="비밀번호를 다시 입력해주세요."
-                    onKeyPress={onKeyPress}
-                    onChange={(e) => setUserPwChk(e.target.value)}
-                />
-            </div>
-            <div className="btn-container">
-                <button className="signup-btn" onClick={onClickSignup}>
-                    회원가입하기
-                </button>
-                <button className="main-btn" onClick= {()=>{history.push('/')}}>
-                    메인으로가기
-                </button>
-            </div>
+            <h1 className="logo">Minggijeok</h1>
+            <section className="contents">
+                <div className="input-container">
+                    <input
+                        placeholder="닉네임을 입력하세요."
+                        onChange={(e) => setNickName(e.target.value)}
+                    />
+                    <input
+                        placeholder="이메일을 입력해주세요."
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="비밀번호를 입력해주세요."
+                        onChange={(e) => setUserPw(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="비밀번호를 다시 입력해주세요."
+                        onKeyPress={onKeyPress}
+                        onChange={(e) => setUserPwChk(e.target.value)}
+                    />
+                </div>
+                <div className="btn-container">
+                    <button className="signup-btn" onClick={onClickSignup}>
+                        회원가입하기
+                    </button>
+                    <button
+                        className="main-btn"
+                        onClick={() => {
+                            history.push('/')
+                        }}
+                    >
+                        메인으로가기
+                    </button>
+                </div>
+            </section>
         </div>
     )
 }
