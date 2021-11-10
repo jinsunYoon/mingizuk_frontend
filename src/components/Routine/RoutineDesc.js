@@ -7,6 +7,10 @@ import {
     myRoutineDeleteMD,
     setMainRoutineMD,
 } from '../../redux/async/routine'
+import {
+    setResult,
+    setFakeResultClear,
+} from '../../redux/modules/completeSlice'
 import Icon from '../icons/Icon'
 import { updateRoutine } from '../../redux/modules/routineSlice'
 
@@ -53,6 +57,8 @@ const RoutineDesc = (props) => {
                                             routine?.Actions[0].routineId,
                                     }
                                     dispatch(setMainRoutineMD(data))
+                                    dispatch(setResult([]))
+                                    dispatch(setFakeResultClear([]))
                                 }
                             }}
                         >
@@ -107,6 +113,8 @@ const RoutineDesc = (props) => {
                                                 routine?.Actions[0].routineId,
                                         }
                                         dispatch(setMainRoutineMD(data))
+                                        dispatch(setResult([]))
+                                        dispatch(setFakeResultClear([]))
                                     }
                                 }}
                             >
