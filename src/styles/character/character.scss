@@ -1,0 +1,61 @@
+//character
+@import '../shared/common.scss';
+
+.addchar {
+    @include flexbox();
+    width: 120px;
+    height: 120px;
+    font-size: 36px;
+    border: dashed 2px #b8c0c4;
+    margin: 40px;
+    background-color: #dedede;
+    color: #b8c0c4;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    cursor: pointer;
+}
+
+.modal-container {
+    .modal-bg {
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.3);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 3;
+
+        .modal {
+            @include flexbox();
+            flex-direction: column;
+            justify-content: space-evenly;
+            width: 60vw;
+            height: 60vh;
+            background: $secondary;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 6;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+
+            .char {
+                width: 200px;
+                height: 200px;
+                border: 1px solid $black;
+            }
+            .close-btn {
+                background: #fff;
+                cursor: pointer;
+                border: 1px solid #fff;
+                padding: 5px;
+            }
+        }
+    }
+}
