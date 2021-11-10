@@ -1,0 +1,58 @@
+//Moim-main
+@import '../shared/common.scss';
+
+//================= > contents에 미디어쿼리 적용
+.moim-layout {
+    @include container();
+
+    .contents {
+        margin: 47px auto 0;
+
+        @include mobile {
+            width: 360px;
+        }
+        @include tablet {
+            width: 100%;
+        }
+        @include desktop {
+            max-width: 1024px;
+        }
+    }
+}
+
+//PostDesc
+.descbox {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: lemonchiffon;
+
+    .location {
+        @include text-style-12(12px, 0.15px, #a5abb0);
+    }
+    .title {
+        @include text-style-16(12px, 0.15px, #000);
+    }
+    .imgbox {
+        width: 100%;
+        padding: 16px;
+        .imgdata {
+            width: 328px;
+            height: 160px;
+        }
+    }
+
+    .smallbox{
+        display: flex;
+        flex-direction: row;
+    }
+    .nickname {
+    }
+    .createat {
+    }
+    .moimuser {
+    }
+}
+
+.ectbox {
+}

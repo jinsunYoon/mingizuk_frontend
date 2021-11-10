@@ -1,21 +1,21 @@
 import React, { Component, useState } from 'react'
 
 //* components
-import { Header, NavBar, CollectionItem } from '../index'
+import { CollectionItem } from '../index'
 
 //* sytle
 import styled from 'styled-components'
 
+// 단계별(1,2,3)
 const CollectionList = () => {
     return (
         <>
-            <Header name="마이콜렉션" />
+        
             <Flex>
                 <CollectionItem />
                 <CollectionItem />
                 <CollectionItem />
             </Flex>
-            <NavBar />
         </>
     )
 }

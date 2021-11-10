@@ -34,7 +34,7 @@ const PostDesc = () => {
             {post_data_all.length > 0 &&
                 post_data_all?.map((data, idx) => (
                     <div key={idx}>
-                        {Object.keys(post_data_all).length > 0 &&
+                        {/* {Object.keys(post_data_all).length > 0 &&
                             data?.MoimUsers[0]?.User?.nickName ===
                                 loginNickName && (
                                 <CloseBtn
@@ -44,56 +44,63 @@ const PostDesc = () => {
                                 >
                                     X
                                 </CloseBtn>
-                            )}
+                            )} */}
 
                         {data?.imgSrc === null ? (
-                            <PostDescBox
+                            <div
+                                className="descbox"
                                 onClick={() => {
                                     history.push(`/moim/detail/${data?.id}`)
                                 }}
                             >
-                                <Text _fontWeight="700" _fontSize="16px">
-                                    {data?.title}
-                                </Text>
-                                <TextBox>
+                                <span className="location">
+                                    {/* location */} 강남구 역삼동
+                                </span>
+                                <span className="title">{data?.title}</span>
+                                <span className="nickname">
                                     {data?.MoimUsers[0]?.User?.nickName}
-                                </TextBox>
-                                <TextBox>{data?.createdAt}</TextBox>
-                                <TextBox>
+                                </span>
+                                <span className="createat">
+                                    {data?.createdAt}
+                                </span>
+                                <span className="moimuser">
                                     참여자 {data?.MoimUsers?.length}명
-                                </TextBox>
-                            </PostDescBox>
+                                </span>
+                            </div>
                         ) : (
-                            <div>
-                                <PostImgBox
-                                    onClick={() => {
-                                        history.push(`/moim/detail/${data?.id}`)
-                                    }}
-                                >
-                                    <Text _fontWeight="700" _fontSize="16px">
-                                        {data.title}
-                                    </Text>
-                                    <TextBox>
+                            <div
+                                className="descbox"
+                                onClick={() => {
+                                    history.push(`/moim/detail/${data?.id}`)
+                                }}
+                            >
+                                <p className="location">
+                                    {/* location */} 강남구 역삼동
+                                </p>
+                                <p className="title">{data?.title}</p>
+                                <div className="imgbox">
+                                    <img
+                                        className="imagedata"
+                                        src={data.imgSrc}
+                                        _width="auto"
+                                        _height="8rem"
+                                    />
+                                </div>
+                                <div className="smallbox">
+                                    <span className="nickname">
                                         {data?.MoimUsers[0]?.User?.nickName}
-                                    </TextBox>
-                                    <TextBox>{data?.createdAt}</TextBox>
-                                    <TextBox>
+                                    </span>
+                                    <span className="createat">
+                                        {data?.createdAt.split('T')[0]}
+                                    </span>
+                                    <span className="moimuser">
                                         참여자 {data?.MoimUsers?.length}명
-                                    </TextBox>
-                                    <ImgWarp>
-                                        <Img
-                                            _src={data.imgSrc}
-                                            _width="auto"
-                                            _height="8rem"
-                                        />
-                                    </ImgWarp>
-                                    <div></div>
-                                </PostImgBox>
+                                    </span>
+                                </div>
                             </div>
                         )}
-                        <EtcBox>
+                        <div className="ectbox">
                             <SmallBox>
-
                                 {data?.Likes?.findIndex(
                                     (user) => user?.userId === loginuserID
                                 ) === -1 ? (
@@ -122,7 +129,7 @@ const PostDesc = () => {
                                 <Icon icon={'message'} size="20px" />
                                 댓글{data?.Comments?.length}개
                             </SmallBox>
-                        </EtcBox>
+                        </div>
                     </div>
                 ))}
         </>
