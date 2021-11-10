@@ -3,10 +3,10 @@ import { getToken } from './utils'
 
 // Axios 인스턴스 설정
 const instance = axios.create({
-    baseURL: 'http://13.125.116.205',
+    baseURL: 'https://mingijuk.shop',
 })
 const instanceSign = axios.create({
-    baseURL: 'http://13.125.116.205',
+    baseURL: 'https://mingijuk.shop',
 })
 
 // interceptor를 통한 header 설정
