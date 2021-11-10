@@ -128,7 +128,6 @@ export const finRoutinesActionsMD = createAsyncThunk(
     'routine/getFins',
     async (data, thunkAPI) => {
         try {
-            console.log('>>>>', '???')
             const response = await finRoutinesActionsAPI(data)
 
             if (response) {

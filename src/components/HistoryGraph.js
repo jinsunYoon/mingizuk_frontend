@@ -7,12 +7,10 @@ import { finRoutinesActionsMD } from '../redux/async/routine'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 
+// TODO history today - joindate 로  dayLength 변수 제대로 값 넣어줘야 함....... / 7일 단위로 나눌 수 있게 해야함...
 const HistoryGraph = () => {
     // * get data from server
     const dispatch = useDispatch()
-    React.useEffect(() => {
-        dispatch(finRoutinesActionsMD())
-    }, [])
     const graphActionData = []
 
     //* setting data from server
@@ -20,31 +18,16 @@ const HistoryGraph = () => {
     const finRoutines = useSelector((state) => state.routine.fin.finRoutines)
     const joinDate = useSelector((state) => state.routine.fin.joinDate)
     const daylength = 2
-    console.log('&&', finActions, finRoutines)
 
     const [startDay, setStartDay] = React.useState(0)
     const [week, setWeek] = React.useState(1)
-    console.log('>>', joinDate)
+    console.log('>>', joinDate, moment(joinDate).fromNow(true))
 
     // * history에 쓰일 날짜들 전부
     const getHistory = () => {
         let history_date = []
-        if (daylength % 7 !== 0) {
-            while (daylength % 7 === 0) {
-                daylength = daylength + 1
-                console.log('<<', daylength)
-            }
-            // for (let i = 0; i < Number(daylength) + (daylength % 7) + 1; i++) {
-            //     history_date.push({
-            //         date: format(
-            //             addDays(new Date(joinDate.slice(0, 10)), i),
-            //             'yyyy-MM-dd'
-            //         ),
-            //         actions: [],
-            //     })
-            // }
-        } else {
-            for (let i = 0; i < Number(daylength); i++) {
+        const dateLoop = (num) => {
+            for (let i = 0; i < num; i++) {
                 history_date.push({
                     date: format(
                         addDays(new Date(joinDate.slice(0, 10)), i),
@@ -53,6 +36,28 @@ const HistoryGraph = () => {
                     actions: [],
                 })
             }
+        }
+        switch (daylength % 7) {
+            case 1:
+                dateLoop(daylength + 6)
+                break
+            case 2:
+                dateLoop(daylength + 5)
+                break
+            case 3:
+                dateLoop(daylength + 4)
+                break
+            case 4:
+                dateLoop(daylength + 3)
+                break
+            case 5:
+                dateLoop(daylength + 2)
+                break
+            case 6:
+                dateLoop(daylength + 1)
+                break
+            default:
+                dateLoop(daylength)
         }
         return history_date
     }
