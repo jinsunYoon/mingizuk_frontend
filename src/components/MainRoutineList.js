@@ -14,10 +14,8 @@ import {
     setActionId,
     setRoutineId,
     setFinDate,
-    setResult,
 } from '../redux/modules/completeSlice'
 import { Complete } from './index'
-import { actionRestartMD } from '../redux/async/actionComplete'
 
 const MainRoutineList = (props) => {
     const dispatch = useDispatch()
@@ -43,27 +41,9 @@ const MainRoutineList = (props) => {
                     _others={'min-height:6.25rem'}
                 >
                     <Text _fontSize={'1.2rem'} _fontWeight={'700'}>
-                        루틴을 끝마치셨습니다 축하드립니다~!
+                        루틴을 끝마치셨습니다
+                        <br /> 축하드립니다~!
                     </Text>
-                    <FlexRow _border={'none'} _width={'none'}>
-                        <ButtonOutlined
-                            _width={'false'}
-                            _fontSize={'0.9rem'}
-                            _onClick={() => {
-                                const routineId =
-                                    mainRoutine.Actions.length > 0 &&
-                                    mainRoutine.Actions[0].routineId
-                                console.log('루틴아이디', routineId)
-                                dispatch(actionRestartMD(routineId))
-                                dispatch(setResult([]))
-                            }}
-                        >
-                            현재 루틴 재시작 하기
-                        </ButtonOutlined>
-                        <ButtonOutlined _width={'false'} _fontSize={'0.9rem'}>
-                            새 루틴 지정하기
-                        </ButtonOutlined>
-                    </FlexRow>
                 </FlexColumn>
             </div>
         )

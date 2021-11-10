@@ -1,13 +1,17 @@
 import React from 'react'
 import HistoryGraph from '../components/HistoryGraph'
-import RoutineTemplate from '../components/Routine/RoutineTemplate'
-import { ActiveUnderLine, FlexColumn, Title } from '../elements'
-import { history } from '../redux/store'
 import Header from '../components/Header'
 import ToggleTab from '../components/ToggleTab'
+import { useDispatch, useSelector } from 'react-redux'
 import '../styles/routine/history.scss'
+import { finRoutinesActionsMD } from '../redux/async/routine'
 
 const History = () => {
+    const status = useSelector((state) => state.routine.myPage)
+    const dispatch = useDispatch()
+    React.useEffect(() => {
+        dispatch(finRoutinesActionsMD())
+    }, [])
     return (
         <>
             <Header name="통계" />
@@ -17,7 +21,7 @@ const History = () => {
                 select={status}
             />
             <section className="history-container">
-                <HistoryGraph />
+                <HistoryGraph select={status} />
             </section>
         </>
     )
