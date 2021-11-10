@@ -1,11 +1,13 @@
-//mypage - main
+//mypage
 @import '../shared/common.scss';
 
 .mypage-layout {
-    @include container()
+    @include container();
 }
 //================= > contents에 미디어쿼리 적용
 .contents {
+    margin: 50px auto 0;
+
     @include mobile {
         width: 100%;
     }
@@ -59,6 +61,7 @@
             font-size: 14px;
             font-weight: 500;
             border-bottom: 1px solid #eee;
+            background-color: $white;
 
             &:hover {
                 cursor: pointer;
