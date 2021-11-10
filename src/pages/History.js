@@ -7,6 +7,7 @@ import '../styles/routine/history.scss'
 import { finRoutinesActionsMD } from '../redux/async/routine'
 
 const History = () => {
+    const status = useSelector((state) => state.routine.myPage)
     const dispatch = useDispatch()
     React.useEffect(() => {
         dispatch(finRoutinesActionsMD())
@@ -20,7 +21,7 @@ const History = () => {
                 select={status}
             />
             <section className="history-container">
-                <HistoryGraph />
+                <HistoryGraph select={status} />
             </section>
         </>
     )
