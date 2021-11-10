@@ -129,6 +129,7 @@ export const finRoutinesActionsMD = createAsyncThunk(
     async (data, thunkAPI) => {
         try {
             const response = await finRoutinesActionsAPI(data)
+
             if (response) {
                 return response
             }

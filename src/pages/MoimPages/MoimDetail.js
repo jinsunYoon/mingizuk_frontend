@@ -15,7 +15,7 @@ import {
 } from '../../redux/async/moim'
 import MoimReview from '../../components/Moim/MoimReview'
 import { moimUpdate } from '../../redux/modules/moimSlice'
-import { darkScrollbar } from '@mui/material'
+import '../../styles/moim/moim-detail.scss'
 
 const MoimDetail = (props) => {
     const post_id = props.match.params.id
@@ -67,7 +67,7 @@ const MoimDetail = (props) => {
     return (
         <>
             <Header name="모임" type="back" />
-            <DetailBox>
+            <section className="detail-layout">
                 <TitleBox>
                     {Object.keys(post_data).length > 0 &&
                         post_data.MoimUsers[0].User.nickName === user_nick && (
@@ -138,7 +138,7 @@ const MoimDetail = (props) => {
                         댓글 {post_data?.Comments?.length}개
                     </SmallBox>
                 </EtcBox>
-            </DetailBox>
+            </section>
             <div style={{ marginBottom: '60px', width: '100vw' }}>
                 <MoimReview moimId={post_id} />
             </div>
@@ -190,13 +190,6 @@ const JoinBtn = styled.button`
     top: 273px;
 `
 
-const DetailBox = styled.div`
-    margin: 5vw auto;
-    width: 90vw;
-    height: 100%;
-    border: 1px solid #c4c4c4;
-    position: relative;
-`
 const SmallBox = styled.div`
     display: flex;
     height: inherit;

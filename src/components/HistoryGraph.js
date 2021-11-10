@@ -7,40 +7,27 @@ import { finRoutinesActionsMD } from '../redux/async/routine'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 
+// TODO history today - joindate 로  dayLength 변수 제대로 값 넣어줘야 함....... / 7일 단위로 나눌 수 있게 해야함...
 const HistoryGraph = () => {
     // * get data from server
     const dispatch = useDispatch()
-    React.useEffect(() => {
-        dispatch(finRoutinesActionsMD())
-    }, [])
     const graphActionData = []
 
     //* setting data from server
     const finActions = useSelector((state) => state.routine.fin.finActions)
     const finRoutines = useSelector((state) => state.routine.fin.finRoutines)
     const joinDate = useSelector((state) => state.routine.fin.joinDate)
-    // const dayLengthCalculate = () => {
-    //     let result = ''
-    //     const day = moment(joinDate).fromNow()
-    //     if (day.includes('day')) {
-    //         result = moment(joinDate).fromNow().slice(0, 1)
-    //     } else {
-    //         result = 1
-    //     }
-    //     return result
-    // }
-    const daylength = moment(joinDate).fromNow().slice(0, 1)
-    console.log('&&', finActions, finRoutines)
+    const daylength = 2
 
     const [startDay, setStartDay] = React.useState(0)
     const [week, setWeek] = React.useState(1)
-    console.log('>>', joinDate, moment(joinDate).fromNow())
+    console.log('>>', joinDate, moment(joinDate).fromNow(true))
 
     // * history에 쓰일 날짜들 전부
     const getHistory = () => {
         let history_date = []
-        if (daylength % 7 !== 0) {
-            for (let i = 0; i < Number(daylength) + (daylength % 7) + 1; i++) {
+        const dateLoop = (num) => {
+            for (let i = 0; i < num; i++) {
                 history_date.push({
                     date: format(
                         addDays(new Date(joinDate.slice(0, 10)), i),
@@ -49,16 +36,28 @@ const HistoryGraph = () => {
                     actions: [],
                 })
             }
-        } else {
-            for (let i = 0; i < Number(daylength); i++) {
-                history_date.push({
-                    date: format(
-                        addDays(new Date(joinDate.slice(0, 10)), i),
-                        'yyyy-MM-dd'
-                    ),
-                    actions: [],
-                })
-            }
+        }
+        switch (daylength % 7) {
+            case 1:
+                dateLoop(daylength + 6)
+                break
+            case 2:
+                dateLoop(daylength + 5)
+                break
+            case 3:
+                dateLoop(daylength + 4)
+                break
+            case 4:
+                dateLoop(daylength + 3)
+                break
+            case 5:
+                dateLoop(daylength + 2)
+                break
+            case 6:
+                dateLoop(daylength + 1)
+                break
+            default:
+                dateLoop(daylength)
         }
         return history_date
     }
@@ -84,7 +83,11 @@ const HistoryGraph = () => {
 
         return _inital
     }
-    initialDate()
+
+    if (joinDate) {
+        initialDate()
+        console.log('<<', getHistory())
+    }
 
     return (
         <>
