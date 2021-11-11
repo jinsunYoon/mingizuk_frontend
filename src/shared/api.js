@@ -80,6 +80,10 @@ const loginCheckAPI = () => {
 
 //mainpage
 
+const getMainRoutineAPI = () => {
+    return instance.get('/api/main/ongoing')
+}
+
 const actionCompleteAPI = (data) => {
     console.log('이거 api 데이터', data)
     return instance.put('/api/users/action', {
@@ -94,8 +98,9 @@ const actionRestartAPI = (routineId) => {
     return instance.post(`/api/routines/create/${routineId}`)
 }
 
-const getMainRoutineAPI = () => {
-    return instance.get('/api/main/ongoing')
+const actionResetAPI = (routineId) => {
+    console.log('이거 api 데이터', routineId)
+    return instance.post(`/api/routines/reset/${routineId}`)
 }
 
 // *---------------------------------------------------
@@ -276,4 +281,5 @@ export {
     naverAPI,
     googleAPI,
     finRoutinesActionsAPI,
+    actionResetAPI,
 }

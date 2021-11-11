@@ -12,7 +12,7 @@ import {
     Header,
     LevelBar,
 } from '../components/index'
-import { setResult } from '../redux/modules/completeSlice'
+import { setFakeResult, setResult } from '../redux/modules/completeSlice'
 import Icon from '../components/icons/Icon'
 import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
@@ -28,19 +28,32 @@ import HabitTraker from '../components/Routine/HabitTraker'
 const Main = (props) => {
     const dispatch = useDispatch()
 
-    React.useEffect(() => {
-        dispatch(loginCheckMD())
-        dispatch(getMainRoutineMD())
-        // const actionFins = mainRoutine?.Actions?.ActionFins?.map(
-        //     (fin, idx) => {}
-        // )
-    }, [])
-
     const is_login = useSelector((state) => state.user.isLogin)
     const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
     console.log('메인루틴', mainRoutine)
     const isMain = useSelector((state) => state.setAction.isMain)
     const nickName = useSelector((state) => state.user.userInfo.nickName)
+
+    const ActionFins = mainRoutine?.Actions?.map((action) => action?.ActionFins)
+    const finDate = ActionFins?.map((fin) => fin[fin.length - 1].date)
+    const fins = finDate?.filter((fin) => fin !== null)
+    console.log('fins', fins)
+
+    const array = []
+    for (let i = 0; i < fins?.length; i++) {
+        array.push('result')
+    }
+    console.log('array', array)
+
+    React.useEffect(() => {
+        dispatch(loginCheckMD())
+        dispatch(getMainRoutineMD())
+    }, [])
+
+    if (array.length > 0) {
+        dispatch(setResult(array))
+        dispatch(setFakeResult(array))
+    }
 
     if (is_login && isMain) {
         return (

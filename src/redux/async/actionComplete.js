@@ -1,5 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { actionCompleteAPI, actionRestartAPI } from '../../shared/api'
+import {
+    actionCompleteAPI,
+    actionRestartAPI,
+    actionResetAPI,
+} from '../../shared/api'
 import { history } from '../store'
 
 export const actionCompleteMD = createAsyncThunk(
@@ -23,6 +27,22 @@ export const actionRestartMD = createAsyncThunk(
     async (data, thunkAPI) => {
         try {
             const response = await actionRestartAPI(data)
+            if (response) {
+                console.log(response)
+                return response
+            }
+        } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const actionResetMD = createAsyncThunk(
+    'completeSlice/reset',
+    async (data, thunkAPI) => {
+        try {
+            const response = await actionResetAPI(data)
             if (response) {
                 console.log(response)
                 return response
