@@ -1,11 +1,13 @@
 import React from 'react'
-import clsx from 'clsx'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addAction, minusAction } from '../../redux/modules/updateRoutine'
 import Icon from '../../components/icons/Icon'
+import clsx from 'clsx'
 
 const RoutineSelect = (props) => {
     const dispatch = useDispatch()
+    const addedActions = useSelector((state) => state.updateAction.actions)
+    console.log('<<', addedActions)
     const [check, setCheck] = React.useState(false)
     const { stretching, body_exercise, select } = props
     const [desc, setDesc] = React.useState('first')
@@ -20,9 +22,17 @@ const RoutineSelect = (props) => {
         }
     })
 
-    const changeActions = (data) => {
-        !check ? setCheck(true) : setCheck(false)
-        !check ? dispatch(addAction(data)) : dispatch(minusAction(data))
+    const changeActions = (newAct) => {
+        const confirm = addedActions?.findIndex(
+            ({ actionName }) => actionName === newAct.value
+        )
+        confirm === -1
+            ? dispatch(addAction(newAct))
+            : dispatch(minusAction(newAct))
+    }
+
+    const checkColor = (name) => {
+        return addedActions?.findIndex(({ actionName }) => actionName === name)
     }
 
     return (
@@ -33,22 +43,37 @@ const RoutineSelect = (props) => {
                         <button
                             className="routine"
                             key={idx}
-                            onClick={(e) => {
+                            onClick={() => {
                                 {
                                     changeActions({
                                         value: routine,
                                         type: 'stretching',
                                     })
-                                    !check
-                                        ? (e.currentTarget.style.color =
-                                              '#6B76FF')
-                                        : (e.currentTarget.style.color =
-                                              '#000000')
                                 }
                             }}
                         >
-                            <span>{routine}</span>
-                            <Icon size="16px" color="lightgray" icon="check" />
+                            <span
+                                className={clsx(
+                                    '',
+                                    checkColor(routine) !== -1 &&
+                                        'select-priamry'
+                                )}
+                            >
+                                {routine}
+                            </span>
+                            {checkColor(routine) === -1 ? (
+                                <Icon
+                                    size="16px"
+                                    color="lightgray"
+                                    icon="check"
+                                />
+                            ) : (
+                                <Icon
+                                    size="16px"
+                                    color="#6B76FF"
+                                    icon="check"
+                                />
+                            )}
                         </button>
                     ))}
                 </section>
@@ -59,18 +84,37 @@ const RoutineSelect = (props) => {
                         <button
                             className="routine"
                             key={idx}
-                            onClick={(e) => {
-                                changeActions({
-                                    value: routine,
-                                    type: 'body_exercise',
-                                })
-                                !check
-                                    ? (e.currentTarget.style.color = '#6B76FF')
-                                    : (e.currentTarget.style.color = '#000000')
+                            onClick={() => {
+                                {
+                                    changeActions({
+                                        value: routine,
+                                        type: 'body_exercise',
+                                    })
+                                }
                             }}
                         >
-                            <span>{routine}</span>
-                            <Icon size="16px" color="lightgray" icon="check" />
+                            <span
+                                className={clsx(
+                                    '',
+                                    checkColor(routine) !== -1 &&
+                                        'select-priamry'
+                                )}
+                            >
+                                {routine}
+                            </span>
+                            {checkColor(routine) === -1 ? (
+                                <Icon
+                                    size="16px"
+                                    color="lightgray"
+                                    icon="check"
+                                />
+                            ) : (
+                                <Icon
+                                    size="16px"
+                                    color="#6B76FF"
+                                    icon="check"
+                                />
+                            )}
                         </button>
                     ))}
                 </section>

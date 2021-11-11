@@ -9,11 +9,12 @@ const actionSlice = createSlice({
     initialState: initialState,
     reducers: {
         addAction: (state, action) => {
+            console.log('<<,add', action)
             let testArray = []
             // * 중복처리
             state.actions.push({
                 actionName: action.payload.value,
-                actionCnt: 0,
+                actionCnt: 1,
                 actionType: action.payload.type,
             })
 
@@ -33,6 +34,7 @@ const actionSlice = createSlice({
             }
         },
         minusAction: (state, action) => {
+            console.log('<<,minuse', action)
             const result = state.actions.filter(
                 (act) => act.actionName !== action.payload.value
             )
@@ -49,7 +51,7 @@ const actionSlice = createSlice({
             const ref = state.actions.findIndex(
                 (act) => act.actionName === action.payload
             )
-            if (state.actions[ref].actionCnt > 0) {
+            if (state.actions[ref].actionCnt > 1) {
                 state.actions[ref].actionCnt = state.actions[ref].actionCnt - 1
             }
         },

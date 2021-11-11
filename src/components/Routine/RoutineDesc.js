@@ -80,14 +80,14 @@ const RoutineDesc = (props) => {
                                 </p>
                             </div>
                             <div className="icon-box">
-                                <button
+                                <div
                                     onClick={() => {
                                         dispatch(updateRoutine(routine.id))
                                         history.push('/routine/update')
                                     }}
                                 >
                                     u
-                                </button>
+                                </div>
                                 <Icon
                                     _onClick={() => {
                                         const answer =

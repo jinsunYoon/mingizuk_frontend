@@ -4,25 +4,26 @@
         {
             "icon": {
                 "paths": [
-                    "M0 1024h1536v-170.667h-1536v170.667zM0 597.333h1536v-170.667h-1536v170.667zM0 0v170.667h1536v-170.667h-1536z"
+                    "M424.225 797.257l-307.2-307.201-102.4 102.4 409.6 409.601 877.718-877.715-102.4-102.4-775.318 775.315z"
                 ],
                 "attrs": [{}],
-                "width": 1536,
+                "width": 1317,
                 "isMulticolor": false,
                 "isMulticolor2": false,
                 "grid": 0,
-                "tags": ["↳Color"]
+                "tags": ["icon"],
+                "colorPermutations": { "16517117614658891": [{}] }
             },
             "attrs": [{}],
             "properties": {
-                "order": 2,
-                "id": 0,
-                "name": "Color",
+                "order": 3,
+                "id": 5,
+                "name": "icon",
                 "prevSize": 32,
                 "code": 59648
             },
-            "setIdx": 0,
-            "setId": 4,
+            "setIdx": 1,
+            "setId": 3,
             "iconIdx": 0
         }
     ],

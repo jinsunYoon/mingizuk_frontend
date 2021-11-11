@@ -39,3 +39,7 @@
         @include text-style-12(16px, auto, $text-gray);
     }
 }
+
+.select-priamry {
+    color: $primary !important;
+}

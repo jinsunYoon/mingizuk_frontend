@@ -1,11 +1,13 @@
 import React from 'react'
-import UpdateCheck from '../../elements/UpdateCheck'
-import { useSelector } from 'react-redux'
-// import '../../styles/routine/add-routine.scss'
+import { useSelector, useDispatch } from 'react-redux'
+import Icon from '../icons/Icon'
+import { addAction, minusAction } from '../../redux/modules/updateRoutine'
 
 const RoutineUpdateSelect = (props) => {
     const { body_exercise, stretching, select } = props
     const [desc, setDesc] = React.useState('first')
+    const dispatch = useDispatch()
+
     React.useEffect(() => {
         if (select === 'first') {
             setDesc('stretching')
@@ -14,7 +16,7 @@ const RoutineUpdateSelect = (props) => {
         } else {
             setDesc('stretching')
         }
-    })
+    }, [select])
 
     // * for pre_select_check
     const myset = useSelector((state) => state.routine.myRoutine)
@@ -44,25 +46,60 @@ const RoutineUpdateSelect = (props) => {
             )
         )
     }
+    React.useEffect(() => {
+        selectStretching?.map((select) =>
+            dispatch(addAction({ value: select, type: 'stretching' }))
+        )
+        selectBodyExercise?.map((select) =>
+            dispatch(addAction({ value: select, type: 'body_exercise' }))
+        )
+    }, [])
+
+    const checkStretchingList = (num) => {
+        return getStretchingIdx.find((n) => n === num)
+    }
+
+    const checkExerciseList = (num) => {
+        return getBodyExerciseIdx.find((n) => n === num)
+    }
 
     return (
         <>
             {desc === 'stretching' && (
                 <section className="routine-container">
                     {stretching.map((routine, idx) => (
-                        <button className="routine" key={idx}>
+                        <button
+                            className="routine"
+                            key={idx}
+                            onClick={() => {
+                                checkStretchingList(idx) === undefined
+                                    ? dispatch(
+                                          addAction({
+                                              value: routine,
+                                              type: 'stretching',
+                                          })
+                                      )
+                                    : dispatch(
+                                          minusAction({
+                                              value: routine,
+                                              type: 'stretching',
+                                          })
+                                      )
+                                console.log('<<', getStretchingIdx)
+                            }}
+                        >
                             <span>{routine}</span>
-                            {getStretchingIdx.find((n) => n === idx) !==
-                            undefined ? (
-                                <UpdateCheck
-                                    value={routine}
-                                    type="stretching"
-                                    pre_select={true}
+                            {checkStretchingList(idx) !== undefined ? (
+                                <Icon
+                                    size="16px"
+                                    color="#6B76FF"
+                                    icon="check"
                                 />
                             ) : (
-                                <UpdateCheck
-                                    value={routine}
-                                    type="stretching"
+                                <Icon
+                                    size="16px"
+                                    color="#A5ABB0"
+                                    icon="check"
                                 />
                             )}
                         </button>
@@ -74,17 +111,17 @@ const RoutineUpdateSelect = (props) => {
                     {body_exercise.map((routine, idx) => (
                         <button className="routine" key={idx}>
                             <span>{routine}</span>
-                            {getBodyExerciseIdx.find((n) => n === idx) !==
-                            undefined ? (
-                                <UpdateCheck
-                                    value={routine}
-                                    type="body_exercise"
-                                    pre_select={true}
+                            {checkExerciseList(idx) !== undefined ? (
+                                <Icon
+                                    size="16px"
+                                    color="#6B76FF"
+                                    icon="check"
                                 />
                             ) : (
-                                <UpdateCheck
-                                    value={routine}
-                                    type="body_exercise"
+                                <Icon
+                                    size="16px"
+                                    color="#A5ABB0"
+                                    icon="check"
                                 />
                             )}
                         </button>

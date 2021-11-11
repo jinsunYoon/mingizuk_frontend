@@ -117,44 +117,28 @@
         },
         {
             "icon": {
-                "paths": ["M85.333 554.667l298.667 298.667 725.333-725.333"],
-                "attrs": [
-                    {
-                        "fill": "none",
-                        "stroke": "rgb(165, 171, 176)",
-                        "strokeLinejoin": "miter",
-                        "strokeLinecap": "butt",
-                        "strokeMiterlimit": "4",
-                        "strokeWidth": 170.66666666666666
-                    }
+                "paths": [
+                    "M424.225 797.257l-307.2-307.201-102.4 102.4 409.6 409.601 877.718-877.715-102.4-102.4-775.318 775.315z"
                 ],
-                "width": 1195,
+                "attrs": [{}],
+                "width": 1317,
                 "isMulticolor": false,
                 "isMulticolor2": false,
                 "grid": 0,
                 "tags": ["check"],
-                "colorPermutations": { "16517117614658891": [{ "s": 1 }] }
+                "colorPermutations": { "16517117614658891": [{}] }
             },
-            "attrs": [
-                {
-                    "fill": "none",
-                    "stroke": "rgb(165, 171, 176)",
-                    "strokeLinejoin": "miter",
-                    "strokeLinecap": "butt",
-                    "strokeMiterlimit": "4",
-                    "strokeWidth": 170.66666666666666
-                }
-            ],
+            "attrs": [{}],
             "properties": {
-                "order": 5,
-                "id": 1,
+                "order": 3,
+                "id": 5,
                 "name": "check",
                 "prevSize": 32,
-                "code": 59651
+                "code": 59648
             },
-            "setIdx": 0,
+            "setIdx": 1,
             "setId": 3,
-            "iconIdx": 3
+            "iconIdx": 0
         },
         {
             "icon": {
