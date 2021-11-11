@@ -2,8 +2,7 @@ import React from 'react'
 import clsx from 'clsx'
 import { useDispatch } from 'react-redux'
 import { addAction, minusAction } from '../../redux/modules/updateRoutine'
-import '../../styles/routine/add-routine.scss'
-import Icon from '../icons/Icon'
+import Icon from '../../components/icons/Icon'
 
 const RoutineSelect = (props) => {
     const dispatch = useDispatch()
