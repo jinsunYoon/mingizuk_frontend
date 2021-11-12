@@ -23,6 +23,8 @@ const characterSlice = createSlice({
 
                     case '제이지':
                         return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-3.png`
+                    default:
+                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png`
                 }
             }
 

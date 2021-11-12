@@ -13,7 +13,7 @@ const CharacterModal = () => {
     const is_login = useSelector((state) => state.user.isLogin)
     const charList = useSelector((state) => state.character.charList)
 
-    console.log(charList[0], '캐릭터리스트')
+    //console.log('>>', charList[0].expMax)
     useEffect(() => {
         dispatch(getCharacterMD())
     }, [])
@@ -38,13 +38,16 @@ const CharacterModal = () => {
                         <p>캐릭터를 추가하세요</p>
                     </div>
                 ) : (
-                    //     //현재 키울 캐릭터의 종류 <캐릭터의 최대경험치 !== 십만> 이 아닌것을 보여주기
+                    //현재 키울 캐릭터의 종류 <캐릭터의 최대경험치 !== 십만> 이 아닌것을 보여주기
                     // charList.expMax !== 100000
                     // ?
                     <div className="char-container">
-                        <img className="char" src={charList[0].charSrc} />
+                        <img className="char" src={charList[0]?.charSrc} />
                         <p>{charList[0].characterName}</p>
-                        <LevelBar />
+                        <LevelBar
+                            exp={charList[0].exp}
+                            expMax={charList[0].expMax}
+                        />
                     </div>
 
                     // :
