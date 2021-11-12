@@ -10,14 +10,14 @@
                 "isMulticolor": false,
                 "isMulticolor2": false,
                 "grid": 0,
-                "tags": ["↳Color-1"],
+                "tags": ["close"],
                 "colorPermutations": { "16517117614658891": [{ "f": 0 }] }
             },
             "attrs": [{ "fill": "rgb(46, 58, 89)" }],
             "properties": {
                 "order": 2,
                 "id": 4,
-                "name": "Color-1",
+                "name": "close",
                 "prevSize": 32,
                 "code": 59648
             },

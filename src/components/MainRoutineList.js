@@ -1,25 +1,9 @@
 import React from 'react'
-import {
-    ButtonOutlined,
-    FlexRow,
-    FlexColumn,
-    Text,
-    Img,
-} from '../elements/index'
+import { FlexRow, FlexColumn, Text } from '../elements/index'
 import Icon from './icons/Icon'
-import { useSelector, useDispatch } from 'react-redux'
-import {
-    setActionName,
-    setModal,
-    setActionId,
-    setRoutineId,
-    setFinDate,
-} from '../redux/modules/completeSlice'
-import { Complete } from './index'
+import { useSelector } from 'react-redux'
 
 const MainRoutineList = (props) => {
-    const dispatch = useDispatch()
-
     const modal = useSelector((state) => state.actionComplete.modalStatus)
     const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
     const num = mainRoutine?.Actions?.length - 1
@@ -60,31 +44,26 @@ const MainRoutineList = (props) => {
                 justifyContent: 'space-around',
             }}
         >
-            {modal && <Complete />}
             {mainRoutine?.Actions?.map((routine, idx) => {
                 return (
                     <>
-                        <ButtonOutlined
-                            _border={'none'}
-                            _margin={'0px'}
-                            _padding={'0px'}
+                        <FlexColumn
                             _width={'100%'}
-                            _others={'height:false'}
-                            _onClick={() => {
-                                dispatch(setModal(true))
-                                dispatch(setActionName(routine?.actionName))
-                                dispatch(setActionId(routine?.id))
-                                dispatch(setRoutineId(routine?.routineId))
-                                dispatch(setFinDate(routine?.finDate))
-                            }}
+                            _height={'100%'}
+                            _border={'none'}
+                            _padding={'0.7rem 0px 0px 0px'}
+                            _justify={'start'}
                         >
-                            <FlexColumn
-                                _width={'100%'}
-                                _height={'100%'}
-                                _border={'none'}
-                                _padding={'0.7rem 0px 0px 0px'}
-                                _justify={'start'}
-                            >
+                            {result?.length - 1 == idx ? (
+                                <FlexRow
+                                    _width={'2.5rem'}
+                                    _height={'2.5rem'}
+                                    _bgColor={'#6B76FF'}
+                                    _border={'none'}
+                                    // _margin={'10px 0px 0px 0px'}
+                                    _others={'border-radius:2.5rem'}
+                                ></FlexRow>
+                            ) : (
                                 <FlexRow
                                     _width={'2.5rem'}
                                     _height={'2.5rem'}
@@ -93,7 +72,9 @@ const MainRoutineList = (props) => {
                                     // _margin={'10px 0px 0px 0px'}
                                     _others={'border-radius:2.5rem'}
                                 ></FlexRow>
-                                {/* <FlexRow
+                            )}
+
+                            {/* <FlexRow
                                     _width={'false'}
                                     _height={'1rem'}
                                     _bgColor={'black'}
@@ -110,25 +91,23 @@ const MainRoutineList = (props) => {
                                         {routine?.actionCnt}
                                     </Text>
                                 </FlexRow> */}
-                                {routine?.actionName?.length > 5 ? (
-                                    <Text
-                                        _margin={'5px 0px 0px 0px'}
-                                        _fontSize={'0.75rem'}
-                                    >
-                                        {routine?.actionName?.split(' ')[0]}{' '}
-                                        <br />{' '}
-                                        {routine?.actionName?.split(' ')[1]}
-                                    </Text>
-                                ) : (
-                                    <Text
-                                        _margin={'5px 0px 0px 0px'}
-                                        _fontSize={'0.75rem'}
-                                    >
-                                        {routine?.actionName}
-                                    </Text>
-                                )}
-                            </FlexColumn>
-                        </ButtonOutlined>
+                            {routine?.actionName?.length > 5 ? (
+                                <Text
+                                    _margin={'5px 0px 0px 0px'}
+                                    _fontSize={'0.75rem'}
+                                >
+                                    {routine?.actionName?.split(' ')[0]} <br />{' '}
+                                    {routine?.actionName?.split(' ')[1]}
+                                </Text>
+                            ) : (
+                                <Text
+                                    _margin={'5px 0px 0px 0px'}
+                                    _fontSize={'0.75rem'}
+                                >
+                                    {routine?.actionName}
+                                </Text>
+                            )}
+                        </FlexColumn>
                         {/* {idx < num && (
                             <FlexRow _border={'none'} _width={'0.625rem'}>
                                 <Icon icon={'chevron-right'} size={24} />

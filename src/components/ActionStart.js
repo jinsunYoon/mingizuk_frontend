@@ -13,12 +13,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { actionCompleteMD } from '../redux/async/actionComplete'
 import { actionRestartMD } from '../redux/async/actionComplete'
 import {
-    setActionBtn,
-    setActionName,
-    setModal,
-    setImgSrc,
-    setCompleteBtn,
-    setDefaultBtn,
     setActionId,
     setRoutineId,
     setFakeResult,
@@ -37,8 +31,8 @@ const ActionStart = (props) => {
     const [action5, setAction5] = useState(false)
     const [complete, setComplete] = useState(false)
     const [next, setNext] = useState(false)
-    const [start, setContinue] = useState('시작하기')
-    const [active, setActive] = useState(true)
+    const [active, setActive] = useState(false)
+    const [actionStart, setActionStart] = useState(true)
 
     const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
     const modalImg = useSelector((state) => state.actionComplete.ImgSrc)
@@ -53,7 +47,7 @@ const ActionStart = (props) => {
     console.log('가짜루틴완료', getFakeResult)
 
     const completeBtn = () => {
-        setTimeout(function () {
+        return setTimeout(function () {
             setActive(false)
             setComplete(true)
         }, 5000)
@@ -62,6 +56,7 @@ const ActionStart = (props) => {
     const successAction = () => {
         const data = { actionId: getActionId, routineId: getRoutineId }
         console.log('액션컴플리트데이터', data)
+
         dispatch(actionCompleteMD(data))
         setComplete(false)
         setNext(true)
@@ -138,6 +133,24 @@ const ActionStart = (props) => {
                                     ></Img>
                                 </FlexColumn>
                             )}
+                            {actionStart && (
+                                <ButtonOutlined
+                                    _width={'9.375rem'}
+                                    _others={'height:3rem'}
+                                    _border={'1px solid #6B76FF'}
+                                    _margin={'0 0 1rem 0'}
+                                    _bradius={'0.5rem'}
+                                    _color={'#6B76FF'}
+                                    _onClick={() => {
+                                        setId(0)
+                                        setActionStart(false)
+                                        setActive(true)
+                                        completeBtn()
+                                    }}
+                                >
+                                    액션 시작!
+                                </ButtonOutlined>
+                            )}
                             {active && (
                                 <ButtonFill
                                     _width={'9.375rem'}
@@ -150,7 +163,6 @@ const ActionStart = (props) => {
                                     _color={'#999999'}
                                 >
                                     완료!
-                                    {completeBtn()}
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -166,7 +178,6 @@ const ActionStart = (props) => {
                                     }}
                                 >
                                     완료!
-                                    {setId(0)}
                                 </ButtonOutlined>
                             )}
                             {next && (
@@ -186,6 +197,7 @@ const ActionStart = (props) => {
                                         _onClick={() => {
                                             setActionModal(false)
                                             dispatch(setFakeResult('result'))
+                                            setNext(false)
                                         }}
                                     >
                                         메인으로
@@ -203,7 +215,7 @@ const ActionStart = (props) => {
                                             _onClick={() => {
                                                 setAction1(false)
                                                 setAction2(true)
-                                                setActive(true)
+                                                setActionStart(true)
                                                 setNext(false)
                                                 dispatch(
                                                     setFakeResult('result')
@@ -261,6 +273,24 @@ const ActionStart = (props) => {
                                     ></Img>
                                 </FlexColumn>
                             )}
+                            {actionStart && (
+                                <ButtonOutlined
+                                    _width={'9.375rem'}
+                                    _others={'height:3rem'}
+                                    _border={'1px solid #6B76FF'}
+                                    _margin={'0 0 1rem 0'}
+                                    _bradius={'0.5rem'}
+                                    _color={'#6B76FF'}
+                                    _onClick={() => {
+                                        setId(1)
+                                        setActionStart(false)
+                                        setActive(true)
+                                        completeBtn()
+                                    }}
+                                >
+                                    액션 시작!
+                                </ButtonOutlined>
+                            )}
                             {active && (
                                 <ButtonFill
                                     _width={'9.375rem'}
@@ -273,7 +303,6 @@ const ActionStart = (props) => {
                                     _color={'#999999'}
                                 >
                                     완료!
-                                    {completeBtn()}
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -289,7 +318,6 @@ const ActionStart = (props) => {
                                     }}
                                 >
                                     완료!
-                                    {setId(1)}
                                 </ButtonOutlined>
                             )}
                             {next && (
@@ -308,6 +336,7 @@ const ActionStart = (props) => {
                                         _onClick={() => {
                                             setActionModal(false)
                                             dispatch(setFakeResult('result'))
+                                            setNext(false)
                                         }}
                                     >
                                         메인으로
@@ -325,7 +354,7 @@ const ActionStart = (props) => {
                                             _onClick={() => {
                                                 setAction2(false)
                                                 setAction3(true)
-                                                setActive(true)
+                                                setActionStart(true)
                                                 setNext(false)
                                                 dispatch(
                                                     setFakeResult('result')
@@ -383,6 +412,24 @@ const ActionStart = (props) => {
                                     ></Img>
                                 </FlexColumn>
                             )}
+                            {actionStart && (
+                                <ButtonOutlined
+                                    _width={'9.375rem'}
+                                    _others={'height:3rem'}
+                                    _border={'1px solid #6B76FF'}
+                                    _margin={'0 0 1rem 0'}
+                                    _bradius={'0.5rem'}
+                                    _color={'#6B76FF'}
+                                    _onClick={() => {
+                                        setId(2)
+                                        setActionStart(false)
+                                        setActive(true)
+                                        completeBtn()
+                                    }}
+                                >
+                                    액션 시작!
+                                </ButtonOutlined>
+                            )}
                             {active && (
                                 <ButtonFill
                                     _width={'9.375rem'}
@@ -395,7 +442,6 @@ const ActionStart = (props) => {
                                     _color={'#999999'}
                                 >
                                     완료!
-                                    {completeBtn()}
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -411,7 +457,6 @@ const ActionStart = (props) => {
                                     }}
                                 >
                                     완료!
-                                    {setId(2)}
                                 </ButtonOutlined>
                             )}
                             {next && (
@@ -430,6 +475,7 @@ const ActionStart = (props) => {
                                         _onClick={() => {
                                             setActionModal(false)
                                             dispatch(setFakeResult('result'))
+                                            setNext(false)
                                         }}
                                     >
                                         메인으로
@@ -447,7 +493,7 @@ const ActionStart = (props) => {
                                             _onClick={() => {
                                                 setAction3(false)
                                                 setAction4(true)
-                                                setActive(true)
+                                                setActionStart(true)
                                                 setNext(false)
                                                 dispatch(
                                                     setFakeResult('result')
@@ -505,6 +551,24 @@ const ActionStart = (props) => {
                                     ></Img>
                                 </FlexColumn>
                             )}
+                            {actionStart && (
+                                <ButtonOutlined
+                                    _width={'9.375rem'}
+                                    _others={'height:3rem'}
+                                    _border={'1px solid #6B76FF'}
+                                    _margin={'0 0 1rem 0'}
+                                    _bradius={'0.5rem'}
+                                    _color={'#6B76FF'}
+                                    _onClick={() => {
+                                        setId(3)
+                                        setActionStart(false)
+                                        setActive(true)
+                                        completeBtn()
+                                    }}
+                                >
+                                    액션 시작!
+                                </ButtonOutlined>
+                            )}
                             {active && (
                                 <ButtonFill
                                     _width={'9.375rem'}
@@ -517,7 +581,6 @@ const ActionStart = (props) => {
                                     _color={'#999999'}
                                 >
                                     완료!
-                                    {completeBtn()}
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -533,7 +596,6 @@ const ActionStart = (props) => {
                                     }}
                                 >
                                     완료!
-                                    {setId(3)}
                                 </ButtonOutlined>
                             )}
                             {next && (
@@ -552,6 +614,7 @@ const ActionStart = (props) => {
                                         _onClick={() => {
                                             setActionModal(false)
                                             dispatch(setFakeResult('result'))
+                                            setNext(false)
                                         }}
                                     >
                                         메인으로
@@ -569,7 +632,7 @@ const ActionStart = (props) => {
                                             _onClick={() => {
                                                 setAction4(false)
                                                 setAction5(true)
-                                                setActive(true)
+                                                setActionStart(true)
                                                 setNext(false)
                                                 dispatch(
                                                     setFakeResult('result')
@@ -626,6 +689,24 @@ const ActionStart = (props) => {
                                     ></Img>
                                 </FlexColumn>
                             )}
+                            {actionStart && (
+                                <ButtonOutlined
+                                    _width={'9.375rem'}
+                                    _others={'height:3rem'}
+                                    _border={'1px solid #6B76FF'}
+                                    _margin={'0 0 1rem 0'}
+                                    _bradius={'0.5rem'}
+                                    _color={'#6B76FF'}
+                                    _onClick={() => {
+                                        setId(4)
+                                        setActionStart(false)
+                                        setActive(true)
+                                        completeBtn()
+                                    }}
+                                >
+                                    액션 시작!
+                                </ButtonOutlined>
+                            )}
                             {active && (
                                 <ButtonFill
                                     _width={'9.375rem'}
@@ -638,7 +719,6 @@ const ActionStart = (props) => {
                                     _color={'#999999'}
                                 >
                                     완료!
-                                    {completeBtn()}
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -654,7 +734,6 @@ const ActionStart = (props) => {
                                     }}
                                 >
                                     완료!
-                                    {setId(4)}
                                 </ButtonOutlined>
                             )}
                             {next && (
@@ -673,6 +752,7 @@ const ActionStart = (props) => {
                                         _onClick={() => {
                                             setActionModal(false)
                                             dispatch(setFakeResult('result'))
+                                            setNext(false)
                                         }}
                                     >
                                         메인으로
@@ -683,25 +763,58 @@ const ActionStart = (props) => {
                     )}
                 </FlexRow>
             )}
-            {result?.length !== mainRoutine?.Actions?.length ? (
-                <ButtonOutlined
-                    _width={'13rem'}
-                    _others={'height:3rem'}
-                    _margin={'0.5rem 0 1rem 0'}
-                    _border={'1px solid #6B76FF'}
-                    _color={'#6B76FF'}
-                    _bradius={'0.5rem'}
-                    _onClick={() => {
-                        setActionModal(true)
-                        setAction1(true)
-                        // if (getFakeResult?.length > 0) {
-                        //     setContinue('이어서 하기')
-                        // }
-                    }}
-                >
-                    {start}
-                </ButtonOutlined>
-            ) : (
+            {result?.length !== mainRoutine?.Actions?.length &&
+                getFakeResult?.length == 0 && (
+                    <ButtonOutlined
+                        _width={'13rem'}
+                        _others={'height:3rem'}
+                        _margin={'0.5rem 0 1rem 0'}
+                        _border={'1px solid #6B76FF'}
+                        _color={'#6B76FF'}
+                        _bradius={'0.5rem'}
+                        _onClick={() => {
+                            setActionModal(true)
+                            setAction1(true)
+                        }}
+                    >
+                        루틴 시작하기
+                    </ButtonOutlined>
+                )}
+            {result?.length !== mainRoutine?.Actions?.length &&
+                getFakeResult?.length > 0 && (
+                    <ButtonOutlined
+                        _width={'13rem'}
+                        _others={'height:3rem'}
+                        _margin={'0.5rem 0 1rem 0'}
+                        _border={'1px solid #6B76FF'}
+                        _color={'#6B76FF'}
+                        _bradius={'0.5rem'}
+                        _onClick={() => {
+                            setActionModal(true)
+                            switch (result?.length) {
+                                case 1:
+                                    setAction2(true)
+                                    setActionStart(true)
+                                    break
+                                case 2:
+                                    setAction3(true)
+                                    setActionStart(true)
+                                    break
+                                case 3:
+                                    setAction4(true)
+                                    setActionStart(true)
+                                    break
+                                case 4:
+                                    setAction5(true)
+                                    setActionStart(true)
+                                    break
+                            }
+                        }}
+                    >
+                        이어서 하기
+                    </ButtonOutlined>
+                )}
+            {result?.length == mainRoutine?.Actions?.length && (
                 <ButtonOutlined
                     _width={'13rem'}
                     _others={'height:3rem'}
@@ -718,7 +831,7 @@ const ActionStart = (props) => {
                         dispatch(setResult([]))
                         dispatch(setFakeResultClear([]))
                         setNext(false)
-                        setActive(true)
+                        setActionStart(true)
                     }}
                 >
                     루틴 재시작하기

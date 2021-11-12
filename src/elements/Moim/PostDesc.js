@@ -95,13 +95,13 @@ const PostDesc = () => {
                                     (user) => user?.userId === loginuserID
                                 ) === -1 ? (
                                     <Icon
-                                        icon="favorite"
+                                        icon="heart"
                                         size="20px"
                                         color="lightgray"
                                     />
                                 ) : (
                                     <Icon
-                                        icon="favorite"
+                                        icon="heart"
                                         size="20px"
                                         color="red"
                                     />

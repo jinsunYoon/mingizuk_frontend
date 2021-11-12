@@ -67,14 +67,14 @@ const MoimReview = (props) => {
                                         updateReview(rev?.id)
                                     }}
                                 >
-                                    u
+                                    수정
                                 </UpdateBtn>
                                 <CloseBtn
                                     onClick={() => {
                                         deleteReview(rev?.id)
                                     }}
                                 >
-                                    X
+                                    삭제
                                 </CloseBtn>
                             </div>
                         )}
@@ -94,12 +94,12 @@ const ReviewBox = styled.article`
     justify-content: center;
     align-items: flex-start;
     padding-left: 15px;
-    border: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
 `
 
 const CloseBtn = styled.button`
     position: absolute;
-    width: 20px;
+    width: 40px;
     height: 20px;
     display: flex;
     justify-content: center;
@@ -110,17 +110,18 @@ const CloseBtn = styled.button`
 `
 const UpdateBtn = styled.button`
     position: absolute;
-    width: 20px;
+    width: 40px;
     height: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: none;
-    right: 50px;
+    right: 80px;
     margin: 10px;
 `
 
 const ScrollY = styled.div`
+    margin-top: 1rem;
     display: grid;
     height: 50px;
     --column-count: 1;

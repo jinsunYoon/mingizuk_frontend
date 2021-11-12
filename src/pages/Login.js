@@ -38,7 +38,7 @@ const Login = () => {
     return (
         <>
             <div className="auth-layout">
-                <h1 className="logo">Minggijeok</h1>
+                <h1 className="logo">Minggijuk</h1>
                 <section className="contents">
                     <div className="input-container">
                         <input
@@ -64,23 +64,20 @@ const Login = () => {
                         </div>
 
                         <a
-                            href="http://52.79.237.95/api/auth/kakao"
+                            href="https://mingijuk.shop/api/auth/kakao"
                             className="kakao-btn"
-                            onClick={() => dispatch(kakaoLoginMD())}
                         >
                             카카오톡으로 로그인하기
                         </a>
                         <a
-                            href="http://52.79.237.95/api/auth/naver"
+                            href="https://mingijuk.shop/api/auth/naver"
                             className="naver-btn"
-                            onClick={() => dispatch(naverLoginMD())}
                         >
                             네이버로 로그인하기
                         </a>
                         <a
-                            href="http://52.79.237.95/api/auth/google"
+                            href="https://mingijuk.shop/api/auth/google"
                             className="google-btn"
-                            onClick={() => dispatch(googleLoginMD())}
                         >
                             구글로 로그인하기
                         </a>

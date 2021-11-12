@@ -12,7 +12,9 @@ import {
     Header,
     LevelBar,
 } from '../components/index'
-import { setResult } from '../redux/modules/completeSlice'
+import { setFakeResult, setResult } from '../redux/modules/completeSlice'
+import Icon from '../components/icons/Icon'
+
 import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -23,6 +25,7 @@ import styled from 'styled-components'
 import { chageMyHabitModal } from '../redux/modules/routineSlice'
 import ActionStart from '../components/ActionStart'
 import HabitTraker from '../components/Routine/HabitTraker'
+import { getCharacterMD } from '../redux/async/character'
 
 const Main = (props) => {
     const dispatch = useDispatch()
@@ -30,6 +33,7 @@ const Main = (props) => {
     React.useEffect(() => {
         dispatch(loginCheckMD())
         dispatch(getMainRoutineMD())
+        // dispatch(getCharacterMD())
         // const actionFins = mainRoutine?.Actions?.ActionFins?.map(
         //     (fin, idx) => {}
         // )
@@ -40,6 +44,27 @@ const Main = (props) => {
     console.log('메인루틴', mainRoutine)
     const isMain = useSelector((state) => state.setAction.isMain)
     const nickName = useSelector((state) => state.user.userInfo.nickName)
+
+    const ActionFins = mainRoutine?.Actions?.map((action) => action?.ActionFins)
+    const finDate = ActionFins?.map((fin) => fin[fin.length - 1].date)
+    const fins = finDate?.filter((fin) => fin !== null)
+    console.log('fins', fins)
+
+    const array = []
+    for (let i = 0; i < fins?.length; i++) {
+        array.push('result')
+    }
+    console.log('array', array)
+
+    React.useEffect(() => {
+        dispatch(loginCheckMD())
+        dispatch(getMainRoutineMD())
+    }, [])
+
+    if (array.length > 0) {
+        dispatch(setResult(array))
+        dispatch(setFakeResult(array))
+    }
 
     if (is_login && isMain) {
         return (
@@ -73,10 +98,7 @@ const Main = (props) => {
                         </Text>
                     </FlexColumn>
                     <CharacterModal />
-                    <Text _fontSize={'0.875rem'} _fontWeight={'500'}>
-                        캐릭터를 추가하세요
-                    </Text>
-                    <LevelBar />
+
                     <FlexColumn
                         _align={'start'}
                         _width={'100%'}
@@ -184,10 +206,7 @@ const Main = (props) => {
                         </Text>
                     </FlexColumn>
                     <CharacterModal />
-                    <Text _fontSize={'0.875rem'} _fontWeight={'500'}>
-                        캐릭터를 추가하세요
-                    </Text>
-                    <LevelBar />
+
                     <FlexColumn
                         _align={'start'}
                         _width={'100%'}

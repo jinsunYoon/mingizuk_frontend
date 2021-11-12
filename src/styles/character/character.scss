@@ -1,21 +1,37 @@
 //character
 @import '../shared/common.scss';
 
-.addchar {
-    @include flexbox();
-    width: 120px;
-    height: 120px;
-    font-size: 36px;
-    border: dashed 2px #b8c0c4;
-    margin: 40px;
-    background-color: #dedede;
-    color: #b8c0c4;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    cursor: pointer;
+.addchar-container {
+    @include container();
+    padding: 30px 0;
+
+    .addchar {
+        @include flexbox();
+        width: 120px;
+        height: 120px;
+        padding: 16px;
+        font-size: 36px;
+        border: dashed 2px #b8c0c4;
+        background-color: #dedede;
+        color: #b8c0c4;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    p {
+        padding: 10px 0;
+        text-align: center;
+    }
+}
+
+.char-container {
+    @include container();
+    color: $black;
+    font-size: 16px;
+    .char {
+        width: 120px;
+        height: 120px;
+    }
 }
 
 .modal-container {
@@ -45,7 +61,7 @@
             -ms-transform: translate(-50%, -50%);
             -o-transform: translate(-50%, -50%);
 
-            .char {
+            .modal-char {
                 width: 200px;
                 height: 200px;
                 border: 1px solid $black;

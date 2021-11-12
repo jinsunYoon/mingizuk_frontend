@@ -80,6 +80,10 @@ const loginCheckAPI = () => {
 
 //mainpage
 
+const getMainRoutineAPI = () => {
+    return instance.get('/api/main/ongoing')
+}
+
 const actionCompleteAPI = (data) => {
     console.log('이거 api 데이터', data)
     return instance.put('/api/users/action', {
@@ -94,8 +98,9 @@ const actionRestartAPI = (routineId) => {
     return instance.post(`/api/routines/create/${routineId}`)
 }
 
-const getMainRoutineAPI = () => {
-    return instance.get('/api/main/ongoing')
+const actionResetAPI = (routineId) => {
+    console.log('이거 api 데이터', routineId)
+    return instance.post(`/api/routines/reset/${routineId}`)
 }
 
 // *---------------------------------------------------
@@ -107,18 +112,6 @@ const userInfoAPI = (data) => {
         nickName: data.newNickName,
         userPw: data.newPwd,
     })
-}
-
-const kakaoAPI = () => {
-    return axios.get('http://52.79.237.95/api/auth/kakao')
-}
-
-const naverAPI = () => {
-    return axios.get('http://52.79.237.95/api/auth/naver')
-}
-
-const googleAPI = () => {
-    return axios.get('http://52.79.237.95/api/auth/google')
 }
 
 // *----------------------------------------------------
@@ -242,11 +235,19 @@ const finRoutinesActionsAPI = () => {
     return instance.get('/api/main/trackerHistory')
 }
 
+// * character
+const getCharacterAPI = () => {
+    return instance.get(`/api/users/character`)
+}
+
+const postCharacterAPI = () => {
+    return instance.post(`/api/users/character`)
+}
+
 export {
     signupAPI,
     loginAPI,
     logoutAPI,
-    kakaoAPI,
     loginCheckAPI,
     userInfoAPI,
     myRoutinePresetAPI,
@@ -273,7 +274,8 @@ export {
     moimUnlikeAPI,
     moimJoinAPI,
     actionRestartAPI,
-    naverAPI,
-    googleAPI,
     finRoutinesActionsAPI,
+    actionResetAPI,
+    getCharacterAPI,
+    postCharacterAPI,
 }
