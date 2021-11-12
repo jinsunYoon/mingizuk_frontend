@@ -107,7 +107,7 @@ const routineSlice = createSlice({
                     setDates.findIndex((day) => day === date.slice(0, 10))
                 )
                 routineDates.map((idx) =>
-                    routienWithDate[idx].routines.push(routineName)
+                    routienWithDate[idx]?.routines?.push(routineName)
                 )
             })
 

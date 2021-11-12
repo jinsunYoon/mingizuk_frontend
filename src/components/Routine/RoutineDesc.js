@@ -17,6 +17,7 @@ import {
     updateRoutine,
 } from '../../redux/modules/routineSlice'
 import '../../styles/routine/my-routine.scss'
+import RoutineOption from './RoutineOption'
 
 const RoutineDesc = (props) => {
     const dispatch = useDispatch()
@@ -162,6 +163,7 @@ const RoutineDesc = (props) => {
                     </button>
                 </div>
             )}
+            {/* <RoutineOption /> */}
         </>
     )
 }

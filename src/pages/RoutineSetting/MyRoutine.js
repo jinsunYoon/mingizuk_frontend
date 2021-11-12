@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { history } from '../../redux/store'
 import '../../styles/routine/my-routine.scss'
 import { setRoutineModal } from '../../redux/modules/routineSlice'
+import RoutineOption from '../../components/Routine/RoutineOption'
 
 const MyRoutine = () => {
     const status = useSelector((state) => state.routine.myPage)

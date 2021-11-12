@@ -9,36 +9,28 @@ const actionSlice = createSlice({
     initialState: initialState,
     reducers: {
         addAction: (state, action) => {
-            console.log('<<,add', action)
-            let testArray = []
-            // * 중복처리
-            state.actions.push({
-                actionName: action.payload.value,
-                actionCnt: 1,
-                actionType: action.payload.type,
-            })
-
-            state.actions.map((act, idx) => {
-                testArray.push(act.actionName)
-            })
-            const matchFilter = testArray.filter(
-                (test) => test === action.payload.value
-            )
-            if (matchFilter.length > 1) {
-                const ref = state.actions.findIndex(
-                    (act) => act.actionName === action.payload.value
+            // * true가 minuse를 해줘야 하는 상황이다.
+            if (
+                state.actions
+                    .map(({ actionName }) => actionName)
+                    .includes(action.payload.value)
+            ) {
+                const result = state.actions.filter(
+                    ({ actionName }) => actionName !== action.payload.value
                 )
-                const refItem = state.actions[ref]
-                const result = state.actions.filter((act) => act !== refItem)
                 state.actions = result
+            } else {
+                state.actions.push({
+                    actionName: action.payload.value,
+                    actionCnt: 1,
+                    actionType: action.payload.type,
+                })
             }
         },
         minusAction: (state, action) => {
-            console.log('<<,minuse', action)
             const result = state.actions.filter(
                 (act) => act.actionName !== action.payload.value
             )
-            console.log(result)
             state.actions = result
         },
         addCount: (state, action) => {

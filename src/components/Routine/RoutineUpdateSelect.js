@@ -1,12 +1,14 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Icon from '../icons/Icon'
-import { addAction, minusAction } from '../../redux/modules/updateRoutine'
+import { addAction } from '../../redux/modules/updateRoutine'
+import clsx from 'clsx'
 
 const RoutineUpdateSelect = (props) => {
     const { body_exercise, stretching, select } = props
     const [desc, setDesc] = React.useState('first')
     const dispatch = useDispatch()
+    const updateActions = useSelector((state) => state?.updateAction?.actions)
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -55,12 +57,8 @@ const RoutineUpdateSelect = (props) => {
         )
     }, [])
 
-    const checkStretchingList = (num) => {
-        return getStretchingIdx.find((n) => n === num)
-    }
-
-    const checkExerciseList = (num) => {
-        return getBodyExerciseIdx.find((n) => n === num)
+    const check = (name) => {
+        return updateActions.findIndex(({ actionName }) => actionName === name)
     }
 
     return (
@@ -72,24 +70,22 @@ const RoutineUpdateSelect = (props) => {
                             className="routine"
                             key={idx}
                             onClick={() => {
-                                checkStretchingList(idx) === undefined
-                                    ? dispatch(
-                                          addAction({
-                                              value: routine,
-                                              type: 'stretching',
-                                          })
-                                      )
-                                    : dispatch(
-                                          minusAction({
-                                              value: routine,
-                                              type: 'stretching',
-                                          })
-                                      )
-                                console.log('<<', getStretchingIdx)
+                                dispatch(
+                                    addAction({
+                                        value: routine,
+                                        type: 'stretching',
+                                    })
+                                )
                             }}
                         >
-                            <span>{routine}</span>
-                            {checkStretchingList(idx) !== undefined ? (
+                            <span
+                                className={clsx(
+                                    check(routine) !== -1 && 'select-priamry'
+                                )}
+                            >
+                                {routine}
+                            </span>
+                            {check(routine) !== -1 ? (
                                 <Icon
                                     size="16px"
                                     color="#6B76FF"
@@ -109,9 +105,26 @@ const RoutineUpdateSelect = (props) => {
             {desc === 'body_exercise' && (
                 <section className="routine-container">
                     {body_exercise.map((routine, idx) => (
-                        <button className="routine" key={idx}>
-                            <span>{routine}</span>
-                            {checkExerciseList(idx) !== undefined ? (
+                        <button
+                            className="routine"
+                            key={idx}
+                            onClick={() => {
+                                dispatch(
+                                    addAction({
+                                        value: routine,
+                                        type: 'body_exercise',
+                                    })
+                                )
+                            }}
+                        >
+                            <span
+                                className={clsx(
+                                    check(routine) !== -1 && 'select-priamry'
+                                )}
+                            >
+                                {routine}
+                            </span>
+                            {check(routine) !== -1 ? (
                                 <Icon
                                     size="16px"
                                     color="#6B76FF"

@@ -27,7 +27,10 @@ const RoutineUpdate = () => {
                 <RoutineUpdateSelect select={status} />
                 <button
                     className="next-btn"
-                    onClick={() => history.push('/routine/update/count')}
+                    onClick={() =>
+                        selectList?.length > 0 &&
+                        history.push('/routine/update/count')
+                    }
                 >
                     {selectNum}
                 </button>
