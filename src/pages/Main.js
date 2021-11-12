@@ -6,12 +6,7 @@ import {
     ButtonOutlined,
     Text,
 } from '../elements/index'
-import {
-    CharacterModal,
-    MainRoutineList,
-    Header,
-    LevelBar,
-} from '../components/index'
+import { CharacterModal, MainRoutineList, Header } from '../components/index'
 import { setResult } from '../redux/modules/completeSlice'
 import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
@@ -23,6 +18,7 @@ import styled from 'styled-components'
 import { chageMyHabitModal } from '../redux/modules/routineSlice'
 import ActionStart from '../components/ActionStart'
 import HabitTraker from '../components/Routine/HabitTraker'
+import { getCharacterMD } from '../redux/async/character'
 
 const Main = (props) => {
     const dispatch = useDispatch()
@@ -30,6 +26,7 @@ const Main = (props) => {
     React.useEffect(() => {
         dispatch(loginCheckMD())
         dispatch(getMainRoutineMD())
+        // dispatch(getCharacterMD())
         // const actionFins = mainRoutine?.Actions?.ActionFins?.map(
         //     (fin, idx) => {}
         // )
@@ -73,10 +70,7 @@ const Main = (props) => {
                         </Text>
                     </FlexColumn>
                     <CharacterModal />
-                    <Text _fontSize={'0.875rem'} _fontWeight={'500'}>
-                        캐릭터를 추가하세요
-                    </Text>
-                    <LevelBar />
+
                     <FlexColumn
                         _align={'start'}
                         _width={'100%'}
@@ -187,7 +181,7 @@ const Main = (props) => {
                     <Text _fontSize={'0.875rem'} _fontWeight={'500'}>
                         캐릭터를 추가하세요
                     </Text>
-                    <LevelBar />
+
                     <FlexColumn
                         _align={'start'}
                         _width={'100%'}
