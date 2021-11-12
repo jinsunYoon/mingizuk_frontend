@@ -240,7 +240,7 @@ const getCharacterAPI = () => {
     return instance.get(`/api/users/character`)
 }
 
-const postCharacterAPI = () =>{
+const postCharacterAPI = () => {
     return instance.post(`/api/users/character`)
 }
 
