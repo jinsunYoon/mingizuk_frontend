@@ -206,9 +206,6 @@ const Main = (props) => {
                         </Text>
                     </FlexColumn>
                     <CharacterModal />
-                    <Text _fontSize={'0.875rem'} _fontWeight={'500'}>
-                        캐릭터를 추가하세요
-                    </Text>
 
                     <FlexColumn
                         _align={'start'}

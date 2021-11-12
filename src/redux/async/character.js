@@ -8,7 +8,7 @@ export const getCharacterMD = createAsyncThunk(
         try {
             const response = await getCharacterAPI()
             if (response) {
-                console.log(response, '>>>getCharacterAPI 리스폰스')
+                console.log('>>getCharacterAPI 리스폰스', response)
                 return response
             }
         } catch (err) {
@@ -22,9 +22,10 @@ export const postCharacterMD = createAsyncThunk(
     'character/post',
     async (data, thunkAPI) => {
         try {
+            console.log('<<', data)
             const response = await postCharacterAPI()
             if (response) {
-                console.log(response, '>>>postCharacterAPI 리스폰스')
+                console.log('<<', response)
                 return response
             }
         } catch (err) {
