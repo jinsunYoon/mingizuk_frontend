@@ -25,15 +25,7 @@ const MyRoutine = () => {
                     secondValue={'추천 루틴'}
                     select={status}
                 />
-
-                <div
-                    onClick={(e) => {
-                        e.stopPropagation()
-                    }}
-                >
-                    <RoutineDesc select={status} />
-                </div>
-
+                <RoutineDesc select={status} />
                 <button
                     className="add-btn"
                     onClick={() => history.push('/routine/add')}

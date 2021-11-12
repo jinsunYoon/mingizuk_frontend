@@ -46,7 +46,11 @@ const RoutineDesc = (props) => {
     return (
         <>
             {desc === 'myRoutine' && (
-                <div>
+                <div
+                    onClick={(e) => {
+                        e.stopPropagation()
+                    }}
+                >
                     {myset?.map((routine, idx) => (
                         <button
                             className="routine-box"
@@ -87,7 +91,7 @@ const RoutineDesc = (props) => {
                                         history.push('/routine/update')
                                     }}
                                 >
-                                    u
+                                    수정
                                 </div>
                                 <Icon
                                     _onClick={() => {
