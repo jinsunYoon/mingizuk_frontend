@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-// history
 import { Header } from '../../components'
 import RoutineSelect from '../../components/Routine/RoutineSelect'
 import ToggleTab from '../../components/ToggleTab'
@@ -19,14 +18,16 @@ const RoutineAdd = () => {
             </div>
             <section className="container">
                 <ToggleTab firstValue={'스트레칭'} secondValue={'맨몸 운동'} />
-                <div className="title">
+                <div className="routine-add-title">
                     <h3>액션을 선택 해주세요.</h3>
                     <span>(최대 5개)</span>
                 </div>
                 <RoutineSelect select={status} />
                 <button
                     className="next-btn"
-                    onClick={() => history.push('/routine/count')}
+                    onClick={() =>
+                        selectList?.length > 0 && history.push('/routine/count')
+                    }
                 >
                     {selectNum}
                 </button>

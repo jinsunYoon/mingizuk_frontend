@@ -20,9 +20,15 @@
     &:focus {
         border: 1px solid $primary;
     }
+    &:first-child {
+        margin-top: 1rem;
+    }
 }
 
 .recommend-routine-box {
+    &:first-child {
+        margin-top: 1rem;
+    }
     width: 320px;
     height: 85px;
     border: 1px solid #dadada;

@@ -25,9 +25,9 @@ const UpdateCheck = (props) => {
             }}
         >
             {check ? (
-                <Icon size="16px" icon="done-check" color="#6B76FF" />
+                <Icon size="16px" icon="check" color="#6B76FF" />
             ) : (
-                <Icon size="16px" icon="done-check" color="#A5ABB0" />
+                <Icon size="16px" icon="check" color="#A5ABB0" />
             )}
         </div>
     )

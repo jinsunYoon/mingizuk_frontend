@@ -10,6 +10,7 @@ import {
 
 const initialState = {
     myPage: '',
+    BtnStatus: false,
     presetRoutine: [],
     myRoutine: [],
     updateRoutineRef: '',
@@ -27,6 +28,9 @@ const routineSlice = createSlice({
     reducers: {
         changeMyPageModal: (state, action) => {
             state.myPage = action.payload
+        },
+        setRoutineModal: (state, action) => {
+            state.BtnStatus = action.payload
         },
         updateRoutine: (state, action) => {
             state.updateRoutineRef = action.payload
@@ -103,7 +107,7 @@ const routineSlice = createSlice({
                     setDates.findIndex((day) => day === date.slice(0, 10))
                 )
                 routineDates.map((idx) =>
-                    routienWithDate[idx].routines.push(routineName)
+                    routienWithDate[idx]?.routines?.push(routineName)
                 )
             })
 
@@ -115,8 +119,12 @@ const routineSlice = createSlice({
 })
 
 //* reducer export
-export const { changeMyPageModal, updateRoutine, chageMyHabitModal } =
-    routineSlice.actions
+export const {
+    changeMyPageModal,
+    updateRoutine,
+    chageMyHabitModal,
+    setRoutineModal,
+} = routineSlice.actions
 
 //* slice export
 export default routineSlice

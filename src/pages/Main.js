@@ -13,7 +13,6 @@ import {
     LevelBar,
 } from '../components/index'
 import { setResult } from '../redux/modules/completeSlice'
-import Icon from '../components/icons/Icon'
 import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -89,13 +88,7 @@ const Main = (props) => {
                         }}
                     >
                         {' '}
-                        <FlexRow
-                            _width={'false'}
-                            _border={'none'}
-                            _bgColor={'none'}
-                            _align={'end'}
-                            _margin={'0px 0px 1rem 0px'}
-                        >
+                        <TextContainer>
                             <Text
                                 _fontSize={'1.125rem'}
                                 _margin={'0px 0.563rem 0px 0px'}
@@ -103,14 +96,25 @@ const Main = (props) => {
                             >
                                 오늘의 루틴
                             </Text>
-                            <Text
-                                _fontSize={'0.75rem'}
-                                _padding={'0px 0px 0.2rem 0px'}
-                                _color={'#6B76FF'}
+                            <div
+                                style={{
+                                    fontSize: '0.75rem',
+                                    padding: '0px 0px 0.2rem 0px',
+                                    color: '#6B76FF',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                }}
                             >
                                 총 {mainRoutine?.Actions?.length}개의 액션
-                            </Text>
-                        </FlexRow>
+                            </div>
+                            <ChangeBtn
+                                onClick={() => {
+                                    history.push('/routine/mypage')
+                                }}
+                            >
+                                변경하기
+                            </ChangeBtn>
+                        </TextContainer>
                         <FlexColumn
                             _width={'100%'}
                             _height={'false'}
@@ -132,16 +136,6 @@ const Main = (props) => {
                                     _padding={'1rem 0.3rem 0px 0.75rem'}
                                 >
                                     {mainRoutine.routineName}
-                                </Text>
-                                <Text _padding={'0px 0px 0.15rem 0px'}>
-                                    <Icon
-                                        icon={'create'}
-                                        color={'#5C5C5C'}
-                                        size={19}
-                                        _onClick={() => {
-                                            history.push('/routine/mypage')
-                                        }}
-                                    />
                                 </Text>
                             </FlexRow>
                             <MainRoutineList />
@@ -314,9 +308,7 @@ const Main = (props) => {
                                 _onClick={() => {
                                     window.alert('로그인 후 이용해주세요.')
                                 }}
-                            >
-                                <Icon icon={'create'} size={20} />
-                            </ButtonOutlined>
+                            ></ButtonOutlined>
                         </Text>
                     </FlexRow>
                     <FlexRow
@@ -352,15 +344,27 @@ const TimeWarp = styled.div`
     background-color: #efefef;
 `
 
-const HabitTrakerWarp = styled.section`
-    box-sizing: content-box;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-
+const ChangeBtn = styled.button`
+    width: 80px;
+    height: 30px;
+    display: flex;
     justify-content: center;
     align-items: center;
-    width: 80vw;
-    height: 180px;
+    margin-right: 1rem;
+    border: 1px solid #6b76ff;
+    border-radius: 4px;
+    color: #6b76ff;
+    background-color: #fff;
+`
+
+const TextContainer = styled.div`
+    width: 90vw;
+    display: grid;
+    grid-template-columns: 2fr 2fr 3fr;
+    padding: 1rem 0;
+    button {
+        justify-self: end;
+    }
 `
 
 export default Main
