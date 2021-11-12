@@ -13,7 +13,9 @@ const CharacterModal = () => {
     const is_login = useSelector((state) => state.user.isLogin)
     const charList = useSelector((state) => state.character.charList)
 
-    //console.log('>>', charList[0].expMax)
+    console.log('>>', charList[0])
+    console.log('>>', 'imgsrc', charList[0]?.charSrc)
+
     useEffect(() => {
         dispatch(getCharacterMD())
     }, [])
@@ -28,29 +30,27 @@ const CharacterModal = () => {
                         <div
                             className="addchar"
                             onClick={() => {
-                                is_login
-                                    ? setModalStatue(true)
-                                    : window.alert('로그인 후 이용해주세요.')
+                                if (is_login) {
+                                    setModalStatue(true)
+                                    dispatch(postCharacterMD())
+                                } else {
+                                    window.alert('로그인 후 이용해주세요.')
+                                }
                             }}
                         >
                             +
                         </div>
-                        <p>캐릭터를 추가하세요</p>
+                        <p>캐릭터를 추가하세요!</p>
                     </div>
                 ) : (
-                    //현재 키울 캐릭터의 종류 <캐릭터의 최대경험치 !== 십만> 이 아닌것을 보여주기
-                    // charList.expMax !== 100000
-                    // ?
                     <div className="char-container">
                         <img className="char" src={charList[0]?.charSrc} />
-                        <p>{charList[0].characterName}</p>
+                        <p>{charList[0]?.charName}</p>
                         <LevelBar
-                            exp={charList[0].exp}
-                            expMax={charList[0].expMax}
+                            exp={charList[0]?.exp}
+                            expMax={charList[0]?.expMax}
                         />
                     </div>
-
-                    // :
                 )
             }
 
@@ -66,16 +66,19 @@ const CharacterModal = () => {
                     >
                         <div className="modal">
                             <p>
-                                안녕~ 만나서 반가워! 난{charList.charName}라고해
+                                안녕~ 만나서 반가워! 난{charList[0]?.charName}
+                                라고해
                             </p>
-                            <div className="char"></div>
+                            <div className="modal-char">
+                                <img src={charList[0]?.charSrc} />
+                            </div>
                             <div
                                 className="close-btn"
                                 onClick={() => {
                                     modalStatus && setModalStatue(false)
                                 }}
                             >
-                                {charList.charName}랑같이 밍기적하러 가기
+                                {charList[0]?.charName}랑같이 밍기적하러 가기
                             </div>
                         </div>
                     </div>

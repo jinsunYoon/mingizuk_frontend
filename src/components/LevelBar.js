@@ -1,39 +1,44 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+
 import styled from 'styled-components'
 import { FlexColumn, Text } from '../elements'
+import { getCharacterMD } from '../redux/async/character'
 
 const LevelBar = ({ exp, expMax }) => {
-    // * exp에 따라 1~10 level을 표시
-    const testexp = 40000
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getCharacterMD(level(exp)))
+    }, [])
+
     const level = () => {
         let result
-        if (testexp <= 10000) {
+        if (exp <= 10000) {
             result = 1
-        } else if (testexp >= 10000 && testexp < 20000) {
+        } else if (exp >= 10000 && exp < 20000) {
             result = 2
-        } else if (testexp >= 20000 && testexp < 30000) {
+        } else if (exp >= 20000 && exp < 30000) {
             result = 3
-        } else if (testexp >= 30000 && testexp < 40000) {
+        } else if (exp >= 30000 && exp < 40000) {
             result = 4
-        } else if (testexp >= 40000 && testexp < 50000) {
+        } else if (exp >= 40000 && exp < 50000) {
             result = 5
-        } else if (testexp >= 50000 && testexp < 60000) {
+        } else if (exp >= 50000 && exp < 60000) {
             result = 6
-        } else if (testexp >= 60000 && testexp < 70000) {
+        } else if (exp >= 60000 && exp < 70000) {
             result = 7
-        } else if (testexp >= 70000 && testexp < 80000) {
+        } else if (exp >= 70000 && exp < 80000) {
             result = 8
-        } else if (testexp >= 80000 && testexp < 90000) {
+        } else if (exp >= 80000 && exp < 90000) {
             result = 9
-        } else if (testexp >= 90000 && testexp <= 92000) {
+        } else if (exp >= 90000 && exp <= 92000) {
             result = 10
         }
         return result
     }
-    const calcLevelBar = (testexp - (level(testexp) - 1) * 10000) / 100
+    const calcLevelBar = (exp - (level(exp) - 1) * 10000) / 100
     console.log('>>', calcLevelBar)
-
-    console.log('>>', level(testexp), testexp, expMax)
+    console.log('>>', level(exp), exp, expMax)
 
     return (
         <>
@@ -46,7 +51,7 @@ const LevelBar = ({ exp, expMax }) => {
                 _bgColor={'none'}
             >
                 <Text _fontWeight="500" _fontSize="0.875" _color={'#6B76FF'}>
-                    Lv.{level(testexp)}
+                    Lv.{level(exp)}
                     <span style={{ fontSize: '0.75rem', color: 'black' }}>
                         / 10
                     </span>
@@ -65,7 +70,7 @@ const LevelBar = ({ exp, expMax }) => {
 
 const FullGauge = styled.div`
     position: relative;
-    width: 11.875rem;
+    width: 50vw;
     background-color: lightgray;
     height: 0.875rem;
     border-radius: 5rem;

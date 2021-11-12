@@ -8,36 +8,68 @@ const initialState = {
 const characterSlice = createSlice({
     name: 'character',
     initialState: initialState,
-    reducers: {},
+    reducers: {
+        charLevel: (state, action) => {
+            state.charList.charLevel = action.payload
+        },
+    },
 
     extraReducers: {
         //* 캐릭터 정보조회
         [getCharacterMD.fulfilled]: (state, { payload }) => {
-            const getChar = (name) => {
-                switch (name) {
-                    case '라이언':
-                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png`
+            const getLevel = (exp) => {
+                let result
+                if (exp <= 10000) {
+                    result = 1
+                } else if (exp >= 10000 && exp < 20000) {
+                    result = 2
+                } else if (exp >= 20000 && exp < 30000) {
+                    result = 3
+                } else if (exp >= 30000 && exp < 40000) {
+                    result = 4
+                } else if (exp >= 40000 && exp < 50000) {
+                    result = 5
+                } else if (exp >= 50000 && exp < 60000) {
+                    result = 6
+                } else if (exp >= 60000 && exp < 70000) {
+                    result = 7
+                } else if (exp >= 70000 && exp < 80000) {
+                    result = 8
+                } else if (exp >= 80000 && exp < 90000) {
+                    result = 9
+                } else if (exp >= 90000 && exp <= 92000) {
+                    result = 10
+                }
+                return result
+            }
 
-                    case '무지':
+            const getSrc = (name, level) => {
+                let result
+                if (name === '라이온') {
+                    if (level === 1 || 2 || 3) {
+                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png`
+                    } else if (level === 4 || 5 || 6) {
                         return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-2.png`
-
-                    case '제이지':
+                    } else if (level === 7 || 8 || 9) {
                         return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-3.png`
-                    default:
-                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png`
+                    } else if (level === 10) {
+                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-2.png`
+                    }
+                    return result
                 }
             }
 
             const charData = []
+
             payload.data.character.map((char) =>
                 charData.push({
                     exp: char.exp,
                     expMax: char.expMax,
-                    characterName: char.characterName,
-                    charSrc: getChar(char.characterName),
+                    charName: char.characterName,
+                    charLevel: getLevel(char.exp),
+                    charSrc: getSrc(char.characterName, getLevel(char.exp)),
                 })
             )
-
             state.charList = charData
         },
         [getCharacterMD.rejected]: (state, { payload }) => {
@@ -46,8 +78,8 @@ const characterSlice = createSlice({
 
         //* 캐릭터 뽑기
         [postCharacterMD.fulfilled]: (state, { payload }) => {
+            console.log('<<', payload)
             state.character = payload
-            console.log(payload, '<<postCharacterMD 풀필드>>')
         },
         [postCharacterMD.rejected]: (state, { payload }) => {
             console.log('erromsg')
