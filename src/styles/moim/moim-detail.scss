@@ -3,5 +3,73 @@
 .detail-layout {
     width: 100%;
     padding: 0 16px;
-    margin-top: 3rem;
+    margin-top: 4rem;
+}
+
+.moim-detail-article {
+    @include column-flexbox(center, start);
+    .detail-location {
+        @include text-style-12(12px, 0.15px, $text-gray);
+        margin-bottom: 25px;
+    }
+    h6 {
+        @include text-style-16(24px, 0.15px, $black);
+    }
+    img {
+        width: auto;
+        height: 160px;
+    }
+    .img-desc-container {
+        @include column-flexbox(center, center);
+        width: 100%;
+    }
+    .detail-desc {
+        @include text-style-14(24px, 0.15px, $black);
+        text-align: left;
+        width: inherit;
+        margin-top: 27px;
+    }
+    button {
+        @include flexbox();
+        width: 100%;
+        background-color: $primary;
+        color: $white;
+        height: 48px;
+        border: none;
+        border-radius: 8px;
+        margin-top: 24px;
+    }
+    .detail-post-info {
+        display: grid;
+        grid-template-columns: 3fr 7fr 2fr;
+        margin-top: 20px;
+        span {
+            @include text-style-12(24px, 0.15px, $text-gray);
+        }
+    }
+}
+.detail-option {
+    @include flexbox(start, center);
+    margin-top: 8px;
+    width: 90vw;
+    height: 40px;
+    padding: 14px 0;
+    border-top: 1px solid $text-gray;
+    border-bottom: 1px solid $text-gray;
+    .option-child {
+        @include flexbox();
+        width: 200px;
+        height: inherit;
+        margin: 0 10px 0;
+        font-size: 11px;
+        color: $text-gray;
+    }
+}
+
+.review-input-container {
+    @include flexbox();
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 1rem;
 }

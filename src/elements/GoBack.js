@@ -11,7 +11,7 @@ const GoBack = () => {
                     history.goBack()
                 }}
             >
-                <Icon icon="chevron-left" size="24px" />
+                <Icon icon="coolicon" size="24px" />
             </div>
         </>
     )

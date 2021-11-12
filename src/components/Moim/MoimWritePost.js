@@ -1,8 +1,6 @@
 /*global kakao*/
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { Input, FlexRow, Text } from '../../elements/index'
-import Icon from '../../components/icons/Icon'
 import { useDispatch, useSelector } from 'react-redux'
 import { moimCreateMD } from '../../redux/async/moim'
 import config from '../../shared/aws_config'
@@ -42,43 +40,39 @@ const MoimWritePost = () => {
 
     return (
         <>
-            <Input
-                _ph="제목을 입력하세요"
-                _width="80vw"
-                _onChange={(e) => setTitle(e.target.value)}
-            />
-            <ContentsBox onChange={(e) => setContents(e.target.value)} />
-            <FlexRow
-                _width="80vw"
-                _height="40px"
-                _margin="20px 0 10px 0"
-                _border="none"
-            >
-                <IconBtn>
-                    <input type="file" onChange={handleFileInput} />
-                    {/* <Icon icon="color-palette" size="20px" />
-                    <Text _fontSize="14px">사진</Text> */}
-                </IconBtn>
-            </FlexRow>
-            <MapSearch />
-            <FlexRow
-                _width="80vw"
-                _height="20px"
-                _margin="20px 0 0 0"
-                _border="none"
-            >
-                <IconBtn>취소</IconBtn>
-                <IconBtn onClick={() => upload()}>업로드</IconBtn>
-            </FlexRow>
+            <section className="moim-post">
+                <h4 className="post-subtitle">모임 제목</h4>
+                <input
+                    className="moim-post"
+                    placeholder="모임 제목을 입력하세요. (ex. 한강 러닝 모집)"
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+                <h4 className="post-subtitle">모임 내용</h4>
+                <textarea onChange={(e) => setContents(e.target.value)} />
+                <h4 className="post-subtitle">모임 위치 설정</h4>
+                <MapSearch />
+                <h4 className="post-subtitle">이미지 첨부</h4>
+                <label className="image-input" for="image">
+                    +
+                </label>
+                <input
+                    id="image"
+                    type="file"
+                    onChange={handleFileInput}
+                    style={{ display: 'none' }}
+                />
+                <p>
+                    모임 모집에 적합한 이미지만 올려주세요.
+                    <br />
+                    이미지는 <span>최대 1장</span>만 등록 가능합니다.
+                </p>
+            </section>
+            <button className="submit-btn" onClick={() => upload()}>
+                완료
+            </button>
         </>
     )
 }
-
-const ContentsBox = styled.textarea`
-    width: 80vw;
-    height: 300px;
-    margin-top: 20px;
-`
 
 const IconBtn = styled.button`
     display: flex;
