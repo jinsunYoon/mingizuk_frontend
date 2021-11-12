@@ -109,7 +109,6 @@ const userInfoAPI = (data) => {
     })
 }
 
-
 // *----------------------------------------------------
 
 // mymoim
@@ -231,6 +230,15 @@ const finRoutinesActionsAPI = () => {
     return instance.get('/api/main/trackerHistory')
 }
 
+// * character
+const getCharacterAPI = () => {
+    return instance.get(`/api/users/character`)
+}
+
+const postCharacterAPI = () =>{
+    return instance.post(`/api/users/character`)
+}
+
 export {
     signupAPI,
     loginAPI,
@@ -262,4 +270,6 @@ export {
     moimJoinAPI,
     actionRestartAPI,
     finRoutinesActionsAPI,
+    getCharacterAPI,
+    postCharacterAPI,
 }
