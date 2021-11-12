@@ -7,7 +7,6 @@ import ToogleTab from './ToggleTab'
 import CollectionItem from './MyPages/CollectionItem'
 import CollectionList from './MyPages/CollectionList'
 import MainRoutineList from './MainRoutineList'
-import Complete from './Complete'
 import MyMoimToogleTab from './MyPages/MyMoimToogleTab'
 import LevelBar from './LevelBar'
 export {
@@ -20,7 +19,6 @@ export {
     CollectionItem,
     CollectionList,
     MainRoutineList,
-    Complete,
     MyMoimToogleTab,
     LevelBar,
 }

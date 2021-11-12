@@ -7,6 +7,7 @@ import {
     myRoutineDeleteMD,
     setMainRoutineMD,
 } from '../../redux/async/routine'
+import { actionResetMD } from '../../redux/async/actionComplete'
 import {
     setResult,
     setFakeResultClear,
@@ -25,6 +26,10 @@ const RoutineDesc = (props) => {
     const [desc, setDesc] = React.useState('first')
     const preset = useSelector((state) => state.routine.presetRoutine)
     const myset = useSelector((state) => state.routine.myRoutine)
+    const result = useSelector((state) => state.actionComplete.result)
+    const getFakeResult = useSelector(
+        (state) => state?.actionComplete?.fakeResult
+    )
     const BtnStatus = useSelector((state) => state.routine.BtnStatus)
 
     React.useEffect(() => {
@@ -64,6 +69,14 @@ const RoutineDesc = (props) => {
                                             routine?.Actions[0].routineId,
                                     }
                                     dispatch(setMainRoutineMD(data))
+                                    // if (
+                                    //     result.length > 0 &&
+                                    //     getFakeResult.length > 0
+                                    // ) {
+                                    //     const routineId =
+                                    //         routine?.Actions[0].routineId
+                                    //     dispatch(actionResetMD(routineId))
+                                    // }
                                     dispatch(setResult([]))
                                     dispatch(setFakeResultClear([]))
                                 }
@@ -127,6 +140,14 @@ const RoutineDesc = (props) => {
                                                 routine?.Actions[0].routineId,
                                         }
                                         dispatch(setMainRoutineMD(data))
+                                        // if (
+                                        //     result.length > 0 &&
+                                        //     getFakeResult.length > 0
+                                        // ) {
+                                        //     const routineId =
+                                        //         routine?.Actions[0].routineId
+                                        //     dispatch(actionResetMD(routineId))
+                                        // }
                                         dispatch(setResult([]))
                                         dispatch(setFakeResultClear([]))
                                     }

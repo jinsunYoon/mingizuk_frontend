@@ -1,6 +1,10 @@
 import { Tune } from '@material-ui/icons'
 import { createSlice } from '@reduxjs/toolkit'
-import { actionCompleteMD, actionRestartMD } from '../async/actionComplete'
+import {
+    actionCompleteMD,
+    actionRestartMD,
+    actionResetMD,
+} from '../async/actionComplete'
 
 const initialState = {
     modalStatus: false,
@@ -49,6 +53,7 @@ const completeSlice = createSlice({
         },
         setResult: (state, { payload }) => {
             state.result = payload
+            console.log('setResult', payload)
         },
         setFakeResult: (state, { payload }) => {
             state.fakeResult.push(payload)
@@ -65,6 +70,9 @@ const completeSlice = createSlice({
         },
         [actionRestartMD.fulfilled]: (state, action) => {
             console.log('리스타트풀필드', action.payload)
+        },
+        [actionResetMD.fulfilled]: (state, action) => {
+            console.log('리셋풀필드', action.payload)
         },
     },
 })
