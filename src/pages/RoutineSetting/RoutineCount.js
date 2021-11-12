@@ -12,13 +12,17 @@ const RoutineCount = () => {
     const actionSet = useSelector((state) => state.updateAction.actions)
     const [name, setName] = React.useState('')
     const addRoutine = () => {
-        const data = {
-            routineName: name,
-            actions: actionSet,
-            isMain: false,
+        if (name === '') {
+            alert('루틴 이름을 입력해주세요')
+        } else {
+            const data = {
+                routineName: name,
+                actions: actionSet,
+                isMain: false,
+            }
+            dispatch(myRoutineCreateMD(data))
+            dispatch(resetAction())
         }
-        dispatch(myRoutineCreateMD(data))
-        dispatch(resetAction())
     }
     return (
         <>

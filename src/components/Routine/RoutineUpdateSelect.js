@@ -1,11 +1,15 @@
 import React from 'react'
-import UpdateCheck from '../../elements/UpdateCheck'
-import { useSelector } from 'react-redux'
-// import '../../styles/routine/add-routine.scss'
+import { useSelector, useDispatch } from 'react-redux'
+import Icon from '../icons/Icon'
+import { addAction } from '../../redux/modules/updateRoutine'
+import clsx from 'clsx'
 
 const RoutineUpdateSelect = (props) => {
     const { body_exercise, stretching, select } = props
     const [desc, setDesc] = React.useState('first')
+    const dispatch = useDispatch()
+    const updateActions = useSelector((state) => state?.updateAction?.actions)
+
     React.useEffect(() => {
         if (select === 'first') {
             setDesc('stretching')
@@ -14,7 +18,7 @@ const RoutineUpdateSelect = (props) => {
         } else {
             setDesc('stretching')
         }
-    })
+    }, [select])
 
     // * for pre_select_check
     const myset = useSelector((state) => state.routine.myRoutine)
@@ -44,25 +48,54 @@ const RoutineUpdateSelect = (props) => {
             )
         )
     }
+    React.useEffect(() => {
+        selectStretching?.map((select) =>
+            dispatch(addAction({ value: select, type: 'stretching' }))
+        )
+        selectBodyExercise?.map((select) =>
+            dispatch(addAction({ value: select, type: 'body_exercise' }))
+        )
+    }, [])
+
+    const check = (name) => {
+        return updateActions.findIndex(({ actionName }) => actionName === name)
+    }
 
     return (
         <>
             {desc === 'stretching' && (
                 <section className="routine-container">
                     {stretching.map((routine, idx) => (
-                        <button className="routine" key={idx}>
-                            <span>{routine}</span>
-                            {getStretchingIdx.find((n) => n === idx) !==
-                            undefined ? (
-                                <UpdateCheck
-                                    value={routine}
-                                    type="stretching"
-                                    pre_select={true}
+                        <button
+                            className="routine"
+                            key={idx}
+                            onClick={() => {
+                                dispatch(
+                                    addAction({
+                                        value: routine,
+                                        type: 'stretching',
+                                    })
+                                )
+                            }}
+                        >
+                            <span
+                                className={clsx(
+                                    check(routine) !== -1 && 'select-priamry'
+                                )}
+                            >
+                                {routine}
+                            </span>
+                            {check(routine) !== -1 ? (
+                                <Icon
+                                    size="16px"
+                                    color="#6B76FF"
+                                    icon="check"
                                 />
                             ) : (
-                                <UpdateCheck
-                                    value={routine}
-                                    type="stretching"
+                                <Icon
+                                    size="16px"
+                                    color="#A5ABB0"
+                                    icon="check"
                                 />
                             )}
                         </button>
@@ -72,19 +105,36 @@ const RoutineUpdateSelect = (props) => {
             {desc === 'body_exercise' && (
                 <section className="routine-container">
                     {body_exercise.map((routine, idx) => (
-                        <button className="routine" key={idx}>
-                            <span>{routine}</span>
-                            {getBodyExerciseIdx.find((n) => n === idx) !==
-                            undefined ? (
-                                <UpdateCheck
-                                    value={routine}
-                                    type="body_exercise"
-                                    pre_select={true}
+                        <button
+                            className="routine"
+                            key={idx}
+                            onClick={() => {
+                                dispatch(
+                                    addAction({
+                                        value: routine,
+                                        type: 'body_exercise',
+                                    })
+                                )
+                            }}
+                        >
+                            <span
+                                className={clsx(
+                                    check(routine) !== -1 && 'select-priamry'
+                                )}
+                            >
+                                {routine}
+                            </span>
+                            {check(routine) !== -1 ? (
+                                <Icon
+                                    size="16px"
+                                    color="#6B76FF"
+                                    icon="check"
                                 />
                             ) : (
-                                <UpdateCheck
-                                    value={routine}
-                                    type="body_exercise"
+                                <Icon
+                                    size="16px"
+                                    color="#A5ABB0"
+                                    icon="check"
                                 />
                             )}
                         </button>

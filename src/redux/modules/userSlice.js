@@ -6,7 +6,6 @@ import {
     logoutMD,
     loginCheckMD,
     userInfoMD,
-    kakaoLoginMD,
 } from '../async/user'
 import { history } from '../store'
 
@@ -68,13 +67,6 @@ const userSlice = createSlice({
             state.userInfo.nickName = payload.newNickName
             state.userInfo.userPw = payload.userPw
             state.userInfo.userID = payload.userID
-        },
-
-        // * loginCheck
-        [kakaoLoginMD.pending]: (state, { payload }) => {},
-        [kakaoLoginMD.rejected]: (state, { payload }) => {},
-        [kakaoLoginMD.fulfilled]: (state, { payload }) => {
-            console.log(payload)
         },
     },
 })

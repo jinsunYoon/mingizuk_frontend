@@ -1,23 +1,41 @@
 //character
 @import '../shared/common.scss';
 
-.addchar {
-    @include flexbox();
-    width: 120px;
-    height: 120px;
-    font-size: 36px;
-    border: dashed 2px #b8c0c4;
-    margin: 40px;
-    background-color: #dedede;
-    color: #b8c0c4;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    cursor: pointer;
+.addchar-container {
+    .addchar {
+        @include flexbox();
+        width: 120px;
+        height: 120px;
+        font-size: 36px;
+        border: dashed 2px #b8c0c4;
+        margin: 40px;
+        background-color: #dedede;
+        color: #b8c0c4;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        cursor: pointer;
+    }
+
+    p {
+        text-align: center;
+    }
 }
 
+.char-container {
+    .char {
+        @include flexbox();
+        border: none;
+        margin: 40px;
+        width: 120px;
+        height: 120px;
+    }
+    p {
+        text-align: center;
+    }
+}
 .modal-container {
     .modal-bg {
         width: 100vw;

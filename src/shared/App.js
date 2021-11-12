@@ -2,7 +2,7 @@
 import React, { Suspense, lazy } from 'react'
 import { ConnectedRouter } from 'connected-react-router'
 import { history } from '../redux/store'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginCheckMD } from '../redux/async/user'
 
@@ -38,6 +38,18 @@ const App = () => {
     React.useEffect(() => {
         dispatch(loginCheckMD())
     }, [])
+
+    // *social login
+    if (window.location.pathname.includes('sociallogin')) {
+        const refreshToken = window.location.pathname
+            .split('=')[1]
+            .split('&')[0]
+        const accessToken = window.location.pathname.split('=')[2]
+
+        sessionStorage.setItem('refreshToken', refreshToken)
+        sessionStorage.setItem('accessToken', accessToken)
+        history.replace('/')
+    }
 
     return (
         <>

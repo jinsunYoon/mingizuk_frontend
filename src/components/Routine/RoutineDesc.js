@@ -13,21 +13,24 @@ import {
     setFakeResultClear,
 } from '../../redux/modules/completeSlice'
 import Icon from '../icons/Icon'
-import { updateRoutine } from '../../redux/modules/routineSlice'
-
+import {
+    setRoutineModal,
+    updateRoutine,
+} from '../../redux/modules/routineSlice'
 import '../../styles/routine/my-routine.scss'
+import RoutineOption from './RoutineOption'
 
 const RoutineDesc = (props) => {
     const dispatch = useDispatch()
     const { select } = props
     const [desc, setDesc] = React.useState('first')
-    const [mainBtnStatus, setMainBtnStatus] = React.useState(false)
     const preset = useSelector((state) => state.routine.presetRoutine)
     const myset = useSelector((state) => state.routine.myRoutine)
     const result = useSelector((state) => state.actionComplete.result)
     const getFakeResult = useSelector(
         (state) => state?.actionComplete?.fakeResult
     )
+    const BtnStatus = useSelector((state) => state.routine.BtnStatus)
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -48,14 +51,18 @@ const RoutineDesc = (props) => {
     return (
         <>
             {desc === 'myRoutine' && (
-                <div>
+                <div
+                    onClick={(e) => {
+                        e.stopPropagation()
+                    }}
+                >
                     {myset?.map((routine, idx) => (
                         <button
                             className="routine-box"
                             key={idx}
                             onClick={(e) => {
                                 e.target.classList.add('.active')
-                                setMainBtnStatus(true)
+                                dispatch(setRoutineModal(true))
                                 if (routine.Actions.length > 0) {
                                     const data = {
                                         routineId:
@@ -78,20 +85,27 @@ const RoutineDesc = (props) => {
                             <div className="text-box">
                                 <h3>{routine?.routineName}</h3>
                                 <p>
-                                    {routine?.Actions?.map(
-                                        (action, idx) => action.actionName
+                                    {routine?.Actions?.map((action, idx) =>
+                                        routine?.Actions?.length - 1 === idx
+                                            ? `${action?.actionName}`
+                                            : action?.actionName?.length > 5
+                                            ? `${action?.actionName?.slice(
+                                                  0,
+                                                  3
+                                              )}.. / `
+                                            : `${action?.actionName} / `
                                     )}
                                 </p>
                             </div>
                             <div className="icon-box">
-                                <Icon
-                                    icon="create"
-                                    size="12px"
-                                    _onClick={() => {
+                                <div
+                                    onClick={() => {
                                         dispatch(updateRoutine(routine.id))
                                         history.push('/routine/update')
                                     }}
-                                />
+                                >
+                                    수정
+                                </div>
                                 <Icon
                                     _onClick={() => {
                                         const answer =
@@ -119,7 +133,7 @@ const RoutineDesc = (props) => {
                             <button
                                 className="recommend-routine-box"
                                 onClick={() => {
-                                    setMainBtnStatus(true)
+                                    dispatch(setRoutineModal(true))
                                     if (routine.Actions.length > 0) {
                                         const data = {
                                             routineId:
@@ -142,8 +156,15 @@ const RoutineDesc = (props) => {
                                 <h3>{routine?.routineName}</h3>
                                 <div>
                                     <p>
-                                        {routine?.Actions?.map(
-                                            (action, idx) => action.actionName
+                                        {routine?.Actions?.map((action, idx) =>
+                                            routine?.Actions?.length - 1 === idx
+                                                ? `${action?.actionName}`
+                                                : action?.actionName?.length > 5
+                                                ? `${action?.actionName?.slice(
+                                                      0,
+                                                      3
+                                                  )}.. / `
+                                                : `${action?.actionName} / `
                                         )}
                                     </p>
                                 </div>
@@ -151,7 +172,7 @@ const RoutineDesc = (props) => {
                         ))}
                 </section>
             )}
-            {mainBtnStatus && (
+            {BtnStatus && (
                 <div
                     style={{
                         zIndex: '3',
@@ -167,6 +188,7 @@ const RoutineDesc = (props) => {
                     </button>
                 </div>
             )}
+            {/* <RoutineOption /> */}
         </>
     )
 }
