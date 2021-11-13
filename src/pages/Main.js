@@ -30,6 +30,15 @@ import { getCharacterMD } from '../redux/async/character'
 const Main = (props) => {
     const dispatch = useDispatch()
 
+    React.useEffect(() => {
+        dispatch(loginCheckMD())
+        dispatch(getMainRoutineMD())
+        // dispatch(getCharacterMD())
+        // const actionFins = mainRoutine?.Actions?.ActionFins?.map(
+        //     (fin, idx) => {}
+        // )
+    }, [])
+
     const is_login = useSelector((state) => state.user.isLogin)
     const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
     console.log('메인루틴', mainRoutine)
@@ -47,17 +56,15 @@ const Main = (props) => {
     }
     console.log('array', array)
 
-    if (array.length > 0) {
-        dispatch(setResult(array))
-        dispatch(setFakeResult(array))
-        console.log('이거 실행')
-    }
-
     React.useEffect(() => {
         dispatch(loginCheckMD())
         dispatch(getMainRoutineMD())
-        setResult()
     }, [])
+
+    if (array.length > 0) {
+        dispatch(setResult(array))
+        dispatch(setFakeResult(array))
+    }
 
     if (is_login && isMain) {
         return (
