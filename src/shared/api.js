@@ -86,7 +86,7 @@ const getMainRoutineAPI = () => {
 
 const actionCompleteAPI = (data) => {
     console.log('이거 api 데이터', data)
-    return instance.put('/api/users/action', {
+    return instance.put('/api/actions', {
         actionId: data.actionId,
         routineId: data.routineId,
         isReset: 0,
@@ -118,7 +118,6 @@ const userInfoAPI = (data) => {
 
 // mymoim
 const myMoimCreateAPI = (data) => {
-    console.log(data, '이거 api데이터')
     return instance.post('/api/users/moims', { userType: 1 })
 }
 
@@ -203,11 +202,11 @@ const moimDetailAPI = (moimId) => {
 }
 
 const moimLikeAPI = (moimId) => {
-    return instance.post(`/api/moim/like/${moimId}`)
+    return instance.post(`/api/moims/like/${moimId}`)
 }
 
 const moimUnlikeAPI = (moimId) => {
-    return instance.delete(`/api/moim/like/${moimId}`)
+    return instance.delete(`/api/moims/like/${moimId}`)
 }
 
 const moimJoinAPI = (data) => {
@@ -215,17 +214,17 @@ const moimJoinAPI = (data) => {
 }
 
 const moimCreateReviewAPI = (data) => {
-    return instance.post(`/api/comments/${data.moimId}`, {
+    return instance.post(`/api/moims/comment/${data.moimId}`, {
         contents: data.contents,
     })
 }
 
 const moimDeleteReviewAPI = (commentId) => {
-    return instance.delete(`/api/comments/${commentId}`)
+    return instance.delete(`/api/moims/comment/${commentId}`)
 }
 
 const moimUpdateReviewAPI = (data) => {
-    return instance.put(`/api/comments/${data.commentId}`, {
+    return instance.put(`/api/moims/comment/${data.commentId}`, {
         contents: data.contents,
     })
 }
@@ -237,11 +236,11 @@ const finRoutinesActionsAPI = () => {
 
 // * character
 const getCharacterAPI = () => {
-    return instance.get(`/api/users/character`)
+    return instance.get(`/api/characters`)
 }
 
 const postCharacterAPI = () => {
-    return instance.post(`/api/users/character`)
+    return instance.post(`/api/characters`)
 }
 
 export {

@@ -50,7 +50,7 @@ const Main = (props) => {
     if (array.length > 0) {
         dispatch(setResult(array))
         dispatch(setFakeResult(array))
-        console.log('이거 실행')
+        console.log('<<', '이거 실행', array.length)
     }
 
     React.useEffect(() => {
