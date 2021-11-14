@@ -25,18 +25,22 @@ const MyPage = (props) => {
                     <div className="user-profile">
                         <div className="user-image">{/* 캐릭터이미지 */}</div>
                         <div className="user-info">
-                            <span className="user-nickname">{nickName}</span>
+                            <div style={{ display: 'flex' }}>
+                                <span className="user-nickname">
+                                    {nickName}
+                                </span>
+                                <Icon
+                                    className="user-info-update"
+                                    _onClick={() => {
+                                        history.push('/users/info')
+                                    }}
+                                    icon="ic_edit"
+                                    size="24px"
+                                    color="white"
+                                />
+                            </div>
                             <span className="user-email">{email}</span>
                         </div>
-                        <Icon
-                            className="user-info-update"
-                            _onClick={() => {
-                                history.push('/users/info')
-                            }}
-                            icon="create"
-                            size="12px"
-                            color="white"
-                        />
                     </div>
 
                     <ul className="mypage-list">

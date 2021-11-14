@@ -20,6 +20,7 @@ import {
 //* style
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { useHistory } from 'react-router'
+import { AssignmentReturnOutlined } from '@material-ui/icons'
 
 const ProfileUpdate = () => {
     const history = useHistory()
@@ -75,8 +76,14 @@ const ProfileUpdate = () => {
                     _bgColor="grey"
                     _onClick={() => {
                         const data = { newNickName, newPwd }
-                        dispatch(userInfoMD(data))
-                        history.push('/users')
+                        const result =
+                            window.confirm('회원정보를 수정하시겠습니까 ?')
+                        if (result) {
+                            dispatch(userInfoMD(data))
+                            history.push('/users')
+                        } else {
+                            return
+                        }
                     }}
                 >
                     완료

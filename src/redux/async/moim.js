@@ -11,6 +11,7 @@ import {
     moimUpdateAPI,
     moimLikeAPI,
     moimUnlikeAPI,
+    moimLeaveAPI,
 } from '../../shared/api'
 import { history } from '../store'
 import swal from 'sweetalert'
@@ -134,8 +135,7 @@ export const moimJoinMD = createAsyncThunk(
         try {
             const response = await moimJoinAPI(data)
             if (response) {
-                console.log('join', response, data)
-                return response
+                return data
             }
         } catch (err) {
             console.log(err)
@@ -184,6 +184,22 @@ export const moimUpdateReviewMD = createAsyncThunk(
             const response = await moimUpdateReviewAPI(data)
             if (response) {
                 Swal.fire('리뷰를 수정하였습니다.')
+                return data
+            }
+        } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const moimLeaveMD = createAsyncThunk(
+    'moim/leave',
+    async (data, thunkAPI) => {
+        try {
+            console.log(data.moimId)
+            const response = await moimLeaveAPI(data)
+            if (response) {
                 return data
             }
         } catch (err) {

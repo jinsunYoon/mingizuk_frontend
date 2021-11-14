@@ -213,6 +213,10 @@ const moimJoinAPI = (data) => {
     return instance.post(`/api/moims/${data.moimId}`)
 }
 
+const moimLeaveAPI = (data) => {
+    return instance.post(`/api/moims/${data.moimId}/exit`)
+}
+
 const moimCreateReviewAPI = (data) => {
     return instance.post(`/api/moims/comment/${data.moimId}`, {
         contents: data.contents,
@@ -272,6 +276,7 @@ export {
     moimLikeAPI,
     moimUnlikeAPI,
     moimJoinAPI,
+    moimLeaveAPI,
     actionRestartAPI,
     finRoutinesActionsAPI,
     actionResetAPI,

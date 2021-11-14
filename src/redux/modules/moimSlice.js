@@ -7,6 +7,7 @@ import {
     moimLikeMD,
     moimUnlikeMD,
     moimJoinMD,
+    moimLeaveMD,
     moimDetailMD,
     moimReviewCreateMD,
     moimDeleteReviewMD,
@@ -46,13 +47,10 @@ const moimSlice = createSlice({
             console.log(payload)
             state.moim_all = payload.data.allMoims
         },
-        [moimReadMD.rejected]: (state, { payload }) => {
-            console.log(payload)
-        },
-        [moimUpdateMD.fulfilled]: (state, { payload }) => {
-            console.log(payload)
-        },
+        [moimReadMD.rejected]: (state, { payload }) => {},
+        [moimUpdateMD.fulfilled]: (state, { payload }) => {},
         [moimDeleteMD.fulfilled]: (state, { payload }) => {
+            console.log('<<', state.moim_all)
             const ref_moim_post = state.moim_all.filter(
                 (post) => post.id !== payload
             )
@@ -75,13 +73,26 @@ const moimSlice = createSlice({
             state.moim_detail.Likes = result
         },
         [moimJoinMD.fulfilled]: (state, { payload }) => {
-            console.log(payload)
+            state.moim_detail.MoimUsers.push({
+                User: { nickName: payload.nickName },
+            })
+        },
+        [moimLeaveMD.fulfilled]: (state, { payload }) => {
+            const refUser = payload.user
+            const moimUsers = state.moim_detail.MoimUsers.filter(
+                ({ User }) => User.nickName
+            )
+            const result = moimUsers.filter(
+                ({ User }) => User.nickName !== refUser
+            )
+            state.moim_detail.MoimUsers = result
         },
         [moimReviewCreateMD.fulfilled]: (state, { payload }) => {
             console.log(payload)
             state.moim_detail.Comments.push({
                 contents: payload.data.contents,
                 id: payload.response.data.newCommentId,
+                User: { nickName: payload.data.writer },
             })
         },
         [moimDeleteReviewMD.fulfilled]: (state, { payload }) => {
