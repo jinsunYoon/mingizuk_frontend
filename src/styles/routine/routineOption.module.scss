@@ -3,16 +3,16 @@
 .option-container {
     @include column-flexbox(center, center);
     position: fixed;
-    right: 0;
-    bottom: 0;
+    bottom: 140px;
     width: 100vw;
     height: 140px;
     background-color: $white;
     border: 1px solid $primary;
     button {
-        width: 100%;
+        width: 10rem;
         border: none;
         background-color: inherit;
+        height: 140px;
         @include text-style-16(16px, auto, $black);
     }
 }

@@ -65,3 +65,49 @@
 .add-btn {
     @include add-btn();
 }
+
+.option-background {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: rgba(144, 144, 144, 0.5);
+    z-index: 6;
+}
+
+.option-container {
+    @include column-flexbox(center, start);
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 160px;
+    background-color: $white;
+    border: none;
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
+    button {
+        @include flexbox(start, center);
+        border: none;
+        background-color: inherit;
+        height: 60px;
+        width: 100%;
+        padding-left: 18px;
+        &:hover,
+        :active {
+            background-color: $primary;
+        }
+        span {
+            @include text-style-16(16px, auto, $black);
+            font-weight: 700;
+            padding-left: 2rem;
+            width: 100%;
+            text-align: left;
+            &:hover,
+            :active {
+                background-color: $primary;
+                color: $white;
+            }
+        }
+    }
+}

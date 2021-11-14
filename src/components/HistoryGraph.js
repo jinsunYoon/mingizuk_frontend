@@ -23,6 +23,7 @@ const HistoryGraph = (props) => {
     const finActions = useSelector((state) => state.routine.fin.finActions)
     const finRoutines = useSelector((state) => state.routine.fin.finRoutines)
     const joinDate = useSelector((state) => state.routine.fin.joinDate)
+
     const daylength = Math.ceil(
         (new Date().getTime() - new Date(joinDate).getTime()) /
             (1000 * 60 * 60 * 24)

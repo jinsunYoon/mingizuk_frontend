@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getToken } from './utils'
+import Swal from 'sweetalert2'
 
 // Axios 인스턴스 설정
 const instance = axios.create({
@@ -160,7 +161,6 @@ const myRoutineUpdateAPI = (data) => {
     return instance.put(`/api/routines/${data.routineId}`, {
         routineName: data.routineName,
         actions: data.actions,
-        isMain: data.isMain,
     })
 }
 
