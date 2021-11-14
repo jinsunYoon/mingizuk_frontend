@@ -4,7 +4,6 @@ import { history } from '../../redux/store'
 import {
     myRoutinePresetMD,
     myRoutineListMD,
-    myRoutineDeleteMD,
     setMainRoutineMD,
 } from '../../redux/async/routine'
 import { actionResetMD } from '../../redux/async/actionComplete'
@@ -12,13 +11,11 @@ import {
     setResult,
     setFakeResultClear,
 } from '../../redux/modules/completeSlice'
-import Icon from '../icons/Icon'
 import {
     setRoutineModal,
-    updateRoutine,
+    setRoutineInfo,
+    setOptionModal,
 } from '../../redux/modules/routineSlice'
-import '../../styles/routine/my-routine.scss'
-import RoutineOption from './RoutineOption'
 
 const RoutineDesc = (props) => {
     const dispatch = useDispatch()
@@ -100,27 +97,12 @@ const RoutineDesc = (props) => {
                             <div className="icon-box">
                                 <div
                                     onClick={() => {
-                                        dispatch(updateRoutine(routine.id))
-                                        history.push('/routine/update')
+                                        dispatch(setOptionModal(true))
+                                        dispatch(setRoutineInfo(routine))
                                     }}
                                 >
-                                    수정
+                                    ...
                                 </div>
-                                <Icon
-                                    _onClick={() => {
-                                        const answer =
-                                            window.confirm(
-                                                '해당 루틴을 삭제하시겠습니까 ?'
-                                            )
-                                        if (answer) {
-                                            dispatch(
-                                                myRoutineDeleteMD(routine.id)
-                                            )
-                                        } else return
-                                    }}
-                                    icon="close-x"
-                                    size="14px"
-                                />
                             </div>
                         </button>
                     ))}
@@ -188,7 +170,6 @@ const RoutineDesc = (props) => {
                     </button>
                 </div>
             )}
-            {/* <RoutineOption /> */}
         </>
     )
 }
