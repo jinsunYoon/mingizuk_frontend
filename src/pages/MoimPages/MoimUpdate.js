@@ -1,9 +1,7 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import Header from '../../components/Header'
-import MoimTemplate from '../../components/Moim/MoimTemplate'
 import MoimUpdateWrite from '../../components/Moim/MoimUpdateWrite'
-import { FlexColumn } from '../../elements'
+import '../../styles/moim/moim-write.scss'
 
 const MoimUpdate = () => {
     return (
@@ -11,11 +9,9 @@ const MoimUpdate = () => {
             <div style={{ zIndex: '3' }}>
                 <Header name="모임 수정하기" type="back" />
             </div>
-            <MoimTemplate>
-                <FlexColumn _width="90vw" _height="80vh">
-                    <MoimUpdateWrite />
-                </FlexColumn>
-            </MoimTemplate>
+            <section className="detail-post-layout">
+                <MoimUpdateWrite />
+            </section>
         </>
     )
 }

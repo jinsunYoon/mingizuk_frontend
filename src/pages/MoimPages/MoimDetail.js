@@ -3,7 +3,6 @@ import Header from '../../components/Header'
 import { history } from '../../redux/store'
 import { NavBar } from '../../components'
 import { LikeBtn } from '../../elements'
-import styled from 'styled-components'
 import Icon from '../../components/icons/Icon'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -12,6 +11,7 @@ import {
     moimDeleteMD,
     moimJoinMD,
     moimLikeMD,
+    moimLeaveMD,
 } from '../../redux/async/moim'
 import MoimReview from '../../components/Moim/MoimReview'
 import { moimUpdate } from '../../redux/modules/moimSlice'
@@ -26,10 +26,11 @@ const MoimDetail = (props) => {
     const user_nick = useSelector((state) => state.user.userInfo.nickName)
     const post_data = useSelector((state) => state.moim.moim_detail)
     const like_id = useSelector((state) => state.user.userInfo.userID)
+    const join_useres = post_data?.MoimUsers?.map(({ User }) => User.nickName)
 
     React.useEffect(() => {
         dispatch(moimDetailMD(post_id))
-        post_data?.Likes?.length
+        // post_data?.Likes?.length
     }, [])
 
     // * post delete
@@ -56,6 +57,7 @@ const MoimDetail = (props) => {
         const data = {
             moimId: post_id,
             contents,
+            writer: user_nick,
         }
         dispatch(moimReviewCreateMD(data))
         setContents('')
@@ -63,37 +65,52 @@ const MoimDetail = (props) => {
 
     // * join Moim
     const join = (data) => {
-        dispatch(moimJoinMD(data))
+        const result = window.confirm('모임에 참여하시겠습니까?')
+        if (result) {
+            dispatch(moimJoinMD(data))
+        } else return
+    }
+
+    // * leave Moim
+    const leave = () => {
+        const data = { moimId: Number(post_id), user: user_nick }
+        const result = window.confirm('모임에 취소하시겠습니까?')
+        if (result) {
+            dispatch(moimLeaveMD(data))
+        } else return
     }
 
     return (
         <>
             <Header name="모임" type="back" />
             <article className="detail-layout">
-                {/* <TitleBox>
-                    {Object.keys(post_data).length > 0 &&
-                        post_data.MoimUsers[0].User.nickName === user_nick && (
-                            <div>
-                                <CloseBtn
-                                    onClick={() => {
-                                        deletePost(post_data?.id)
-                                    }}
-                                >
-                                    x
-                                </CloseBtn>
-                                <button
-                                    onClick={() => {
-                                        dispatch(moimUpdate(post_data))
-                                        history.push('/moim/update')
-                                    }}
-                                >
-                                    u
-                                </button>
-                            </div>
-                        )}
-                </TitleBox> */}
                 <article className="moim-detail-article">
-                    <p className="detail-location">서울특별시 강남구 역삼동</p>
+                    <div className="location-btn">
+                        <p className="detail-location">
+                            서울특별시 강남구 역삼동
+                        </p>
+                        {Object.keys(post_data).length > 0 &&
+                            post_data?.MoimUsers[0]?.User?.nickName ===
+                                user_nick && (
+                                <div className="post-detail-btns-container">
+                                    <button
+                                        onClick={() => {
+                                            deletePost(post_data?.id)
+                                        }}
+                                    >
+                                        삭제
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            dispatch(moimUpdate(post_data))
+                                            history.push('/moim/update')
+                                        }}
+                                    >
+                                        수정
+                                    </button>
+                                </div>
+                            )}
+                    </div>
                     <h6>{post_data?.title}</h6>
                     <article className="img-desc-container">
                         {post_data?.imgSrc !== null && (
@@ -101,21 +118,42 @@ const MoimDetail = (props) => {
                         )}
                         <p className="detail-desc">{post_data?.contents}</p>
                     </article>
-                    {Object.keys(post_data).length > 0 &&
-                        user_nick !==
-                            post_data?.MoimUsers[0]?.User.nickName && (
-                            <button
-                                onClick={() => {
-                                    const data = {
-                                        moimId: post_data?.id,
-                                        userId: post_data?.MoimUsers[0]?.userId,
-                                    }
-                                    join(data)
-                                }}
-                            >
-                                모임참여하기
+                    {!join_useres?.includes(user_nick) && (
+                        <button
+                            onClick={() => {
+                                const data = {
+                                    moimId: post_data?.id,
+                                    userId: post_data?.MoimUsers[0]?.userId,
+                                    nickName: user_nick,
+                                }
+                                join(data)
+                            }}
+                        >
+                            모임참여하기
+                        </button>
+                    )}
+                    {join_useres?.includes(user_nick) && (
+                        <div className="join-user-container">
+                            <button className="join" onClick={() => {}}>
+                                <Icon
+                                    icon="message"
+                                    size="24px"
+                                    color="white"
+                                />
+                                채팅방 참여하기
                             </button>
-                        )}
+                            {join_useres[0] !== user_nick && (
+                                <button
+                                    className="leave"
+                                    onClick={() => {
+                                        leave()
+                                    }}
+                                >
+                                    모임 그만하기
+                                </button>
+                            )}
+                        </div>
+                    )}
                     <section className="detail-post-info">
                         <span>
                             작성자 :{' '}
@@ -139,54 +177,28 @@ const MoimDetail = (props) => {
                         댓글 {post_data?.Comments?.length}개
                     </div>
                 </section>
+                <div style={{ width: '100vw' }}>
+                    <MoimReview moimId={post_id} />
+                </div>
+                <section className="review-input-container">
+                    <input
+                        placeholder="댓글을 입력해주세요"
+                        onChange={(e) => {
+                            setContents(e.target.value)
+                        }}
+                        value={contents}
+                    />
+                    <button
+                        onClick={() => {
+                            commitsubmit()
+                        }}
+                    >
+                        등록
+                    </button>
+                </section>
             </article>
-            <div style={{ marginBottom: '60px', width: '100vw' }}>
-                <MoimReview moimId={post_id} />
-            </div>
-            <section className="review-input-container">
-                <ReviewInput
-                    placeholder="댓글을 입력해주세요"
-                    onChange={(e) => {
-                        setContents(e.target.value)
-                    }}
-                    value={contents}
-                ></ReviewInput>
-                <SubmitBtn
-                    onClick={() => {
-                        commitsubmit()
-                    }}
-                >
-                    등록
-                </SubmitBtn>
-            </section>
         </>
     )
 }
-
-const ReviewInput = styled.input`
-    width: 280px;
-    height: 40px;
-    padding-left: 10px;
-`
-
-const SubmitBtn = styled.button`
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
-    border: none;
-    margin-left: 5px;
-`
-
-const CloseBtn = styled.button`
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    right: 20px;
-    margin: 10px;
-`
 
 export default MoimDetail

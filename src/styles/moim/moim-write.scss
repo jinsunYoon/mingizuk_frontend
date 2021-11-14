@@ -59,3 +59,20 @@
     margin: 0;
     border: none;
 }
+
+.date-container {
+    @include flexbox();
+    flex-wrap: nowrap;
+    width: inherit;
+    &:first-child {
+        margin-right: 2rem;
+    }
+}
+
+.react-datepicker__input-container {
+    width: 10rem;
+}
+
+.DayPicker-Month {
+    width: 275px;
+}

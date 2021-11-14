@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Input, FlexRow, Text } from '../../elements/index'
-import Icon from '../../components/icons/Icon'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { moimUpdateMD } from '../../redux/async/moim'
 import config from '../../shared/aws_config'
 import { uploadFile } from 'react-s3'
+import MapSearch from './MapSearch'
 
 const MoimUpdateWrite = () => {
     const dispatch = useDispatch()
@@ -20,6 +21,9 @@ const MoimUpdateWrite = () => {
     const [title, setTitle] = React.useState(beforeTitle)
     const [contents, setContents] = React.useState(beforeContent)
     const [selectedFile, setSelectedFile] = React.useState(null)
+
+    const [startDate, setStartDate] = React.useState(new Date())
+    const [endDate, setEndDate] = React.useState(new Date())
 
     // * upload S3 & update
     const handleFileInput = (e) => {
@@ -51,42 +55,52 @@ const MoimUpdateWrite = () => {
 
     return (
         <>
-            <Input
-                _ph="제목을 입력하세요"
-                _width="80vw"
-                _onChange={(e) => setTitle(e.target.value)}
-                _valueType="customValue"
-                _value={title}
-            />
-            <ContentsBox
-                onChange={(e) => setContents(e.target.value)}
-                value={contents}
-            />
-            <FlexRow
-                _width="80vw"
-                _height="40px"
-                _margin="20px 0 0 0"
-                _border="none"
-            >
-                <IconBtn>
-                    <input type="file" onChange={handleFileInput} />
-                    {/* <Icon icon="color-palette" size="20px" />
-                    <Text _fontSize="14px">사진</Text> */}
-                </IconBtn>
-                <IconBtn>
-                    <Text _fontSize="14px">위치</Text>
-                    <Icon icon="place-location" size="20px" />
-                </IconBtn>
-            </FlexRow>
-            <FlexRow
-                _width="80vw"
-                _height="20px"
-                _margin="20px 0 0 0"
-                _border="none"
-            >
-                <IconBtn>취소</IconBtn>
-                <IconBtn onClick={() => update()}>수정하기</IconBtn>
-            </FlexRow>
+            {' '}
+            <section className="moim-post">
+                <h4 className="post-subtitle">모임 제목 수정</h4>
+                <input
+                    className="moim-post"
+                    placeholder="모임 제목을 입력하세요. (ex. 한강 러닝 모집)"
+                    onChange={(e) => setTitle(e.target.value)}
+                    value={title}
+                />
+                <h4 className="post-subtitle">모임 내용 수정</h4>
+                <textarea
+                    onChange={(e) => setContents(e.target.value)}
+                    value={contents}
+                />
+                <h4 className="post-subtitle">모임 위치 수정</h4>
+                <MapSearch />
+                <h4 className="post-subtitle">모임 날짜 수정</h4>
+                <div className="date-container">
+                    <DatePicker
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                    />
+                    <DatePicker
+                        selected={endDate}
+                        onChange={(date) => setEndDate(date)}
+                    />
+                </div>
+                <h4 className="post-subtitle">이미지 수정</h4>
+                <label className="image-input" htmlFor="image">
+                    +
+                </label>
+                <input
+                    id="image"
+                    type="file"
+                    onChange={handleFileInput}
+                    style={{ display: 'none' }}
+                />
+                <p>
+                    모임 모집에 적합한 이미지만 올려주세요.
+                    <br />
+                    이미지는 <span>최대 1장</span>만 등록 가능합니다.
+                </p>
+            </section>
+            <button className="submit-btn" onClick={() => update()}>
+                수정하기
+            </button>
         </>
     )
 }
