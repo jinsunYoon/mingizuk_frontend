@@ -1,7 +1,7 @@
-@mixin container($bg: #eee) {
+@mixin container($bg: #fff) {
     @include flexbox();
     width: 100vw;
     flex-direction: column;
     align-content: center;
-    background:$bg;
+    background: $bg;
 }

@@ -2,21 +2,11 @@
 @import '../shared/common.scss';
 
 .mypage-layout {
-    @include container();
+    max-width: $tablet;
 }
-//================= > contents에 미디어쿼리 적용
+
 .contents {
     margin: 50px auto 0;
-
-    @include mobile {
-        width: 100%;
-    }
-    @include tablet {
-        width: 100%;
-    }
-    @include desktop {
-        width: 1024px;
-    }
 
     .user-profile {
         @include flexbox();
@@ -24,7 +14,7 @@
         height: 120px;
         justify-content: space-evenly;
         align-content: center;
-        background-color: $primary;
+        background-color: orange;
 
         .user-image {
             width: 56px;
@@ -70,3 +60,5 @@
         }
     }
 }
+
+//================= > contents에 미디어쿼리 적용

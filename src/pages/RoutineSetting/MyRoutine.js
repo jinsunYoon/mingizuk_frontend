@@ -22,61 +22,67 @@ const MyRoutine = () => {
 
     return (
         <>
-            <Header />
-            <section
-                className="container"
-                onClick={() => BtnStatus && dispatch(setRoutineModal(false))}
-            >
-                <ToggleTab
-                    firstValue={'내 루틴'}
-                    secondValue={'추천 루틴'}
-                    select={status}
-                />
-                <RoutineDesc select={status} />
-                <button
-                    className="add-btn"
-                    onClick={() => history.push('/routine/add')}
+            <div className="routine-layout">
+                <Header />
+                <section
+                    className="container"
+                    onClick={() =>
+                        BtnStatus && dispatch(setRoutineModal(false))
+                    }
                 >
-                    +
-                </button>
-                {optionStatus && (
-                    <div
-                        className="option-background"
-                        onClick={() => {
-                            dispatch(setOptionModal(false))
-                        }}
+                    <ToggleTab
+                        firstValue={'내 루틴'}
+                        secondValue={'추천 루틴'}
+                        select={status}
+                    />
+                    <RoutineDesc select={status} />
+                    <button
+                        className="add-btn"
+                        onClick={() => history.push('/routine/add')}
                     >
+                        +
+                    </button>
+                    {optionStatus && (
                         <div
-                            className="option-container"
-                            onClick={(e) => e.stopPropagation()}
+                            className="option-background"
+                            onClick={() => {
+                                dispatch(setOptionModal(false))
+                            }}
                         >
-                            <button
-                                onClick={() => {
-                                    dispatch(updateRoutine(optInfo.id))
-                                    history.push('/routine/update')
-                                }}
+                            <div
+                                className="option-container"
+                                onClick={(e) => e.stopPropagation()}
                             >
-                                <Icon icon="ic_edit" size="24px" />
-                                <span>수정하기</span>
-                            </button>
-                            <button
-                                onClick={() => {
-                                    const result =
-                                        window.confirm(
-                                            '루틴을 삭제하시겠습니까?'
-                                        )
-                                    if (result) {
-                                        dispatch(myRoutineDeleteMD(optInfo.id))
-                                    } else return
-                                }}
-                            >
-                                <Icon icon="Trash_light" size="24px" />
-                                <span>삭제하기</span>
-                            </button>
+                                <button
+                                    onClick={() => {
+                                        dispatch(updateRoutine(optInfo.id))
+                                        history.push('/routine/update')
+                                    }}
+                                >
+                                    <Icon icon="ic_edit" size="24px" />
+                                    <span>수정하기</span>
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        const result =
+                                            window.confirm(
+                                                '루틴을 삭제하시겠습니까?'
+                                            )
+                                        if (result) {
+                                            dispatch(
+                                                myRoutineDeleteMD(optInfo.id)
+                                            )
+                                        } else return
+                                    }}
+                                >
+                                    <Icon icon="Trash_light" size="24px" />
+                                    <span>삭제하기</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                )}
-            </section>
+                    )}
+                </section>
+            </div>
         </>
     )
 }

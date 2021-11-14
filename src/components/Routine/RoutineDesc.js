@@ -49,6 +49,7 @@ const RoutineDesc = (props) => {
         <>
             {desc === 'myRoutine' && (
                 <div
+                    className="routine-box-container"
                     onClick={(e) => {
                         e.stopPropagation()
                     }}
@@ -109,7 +110,12 @@ const RoutineDesc = (props) => {
                 </div>
             )}
             {desc === 'recommendRoutine' && (
-                <section>
+                <section
+                    className="routine-box-container"
+                    onClick={(e) => {
+                        e.stopPropagation()
+                    }}
+                >
                     {preset.length > 0 &&
                         preset?.map((routine, idx) => (
                             <button
