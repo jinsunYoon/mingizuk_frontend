@@ -30,7 +30,6 @@ const MoimDetail = (props) => {
 
     React.useEffect(() => {
         dispatch(moimDetailMD(post_id))
-        // post_data?.Likes?.length
     }, [])
 
     // * post delete

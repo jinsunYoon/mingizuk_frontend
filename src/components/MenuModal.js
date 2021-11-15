@@ -13,7 +13,11 @@ const MenuModal = () => {
     const dispatch = useDispatch()
     const is_login = useSelector((state) => state.user.isLogin)
     const logout = () => {
-        dispatch(logoutMD())
+        if (window.confirm('로그아웃 하시겠습니까 ?')) {
+            dispatch(logoutMD())
+        } else {
+            return
+        }
     }
     const [modalStatus, setModalStatue] = React.useState(false)
     const nickName = useSelector((state) => state.user.userInfo.nickName)
@@ -87,7 +91,11 @@ const MenuModal = () => {
                                             님
                                         </Text>
                                     </FlexRow>
-                                    <div onClick={logout}>
+                                    <div
+                                        onClick={() => {
+                                            logout()
+                                        }}
+                                    >
                                         <ExitToAppRounded
                                             style={{
                                                 color: '#c1c1c1',
