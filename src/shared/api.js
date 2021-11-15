@@ -129,7 +129,8 @@ const myMoimCommentAPI = () => {
 }
 
 const myMoimLikeAPI = () => {
-    return instance.get('/api/moim/like')
+    console.log('>>', 'api')
+    return instance.get('/api/moims/like')
 }
 
 // * ------------------------------------------------
