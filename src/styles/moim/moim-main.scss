@@ -4,9 +4,12 @@
 
 .moim-layout {
     @include container();
+    width: 100vw;
+    height: 100vh;
 
     .contents {
         margin: 47px auto 0;
+        height: 100vh;
     }
 
     .moim-main-layout {
@@ -73,8 +76,10 @@
             }
         }
     }
-
-    .moim-add-btn {
-        @include add-btn();
-    }
+}
+.moim-add-btn {
+    @include add-btn();
+    position: fixed;
+    right: 100px;
+    bottom: 100px;
 }

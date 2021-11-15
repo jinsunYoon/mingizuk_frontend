@@ -32,16 +32,26 @@ const MyJoin = () => {
                         key={idx}
                     >
                         <div className="contentsbox">
-                            <span>서울특별시 강남구 역삼동</span>
-                            <div>
+                            <span className="location">위치!!!!!!</span>
+                            <div className="titlebox">
                                 <span className="title">{i?.Moim?.title}</span>
-                                <span className="date">
-                                    {i?.createdAt?.split(['T'])[0]}
+                            </div>
+
+                            <div className="etcbox">
+                                <div>
+                                    <span className="writer">
+                                        작성자{' '}
+                                        {i?.Moim.MoimUsers[0]?.User?.nickName}
+                                    </span>
+                                    <span className="date">
+                                        {i?.Moim?.createdAt?.split(['T'])[0]}
+                                    </span>
+                                </div>
+                                <span className="join">
+                                    <PersonOutlineIcon />
+                                    {i?.Moim?.MoimUsers?.length}
                                 </span>
                             </div>
-                            <span _align="left">
-                                {i?.Moim.MoimUsers[0]?.User?.nickName}
-                            </span>
                         </div>
                         <div className="commentbox">
                             <div>

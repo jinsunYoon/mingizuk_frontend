@@ -33,6 +33,8 @@ const MoimDetail = (props) => {
         // post_data?.Likes?.length
     }, [])
 
+    console.log('><>', post_data)
+
     // * post delete
     const deletePost = (data) => {
         swal({
