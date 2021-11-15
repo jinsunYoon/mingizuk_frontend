@@ -1,8 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
-import styled from 'styled-components'
-import { FlexRow, Text } from '../../elements/index'
+
 import {
     moimReviewCreateMD,
     moimDeleteReviewMD,
@@ -57,86 +56,40 @@ const MoimReview = (props) => {
 
     return (
         <>
+            {review?.length === 0 && (
+                <p className="empty-review">
+                    아직 작성된 댓글이 없습니다.
+                    <br />이 모임에 관심이 있다면 댓글을 남겨보세요 !{' '}
+                </p>
+            )}
             {review?.map((rev, idx) => (
-                <ScrollY key={idx}>
-                    <ReviewBox>
+                <section className="post-review-container" key={idx}>
+                    <div className="post-review-box">
+                        <span>{rev?.User?.nickName}</span>
+                        <p>{rev?.contents}</p>
                         {loginNickName === rev?.User?.nickName && (
-                            <div>
-                                <UpdateBtn
+                            <div className="review-btn-container">
+                                <button
                                     onClick={() => {
                                         updateReview(rev?.id)
                                     }}
                                 >
                                     수정
-                                </UpdateBtn>
-                                <CloseBtn
+                                </button>
+                                <button
                                     onClick={() => {
                                         deleteReview(rev?.id)
                                     }}
                                 >
                                     삭제
-                                </CloseBtn>
+                                </button>
                             </div>
                         )}
-
-                        <Text>{rev?.User?.nickName}</Text>
-                        <Text>{rev?.contents}</Text>
-                    </ReviewBox>
-                </ScrollY>
+                    </div>
+                </section>
             ))}
         </>
     )
 }
-
-const ReviewBox = styled.article`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding-left: 15px;
-    border-bottom: 1px solid lightgray;
-`
-
-const CloseBtn = styled.button`
-    position: absolute;
-    width: 40px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    right: 20px;
-    margin: 10px;
-`
-const UpdateBtn = styled.button`
-    position: absolute;
-    width: 40px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    right: 80px;
-    margin: 10px;
-`
-
-const ScrollY = styled.div`
-    margin-top: 1rem;
-    display: grid;
-    height: 50px;
-    --column-count: 1;
-    overflow-y: auto;
-    grid-template-rows: repeat(1, auto);
-    scroll-padding: 0px 24px;
-    scroll-snap-type: y mandatory;
-    grid-auto-flow: row;
-    gap: 12px;
-    row-gap: 12px;
-    column-gap: 12px;
-    -ms-overflow-style: none;
-    &::-webkit-scrollbar {
-        display: none;
-    }
-`
 
 export default MoimReview

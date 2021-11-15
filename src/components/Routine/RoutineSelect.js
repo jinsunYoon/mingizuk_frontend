@@ -7,8 +7,6 @@ import clsx from 'clsx'
 const RoutineSelect = (props) => {
     const dispatch = useDispatch()
     const addedActions = useSelector((state) => state.updateAction.actions)
-    console.log('<<', addedActions)
-    const [check, setCheck] = React.useState(false)
     const { stretching, body_exercise, select } = props
     const [desc, setDesc] = React.useState('first')
 
