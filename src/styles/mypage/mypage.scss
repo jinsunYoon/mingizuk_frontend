@@ -3,6 +3,7 @@
 
 .mypage-layout {
     max-width: $tablet;
+    margin: 0 auto;
 }
 
 .contents {
@@ -14,7 +15,7 @@
         height: 120px;
         justify-content: space-evenly;
         align-content: center;
-        background-color: orange;
+        background-color: $primary;
 
         .user-image {
             width: 56px;

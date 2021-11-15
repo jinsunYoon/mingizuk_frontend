@@ -9,10 +9,12 @@ import { NavBar } from '../index'
 
 import { myMoimCommentMD } from '../../redux/async/myMoim'
 
+import '../../styles/mypage/mymoim.scss'
+
 const MyComment = () => {
     const dispatch = useDispatch()
     const comment_list = useSelector((state) => state.myMoim.my_comment_list)
-    console.log(comment_list, 'comment_list state에서 가져오는값')
+    console.log('><', comment_list)
 
     React.useEffect(() => {
         dispatch(myMoimCommentMD())
@@ -25,23 +27,20 @@ const MyComment = () => {
                     onClick={() => history.push(`/moim/detail/${i.moimId}`)}
                     key={idx}
                 >
-                    <TitleBox>
-                        <div>
-                            <Text
-                                _fontSize="11px"
-                                _color="#8f8f8f"
-                                _align="left"
-                            >
-                                모임: {comment_list?.Moim?.title}
-                            </Text>
-                            <Text _fontSize="16px" _margin='10px 0 0'>
-                                {comment_list?.contents}
-                            </Text>
-                        </div>
-                        <Text _fontSize="11px">
+                    <ContentBox>
+                        <span className="title">
+                            {comment_list?.Moim?.title}
+                        </span>
+                        <span className="contents">
+                            {comment_list?.contents.slice(0, 5) + '...'}
+                        </span>
+                        <span className="nickname">
+                            작성자 {comment_list?.User?.nickName}
+                        </span>
+                        <span className="date">
                             {comment_list?.createdAt?.split(['T'])[0]}
-                        </Text>
-                    </TitleBox>
+                        </span>
+                    </ContentBox>
                 </PostBox>
             ))}
             <NavBar />
@@ -49,7 +48,7 @@ const MyComment = () => {
     )
 }
 
-const TitleBox = styled.div`
+const ContentBox = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 15px;
