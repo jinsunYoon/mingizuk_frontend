@@ -2,23 +2,20 @@
 @import './layouts.module.scss';
 @import '../shared/modules/buttons.module.scss';
 
-.routine-layout {
-}
-
 .routine-box {
     width: 100%;
-    height: 85px;
+    height: 5.313rem;
     border: 1px solid #dadada;
     @include flexbox(between, center);
-    padding: 20px 20px;
-    border-radius: 7px;
+    padding: 1.25rem 1.25rem;
+    border-radius: 0.438rem;
     margin-bottom: 20px;
     background-color: $white;
     h3 {
-        @include text-style-16(24px, 0.15px);
+        @include text-style-16(1.5rem, 0.009rem);
     }
     p {
-        @include text-style-12(24px, 0.15px, $text-gray);
+        @include text-style-12(1.5rem, 0.009rem, $text-gray);
     }
     &:focus {
         border: 1px solid $primary;
@@ -30,6 +27,7 @@
 
 .routine-box-container {
     width: 100%;
+    max-width: 768px;
 }
 
 .recommend-routine-box {
@@ -37,18 +35,18 @@
         margin-top: 1rem;
     }
     width: 100%;
-    height: 85px;
+    height: 5.313rem;
     border: 1px solid #dadada;
     @include column-flexbox(start, start);
-    padding: 20px;
-    border-radius: 7px;
-    margin-bottom: 20px;
+    padding: 1.25rem;
+    border-radius: 0.438rem;
+    margin-bottom: 1.25rem;
     background-color: $white;
     h3 {
-        @include text-style-16(24px, 0.15px);
+        @include text-style-16(1.5rem, 0.009rem);
     }
     p {
-        @include text-style-12(24px, 0.15px, $text-gray);
+        @include text-style-12(1.5rem, 0.009rem, $text-gray);
     }
     &:focus {
         border: 1px solid $primary;
@@ -57,7 +55,7 @@
 
 .icon-box {
     @include flexbox(between, center);
-    width: 30px;
+    width: 1.875rem;
 }
 
 .text-box {
@@ -66,7 +64,7 @@
 
 .setting-btn {
     @include primary-btn();
-    @include text-style-14(16px, 0.15px, $white);
+    @include text-style-14(1rem, 0.009rem, $white);
 }
 
 .add-btn {
@@ -88,24 +86,24 @@
     position: fixed;
     bottom: 0;
     width: 100vw;
-    height: 160px;
+    height: 10rem;
     background-color: $white;
     border: none;
-    border-top-right-radius: 18px;
-    border-top-left-radius: 18px;
+    border-top-right-radius: 1.125rem;
+    border-top-left-radius: 1.125rem;
     button {
         @include flexbox(start, center);
         border: none;
         background-color: inherit;
-        height: 60px;
+        height: 3.75rem;
         width: 100%;
-        padding-left: 18px;
+        padding-left: 1.125rem;
         &:hover,
         :active {
             background-color: $primary;
         }
         span {
-            @include text-style-16(16px, auto, $black);
+            @include text-style-16(1rem, auto, $black);
             font-weight: 700;
             padding-left: 2rem;
             width: 100%;

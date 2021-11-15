@@ -29,7 +29,7 @@ const ToggleTab = (props) => {
             _width="100vw"
             _border="none"
             _margin="3.5rem 0 0 0"
-            _others="z-index:1;"
+            _others="z-index:1;max-width:768px"
             _height="48px"
             _align="flex-end"
         >

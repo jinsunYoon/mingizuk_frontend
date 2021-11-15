@@ -1,0 +1,29 @@
+@import './common.scss';
+
+.a-warp {
+    @include column-flexbox();
+    width: 100vw;
+    height: 100vh;
+}
+
+.unknown-container {
+    @include column-flexbox();
+    width: 100%;
+    max-width: 768px;
+    height: inherit;
+    p {
+        text-align: center;
+        @include text-style-18(40px, 0.15px, #8f8f8f);
+        margin-bottom: 2.625rem;
+    }
+    button {
+        width: 13rem;
+        height: 3rem;
+        border: 1px solid $primary;
+        color: $primary;
+        background-color: $white;
+        @include flexbox();
+        border-radius: 0.5rem;
+        cursor: pointer;
+    }
+}

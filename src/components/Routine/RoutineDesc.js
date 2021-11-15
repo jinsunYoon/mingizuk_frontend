@@ -33,7 +33,6 @@ const RoutineDesc = (props) => {
         if (select === 'first') {
             setDesc('myRoutine')
         } else if (select === 'second') {
-            console.log('secondfffe')
             setDesc('recommendRoutine')
         } else {
             setDesc('myRoutine')
@@ -67,14 +66,6 @@ const RoutineDesc = (props) => {
                                             routine?.Actions[0].routineId,
                                     }
                                     dispatch(setMainRoutineMD(data))
-                                    // if (
-                                    //     result.length > 0 &&
-                                    //     getFakeResult.length > 0
-                                    // ) {
-                                    //     const routineId =
-                                    //         routine?.Actions[0].routineId
-                                    //     dispatch(actionResetMD(routineId))
-                                    // }
                                     dispatch(setResult([]))
                                     dispatch(setFakeResultClear([]))
                                 }
@@ -128,14 +119,6 @@ const RoutineDesc = (props) => {
                                                 routine?.Actions[0].routineId,
                                         }
                                         dispatch(setMainRoutineMD(data))
-                                        // if (
-                                        //     result.length > 0 &&
-                                        //     getFakeResult.length > 0
-                                        // ) {
-                                        //     const routineId =
-                                        //         routine?.Actions[0].routineId
-                                        //     dispatch(actionResetMD(routineId))
-                                        // }
                                         dispatch(setResult([]))
                                         dispatch(setFakeResultClear([]))
                                     }

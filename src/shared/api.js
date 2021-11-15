@@ -30,8 +30,6 @@ instanceSign.interceptors.request.use(async (config) => {
 // interceptor를 통한 response 설정
 instance.interceptors.response.use(
     async (response) => {
-        // window.alert(response.data.msg)
-        // const tokens = response.data
         console.log(response)
         return response
     },
