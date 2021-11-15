@@ -2,90 +2,79 @@
 @import '../shared/common.scss';
 @import '../shared/modules/buttons.module.scss';
 
-//================= > contents에 미디어쿼리 적용
 .moim-layout {
     @include container();
 
     .contents {
         margin: 47px auto 0;
-
-        @include mobile {
-            width: 360px;
-        }
-        @include tablet {
-            width: 100%;
-        }
-        @include desktop {
-            max-width: 1024px;
-        }
     }
-}
 
-.moim-main-layout {
-    width: 100%;
-    padding-top: 3rem;
-    padding-bottom: 65px;
-    background-color: $bg-light-gray;
-}
-
-//PostDesc
-.moim-post-box {
-    @include column-flexbox(center, start);
-    width: 100%;
-    background-color: $white;
-    padding: 0 16px;
-
-    .location {
-        @include text-style-12(12px, 0.15px, $text-gray);
-        padding: 16px 0;
-    }
-    .title {
-        @include text-style-18(12px, 0.15px, $black);
-        font-weight: 700;
-        padding: 8px 0;
-    }
-    .content {
-        @include text-style-14(20px, 1.2px, $black);
-        padding: 8px 0;
-    }
-    .imgbox {
-        @include flexbox(center, center);
+    .moim-main-layout {
         width: 100%;
-
-        img {
-            width: auto;
-            height: 160px;
-        }
+        padding-top: 3rem;
+        padding-bottom: 65px;
+        background-color: $bg-light-gray;
     }
 
-    .post-info {
-        @include flexbox(between, center);
+    //PostDesc
+    .moim-post-box {
+        @include column-flexbox(center, start);
         width: 100%;
-        padding-bottom: 8px;
-    }
-    span {
-        @include text-style-12(24px, auto, $text-gray);
-    }
-}
+        background-color: $white;
+        padding: 0 16px;
 
-.ectbox {
-    @include flexbox(start, center);
-    margin-bottom: 16px;
-    background-color: $white;
-    border: 1px solid $bg-light-gray;
-    height: 40px;
-    padding-left: 16px;
-    .icon-text {
-        @include flexbox(center, center);
-        span {
+        .location {
             @include text-style-12(12px, 0.15px, $text-gray);
+            padding: 16px 0;
         }
-        &:first-child {
-            margin-right: 35px;
+        .title {
+            @include text-style-18(12px, 0.15px, $black);
+            font-weight: 700;
+            padding: 8px 0;
+        }
+        .content {
+            @include text-style-14(20px, 1.2px, $black);
+            padding: 8px 0;
+        }
+        .imgbox {
+            @include flexbox(center, center);
+            width: 100%;
+
+            img {
+                width: auto;
+                height: 160px;
+            }
+        }
+
+        .post-info {
+            @include flexbox(between, center);
+            width: 100%;
+            padding-bottom: 8px;
+        }
+        span {
+            @include text-style-12(24px, auto, $text-gray);
         }
     }
-}
 
-.moim-add-btn {
-    @include add-btn();
+    .ectbox {
+        @include flexbox(start, center);
+        margin-bottom: 16px;
+        background-color: $white;
+        border: 1px solid $bg-light-gray;
+        height: 40px;
+        padding-left: 16px;
+        .icon-text {
+            @include flexbox(center, center);
+            span {
+                @include text-style-12(12px, 0.15px, $text-gray);
+            }
+            &:first-child {
+                margin-right: 35px;
+            }
+        }
+    }
+
+    .moim-add-btn {
+        @include add-btn();
+    }
 }
