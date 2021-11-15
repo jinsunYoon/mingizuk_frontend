@@ -1,5 +1,5 @@
 import React from 'react'
-import { BarChart, Bar, XAxis, Label, YAxis, LabelList } from 'recharts'
+import { BarChart, Bar, XAxis, LabelList } from 'recharts'
 import { format, addDays } from 'date-fns'
 import { finRoutinesActionsMD } from '../redux/async/routine'
 import { useDispatch, useSelector } from 'react-redux'
@@ -137,7 +137,7 @@ const HistoryGraph = (props) => {
                             } else return
                         }}
                     >
-                        -
+                        &lt;
                     </button>
                     <h3>밍기적 {week}주차</h3>
                     <button
@@ -149,7 +149,7 @@ const HistoryGraph = (props) => {
                             } else return
                         }}
                     >
-                        +
+                        &gt;
                     </button>
                 </section>
                 <section className="graph-container">

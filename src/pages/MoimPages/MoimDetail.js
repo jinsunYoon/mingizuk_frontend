@@ -23,9 +23,9 @@ const MoimDetail = (props) => {
     const post_id = props.match.params.id
     const dispatch = useDispatch()
 
-    const user_nick = useSelector((state) => state.user.userInfo.nickName)
-    const post_data = useSelector((state) => state.moim.moim_detail)
-    const like_id = useSelector((state) => state.user.userInfo.userID)
+    const user_nick = useSelector((state) => state?.user?.userInfo?.nickName)
+    const post_data = useSelector((state) => state?.moim?.moim_detail)
+    const user_id = useSelector((state) => state?.user?.userInfo?.userID)
     const join_useres = post_data?.MoimUsers?.map(({ User }) => User.nickName)
 
     React.useEffect(() => {
@@ -168,6 +168,7 @@ const MoimDetail = (props) => {
                         <LikeBtn
                             moim_id={post_data?.id}
                             likeUsers={post_data?.Likes}
+                            user_id={user_id}
                         />
                         좋아요 {post_data?.Likes?.length}개
                     </div>
@@ -176,7 +177,7 @@ const MoimDetail = (props) => {
                         댓글 {post_data?.Comments?.length}개
                     </div>
                 </section>
-                <div style={{ width: '100vw' }}>
+                <div style={{ width: '100vw', maxWidth: '768px' }}>
                     <MoimReview moimId={post_id} />
                 </div>
                 <section className="review-input-container">

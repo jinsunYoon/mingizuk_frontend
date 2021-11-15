@@ -15,14 +15,25 @@ const History = () => {
     return (
         <>
             <Header name="통계" />
-            <ToggleTab
-                firstValue={'액션'}
-                secondValue={'루틴'}
-                select={status}
-            />
-            <section className="history-container">
-                <HistoryGraph select={status} />
-            </section>
+
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '100vw',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+            >
+                <ToggleTab
+                    firstValue={'액션'}
+                    secondValue={'루틴'}
+                    select={status}
+                />
+                <section className="history-container">
+                    <HistoryGraph select={status} />
+                </section>
+            </div>
         </>
     )
 }
