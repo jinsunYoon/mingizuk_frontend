@@ -62,287 +62,293 @@ const Main = (props) => {
     if (is_login && isMain) {
         return (
             <React.Fragment>
-                <Header />
-                <FlexColumn
-                    _width={'100vw'}
-                    _height={'100%'}
-                    _padding={'2.938rem 1rem 0px 1rem'}
-                    _others={'box-sizing: border-box;'}
-                    _border={'none'}
-                    _bgColor={'#efefef'}
-                    _justify={'start'}
-                >
-                    <TimeWarp>
-                        <Time _format="YYYY년 MM월 DD일" />
-                    </TimeWarp>
+                <Container>
+                    <Header />
                     <FlexColumn
                         _width={'100%'}
-                        _height={'false'}
-                        _padding={'0.75rem 1rem'}
-                        _others={'border-radius: 0.5rem'}
-                        _align={'start'}
+                        _height={'100%'}
+                        _padding={'2.938rem 1rem 0px 1rem'}
+                        _others={'box-sizing: border-box; max-width: 48rem'}
+                        _border={'none'}
+                        _bgColor={'#efefef'}
                         _justify={'start'}
                     >
-                        <Text _color={'#6B76FF'} _fontSize={'0.75rem'}>
-                            {nickName}님,
-                        </Text>
-                        <Text _fontSize={'1rem'} _fontWeight={'500'}>
-                            오늘도 작은 밍기적을 만들어봐요!🙌
-                        </Text>
-                    </FlexColumn>
-                    <CharacterModal />
-
-                    <FlexColumn
-                        _align={'start'}
-                        _width={'100%'}
-                        _height={'false'}
-                        _border={'none'}
-                        _bgColor={'none'}
-                        _onClick={() => {
-                            dispatch(chageMyHabitModal(false))
-                        }}
-                    >
-                        {' '}
-                        <TextContainer>
-                            <Text
-                                _fontSize={'1.125rem'}
-                                _margin={'0px 0.563rem 0px 0px'}
-                                _padding={'0px'}
-                            >
-                                오늘의 루틴
-                            </Text>
-                            <div
-                                style={{
-                                    fontSize: '0.75rem',
-                                    padding: '0px 0px 0.2rem 0px',
-                                    color: '#6B76FF',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                }}
-                            >
-                                총 {mainRoutine?.Actions?.length}개의 액션
-                            </div>
-                            <ChangeBtn
-                                onClick={() => {
-                                    history.push('/routine/mypage')
-                                }}
-                            >
-                                변경하기
-                            </ChangeBtn>
-                        </TextContainer>
+                        <TimeWarp>
+                            <Time _format="YYYY년 MM월 DD일" />
+                        </TimeWarp>
                         <FlexColumn
                             _width={'100%'}
                             _height={'false'}
+                            _padding={'0.75rem 1rem'}
+                            _others={'border-radius: 0.5rem'}
+                            _align={'start'}
                             _justify={'start'}
-                            _others={
-                                'border-radius: 0.5rem; min-height:11.25rem'
-                            }
                         >
-                            <FlexRow
-                                _justify={'start'}
-                                _align={'end'}
-                                _width={'100%'}
-                                _border={'none'}
-                                _others={'border-radius: 0.5rem;'}
-                            >
-                                <Text
-                                    _fontSize={'1rem'}
-                                    _color={'#5C5C5C'}
-                                    _padding={'1rem 0.3rem 0px 0.75rem'}
-                                >
-                                    {mainRoutine.routineName}
-                                </Text>
-                            </FlexRow>
-                            <MainRoutineList />
-                            <ActionStart />
+                            <Text _color={'#6B76FF'} _fontSize={'0.75rem'}>
+                                {nickName}님,
+                            </Text>
+                            <Text _fontSize={'1rem'} _fontWeight={'500'}>
+                                오늘도 작은 밍기적을 만들어봐요!🙌
+                            </Text>
                         </FlexColumn>
+                        <CharacterModal />
+
+                        <FlexColumn
+                            _align={'start'}
+                            _width={'100%'}
+                            _height={'false'}
+                            _border={'none'}
+                            _bgColor={'none'}
+                            _onClick={() => {
+                                dispatch(chageMyHabitModal(false))
+                            }}
+                        >
+                            {' '}
+                            <TextContainer>
+                                <Text
+                                    _fontSize={'1.125rem'}
+                                    _margin={'0px 0.563rem 0px 0px'}
+                                    _padding={'0px'}
+                                >
+                                    오늘의 루틴
+                                </Text>
+                                <div
+                                    style={{
+                                        fontSize: '0.75rem',
+                                        padding: '0px 0px 0.2rem 0px',
+                                        color: '#6B76FF',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    총 {mainRoutine?.Actions?.length}개의 액션
+                                </div>
+                                <ChangeBtn
+                                    onClick={() => {
+                                        history.push('/routine/mypage')
+                                    }}
+                                >
+                                    변경하기
+                                </ChangeBtn>
+                            </TextContainer>
+                            <FlexColumn
+                                _width={'100%'}
+                                _height={'false'}
+                                _justify={'start'}
+                                _others={
+                                    'border-radius: 0.5rem; min-height:11.25rem'
+                                }
+                            >
+                                <FlexRow
+                                    _justify={'start'}
+                                    _align={'end'}
+                                    _width={'100%'}
+                                    _border={'none'}
+                                    _others={'border-radius: 0.5rem;'}
+                                >
+                                    <Text
+                                        _fontSize={'1rem'}
+                                        _color={'#5C5C5C'}
+                                        _padding={'1rem 0.3rem 0px 0.75rem'}
+                                    >
+                                        {mainRoutine.routineName}
+                                    </Text>
+                                </FlexRow>
+                                <MainRoutineList />
+                                <ActionStart />
+                            </FlexColumn>
+                        </FlexColumn>
+                        <div
+                            onClick={() => {
+                                dispatch(chageMyHabitModal(false))
+                            }}
+                        >
+                            <HabitTraker />
+                        </div>
                     </FlexColumn>
-                    <div
-                        onClick={() => {
-                            dispatch(chageMyHabitModal(false))
-                        }}
-                    >
-                        <HabitTraker />
-                    </div>
-                </FlexColumn>
+                </Container>
             </React.Fragment>
         )
     } else if (is_login) {
         return (
             <React.Fragment>
-                <Header />
-                <FlexColumn
-                    _width={'100vw'}
-                    _height={'100%'}
-                    _padding={'2.938rem 1rem 0px 1rem'}
-                    _others={'box-sizing: border-box;'}
-                    _border={'none'}
-                    _bgColor={'#efefef'}
-                    _justify={'start'}
-                >
-                    <TimeWarp>
-                        <Time _format="YYYY년 MM월 DD일" />
-                    </TimeWarp>
+                <Container>
+                    <Header />
                     <FlexColumn
                         _width={'100%'}
-                        _height={'false'}
-                        _padding={'0.75rem 1rem'}
-                        _others={'border-radius: 0.5rem'}
-                        _align={'start'}
+                        _height={'100%'}
+                        _padding={'2.938rem 1rem 0px 1rem'}
+                        _others={'box-sizing: border-box; max-width: 48rem'}
+                        _border={'none'}
+                        _bgColor={'#efefef'}
                         _justify={'start'}
                     >
-                        <Text _color={'#6B76FF'} _fontSize={'0.75rem'}>
-                            {nickName}님,
-                        </Text>
-                        <Text _fontSize={'1rem'} _fontWeight={'500'}>
-                            오늘도 작은 밍기적을 만들어봐요!🙌
-                        </Text>
-                    </FlexColumn>
-                    <CharacterModal />
-
-                    <FlexColumn
-                        _align={'start'}
-                        _width={'100%'}
-                        _height={'false'}
-                        _border={'none'}
-                        _bgColor={'none'}
-                        _onClick={() => {
-                            dispatch(chageMyHabitModal(false))
-                        }}
-                    >
-                        {' '}
-                        <FlexRow
-                            _width={'false'}
-                            _border={'none'}
-                            _bgColor={'none'}
-                            _align={'end'}
-                            _margin={'0px 0px 1rem 0px'}
-                        >
-                            <Text
-                                _fontSize={'1.125rem'}
-                                _margin={'0px 0.563rem 0px 0px'}
-                                _padding={'0px'}
-                            >
-                                오늘의 루틴
-                            </Text>
-                            <Text
-                                _fontSize={'0.75rem'}
-                                _padding={'0px 0px 0.2rem 0px'}
-                                _color={'#6B76FF'}
-                            >
-                                총 0개의 액션
-                            </Text>
-                        </FlexRow>
+                        <TimeWarp>
+                            <Time _format="YYYY년 MM월 DD일" />
+                        </TimeWarp>
                         <FlexColumn
                             _width={'100%'}
-                            _height={'100%'}
+                            _height={'false'}
+                            _padding={'0.75rem 1rem'}
+                            _others={'border-radius: 0.5rem'}
+                            _align={'start'}
                             _justify={'start'}
-                            _others={
-                                'border-radius: 0.5rem; min-height:11.25rem'
-                            }
                         >
-                            <Text
-                                _fontSize={'0.875rem'}
-                                _color={'#8F8F8F'}
-                                _padding={'2.25rem 0px 1.8rem 0px'}
-                            >
-                                아직 루틴이 없습니다.
-                                <br />
-                                루틴을 만들어주세요 ! 💪
+                            <Text _color={'#6B76FF'} _fontSize={'0.75rem'}>
+                                {nickName}님,
                             </Text>
-                            <ButtonOutlined
-                                _width={'13rem'}
-                                _others={'height:3rem'}
-                                _margin={'0.5rem 0 1rem 0'}
-                                _border={'1px solid #6B76FF'}
-                                _color={'#6B76FF'}
-                                _bradius={'0.5rem'}
-                                _onClick={() => {
-                                    history.push('/routine/mypage')
-                                }}
-                            >
-                                루틴 만들기
-                            </ButtonOutlined>
+                            <Text _fontSize={'1rem'} _fontWeight={'500'}>
+                                오늘도 작은 밍기적을 만들어봐요!🙌
+                            </Text>
                         </FlexColumn>
+                        <CharacterModal />
+
+                        <FlexColumn
+                            _align={'start'}
+                            _width={'100%'}
+                            _height={'false'}
+                            _border={'none'}
+                            _bgColor={'none'}
+                            _onClick={() => {
+                                dispatch(chageMyHabitModal(false))
+                            }}
+                        >
+                            {' '}
+                            <FlexRow
+                                _width={'false'}
+                                _border={'none'}
+                                _bgColor={'none'}
+                                _align={'end'}
+                                _margin={'0px 0px 1rem 0px'}
+                            >
+                                <Text
+                                    _fontSize={'1.125rem'}
+                                    _margin={'0px 0.563rem 0px 0px'}
+                                    _padding={'0px'}
+                                >
+                                    오늘의 루틴
+                                </Text>
+                                <Text
+                                    _fontSize={'0.75rem'}
+                                    _padding={'0px 0px 0.2rem 0px'}
+                                    _color={'#6B76FF'}
+                                >
+                                    총 0개의 액션
+                                </Text>
+                            </FlexRow>
+                            <FlexColumn
+                                _width={'100%'}
+                                _height={'100%'}
+                                _justify={'start'}
+                                _others={
+                                    'border-radius: 0.5rem; min-height:11.25rem'
+                                }
+                            >
+                                <Text
+                                    _fontSize={'0.875rem'}
+                                    _color={'#8F8F8F'}
+                                    _padding={'2.25rem 0px 1.8rem 0px'}
+                                >
+                                    아직 루틴이 없습니다.
+                                    <br />
+                                    루틴을 만들어주세요 ! 💪
+                                </Text>
+                                <ButtonOutlined
+                                    _width={'13rem'}
+                                    _others={'height:3rem'}
+                                    _margin={'0.5rem 0 1rem 0'}
+                                    _border={'1px solid #6B76FF'}
+                                    _color={'#6B76FF'}
+                                    _bradius={'0.5rem'}
+                                    _onClick={() => {
+                                        history.push('/routine/mypage')
+                                    }}
+                                >
+                                    루틴 만들기
+                                </ButtonOutlined>
+                            </FlexColumn>
+                        </FlexColumn>
+                        <div
+                            onClick={() => {
+                                dispatch(chageMyHabitModal(false))
+                            }}
+                        >
+                            <HabitTraker />
+                        </div>
                     </FlexColumn>
-                    <div
-                        onClick={() => {
-                            dispatch(chageMyHabitModal(false))
-                        }}
-                    >
-                        <HabitTraker />
-                    </div>
-                </FlexColumn>
+                </Container>
             </React.Fragment>
         )
     }
 
     return (
         <React.Fragment>
-            <Header />
-            <TimeWarp>
-                <Time _format="YYYY년 MM월 DD일" />
-            </TimeWarp>
-            <FlexColumn
-                _width={'100vw'}
-                _height={'100%'}
-                _padding={'0px 1rem'}
-                _others={'box-sizing: border-box;'}
-                _border={'none'}
-                _bgColor={'#efefef'}
-            >
-                <CharacterModal />
+            <Container>
+                <Header />
+                <TimeWarp>
+                    <Time _format="YYYY년 MM월 DD일" />
+                </TimeWarp>
                 <FlexColumn
-                    _align={'start'}
                     _width={'100%'}
-                    _border={'none'}
-                    _bgColor={'none'}
                     _height={'100%'}
+                    _padding={'0px 1rem'}
+                    _others={'box-sizing: border-box; max-width: 48rem'}
+                    _border={'none'}
+                    _bgColor={'#efefef'}
                 >
-                    {' '}
-                    <FlexRow
-                        _width={'false'}
+                    <CharacterModal />
+                    <FlexColumn
+                        _align={'start'}
+                        _width={'100%'}
                         _border={'none'}
                         _bgColor={'none'}
+                        _height={'100%'}
                     >
-                        <Text
-                            _fontSize={'1.25rem'}
-                            _margin={'0px 0.2rem 0px 0px'}
+                        {' '}
+                        <FlexRow
+                            _width={'false'}
+                            _border={'none'}
+                            _bgColor={'none'}
                         >
-                            메인 루틴
-                        </Text>
-                        <Text _padding={'0px 0px 0.2rem 0px'}>
+                            <Text
+                                _fontSize={'1.25rem'}
+                                _margin={'0px 0.2rem 0px 0px'}
+                            >
+                                메인 루틴
+                            </Text>
+                            <Text _padding={'0px 0px 0.2rem 0px'}>
+                                <ButtonOutlined
+                                    _width={'false'}
+                                    _margin={'none'}
+                                    _padding={'none'}
+                                    _border={'none'}
+                                    _onClick={() => {
+                                        window.alert('로그인 후 이용해주세요.')
+                                    }}
+                                ></ButtonOutlined>
+                            </Text>
+                        </FlexRow>
+                        <FlexRow
+                            _width={'100%'}
+                            _others={
+                                'box-sizing: border-box; background-color: #C4C4C4; min-height=6.25rem'
+                            }
+                        >
                             <ButtonOutlined
-                                _width={'false'}
-                                _margin={'none'}
-                                _padding={'none'}
+                                _width={'100%'}
+                                _color={'black'}
                                 _border={'none'}
+                                _others={'min-height:6.25rem'}
                                 _onClick={() => {
                                     window.alert('로그인 후 이용해주세요.')
                                 }}
-                            ></ButtonOutlined>
-                        </Text>
-                    </FlexRow>
-                    <FlexRow
-                        _width={'100%'}
-                        _others={
-                            'box-sizing: border-box; background-color: #C4C4C4; min-height=6.25rem'
-                        }
-                    >
-                        <ButtonOutlined
-                            _width={'100%'}
-                            _color={'black'}
-                            _border={'none'}
-                            _others={'min-height:6.25rem'}
-                            _onClick={() => {
-                                window.alert('로그인 후 이용해주세요.')
-                            }}
-                        >
-                            당신의 루틴을 설정해보세요!
-                        </ButtonOutlined>
-                    </FlexRow>
+                            >
+                                당신의 루틴을 설정해보세요!
+                            </ButtonOutlined>
+                        </FlexRow>
+                    </FlexColumn>
                 </FlexColumn>
-            </FlexColumn>
+            </Container>
         </React.Fragment>
     )
 }
@@ -353,7 +359,6 @@ const TimeWarp = styled.div`
     display: flex;
     justify-content: start;
     align-items: center;
-    background-color: #efefef;
 `
 
 const ChangeBtn = styled.button`
@@ -377,6 +382,13 @@ const TextContainer = styled.div`
     button {
         justify-self: end;
     }
+`
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
 `
 
 export default Main
