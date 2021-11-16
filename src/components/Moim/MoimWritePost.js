@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { moimCreateMD } from '../../redux/async/moim'
 import config from '../../shared/aws_config'
 import { uploadFile } from 'react-s3'
-import MapSearch from './MapSearch'
+import { history } from '../../redux/store'
 
 const MoimWritePost = () => {
     const dispatch = useDispatch()
@@ -15,7 +15,6 @@ const MoimWritePost = () => {
     const [selectedFile, setSelectedFile] = React.useState(null)
     const [startDate, setStartDate] = React.useState(new Date())
     const [endDate, setEndDate] = React.useState(new Date())
-    const [imgSrc, setImgSrc] = React.useState('')
 
     // * upload S3
     const handleFileInput = (e) => {
@@ -53,7 +52,13 @@ const MoimWritePost = () => {
                 <h4 className="post-subtitle">모임 내용</h4>
                 <textarea onChange={(e) => setContents(e.target.value)} />
                 <h4 className="post-subtitle">모임 위치 설정</h4>
-                <MapSearch />
+                <button
+                    onClick={() => {
+                        history.push('/moim/map')
+                    }}
+                >
+                    검색
+                </button>
                 <h4 className="post-subtitle">모임 기간 설정</h4>
                 <div className="date-container">
                     <DatePicker

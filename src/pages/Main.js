@@ -10,7 +10,7 @@ import {
     CharacterModal,
     MainRoutineList,
     Header,
-    LevelBar,
+    NavBar,
 } from '../components/index'
 import { setFakeResult, setResult } from '../redux/modules/completeSlice'
 import Icon from '../components/icons/Icon'
@@ -67,7 +67,7 @@ const Main = (props) => {
                     <FlexColumn
                         _width={'100%'}
                         _height={'100%'}
-                        _padding={'2.938rem 1rem 0px 1rem'}
+                        _padding={'2.938rem 1rem 4.063rem 1rem'}
                         _others={'box-sizing: border-box; max-width: 48rem'}
                         _border={'none'}
                         _bgColor={'#efefef'}
@@ -103,8 +103,13 @@ const Main = (props) => {
                                 dispatch(chageMyHabitModal(false))
                             }}
                         >
-                            {' '}
-                            <TextContainer>
+                            <FlexRow
+                                _width={'false'}
+                                _border={'none'}
+                                _bgColor={'none'}
+                                _align={'end'}
+                                _margin={'0px 0px 0.5rem 0px'}
+                            >
                                 <Text
                                     _fontSize={'1.125rem'}
                                     _margin={'0px 0.563rem 0px 0px'}
@@ -112,25 +117,14 @@ const Main = (props) => {
                                 >
                                     오늘의 루틴
                                 </Text>
-                                <div
-                                    style={{
-                                        fontSize: '0.75rem',
-                                        padding: '0px 0px 0.2rem 0px',
-                                        color: '#6B76FF',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                    }}
+                                <Text
+                                    _fontSize={'0.75rem'}
+                                    _padding={'0px 0px 0.2rem 0px'}
+                                    _color={'#6B76FF'}
                                 >
                                     총 {mainRoutine?.Actions?.length}개의 액션
-                                </div>
-                                <ChangeBtn
-                                    onClick={() => {
-                                        history.push('/routine/mypage')
-                                    }}
-                                >
-                                    변경하기
-                                </ChangeBtn>
-                            </TextContainer>
+                                </Text>
+                            </FlexRow>
                             <FlexColumn
                                 _width={'100%'}
                                 _height={'false'}
@@ -166,6 +160,7 @@ const Main = (props) => {
                             <HabitTraker />
                         </div>
                     </FlexColumn>
+                    <NavBar />
                 </Container>
             </React.Fragment>
         )
@@ -177,7 +172,7 @@ const Main = (props) => {
                     <FlexColumn
                         _width={'100%'}
                         _height={'100%'}
-                        _padding={'2.938rem 1rem 0px 1rem'}
+                        _padding={'2.938rem 1rem 4.063rem 1rem'}
                         _others={'box-sizing: border-box; max-width: 48rem'}
                         _border={'none'}
                         _bgColor={'#efefef'}
@@ -276,6 +271,7 @@ const Main = (props) => {
                             <HabitTraker />
                         </div>
                     </FlexColumn>
+                    <NavBar />
                 </Container>
             </React.Fragment>
         )
@@ -348,6 +344,7 @@ const Main = (props) => {
                         </FlexRow>
                     </FlexColumn>
                 </FlexColumn>
+                <NavBar />
             </Container>
         </React.Fragment>
     )
@@ -360,20 +357,6 @@ const TimeWarp = styled.div`
     justify-content: start;
     align-items: center;
 `
-
-const ChangeBtn = styled.button`
-    width: 80px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 1rem;
-    border: 1px solid #6b76ff;
-    border-radius: 4px;
-    color: #6b76ff;
-    background-color: #fff;
-`
-
 const TextContainer = styled.div`
     width: 90vw;
     display: grid;
