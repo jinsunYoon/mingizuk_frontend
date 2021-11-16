@@ -15,6 +15,8 @@ const initialState = {
     myRoutine: [],
     updateRoutineRef: '',
     habitModal: false,
+    info: {},
+    optionStatus: false,
     fin: {
         finActions: [],
         finRoutines: [],
@@ -38,6 +40,17 @@ const routineSlice = createSlice({
         chageMyHabitModal: (state, action) => {
             state.habitModal = action.payload
         },
+        setRoutineInfo: (state, { payload }) => {
+            const result = {
+                id: payload.id,
+                routineName: payload.routineName,
+                Actions: payload.Actions,
+            }
+            state.info = result
+        },
+        setOptionModal: (state, action) => {
+            state.optionStatus = action.payload
+        },
     },
     extraReducers: {
         [myRoutinePresetMD.fulfilled]: (state, { payload }) => {
@@ -57,6 +70,7 @@ const routineSlice = createSlice({
         },
         // * ----
         [myRoutineDeleteMD.fulfilled]: (state, { payload }) => {
+            console.log('<<', payload)
             const result = state.myRoutine.filter(
                 (routine) => routine.id !== payload
             )
@@ -124,6 +138,8 @@ export const {
     updateRoutine,
     chageMyHabitModal,
     setRoutineModal,
+    setRoutineInfo,
+    setOptionModal,
 } = routineSlice.actions
 
 //* slice export

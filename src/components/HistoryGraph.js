@@ -1,16 +1,12 @@
-// ! TODO 가입 하루 지나기 전에 moment로 인한 에러 처리 해야 함
 import React from 'react'
-import '../styles/routine/history.scss'
-import { BarChart, Bar, XAxis, Label, Tooltip, LabelList } from 'recharts'
+import { BarChart, Bar, XAxis, LabelList } from 'recharts'
 import { format, addDays } from 'date-fns'
 import { finRoutinesActionsMD } from '../redux/async/routine'
 import { useDispatch, useSelector } from 'react-redux'
 
-// TODO 7일 단위로 나눌 수 있게 해야함...
 const HistoryGraph = (props) => {
     const { select } = props
     const [graph, setGraph] = React.useState('')
-    console.log('<', select, graph)
 
     // * get data from server
     const dispatch = useDispatch()
@@ -23,6 +19,7 @@ const HistoryGraph = (props) => {
     const finActions = useSelector((state) => state.routine.fin.finActions)
     const finRoutines = useSelector((state) => state.routine.fin.finRoutines)
     const joinDate = useSelector((state) => state.routine.fin.joinDate)
+
     const daylength = Math.ceil(
         (new Date().getTime() - new Date(joinDate).getTime()) /
             (1000 * 60 * 60 * 24)
@@ -140,7 +137,7 @@ const HistoryGraph = (props) => {
                             } else return
                         }}
                     >
-                        -
+                        &lt;
                     </button>
                     <h3>밍기적 {week}주차</h3>
                     <button
@@ -152,7 +149,7 @@ const HistoryGraph = (props) => {
                             } else return
                         }}
                     >
-                        +
+                        &gt;
                     </button>
                 </section>
                 <section className="graph-container">
@@ -162,38 +159,73 @@ const HistoryGraph = (props) => {
                     {graph === 'action' && (
                         <BarChart
                             width={340}
-                            height={250}
+                            height={270}
                             data={graphActionDataDivSeven}
+                            margin={{ top: 25 }}
                         >
-                            <XAxis dataKey="name" axisLine={false} />
+                            <XAxis
+                                dataKey="name"
+                                axisLine={false}
+                                tickLine={false}
+                                style={{
+                                    fill: '#A5ABB0',
+                                    fontSize: '12px',
+                                }}
+                            />
                             <Bar
                                 dataKey="actionCtn"
                                 radius={[10, 10, 10, 10]}
                                 fill="#6B76FF"
-                                background="#eee"
+                                background={{
+                                    fill: '#eee',
+                                    radius: [10, 10, 10, 10],
+                                }}
                                 barSize={20}
                             >
-                                <LabelList dataKey="actionCtn" position="top" />
+                                <LabelList
+                                    dataKey="actionCtn"
+                                    position="top"
+                                    style={{
+                                        fill: '#6B76FF',
+                                        fontSize: '12px',
+                                    }}
+                                />
                             </Bar>
                         </BarChart>
                     )}
                     {graph === 'routine' && (
                         <BarChart
                             width={340}
-                            height={250}
+                            height={270}
                             data={graphRoutineDataDivSeven}
+                            margin={{ top: 25 }}
                         >
-                            <XAxis dataKey="name" axisLine={false} />
+                            <XAxis
+                                dataKey="name"
+                                axisLine={false}
+                                tickLine={false}
+                                style={{
+                                    fill: '#A5ABB0',
+                                    fontSize: '12px',
+                                }}
+                            />
                             <Bar
                                 dataKey="routineCtn"
                                 radius={[10, 10, 10, 10]}
                                 fill="#6B76FF"
-                                background="#eee"
+                                background={{
+                                    fill: '#eee',
+                                    radius: [10, 10, 10, 10],
+                                }}
                                 barSize={20}
                             >
                                 <LabelList
                                     dataKey="routineCtn"
                                     position="top"
+                                    style={{
+                                        fill: '#6B76FF',
+                                        fontSize: '12px',
+                                    }}
                                 />
                             </Bar>
                         </BarChart>

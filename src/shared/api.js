@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getToken } from './utils'
+import Swal from 'sweetalert2'
 
 // Axios 인스턴스 설정
 const instance = axios.create({
@@ -29,8 +30,6 @@ instanceSign.interceptors.request.use(async (config) => {
 // interceptor를 통한 response 설정
 instance.interceptors.response.use(
     async (response) => {
-        // window.alert(response.data.msg)
-        // const tokens = response.data
         console.log(response)
         return response
     },
@@ -130,7 +129,8 @@ const myMoimCommentAPI = () => {
 }
 
 const myMoimLikeAPI = () => {
-    return instance.get('/api/moim/like')
+    console.log('>>', 'api')
+    return instance.get('/api/moims/like')
 }
 
 // * ------------------------------------------------
@@ -160,7 +160,6 @@ const myRoutineUpdateAPI = (data) => {
     return instance.put(`/api/routines/${data.routineId}`, {
         routineName: data.routineName,
         actions: data.actions,
-        isMain: data.isMain,
     })
 }
 
@@ -211,6 +210,10 @@ const moimUnlikeAPI = (moimId) => {
 
 const moimJoinAPI = (data) => {
     return instance.post(`/api/moims/${data.moimId}`)
+}
+
+const moimLeaveAPI = (data) => {
+    return instance.post(`/api/moims/${data.moimId}/exit`)
 }
 
 const moimCreateReviewAPI = (data) => {
@@ -272,6 +275,7 @@ export {
     moimLikeAPI,
     moimUnlikeAPI,
     moimJoinAPI,
+    moimLeaveAPI,
     actionRestartAPI,
     finRoutinesActionsAPI,
     actionResetAPI,

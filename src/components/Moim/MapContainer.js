@@ -20,15 +20,13 @@ const MapContainer = ({ searchPlace }) => {
     // 검색결과 배열에 담아줌
     const [Places, setPlaces] = useState([])
 
-    // 위도, 경도 - 안써도 될 것 같아서 주석처리 합니다.
-    // const [latitude, setLatitude] = React.useState('')
-    // const [longitude, setLongitude] = React.useState('')
+    const [latitude, setLatitude] = React.useState('')
+    const [longitude, setLongitude] = React.useState('')
 
-    // 좌표 - 안써도 될 것 같아서 주석처리 합니다.
-    // navigator.geolocation.getCurrentPosition((position) => {
-    //     setLatitude(position?.coords?.latitude)
-    //     setLongitude(position?.coords?.longitude)
-    // })
+    navigator.geolocation.getCurrentPosition((position) => {
+        setLatitude(position?.coords?.latitude)
+        setLongitude(position?.coords?.longitude)
+    })
 
     const getMarker = useSelector((state) => state.moim.marker)
     const getAddressName = useSelector((state) => state.moim.addressName)
@@ -38,7 +36,7 @@ const MapContainer = ({ searchPlace }) => {
         var markers = []
         const container = document.getElementById('myMap')
         const options = {
-            center: new kakao.maps.LatLng(33.450701, 126.570667),
+            center: new kakao.maps.LatLng(latitude, longitude),
             level: 3,
         }
         const map = new kakao.maps.Map(container, options)
@@ -77,12 +75,12 @@ const MapContainer = ({ searchPlace }) => {
                 dispatch(setMarker(place.place_name))
             })
         }
-    }, [searchPlace])
+    }, [searchPlace, latitude, longitude])
 
     return (
         <>
             <FlexColumn
-                _width={'90%'}
+                _width={'100%'}
                 _alignItems={'center'}
                 _border={'1px solid lightgray'}
                 _height={'100%'}
@@ -91,7 +89,7 @@ const MapContainer = ({ searchPlace }) => {
                     id="myMap"
                     style={{
                         width: '100%',
-                        height: '22rem',
+                        height: '20rem',
                     }}
                 ></div>
                 <FlexColumn
@@ -149,7 +147,7 @@ const MapContainer = ({ searchPlace }) => {
                     </div>
                 </FlexColumn>
             </FlexColumn>
-            <FlexRow _margin={'1rem 0 0 0'} _width={'90%'}>
+            <FlexRow _margin={'1rem 0 0 0'} _width={'100%'}>
                 <Text _padding={'1rem'}>선택한 주소 : {getAddressName}</Text>
             </FlexRow>
         </>

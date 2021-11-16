@@ -4,7 +4,6 @@ import { history } from '../../redux/store'
 import {
     myRoutinePresetMD,
     myRoutineListMD,
-    myRoutineDeleteMD,
     setMainRoutineMD,
 } from '../../redux/async/routine'
 import { actionResetMD } from '../../redux/async/actionComplete'
@@ -12,13 +11,11 @@ import {
     setResult,
     setFakeResultClear,
 } from '../../redux/modules/completeSlice'
-import Icon from '../icons/Icon'
 import {
     setRoutineModal,
-    updateRoutine,
+    setRoutineInfo,
+    setOptionModal,
 } from '../../redux/modules/routineSlice'
-import '../../styles/routine/my-routine.scss'
-import RoutineOption from './RoutineOption'
 
 const RoutineDesc = (props) => {
     const dispatch = useDispatch()
@@ -36,7 +33,6 @@ const RoutineDesc = (props) => {
         if (select === 'first') {
             setDesc('myRoutine')
         } else if (select === 'second') {
-            console.log('secondfffe')
             setDesc('recommendRoutine')
         } else {
             setDesc('myRoutine')
@@ -52,6 +48,7 @@ const RoutineDesc = (props) => {
         <>
             {desc === 'myRoutine' && (
                 <div
+                    className="routine-box-container"
                     onClick={(e) => {
                         e.stopPropagation()
                     }}
@@ -69,14 +66,6 @@ const RoutineDesc = (props) => {
                                             routine?.Actions[0].routineId,
                                     }
                                     dispatch(setMainRoutineMD(data))
-                                    // if (
-                                    //     result.length > 0 &&
-                                    //     getFakeResult.length > 0
-                                    // ) {
-                                    //     const routineId =
-                                    //         routine?.Actions[0].routineId
-                                    //     dispatch(actionResetMD(routineId))
-                                    // }
                                     dispatch(setResult([]))
                                     dispatch(setFakeResultClear([]))
                                 }
@@ -100,34 +89,24 @@ const RoutineDesc = (props) => {
                             <div className="icon-box">
                                 <div
                                     onClick={() => {
-                                        dispatch(updateRoutine(routine.id))
-                                        history.push('/routine/update')
+                                        dispatch(setOptionModal(true))
+                                        dispatch(setRoutineInfo(routine))
                                     }}
                                 >
-                                    수정
+                                    ...
                                 </div>
-                                <Icon
-                                    _onClick={() => {
-                                        const answer =
-                                            window.confirm(
-                                                '해당 루틴을 삭제하시겠습니까 ?'
-                                            )
-                                        if (answer) {
-                                            dispatch(
-                                                myRoutineDeleteMD(routine.id)
-                                            )
-                                        } else return
-                                    }}
-                                    icon="close-x"
-                                    size="14px"
-                                />
                             </div>
                         </button>
                     ))}
                 </div>
             )}
             {desc === 'recommendRoutine' && (
-                <section>
+                <section
+                    className="routine-box-container"
+                    onClick={(e) => {
+                        e.stopPropagation()
+                    }}
+                >
                     {preset.length > 0 &&
                         preset?.map((routine, idx) => (
                             <button
@@ -140,14 +119,6 @@ const RoutineDesc = (props) => {
                                                 routine?.Actions[0].routineId,
                                         }
                                         dispatch(setMainRoutineMD(data))
-                                        // if (
-                                        //     result.length > 0 &&
-                                        //     getFakeResult.length > 0
-                                        // ) {
-                                        //     const routineId =
-                                        //         routine?.Actions[0].routineId
-                                        //     dispatch(actionResetMD(routineId))
-                                        // }
                                         dispatch(setResult([]))
                                         dispatch(setFakeResultClear([]))
                                     }
@@ -188,7 +159,6 @@ const RoutineDesc = (props) => {
                     </button>
                 </div>
             )}
-            {/* <RoutineOption /> */}
         </>
     )
 }

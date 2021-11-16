@@ -13,7 +13,11 @@ const MenuModal = () => {
     const dispatch = useDispatch()
     const is_login = useSelector((state) => state.user.isLogin)
     const logout = () => {
-        dispatch(logoutMD())
+        if (window.confirm('로그아웃 하시겠습니까 ?')) {
+            dispatch(logoutMD())
+        } else {
+            return
+        }
     }
     const [modalStatus, setModalStatue] = React.useState(false)
     const nickName = useSelector((state) => state.user.userInfo.nickName)
@@ -32,7 +36,7 @@ const MenuModal = () => {
                                 backgroundColor: 'black',
                                 opacity: '0.3',
                                 position: 'fixed',
-                                top: '46px',
+                                top: '2.875rem',
                                 left: '0rem',
                             }}
                             onClick={() => {
@@ -43,13 +47,13 @@ const MenuModal = () => {
                         ></div>
                         <div
                             style={{
-                                width: '200px',
+                                width: '12.5rem',
                                 height: '100vh',
                                 padding: '1rem',
                                 boxSizing: 'border-box',
                                 backgroundColor: '#fff',
                                 position: 'fixed',
-                                top: '46px',
+                                top: '2.875rem',
                                 left: '0rem',
                             }}
                         >
@@ -63,7 +67,7 @@ const MenuModal = () => {
                                     _justify={'space-between'}
                                     _border={'none'}
                                     _others={
-                                        'padding-bottom:5px; border-bottom:1px solid #dbdbdb'
+                                        'padding-bottom:0.313rem; border-bottom:1px solid #dbdbdb'
                                     }
                                 >
                                     <FlexRow
@@ -73,11 +77,11 @@ const MenuModal = () => {
                                     >
                                         <AccountCircleRounded
                                             style={{
-                                                marginRight: '10px',
+                                                marginRight: '0.625rem',
                                                 color: '#6dddd0',
-                                                fontSize: '27px',
+                                                fontSize: '1.688rem',
                                                 background: '#fff',
-                                                borderRadius: '50px',
+                                                borderRadius: '3.125rem',
                                             }}
                                         />
                                         <Text _margin={'0px'} _padding={'0px'}>
@@ -87,13 +91,17 @@ const MenuModal = () => {
                                             님
                                         </Text>
                                     </FlexRow>
-                                    <div onClick={logout}>
+                                    <div
+                                        onClick={() => {
+                                            logout()
+                                        }}
+                                    >
                                         <ExitToAppRounded
                                             style={{
                                                 color: '#c1c1c1',
                                                 fontSize: '27px',
                                                 background: '#fff',
-                                                borderRadius: '50px',
+                                                borderRadius: '3.125rem',
                                                 cursor: 'pointer',
                                             }}
                                         />
@@ -199,7 +207,7 @@ const MenuModal = () => {
                             backgroundColor: 'black',
                             opacity: '0.3',
                             position: 'fixed',
-                            top: '46px',
+                            top: '2.875rem',
                             left: '0rem',
                         }}
                         onClick={() => {
@@ -210,13 +218,13 @@ const MenuModal = () => {
                     ></div>
                     <div
                         style={{
-                            width: '200px',
+                            width: '12.5rem',
                             height: '100vh',
                             padding: '1rem',
                             boxSizing: 'border-box',
                             backgroundColor: '#fff',
                             position: 'fixed',
-                            top: '46px',
+                            top: '2.875rem',
                             left: '0rem',
                         }}
                     >

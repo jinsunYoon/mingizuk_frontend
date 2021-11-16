@@ -33,7 +33,7 @@ const PostDesc = () => {
         <>
             {post_data_all.length > 0 &&
                 post_data_all?.map((data, idx) => (
-                    <div key={idx}>
+                    <div key={idx} className="post-warp">
                         {data?.imgSrc === null ? (
                             <div
                                 className="moim-post-box"

@@ -2,29 +2,17 @@
 @import '../shared/common.scss';
 @import '../shared/modules/buttons.module.scss';
 
-//================= > contents에 미디어쿼리 적용
-.moim-layout {
-    @include container();
-
-    .contents {
-        margin: 47px auto 0;
-
-        @include mobile {
-            width: 360px;
-        }
-        @include tablet {
-            width: 100%;
-        }
-        @include desktop {
-            max-width: 1024px;
-        }
-    }
-}
-
 .moim-main-layout {
-    width: 100%;
+    width: 100vw;
+    @include column-flexbox(center, center);
     padding-top: 3rem;
     padding-bottom: 65px;
+}
+
+.post-warp {
+    width: 100vw;
+    max-width: 768px;
+    @include column-flexbox(center, center);
     background-color: $bg-light-gray;
 }
 
@@ -32,21 +20,22 @@
 .moim-post-box {
     @include column-flexbox(center, start);
     width: 100%;
+    max-width: 768px;
     background-color: $white;
-    padding: 0 16px;
+    padding: 0 2rem;
 
     .location {
-        @include text-style-12(12px, 0.15px, $text-gray);
-        padding: 16px 0;
+        @include text-style-12(0.75rem, 0.15px, $text-gray);
+        padding: 2rem 0;
     }
     .title {
-        @include text-style-18(12px, 0.15px, $black);
+        @include text-style-18(0.75rem, 0.15px, $black);
         font-weight: 700;
-        padding: 8px 0;
+        padding: 0.5rem 0;
     }
     .content {
-        @include text-style-14(20px, 1.2px, $black);
-        padding: 8px 0;
+        @include text-style-14(1.25rem, 1.2px, $black);
+        padding: 0.5rem 0;
     }
     .imgbox {
         @include flexbox(center, center);
@@ -54,34 +43,36 @@
 
         img {
             width: auto;
-            height: 160px;
+            height: 10rem;
         }
     }
 
     .post-info {
         @include flexbox(between, center);
         width: 100%;
-        padding-bottom: 8px;
+        padding-bottom: 0.5rem;
     }
     span {
-        @include text-style-12(24px, auto, $text-gray);
+        @include text-style-12(1.5rem, auto, $text-gray);
     }
 }
 
 .ectbox {
     @include flexbox(start, center);
-    margin-bottom: 16px;
+    width: 100%;
+    margin-bottom: 2rem;
+    max-width: 768px;
     background-color: $white;
     border: 1px solid $bg-light-gray;
-    height: 40px;
-    padding-left: 16px;
+    height: 2.5rem;
+    padding-left: 2rem;
     .icon-text {
         @include flexbox(center, center);
         span {
             @include text-style-12(12px, 0.15px, $text-gray);
         }
         &:first-child {
-            margin-right: 35px;
+            margin-right: 2.188rem;
         }
     }
 }

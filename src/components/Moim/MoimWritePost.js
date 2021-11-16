@@ -1,18 +1,20 @@
 /*global kakao*/
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
+import React from 'react'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { moimCreateMD } from '../../redux/async/moim'
 import config from '../../shared/aws_config'
 import { uploadFile } from 'react-s3'
-import MapSearch from './MapSearch'
+import { history } from '../../redux/store'
 
 const MoimWritePost = () => {
     const dispatch = useDispatch()
     const [title, setTitle] = React.useState('')
     const [contents, setContents] = React.useState('')
     const [selectedFile, setSelectedFile] = React.useState(null)
-    const [imgSrc, setImgSrc] = React.useState('')
+    const [startDate, setStartDate] = React.useState(new Date())
+    const [endDate, setEndDate] = React.useState(new Date())
 
     // * upload S3
     const handleFileInput = (e) => {
@@ -50,9 +52,26 @@ const MoimWritePost = () => {
                 <h4 className="post-subtitle">모임 내용</h4>
                 <textarea onChange={(e) => setContents(e.target.value)} />
                 <h4 className="post-subtitle">모임 위치 설정</h4>
-                <MapSearch />
+                <button
+                    onClick={() => {
+                        history.push('/moim/map')
+                    }}
+                >
+                    검색
+                </button>
+                <h4 className="post-subtitle">모임 기간 설정</h4>
+                <div className="date-container">
+                    <DatePicker
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                    />
+                    <DatePicker
+                        selected={endDate}
+                        onChange={(date) => setEndDate(date)}
+                    />
+                </div>
                 <h4 className="post-subtitle">이미지 첨부</h4>
-                <label className="image-input" for="image">
+                <label className="image-input" htmlFor="image">
                     +
                 </label>
                 <input
@@ -73,15 +92,5 @@ const MoimWritePost = () => {
         </>
     )
 }
-
-const IconBtn = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 25px;
-    border: none;
-    border-radius: 10px;
-    margin: 0 5px;
-`
 
 export default MoimWritePost

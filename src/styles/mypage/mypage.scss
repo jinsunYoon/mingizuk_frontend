@@ -2,21 +2,13 @@
 @import '../shared/common.scss';
 
 .mypage-layout {
-    @include container();
+    max-width: $tablet;
+    margin: 0 auto;
 }
-//================= > contents에 미디어쿼리 적용
+
 .contents {
     margin: 50px auto 0;
-
-    @include mobile {
-        width: 100%;
-    }
-    @include tablet {
-        width: 100%;
-    }
-    @include desktop {
-        width: 1024px;
-    }
+    max-width: 100%;
 
     .user-profile {
         @include flexbox();
@@ -70,3 +62,5 @@
         }
     }
 }
+
+//================= > contents에 미디어쿼리 적용

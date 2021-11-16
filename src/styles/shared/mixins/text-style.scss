@@ -1,28 +1,28 @@
 @import '../constants/colors';
 
 @mixin text-style-12($lh, $ls, $color: $black) {
-    font-size: 12px;
+    font-size: 0.75rem;
     line-height: $lh;
     letter-spacing: $ls;
     color: $color;
 }
 
 @mixin text-style-14($lh, $ls, $color: $black) {
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: $lh;
     letter-spacing: $ls;
     color: $color;
 }
 
 @mixin text-style-16($lh, $ls, $color: $black) {
-    font-size: 16px;
+    font-size: 1rem;
     line-height: $lh;
     letter-spacing: $ls;
     color: $color;
 }
 
 @mixin text-style-18($lh, $ls, $color: $black) {
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height: $lh;
     letter-spacing: $ls;
     color: $color;

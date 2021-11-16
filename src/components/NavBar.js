@@ -17,16 +17,23 @@ import { positions } from '@mui/system'
 
 const NavBar = () => {
     const navPosition = {
-        width: '100%',
+        width: '100vw',
         position: 'fixed',
-        zIndex:5,
+        display: 'flex',
+        justifyContent: 'center',
+        zIndex: 3,
         bottom: 0,
     }
     return (
         <>
             <div style={navPosition}>
-                <FlexRow _border="none" _width="100%" _justify="space-between">
-                    <FlexColumn _border="none" _height="65px">
+                <FlexRow
+                    _border="none"
+                    _width="100%"
+                    _justify="space-between"
+                    _others="max-width:48rem"
+                >
+                    <FlexColumn _border="none" _height="4.063rem">
                         <ButtonOutlined
                             _width="auto"
                             _padding="0"
