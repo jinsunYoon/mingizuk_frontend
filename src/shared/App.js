@@ -8,7 +8,6 @@ import { loginCheckMD } from '../redux/async/user'
 
 // * pages
 import Main from '../pages/Main'
-import { NavBar } from '../components'
 import NoLogin from '../pages/MyPages/NoLogin'
 const Login = lazy(() => import('../pages/Login'))
 const Signup = lazy(() => import('../pages/Signup'))
@@ -32,7 +31,9 @@ const MoimDetail = lazy(() => import('../pages/MoimPages/MoimDetail'))
 const MyMoim = lazy(() => import('../pages/MyPages/MyMoim'))
 const Backend = lazy(() => import('../pages/Backend'))
 const MoimUpdate = lazy(() => import('../pages/MoimPages/MoimUpdate'))
+const MoimMap = lazy(() => import('../pages/MoimPages/MoimMap'))
 const notLoggedIn = lazy(() => import('../pages/notLoggedIn'))
+const Chat = lazy(() => import('../pages/Chat'))
 
 const App = () => {
     const dispatch = useDispatch()
@@ -105,6 +106,7 @@ const App = () => {
                         />
                         <Route path="/moim" exact component={MoimMain} />
                         <Route path="/moim/write" exact component={MoimWrite} />
+                        <Route path="/moim/map" exact component={MoimMap} />
                         <Route
                             path="/moim/update"
                             exact
@@ -118,11 +120,11 @@ const App = () => {
 
                         <Route path="/backend" exact component={Backend} />
                         <Route path="/not" exact component={notLoggedIn} />
+                        <Route pate="/chat" exact component={Chat} />
                         <Route path="*" component={NotFound} />
                     </Switch>
                 </Suspense>
             </ConnectedRouter>
-            {/* <NavBar /> */}
         </>
     )
 }

@@ -1,18 +1,8 @@
 /*global kakao*/
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import MapContainer from './MapContainer'
-import {
-    FlexRow,
-    FlexColumn,
-    SubTitle,
-    Title,
-    Input,
-    ButtonFill,
-    ButtonOutlined,
-    Text,
-} from '../../elements/index'
-
-const { kakao } = window
+import { FlexRow, ButtonOutlined, ButtonFill } from '../../elements/index'
+import { history } from '../../redux/store'
 
 const MapSearch = () => {
     const [InputText, setInputText] = useState('')
@@ -39,18 +29,28 @@ const MapSearch = () => {
             <form
                 onSubmit={handleSubmit}
                 style={{
-                    width: '90%',
+                    width: '100%',
                     display: 'flex',
+                    marginTop: '2.938rem',
+                    padding: '1rem',
+                    flexDirection: 'column',
                     justifyContent: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
                 }}
             >
-                <FlexRow _width={'100%'}>
-                    <Input
-                        _ph="모임을 할 장소를 검색해주세요!"
-                        _onChange={onChange}
-                        _value={InputText}
-                        _others={'border:none; outline: none'}
-                        _width={'100%'}
+                <FlexRow _width={'100%'} _others={'max-width:48rem'}>
+                    <input
+                        onChange={onChange}
+                        value={InputText}
+                        placeholder="모임을 할 장소를 검색해주세요!"
+                        style={{
+                            border: 'none',
+                            outline: 'none',
+                            width: '100%',
+                            padding: '0 1rem',
+                        }}
                     />
                     <ButtonOutlined
                         _width={'5rem'}
@@ -61,16 +61,31 @@ const MapSearch = () => {
                         _others={
                             'height: 3rem; border-left: 1px solid lightgray'
                         }
-                        _onClick={() => {
-                            setMap(true)
-                            InputText == '' && alert()
-                        }}
                     >
                         검색
                     </ButtonOutlined>
                 </FlexRow>
+                <MapContainer searchPlace={Place} />
             </form>
-            {map && <MapContainer searchPlace={Place} />}
+            <FlexRow
+                _width={'100vw'}
+                _border={'none'}
+                _margin={'0'}
+                _padding={'0'}
+            >
+                <ButtonFill
+                    _bgColor={'#6B76FF'}
+                    _width={'100%'}
+                    _margin={'0'}
+                    _padding={'0'}
+                    _others={'height:3.5rem; max-width:48rem'}
+                    _onClick={() => {
+                        history.push('/moim/write')
+                    }}
+                >
+                    위치 선택 완료
+                </ButtonFill>
+            </FlexRow>
         </>
     )
 }

@@ -52,7 +52,7 @@ const HabitTraker = () => {
     getExerciseData()
 
     return (
-        <>
+        <div className="all-container">
             <p className="habit-title">이번달 해빗 트래커</p>
             <section className="habit-container">
                 {designMap.map((day, idx) => (
@@ -78,7 +78,7 @@ const HabitTraker = () => {
                     ))}
                 </section>
             </section>
-        </>
+        </div>
     )
 }
 
