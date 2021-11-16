@@ -10,11 +10,14 @@ import { NavBar } from '../index'
 import { myMoimCommentMD } from '../../redux/async/myMoim'
 
 import '../../styles/mypage/mymoim.scss'
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 
 const MyComment = () => {
     const dispatch = useDispatch()
     const comment_list = useSelector((state) => state.myMoim.my_comment_list)
-    console.log('><', comment_list)
+    console.log('><', 'comment', comment_list)
 
     React.useEffect(() => {
         dispatch(myMoimCommentMD())
@@ -22,28 +25,39 @@ const MyComment = () => {
 
     return (
         <>
-            {comment_list?.map((comment_list, idx) => (
-                <PostBox
-                    onClick={() => history.push(`/moim/detail/${i.moimId}`)}
-                    key={idx}
-                >
-                    <ContentBox>
-                        <span className="title">
-                            {comment_list?.Moim?.title}
-                        </span>
-                        <span className="contents">
-                            {comment_list?.contents.slice(0, 5) + '...'}
-                        </span>
-                        <span className="nickname">
-                            작성자 {comment_list?.User?.nickName}
-                        </span>
-                        <span className="date">
-                            {comment_list?.createdAt?.split(['T'])[0]}
-                        </span>
-                    </ContentBox>
-                </PostBox>
-            ))}
-            <NavBar />
+            <section className="mymoim-contents">
+                {comment_list?.map((comment_list, idx) => (
+                    <div
+                        className="postbox"
+                        onClick={() =>
+                            history.push(`/moim/detail/${comment_list?.moimId}`)
+                        }
+                        key={idx}
+                    >
+                        <div className="contentsBox">
+                            <span className="location">위치!!!!</span>
+                            <div className="titlebox">
+                                <span className="title">
+                                    {comment_list?.Moim?.title}
+                                </span>
+                                <span className="comments">
+                                    내 댓글 : {comment_list?.contents}
+                                </span>
+                            </div>
+
+                            <div className="etcbox">
+                                <span className="writer">
+                                    작성자 {comment_list?.User?.nickName}
+                                </span>
+                                <span className="date">
+                                    {comment_list?.createdAt?.split(['T'])[0]}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+                <NavBar />
+            </section>
         </>
     )
 }

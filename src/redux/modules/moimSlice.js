@@ -61,6 +61,7 @@ const moimSlice = createSlice({
             console.log(payload)
         },
         [moimLikeMD.fulfilled]: (state, { payload }) => {
+            console.log('><>', payload)
             const likeUser = payload.data.msg.slice(0, 1)
             state.moim_detail.Likes.push({ userId: Number(likeUser) })
         },
