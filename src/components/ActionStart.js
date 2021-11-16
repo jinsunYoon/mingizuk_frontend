@@ -98,6 +98,7 @@ const ActionStart = (props) => {
                                     _width={'100%'}
                                     _height={'100%'}
                                     _padding={'0px'}
+                                    _others={'max-width:48rem'}
                                 >
                                     <Text
                                         _fontSize={'1rem'}

@@ -36,7 +36,7 @@ const MenuModal = () => {
                                 backgroundColor: 'black',
                                 opacity: '0.3',
                                 position: 'fixed',
-                                top: '46px',
+                                top: '2.875rem',
                                 left: '0rem',
                             }}
                             onClick={() => {
@@ -47,13 +47,13 @@ const MenuModal = () => {
                         ></div>
                         <div
                             style={{
-                                width: '200px',
+                                width: '12.5rem',
                                 height: '100vh',
                                 padding: '1rem',
                                 boxSizing: 'border-box',
                                 backgroundColor: '#fff',
                                 position: 'fixed',
-                                top: '46px',
+                                top: '2.875rem',
                                 left: '0rem',
                             }}
                         >
@@ -67,7 +67,7 @@ const MenuModal = () => {
                                     _justify={'space-between'}
                                     _border={'none'}
                                     _others={
-                                        'padding-bottom:5px; border-bottom:1px solid #dbdbdb'
+                                        'padding-bottom:0.313rem; border-bottom:1px solid #dbdbdb'
                                     }
                                 >
                                     <FlexRow
@@ -77,11 +77,11 @@ const MenuModal = () => {
                                     >
                                         <AccountCircleRounded
                                             style={{
-                                                marginRight: '10px',
+                                                marginRight: '0.625rem',
                                                 color: '#6dddd0',
-                                                fontSize: '27px',
+                                                fontSize: '1.688rem',
                                                 background: '#fff',
-                                                borderRadius: '50px',
+                                                borderRadius: '3.125rem',
                                             }}
                                         />
                                         <Text _margin={'0px'} _padding={'0px'}>
@@ -101,7 +101,7 @@ const MenuModal = () => {
                                                 color: '#c1c1c1',
                                                 fontSize: '27px',
                                                 background: '#fff',
-                                                borderRadius: '50px',
+                                                borderRadius: '3.125rem',
                                                 cursor: 'pointer',
                                             }}
                                         />
@@ -207,7 +207,7 @@ const MenuModal = () => {
                             backgroundColor: 'black',
                             opacity: '0.3',
                             position: 'fixed',
-                            top: '46px',
+                            top: '2.875rem',
                             left: '0rem',
                         }}
                         onClick={() => {
@@ -218,13 +218,13 @@ const MenuModal = () => {
                     ></div>
                     <div
                         style={{
-                            width: '200px',
+                            width: '12.5rem',
                             height: '100vh',
                             padding: '1rem',
                             boxSizing: 'border-box',
                             backgroundColor: '#fff',
                             position: 'fixed',
-                            top: '46px',
+                            top: '2.875rem',
                             left: '0rem',
                         }}
                     >
