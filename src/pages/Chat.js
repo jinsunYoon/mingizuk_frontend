@@ -14,6 +14,21 @@ const Chat = () => {
                         <span className="chat-time">시간나오는곳</span>
                     </div>
                 </div>
+                <div className="chat-others-container">
+                    <span className="chat-title">모임장 닉넴</span>
+                    <div>
+                        <p className="chat-content">대화내용내용내용내용</p>
+                        <span className="chat-time">시간나오는곳</span>
+                    </div>
+                </div>
+                <div className="chat-me-container">
+                    <span className="chat-time">시간나오는곳</span>
+                    <p className="chat-content">대화내용내용내용내용</p>
+                </div>
+                <div className="chat-me-container">
+                    <span className="chat-time">시간나오는곳</span>
+                    <p className="chat-content">대화내용내용내용내용</p>
+                </div>
                 <div className="chat-me-container">
                     <span className="chat-time">시간나오는곳</span>
                     <p className="chat-content">대화내용내용내용내용</p>

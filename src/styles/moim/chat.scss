@@ -11,13 +11,13 @@
 .chat-me-container {
     width: 100%;
     max-width: 768px;
-    background-color: lavender;
+    margin-bottom: 1rem;
 }
 
 .chat-me-container {
     @include flexbox(end, center);
     .chat-time {
-        margin-right: 3rem;
+        margin-right: 1rem;
     }
 }
 
@@ -42,5 +42,5 @@
 .chat-time {
     font-size: 0.625rem;
     color: $text-gray;
-    margin-left: 2rem;
+    margin-left: 1rem;
 }

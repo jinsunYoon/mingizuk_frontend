@@ -12,6 +12,9 @@ const Header = (props) => {
         <React.Fragment>
             <div
                 style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    aligmItems: 'center',
                     width: '100vw',
                     height: '3rem',
                     borderTop: '1px solid #B8B8B8',
@@ -21,7 +24,12 @@ const Header = (props) => {
                     zIndex: '5',
                 }}
             >
-                <FlexRow _width={'100vw'} _height={'100%'} _border={'none'}>
+                <FlexRow
+                    _width={'100vw'}
+                    _height={'100%'}
+                    _border={'none'}
+                    _others="max-width:768px"
+                >
                     {type === 'menu' && <MenuModal />}
                     {type === 'back' && <GoBack />}
                     <ButtonOutlined

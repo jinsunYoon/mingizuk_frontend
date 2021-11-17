@@ -13,19 +13,26 @@ import CachedIcon from '@mui/icons-material/Cached'
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline'
 import BarChartIcon from '@mui/icons-material/BarChart'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
-import { positions } from '@mui/system'
 
 const NavBar = () => {
     const navPosition = {
-        width: '100%',
+        width: '100vw',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         position: 'fixed',
-        zIndex:5,
+        zIndex: 5,
         bottom: 0,
     }
     return (
         <>
             <div style={navPosition}>
-                <FlexRow _border="none" _width="100%" _justify="space-between">
+                <FlexRow
+                    _border="none"
+                    _width="100%"
+                    _justify="space-between"
+                    _others="max-width:786px"
+                >
                     <FlexColumn _border="none" _height="65px">
                         <ButtonOutlined
                             _width="auto"
