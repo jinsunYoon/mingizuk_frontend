@@ -10,7 +10,7 @@ import {
     Text,
 } from '../../elements/index'
 import { useDispatch, useSelector } from 'react-redux'
-import { setMarker, setAddressName } from '../../redux/modules/moimSlice'
+import { setPlace, setAddress } from '../../redux/modules/moimSlice'
 
 const { kakao } = window
 
@@ -20,25 +20,22 @@ const MapContainer = ({ searchPlace }) => {
     // 검색결과 배열에 담아줌
     const [Places, setPlaces] = useState([])
 
-    // 위도, 경도 - 안써도 될 것 같아서 주석처리 합니다.
-    // const [latitude, setLatitude] = React.useState('')
-    // const [longitude, setLongitude] = React.useState('')
+    const [latitude, setLatitude] = React.useState('')
+    const [longitude, setLongitude] = React.useState('')
+    const [addressName, setAddressName] = React.useState('')
+    const [placeName, setPlaceName] = React.useState('')
 
-    // 좌표 - 안써도 될 것 같아서 주석처리 합니다.
-    // navigator.geolocation.getCurrentPosition((position) => {
-    //     setLatitude(position?.coords?.latitude)
-    //     setLongitude(position?.coords?.longitude)
-    // })
-
-    const getMarker = useSelector((state) => state.moim.marker)
-    const getAddressName = useSelector((state) => state.moim.addressName)
+    navigator.geolocation.getCurrentPosition((position) => {
+        setLatitude(position?.coords?.latitude)
+        setLongitude(position?.coords?.longitude)
+    })
 
     useEffect(() => {
         var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 })
         var markers = []
         const container = document.getElementById('myMap')
         const options = {
-            center: new kakao.maps.LatLng(33.450701, 126.570667),
+            center: new kakao.maps.LatLng(latitude, longitude),
             level: 3,
         }
         const map = new kakao.maps.Map(container, options)
@@ -70,28 +67,33 @@ const MapContainer = ({ searchPlace }) => {
             kakao.maps.event.addListener(marker, 'click', function () {
                 infowindow.setContent(
                     `<div style="padding:5px;font-size:12px;border-bottom:1px solid lightgray">
-                    ${place.place_name}
+                    ${place?.place_name}
                     </div>`
                 )
                 infowindow.open(map, marker)
-                dispatch(setMarker(place.place_name))
+                setAddressName(place?.address_name)
+                setPlaceName(place?.place_name)
+                dispatch(setPlace(place?.place_name))
+                dispatch(setAddress(place?.address_name))
+                console.log('place', place)
             })
         }
-    }, [searchPlace])
+    }, [searchPlace, latitude, longitude])
 
     return (
         <>
             <FlexColumn
-                _width={'90%'}
+                _width={'100%'}
                 _alignItems={'center'}
                 _border={'1px solid lightgray'}
                 _height={'100%'}
+                _others={'max-width:48rem'}
             >
                 <div
                     id="myMap"
                     style={{
                         width: '100%',
-                        height: '22rem',
+                        height: '20rem',
                     }}
                 ></div>
                 <FlexColumn
@@ -108,17 +110,21 @@ const MapContainer = ({ searchPlace }) => {
                                 onClick={() => {
                                     {
                                         item?.road_address_name
-                                            ? dispatch(
-                                                  setAddressName(
-                                                      item?.road_address_name
-                                                  )
+                                            ? setAddressName(
+                                                  item?.road_address_name
                                               )
-                                            : dispatch(
-                                                  setAddressName(
-                                                      item?.address_name
-                                                  )
-                                              )
+                                            : setAddressName(item?.address_name)
                                     }
+                                    item?.road_address_name
+                                        ? dispatch(
+                                              setAddress(
+                                                  item?.road_address_name
+                                              )
+                                          )
+                                        : dispatch(
+                                              setAddress(item?.address_name)
+                                          )
+                                    dispatch(setPlace(item?.place_name))
                                 }}
                             >
                                 <FlexColumn
@@ -131,26 +137,33 @@ const MapContainer = ({ searchPlace }) => {
                                         'border-bottom: 1px solid lightgray'
                                     }
                                 >
-                                    <h5>{item.place_name}</h5>
-                                    {item.road_address_name ? (
+                                    <h5>{item?.place_name}</h5>
+                                    {item?.road_address_name ? (
                                         <div>
                                             <span>
-                                                {item.road_address_name}
+                                                {item?.road_address_name}
                                             </span>
-                                            <span>{item.address_name}</span>
                                         </div>
                                     ) : (
-                                        <span>{item.address_name}</span>
+                                        <span>{item?.address_name}</span>
                                     )}
-                                    <span>{item.phone}</span>
+                                    <span>{item?.phone}</span>
                                 </FlexColumn>
                             </div>
                         ))}
                     </div>
                 </FlexColumn>
             </FlexColumn>
-            <FlexRow _margin={'1rem 0 0 0'} _width={'90%'}>
-                <Text _padding={'1rem'}>선택한 주소 : {getAddressName}</Text>
+            <FlexRow
+                _margin={'1rem 0 0 0'}
+                _width={'100%'}
+                _others={'max-width:48rem'}
+            >
+                <Text _padding={'1rem'}>
+                    {placeName
+                        ? `선택한 주소 : ${placeName} - ${addressName}`
+                        : '위치를 선택해주세요'}
+                </Text>
             </FlexRow>
         </>
     )

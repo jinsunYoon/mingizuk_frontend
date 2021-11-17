@@ -17,11 +17,10 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 const NavBar = () => {
     const navPosition = {
         width: '100vw',
+        position: 'fixed',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
-        position: 'fixed',
-        zIndex: 5,
+        zIndex: 3,
         bottom: 0,
     }
     return (
@@ -31,9 +30,9 @@ const NavBar = () => {
                     _border="none"
                     _width="100%"
                     _justify="space-between"
-                    _others="max-width:786px"
+                    _others="max-width:48rem"
                 >
-                    <FlexColumn _border="none" _height="65px">
+                    <FlexColumn _border="none" _height="4.063rem">
                         <ButtonOutlined
                             _width="auto"
                             _padding="0"

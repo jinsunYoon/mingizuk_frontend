@@ -5,6 +5,7 @@ import { ButtonOutlined, FlexRow, GoBack, Text } from '../elements/index'
 import { MenuModal } from '../components/index'
 
 import { history } from '../redux/store'
+import { Directions } from '@mui/icons-material'
 
 const Header = (props) => {
     const { name, type } = props
@@ -18,22 +19,22 @@ const Header = (props) => {
                     width: '100vw',
                     height: '3rem',
                     borderTop: '1px solid #B8B8B8',
+                    display: 'flex',
+                    justifyContent: 'center',
                     position: 'fixed',
-                    top: '0',
-                    left: '0',
-                    zIndex: '5',
+                    top: 0,
+                    zIndex: 5,
                 }}
             >
                 <FlexRow
-                    _width={'100vw'}
+                    _width={'100%'}
                     _height={'100%'}
                     _border={'none'}
-                    _others="max-width:768px"
+                    _others={'position: fixed, top:0; max-width: 48rem;'}
                 >
                     {type === 'menu' && <MenuModal />}
                     {type === 'back' && <GoBack />}
                     <ButtonOutlined
-                        _others={'position: fixed;'}
                         _border={'none'}
                         _width={'70%'}
                         _onClick={() => {

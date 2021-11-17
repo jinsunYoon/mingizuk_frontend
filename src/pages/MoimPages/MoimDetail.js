@@ -32,6 +32,8 @@ const MoimDetail = (props) => {
         dispatch(moimDetailMD(post_id))
     }, [])
 
+    console.log('><>', post_data)
+
     // * post delete
     const deletePost = (data) => {
         swal({

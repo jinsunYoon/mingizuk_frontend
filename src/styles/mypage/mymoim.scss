@@ -8,12 +8,12 @@
     .toogle-layout {
         position: sticky;
         min-width: 100%;
-        height: 50px;
+        height: 100%;
         overflow-x: scroll;
 
         .toogle-container {
             min-width: 480px;
-            height: 50px;
+            height: 100%;
             display: flex;
             justify-content: space-evenly;
         }
@@ -44,13 +44,18 @@
             }
 
             .titlebox {
+                display: flex;
+                flex-direction: column;
                 width: 100%;
-                margin-top: 1rem;
+                text-align: left;
 
                 .title {
                     @include text-style-16(24px, 0.15px, #2e3a59);
-                    text-align: left;
                     margin-top: 1rem;
+                }
+                .comments {
+                    @include text-style-14(20px, 0.15px, gray);
+                    margin-top: 0.5rem;
                 }
             }
 
@@ -61,7 +66,7 @@
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: baseline;
-                margin-top: 2rem;
+                margin-top: 1rem;
 
                 .writer {
                     margin-right: 1rem;
