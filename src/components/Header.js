@@ -13,6 +13,9 @@ const Header = (props) => {
         <React.Fragment>
             <div
                 style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    aligmItems: 'center',
                     width: '100vw',
                     height: '3rem',
                     borderTop: '1px solid #B8B8B8',
