@@ -30,18 +30,33 @@ const MoimWritePost = () => {
         if (selectedFile !== null) {
             uploadFile(file, config)
                 .then((data) => {
-                    const req = { title, contents, imgSrc: data.location }
+                    const req = {
+                        title,
+                        contents,
+                        imgSrc: data.location,
+                        startAt: startDate,
+                        finishAt: endDate,
+                        location: `${getAddress}${getPlace}`,
+                    }
                     dispatch(moimCreateMD(req))
                 })
                 .catch((err) => console.error(err))
         } else return
     }
+    console.log('<<<', `${getAddress}${getPlace}`)
 
     const upload = () => {
         if (selectedFile !== null) {
             handleUpload(selectedFile)
         } else {
-            const req = { title, contents, imgSrc: null }
+            const req = {
+                title,
+                contents,
+                imgSrc: null,
+                startAt: startDate,
+                finishAt: endDate,
+                location: `${getAddress}${getPlace}`,
+            }
             dispatch(moimCreateMD(req))
         }
     }

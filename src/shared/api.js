@@ -177,6 +177,9 @@ const moimCreateAPI = (data) => {
         title: data.title,
         contents: data.contents,
         imgSrc: data.imgSrc,
+        startAt: data.startAt,
+        finishAt: data.finishAt,
+        location: data.location,
     })
 }
 
