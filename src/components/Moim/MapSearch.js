@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import MapContainer from './MapContainer'
 import { FlexRow, ButtonOutlined, ButtonFill } from '../../elements/index'
+import { history } from '../../redux/store'
 
 const MapSearch = () => {
     const [InputText, setInputText] = useState('')
@@ -34,9 +35,12 @@ const MapSearch = () => {
                     padding: '1rem',
                     flexDirection: 'column',
                     justifyContent: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
                 }}
             >
-                <FlexRow _width={'100%'}>
+                <FlexRow _width={'100%'} _others={'max-width:48rem'}>
                     <input
                         onChange={onChange}
                         value={InputText}
@@ -63,15 +67,25 @@ const MapSearch = () => {
                 </FlexRow>
                 <MapContainer searchPlace={Place} />
             </form>
-            <ButtonFill
-                _bgColor={'#6B76FF'}
-                _width={'100%'}
+            <FlexRow
+                _width={'100vw'}
+                _border={'none'}
                 _margin={'0'}
                 _padding={'0'}
-                _others={'height:3.5rem'}
             >
-                위치 선택 완료
-            </ButtonFill>
+                <ButtonFill
+                    _bgColor={'#6B76FF'}
+                    _width={'100%'}
+                    _margin={'0'}
+                    _padding={'0'}
+                    _others={'height:3.5rem; max-width:48rem'}
+                    _onClick={() => {
+                        history.push('/moim/write')
+                    }}
+                >
+                    위치 선택 완료
+                </ButtonFill>
+            </FlexRow>
         </>
     )
 }

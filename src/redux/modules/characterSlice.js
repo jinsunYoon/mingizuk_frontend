@@ -3,6 +3,7 @@ import { getCharacterMD, postCharacterMD } from '../async/character'
 
 const initialState = {
     charList: [],
+    characterName: '',
 }
 
 const characterSlice = createSlice({
@@ -50,10 +51,30 @@ const characterSlice = createSlice({
                         return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png`
                     } else if (level === 4 || 5 || 6) {
                         return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-2.png`
-                    } else if (level === 7 || 8 || 9) {
+                    } else if (level === 7 || 8 || 9 || 10) {
                         return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-3.png`
-                    } else if (level === 10) {
-                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-2.png`
+                    }
+                    return result
+                }
+
+                if (name === '제이지') {
+                    if (level === 1 || 2 || 3) {
+                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_1+1.png`
+                    } else if (level === 4 || 5 || 6) {
+                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_2+1.png`
+                    } else if (level === 7 || 8 || 9 || 10) {
+                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_3+1.png`
+                    }
+                    return result
+                }
+
+                if (name === '무지') {
+                    if (level === 1 || 2 || 3) {
+                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_1+1.png`
+                    } else if (level === 4 || 5 || 6) {
+                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_2+1.png`
+                    } else if (level === 7 || 8 || 9 || 10) {
+                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_3+1.png`
                     }
                     return result
                 }
@@ -78,12 +99,15 @@ const characterSlice = createSlice({
 
         //* 캐릭터 뽑기
         [postCharacterMD.fulfilled]: (state, { payload }) => {
-            console.log('<<', payload)
-            state.character = payload
+            const data = {
+                exp: 0,
+                expMax: 10000,
+                charName: payload.data.characterName,
+                charLevel: 1,
+            }
+            state.charList = state.charList.push(data)
         },
-        [postCharacterMD.rejected]: (state, { payload }) => {
-            console.log('erromsg')
-        },
+        [postCharacterMD.rejected]: (state, { payload }) => {},
     },
 })
 

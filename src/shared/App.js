@@ -117,6 +117,7 @@ const App = () => {
                             exact
                             component={MoimDetail}
                         />
+
                         <Route path="/backend" exact component={Backend} />
                         <Route path="/not" exact component={notLoggedIn} />
                         <Route pate="/chat" exact component={Chat} />
