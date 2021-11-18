@@ -1,0 +1,77 @@
+@import '../shared/common.scss';
+
+.onBoarding-warp {
+    @include flexbox();
+    width: 100vw;
+    height: 100vh;
+}
+
+.onBoarding-container {
+    @include column-flexbox(start, center);
+    padding: 5.6rem 1rem 90px 1rem;
+    width: 100%;
+    max-width: 768px;
+    height: inherit;
+    background-color: $primary;
+}
+
+.onBoarding-btn-container {
+    button {
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: $white;
+        margin-right: 0.875rem;
+        border: none;
+        border-radius: 0.5rem;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    margin-bottom: 56px;
+}
+
+.onBoarding-group {
+    @include column-flexbox(center, center);
+    h1,
+    p {
+        color: $white;
+        text-align: center;
+    }
+    h1 {
+        font-size: 1.5rem;
+        letter-spacing: 0.15px;
+        line-height: 2.25rem;
+        margin-bottom: 0.5rem;
+    }
+    p {
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0.15px;
+        margin-bottom: 5.6rem;
+    }
+    div {
+        width: 328px;
+        height: 205px;
+        background-color: lightcoral;
+    }
+}
+
+.act-on-btn {
+    background-color: #434bb5 !important;
+}
+
+.act-in-btn {
+    background-color: #a1a7e7 !important;
+}
+
+.getting-start {
+    @include flexbox();
+    position: fixed;
+    bottom: 3rem;
+    background-color: $white;
+    color: $primary;
+    border-radius: 0.5rem;
+    border: none;
+    width: 20.5rem;
+    height: 3rem;
+}

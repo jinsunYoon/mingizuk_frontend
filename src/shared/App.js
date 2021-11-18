@@ -37,6 +37,7 @@ const MoimUpdate = lazy(() => import('../pages/MoimPages/MoimUpdate'))
 const MoimMap = lazy(() => import('../pages/MoimPages/MoimMap'))
 const notLoggedIn = lazy(() => import('../pages/notLoggedIn'))
 const Chat = lazy(() => import('../pages/Chat'))
+const Onboarding = lazy(() => import('../pages/Onboarding'))
 
 const App = () => {
     const dispatch = useDispatch()
@@ -143,7 +144,12 @@ const App = () => {
                         />
                         <Route path="/backend" exact component={Backend} />
                         <Route path="/not" exact component={notLoggedIn} />
-                        <Route pate="/chat" exact component={Chat} />
+                        <Route path="/chat" exact component={Chat} />
+                        <Route
+                            path="/Onboarding"
+                            exact
+                            component={Onboarding}
+                        />
                         <Route path="*" component={NotFound} />
                     </Switch>
                 </Suspense>
