@@ -40,6 +40,7 @@
 
 .modal-container {
     .modal-bg {
+        @include flexbox();
         width: 100vw;
         height: 100vh;
         background: rgba(0, 0, 0, 0.3);
@@ -49,18 +50,22 @@
         z-index: 3;
 
         .modal {
-            @include flexbox();
+            display: flex;
             flex-direction: column;
-            justify-content: space-evenly;
-            width: 80vw;
-            height: 90vh;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            height: 75vh;
             padding: 3rem 1rem 2rem;
             background: $white;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             z-index: 6;
+            @media screen and (max-width: 480px) {
+                width: 340px;
+            }
+            @media screen and (max-width: 330px) {
+                width: 280px;
+            }
 
             .charName {
                 font-size: 1.125rem;
@@ -121,32 +126,37 @@
         }
 
         .newchar {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            @include column-flexbox();
 
             .newimg {
                 width: 10rem;
                 height: 10rem;
                 border: none;
-                background: #949bff;
             }
             p {
-                margin-top: 3rem;
+                @include text-style-12(1rem, auto);
                 font-size: 0.75rem;
                 line-height: 18px;
+                text-align: center;
             }
         }
 
         .close-btn {
-            background: #949bff;
+            @include flexbox();
+            @include text-style-16(1rem, auto, $white);
             cursor: pointer;
             border: 1px solid #fff;
             padding: 5px;
             width: 100%;
             text-align: center;
-            margin-top: 3rem;
+            margin-top: 2.5rem;
+            height: 3rem;
+            border-radius: 8px;
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            -ms-border-radius: 8px;
+            -o-border-radius: 8px;
+            background-color: $primary;
         }
     }
 }

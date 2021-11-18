@@ -23,6 +23,7 @@ const CharacterModal = () => {
             return ['a', 'b', 'c', 'd']
     }
     */
+
     const exSrc = [
         'https://minggizuk.s3.ap-northeast-2.amazonaws.com/Lv1.png',
         'https://minggizuk.s3.ap-northeast-2.amazonaws.com/Lv3.png',
@@ -34,14 +35,13 @@ const CharacterModal = () => {
     const [modalState, setModalState] = useState(false)
     const is_login = useSelector((state) => state.user.isLogin)
     const charList = useSelector((state) => state.character.charList)
+    const charName = useSelector((state) => state.character.characterName)
 
-    console.log('>>', charList)
-    console.log('>>', 'imgsrc', charList[0]?.charSrc)
-    console.log('>>', exSrc[0])
+    console.log('>>', charName)
 
     useEffect(() => {
-        dispatch(getCharacterMD(), [])
-    })
+        dispatch(getCharacterMD())
+    }, [])
 
     // 캐릭터생성
     return (
@@ -54,8 +54,8 @@ const CharacterModal = () => {
                             className="addchar"
                             onClick={() => {
                                 if (is_login) {
-                                    setModalState(true) &&
-                                        dispatch(postCharacterMD())
+                                    setModalState(true)
+                                    dispatch(postCharacterMD())
                                 } else {
                                     window.alert('로그인 후 이용해주세요.')
                                 }
@@ -82,72 +82,68 @@ const CharacterModal = () => {
 
             {setModalState && (
                 <div className="modal-container">
-                    <div
-                        className="modal-bg"
-                        onClick={() => {
-                            {
-                                modalState && setModalState(false)
-                            }
-                        }}
-                    >
-                        <div className="modal">
-                            <h3 className="charName">
-                                {charList[charList?.length - 1]?.charName}
-                                {charList[charList?.length - 1]?.charName ===
-                                    '제이지' || '무지'
-                                    ? '가'
-                                    : '이'}{' '}
-                                찾아왔어요!
-                                <br />
-                                <span>
-                                    생성한 캐릭터는 획득한{' '}
-                                    <span className="color">포인트</span>에 따라{' '}
-                                    <span className="color">3단계</span>로
-                                    진화합니다!
-                                </span>
-                            </h3>
+                    {modalState && (
+                        <div
+                            className="modal-bg"
+                            onClick={() => setModalState(false)}
+                        >
+                            <div className="modal">
+                                <h3 className="charName">
+                                    {charName !== '' && charName}
+                                    {charName === '무지' ||
+                                    charName === '제이지'
+                                        ? '가'
+                                        : '이'}{' '}
+                                    찾아왔어요!
+                                    <br />
+                                    <span>
+                                        생성한 캐릭터는 획득한{' '}
+                                        <span className="color">포인트</span>에
+                                        따라{' '}
+                                        <span className="color">3단계</span>로
+                                        진화합니다!
+                                    </span>
+                                </h3>
 
-                            <div className="charlevelbox">
-                                <div className="charlevel">
-                                    <span>Lv.1</span>
-                                    <br />
-                                    <img src={exSrc[0]} />
+                                <div className="charlevelbox">
+                                    <div className="charlevel">
+                                        <span>Lv.1</span>
+                                        <br />
+                                        <img src={exSrc[0]} />
+                                    </div>
+                                    <div className="charlevel">
+                                        <span>Lv.4</span>
+                                        <br />
+                                        <img src={exSrc[1]} />
+                                    </div>
+                                    <div className="charlevel">
+                                        <span>Lv.7</span>
+                                        <br />
+                                        <img src={exSrc[2]} />
+                                    </div>
                                 </div>
-                                <div className="charlevel">
-                                    <span>Lv.4</span>
-                                    <br />
-                                    <img src={exSrc[1]} />
-                                </div>
-                                <div className="charlevel">
-                                    <span>Lv.7</span>
-                                    <br />
-                                    <img src={exSrc[2]} />
-                                </div>
-                            </div>
 
-                            <div className="newchar">
-                                <img
-                                    className="newimg"
-                                    src={charList[charList.length - 1]?.charSrc}
-                                />
-                                <p>
-                                    이 슬라임은 세상에 나온지 얼마안돼서
-                                    <br />
-                                    궁금한게 너무나도 많은 아이랍니다!
-                                    <br /> 함께라면 기적을 일으킬 수 있겠죠?
-                                </p>
-                            </div>
+                                <div className="newchar">
+                                    <img className="newimg" src={exSrc[3]} />
+                                    <p>
+                                        이 슬라임은 세상에 나온지 얼마안돼서
+                                        <br />
+                                        궁금한게 너무나도 많은 아이랍니다!
+                                        <br /> 함께라면 기적을 일으킬 수 있겠죠?
+                                    </p>
+                                </div>
 
-                            <div
-                                className="close-btn"
-                                onClick={() => {
-                                    setModalState(false) && modalState
-                                }}
-                            >
-                                밍기적 일으키러 가기
+                                <div
+                                    className="close-btn"
+                                    onClick={() => {
+                                        setModalState(false)
+                                    }}
+                                >
+                                    밍기적 일으키러 가기
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             )}
         </>
