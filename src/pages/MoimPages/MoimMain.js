@@ -1,10 +1,9 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { NavBar } from '../../components'
-import Header from '../../components/Header'
-import MoimPost from '../../components/Moim/MoimPost'
-import { moimReadMD } from '../../redux/async/moim'
+import PostDesc from '../../elements/Moim/PostDesc'
 import '../../styles/moim/moim-main.scss'
+import { history } from '../../redux/store'
+import { useDispatch } from 'react-redux'
+import { moimReadMD } from '../../redux/async/moim'
 
 const MoimMain = () => {
     const dispatch = useDispatch()
@@ -14,11 +13,17 @@ const MoimMain = () => {
 
     return (
         <>
-            <Header name="모임" />
             <section className="moim-main-layout">
-                <MoimPost />
+                <PostDesc />
+                <button
+                    className="moim-add-btn"
+                    onClick={() => {
+                        history.push('/moim/write')
+                    }}
+                >
+                    +
+                </button>
             </section>
-            <NavBar />
         </>
     )
 }

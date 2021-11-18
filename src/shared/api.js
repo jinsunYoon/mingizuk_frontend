@@ -1,6 +1,6 @@
 import axios from 'axios'
+import { useQuery } from 'react-query'
 import { getToken } from './utils'
-import Swal from 'sweetalert2'
 
 // Axios 인스턴스 설정
 const instance = axios.create({
@@ -49,6 +49,14 @@ instanceSign.interceptors.response.use(
         window.alert(error.response.data.msg)
     }
 )
+
+// * react-query-get
+const queryGet = (key, url) => {
+    useQuery(key, () => instance.get(url), {
+        cacheTime: 60 * 60 * 1000,
+        refetchOnWindowFocus: false,
+    })
+}
 
 // user API
 const signupAPI = (data) => {
@@ -250,6 +258,7 @@ const postCharacterAPI = () => {
 }
 
 export {
+    queryGet,
     signupAPI,
     loginAPI,
     logoutAPI,

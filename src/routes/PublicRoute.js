@@ -10,7 +10,7 @@ function PublicRoute({ children, isAuthenticated, ...rest }) {
                 ) : (
                     <Redirect
                         to={{
-                            pathname: '/home',
+                            pathname: '/main',
                             state: { from: location },
                         }}
                     />

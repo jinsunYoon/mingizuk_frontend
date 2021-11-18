@@ -1,33 +1,22 @@
 import React from 'react'
-import swal from 'sweetalert'
 import { useSelector, useDispatch } from 'react-redux'
 import { moimDeleteMD, moimLikeMD, moimUnlikeMD } from '../../redux/async/moim'
 import { history } from '../../redux/store'
 import Icon from '../../components/icons/Icon'
 import 'moment/locale/ko'
 import moment from 'moment'
+import { queryGet } from '../../shared/api'
 
 const PostDesc = () => {
+    const usePostListQuery = () => {
+        queryGet('POST_LIST_ALL', '/api/moims')
+    }
+    const { response } = usePostListQuery()
+    console.log('<<<<<<', response)
     const dispatch = useDispatch()
     const post_data_all = useSelector((state) => state.moim.moim_all)
     const loginNickName = useSelector((state) => state.user.userInfo.nickName)
     const loginuserID = useSelector((state) => state.user.userInfo.userID)
-
-    const deletePost = (data) => {
-        swal({
-            title: '게시글을 지우시겠습니까 ?',
-            icon: 'warning',
-            buttons: true,
-            dangerMode: true,
-        }).then((willDelete) => {
-            if (willDelete) {
-                dispatch(moimDeleteMD(data))
-                swal('게시글이 지워졌습니다.', {
-                    icon: 'success',
-                })
-            } else return
-        })
-    }
 
     return (
         <>
