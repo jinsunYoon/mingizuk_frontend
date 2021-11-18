@@ -99,7 +99,13 @@ const characterSlice = createSlice({
 
         //* 캐릭터 뽑기
         [postCharacterMD.fulfilled]: (state, { payload }) => {
-            state.characterName = payload.data.characterName
+            const data = {
+                exp: 0,
+                expMax: 10000,
+                charName: payload.data.characterName,
+                charLevel: 1,
+            }
+            state.charList = state.charList.push(data)
         },
         [postCharacterMD.rejected]: (state, { payload }) => {},
     },

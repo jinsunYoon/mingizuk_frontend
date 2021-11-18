@@ -8,28 +8,22 @@ import { getCharacterMD, postCharacterMD } from '../redux/async/character'
 import LevelBar from '../components/LevelBar'
 
 const CharacterModal = () => {
-    /*
-    const exSrc = () => {
-        if (charList[charList?.length - 1]?.charName === '라이온')
-            return [
-                'https://minggizuk.s3.ap-northeast-2.amazonaws.com/Lv1.png',
-                'https://minggizuk.s3.ap-northeast-2.amazonaws.com/Lv3.png',
-                'https://minggizuk.s3.ap-northeast-2.amazonaws.com/Lv10.png',
-                'https://minggizuk.s3.ap-northeast-2.amazonaws.com/big_char.png',
-            ]
-        else if (charList[charList?.length - 1]?.charName === '무지')
-            return ['hi', 'hle', 'c', 'd']
-        else if (charList[charList?.length - 1]?.charName === '제이지')
-            return ['a', 'b', 'c', 'd']
-    }
-    */
+    const charLv1 = [
+        'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png',
+        'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_1+1.png',
+        'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_1+1.png',
+    ]
 
-    const exSrc = [
-        'https://minggizuk.s3.ap-northeast-2.amazonaws.com/Lv1.png',
+    const charEx = [
         'https://minggizuk.s3.ap-northeast-2.amazonaws.com/Lv3.png',
         'https://minggizuk.s3.ap-northeast-2.amazonaws.com/Lv10.png',
-        'https://minggizuk.s3.ap-northeast-2.amazonaws.com/big_char.png',
     ]
+
+    const charLv1Select = () => {
+        if (charName === '라이온') return <img src={charLv1[0]} />
+        else if (charName === '제이지') return <img src={charLv1[1]} />
+        else if (charName === '무지') return <img src={charLv1[2]} />
+    }
 
     const dispatch = useDispatch()
     const [modalState, setModalState] = useState(false)
@@ -109,22 +103,22 @@ const CharacterModal = () => {
                                     <div className="charlevel">
                                         <span>Lv.1</span>
                                         <br />
-                                        <img src={exSrc[0]} />
+                                        {charLv1Select()}
                                     </div>
+
                                     <div className="charlevel">
                                         <span>Lv.4</span>
                                         <br />
-                                        <img src={exSrc[1]} />
+                                        <img src={charEx[0]} />
                                     </div>
                                     <div className="charlevel">
                                         <span>Lv.7</span>
                                         <br />
-                                        <img src={exSrc[2]} />
+                                        <img src={charEx[1]} />
                                     </div>
                                 </div>
-
                                 <div className="newchar">
-                                    <img className="newimg" src={exSrc[3]} />
+                                    {charLv1Select()}
                                     <p>
                                         이 슬라임은 세상에 나온지 얼마안돼서
                                         <br />
@@ -132,7 +126,6 @@ const CharacterModal = () => {
                                         <br /> 함께라면 기적을 일으킬 수 있겠죠?
                                     </p>
                                 </div>
-
                                 <div
                                     className="close-btn"
                                     onClick={() => {
