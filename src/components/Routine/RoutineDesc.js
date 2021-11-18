@@ -23,10 +23,6 @@ const RoutineDesc = (props) => {
     const [desc, setDesc] = React.useState('first')
     const preset = useSelector((state) => state.routine.presetRoutine)
     const myset = useSelector((state) => state.routine.myRoutine)
-    const result = useSelector((state) => state.actionComplete.result)
-    const getFakeResult = useSelector(
-        (state) => state?.actionComplete?.fakeResult
-    )
     const BtnStatus = useSelector((state) => state.routine.BtnStatus)
 
     React.useEffect(() => {
@@ -66,8 +62,9 @@ const RoutineDesc = (props) => {
                                             routine?.Actions[0].routineId,
                                     }
                                     dispatch(setMainRoutineMD(data))
-                                    dispatch(setResult([]))
-                                    dispatch(setFakeResultClear([]))
+                                    const routineId =
+                                        routine?.Actions[0].routineId
+                                    dispatch(actionResetMD(routineId))
                                 }
                             }}
                         >
@@ -119,8 +116,9 @@ const RoutineDesc = (props) => {
                                                 routine?.Actions[0].routineId,
                                         }
                                         dispatch(setMainRoutineMD(data))
-                                        dispatch(setResult([]))
-                                        dispatch(setFakeResultClear([]))
+                                        const routineId =
+                                            routine?.Actions[0].routineId
+                                        dispatch(actionResetMD(routineId))
                                     }
                                 }}
                             >
