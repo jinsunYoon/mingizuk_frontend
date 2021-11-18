@@ -13,7 +13,6 @@ import CachedIcon from '@mui/icons-material/Cached'
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline'
 import BarChartIcon from '@mui/icons-material/BarChart'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
-import { positions } from '@mui/system'
 
 const NavBar = () => {
     const navPosition = {

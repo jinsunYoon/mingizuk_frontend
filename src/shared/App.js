@@ -6,6 +6,9 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginCheckMD } from '../redux/async/user'
 
+// * fcm test-------------------------------------------------------
+import { getToken, onMessageListener } from '../firebase'
+
 // * pages
 import Main from '../pages/Main'
 import NoLogin from '../pages/MyPages/NoLogin'
@@ -34,13 +37,35 @@ const MoimUpdate = lazy(() => import('../pages/MoimPages/MoimUpdate'))
 const MoimMap = lazy(() => import('../pages/MoimPages/MoimMap'))
 const notLoggedIn = lazy(() => import('../pages/notLoggedIn'))
 const Chat = lazy(() => import('../pages/Chat'))
+const Onboarding = lazy(() => import('../pages/Onboarding'))
 
 const App = () => {
     const dispatch = useDispatch()
+
+    // * fcm test-------------------------------------------------------
+    const [show, setShow] = React.useState(false)
+    const [notification, setNotification] = React.useState({
+        title: '',
+        body: '',
+    })
+    const [isTokenFound, setTokenFound] = React.useState(false)
+    getToken(setTokenFound)
+
+    onMessageListener()
+        .then((payload) => {
+            setShow(true)
+            setNotification({
+                title: payload.notification.title,
+                body: payload.notification.body,
+            })
+            window.alert(payload.notification.body)
+        })
+        .catch((err) => console.log('failed: ', err))
+    // *-------------------------------------------------------------------
+
     React.useEffect(() => {
         dispatch(loginCheckMD())
     }, [])
-
     // *social login
     if (window.location.pathname.includes('sociallogin')) {
         const refreshToken = window.location.pathname
@@ -120,7 +145,12 @@ const App = () => {
 
                         <Route path="/backend" exact component={Backend} />
                         <Route path="/not" exact component={notLoggedIn} />
-                        <Route pate="/chat" exact component={Chat} />
+                        <Route path="/chat" exact component={Chat} />
+                        <Route
+                            path="/Onboarding"
+                            exact
+                            component={Onboarding}
+                        />
                         <Route path="*" component={NotFound} />
                     </Switch>
                 </Suspense>

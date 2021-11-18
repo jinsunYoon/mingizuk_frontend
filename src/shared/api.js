@@ -99,7 +99,7 @@ const actionRestartAPI = (routineId) => {
 
 const actionResetAPI = (routineId) => {
     console.log('이거 api 데이터', routineId)
-    return instance.post(`/api/routines/reset/${routineId}`)
+    return instance.put(`/api/routines/reset/${routineId}`)
 }
 
 // *---------------------------------------------------
@@ -177,6 +177,9 @@ const moimCreateAPI = (data) => {
         title: data.title,
         contents: data.contents,
         imgSrc: data.imgSrc,
+        startAt: data.startAt,
+        finishAt: data.finishAt,
+        location: data.location,
     })
 }
 
