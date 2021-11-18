@@ -1,8 +1,12 @@
-// * basic import
+// * basic import for route
 import React, { Suspense, lazy } from 'react'
-import { ConnectedRouter } from 'connected-react-router'
-import { history } from '../redux/store'
 import { Route, Switch, Redirect } from 'react-router-dom'
+import { ConnectedRouter } from 'connected-react-router'
+// import ProtectedRoutes from './routes/ProtectedRoutes' //Authenticated routes
+// import PublicRoute from './routes/PublicRoute'
+// import PrivateRoute from './routes/PrivateRoute'
+
+import { history } from '../redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginCheckMD } from '../redux/async/user'
 
@@ -83,9 +87,17 @@ const App = () => {
             <ConnectedRouter history={history}>
                 <Suspense fallback={<div>Loading..</div>}>
                     <Switch>
-                        <Route path="/" exact component={Main}></Route>
                         <Route path="/login" exact component={Login}></Route>
                         <Route path="/signup" exact component={Signup}></Route>
+                        <Route path="/not" exact component={notLoggedIn} />
+                        <Route
+                            path="/Onboarding"
+                            exact
+                            component={Onboarding}
+                        />
+
+                        {/* ------------------------------------------------------------------ */}
+                        <Route path="/main" exact component={Main}></Route>
                         <Route
                             path="/routine/mypage"
                             exact
@@ -143,13 +155,7 @@ const App = () => {
                             component={MoimDetail}
                         />
                         <Route path="/backend" exact component={Backend} />
-                        <Route path="/not" exact component={notLoggedIn} />
                         <Route path="/chat" exact component={Chat} />
-                        <Route
-                            path="/Onboarding"
-                            exact
-                            component={Onboarding}
-                        />
                         <Route path="*" component={NotFound} />
                     </Switch>
                 </Suspense>
