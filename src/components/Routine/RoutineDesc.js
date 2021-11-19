@@ -7,10 +7,7 @@ import {
     setMainRoutineMD,
 } from '../../redux/async/routine'
 import { actionResetMD } from '../../redux/async/actionComplete'
-import {
-    setResult,
-    setFakeResultClear,
-} from '../../redux/modules/completeSlice'
+import { setRoutineId } from '../../redux/modules/mainRoutine'
 import {
     setRoutineModal,
     setRoutineInfo,
@@ -24,6 +21,9 @@ const RoutineDesc = (props) => {
     const preset = useSelector((state) => state.routine.presetRoutine)
     const myset = useSelector((state) => state.routine.myRoutine)
     const BtnStatus = useSelector((state) => state.routine.BtnStatus)
+    const getRoutineId = useSelector((state) => state.setAction.routineId)
+    const result = useSelector((state) => state.actionComplete.result)
+    console.log('result', result)
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -57,14 +57,11 @@ const RoutineDesc = (props) => {
                                 e.target.classList.add('.active')
                                 dispatch(setRoutineModal(true))
                                 if (routine.Actions.length > 0) {
-                                    const data = {
-                                        routineId:
-                                            routine?.Actions[0].routineId,
-                                    }
-                                    dispatch(setMainRoutineMD(data))
-                                    const routineId =
-                                        routine?.Actions[0].routineId
-                                    dispatch(actionResetMD(routineId))
+                                    dispatch(
+                                        setRoutineId(
+                                            routine?.Actions[0].routineId
+                                        )
+                                    )
                                 }
                             }}
                         >
@@ -111,14 +108,11 @@ const RoutineDesc = (props) => {
                                 onClick={() => {
                                     dispatch(setRoutineModal(true))
                                     if (routine.Actions.length > 0) {
-                                        const data = {
-                                            routineId:
-                                                routine?.Actions[0].routineId,
-                                        }
-                                        dispatch(setMainRoutineMD(data))
-                                        const routineId =
-                                            routine?.Actions[0].routineId
-                                        dispatch(actionResetMD(routineId))
+                                        dispatch(
+                                            setRoutineId(
+                                                routine?.Actions[0].routineId
+                                            )
+                                        )
                                     }
                                 }}
                             >
@@ -150,6 +144,14 @@ const RoutineDesc = (props) => {
                     <button
                         className="setting-btn"
                         onClick={() => {
+                            const data = getRoutineId
+                            console.log('data', data)
+                            dispatch(setMainRoutineMD(data))
+                            if (result?.length > 0) {
+                                const routineId = getRoutineId
+                                console.log('리셋할 루틴아디', routineId)
+                                dispatch(actionResetMD(routineId))
+                            }
                             history.push('/')
                         }}
                     >

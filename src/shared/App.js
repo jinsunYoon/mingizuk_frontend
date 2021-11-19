@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { loginCheckMD } from '../redux/async/user'
 
 // * fcm test-------------------------------------------------------
-import { getToken, onMessageListener } from '../firebase'
+// import { getToken, onMessageListener } from '../firebase'
 
 // * pages
 import Main from '../pages/Main'
@@ -34,7 +34,6 @@ const MoimDetail = lazy(() => import('../pages/MoimPages/MoimDetail'))
 const MyMoim = lazy(() => import('../pages/MyPages/MyMoim'))
 const Backend = lazy(() => import('../pages/Backend'))
 const MoimUpdate = lazy(() => import('../pages/MoimPages/MoimUpdate'))
-const MoimMap = lazy(() => import('../pages/MoimPages/MoimMap'))
 const notLoggedIn = lazy(() => import('../pages/notLoggedIn'))
 const Chat = lazy(() => import('../pages/Chat'))
 const Onboarding = lazy(() => import('../pages/Onboarding'))
@@ -43,24 +42,24 @@ const App = () => {
     const dispatch = useDispatch()
 
     // * fcm test-------------------------------------------------------
-    const [show, setShow] = React.useState(false)
-    const [notification, setNotification] = React.useState({
-        title: '',
-        body: '',
-    })
-    const [isTokenFound, setTokenFound] = React.useState(false)
-    getToken(setTokenFound)
+    // const [show, setShow] = React.useState(false)
+    // const [notification, setNotification] = React.useState({
+    //     title: '',
+    //     body: '',
+    // })
+    // const [isTokenFound, setTokenFound] = React.useState(false)
+    // getToken(setTokenFound)
 
-    onMessageListener()
-        .then((payload) => {
-            setShow(true)
-            setNotification({
-                title: payload.notification.title,
-                body: payload.notification.body,
-            })
-            window.alert(payload.notification.body)
-        })
-        .catch((err) => console.log('failed: ', err))
+    // onMessageListener()
+    //     .then((payload) => {
+    //         setShow(true)
+    //         setNotification({
+    //             title: payload.notification.title,
+    //             body: payload.notification.body,
+    //         })
+    //         window.alert(payload.notification.body)
+    //     })
+    //     .catch((err) => console.log('failed: ', err))
     // *-------------------------------------------------------------------
 
     React.useEffect(() => {
@@ -131,7 +130,6 @@ const App = () => {
                         />
                         <Route path="/moim" exact component={MoimMain} />
                         <Route path="/moim/write" exact component={MoimWrite} />
-                        <Route path="/moim/map" exact component={MoimMap} />
                         <Route
                             path="/moim/update"
                             exact

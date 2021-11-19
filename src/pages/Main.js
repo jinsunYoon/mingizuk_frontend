@@ -56,7 +56,6 @@ const Main = (props) => {
     React.useEffect(() => {
         dispatch(loginCheckMD())
         dispatch(getMainRoutineMD())
-        setResult()
     }, [])
 
     if (is_login && isMain) {
