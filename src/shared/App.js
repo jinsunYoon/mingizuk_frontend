@@ -140,6 +140,7 @@ const App = () => {
                             exact
                             component={MoimDetail}
                         />
+
                         <Route path="/backend" exact component={Backend} />
                         <Route path="/not" exact component={notLoggedIn} />
                         <Route path="/chat" exact component={Chat} />

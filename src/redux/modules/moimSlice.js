@@ -12,6 +12,7 @@ import {
     moimReviewCreateMD,
     moimDeleteReviewMD,
     moimUpdateReviewMD,
+    moimLocationMD,
 } from '../async/moim'
 
 const initialState = {
@@ -109,6 +110,9 @@ const moimSlice = createSlice({
                 (comment) => comment.id === payload.commentId
             )
             state.moim_detail.Comments[refIdx].contents = payload.contents
+        },
+        [moimLocationMD.fulfilled]: (state, { payload }) => {
+            console.log('>>>>><', payload)
         },
     },
 })

@@ -19,52 +19,48 @@ const MyPage = (props) => {
 
     return (
         <>
-            <div className="mypage-layout">
-                <Header name="마이페이지" />
-                <section className="contents">
-                    <div className="user-profile">
-                        <div className="user-image">{/* 캐릭터이미지 */}</div>
-                        <div className="user-info">
-                            <div style={{ display: 'flex' }}>
-                                <span className="user-nickname">
-                                    {nickName}
-                                </span>
-                                <Icon
-                                    className="user-info-update"
-                                    _onClick={() => {
-                                        history.push('/users/info')
-                                    }}
-                                    icon="ic_edit"
-                                    size="24px"
-                                    color="white"
-                                />
-                            </div>
-                            <span className="user-email">{email}</span>
+            <Header name="마이페이지" />
+            <section className="contents">
+                <div className="user-profile">
+                    <div className="user-image">{/* 캐릭터이미지 */}</div>
+                    <div className="user-info">
+                        <div style={{ display: 'flex' }}>
+                            <span className="user-nickname">{nickName}</span>
+                            <Icon
+                                className="user-info-update"
+                                _onClick={() => {
+                                    history.push('/users/info')
+                                }}
+                                icon="ic_edit"
+                                size="24px"
+                                color="white"
+                            />
                         </div>
+                        <span className="user-email">{email}</span>
                     </div>
+                </div>
 
-                    <ul className="mypage-list">
-                        <li onClick={() => history.push('/users/collection')}>
-                            <span>내 캐릭터 콜렉션</span>
-                            <Icon
-                                className="list-icon"
-                                icon="chevron-right-lg"
-                                size="12px"
-                                color="#A5ABB0"
-                            />
-                        </li>
-                        <li onClick={() => history.push('/users/moim')}>
-                            <span>내 모임</span>
-                            <Icon
-                                icon="chevron-right-lg"
-                                size="12px"
-                                color="#A5ABB0"
-                            />
-                        </li>
-                    </ul>
-                </section>
-                <NavBar />
-            </div>
+                <ul className="mypage-list">
+                    <li onClick={() => history.push('/users/collection')}>
+                        <span>내 캐릭터 콜렉션</span>
+                        <Icon
+                            className="list-icon"
+                            icon="chevron-right-lg"
+                            size="12px"
+                            color="#A5ABB0"
+                        />
+                    </li>
+                    <li onClick={() => history.push('/users/moim')}>
+                        <span>내 모임</span>
+                        <Icon
+                            icon="chevron-right-lg"
+                            size="12px"
+                            color="#A5ABB0"
+                        />
+                    </li>
+                </ul>
+            </section>
+            <NavBar />
         </>
     )
 }

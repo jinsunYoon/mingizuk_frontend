@@ -2,19 +2,36 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { ButtonOutlined, FlexRow, Text } from '../elements/index'
-import { CancelRounded } from '@material-ui/icons'
+import { CancelRounded, ContactlessOutlined } from '@material-ui/icons'
 import '../styles/character/character.scss'
 import { getCharacterMD, postCharacterMD } from '../redux/async/character'
 import LevelBar from '../components/LevelBar'
 
 const CharacterModal = () => {
+    const charLv1 = [
+        'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png',
+        'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_1+1.png',
+        'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_1+1.png',
+    ]
+
+    const charEx = [
+        'https://minggizuk.s3.ap-northeast-2.amazonaws.com/Lv3.png',
+        'https://minggizuk.s3.ap-northeast-2.amazonaws.com/Lv10.png',
+    ]
+
+    const charLv1Select = () => {
+        if (charName === '라이온') return <img src={charLv1[0]} />
+        else if (charName === '제이지') return <img src={charLv1[1]} />
+        else if (charName === '무지') return <img src={charLv1[2]} />
+    }
+
     const dispatch = useDispatch()
-    const [modalStatus, setModalStatue] = useState(false)
+    const [modalState, setModalState] = useState(false)
     const is_login = useSelector((state) => state.user.isLogin)
     const charList = useSelector((state) => state.character.charList)
+    const charName = useSelector((state) => state.character.characterName)
 
-    console.log('>>', charList[0])
-    console.log('>>', 'imgsrc', charList[0]?.charSrc)
+    console.log('>>', charName)
 
     useEffect(() => {
         dispatch(getCharacterMD())
@@ -31,7 +48,7 @@ const CharacterModal = () => {
                             className="addchar"
                             onClick={() => {
                                 if (is_login) {
-                                    setModalStatue(true)
+                                    setModalState(true)
                                     dispatch(postCharacterMD())
                                 } else {
                                     window.alert('로그인 후 이용해주세요.')
@@ -44,44 +61,84 @@ const CharacterModal = () => {
                     </div>
                 ) : (
                     <div className="char-container">
-                        <img className="char" src={charList[0]?.charSrc} />
-                        <p>{charList[0]?.charName}</p>
+                        <img
+                            className="char"
+                            src={charList[charList?.length - 1]?.charSrc}
+                        />
+                        <p>{charList[charList?.length - 1]?.charName}</p>
                         <LevelBar
-                            exp={charList[0]?.exp}
-                            expMax={charList[0]?.expMax}
+                            exp={charList[charList?.length - 1]?.exp}
+                            expMax={charList[charList?.length - 1]?.expMax}
                         />
                     </div>
                 )
             }
 
-            {modalStatus && (
+            {setModalState && (
                 <div className="modal-container">
-                    <div
-                        className="modal-bg"
-                        onClick={() => {
-                            {
-                                modalStatus && setModalStatue(false)
-                            }
-                        }}
-                    >
-                        <div className="modal">
-                            <p>
-                                안녕~ 만나서 반가워! 난{charList[0]?.charName}
-                                라고해
-                            </p>
-                            <div className="modal-char">
-                                <img src={charList[0]?.charSrc} />
-                            </div>
-                            <div
-                                className="close-btn"
-                                onClick={() => {
-                                    modalStatus && setModalStatue(false)
-                                }}
-                            >
-                                {charList[0]?.charName}랑같이 밍기적하러 가기
+                    {modalState && (
+                        <div
+                            className="modal-bg"
+                            onClick={() => setModalState(false)}
+                        >
+                            <div className="modal">
+                                <h3 className="charName">
+                                    <span className="color name">
+                                        {charName !== '' && charName}
+                                    </span>
+                                    {charName === '무지' ||
+                                    charName === '제이지'
+                                        ? '가'
+                                        : '이'}{' '}
+                                    찾아왔어요!
+                                    <br />
+                                    <span>
+                                        생성한 캐릭터는 획득한{' '}
+                                        <span className="color">포인트</span>에
+                                        따라{' '}
+                                        <span className="color">3단계</span>로
+                                        진화합니다!
+                                    </span>
+                                </h3>
+
+                                <div className="charlevelbox">
+                                    <div className="charlevel">
+                                        <span>Lv.1</span>
+                                        <br />
+                                        {charLv1Select()}
+                                    </div>
+
+                                    <div className="charlevel">
+                                        <span>Lv.4</span>
+                                        <br />
+                                        <img src={charEx[0]} />
+                                    </div>
+                                    <div className="charlevel">
+                                        <span>Lv.7</span>
+                                        <br />
+                                        <img src={charEx[1]} />
+                                    </div>
+                                </div>
+                                <div className="newchar">
+                                    {charLv1Select()}
+                                    <p>
+                                        이 슬라임은 세상에 나온지 얼마안돼서
+                                        <br />
+                                        궁금한게 너무나도 많은 아이랍니다!
+                                        <br /> 함께라면 기적을 일으킬 수 있겠죠?
+                                    </p>
+                                </div>
+                                <div
+                                    className="close-btn"
+                                    onClick={() => {
+                                        setModalState(false)
+                                    }}
+                                >
+                                    밍기적 일으키러 가기
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             )}
         </>

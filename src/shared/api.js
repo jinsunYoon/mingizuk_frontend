@@ -173,6 +173,17 @@ const setmainRoutineAPI = (data) => {
 
 // moim
 const moimCreateAPI = (data) => {
+    console.log('<<<<<<>', data.location)
+    const locationSp = data.location.split(' ')
+    let gu = locationSp.find((e) => {
+        return e.charAt(e.length - 1) === '구'
+    })
+    if (!gu) {
+        gu = locationSp.find((e) => {
+            return e.charAt(e.length - 1) === '시'
+        })
+    }
+    console.log('<<<<<<>', gu)
     return instance.post('api/moims', {
         title: data.title,
         contents: data.contents,
@@ -180,6 +191,7 @@ const moimCreateAPI = (data) => {
         startAt: data.startAt,
         finishAt: data.finishAt,
         location: data.location,
+        // locationGu: data.locationGu
     })
 }
 
@@ -230,8 +242,20 @@ const moimDeleteReviewAPI = (commentId) => {
 }
 
 const moimUpdateReviewAPI = (data) => {
-    return instance.put(`/api/moims/comment/${data.commentId}`, {
-        contents: data.contents,
+    return instance.put(
+        `/api/moims/comment/${data.commentId}`,
+        {
+            contents: data.contents,
+        },
+
+        console.log('data', data)
+    )
+}
+
+const moimLocationAPI = (locationGu) => {
+    console.log('>>>>>', locationGu)
+    return instance.post(`/api/moims/search`, {
+        locationGu: locationGu,
     })
 }
 
@@ -272,6 +296,7 @@ export {
     moimCreateReviewAPI,
     moimDeleteReviewAPI,
     moimUpdateReviewAPI,
+    moimLocationAPI,
     getMainRoutineAPI,
     setmainRoutineAPI,
     moimUpdateAPI,
