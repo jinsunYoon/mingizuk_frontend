@@ -83,7 +83,9 @@ const CharacterModal = () => {
                         >
                             <div className="modal">
                                 <h3 className="charName">
-                                    {charName !== '' && charName}
+                                    <span className="color name">
+                                        {charName !== '' && charName}
+                                    </span>
                                     {charName === '무지' ||
                                     charName === '제이지'
                                         ? '가'

@@ -106,6 +106,7 @@ const characterSlice = createSlice({
                 charLevel: 1,
             }
             state.charList = state.charList.push(data)
+            state.characterName = payload.data.characterName
         },
         [postCharacterMD.rejected]: (state, { payload }) => {},
     },
