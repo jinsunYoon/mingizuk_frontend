@@ -1,6 +1,5 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Header } from '../../components'
 import RoutineCounter from '../../components/Routine/RoutineCounter'
 import { myRoutineUpdateMD } from '../../redux/async/routine'
 import { resetAction } from '../../redux/modules/updateRoutine'
@@ -31,9 +30,6 @@ const RoutineUpdateCount = () => {
     }
     return (
         <>
-            <div style={{ zIndex: '3' }}>
-                <Header name="내 루틴 수정하기 ( 2 / 2 )" />
-            </div>
             <section className="container">
                 <h3 className="count-title">
                     루틴 제목과 액션 횟수를 수정해주세요.

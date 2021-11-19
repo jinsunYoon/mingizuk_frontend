@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 //* 컴포넌트, 엘리먼트
-import { Header, NavBar, MyMoimToogleTab } from '../../components'
 import { ActiveUnderLine } from '../../elements'
 //* 페이지
 import MyCreateMoim from '../../components/MyPages/MyCreatedMoims'
@@ -16,7 +15,6 @@ const MyMoim = () => {
     return (
         <>
             <div className="mymoim-layout">
-                <Header name="내모임" />
                 <div className="toogle-layout">
                     <div className="toogle-container">
                         {tabState === 'a' ? (

@@ -1,7 +1,7 @@
-import React, { Component, useState } from 'react'
+import React from 'react'
 
 //* components
-import { Header, NavBar, CollectionList } from '../../components/index'
+import { CollectionList } from '../../components/index'
 
 // *styles
 import '../../styles/mypage/mypage.scss'
@@ -9,13 +9,11 @@ import '../../styles/mypage/mypage.scss'
 const MyCollection = () => {
     return (
         <>
-            <Header name="마이콜렉션" />
             <section className="contents">
                 <CollectionList />
                 <CollectionList />
                 <CollectionList />
             </section>
-            <NavBar />
         </>
     )
 }

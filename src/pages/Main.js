@@ -6,12 +6,7 @@ import {
     ButtonOutlined,
     Text,
 } from '../elements/index'
-import {
-    CharacterModal,
-    MainRoutineList,
-    Header,
-    NavBar,
-} from '../components/index'
+import { CharacterModal, MainRoutineList } from '../components/index'
 import { setFakeResult, setResult } from '../redux/modules/completeSlice'
 import Icon from '../components/icons/Icon'
 
@@ -63,7 +58,6 @@ const Main = (props) => {
         return (
             <React.Fragment>
                 <Container>
-                    <Header />
                     <FlexColumn
                         _width={'100%'}
                         _height={'100%'}
@@ -160,7 +154,6 @@ const Main = (props) => {
                             <HabitTraker />
                         </div>
                     </FlexColumn>
-                    <NavBar />
                 </Container>
             </React.Fragment>
         )
@@ -168,7 +161,6 @@ const Main = (props) => {
         return (
             <React.Fragment>
                 <Container>
-                    <Header />
                     <FlexColumn
                         _width={'100%'}
                         _height={'100%'}
@@ -271,7 +263,6 @@ const Main = (props) => {
                             <HabitTraker />
                         </div>
                     </FlexColumn>
-                    <NavBar />
                 </Container>
             </React.Fragment>
         )
@@ -344,7 +335,6 @@ const Main = (props) => {
                         </FlexRow>
                     </FlexColumn>
                 </FlexColumn>
-                <NavBar />
             </Container>
         </React.Fragment>
     )

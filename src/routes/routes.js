@@ -34,6 +34,16 @@ const routes = [
         exact: true,
     },
     {
+        path: 'history',
+        component: lazy(() => import('../pages/History')),
+        exact: true,
+    },
+    {
+        path: 'users',
+        component: lazy(() => import('../pages/MyPages/MyPage')),
+        exact: true,
+    },
+    {
         path: 'users/info',
         component: lazy(() => import('../pages/MyPages/MyProfileUpdate')),
         exact: true,

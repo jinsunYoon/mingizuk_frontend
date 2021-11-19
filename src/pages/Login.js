@@ -1,32 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Header } from '../components/Header'
 import { kakaoLoginMD, loginMD } from '../redux/async/user'
 import { history } from '../redux/store'
 import '../styles/auth/auth.scss'
 
 const Login = () => {
     const dispatch = useDispatch()
-    const [id, setId] = useState()
-    const [pwd, setPwd] = useState()
-    //const [disabled, setDisabled] = useState(true)
+    const [id, setId] = useState('')
+    const [pwd, setPwd] = useState('')
 
     const emailLogin = () => {
-        const data = {
-            userEmail: id,
-            userPw: pwd,
+        if (id === '') {
+            window.alert('아이디를 입력해주세요 ! ')
+            return
+        } else if (pwd === '') {
+            window.alert('비밀번호를 입력해주세요 ! ')
+            return
+        } else {
+            const data = {
+                userEmail: id,
+                userPw: pwd,
+            }
+            dispatch(loginMD(data))
         }
-        dispatch(loginMD(data))
     }
-    /* 로그인 버튼 비활성화(미완)
-    
-    useEffect(() => {
-        if(id !== '' && pwd !==''){
-            return setDisabled(false);
-        }
-            setDisabled(true)
-        }, []);
-    */
 
     // enter키 이벤트
     const onKeyPress = (e) => {
@@ -55,6 +52,12 @@ const Login = () => {
                     <div className="btn-container">
                         <button className="login-btn" onClick={emailLogin}>
                             로그인하기
+                        </button>
+                        <button
+                            className="login-btn"
+                            onClick={() => history.push('/signup')}
+                        >
+                            회원가입하기
                         </button>
 
                         <div className="slogin-title">

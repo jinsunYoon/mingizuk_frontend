@@ -1,6 +1,7 @@
 import React from 'react'
 import clsx from 'clsx'
 import '../styles/auth/onboarding.scss'
+import { history } from '../redux/store'
 
 const Onboarding = () => {
     const [touchStart, setTouchStart] = React.useState(0)
@@ -37,9 +38,12 @@ const Onboarding = () => {
                 <section
                     className="onBoarding-container"
                     onTouchStart={(e) =>
+                        pageState !== 5 &&
                         setTouchStart(e.changedTouches[0].clientX)
                     }
-                    onTouchEnd={(e) => movePage(e.changedTouches[0].clientX)}
+                    onTouchEnd={(e) =>
+                        pageState !== 5 && movePage(e.changedTouches[0].clientX)
+                    }
                 >
                     <div className="onBoarding-btn-container">
                         <button
@@ -86,7 +90,15 @@ const Onboarding = () => {
                         {pageState !== 0 && <div>임시</div>}
                     </article>
                     {pageState === 5 && (
-                        <button className="getting-start">시작하기</button>
+                        <button
+                            className="getting-start"
+                            onClick={() => {
+                                history.push('/login')
+                                console.log('<>')
+                            }}
+                        >
+                            시작하기
+                        </button>
                     )}
                 </section>
             </div>

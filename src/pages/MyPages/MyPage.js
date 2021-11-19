@@ -2,9 +2,6 @@ import React, { useState } from 'react'
 import { history } from '../../redux/store'
 import { useSelector } from 'react-redux'
 
-//* components
-import { Header, NavBar } from '../../components/index'
-
 //* sytle
 import '../../styles/mypage/mypage.scss'
 import Icon from '../../components/icons/Icon'
@@ -20,7 +17,6 @@ const MyPage = (props) => {
     return (
         <>
             <div className="mypage-layout">
-                <Header name="마이페이지" />
                 <section className="contents">
                     <div className="user-profile">
                         <div className="user-image">{/* 캐릭터이미지 */}</div>
@@ -63,7 +59,6 @@ const MyPage = (props) => {
                         </li>
                     </ul>
                 </section>
-                <NavBar />
             </div>
         </>
     )

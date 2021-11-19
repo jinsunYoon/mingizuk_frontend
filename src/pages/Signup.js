@@ -1,12 +1,4 @@
 import React, { useState } from 'react'
-import {
-    ButtonFill,
-    FlexColumn,
-    FlexRow,
-    Input,
-    SubTitle,
-    Text,
-} from '../elements/index'
 import { useDispatch } from 'react-redux'
 import { history } from '../redux/store'
 import { signupMD } from '../redux/async/user'
@@ -101,10 +93,10 @@ const Signup = (props) => {
                     <button
                         className="main-btn"
                         onClick={() => {
-                            history.push('/')
+                            history.push('/login')
                         }}
                     >
-                        메인으로가기
+                        로그인 하기
                     </button>
                 </div>
             </section>

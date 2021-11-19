@@ -1,6 +1,8 @@
 import axios from 'axios'
-import { useQuery } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 import { getToken } from './utils'
+
+const BASE_URL = 'https://mingijuk.shop'
 
 // Axios 인스턴스 설정
 const instance = axios.create({
@@ -50,12 +52,35 @@ instanceSign.interceptors.response.use(
     }
 )
 
-// * react-query-get
+// * react-query-get * react-query-get * react-query-get
 const queryGet = (key, url) => {
-    useQuery(key, () => instance.get(url), {
-        cacheTime: 60 * 60 * 1000,
-        refetchOnWindowFocus: false,
-    })
+    return useQuery(
+        key,
+        () =>
+            axios
+                .get(`${BASE_URL}${url}`, {
+                    headers: {
+                        ['accessToken']: getToken().accessToken,
+                        ['refreshToken']: getToken().refreshToken,
+                    },
+                })
+                .then(({ data }) => data),
+        {
+            cacheTime: 60 * 60 * 1000,
+            refetchOnWindowFocus: false,
+        }
+    )
+}
+
+const queryDelete = async (url) => {
+    return axios
+        .delete(`${BASE_URL}${url}`, {
+            headers: {
+                ['accessToken']: getToken().accessToken,
+                ['refreshToken']: getToken().refreshToken,
+            },
+        })
+        .then((res) => console.log('<>', res))
 }
 
 // user API
@@ -207,6 +232,7 @@ const moimDeleteAPI = (moimId) => {
     return instance.delete(`/api/moims/${moimId}`)
 }
 
+// *******
 const moimDetailAPI = (moimId) => {
     return instance.get(`/api/moims/${moimId}`)
 }
@@ -259,6 +285,7 @@ const postCharacterAPI = () => {
 
 export {
     queryGet,
+    queryDelete,
     signupAPI,
     loginAPI,
     logoutAPI,

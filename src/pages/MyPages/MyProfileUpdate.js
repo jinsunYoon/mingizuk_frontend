@@ -3,24 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { userInfoMD } from '../../redux/async/user'
 // import history from '../redux/store'
 
-//* components
-import { Header, NavBar } from '../../components/index'
-
 //* elements
-import {
-    FlexColumn,
-    FlexRow,
-    Img,
-    Text,
-    ButtonOutlined,
-    ButtonFill,
-    Input,
-} from '../../elements/index'
+import { FlexColumn, Text, ButtonFill, Input } from '../../elements/index'
 
 //* style
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { useHistory } from 'react-router'
-import { AssignmentReturnOutlined } from '@material-ui/icons'
 
 const ProfileUpdate = () => {
     const history = useHistory()
@@ -33,7 +21,6 @@ const ProfileUpdate = () => {
 
     return (
         <>
-            <Header name="프로필수정" />
             <FlexColumn _width="100%" _height="600px" _border="none">
                 <Text>프로필</Text>
                 <label for="profile">
@@ -89,7 +76,6 @@ const ProfileUpdate = () => {
                     완료
                 </ButtonFill>
             </FlexColumn>
-            <NavBar />
         </>
     )
 }

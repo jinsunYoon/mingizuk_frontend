@@ -22,11 +22,22 @@ const NavBar = lazy(() => import('./components/NavBar.js'))
 const App = () => {
     const dispatch = useDispatch()
 
-    React.useEffect(() => {
-        dispatch(loginCheckMD())
-    }, [])
-
     const isAuthenticated = useSelector((state) => state?.user?.isLogin)
+    React.useEffect(() => {
+        if (!isAuthenticated) {
+            dispatch(loginCheckMD())
+        }
+    }, [])
+    const nav = [
+        '/moim',
+        '/main',
+        '/history',
+        'routine/mypage',
+        '/users',
+        '/users/info',
+        '/users/collection',
+        '/users/moim',
+    ]
 
     // *social login
     if (window.location.pathname.includes('sociallogin')) {
@@ -44,7 +55,55 @@ const App = () => {
         <>
             <ConnectedRouter history={history}>
                 <Suspense fallback={<div>Loading..</div>}>
-                    <Header />
+                    <Route path={'/main'} exact>
+                        <Header type="menu" />
+                    </Route>
+                    <Route path={'/history'} exact>
+                        <Header type="menu" name="통계" />
+                    </Route>
+                    <Route path={'/routine/mypage'} exact>
+                        <Header name="루틴" type="back" />
+                    </Route>
+                    <Route path={'/routine/update'} exact>
+                        <Header name="내 루틴 수정하기 ( 1 / 2 )" type="back" />
+                    </Route>
+                    <Route path={'/routine/update/count'} exact>
+                        <Header name="내 루틴 수정하기 ( 2 / 2 )" type="back" />
+                    </Route>
+                    <Route path={'/routine/add'} exact>
+                        <Header name="내 루틴 추가하기 ( 1 / 2 )" type="back" />
+                    </Route>
+                    <Route path={'/routine/count'} exact>
+                        <Header name="내 루틴 추가하기 ( 2 / 2 )" type="back" />
+                    </Route>
+                    <Route path={'/moim'} exact>
+                        <Header type="back" name="모임" />
+                    </Route>
+                    <Route path={'/moim/detail/:id'} exact>
+                        <Header type="back" name="모임" />
+                    </Route>
+                    <Route path={'/moim/write'} exact>
+                        <Header type="back" name="모임 글쓰기" />
+                    </Route>
+                    <Route path={'/moim/map'} exact>
+                        <Header type="back" name="모임 위치 설정" />
+                    </Route>
+                    <Route path={'/moim/update'} exact>
+                        <Header type="back" name="모임 수정하기" />
+                    </Route>
+                    <Route path={'/users'} exact>
+                        <Header type="back" name="마이페이지" />
+                    </Route>
+                    <Route path={'/users/info'} exact>
+                        <Header type="back" name="프로필 수정" />
+                    </Route>
+                    <Route path={'/users/collection'} exact>
+                        <Header type="back" name="내 캐릭터" />
+                    </Route>
+                    <Route path={'/users/moim'} exact>
+                        <Header type="back" name="내 모임" />
+                    </Route>
+
                     <Switch>
                         <PublicRoute
                             path="/"
@@ -84,7 +143,7 @@ const App = () => {
                             <NotFound />
                         </Route>
                     </Switch>
-                    <NavBar />
+                    <Route path={nav} exact component={NavBar} />
                 </Suspense>
             </ConnectedRouter>
         </>

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Header } from '../../components'
 import RoutineDesc from '../../components/Routine/RoutineDesc'
 import ToggleTab from '../../components/ToggleTab'
 import { useSelector, useDispatch } from 'react-redux'
@@ -23,7 +22,6 @@ const MyRoutine = () => {
     return (
         <>
             <div className="routine-layout">
-                <Header />
                 <section
                     className="container"
                     onClick={() =>
@@ -57,6 +55,8 @@ const MyRoutine = () => {
                                     onClick={() => {
                                         dispatch(updateRoutine(optInfo.id))
                                         history.push('/routine/update')
+                                        dispatch(setOptionModal(false))
+                                        dispatch(setRoutineModal(false))
                                     }}
                                 >
                                     <Icon icon="ic_edit" size="24px" />
@@ -69,6 +69,8 @@ const MyRoutine = () => {
                                                 '루틴을 삭제하시겠습니까?'
                                             )
                                         if (result) {
+                                            dispatch(setOptionModal(false))
+                                            dispatch(setRoutineModal(false))
                                             dispatch(
                                                 myRoutineDeleteMD(optInfo.id)
                                             )

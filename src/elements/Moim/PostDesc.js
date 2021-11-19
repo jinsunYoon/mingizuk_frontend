@@ -1,6 +1,5 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { moimDeleteMD, moimLikeMD, moimUnlikeMD } from '../../redux/async/moim'
+import { useSelector } from 'react-redux'
 import { history } from '../../redux/store'
 import Icon from '../../components/icons/Icon'
 import 'moment/locale/ko'
@@ -9,18 +8,16 @@ import { queryGet } from '../../shared/api'
 
 const PostDesc = () => {
     const usePostListQuery = () => {
-        queryGet('POST_LIST_ALL', '/api/moims')
+        return queryGet('POST_LIST_ALL', '/api/moims')
     }
-    const { response } = usePostListQuery()
-    console.log('<<<<<<', response)
-    const dispatch = useDispatch()
-    const post_data_all = useSelector((state) => state.moim.moim_all)
-    const loginNickName = useSelector((state) => state.user.userInfo.nickName)
+
+    const { data } = usePostListQuery()
+    const post_data_all = data?.allMoims
     const loginuserID = useSelector((state) => state.user.userInfo.userID)
 
     return (
         <>
-            {post_data_all.length > 0 &&
+            {post_data_all?.length > 0 &&
                 post_data_all?.map((data, idx) => (
                     <div key={idx} className="post-warp">
                         {data?.imgSrc === null ? (

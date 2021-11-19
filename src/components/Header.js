@@ -5,7 +5,6 @@ import { ButtonOutlined, FlexRow, GoBack, Text } from '../elements/index'
 import { MenuModal } from '../components/index'
 
 import { history } from '../redux/store'
-import { Directions } from '@mui/icons-material'
 
 const Header = (props) => {
     const { name, type } = props

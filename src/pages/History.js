@@ -14,8 +14,6 @@ const History = () => {
     }, [])
     return (
         <>
-            <Header name="통계" />
-
             <div
                 style={{
                     display: 'flex',

@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch, useSelector } from 'react-redux'
@@ -104,22 +103,5 @@ const MoimUpdateWrite = () => {
         </>
     )
 }
-
-const ContentsBox = styled.textarea`
-    width: 80vw;
-    height: 300px;
-    margin-top: 20px;
-`
-
-const IconBtn = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100px;
-    height: 25px;
-    border: none;
-    border-radius: 10px;
-    margin: 0 5px;
-`
 
 export default MoimUpdateWrite
