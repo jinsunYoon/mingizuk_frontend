@@ -165,7 +165,7 @@ const myRoutineUpdateAPI = (data) => {
 
 const setmainRoutineAPI = (data) => {
     return instance.put('/api/users/mainRoutine', {
-        routineId: data.routineId,
+        routineId: data,
     })
 }
 
