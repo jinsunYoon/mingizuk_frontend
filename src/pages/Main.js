@@ -30,6 +30,10 @@ const Main = (props) => {
     console.log('메인루틴', mainRoutine)
     const isMain = useSelector((state) => state.setAction.isMain)
     const nickName = useSelector((state) => state.user.userInfo.nickName)
+    const charList = useSelector((state) => state.character.charList)
+    const curChara =
+        charList.length > 0 && charList[charList.length - 1].charName
+    console.log('charList', charList)
 
     const ActionFins = mainRoutine?.Actions?.map((action) => action?.ActionFins)
     const finDate = ActionFins?.map((fin) => fin[fin.length - 1].date)
@@ -222,37 +226,56 @@ const Main = (props) => {
                                     총 0개의 액션
                                 </Text>
                             </FlexRow>
-                            <FlexColumn
-                                _width={'100%'}
-                                _height={'100%'}
-                                _justify={'start'}
-                                _others={
-                                    'border-radius: 0.5rem; min-height:11.25rem'
-                                }
-                            >
-                                <Text
-                                    _fontSize={'0.875rem'}
-                                    _color={'#8F8F8F'}
-                                    _padding={'2.25rem 0px 1.8rem 0px'}
+                            {curChara ? (
+                                <FlexColumn
+                                    _width={'100%'}
+                                    _height={'100%'}
+                                    _justify={'start'}
+                                    _others={
+                                        'border-radius: 0.5rem; min-height:11.25rem'
+                                    }
                                 >
-                                    아직 루틴이 없습니다.
-                                    <br />
-                                    루틴을 만들어주세요 ! 💪
-                                </Text>
-                                <ButtonOutlined
-                                    _width={'13rem'}
-                                    _others={'height:3rem'}
-                                    _margin={'0.5rem 0 1rem 0'}
-                                    _border={'1px solid #6B76FF'}
-                                    _color={'#6B76FF'}
-                                    _bradius={'0.5rem'}
-                                    _onClick={() => {
-                                        history.push('/routine/mypage')
-                                    }}
+                                    <Text
+                                        _fontSize={'0.875rem'}
+                                        _color={'#8F8F8F'}
+                                        _padding={'2.25rem 0px 1.8rem 0px'}
+                                    >
+                                        아직 루틴이 없습니다.
+                                        <br />
+                                        루틴을 만들어주세요 ! 💪
+                                    </Text>
+                                    <ButtonOutlined
+                                        _width={'13rem'}
+                                        _others={'height:3rem'}
+                                        _margin={'0.5rem 0 1rem 0'}
+                                        _border={'1px solid #6B76FF'}
+                                        _color={'#6B76FF'}
+                                        _bradius={'0.5rem'}
+                                        _onClick={() => {
+                                            history.push('/routine/mypage')
+                                        }}
+                                    >
+                                        루틴 만들기
+                                    </ButtonOutlined>
+                                </FlexColumn>
+                            ) : (
+                                <FlexColumn
+                                    _width={'100%'}
+                                    _height={'100%'}
+                                    _others={
+                                        'border-radius: 0.5rem; min-height:11.25rem'
+                                    }
                                 >
-                                    루틴 만들기
-                                </ButtonOutlined>
-                            </FlexColumn>
+                                    <Text
+                                        _fontSize={'0.875rem'}
+                                        _color={'#8F8F8F'}
+                                    >
+                                        아직 캐릭터를 받지 않으셨군요!
+                                        <br />
+                                        캐릭터를 먼저 받아주세요 ! 😉
+                                    </Text>
+                                </FlexColumn>
+                            )}
                         </FlexColumn>
                         <div
                             onClick={() => {

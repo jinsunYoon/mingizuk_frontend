@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlexRow, FlexColumn, Text } from '../elements/index'
+import { FlexRow, FlexColumn, Text, Img } from '../elements/index'
 import Icon from './icons/Icon'
 import { useSelector } from 'react-redux'
 
@@ -54,24 +54,22 @@ const MainRoutineList = (props) => {
                             _padding={'0.7rem 0px 0px 0px'}
                             _justify={'start'}
                         >
-                            {result?.length - 1 == idx ? (
-                                <FlexRow
-                                    _width={'2.5rem'}
-                                    _height={'2.5rem'}
-                                    _bgColor={'#6B76FF'}
-                                    _border={'none'}
-                                    // _margin={'10px 0px 0px 0px'}
-                                    _others={'border-radius:2.5rem'}
-                                ></FlexRow>
+                            {routine?.actionType == 'stretching' ? (
+                                <Img
+                                    _src={
+                                        'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/stretch.png'
+                                    }
+                                    _width={'3rem'}
+                                    _height={'3rem'}
+                                />
                             ) : (
-                                <FlexRow
-                                    _width={'2.5rem'}
-                                    _height={'2.5rem'}
-                                    _bgColor={'lightgray'}
-                                    _border={'none'}
-                                    // _margin={'10px 0px 0px 0px'}
-                                    _others={'border-radius:2.5rem'}
-                                ></FlexRow>
+                                <Img
+                                    _src={
+                                        'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/exercise.png'
+                                    }
+                                    _width={'3rem'}
+                                    _height={'3rem'}
+                                />
                             )}
 
                             {/* <FlexRow
@@ -92,12 +90,33 @@ const MainRoutineList = (props) => {
                                     </Text>
                                 </FlexRow> */}
                             {routine?.actionName?.length > 5 ? (
+                                result?.length - 1 == idx ? (
+                                    <Text
+                                        _margin={'5px 0px 0px 0px'}
+                                        _fontSize={'0.75rem'}
+                                        _color={'#6B76FF'}
+                                    >
+                                        {routine?.actionName?.split(' ')[0]}{' '}
+                                        <br />{' '}
+                                        {routine?.actionName?.split(' ')[1]}
+                                    </Text>
+                                ) : (
+                                    <Text
+                                        _margin={'5px 0px 0px 0px'}
+                                        _fontSize={'0.75rem'}
+                                    >
+                                        {routine?.actionName?.split(' ')[0]}{' '}
+                                        <br />{' '}
+                                        {routine?.actionName?.split(' ')[1]}
+                                    </Text>
+                                )
+                            ) : result?.length - 1 == idx ? (
                                 <Text
                                     _margin={'5px 0px 0px 0px'}
                                     _fontSize={'0.75rem'}
+                                    _color={'#6B76FF'}
                                 >
-                                    {routine?.actionName?.split(' ')[0]} <br />{' '}
-                                    {routine?.actionName?.split(' ')[1]}
+                                    {routine?.actionName}
                                 </Text>
                             ) : (
                                 <Text
