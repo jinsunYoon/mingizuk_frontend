@@ -1,0 +1,7 @@
+@import '../shared/common.scss';
+
+.contents{
+    @include flexbox();
+    flex-direction:column;
+    justify-content: center;
+}
