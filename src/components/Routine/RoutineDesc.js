@@ -13,6 +13,10 @@ import {
     setRoutineInfo,
     setOptionModal,
 } from '../../redux/modules/routineSlice'
+import {
+    setResult,
+    setFakeResultClear,
+} from '../../redux/modules/completeSlice'
 
 const RoutineDesc = (props) => {
     const dispatch = useDispatch()
@@ -153,6 +157,8 @@ const RoutineDesc = (props) => {
                             const data = getRoutineId
                             console.log('data', data)
                             dispatch(setMainRoutineMD(data))
+                            dispatch(setResult([]))
+                            dispatch(setFakeResultClear([]))
                             if (result?.length > 0) {
                                 const routineId = getRoutineId
                                 console.log('리셋할 루틴아디', routineId)
