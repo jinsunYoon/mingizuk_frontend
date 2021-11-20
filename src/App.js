@@ -85,9 +85,6 @@ const App = () => {
                     <Route path={'/moim/write'} exact>
                         <Header type="back" name="모임 글쓰기" />
                     </Route>
-                    <Route path={'/moim/map'} exact>
-                        <Header type="back" name="모임 위치 설정" />
-                    </Route>
                     <Route path={'/moim/update'} exact>
                         <Header type="back" name="모임 수정하기" />
                     </Route>

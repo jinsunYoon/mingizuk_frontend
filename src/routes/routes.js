@@ -69,11 +69,6 @@ const routes = [
         exact: true,
     },
     {
-        path: 'moim/map',
-        component: lazy(() => import('../pages/MoimPages/MoimMap')),
-        exact: true,
-    },
-    {
         path: 'moim/update',
         component: lazy(() => import('../pages/MoimPages/MoimUpdate')),
         exact: true,
