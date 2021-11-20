@@ -13,7 +13,8 @@ const actionSlice = createSlice({
             if (
                 state.actions
                     .map(({ actionName }) => actionName)
-                    .includes(action.payload.value)
+                    .includes(action.payload.value) ||
+                state.actions.length > 4
             ) {
                 const result = state.actions.filter(
                     ({ actionName }) => actionName !== action.payload.value

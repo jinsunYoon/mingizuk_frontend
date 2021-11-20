@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useMutation, useQuery } from 'react-query'
+import { history } from '../redux/store'
 import { getToken } from './utils'
 
 const BASE_URL = 'https://mingijuk.shop'
@@ -37,6 +38,15 @@ instance.interceptors.response.use(
     },
     async (error) => {
         console.log(error)
+        if (
+            error.response.data.msg ===
+            'accessToken이 재발급되었습니다. 다시 로그인해주세요'
+        ) {
+            history.push('/login')
+            window.alert('로그인 시간이 만료되었습니다. 재로그인을 해 주세요.')
+
+            return
+        }
         window.alert(error.response.data.msg)
     }
 )

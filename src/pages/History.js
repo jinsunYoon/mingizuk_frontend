@@ -1,6 +1,5 @@
 import React from 'react'
 import HistoryGraph from '../components/HistoryGraph'
-import Header from '../components/Header'
 import ToggleTab from '../components/ToggleTab'
 import { useDispatch, useSelector } from 'react-redux'
 import '../styles/routine/history.scss'
