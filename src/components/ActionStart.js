@@ -35,7 +35,6 @@ const ActionStart = (props) => {
     const [actionStart, setActionStart] = useState(true)
 
     const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
-    const modalImg = useSelector((state) => state.actionComplete.ImgSrc)
     const result = useSelector((state) => state.actionComplete.result)
     const getActionId = useSelector((state) => state?.actionComplete?.actionId)
     const getRoutineId = useSelector(
@@ -45,6 +44,10 @@ const ActionStart = (props) => {
         (state) => state?.actionComplete?.fakeResult
     )
     console.log('가짜루틴완료', getFakeResult)
+
+    const charList = useSelector((state) => state.character.charList)
+    const curChara =
+        charList.length > 0 && charList[charList.length - 1].charName
 
     const completeBtn = () => {
         return setTimeout(function () {
@@ -68,6 +71,16 @@ const ActionStart = (props) => {
         dispatch(setActionId(thisActionId))
         dispatch(setRoutineId(thisRoutineId))
         console.log('this 액션아디, 루틴아디', thisActionId, thisRoutineId)
+    }
+
+    const imgGif = (name) => {
+        if (name == '라이온') {
+            return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming2.gif'
+        } else if (name == '무지') {
+            return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming3.gif'
+        } else if (name == '제이지') {
+            return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming4.gif'
+        }
     }
 
     return (
@@ -126,7 +139,7 @@ const ActionStart = (props) => {
                                         </Text>
                                     </FlexRow>
                                     <Img
-                                        _src={modalImg}
+                                        _src={imgGif(curChara)}
                                         _width={'13rem'}
                                         _height={'13rem'}
                                         _bradius={'0px'}
@@ -266,7 +279,7 @@ const ActionStart = (props) => {
                                         </Text>
                                     </FlexRow>
                                     <Img
-                                        _src={modalImg}
+                                        _src={imgGif(curChara)}
                                         _width={'13rem'}
                                         _height={'13rem'}
                                         _bradius={'0px'}
@@ -405,7 +418,7 @@ const ActionStart = (props) => {
                                         </Text>
                                     </FlexRow>
                                     <Img
-                                        _src={modalImg}
+                                        _src={imgGif(curChara)}
                                         _width={'13rem'}
                                         _height={'13rem'}
                                         _bradius={'0px'}
@@ -544,7 +557,7 @@ const ActionStart = (props) => {
                                         </Text>
                                     </FlexRow>
                                     <Img
-                                        _src={modalImg}
+                                        _src={imgGif(curChara)}
                                         _width={'13rem'}
                                         _height={'13rem'}
                                         _bradius={'0px'}
@@ -682,7 +695,7 @@ const ActionStart = (props) => {
                                         </Text>
                                     </FlexRow>
                                     <Img
-                                        _src={modalImg}
+                                        _src={imgGif(curChara)}
                                         _width={'13rem'}
                                         _height={'13rem'}
                                         _bradius={'0px'}
