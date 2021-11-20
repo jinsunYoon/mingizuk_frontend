@@ -1,0 +1,185 @@
+//character
+@import '../shared/common.scss';
+
+.addchar-container {
+    @include flexbox();
+    flex-direction: column;
+    padding: 2rem 0;
+
+    .addchar {
+        @include flexbox();
+        width: 7.5rem;
+        height: 7.5rem;
+        padding: 1rem;
+        font-size: 2.25rem;
+        border: dashed 2px #b8c0c4;
+        background-color: #dedede;
+        color: #b8c0c4;
+        border-radius: 50%;
+        cursor: pointer;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+    }
+
+    p {
+        padding: 0.625rem 0;
+        text-align: center;
+    }
+}
+
+.char-container {
+    @include flexbox();
+    flex-direction: column;
+    color: $black;
+    font-size: 1rem;
+    padding: 1rem;
+
+    .char {
+        width: 7.5rem;
+        height: 7.5rem;
+    }
+}
+
+.color {
+    color: $primary;
+}
+
+.modal-container {
+    .modal-bg {
+        @include flexbox();
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.3);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 3;
+
+        .modal {
+            @include column-flexbox();
+            width: 100%;
+            max-width: 25rem;
+            height: 80vh;
+            padding: 1rem 1rem 2rem;
+            background: $white;
+            z-index: 6;
+            position: relative;
+
+            @media screen and (max-width: 480px) {
+                @include column-flexbox();
+                width: 21.25rem;
+                height: 75vh;
+            }
+
+            @media screen and (max-width: 320px) {
+                @include column-flexbox(start, center);
+                width: 17.5rem;
+                height: 75vh;
+            }
+
+            .charName {
+                font-size: 1.125rem;
+                text-align: center;
+                span {
+                    font-size: 0.7rem;
+                }
+                .name {
+                    font-size: 1.3rem;
+                }
+                @media screen and (max-width: 320px) {
+                    span {
+                        font-size: 0.5rem;
+                    }
+                }
+            }
+
+            .charlevelbox {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                text-align: center;
+                padding: 0.75rem;
+                border: 1px solid lightgray;
+                border-radius: 20px;
+                -webkit-border-radius: 20px;
+                -moz-border-radius: 20px;
+                -ms-border-radius: 20px;
+                -o-border-radius: 20px;
+                margin: 1rem;
+                .charlevel {
+                    &:nth-of-type(1) {
+                        color: black;
+                    }
+                    &:nth-of-type(2) {
+                        color: #949bff;
+                    }
+                    &:nth-of-type(3) {
+                        color: #6b76ff;
+                    }
+
+                    span {
+                        font-size: 0.75rem;
+                    }
+
+                    img {
+                        width: 2.5rem;
+                        height: 2.5rem;
+                        margin-top: 0.75rem;
+                        border: none;
+                    }
+
+                    // &::after {
+                    //     width: 2rem;
+                    //     display: block;
+                    //     content: '';
+                    //     border: dotted 1px $primary;
+                    //     transform: translate(-75px, -55px);
+                    // }
+                    // &:nth-of-type(1)::after {
+                    //     display: none;
+                    // }
+                }
+            }
+        }
+
+        .newchar {
+            @include column-flexbox();
+            margin-bottom: 100px;
+
+            img {
+                width: auto;
+                height: 6rem;
+                border: none;
+            }
+            p {
+                @include text-style-12(1rem, auto);
+                font-size: 0.75rem;
+                line-height: 18px;
+                text-align: center;
+            }
+        }
+    }
+}
+.close-btn {
+    @include flexbox();
+    @include text-style-14(1rem, auto, $white);
+    position: absolute;
+    cursor: pointer;
+    border: 1px solid #fff;
+    padding: 0.5rem;
+    width: 80%;
+    text-align: center;
+    margin-top: 2.5rem;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    background-color: $primary;
+    bottom: 1rem;
+    border: none;
+}
