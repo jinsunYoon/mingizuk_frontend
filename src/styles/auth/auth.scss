@@ -1,43 +1,42 @@
 @import '../shared/common.scss';
 
 .auth-layout {
-    @include flexbox();
+    @include flexbox(center, start);
     width: 100vw;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.logo {
-    color: $primary;
-    font-weight: bold;
-    font-size: 24px;
-    letter-spacing: 0.15px;
-    line-height: 24px;
-    padding: 12px;
-    margin-top: 30px;
+    height: 100vh;
+    margin-top: 8rem;
 }
 
 .contents {
-    //==================== > 100%로 하면 안예뻐서 일단 width px로 줌 
-    width: 320px; //mobile small
-    padding: 30px 16px;
-    border: none;
+    @include column-flexbox(center, center);
+    width: 100%;
+    max-width: 768px;
+    padding: 0 2rem;
+
+    label {
+        @include text-style-12(0.9rem, auto);
+        width: 100%;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
 
     .input-container {
-        @include flexbox();
-        flex-direction: column;
+        @include column-flexbox();
         width: 100%;
 
         input {
             width: 100%;
-            height: 48px;
-            padding: 16px;
-            margin: 10px;
-            border: 1px solid lightgray;
+            height: 3rem;
+            padding-left: 0.8rem;
+            border: 1px solid #d0d0d0;
+            border-radius: 0.25rem;
             font-size: text-style-14($text-gray);
             &::placeholder {
                 color: $text-gray;
             }
+        }
+        label {
+            @include text-style-14(0.9rem, auto);
         }
     }
 }
@@ -45,12 +44,12 @@
 @mixin auth-button($bg, $color) {
     @include flexbox();
     width: 100%;
-    height: 48px;
+    height: 3rem;
     background-color: $bg;
     color: $color;
     border: none;
-    border-radius: 8px;
-    margin: 10px 0;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
     font-size: 14px;
     text-decoration: none;
 }
@@ -59,12 +58,12 @@
     width: 100%;
 
     .login-btn {
-        @include auth-button($primary, $white);
-        margin-top: 30px;
+        @include auth-button($white, $primary);
+        border: 1px solid $primary !important;
     }
 
     .kakao-btn {
-        @include auth-button(#faef3f, $black);
+        @include auth-button(#f7e600, $white);
     }
     .naver-btn {
         @include auth-button(#2db400, $white);
@@ -76,27 +75,75 @@
 
     .signup-btn {
         @include auth-button($primary, $white);
-        margin-top: 30px;
     }
 
     .main-btn {
-        @include auth-button($secondary, $black);
+        @include auth-button($white, $primary);
+        border: 1px solid $primary !important;
+    }
+    .dis-btn {
+        @include auth-button($gray, #999999);
+        cursor: not-allowed;
     }
 }
 
 .slogin-title {
-    //====================media query================ :: 720이상 width 변경
     @include flexbox();
-
     hr {
-        width: 30%; //mobile small
-        color: gray;
+        width: 30%;
+        color: $text-gray;
+        height: 1px;
     }
     h3 {
-        width: 40%; 
+        width: 40%;
         color: $text-gray;
         font-size: 14px;
         padding: 16px;
         text-align: center;
     }
+}
+
+.auth-warning {
+    @include text-style-12(0.9rem, auto, #ff4040);
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.input-warning {
+    border: 1px solid #ff4040 !important;
+}
+
+button {
+    cursor: pointer;
+}
+
+.login-title {
+    @include flexbox();
+    margin-bottom: 70px;
+    img {
+        width: 2.5rem;
+        height: auto;
+    }
+    h1 {
+        font-size: 1.5rem;
+        color: $primary;
+        margin-left: 9px;
+    }
+}
+
+.login-container {
+    width: 100%;
+    @include column-flexbox();
+    input {
+        @include text-style-14(21px, auto, $black);
+        border: none;
+        width: 100%;
+        border-bottom: 1px solid #eeeeee;
+        height: 2.5rem;
+        padding-left: 0.8rem;
+        &:first-child {
+            margin-bottom: 24px;
+        }
+    }
+    margin-bottom: 3.3rem;
 }

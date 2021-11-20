@@ -5,102 +5,138 @@ import { history } from '../redux/store'
 
 const Onboarding = () => {
     const [touchStart, setTouchStart] = React.useState(0)
-    const [pageState, setPageState] = React.useState(0)
+    const [pageState, setPageState] = React.useState(-1)
     const movePage = (num) => {
         if (touchStart - 150 > num) {
-            setPageState(pageState < 5 ? pageState + 1 : pageState)
+            setPageState(pageState < 3 ? pageState + 1 : pageState)
         } else if (touchStart - 150 < num) {
-            setPageState(pageState > 0 ? pageState - 1 : pageState)
+            setPageState(pageState > -1 ? pageState - 1 : pageState)
         }
     }
 
-    const title = [
-        'Mingizuk',
-        '사소한 운동 습관부터',
-        '귀여운 친구들을 모아보세요 !',
-        '액션과 루틴 기록을 한 눈에!',
-        '지역 기반 모임 참여',
-        '같이 밍기적을 일으키러 가볼까요 ?',
-    ]
-    const desc = [
-        '',
-        '거창한 운동일 필요 없어요 우리에게 필요한건 작은 밍기적 쉽고 사소한 운동 습관부터 길러보세요!',
-        '운동을 함께 해줄 밍기적 캐릭터와 함께 습관을 길러보세요!',
-        '세번째세번째',
-        '혼자 하기 힘들다면 모임에 참여해서 운동 습관을 길러보세요',
-        '',
-    ]
-    const img = ['', '1', '2', '3', '4', '5']
+    const rionImg = {
+        width: '6.7rem',
+        height: 'auto',
+    }
 
+    const slideContent = [
+        {
+            title: '작은 운동 습관부터',
+            desc: '거창한 운동일 필요 없어요. 밍기적과 함께 매일 소소한 건강 루틴을 함께해요.',
+            src: 'https://test-pwa-kyuung.s3.ap-northeast-2.amazonaws.com/on1.png',
+        },
+        {
+            title: '귀여운 친구들을 모아보세요',
+            desc: '밍기적 캐릭터와 함께 밍기적 습관을 기르세요! 루틴을 완료할 때마다 포인트가 쌓여 레벨업 합니다.',
+            src: 'https://test-pwa-kyuung.s3.ap-northeast-2.amazonaws.com/on2.png',
+        },
+        {
+            title: '액션과 루틴 기록을 한눈에!',
+            desc: '밍기적 캐릭터와 함께 밍기적 습관을 기르세요! 루틴을 완료할 때마다 포인트가 쌓여 성장합니다.',
+            src: 'https://test-pwa-kyuung.s3.ap-northeast-2.amazonaws.com/on3.png',
+        },
+        {
+            title: '지역 기반 모임 참여',
+            desc: '원하는 지역에서 건강한 습관 만들기 모임을 참여해보세요.',
+            src: 'https://test-pwa-kyuung.s3.ap-northeast-2.amazonaws.com/on4.png',
+        },
+    ]
     return (
         <>
             <div className="onBoarding-warp">
                 <section
                     className="onBoarding-container"
                     onTouchStart={(e) =>
-                        pageState !== 5 &&
                         setTouchStart(e.changedTouches[0].clientX)
                     }
-                    onTouchEnd={(e) =>
-                        pageState !== 5 && movePage(e.changedTouches[0].clientX)
-                    }
+                    onTouchEnd={(e) => movePage(e.changedTouches[0].clientX)}
                 >
-                    <div className="onBoarding-btn-container">
-                        <button
-                            className={clsx(
-                                '',
-                                pageState === 0 && 'act-on-btn'
-                            )}
-                        />
-                        <button
-                            className={clsx(
-                                '',
-                                pageState === 1 && 'act-on-btn'
-                            )}
-                        />
-                        <button
-                            className={clsx(
-                                '',
-                                pageState === 2 && 'act-on-btn'
-                            )}
-                        />
-                        <button
-                            className={clsx(
-                                '',
-                                pageState === 3 && 'act-on-btn'
-                            )}
-                        />
-                        <button
-                            className={clsx(
-                                '',
-                                pageState === 4 && 'act-on-btn'
-                            )}
-                        />
-                        <button
-                            className={clsx(
-                                '',
-                                pageState === 5 && 'act-on-btn'
-                            )}
-                        />
-                    </div>
-                    <article className="onBoarding-group" ontouche>
-                        <h1>{title[pageState]}</h1>
-                        <p>{desc[pageState]}</p>
-                        {/* <img src={img[pageState]} /> */}
-                        {pageState !== 0 && <div>임시</div>}
-                    </article>
-                    {pageState === 5 && (
-                        <button
-                            className="getting-start"
-                            onClick={() => {
-                                history.push('/login')
-                                console.log('<>')
-                            }}
+                    {pageState !== -1 && (
+                        <div className="onBoarding-btn-container">
+                            <button
+                                className={clsx(
+                                    '',
+                                    pageState === 0 && 'act-on-btn'
+                                )}
+                            />
+                            <button
+                                className={clsx(
+                                    '',
+                                    pageState === 1 && 'act-on-btn'
+                                )}
+                            />
+                            <button
+                                className={clsx(
+                                    '',
+                                    pageState === 2 && 'act-on-btn'
+                                )}
+                            />
+                            <button
+                                className={clsx(
+                                    '',
+                                    pageState === 3 && 'act-on-btn'
+                                )}
+                            />
+                        </div>
+                    )}
+                    {pageState === -1 && (
+                        <article
+                            className="rion-main"
+                            onClick={() => setPageState(1)}
                         >
-                            시작하기
-                        </button>
+                            <img
+                                style={rionImg}
+                                src="https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png"
+                            />
+                            <h1>Mingizuk</h1>
+                        </article>
+                    )}
+                    {pageState !== -1 && (
+                        <article className="onBoarding-group">
+                            <h1>{slideContent[pageState].title}</h1>
+                            <p>{slideContent[pageState].desc}</p>
+                            <div>
+                                <img src={slideContent[pageState].src} />
+                            </div>
+                        </article>
                     )}
                 </section>
+                {pageState !== -1 && pageState !== 3 && (
+                    <div className="onBoarding-btn-box">
+                        <button
+                            onClick={() => {
+                                setPageState(3)
+                            }}
+                        >
+                            건너뛰기
+                        </button>
+                        <button
+                            onClick={() =>
+                                setPageState(
+                                    pageState < 3 ? pageState + 1 : pageState
+                                )
+                            }
+                        >
+                            다음
+                        </button>
+                    </div>
+                )}
+                {pageState === 3 && (
+                    <div className="onBoarding-btn-box">
+                        <button
+                            style={{
+                                width: '100vw',
+                                display: 'flex',
+                                justifyContent: 'center',
+                            }}
+                            onClick={() => {
+                                history.push('/signup')
+                            }}
+                        >
+                            밍기적 시작하기
+                        </button>
+                    </div>
+                )}
             </div>
         </>
     )

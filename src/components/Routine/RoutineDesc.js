@@ -23,7 +23,6 @@ const RoutineDesc = (props) => {
     const BtnStatus = useSelector((state) => state.routine.BtnStatus)
     const getRoutineId = useSelector((state) => state.setAction.routineId)
     const result = useSelector((state) => state.actionComplete.result)
-    console.log('result', result)
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -92,6 +91,9 @@ const RoutineDesc = (props) => {
                             </div>
                         </button>
                     ))}
+                    {myset?.length === 0 && (
+                        <p className="no-routine">내 루틴이 없습니다 ㅠㅠ</p>
+                    )}
                 </div>
             )}
             {desc === 'recommendRoutine' && (
@@ -104,6 +106,7 @@ const RoutineDesc = (props) => {
                     {preset.length > 0 &&
                         preset?.map((routine, idx) => (
                             <button
+                                key={idx}
                                 className="recommend-routine-box"
                                 onClick={() => {
                                     dispatch(setRoutineModal(true))
@@ -139,6 +142,9 @@ const RoutineDesc = (props) => {
                 <div
                     style={{
                         zIndex: '3',
+                        width: '100vw',
+                        display: 'flex',
+                        justifyContent: 'center',
                     }}
                 >
                     <button

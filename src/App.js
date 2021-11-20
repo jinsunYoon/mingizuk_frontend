@@ -18,6 +18,7 @@ const notLoggedIn = lazy(() => import('./pages/notLoggedIn'))
 const Onboarding = lazy(() => import('./pages/Onboarding'))
 const Header = lazy(() => import('./components/Header.js'))
 const NavBar = lazy(() => import('./components/NavBar.js'))
+const ReLogin = lazy(() => import('./pages/ReLogin'))
 
 const App = () => {
     const dispatch = useDispatch()
@@ -55,6 +56,9 @@ const App = () => {
         <>
             <ConnectedRouter history={history}>
                 <Suspense fallback={<div>Loading..</div>}>
+                    <Route path={'/signup'} exact>
+                        <Header type="none" name="회원가입" />
+                    </Route>
                     <Route path={'/main'} exact>
                         <Header type="menu" />
                     </Route>
@@ -124,7 +128,7 @@ const App = () => {
                             <Signup />
                         </PublicRoute>
                         <PublicRoute
-                            path="/notLoggedIn"
+                            path="/ReLogin"
                             exact
                             isAuthenticated={isAuthenticated}
                         >

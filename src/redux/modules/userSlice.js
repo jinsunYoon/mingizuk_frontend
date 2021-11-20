@@ -51,11 +51,14 @@ const userSlice = createSlice({
         [loginCheckMD.fulfilled]: (state, { payload }) => {
             state.isLogin = true
 
-            state.userInfo.userEmail = payload.data.user.userEmail
-            state.userInfo.nickName = payload.data.user.nickName
-            state.userInfo.userPw = payload.data.user.userPw
-            state.userInfo.userID = payload.data.user.id
-            console.log(payload, '이거 페이로드 확인')
+            state.userInfo.userEmail = payload?.data?.user?.userEmail
+            state.userInfo.nickName = payload?.data?.user?.nickName
+            state.userInfo.userPw = payload?.data?.user?.userPw
+            state.userInfo.userID = payload?.data?.user?.id
+            console.log('<<ful')
+        },
+        [loginCheckMD.rejected]: (state, action) => {
+            console.log('<<eerr')
         },
 
         [loginMD.pending]: (state, { payload }) => {}, //response NO!

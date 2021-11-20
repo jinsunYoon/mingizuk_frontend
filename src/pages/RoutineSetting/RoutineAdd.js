@@ -12,22 +12,28 @@ const RoutineAdd = () => {
 
     return (
         <>
-            <section className="container">
-                <ToggleTab firstValue={'스트레칭'} secondValue={'맨몸 운동'} />
-                <div className="routine-add-title">
-                    <h3>액션을 선택 해주세요.</h3>
-                    <span>(최대 5개)</span>
-                </div>
-                <RoutineSelect select={status} />
-                <button
-                    className="next-btn"
-                    onClick={() =>
-                        selectList?.length > 0 && history.push('/routine/count')
-                    }
-                >
-                    {selectNum}
-                </button>
-            </section>
+            <div className="routine-layout">
+                <section className="container">
+                    <ToggleTab
+                        firstValue={'스트레칭'}
+                        secondValue={'맨몸 운동'}
+                    />
+                    <div className="routine-add-title">
+                        <h3>액션을 선택 해주세요.</h3>
+                        <span>(최대 5개)</span>
+                    </div>
+                    <RoutineSelect select={status} />
+                    <button
+                        className="next-btn"
+                        onClick={() =>
+                            selectList?.length > 0 &&
+                            history.push('/routine/count')
+                        }
+                    >
+                        {selectNum}
+                    </button>
+                </section>
+            </div>
         </>
     )
 }
