@@ -24,6 +24,7 @@ const MapContainer = ({ searchPlace }) => {
     const [longitude, setLongitude] = React.useState('')
     const [addressName, setAddressName] = React.useState('')
     const [placeName, setPlaceName] = React.useState('')
+    const [select, setSelect] = React.useState(false)
 
     navigator.geolocation.getCurrentPosition((position) => {
         setLatitude(position?.coords?.latitude)
@@ -75,6 +76,7 @@ const MapContainer = ({ searchPlace }) => {
                 setPlaceName(place?.place_name)
                 dispatch(setPlace(place?.place_name))
                 dispatch(setAddress(place?.address_name))
+                setSelect(true)
                 console.log('place', place)
             })
         }
@@ -115,16 +117,29 @@ const MapContainer = ({ searchPlace }) => {
                                               )
                                             : setAddressName(item?.address_name)
                                     }
-                                    item?.road_address_name
-                                        ? dispatch(
-                                              setAddress(
-                                                  item?.road_address_name
+
+                                    {
+                                        item?.road_address_name
+                                            ? dispatch(
+                                                  setAddress(
+                                                      item?.road_address_name
+                                                  )
                                               )
-                                          )
-                                        : dispatch(
-                                              setAddress(item?.address_name)
-                                          )
-                                    dispatch(setPlace(item?.place_name))
+                                            : dispatch(
+                                                  setAddress(item?.address_name)
+                                              )
+                                    }
+
+                                    {
+                                        item?.place_name &&
+                                            setPlaceName(item?.place_name)
+                                    }
+
+                                    {
+                                        item?.place_name &&
+                                            dispatch(setPlace(item?.place_name))
+                                    }
+                                    setSelect(true)
                                 }}
                             >
                                 <FlexColumn
@@ -154,17 +169,17 @@ const MapContainer = ({ searchPlace }) => {
                     </div>
                 </FlexColumn>
             </FlexColumn>
-            <FlexRow
-                _margin={'1rem 0 0 0'}
-                _width={'100%'}
-                _others={'max-width:48rem'}
-            >
-                <Text _padding={'1rem'}>
-                    {placeName
-                        ? `선택한 주소 : ${placeName} - ${addressName}`
-                        : '위치를 선택해주세요'}
-                </Text>
-            </FlexRow>
+            {select && (
+                <FlexRow
+                    _margin={'1rem 0 3.5rem 0'}
+                    _width={'100%'}
+                    _others={'max-width:48rem'}
+                >
+                    <Text _padding={'1rem'}>
+                        {`선택한 주소 : ${placeName} - ${addressName}`}
+                    </Text>
+                </FlexRow>
+            )}
         </>
     )
 }

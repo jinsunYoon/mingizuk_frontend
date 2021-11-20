@@ -4,6 +4,7 @@ import { history } from '../../redux/store'
 import Icon from '../../components/icons/Icon'
 import 'moment/locale/ko'
 import moment from 'moment'
+import Filter from '../../components/Filter'
 import { queryGet } from '../../shared/api'
 
 const PostDesc = () => {
@@ -17,6 +18,14 @@ const PostDesc = () => {
 
     return (
         <>
+            <div>
+                <Filter />
+                <div>
+                    <button>좋아요순</button>
+                    <button>이름순</button>
+                    <button>최신순</button>
+                </div>
+            </div>
             {post_data_all?.length > 0 &&
                 post_data_all?.map((data, idx) => (
                     <div key={idx} className="post-warp">
@@ -29,7 +38,8 @@ const PostDesc = () => {
                             >
                                 <div className="post-info">
                                     <span className="location">
-                                        {/* location */} 강남구 역삼동
+                                        {data?.location?.split(' ')[0]}{' '}
+                                        {data?.location?.split(' ')[1]}
                                     </span>
                                     <span className="moimuser">
                                         참여자 {data?.MoimUsers?.length}명
@@ -55,7 +65,8 @@ const PostDesc = () => {
                             >
                                 <div className="post-info">
                                     <p className="location">
-                                        {/* location */} 강남구 역삼동
+                                        {data?.location?.split(' ')[0]}{' '}
+                                        {data?.location?.split(' ')[1]}
                                     </p>
                                     <span>
                                         참여자 {data?.MoimUsers?.length}명

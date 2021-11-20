@@ -198,7 +198,7 @@ const myRoutineUpdateAPI = (data) => {
 
 const setmainRoutineAPI = (data) => {
     return instance.put('/api/users/mainRoutine', {
-        routineId: data.routineId,
+        routineId: data,
     })
 }
 
@@ -206,6 +206,17 @@ const setmainRoutineAPI = (data) => {
 
 // moim
 const moimCreateAPI = (data) => {
+    console.log('<<<<<<>', data.location)
+    const locationSp = data.location.split(' ')
+    let gu = locationSp.find((e) => {
+        return e.charAt(e.length - 1) === '구'
+    })
+    if (!gu) {
+        gu = locationSp.find((e) => {
+            return e.charAt(e.length - 1) === '시'
+        })
+    }
+    console.log('<<<<<<>', gu)
     return instance.post('api/moims', {
         title: data.title,
         contents: data.contents,
@@ -213,6 +224,7 @@ const moimCreateAPI = (data) => {
         startAt: data.startAt,
         finishAt: data.finishAt,
         location: data.location,
+        // locationGu: data.locationGu
     })
 }
 
@@ -269,6 +281,13 @@ const moimUpdateReviewAPI = (data) => {
     })
 }
 
+const moimLocationAPI = (locationGu) => {
+    console.log('>>>>>', locationGu)
+    return instance.post(`/api/moims/search`, {
+        locationGu: locationGu,
+    })
+}
+
 // * history , habittraker
 const finRoutinesActionsAPI = () => {
     return instance.get('/api/main/trackerHistory')
@@ -320,4 +339,5 @@ export {
     actionResetAPI,
     getCharacterAPI,
     postCharacterAPI,
+    moimLocationAPI,
 }

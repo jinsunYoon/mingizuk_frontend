@@ -1,13 +1,12 @@
 /*global kakao*/
-import React, { useEffect } from 'react'
+import React from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { moimCreateMD } from '../../redux/async/moim'
 import config from '../../shared/aws_config'
 import { uploadFile } from 'react-s3'
-import { history } from '../../redux/store'
-import Icon from '../icons/Icon'
+import MapSearch from './MapSearch'
 
 const MoimWritePost = () => {
     const dispatch = useDispatch()
@@ -16,11 +15,9 @@ const MoimWritePost = () => {
     const [selectedFile, setSelectedFile] = React.useState(null)
     const [startDate, setStartDate] = React.useState(new Date())
     const [endDate, setEndDate] = React.useState(new Date())
-    const [map, setMap] = React.useState('위치를 선택해주세요')
 
     const getAddress = useSelector((state) => state.moim.address)
     const getPlace = useSelector((state) => state.moim.place)
-    console.log('왜 안들어와', getAddress, getPlace)
 
     // * upload S3
     const handleFileInput = (e) => {
@@ -43,7 +40,6 @@ const MoimWritePost = () => {
                 .catch((err) => console.error(err))
         } else return
     }
-    console.log('<<<', `${getAddress}${getPlace}`)
 
     const upload = () => {
         if (selectedFile !== null) {
@@ -73,17 +69,7 @@ const MoimWritePost = () => {
                 <h4 className="post-subtitle">모임 내용</h4>
                 <textarea onChange={(e) => setContents(e.target.value)} />
                 <h4 className="post-subtitle">모임 위치 설정</h4>
-                <button
-                    className="map-btn"
-                    onClick={() => {
-                        history.push('/moim/map')
-                    }}
-                >
-                    <Icon icon={'create'} size={13} />
-                    {getPlace
-                        ? `${getPlace} - ${getAddress}`
-                        : '위치를 선택해주세요'}
-                </button>
+                <MapSearch />
                 <h4 className="post-subtitle">모임 기간 설정</h4>
                 <div className="date-container">
                     <DatePicker

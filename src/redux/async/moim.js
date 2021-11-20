@@ -12,6 +12,7 @@ import {
     moimLikeAPI,
     moimUnlikeAPI,
     moimLeaveAPI,
+    moimLocationAPI,
 } from '../../shared/api'
 import { history } from '../store'
 import swal from 'sweetalert'
@@ -200,6 +201,22 @@ export const moimLeaveMD = createAsyncThunk(
             const response = await moimLeaveAPI(data)
             if (response) {
                 return data
+            }
+        } catch (err) {
+            console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const moimLocationMD = createAsyncThunk(
+    'moim/location',
+    async (locationGu, thunkAPI) => {
+        try {
+            console.log('>>>>>', locationGu)
+            const response = await moimLocationAPI(locationGu)
+            if (response) {
+                return response
             }
         } catch (err) {
             console.log(err)

@@ -70,11 +70,11 @@ const LevelBar = ({ exp, expMax }) => {
 
 const FullGauge = styled.div`
     position: relative;
-    width: 50vw;
+    width: 40%;
     background-color: lightgray;
     height: 0.875rem;
     border-radius: 5rem;
-    margin: 0.5rem 0px 0px 0px;
+    margin: 0.5rem 0px;
 `
 
 const ExpGauge = styled.div`

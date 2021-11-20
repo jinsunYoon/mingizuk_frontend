@@ -4,6 +4,7 @@ import { getMainRoutineMD, setMainRoutineMD } from '../async/routine'
 const initialState = {
     mainRoutine: [],
     isMain: '',
+    routineId: '',
 }
 
 const mainRoutineSlice = createSlice({
@@ -12,6 +13,9 @@ const mainRoutineSlice = createSlice({
     reducers: {
         setAction: (state, action) => {
             state.mainRoutine = action.payload
+        },
+        setRoutineId: (state, action) => {
+            state.routineId = action.payload
         },
     },
 
@@ -34,7 +38,7 @@ const mainRoutineSlice = createSlice({
 })
 
 //* reducer export
-export const { setAction } = mainRoutineSlice.actions
+export const { setAction, setRoutineId } = mainRoutineSlice.actions
 
 //* slice export
 export default mainRoutineSlice

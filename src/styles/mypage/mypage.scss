@@ -1,14 +1,9 @@
 //mypage
 @import '../shared/common.scss';
 
-.mypage-layout {
-    max-width: $tablet;
-    margin: 0 auto;
-}
-
 .contents {
     margin: 50px auto 0;
-    max-width: 100%;
+    max-width: $tablet;
 
     .user-profile {
         @include flexbox();
