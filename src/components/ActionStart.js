@@ -19,6 +19,7 @@ import {
     setResult,
     setFakeResultClear,
 } from '../redux/modules/completeSlice'
+import Swal from 'sweetalert2'
 
 const ActionStart = (props) => {
     const dispatch = useDispatch()
@@ -82,6 +83,18 @@ const ActionStart = (props) => {
             return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming4.gif'
         }
     }
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+    })
 
     return (
         <>
@@ -176,7 +189,7 @@ const ActionStart = (props) => {
                                     _bradius={'0.5rem'}
                                     _color={'#999999'}
                                 >
-                                    완료!
+                                    액션 진행중...
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -189,9 +202,13 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
+                                        Toast.fire({
+                                            icon: 'success',
+                                            title: '100 포인트를 지급받았습니다!',
+                                        })
                                     }}
                                 >
-                                    완료!
+                                    완료하기!
                                 </ButtonOutlined>
                             )}
                             {next && (
@@ -316,7 +333,7 @@ const ActionStart = (props) => {
                                     _bradius={'0.5rem'}
                                     _color={'#999999'}
                                 >
-                                    완료!
+                                    액션 진행중...
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -329,9 +346,13 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
+                                        Toast.fire({
+                                            icon: 'success',
+                                            title: '100 포인트를 지급받았습니다!',
+                                        })
                                     }}
                                 >
-                                    완료!
+                                    완료하기!
                                 </ButtonOutlined>
                             )}
                             {next && (
@@ -455,7 +476,7 @@ const ActionStart = (props) => {
                                     _bradius={'0.5rem'}
                                     _color={'#999999'}
                                 >
-                                    완료!
+                                    액션 진행중...
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -468,9 +489,13 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
+                                        Toast.fire({
+                                            icon: 'success',
+                                            title: '100 포인트를 지급받았습니다!',
+                                        })
                                     }}
                                 >
-                                    완료!
+                                    완료하기!
                                 </ButtonOutlined>
                             )}
                             {next && (
@@ -594,7 +619,7 @@ const ActionStart = (props) => {
                                     _bradius={'0.5rem'}
                                     _color={'#999999'}
                                 >
-                                    완료!
+                                    액션 진행중...
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -607,9 +632,13 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
+                                        Toast.fire({
+                                            icon: 'success',
+                                            title: '100 포인트를 지급받았습니다!',
+                                        })
                                     }}
                                 >
-                                    완료!
+                                    완료하기!
                                 </ButtonOutlined>
                             )}
                             {next && (
@@ -732,7 +761,7 @@ const ActionStart = (props) => {
                                     _bradius={'0.5rem'}
                                     _color={'#999999'}
                                 >
-                                    완료!
+                                    액션 진행중...
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -745,9 +774,13 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
+                                        Toast.fire({
+                                            icon: 'success',
+                                            title: '100 포인트를 지급받았습니다!',
+                                        })
                                     }}
                                 >
-                                    완료!
+                                    완료하기!
                                 </ButtonOutlined>
                             )}
                             {next && (
