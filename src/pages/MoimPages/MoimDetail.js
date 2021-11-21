@@ -117,8 +117,6 @@ const MoimDetail = () => {
         })
     }
 
-    console.log('<<', post_data)
-
     return (
         <>
             <article className="detail-layout">
@@ -137,7 +135,7 @@ const MoimDetail = () => {
                                         setOptModalStatus(true)
                                     }}
                                 >
-                                    옵션
+                                    <Icon icon={'opt-btn'} size="20px" />
                                 </div>
                             )}
                     </div>

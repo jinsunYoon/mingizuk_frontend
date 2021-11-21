@@ -27,6 +27,7 @@
 
     .location {
         @include text-style-12(0.75rem, 0.15px, $text-gray);
+        @include flexbox();
         padding-top: 1rem;
     }
     .title {

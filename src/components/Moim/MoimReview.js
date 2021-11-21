@@ -72,13 +72,15 @@ const MoimReview = (props) => {
                         <span>{rev?.User?.nickName}</span>
                         <p>{rev?.contents}</p>
                         {loginNickName === rev?.User?.nickName && (
-                            <div
-                                className="opt-icon"
-                                onClick={() => {
-                                    setOptModalStatus(true)
-                                }}
-                            >
-                                옵션
+                            <div className="review-opt-warp">
+                                <div
+                                    className="opt-icon"
+                                    onClick={() => {
+                                        setOptModalStatus(true)
+                                    }}
+                                >
+                                    <Icon icon={'opt-btn'} size="20px" />
+                                </div>
                             </div>
                         )}
                         {optModalStatus && (

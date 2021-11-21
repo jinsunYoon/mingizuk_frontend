@@ -153,6 +153,10 @@
             @include text-style-14(24px, auto);
         }
     }
+    .review-opt-warp {
+        position: absolute;
+        right: 0;
+    }
     .review-btn-container {
         @include flexbox();
         position: absolute;
