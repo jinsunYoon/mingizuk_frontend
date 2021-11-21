@@ -70,7 +70,7 @@
             "purpose": "any maskable"
         }
     ],
-    "start_url": "/",
+    "start_url": "/login",
     "display": "standalone",
     "theme_color": "#FFFFFF",
     "background_color": "#FFFFFF"

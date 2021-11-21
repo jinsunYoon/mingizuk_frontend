@@ -7,9 +7,9 @@ const Onboarding = () => {
     const [touchStart, setTouchStart] = React.useState(0)
     const [pageState, setPageState] = React.useState(-1)
     const movePage = (num) => {
-        if (touchStart - 150 > num) {
+        if (touchStart !== num && touchStart - 150 > num) {
             setPageState(pageState < 3 ? pageState + 1 : pageState)
-        } else if (touchStart - 150 < num) {
+        } else if (touchStart !== num && touchStart - 150 < num) {
             setPageState(pageState > -1 ? pageState - 1 : pageState)
         }
     }
@@ -82,7 +82,7 @@ const Onboarding = () => {
                     {pageState === -1 && (
                         <article
                             className="rion-main"
-                            onClick={() => setPageState(1)}
+                            onClick={() => setPageState(0)}
                         >
                             <img
                                 style={rionImg}

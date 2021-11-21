@@ -119,11 +119,9 @@ export const moimUnlikeMD = createAsyncThunk(
         try {
             const response = await moimUnlikeAPI(data)
             if (response) {
-                console.log(response)
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
