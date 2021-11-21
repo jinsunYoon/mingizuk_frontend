@@ -46,18 +46,18 @@ const Main = (props) => {
     }
     console.log('array', array)
 
-    if (array.length > 0) {
-        dispatch(setResult(array))
-        dispatch(setFakeResult(array))
-        console.log('<<', '이거 실행', array.length)
-    }
+    // if (array.length > 0) {
+    //     dispatch(setResult(array))
+    //     dispatch(setFakeResult(array))
+    //     console.log('<<', '이거 실행', array.length)
+    // }
 
     React.useEffect(() => {
         dispatch(loginCheckMD())
         dispatch(getMainRoutineMD())
     }, [])
 
-    if (is_login && isMain) {
+    if (isMain) {
         return (
             <React.Fragment>
                 <Container>

@@ -26,7 +26,10 @@ const RoutineDesc = (props) => {
     const myset = useSelector((state) => state.routine.myRoutine)
     const BtnStatus = useSelector((state) => state.routine.BtnStatus)
     const getRoutineId = useSelector((state) => state.setAction.routineId)
-    const result = useSelector((state) => state.actionComplete.result)
+    const getResult = useSelector((state) => state.actionComplete.result)
+    const getFakeResult = useSelector(
+        (state) => state.actionComplete.fakeResult
+    )
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -157,12 +160,19 @@ const RoutineDesc = (props) => {
                             const data = getRoutineId
                             console.log('data', data)
                             dispatch(setMainRoutineMD(data))
+                            const routineId = getRoutineId
+                            console.log('리셋할 루틴아디', routineId)
+                            dispatch(actionResetMD(routineId))
                             dispatch(setResult([]))
                             dispatch(setFakeResultClear([]))
-                            if (result?.length > 0) {
-                                const routineId = getRoutineId
-                                console.log('리셋할 루틴아디', routineId)
-                                dispatch(actionResetMD(routineId))
+
+                            if (
+                                getResult?.length > 0 &&
+                                getFakeResult?.length > 0
+                            ) {
+                                window.alert(
+                                    '진행중이던 루틴이 초기화되었습니다.'
+                                )
                             }
                             history.push('/')
                         }}

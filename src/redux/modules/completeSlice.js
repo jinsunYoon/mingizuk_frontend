@@ -53,7 +53,6 @@ const completeSlice = createSlice({
         },
         setResult: (state, { payload }) => {
             state.result = payload
-            console.log('setResult', payload)
         },
         setFakeResult: (state, { payload }) => {
             state.fakeResult.push(payload)
