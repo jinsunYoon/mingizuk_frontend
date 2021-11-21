@@ -4,6 +4,19 @@ import clsx from 'clsx'
 import { history } from '../redux/store'
 import { signupMD } from '../redux/async/user'
 import '../styles/auth/auth.scss'
+import Swal from 'sweetalert2'
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'center',
+    showConfirmButton: false,
+    timer: 500,
+    timerProgressBar: false,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    },
+})
 
 const Signup = () => {
     const dispatch = useDispatch()
@@ -29,10 +42,16 @@ const Signup = () => {
             nickName === false ||
             userPwChk === false
         ) {
-            window.alert('빈칸이 있습니다! 다 채워주세요!')
+            Toast.fire({
+                icon: 'error',
+                title: '빈칸을 전부 채워주세요.',
+            })
             return
         } else if (userPw.length < 8 || userPw.length > 17) {
-            window.alert('비밀번호는 8~16자 사용하세요!')
+            Toast.fire({
+                icon: 'error',
+                title: '비밀번호는 8~16자를 사용해주세요.',
+            })
         }
 
         const data = {

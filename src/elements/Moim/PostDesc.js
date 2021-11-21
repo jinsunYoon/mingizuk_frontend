@@ -4,7 +4,7 @@ import { history } from '../../redux/store'
 import Icon from '../../components/icons/Icon'
 import 'moment/locale/ko'
 import moment from 'moment'
-import Filter from '../../components/Filter'
+// import Filter from '../../components/Filter'
 import { queryGet } from '../../shared/api'
 
 const PostDesc = () => {
@@ -18,17 +18,21 @@ const PostDesc = () => {
 
     return (
         <>
-            <div>
-                <Filter />
-                <div>
+            {/* <div> */}
+            {/* <Filter /> */}
+            {/* <div>
                     <button>좋아요순</button>
                     <button>이름순</button>
                     <button>최신순</button>
                 </div>
-            </div>
+            </div> */}
             {post_data_all?.length > 0 &&
                 post_data_all?.map((data, idx) => (
-                    <div key={idx} className="post-warp">
+                    <div
+                        key={idx}
+                        className="post-warp"
+                        style={{ cursor: 'pointer' }}
+                    >
                         {data?.imgSrc === null ? (
                             <div
                                 className="moim-post-box"
@@ -38,10 +42,20 @@ const PostDesc = () => {
                             >
                                 <div className="post-info">
                                     <span className="location">
+                                        <Icon
+                                            icon="place"
+                                            size="20px"
+                                            color="#273B4A"
+                                        />
                                         {data?.location?.split(' ')[0]}{' '}
                                         {data?.location?.split(' ')[1]}
                                     </span>
-                                    <span className="moimuser">
+                                    <span className="location">
+                                        <Icon
+                                            icon="user-person"
+                                            size="20px"
+                                            color="#A5ABB0"
+                                        />
                                         참여자 {data?.MoimUsers?.length}명
                                     </span>
                                 </div>
@@ -65,12 +79,21 @@ const PostDesc = () => {
                             >
                                 <div className="post-info">
                                     <p className="location">
+                                        <Icon
+                                            icon="place"
+                                            size="20px"
+                                            color="#273B4A"
+                                        />
                                         {data?.location?.split(' ')[0]}{' '}
                                         {data?.location?.split(' ')[1]}
                                     </p>
-                                    <span>
-                                        참여자 {data?.MoimUsers?.length}명,{' '}
-                                        {moment(data?.createdAt).fromNow()}
+                                    <span className="location">
+                                        <Icon
+                                            icon="user-person"
+                                            size="20px"
+                                            color="#A5ABB0"
+                                        />
+                                        참여자 {data?.MoimUsers?.length}명
                                     </span>
                                 </div>
                                 <p className="title">{data?.title}</p>
@@ -81,9 +104,9 @@ const PostDesc = () => {
                                     <span>
                                         {data?.MoimUsers[0]?.User?.nickName}
                                     </span>
-                                    {/* <span>
+                                    <span>
                                         {moment(data?.createdAt).fromNow()}
-                                    </span> */}
+                                    </span>
                                 </div>
                             </div>
                         )}

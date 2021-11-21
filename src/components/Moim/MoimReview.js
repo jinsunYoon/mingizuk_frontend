@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
-
+import Icon from '../../components/icons/Icon'
 import {
     moimReviewCreateMD,
     moimDeleteReviewMD,
@@ -13,6 +13,7 @@ const MoimReview = (props) => {
     const loginNickName = useSelector((state) => state.user.userInfo.nickName)
     const review = useSelector((state) => state.moim.moim_detail.Comments)
     const { moimId } = props
+    const [optModalStatus, setOptModalStatus] = React.useState(false)
 
     const deleteReview = (reviewId) => {
         const data = {
@@ -20,12 +21,15 @@ const MoimReview = (props) => {
             reviewId: reviewId,
         }
         Swal.fire({
-            title: '리뷰를 삭제하시겠습니까 ?',
-            icon: 'warning',
+            text: '댓글을 삭제하시겠어요 ?',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
+            confirmButtonColor: '#6B76FF',
+            cancelButtonColor: '#DEDEDE',
+            confirmButtonText: '삭제',
+            cancelButtonText: '취소',
+            width: '30rem',
+            height: '15rem',
+            reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(moimDeleteReviewMD(data))
@@ -68,21 +72,50 @@ const MoimReview = (props) => {
                         <span>{rev?.User?.nickName}</span>
                         <p>{rev?.contents}</p>
                         {loginNickName === rev?.User?.nickName && (
-                            <div className="review-btn-container">
-                                <button
+                            <div className="review-opt-warp">
+                                <div
+                                    className="opt-icon"
                                     onClick={() => {
-                                        updateReview(rev?.id)
+                                        setOptModalStatus(true)
                                     }}
                                 >
-                                    수정
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        deleteReview(rev?.id)
-                                    }}
-                                >
-                                    삭제
-                                </button>
+                                    <Icon icon={'opt-btn'} size="20px" />
+                                </div>
+                            </div>
+                        )}
+                        {optModalStatus && (
+                            <div
+                                className="option-background"
+                                onClick={() => {
+                                    setOptModalStatus(false)
+                                }}
+                            >
+                                <div className="opt-warp">
+                                    <div
+                                        className="option-container"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <button
+                                            onClick={() => {
+                                                updateReview(rev?.id)
+                                            }}
+                                        >
+                                            <Icon icon="ic_edit" size="24px" />
+                                            <span>수정</span>
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                deleteReview(rev?.id)
+                                            }}
+                                        >
+                                            <Icon
+                                                icon="Trash_light"
+                                                size="24px"
+                                            />
+                                            <span>삭제</span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         )}
                     </div>

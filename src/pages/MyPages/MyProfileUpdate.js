@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { userInfoMD } from '../../redux/async/user'
-// import history from '../redux/store'
+import Swal from 'sweetalert2'
 
 //* elements
 import { FlexColumn, Text, ButtonFill, Input } from '../../elements/index'
@@ -63,14 +63,23 @@ const ProfileUpdate = () => {
                     _bgColor="grey"
                     _onClick={() => {
                         const data = { newNickName, newPwd }
-                        const result =
-                            window.confirm('회원정보를 수정하시겠습니까 ?')
-                        if (result) {
-                            dispatch(userInfoMD(data))
-                            history.push('/users')
-                        } else {
-                            return
-                        }
+
+                        Swal.fire({
+                            text: '회원 정보를 수정하시겠어요 ?',
+                            showCancelButton: true,
+                            confirmButtonColor: '#6B76FF',
+                            cancelButtonColor: '#DEDEDE',
+                            confirmButtonText: '참여',
+                            cancelButtonText: '취소',
+                            width: '30rem',
+                            height: '15rem',
+                            reverseButtons: true,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                dispatch(userInfoMD(data))
+                                history.push('/users')
+                            } else return
+                        })
                     }}
                 >
                     완료

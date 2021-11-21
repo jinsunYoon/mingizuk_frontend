@@ -14,6 +14,19 @@ import {
     moimUpdateReviewMD,
     moimLocationMD,
 } from '../async/moim'
+import Swal from 'sweetalert2'
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'center',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    },
+})
 
 const initialState = {
     moim_all: {},
@@ -41,7 +54,10 @@ const moimSlice = createSlice({
     },
     extraReducers: {
         [moimCreateMD.fulfilled]: (state, { payload }) => {
-            console.log(payload)
+            Toast.fire({
+                icon: 'success',
+                title: '모임 글이 게시되었습니다.',
+            })
         },
         [moimCreateMD.rejected]: (state, { payload }) => {
             console.log(payload)
@@ -104,12 +120,20 @@ const moimSlice = createSlice({
                 (comment) => comment.id !== payload.reviewId
             )
             state.moim_detail.Comments = refReviews
+            Toast.fire({
+                icon: 'success',
+                title: '댓글을 삭제하였어요.',
+            })
         },
         [moimUpdateReviewMD.fulfilled]: (state, { payload }) => {
             const refIdx = state.moim_detail.Comments.findIndex(
                 (comment) => comment.id === payload.commentId
             )
             state.moim_detail.Comments[refIdx].contents = payload.contents
+            Toast.fire({
+                icon: 'success',
+                title: '댓글을 수정했어요.',
+            })
         },
         [moimLocationMD.fulfilled]: (state, { payload }) => {
             console.log('>>>>><', payload)

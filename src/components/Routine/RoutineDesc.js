@@ -192,6 +192,7 @@ const RoutineDesc = (props) => {
                     <button
                         className="setting-btn"
                         onClick={() => {
+
                             if (
                                 getResult?.length == 0 &&
                                 getFakeResult?.length == 0
