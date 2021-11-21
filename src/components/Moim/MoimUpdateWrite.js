@@ -35,6 +35,8 @@ const MoimUpdateWrite = () => {
                     const req = {
                         title,
                         contents,
+                        startAt: startDate,
+                        finishAt: endDate,
                         imgSrc: data.location,
                         moimId,
                     }
@@ -47,7 +49,14 @@ const MoimUpdateWrite = () => {
         if (selectedFile !== null) {
             handleUpload(selectedFile)
         } else {
-            const req = { title, contents, imgSrc: beforeImgSrc, moimId }
+            const req = {
+                title,
+                contents,
+                imgSrc: beforeImgSrc,
+                moimId,
+                startAt: startDate,
+                finishAt: endDate,
+            }
             dispatch(moimUpdateMD(req))
         }
     }

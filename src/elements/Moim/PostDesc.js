@@ -69,7 +69,8 @@ const PostDesc = () => {
                                         {data?.location?.split(' ')[1]}
                                     </p>
                                     <span>
-                                        참여자 {data?.MoimUsers?.length}명
+                                        참여자 {data?.MoimUsers?.length}명,{' '}
+                                        {moment(data?.createdAt).fromNow()}
                                     </span>
                                 </div>
                                 <p className="title">{data?.title}</p>
@@ -80,9 +81,9 @@ const PostDesc = () => {
                                     <span>
                                         {data?.MoimUsers[0]?.User?.nickName}
                                     </span>
-                                    <span>
+                                    {/* <span>
                                         {moment(data?.createdAt).fromNow()}
-                                    </span>
+                                    </span> */}
                                 </div>
                             </div>
                         )}
@@ -100,10 +101,10 @@ const PostDesc = () => {
                                     <Icon
                                         icon="heart"
                                         size="20px"
-                                        color="red"
+                                        color="#FD8787"
                                     />
                                 )}
-                                <span>
+                                <span style={{ marginLeft: '0.5rem' }}>
                                     좋아요
                                     {data?.Likes?.length}개
                                 </span>
@@ -111,10 +112,12 @@ const PostDesc = () => {
                             <div className="icon-text">
                                 <Icon
                                     icon={'message'}
-                                    size="20px"
+                                    size="26px"
                                     color="#A5ABB0"
                                 />
-                                <span>댓글{data?.Comments?.length}개</span>
+                                <span style={{ marginLeft: '0.2rem' }}>
+                                    댓글{data?.Comments?.length}개
+                                </span>
                             </div>
                         </div>
                     </div>

@@ -60,7 +60,7 @@ const HabitTraker = () => {
                 ))}
                 <section className="day-container">
                     {monthMap.map((day, idx) => (
-                        <div>
+                        <div key={idx}>
                             {day.date === 1 && (
                                 <span className="first-day">1일</span>
                             )}

@@ -43,7 +43,6 @@ instance.interceptors.response.use(
             'accessToken이 재발급되었습니다. 다시 로그인해주세요'
         ) {
             history.push('/login')
-            window.alert('로그인 시간이 만료되었습니다. 재로그인을 해 주세요.')
 
             return
         }
@@ -243,10 +242,13 @@ const moimReadAPI = () => {
 }
 
 const moimUpdateAPI = (data) => {
+    console.log(data)
     return instance.put(`/api/moims/${data.moimId}`, {
         title: data.title,
         contents: data.contents,
         imgSrc: data.imgSrc,
+        finishAt: data.finishAt,
+        startAt: data.startAt,
     })
 }
 

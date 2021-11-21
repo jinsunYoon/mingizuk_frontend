@@ -54,9 +54,6 @@ const Login = () => {
                         />
                     </div>
                     <div className="btn-container">
-                        <button className="login-btn" onClick={emailLogin}>
-                            로그인하기
-                        </button>
                         <button
                             className={clsx(
                                 {
@@ -66,6 +63,12 @@ const Login = () => {
                                     'signup-btn': id !== '' && pwd !== '',
                                 }
                             )}
+                            onClick={emailLogin}
+                        >
+                            로그인하기
+                        </button>
+                        <button
+                            className="login-btn"
                             onClick={() => history.push('/signup')}
                         >
                             회원가입하기
@@ -83,12 +86,12 @@ const Login = () => {
                         >
                             카카오톡으로 로그인하기
                         </a>
-                        <a
+                        {/* <a
                             href="https://mingijuk.shop/api/auth/naver"
                             className="naver-btn"
                         >
                             네이버로 로그인하기
-                        </a>
+                        </a> */}
                         <a
                             href="https://mingijuk.shop/api/auth/google"
                             className="google-btn"

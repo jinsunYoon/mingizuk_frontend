@@ -7,6 +7,7 @@ const LikeBtn = (props) => {
     const { moim_id, likeUsers, user_id } = props
     const dispatch = useDispatch()
     const confirm = likeUsers?.findIndex(({ userId }) => userId === user_id)
+    console.log('<<', confirm, moim_id, likeUsers, user_id)
 
     return (
         <>
@@ -14,7 +15,7 @@ const LikeBtn = (props) => {
                 <Icon
                     icon="heart"
                     size="20px"
-                    color="red"
+                    color="#FD8787"
                     _onClick={() => {
                         dispatch(moimUnlikeMD(moim_id))
                     }}
