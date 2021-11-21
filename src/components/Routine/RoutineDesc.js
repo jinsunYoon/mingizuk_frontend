@@ -13,6 +13,10 @@ import {
     setRoutineInfo,
     setOptionModal,
 } from '../../redux/modules/routineSlice'
+import {
+    setResult,
+    setFakeResultClear,
+} from '../../redux/modules/completeSlice'
 
 const RoutineDesc = (props) => {
     const dispatch = useDispatch()
@@ -22,8 +26,10 @@ const RoutineDesc = (props) => {
     const myset = useSelector((state) => state.routine.myRoutine)
     const BtnStatus = useSelector((state) => state.routine.BtnStatus)
     const getRoutineId = useSelector((state) => state.setAction.routineId)
-    const result = useSelector((state) => state.actionComplete.result)
-    console.log('result', result)
+    const getResult = useSelector((state) => state.actionComplete.result)
+    const getFakeResult = useSelector(
+        (state) => state.actionComplete.fakeResult
+    )
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -92,6 +98,9 @@ const RoutineDesc = (props) => {
                             </div>
                         </button>
                     ))}
+                    {myset?.length === 0 && (
+                        <p className="no-routine">내 루틴이 없습니다 ㅠㅠ</p>
+                    )}
                 </div>
             )}
             {desc === 'recommendRoutine' && (
@@ -104,6 +113,7 @@ const RoutineDesc = (props) => {
                     {preset.length > 0 &&
                         preset?.map((routine, idx) => (
                             <button
+                                key={idx}
                                 className="recommend-routine-box"
                                 onClick={() => {
                                     dispatch(setRoutineModal(true))
@@ -139,6 +149,9 @@ const RoutineDesc = (props) => {
                 <div
                     style={{
                         zIndex: '3',
+                        width: '100vw',
+                        display: 'flex',
+                        justifyContent: 'center',
                     }}
                 >
                     <button
@@ -147,10 +160,19 @@ const RoutineDesc = (props) => {
                             const data = getRoutineId
                             console.log('data', data)
                             dispatch(setMainRoutineMD(data))
-                            if (result?.length > 0) {
-                                const routineId = getRoutineId
-                                console.log('리셋할 루틴아디', routineId)
-                                dispatch(actionResetMD(routineId))
+                            const routineId = getRoutineId
+                            console.log('리셋할 루틴아디', routineId)
+                            dispatch(actionResetMD(routineId))
+                            dispatch(setResult([]))
+                            dispatch(setFakeResultClear([]))
+
+                            if (
+                                getResult?.length > 0 &&
+                                getFakeResult?.length > 0
+                            ) {
+                                window.alert(
+                                    '진행중이던 루틴이 초기화되었습니다.'
+                                )
                             }
                             history.push('/')
                         }}

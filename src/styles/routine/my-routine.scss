@@ -73,6 +73,7 @@
 
 .option-background {
     width: 100vw;
+    @include flexbox(center, center);
     height: 100vh;
     position: fixed;
     top: 0;
@@ -81,9 +82,16 @@
     z-index: 6;
 }
 
+.opt-warp {
+    width: 100vw;
+    height: 100vh;
+    @include flexbox(center, center);
+}
+
 .option-container {
-    @include column-flexbox(center, start);
+    @include column-flexbox(center, center);
     position: fixed;
+    max-width: 768px;
     bottom: 0;
     width: 100vw;
     height: 10rem;

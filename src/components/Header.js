@@ -29,13 +29,22 @@ const Header = (props) => {
                     _width={'100%'}
                     _height={'100%'}
                     _border={'none'}
-                    _others={'position: fixed, top:0; max-width: 48rem;'}
+                    _others={'position:relative;max-width: 48rem;'}
                 >
-                    {type === 'menu' && <MenuModal />}
-                    {type === 'back' && <GoBack />}
+                    <div
+                        style={{
+                            position: 'absolute',
+                            top: '0.5rem',
+                            left: '1rem',
+                        }}
+                    >
+                        {type === 'menu' && <MenuModal />}
+                        {type === 'back' && <GoBack />}
+                    </div>
                     <ButtonOutlined
                         _border={'none'}
-                        _width={'70%'}
+                        _width={'100%'}
+                        _others={'position: fixed, top:0;'}
                         _onClick={() => {
                             history.push('/')
                         }}

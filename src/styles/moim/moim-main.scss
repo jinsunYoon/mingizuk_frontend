@@ -7,13 +7,14 @@
     @include column-flexbox(center, center);
     padding-top: 3rem;
     padding-bottom: 65px;
+    position: relative;
 }
 
 .post-warp {
     width: 100vw;
     max-width: 768px;
     @include column-flexbox(center, center);
-    background-color: $bg-light-gray;
+    background-color: #efefef;
 }
 
 //PostDesc
@@ -26,7 +27,7 @@
 
     .location {
         @include text-style-12(0.75rem, 0.15px, $text-gray);
-        padding: 2rem 0;
+        padding-top: 1rem;
     }
     .title {
         @include text-style-18(0.75rem, 0.15px, $black);
@@ -63,7 +64,8 @@
     margin-bottom: 2rem;
     max-width: 768px;
     background-color: $white;
-    border: 1px solid $bg-light-gray;
+    border: none;
+    border-top: 1px solid #efefef;
     height: 2.5rem;
     padding-left: 2rem;
     .icon-text {
@@ -78,5 +80,29 @@
 }
 
 .moim-add-btn {
-    @include add-btn();
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: $primary;
+    color: $white;
+    position: fixed;
+    border: none;
+    font-size: 35px;
+    right: 5%;
+    bottom: 90px;
+    @media screen and (min-width: 768px) {
+        right: 10vw;
+    }
+    @media screen and (min-width: 920px) {
+        right: 14vw;
+    }
+    @media screen and (min-width: 1000px) {
+        right: 18vw;
+    }
+    @media screen and (min-width: 1100px) {
+        right: 24vw;
+    }
+    @media screen and (min-width: 1400px) {
+        right: 28vw;
+    }
 }

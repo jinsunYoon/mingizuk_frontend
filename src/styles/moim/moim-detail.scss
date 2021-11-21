@@ -58,8 +58,7 @@
     width: 90vw;
     height: 2.5rem;
     padding: 0.875rem 0;
-    border-top: 1px solid $text-gray;
-    border-bottom: 1px solid $text-gray;
+    border-bottom: 1px solid #eeeeee;
     .option-child {
         @include flexbox();
         width: 12.5rem;
@@ -80,12 +79,14 @@
     margin-bottom: 2rem;
 
     input {
-        width: 80%;
-        height: 2.5rem;
+        width: 100%;
+        height: 3rem;
+        padding-left: 0.8rem;
+        border: 1px solid #ececec;
     }
     button {
-        width: 18%;
-        height: 2.5rem;
+        width: 4rem;
+        height: 3rem;
         border: none;
     }
 }
@@ -123,8 +124,9 @@
 .post-review-container {
     position: relative;
     width: 100%;
+    padding: 0 1rem;
     max-width: 768px;
-    height: 3.125rem;
+    height: 4rem;
     display: grid;
     place-items: center center;
     --column-count: 1;
@@ -143,23 +145,31 @@
     .post-review-box {
         width: 100%;
         max-width: 768px;
-        border-bottom: 1px solid lightgray;
         @include column-flexbox(center, start);
+        span {
+            @include text-style-12(24px, auto);
+        }
+        p {
+            @include text-style-14(24px, auto);
+        }
     }
     .review-btn-container {
         @include flexbox();
         position: absolute;
-        right: 0;
+        right: 1.3rem;
         button {
+            @include flexbox();
             border: none;
             background-color: $primary;
-            width: 3rem;
-            height: 2rem;
+            width: 2.5rem;
+            height: 1.5rem;
             color: $white;
             border-radius: 0.5rem;
             &:first-child {
                 margin-right: 0.5rem;
             }
+            font-size: 12px;
+            text-align: center;
         }
     }
 }

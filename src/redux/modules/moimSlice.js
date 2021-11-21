@@ -64,13 +64,13 @@ const moimSlice = createSlice({
             console.log(payload)
         },
         [moimLikeMD.fulfilled]: (state, { payload }) => {
-            console.log('><>', payload)
-            const likeUser = payload.data.msg.slice(0, 1)
+            const likeUser = payload.data.msg.split(' ')[0]
+            console.log('<<', likeUser)
             state.moim_detail.Likes.push({ userId: Number(likeUser) })
         },
         [moimUnlikeMD.fulfilled]: (state, { payload }) => {
             const likeUser = state.moim_detail.Likes
-            const unlikeUser = payload.data.msg.slice(0, 1)
+            const unlikeUser = payload.data.msg.split(' ')[0]
             const result = state.moim_detail.Likes.filter(
                 (likeUser) => likeUser.userId !== Number(unlikeUser)
             )
@@ -78,7 +78,7 @@ const moimSlice = createSlice({
         },
         [moimJoinMD.fulfilled]: (state, { payload }) => {
             state.moim_detail.MoimUsers.push({
-                User: { nickName: payload.nickName },
+                User: { nickName: payload?.nickName },
             })
         },
         [moimLeaveMD.fulfilled]: (state, { payload }) => {

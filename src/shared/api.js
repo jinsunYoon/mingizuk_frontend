@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useMutation, useQuery } from 'react-query'
+import { history } from '../redux/store'
 import { getToken } from './utils'
 
 const BASE_URL = 'https://mingijuk.shop'
@@ -37,6 +38,14 @@ instance.interceptors.response.use(
     },
     async (error) => {
         console.log(error)
+        if (
+            error.response.data.msg ===
+            'accessToken이 재발급되었습니다. 다시 로그인해주세요'
+        ) {
+            history.push('/login')
+
+            return
+        }
         window.alert(error.response.data.msg)
     }
 )
@@ -233,10 +242,13 @@ const moimReadAPI = () => {
 }
 
 const moimUpdateAPI = (data) => {
+    console.log(data)
     return instance.put(`/api/moims/${data.moimId}`, {
         title: data.title,
         contents: data.contents,
         imgSrc: data.imgSrc,
+        finishAt: data.finishAt,
+        startAt: data.startAt,
     })
 }
 

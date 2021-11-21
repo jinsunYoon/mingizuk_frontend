@@ -322,7 +322,7 @@
                 "attrs": [
                     {
                         "fill": "none",
-                        "stroke": "rgb(165, 171, 176)",
+                        "stroke": "none",
                         "strokeLinejoin": "miter",
                         "strokeLinecap": "butt",
                         "strokeMiterlimit": "4",
@@ -339,7 +339,7 @@
             "attrs": [
                 {
                     "fill": "none",
-                    "stroke": "rgb(165, 171, 176)",
+                    "stroke": "none",
                     "strokeLinejoin": "miter",
                     "strokeLinecap": "butt",
                     "strokeMiterlimit": "4",

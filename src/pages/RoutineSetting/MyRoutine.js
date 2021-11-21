@@ -47,39 +47,43 @@ const MyRoutine = () => {
                                 dispatch(setOptionModal(false))
                             }}
                         >
-                            <div
-                                className="option-container"
-                                onClick={(e) => e.stopPropagation()}
-                            >
-                                <button
-                                    onClick={() => {
-                                        dispatch(updateRoutine(optInfo.id))
-                                        history.push('/routine/update')
-                                        dispatch(setOptionModal(false))
-                                        dispatch(setRoutineModal(false))
-                                    }}
+                            <div className="opt-warp">
+                                <div
+                                    className="option-container"
+                                    onClick={(e) => e.stopPropagation()}
                                 >
-                                    <Icon icon="ic_edit" size="24px" />
-                                    <span>수정하기</span>
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        const result =
-                                            window.confirm(
-                                                '루틴을 삭제하시겠습니까?'
-                                            )
-                                        if (result) {
+                                    <button
+                                        onClick={() => {
+                                            dispatch(updateRoutine(optInfo.id))
+                                            history.push('/routine/update')
                                             dispatch(setOptionModal(false))
                                             dispatch(setRoutineModal(false))
-                                            dispatch(
-                                                myRoutineDeleteMD(optInfo.id)
-                                            )
-                                        } else return
-                                    }}
-                                >
-                                    <Icon icon="Trash_light" size="24px" />
-                                    <span>삭제하기</span>
-                                </button>
+                                        }}
+                                    >
+                                        <Icon icon="ic_edit" size="24px" />
+                                        <span>수정하기</span>
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            const result =
+                                                window.confirm(
+                                                    '루틴을 삭제하시겠습니까?'
+                                                )
+                                            if (result) {
+                                                dispatch(setOptionModal(false))
+                                                dispatch(setRoutineModal(false))
+                                                dispatch(
+                                                    myRoutineDeleteMD(
+                                                        optInfo.id
+                                                    )
+                                                )
+                                            } else return
+                                        }}
+                                    >
+                                        <Icon icon="Trash_light" size="24px" />
+                                        <span>삭제하기</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     )}
