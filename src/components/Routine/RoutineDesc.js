@@ -17,6 +17,7 @@ import {
     setResult,
     setFakeResultClear,
 } from '../../redux/modules/completeSlice'
+import Swal from 'sweetalert2'
 
 const RoutineDesc = (props) => {
     const dispatch = useDispatch()
@@ -45,6 +46,40 @@ const RoutineDesc = (props) => {
         dispatch(myRoutinePresetMD())
         dispatch(myRoutineListMD())
     }, [])
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+    })
+
+    const resetRoutine = (routineId) => {
+        swal({
+            text: '진행중이던 루틴을 초시화 하시겠습니까?',
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                dispatch(actionResetMD(routineId))
+                const data = getRoutineId
+                console.log('data', data)
+                dispatch(setMainRoutineMD(data))
+                dispatch(setResult([]))
+                dispatch(setFakeResultClear([]))
+                Toast.fire({
+                    icon: 'success',
+                    title: '루틴이 초기화되었습니다.',
+                })
+                history.push('/')
+            } else return
+        })
+    }
 
     return (
         <>
@@ -157,22 +192,27 @@ const RoutineDesc = (props) => {
                     <button
                         className="setting-btn"
                         onClick={() => {
-                            const data = getRoutineId
-                            dispatch(setMainRoutineMD(data))
-                            const routineId = getRoutineId
-                            dispatch(actionResetMD(routineId))
-                            dispatch(setResult([]))
-                            dispatch(setFakeResultClear([]))
+
+                            if (
+                                getResult?.length == 0 &&
+                                getFakeResult?.length == 0
+                            ) {
+                                const data = getRoutineId
+                                console.log('data', data)
+                                dispatch(setMainRoutineMD(data))
+                                dispatch(setResult([]))
+                                dispatch(setFakeResultClear([]))
+                                history.push('/')
+                            }
 
                             if (
                                 getResult?.length > 0 &&
                                 getFakeResult?.length > 0
                             ) {
-                                window.alert(
-                                    '진행중이던 루틴이 초기화되었습니다.'
-                                )
+                                const routineId = getRoutineId
+                                console.log('리셋할 루틴아디', routineId)
+                                resetRoutine(routineId)
                             }
-                            history.push('/')
                         }}
                     >
                         메인 루틴으로 설정하기
