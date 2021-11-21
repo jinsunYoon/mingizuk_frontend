@@ -158,10 +158,8 @@ const RoutineDesc = (props) => {
                         className="setting-btn"
                         onClick={() => {
                             const data = getRoutineId
-                            console.log('data', data)
                             dispatch(setMainRoutineMD(data))
                             const routineId = getRoutineId
-                            console.log('리셋할 루틴아디', routineId)
                             dispatch(actionResetMD(routineId))
                             dispatch(setResult([]))
                             dispatch(setFakeResultClear([]))

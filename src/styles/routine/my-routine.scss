@@ -112,9 +112,11 @@
         }
         span {
             @include text-style-16(1rem, auto, $black);
+            @include flexbox(start, center);
             font-weight: 700;
             padding-left: 2rem;
             width: 100%;
+            height: inherit;
             text-align: left;
             &:hover,
             :active {
