@@ -11,6 +11,7 @@ import {
 } from '../../redux/modules/routineSlice'
 import Icon from '../../components/icons/Icon'
 import { myRoutineDeleteMD } from '../../redux/async/routine'
+import Swal from 'sweetalert2'
 
 const MyRoutine = () => {
     const status = useSelector((state) => state.routine.myPage)
@@ -65,19 +66,31 @@ const MyRoutine = () => {
                                     </button>
                                     <button
                                         onClick={() => {
-                                            const result =
-                                                window.confirm(
-                                                    '루틴을 삭제하시겠습니까?'
-                                                )
-                                            if (result) {
-                                                dispatch(setOptionModal(false))
-                                                dispatch(setRoutineModal(false))
-                                                dispatch(
-                                                    myRoutineDeleteMD(
-                                                        optInfo.id
+                                            Swal.fire({
+                                                text: '루틴을 삭제하시겠어요 ?',
+                                                showCancelButton: true,
+                                                confirmButtonColor: '#6B76FF',
+                                                cancelButtonColor: '#DEDEDE',
+                                                confirmButtonText: '삭제',
+                                                cancelButtonText: '취소',
+                                                width: '30rem',
+                                                height: '15rem',
+                                                reverseButtons: true,
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    dispatch(
+                                                        setOptionModal(false)
                                                     )
-                                                )
-                                            } else return
+                                                    dispatch(
+                                                        setRoutineModal(false)
+                                                    )
+                                                    dispatch(
+                                                        myRoutineDeleteMD(
+                                                            optInfo.id
+                                                        )
+                                                    )
+                                                }
+                                            })
                                         }}
                                     >
                                         <Icon icon="Trash_light" size="24px" />

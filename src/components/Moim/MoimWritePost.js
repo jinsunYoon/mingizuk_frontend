@@ -7,6 +7,8 @@ import { moimCreateMD } from '../../redux/async/moim'
 import config from '../../shared/aws_config'
 import { uploadFile } from 'react-s3'
 import MapSearch from './MapSearch'
+import Icon from '../../components/icons/Icon'
+import Swal from 'sweetalert2'
 
 const MoimWritePost = () => {
     const dispatch = useDispatch()
@@ -14,14 +16,32 @@ const MoimWritePost = () => {
     const [contents, setContents] = React.useState('')
     const [selectedFile, setSelectedFile] = React.useState(null)
     const [startDate, setStartDate] = React.useState(new Date())
-    const [endDate, setEndDate] = React.useState(new Date())
+    const [endDate, setEndDate] = React.useState(
+        new Date(new Date().setDate(new Date().getDate() + 7))
+    )
+    const [imgState, setImageState] = React.useState(false)
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 1200,
+        timerProgressBar: false,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+    })
 
     const getAddress = useSelector((state) => state.moim.address)
     const getPlace = useSelector((state) => state.moim.place)
 
+    console.log('<<<<<', getAddress, getPlace)
+
     // * upload S3
     const handleFileInput = (e) => {
         setSelectedFile(e.target.files[0])
+        setImageState(true)
     }
     const handleUpload = async (file) => {
         if (selectedFile !== null) {
@@ -34,6 +54,26 @@ const MoimWritePost = () => {
                         startAt: startDate,
                         finishAt: endDate,
                         location: `${getAddress}${getPlace}`,
+                    }
+                    if (title === '') {
+                        Toast.fire({
+                            icon: 'error',
+                            title: '제목을 입력해주세요',
+                        })
+                        return
+                    } else if (contents === '') {
+                        Toast.fire({
+                            icon: 'error',
+                            title: '내용을 입력해주세요.',
+                        })
+                        return
+                    } else if (req.location === '') {
+                        Toast.fire({
+                            icon: 'error',
+                            title: '위치를 입력해주세요.',
+                        })
+
+                        return
                     }
                     dispatch(moimCreateMD(req))
                 })
@@ -52,6 +92,25 @@ const MoimWritePost = () => {
                 startAt: startDate,
                 finishAt: endDate,
                 location: `${getAddress}${getPlace}`,
+            }
+            if (title === '') {
+                Toast.fire({
+                    icon: 'error',
+                    title: '제목을 입력해주세요',
+                })
+                return
+            } else if (contents === '') {
+                Toast.fire({
+                    icon: 'error',
+                    title: '내용을 입력해주세요.',
+                })
+                return
+            } else if (req.location === '') {
+                Toast.fire({
+                    icon: 'error',
+                    title: '위치를 입력해주세요.',
+                })
+                return
             }
             dispatch(moimCreateMD(req))
         }
@@ -82,9 +141,16 @@ const MoimWritePost = () => {
                     />
                 </div>
                 <h4 className="post-subtitle">이미지 첨부</h4>
-                <label className="image-input" htmlFor="image">
-                    +
-                </label>
+                {imgState ? (
+                    <label className="image-input" htmlFor="image">
+                        <Icon icon="check" size="3rem" color="white" />
+                    </label>
+                ) : (
+                    <label className="image-input" htmlFor="image">
+                        +
+                    </label>
+                )}
+
                 <input
                     id="image"
                     type="file"

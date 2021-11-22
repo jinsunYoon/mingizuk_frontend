@@ -16,15 +16,28 @@ import { moimUpdate } from '../../redux/modules/moimSlice'
 import '../../styles/moim/moim-detail.scss'
 import 'moment/locale/ko'
 import moment from 'moment'
+import Swal from 'sweetalert2'
 
 const MoimDetail = () => {
     const post_id = history?.location?.pathname?.split('/').slice(-1)
     const dispatch = useDispatch()
-
     const user_nick = useSelector((state) => state?.user?.userInfo?.nickName)
     const post_data = useSelector((state) => state?.moim?.moim_detail)
     const user_id = useSelector((state) => state?.user?.userInfo?.userID)
     const join_useres = post_data?.MoimUsers?.map(({ User }) => User.nickName)
+    const [optModalStatus, setOptModalStatus] = React.useState(false)
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+    })
 
     React.useEffect(() => {
         dispatch(moimDetailMD(post_id))
@@ -34,14 +47,14 @@ const MoimDetail = () => {
     const deletePost = (data) => {
         swal({
             title: '게시글을 지우시겠습니까 ?',
-            icon: 'warning',
             buttons: true,
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
                 dispatch(moimDeleteMD(data))
-                swal('게시글이 지워졌습니다.', {
+                Toast.fire({
                     icon: 'success',
+                    title: '게시글이 지워졌습니다.',
                 })
                 history.push('/moim')
             } else return
@@ -62,19 +75,46 @@ const MoimDetail = () => {
 
     // * join Moim
     const join = (data) => {
-        const result = window.confirm('모임에 참여하시겠습니까?')
-        if (result) {
-            dispatch(moimJoinMD(data))
-        } else return
+        {
+            Swal.fire({
+                title: '모임에 참여하시겠어요 ?',
+                text: '참여하시면 모임 참여자 채팅방에 참여 가능해요.',
+                showCancelButton: true,
+                confirmButtonColor: '#6B76FF',
+                cancelButtonColor: '#DEDEDE',
+                confirmButtonText: '참여',
+                cancelButtonText: '취소',
+                width: '30rem',
+                height: '15rem',
+                reverseButtons: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    dispatch(moimJoinMD(data))
+                }
+            })
+        }
     }
 
     // * leave Moim
     const leave = () => {
         const data = { moimId: Number(post_id), user: user_nick }
-        const result = window.confirm('모임에 취소하시겠습니까?')
-        if (result) {
-            dispatch(moimLeaveMD(data))
-        } else return
+
+        Swal.fire({
+            title: '모임을 그만하시겠어요 ?',
+            text: '더 이상 모임 채팅방에 참여할 수 없어요.',
+            showCancelButton: true,
+            confirmButtonColor: '#6B76FF',
+            cancelButtonColor: '#DEDEDE',
+            confirmButtonText: '그만하기',
+            cancelButtonText: '취소',
+            width: '30rem',
+            height: '15rem',
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(moimLeaveMD(data))
+            }
+        })
     }
 
     return (
@@ -83,27 +123,19 @@ const MoimDetail = () => {
                 <article className="moim-detail-article">
                     <div className="location-btn">
                         <p className="detail-location">
-                            서울특별시 강남구 역삼동
+                            {post_data?.location?.split(' ')[0]}{' '}
+                            {post_data?.location?.split(' ')[1]}
                         </p>
                         {Object.keys(post_data).length > 0 &&
                             post_data?.MoimUsers[0]?.User?.nickName ===
                                 user_nick && (
-                                <div className="post-detail-btns-container">
-                                    <button
-                                        onClick={() => {
-                                            deletePost(post_data?.id)
-                                        }}
-                                    >
-                                        삭제
-                                    </button>
-                                    <button
-                                        onClick={() => {
-                                            dispatch(moimUpdate(post_data))
-                                            history.push('/moim/update')
-                                        }}
-                                    >
-                                        수정
-                                    </button>
+                                <div
+                                    className="opt-icon"
+                                    onClick={() => {
+                                        setOptModalStatus(true)
+                                    }}
+                                >
+                                    <Icon icon={'opt-btn'} size="20px" />
                                 </div>
                             )}
                     </div>
@@ -194,6 +226,39 @@ const MoimDetail = () => {
                     </button>
                 </section>
             </article>
+            {optModalStatus && (
+                <div
+                    className="option-background"
+                    onClick={() => {
+                        setOptModalStatus(false)
+                    }}
+                >
+                    <div className="opt-warp">
+                        <div
+                            className="option-container"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <button
+                                onClick={() => {
+                                    dispatch(moimUpdate(post_data))
+                                    history.push('/moim/update')
+                                }}
+                            >
+                                <Icon icon="ic_edit" size="24px" />
+                                <span>수정</span>
+                            </button>
+                            <button
+                                onClick={() => {
+                                    deletePost(post_data?.id)
+                                }}
+                            >
+                                <Icon icon="Trash_light" size="24px" />
+                                <span>삭제</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     )
 }

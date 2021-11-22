@@ -12,7 +12,7 @@ const Icon = (props) => {
         _text,
     } = props
     return (
-        <div onClick={_onClick}>
+        <div onClick={_onClick} style={{ cursor: 'pointer' }}>
             <IcomoonReact
                 iconSet={iconSet}
                 color={color}

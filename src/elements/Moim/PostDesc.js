@@ -4,7 +4,7 @@ import { history } from '../../redux/store'
 import Icon from '../../components/icons/Icon'
 import 'moment/locale/ko'
 import moment from 'moment'
-import Filter from '../../components/Filter'
+// import Filter from '../../components/Filter'
 import { queryGet } from '../../shared/api'
 
 const PostDesc = () => {
@@ -39,7 +39,7 @@ const PostDesc = () => {
     return (
         <>
             <div>
-                <Filter />
+                {/* <Filter /> */}
                 <button onClick={handleClickLike}>좋아요순</button>
                 <button onClick={handleClickLastestOrderButton}>최신순</button>
             </div>
@@ -56,10 +56,20 @@ const PostDesc = () => {
                             >
                                 <div className="post-info">
                                     <span className="location">
+                                        <Icon
+                                            icon="place"
+                                            size="20px"
+                                            color="#273B4A"
+                                        />
                                         {data?.location?.split(' ')[0]}{' '}
                                         {data?.location?.split(' ')[1]}
                                     </span>
-                                    <span className="moimuser">
+                                    <span className="location">
+                                        <Icon
+                                            icon="user-person"
+                                            size="20px"
+                                            color="#A5ABB0"
+                                        />
                                         참여자 {data?.MoimUsers?.length}명
                                     </span>
                                 </div>
@@ -83,6 +93,11 @@ const PostDesc = () => {
                             >
                                 <div className="post-info">
                                     <p className="location">
+                                        <Icon
+                                            icon="place"
+                                            size="20px"
+                                            color="#273B4A"
+                                        />
                                         {data?.location?.split(' ')[0]}{' '}
                                         {data?.location?.split(' ')[1]}
                                     </p>

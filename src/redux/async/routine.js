@@ -34,8 +34,6 @@ export const myRoutineCreateMD = createAsyncThunk(
             console.log('2', data)
             const response = await myRoutineCreateAPI(data)
             if (response) {
-                console.log(response)
-                window.alert('루틴이 추가되었습니다.')
                 history.push('/routine/mypage')
                 return response
             }
@@ -82,12 +80,10 @@ export const myRoutineUpdateMD = createAsyncThunk(
         try {
             const response = await myRoutineUpdateAPI(data)
             if (response) {
-                window.alert('루틴이 수정되었습니다.')
                 history.push('/routine/mypage')
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }

@@ -82,11 +82,11 @@ const characterSlice = createSlice({
 
             const charData = []
 
-            payload.data.character.map((char) =>
-                charData.push({
-                    exp: char.exp,
-                    expMax: char.expMax,
-                    charName: char.characterName,
+            payload?.data?.character?.map((char) =>
+                charData?.push({
+                    exp: char?.exp,
+                    expMax: char?.expMax,
+                    charName: char?.characterName,
                     charLevel: getLevel(char.exp),
                     charSrc: getSrc(char.characterName, getLevel(char.exp)),
                 })
