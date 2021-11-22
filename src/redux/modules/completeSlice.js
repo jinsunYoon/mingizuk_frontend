@@ -12,6 +12,7 @@ const initialState = {
     actionName: '',
     actionId: '',
     routineId: '',
+    tempRoutineId: '',
     actionBtn: '시작 !',
     completeBtn: false,
     defaultBtn: true,
@@ -38,6 +39,9 @@ const completeSlice = createSlice({
         },
         setRoutineId: (state, { payload }) => {
             state.routineId = payload
+        },
+        setTempRoutineId: (state, { payload }) => {
+            state.tempRoutineId = payload
         },
         setActionBtn: (state, { payload }) => {
             state.actionBtn = payload
@@ -90,6 +94,7 @@ export const {
     setResult,
     setFakeResult,
     setFakeResultClear,
+    setTempRoutineId,
 } = completeSlice.actions
 
 //* slice export

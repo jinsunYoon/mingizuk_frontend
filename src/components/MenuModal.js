@@ -35,7 +35,7 @@ const MenuModal = () => {
                             backgroundColor: 'black',
                             opacity: '0.3',
                             position: 'absolute',
-                            top: '2rem',
+                            top: '2.5rem',
                             left: '-1rem',
                             maxWidth: '48rem',
                         }}

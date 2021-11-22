@@ -16,6 +16,7 @@ import {
 import {
     setResult,
     setFakeResultClear,
+    setTempRoutineId,
 } from '../../redux/modules/completeSlice'
 import Swal from 'sweetalert2'
 
@@ -27,6 +28,10 @@ const RoutineDesc = (props) => {
     const myset = useSelector((state) => state.routine.myRoutine)
     const BtnStatus = useSelector((state) => state.routine.BtnStatus)
     const getRoutineId = useSelector((state) => state.setAction.routineId)
+    const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
+    const getTempRoutineId = useSelector(
+        (state) => state.actionComplete.tempRoutineId
+    )
     const getResult = useSelector((state) => state.actionComplete.result)
     const getFakeResult = useSelector(
         (state) => state.actionComplete.fakeResult
@@ -61,17 +66,17 @@ const RoutineDesc = (props) => {
 
     const resetRoutine = (routineId) => {
         swal({
-            text: '진행중이던 루틴을 초시화 하시겠습니까?',
+            text: '진행중이던 루틴을 초기화 하시겠습니까?',
             buttons: true,
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
                 dispatch(actionResetMD(routineId))
-                const data = getRoutineId
-                console.log('data', data)
-                dispatch(setMainRoutineMD(data))
+                const data = getTempRoutineId
+                console.log('바꾸고싶은 루틴아디', data)
                 dispatch(setResult([]))
                 dispatch(setFakeResultClear([]))
+                dispatch(setMainRoutineMD(data))
                 Toast.fire({
                     icon: 'success',
                     title: '루틴이 초기화되었습니다.',
@@ -99,9 +104,13 @@ const RoutineDesc = (props) => {
                                 dispatch(setRoutineModal(true))
                                 if (routine.Actions.length > 0) {
                                     dispatch(
-                                        setRoutineId(
+                                        setTempRoutineId(
                                             routine?.Actions[0].routineId
                                         )
+                                    )
+                                    console.log(
+                                        '선택한 루틴',
+                                        routine?.Actions[0].routineId
                                     )
                                 }
                             }}
@@ -154,9 +163,13 @@ const RoutineDesc = (props) => {
                                     dispatch(setRoutineModal(true))
                                     if (routine.Actions.length > 0) {
                                         dispatch(
-                                            setRoutineId(
+                                            setTempRoutineId(
                                                 routine?.Actions[0].routineId
                                             )
+                                        )
+                                        console.log(
+                                            '선택한 루틴',
+                                            routine?.Actions[0].routineId
                                         )
                                     }
                                 }}
@@ -192,26 +205,27 @@ const RoutineDesc = (props) => {
                     <button
                         className="setting-btn"
                         onClick={() => {
-
+                            if (
+                                getResult?.length > 0 &&
+                                getFakeResult?.length > 0
+                            ) {
+                                const routineId =
+                                    mainRoutine.Actions.length > 0 &&
+                                    mainRoutine.Actions[0].routineId
+                                dispatch(setRoutineId(routineId))
+                                console.log('리셋할 루틴아디', routineId)
+                                resetRoutine(routineId)
+                            }
                             if (
                                 getResult?.length == 0 &&
                                 getFakeResult?.length == 0
                             ) {
-                                const data = getRoutineId
+                                const data = getTempRoutineId
                                 console.log('data', data)
                                 dispatch(setMainRoutineMD(data))
                                 dispatch(setResult([]))
                                 dispatch(setFakeResultClear([]))
                                 history.push('/')
-                            }
-
-                            if (
-                                getResult?.length > 0 &&
-                                getFakeResult?.length > 0
-                            ) {
-                                const routineId = getRoutineId
-                                console.log('리셋할 루틴아디', routineId)
-                                resetRoutine(routineId)
                             }
                         }}
                     >
