@@ -50,15 +50,14 @@ const userSlice = createSlice({
         // * loginCheck
         [loginCheckMD.fulfilled]: (state, { payload }) => {
             state.isLogin = true
-
             state.userInfo.userEmail = payload?.data?.user?.userEmail
             state.userInfo.nickName = payload?.data?.user?.nickName
             state.userInfo.userPw = payload?.data?.user?.userPw
             state.userInfo.userID = payload?.data?.user?.id
-            console.log('<<ful')
+            console.log('>><<슬라이스', payload)
         },
-        [loginCheckMD.rejected]: (state, action) => {
-            console.log('<<eerr')
+        [loginCheckMD.rejected]: (state, { payload }) => {
+            state.isLogin = false
         },
 
         [loginMD.pending]: (state, { payload }) => {}, //response NO!

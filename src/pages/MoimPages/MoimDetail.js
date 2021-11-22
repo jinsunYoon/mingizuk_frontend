@@ -162,7 +162,10 @@ const MoimDetail = () => {
                     )}
                     {join_useres?.includes(user_nick) && (
                         <div className="join-user-container">
-                            <button className="join" onClick={() => {}}>
+                            <button
+                                className="join"
+                                onClick={() => history.push(`/chat/${post_id}`)}
+                            >
                                 <Icon
                                     icon="message"
                                     size="24px"

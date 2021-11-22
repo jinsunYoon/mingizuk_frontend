@@ -114,7 +114,33 @@ const logoutAPI = () => {
 }
 
 const loginCheckAPI = () => {
-    return instance.get('/api/auth/me')
+    return axios
+        .get(`${BASE_URL}/api/auth/me`, {
+            headers: {
+                ['accessToken']: getToken().accessToken,
+                ['refreshToken']: getToken().refreshToken,
+            },
+        })
+        .then(function (response) {
+            if (response?.data?.result === true) {
+                console.log('>><<만료 안됨', response)
+                return response
+            } else if (response?.data?.msg === 'accessToken 재발급') {
+                console.log('>><<, aces재발급', response)
+                sessionStorage.setItem('accessToken', response.data.accessToken)
+                return response
+            } else if (response?.data?.msg === 'refreshToken 재발급') {
+                sessionStorage.setItem(
+                    'refreshToken',
+                    response.data.refreshToken
+                )
+                return response
+            }
+        })
+        .catch(function (error) {
+            console.log('<><>', error)
+        })
+    // return instance.get('/api/auth/me')
 }
 
 // *---------------------------------------------
