@@ -7,7 +7,11 @@ import {
     Text,
 } from '../elements/index'
 import { CharacterModal, MainRoutineList } from '../components/index'
-import { setFakeResult, setResult } from '../redux/modules/completeSlice'
+import {
+    setFakeResult,
+    setResult,
+    setFakeResultClear,
+} from '../redux/modules/completeSlice'
 import Icon from '../components/icons/Icon'
 
 import { history } from '../redux/store'
@@ -55,7 +59,16 @@ const Main = (props) => {
     React.useEffect(() => {
         dispatch(loginCheckMD())
         dispatch(getMainRoutineMD())
-    }, [])
+        console.log('실행됨', array.length)
+        if (array.length !== 0) {
+            dispatch(setResult(array))
+            dispatch(setFakeResult(array))
+            console.log('이거 실행', array.length)
+        } else if (array.length == 0) {
+            dispatch(setResult([]))
+            dispatch(setFakeResultClear([]))
+        }
+    }, [array.length])
 
     if (isMain) {
         return (
