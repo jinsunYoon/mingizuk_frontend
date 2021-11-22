@@ -8,6 +8,9 @@ const MainRoutineList = (props) => {
     const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
     const num = mainRoutine?.Actions?.length - 1
     const result = useSelector((state) => state.actionComplete.result)
+
+    const actionComplete = useSelector((state) => state.actionComplete)
+    console.log('메인루틴완료', actionComplete)
     console.log(
         '메인루틴, result',
         mainRoutine?.Actions?.length,

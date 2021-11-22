@@ -10,12 +10,28 @@ import styled from 'styled-components'
 const CollectionList = () => {
     return (
         <>
-        
-            <Flex>
-                <CollectionItem />
-                <CollectionItem />
-                <CollectionItem />
-            </Flex>
+            <section className="contents">
+                <Flex>
+                    <CollectionItem />
+                    <CollectionItem />
+                    <CollectionItem />
+                </Flex>
+                <Flex>
+                    <CollectionItem />
+                    <CollectionItem />
+                    <CollectionItem />
+                </Flex>
+                <Flex>
+                    <CollectionItem />
+                    <CollectionItem />
+                    <CollectionItem />
+                </Flex>
+                <Flex>
+                    <CollectionItem />
+                    <CollectionItem />
+                    <CollectionItem />
+                </Flex>
+            </section>
         </>
     )
 }

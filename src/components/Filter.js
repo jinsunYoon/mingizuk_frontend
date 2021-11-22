@@ -1,11 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { moimLocationMD } from '../redux/async/moim'
 
 const Filter = () => {
     const dispatch = useDispatch()
     const locations = {
-        _a: [
+        지역: [
+            '서울특별시',
+            '부산광역시',
+            '인천광역시',
+            '대구광역시',
+            '대전광역시',
+            '광주광역시',
+            '울산광역시',
+            '세종특별자치시',
+            '경기도',
+            '강원도',
+            '충청북도',
+            '충청남도',
+            '경상북도',
+            '경상남도',
+            '전라북도',
+            '전라남도',
+        ],
+        서울특별시: [
             '강남구',
             '강동구',
             '강북구',
@@ -32,7 +50,7 @@ const Filter = () => {
             '중구',
             '중랑구',
         ],
-        _b: [
+        부산광역시: [
             '강서구',
             '금정구',
             '남구',
@@ -49,7 +67,7 @@ const Filter = () => {
             '중구',
             '해운대구',
         ],
-        _c: [
+        인천광역시: [
             '중구',
             '동구',
             '미추홀구',
@@ -59,12 +77,20 @@ const Filter = () => {
             '계양구',
             '서구',
         ],
-        _d: ['남구', '달서구', '동구', '북구', '서구', '수성구', '중구'],
-        _e: ['대덕구', '동구', '서구', '유성구', '중구'],
-        _f: ['광산구', '남구', '동구', '북구', '서구'],
-        _g: ['남구', '동구', '북구', '중구'],
-        _h: ['-'],
-        _i: [
+        대구광역시: [
+            '남구',
+            '달서구',
+            '동구',
+            '북구',
+            '서구',
+            '수성구',
+            '중구',
+        ],
+        대전광역시: ['대덕구', '동구', '서구', '유성구', '중구'],
+        광주광역시: ['광산구', '남구', '동구', '북구', '서구'],
+        울산광역시: ['남구', '동구', '북구', '중구'],
+        세종특별자치시: ['-'],
+        경기도: [
             '수원시',
             '성남시',
             '의정부시',
@@ -94,7 +120,7 @@ const Filter = () => {
             '포천시',
             '여주시',
         ],
-        _j: [
+        강원도: [
             '춘천시',
             '원주시',
             '강릉시',
@@ -103,8 +129,8 @@ const Filter = () => {
             '속초시',
             '삼척시',
         ],
-        _k: ['청주시', '충추시', '제천시'],
-        _l: [
+        충청북도: ['청주시', '충추시', '제천시'],
+        충청남도: [
             '천안시',
             '공주시',
             '보령시',
@@ -114,7 +140,7 @@ const Filter = () => {
             '계룡시',
             '당진시',
         ],
-        _m: [
+        경상북도: [
             '포항시',
             '경주시',
             '김천시',
@@ -126,7 +152,7 @@ const Filter = () => {
             '문경시',
             '경산시',
         ],
-        _n: [
+        경상남도: [
             '창원시',
             '통영시',
             '사천시',
@@ -136,7 +162,7 @@ const Filter = () => {
             '거제시',
             '양산시',
         ],
-        _o: [
+        전라북도: [
             '전주시',
             '완산구',
             '덕진구',
@@ -146,45 +172,53 @@ const Filter = () => {
             '남원시',
             '김제시',
         ],
-        _p: ['목포시', '여수시', '순천시', '나주시', '광양시'],
+        전라남도: ['목포시', '여수시', '순천시', '나주시', '광양시'],
     }
 
     const locationGu = useSelector((state) => state.moim.moim_all)
 
-    const [location1, setLocation1] = React.useState('_a')
-    const [location2, setLocation2] = React.useState('a')
+    const [location1, setLocation1] = useState('서울특별시')
+    const [location2, setLocation2] = useState('강남구')
+    const [locationUI, setLocationUI] = useState(0)
 
     console.log('>>>>>', locationGu)
     console.log('>>>>>', location2)
+
     return (
         <>
-            <select onChange={(e) => setLocation1(`_${e.target.value}`)}>
-                <option value="a">서울특별시</option>
-                <option value="b">부산광역시</option>
-                <option value="c">인천광역시</option>
-                <option value="d">대구광역시</option>
-                <option value="e">대전광역시</option>
-                <option value="f">광주광역시</option>
-                <option value="g">울산광역시</option>
-                <option value="h">세종특별자치시</option>
-
-                <option value="i">경기도</option>
-                <option value="j">강원도</option>
-                <option value="k">충청북도</option>
-                <option value="l">충청남도</option>
-                <option value="m">경상북도</option>
-                <option value="n">경상남도</option>
-                <option value="o">전라북도</option>
-                <option value="p">전라남도</option>
-            </select>
-            <select onChange={(e) => setLocation2(e.target.value)}>
-                {locations[location1]?.map((e) => (
-                    <option value={e}> {e}</option>
-                ))}
-            </select>
-            <button onClick={() => dispatch(moimLocationMD(location2))}>
-                검색하기
-            </button>
+            {locationUI === 0 ? (
+                <>
+                    <button onClick={() => setLocationUI(1)}>
+                        {setLocationUI(0) ? '위치필터' : location1 && location2}
+                    </button>
+                </>
+            ) : (
+                <>
+                    <button>
+                        {location1} {location2}
+                    </button>
+                    <div className="location-container">
+                        <select onChange={(e) => setLocation1(e.target.value)}>
+                            {locations['지역']?.map((e) => (
+                                <option value={e}> {e}</option>
+                            ))}
+                        </select>
+                        <select onChange={(e) => setLocation2(e.target.value)}>
+                            {locations[location1]?.map((e) => (
+                                <option value={e}> {e}</option>
+                            ))}
+                        </select>
+                        <button
+                            onClick={() =>
+                                dispatch(moimLocationMD(location2)) &&
+                                setLocationUI(0)
+                            }
+                        >
+                            적용
+                        </button>
+                    </div>
+                </>
+            )}
         </>
     )
 }

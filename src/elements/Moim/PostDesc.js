@@ -1,5 +1,5 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { history } from '../../redux/store'
 import Icon from '../../components/icons/Icon'
 import 'moment/locale/ko'
@@ -8,26 +8,44 @@ import Filter from '../../components/Filter'
 import { queryGet } from '../../shared/api'
 
 const PostDesc = () => {
+    const loginuserID = useSelector((state) => state.user.userInfo.userID)
     const usePostListQuery = () => {
         return queryGet('POST_LIST_ALL', '/api/moims')
     }
-
     const { data } = usePostListQuery()
     const post_data_all = data?.allMoims
-    const loginuserID = useSelector((state) => state.user.userInfo.userID)
+    const dispatch = useDispatch()
+    const [posts, setPosts] = useState(post_data_all)
+    const handleClickLike = () => {
+        setPosts(
+            post_data_all
+                .sort((postA, postB) => postB.Likes.length - postA.Likes.length)
+                .slice()
+        )
+    }
+    const handleClickLastestOrderButton = () => {
+        setPosts(
+            post_data_all
+                .sort(
+                    (postA, postB) =>
+                        moment(postB.createdAt) - moment(postA.createdAt)
+                )
+                .slice()
+        )
+    }
+
+    console.log('render')
 
     return (
         <>
             <div>
                 <Filter />
-                <div>
-                    <button>좋아요순</button>
-                    <button>이름순</button>
-                    <button>최신순</button>
-                </div>
+                <button onClick={handleClickLike}>좋아요순</button>
+                <button onClick={handleClickLastestOrderButton}>최신순</button>
             </div>
-            {post_data_all?.length > 0 &&
-                post_data_all?.map((data, idx) => (
+
+            {posts?.length > 0 &&
+                posts?.map((data, idx) => (
                     <div key={idx} className="post-warp">
                         {data?.imgSrc === null ? (
                             <div
@@ -69,8 +87,7 @@ const PostDesc = () => {
                                         {data?.location?.split(' ')[1]}
                                     </p>
                                     <span>
-                                        참여자 {data?.MoimUsers?.length}명,{' '}
-                                        {moment(data?.createdAt).fromNow()}
+                                        참여자 {data?.MoimUsers?.length}명
                                     </span>
                                 </div>
                                 <p className="title">{data?.title}</p>
@@ -81,9 +98,9 @@ const PostDesc = () => {
                                     <span>
                                         {data?.MoimUsers[0]?.User?.nickName}
                                     </span>
-                                    {/* <span>
+                                    <span>
                                         {moment(data?.createdAt).fromNow()}
-                                    </span> */}
+                                    </span>
                                 </div>
                             </div>
                         )}
@@ -101,10 +118,10 @@ const PostDesc = () => {
                                     <Icon
                                         icon="heart"
                                         size="20px"
-                                        color="#FD8787"
+                                        color="red"
                                     />
                                 )}
-                                <span style={{ marginLeft: '0.5rem' }}>
+                                <span>
                                     좋아요
                                     {data?.Likes?.length}개
                                 </span>
@@ -112,12 +129,10 @@ const PostDesc = () => {
                             <div className="icon-text">
                                 <Icon
                                     icon={'message'}
-                                    size="26px"
+                                    size="20px"
                                     color="#A5ABB0"
                                 />
-                                <span style={{ marginLeft: '0.2rem' }}>
-                                    댓글{data?.Comments?.length}개
-                                </span>
+                                <span>댓글{data?.Comments?.length}개</span>
                             </div>
                         </div>
                     </div>

@@ -6,7 +6,7 @@ import MyCreateMoim from '../../components/MyPages/MyCreatedMoims'
 import MyJoinMoim from '../../components/MyPages/MyJoinedMoims'
 import MyLikeMoim from '../../components/MyPages/MyLikedMoims'
 import MyCommentMoim from '../../components/MyPages/MyCommentMoims'
-// *스타일
+// * 스타일
 import '../../styles/mypage/mymoim.scss'
 
 const MyMoim = () => {
