@@ -35,7 +35,9 @@ const MyComment = () => {
                         key={idx}
                     >
                         <div className="contentsBox">
-                            <span className="location">위치!!!!</span>
+                            <span className="location">
+                                
+                            </span>
                             <div className="titlebox">
                                 <span className="title">
                                     {comment_list?.Moim?.title}
