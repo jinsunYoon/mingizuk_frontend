@@ -93,7 +93,8 @@ const MainRoutineList = (props) => {
                                     </Text>
                                 </FlexRow> */}
                             {routine?.actionName?.length > 5 ? (
-                                result?.length - 1 == idx ? (
+                                result?.length > 0 &&
+                                result?.length - 1 >= idx ? (
                                     <Text
                                         _margin={'5px 0px 0px 0px'}
                                         _fontSize={'0.75rem'}
@@ -113,7 +114,8 @@ const MainRoutineList = (props) => {
                                         {routine?.actionName?.split(' ')[1]}
                                     </Text>
                                 )
-                            ) : result?.length - 1 == idx ? (
+                            ) : result?.length > 0 &&
+                              result?.length - 1 >= idx ? (
                                 <Text
                                     _margin={'5px 0px 0px 0px'}
                                     _fontSize={'0.75rem'}
