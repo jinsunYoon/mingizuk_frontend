@@ -1,43 +1,73 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { history } from '../../redux/store'
 import Icon from '../../components/icons/Icon'
 import 'moment/locale/ko'
 import moment from 'moment'
-// import Filter from '../../components/Filter'
-import { queryGet } from '../../shared/api'
+import Filter from '../../components/Filter'
+import '../../styles/moim/moim-main.scss'
 
 const PostDesc = () => {
-    const usePostListQuery = () => {
-        return queryGet('POST_LIST_ALL', '/api/moims')
+    const post_data_all = useSelector((state) => state.moim.moim_all)
+    const loginuserID = useSelector((state) => state.user.userInfo.userID)
+
+    const dispatch = useDispatch()
+    const [posts, setPosts] = useState('')
+    const [renderingPost, setRenderingPost] = useState(false)
+
+    React.useEffect(() => {
+        if (post_data_all === '') {
+            setPosts(post_data_all)
+            setRenderingPost(false)
+        }
+    }, [renderingPost, posts, post_data_all])
+
+    const handleClickLikeOrderButton = () => {
+        setPosts(
+            post_data_all
+                .slice()
+                .sort((postA, postB) => postB.Likes.length - postA.Likes.length)
+        )
+        setRenderingPost(true)
     }
 
-    const { data } = usePostListQuery()
-    const post_data_all = data?.allMoims
-    const loginuserID = useSelector((state) => state.user.userInfo.userID)
+    const handleClickLastestOrderButton = () => {
+        setPosts(
+            post_data_all
+                .slice()
+                .sort(
+                    (postA, postB) =>
+                        moment(postB.createdAt) - moment(postA.createdAt)
+                )
+        )
+        setRenderingPost(true)
+    }
 
     return (
         <>
-            {/* <div> */}
-            {/* <Filter /> */}
-            {/* <div>
-                    <button>좋아요순</button>
-                    <button>이름순</button>
-                    <button>최신순</button>
-                </div>
-            </div> */}
-            {post_data_all?.length > 0 &&
-                post_data_all?.map((data, idx) => (
-                    <div
-                        key={idx}
-                        className="post-warp"
-                        style={{ cursor: 'pointer' }}
-                    >
-                        {data?.imgSrc === null ? (
+            <div className="filters-container">
+                <Filter />
+                <button
+                    className="latest-filter-btn filter-btn"
+                    onClick={handleClickLastestOrderButton}
+                >
+                    최신순
+                </button>
+                <button
+                    className="liked-filter-btn filter-btn"
+                    onClick={handleClickLikeOrderButton}
+                >
+                    좋아요순
+                </button>
+            </div>
+            {posts?.length > 0 &&
+                posts?.map((el, idx) => (
+                    <div key={idx} className="post-warp">
+                        {el?.imgSrc === null ? (
                             <div
                                 className="moim-post-box"
                                 onClick={() => {
-                                    history.push(`/moim/detail/${data?.id}`)
+                                    history.push(`/moim/detail/${el?.id}`)
                                 }}
                             >
                                 <div className="post-info">
@@ -47,8 +77,8 @@ const PostDesc = () => {
                                             size="20px"
                                             color="#273B4A"
                                         />
-                                        {data?.location?.split(' ')[0]}{' '}
-                                        {data?.location?.split(' ')[1]}
+                                        {el?.location?.split(' ')[0]}{' '}
+                                        {el?.location?.split(' ')[1]}
                                     </span>
                                     <span className="location">
                                         <Icon
@@ -56,17 +86,17 @@ const PostDesc = () => {
                                             size="20px"
                                             color="#A5ABB0"
                                         />
-                                        참여자 {data?.MoimUsers?.length}명
+                                        참여자 {el?.MoimUsers?.length}명
                                     </span>
                                 </div>
-                                <span className="title">{data?.title}</span>
-                                <p className="content">{data?.contents}</p>
+                                <span className="title">{el?.title}</span>
+                                <p className="content">{el?.contents}</p>
                                 <div className="post-info">
                                     <span>
-                                        {data?.MoimUsers[0]?.User?.nickName}
+                                        {el?.MoimUsers[0]?.User?.nickName}
                                     </span>
                                     <span>
-                                        {moment(data?.createdAt).fromNow()}
+                                        {moment(el?.createdAt).fromNow()}
                                     </span>
                                 </div>
                             </div>
@@ -74,7 +104,7 @@ const PostDesc = () => {
                             <div
                                 className="moim-post-box"
                                 onClick={() => {
-                                    history.push(`/moim/detail/${data?.id}`)
+                                    history.push(`/moim/detail/${el?.id}`)
                                 }}
                             >
                                 <div className="post-info">
@@ -84,35 +114,30 @@ const PostDesc = () => {
                                             size="20px"
                                             color="#273B4A"
                                         />
-                                        {data?.location?.split(' ')[0]}{' '}
-                                        {data?.location?.split(' ')[1]}
+                                        {el?.location?.split(' ')[0]}{' '}
+                                        {el?.location?.split(' ')[1]}
                                     </p>
-                                    <span className="location">
-                                        <Icon
-                                            icon="user-person"
-                                            size="20px"
-                                            color="#A5ABB0"
-                                        />
-                                        참여자 {data?.MoimUsers?.length}명
+                                    <span>
+                                        참여자 {el?.MoimUsers?.length}명
                                     </span>
                                 </div>
-                                <p className="title">{data?.title}</p>
+                                <p className="title">{el?.title}</p>
                                 <div className="imgbox">
-                                    <img src={data.imgSrc} />
+                                    <img src={el.imgSrc} />
                                 </div>
                                 <div className="post-info">
                                     <span>
-                                        {data?.MoimUsers[0]?.User?.nickName}
+                                        {el?.MoimUsers[0]?.User?.nickName}
                                     </span>
                                     <span>
-                                        {moment(data?.createdAt).fromNow()}
+                                        {moment(el?.createdAt).fromNow()}
                                     </span>
                                 </div>
                             </div>
                         )}
                         <div className="ectbox">
                             <div className="icon-text">
-                                {data?.Likes?.findIndex(
+                                {el?.Likes?.findIndex(
                                     (user) => user?.userId === loginuserID
                                 ) === -1 ? (
                                     <Icon
@@ -124,23 +149,21 @@ const PostDesc = () => {
                                     <Icon
                                         icon="heart"
                                         size="20px"
-                                        color="#FD8787"
+                                        color="red"
                                     />
                                 )}
-                                <span style={{ marginLeft: '0.5rem' }}>
+                                <span>
                                     좋아요
-                                    {data?.Likes?.length}개
+                                    {el?.Likes?.length}개
                                 </span>
                             </div>
                             <div className="icon-text">
                                 <Icon
                                     icon={'message'}
-                                    size="26px"
+                                    size="20px"
                                     color="#A5ABB0"
                                 />
-                                <span style={{ marginLeft: '0.2rem' }}>
-                                    댓글{data?.Comments?.length}개
-                                </span>
+                                <span>댓글{el?.Comments?.length}개</span>
                             </div>
                         </div>
                     </div>

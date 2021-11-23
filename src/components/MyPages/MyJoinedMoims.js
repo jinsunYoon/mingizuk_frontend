@@ -12,7 +12,7 @@ import { myMoimJoinMD } from '../../redux/async/myMoim'
 const MyJoin = () => {
     const dispatch = useDispatch()
     const join_list = useSelector((state) => state.myMoim.my_join)
-    console.log('><', 'join', join_list)
+    console.log('>>>', 'join', join_list)
     React.useEffect(() => {
         dispatch(myMoimJoinMD())
     }, [])

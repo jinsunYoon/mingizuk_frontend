@@ -136,7 +136,8 @@ const moimSlice = createSlice({
             })
         },
         [moimLocationMD.fulfilled]: (state, { payload }) => {
-            console.log('>>>>><', payload)
+            console.log('>>>>>!', payload)
+            
         },
     },
 })

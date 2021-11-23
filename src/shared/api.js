@@ -320,7 +320,7 @@ const moimUpdateReviewAPI = (data) => {
 }
 
 const moimLocationAPI = (locationGu) => {
-    console.log('>>>>>', locationGu)
+    console.log('>>>>>!', locationGu)
     return instance.post(`/api/moims/search`, {
         locationGu: locationGu,
     })

@@ -36,7 +36,7 @@ const myMoimSlice = createSlice({
 
         [myMoimLikeMD.fulfilled]: (state, { payload }) => {
             console.log('>>>', 'like', payload)
-            state.my_like = payload?.data?.myLikes
+            state.my_like = payload.data.myLikes
         },
         [myMoimLikeMD.rejected]: (state, { payload }) => {
             console.log('errormsg')

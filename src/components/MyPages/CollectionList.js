@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React from 'react'
 
 //* components
 import { CollectionItem } from '../index'
@@ -9,7 +9,7 @@ import styled from 'styled-components'
 const CollectionList = () => {
     return (
         <>
-            <Container>
+            <section className="contents">
                 <Flex>
                     <CollectionItem />
                     <CollectionItem />
@@ -30,14 +30,10 @@ const CollectionList = () => {
                     <CollectionItem />
                     <CollectionItem />
                 </Flex>
-            </Container>
+            </section>
         </>
     )
 }
-
-const Container = styled.div`
-    margin-top: 50px;
-`
 
 const Flex = styled.div`
     display: flex;
