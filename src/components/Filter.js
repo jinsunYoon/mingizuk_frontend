@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { moimLocationMD } from '../redux/async/moim'
+import Icon from '../components/icons/Icon'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
-const Filter = () => {
+import '../styles/moim/moim-main.scss'
+
+const Filter = (props) => {
     const dispatch = useDispatch()
     const locations = {
         지역: [
@@ -89,7 +93,7 @@ const Filter = () => {
         대전광역시: ['대덕구', '동구', '서구', '유성구', '중구'],
         광주광역시: ['광산구', '남구', '동구', '북구', '서구'],
         울산광역시: ['남구', '동구', '북구', '중구'],
-        세종특별자치시: ['-'],
+        세종특별자치시: ['세종시'],
         경기도: [
             '수원시',
             '성남시',
@@ -174,51 +178,66 @@ const Filter = () => {
         ],
         전라남도: ['목포시', '여수시', '순천시', '나주시', '광양시'],
     }
-
     const locationGu = useSelector((state) => state.moim.moim_all)
+    const [location1, setLocation1] = useState('')
+    const [location2, setLocation2] = useState('')
+    const [filterState, setFilterState] = useState(false)
+    const [filterUIState, setFilterUIState] = useState(false)
 
-    const [location1, setLocation1] = useState('서울특별시')
-    const [location2, setLocation2] = useState('강남구')
-    const [locationUI, setLocationUI] = useState(0)
-
-    console.log('>>>>>', locationGu)
-    console.log('>>>>>', location2)
+    console.log('>>>>>', filterState)
 
     return (
         <>
-            {locationUI === 0 ? (
-                <>
-                    <button onClick={() => setLocationUI(1)}>
-                        {setLocationUI(0) ? '위치필터' : location1 && location2}
-                    </button>
-                </>
-            ) : (
-                <>
-                    <button>
-                        {location1} {location2}
-                    </button>
-                    <div className="location-container">
-                        <select onChange={(e) => setLocation1(e.target.value)}>
-                            {locations['지역']?.map((e) => (
-                                <option value={e}> {e}</option>
+            <div className="location-filter-container">
+                <button
+                    className="location-filter-btn"
+                    onClick={() => {
+                        setFilterUIState(true)
+                        setFilterState(false)
+                    }}
+                >
+                    <Icon icon="place" size="20px" color="#a5abb0" />
+                    {!filterState ? '위치필터' : `${location1} ${location2}`}
+                    {/* <KeyboardArrowDownIcon /> */}
+                </button>
+                {filterUIState && (
+                    <div className="location-select-container">
+                        <select
+                            className="location-select"
+                            onChange={(e) => setLocation1(e.target.value)}
+                        >
+                            <option selected>선택하세요</option>
+                            {locations['지역']?.map((e, idx) => (
+                                <option key={idx} value={e}>
+                                    {e}
+                                </option>
                             ))}
                         </select>
-                        <select onChange={(e) => setLocation2(e.target.value)}>
-                            {locations[location1]?.map((e) => (
-                                <option value={e}> {e}</option>
+                        <select
+                            className="location-select"
+                            onChange={(e) => setLocation2(e.target.value)}
+                        >
+                            <option selected>선택하세요</option>
+
+                            {locations[location1]?.map((e, idx) => (
+                                <option key={idx} value={e}>
+                                    {' '}
+                                    {e}
+                                </option>
                             ))}
                         </select>
                         <button
-                            onClick={() =>
-                                dispatch(moimLocationMD(location2)) &&
-                                setLocationUI(0)
-                            }
+                            onClick={() => {
+                                dispatch(moimLocationMD(location2))
+                                setFilterUIState(false)
+                                setFilterState(true)
+                            }}
                         >
                             적용
                         </button>
                     </div>
-                </>
-            )}
+                )}
+            </div>
         </>
     )
 }
