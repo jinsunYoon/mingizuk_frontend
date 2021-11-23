@@ -41,6 +41,8 @@
             .location {
                 @include text-style-12(12px, 0.15px, $text-gray);
                 margin-top: 1rem;
+                display: flex;
+                align-items: center;
             }
 
             .titlebox {
