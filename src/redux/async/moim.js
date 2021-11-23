@@ -206,7 +206,6 @@ export const moimLocationMD = createAsyncThunk(
     'moim/location',
     async (locationGu, thunkAPI) => {
         try {
-            console.log('>>>>>', locationGu)
             const response = await moimLocationAPI(locationGu)
             if (response) {
                 return response

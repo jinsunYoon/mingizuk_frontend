@@ -107,3 +107,115 @@
         right: 28vw;
     }
 }
+
+.filters-container {
+    width: 100%;
+    max-width: $tablet;
+    height: auto;
+    box-sizing: border-box;
+    position: relative;
+    border: none;
+}
+
+.location-filter-container {
+    width: 100%;
+    max-width: $tablet;
+    height: auto;
+    border: none;
+}
+
+.location-filter-btn {
+    width: auto;
+    height: 2.125rem;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid #a5abb0;
+    margin-left: 1rem;
+    color: #a5abb0;
+    background-color: #fff;
+}
+
+.filter-btn {
+    width: auto;
+    height: 2.125rem;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border-radius: 20px;
+    border: 1px solid #a5abb0;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    margin-right: 1rem;
+    color: #a5abb0;
+    background-color: #fff;
+}
+
+.latest-filter-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+.liked-filter-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 4.5rem;
+}
+
+.filter-btn {
+    &:hover {
+        background: $primary;
+        color: $white;
+        cursor: pointer;
+    }
+}
+.location-filter-btn {
+    margin: 0.5rem;
+    &:hover {
+        color: $primary;
+        border: $primary 1px solid;
+        cursor: pointer;
+    }
+}
+
+.location-select-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: $tablet;
+    height: 3.125rem;
+    background-color: #f0f0f0;
+
+    & select,
+    & button {
+        width: auto;
+        padding: 0.25rem 0.5rem;
+        height: 2.125rem;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        color: #a5abb0;
+        margin-left: 1rem;
+        background: #fff;
+    }
+
+    & button {
+        &:hover {
+            background: $primary;
+            color: $white;
+        }
+    }
+
+    & select {
+        &:hover {
+            color: $primary;
+        }
+    }
+}
