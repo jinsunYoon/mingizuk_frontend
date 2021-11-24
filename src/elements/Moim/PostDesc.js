@@ -13,14 +13,10 @@ const PostDesc = () => {
 
     const dispatch = useDispatch()
     const [posts, setPosts] = useState('')
-    const [renderingPost, setRenderingPost] = useState(false)
     const [textColor, setTextColor] = useState(false)
     React.useEffect(() => {
-        if (post_data_all === '') {
-            setPosts(post_data_all)
-            renderingPost(true)
-        }
-    }, [renderingPost, posts, post_data_all])
+        setPosts(post_data_all)
+    }, [posts, post_data_all])
 
     const handleClickLikeOrderButton = () => {
         setPosts(
@@ -28,7 +24,6 @@ const PostDesc = () => {
                 .slice()
                 .sort((postA, postB) => postB.Likes.length - postA.Likes.length)
         )
-        setRenderingPost(true)
     }
 
     const handleClickLastestOrderButton = () => {
@@ -40,7 +35,6 @@ const PostDesc = () => {
                         moment(postB.createdAt) - moment(postA.createdAt)
                 )
         )
-        setRenderingPost(true)
         setTextColor(true)
     }
 
@@ -80,8 +74,7 @@ const PostDesc = () => {
                                             size="20px"
                                             color="#6B76FF"
                                         />
-                                        {el?.location?.split(' ')[0]}{' '}
-                                        {el?.location?.split(' ')[1]}
+                                        {el?.location}
                                     </p>
                                     <span className="location">
                                         <Icon
@@ -93,7 +86,7 @@ const PostDesc = () => {
                                     </span>
                                 </div>
                                 <span className="title">{el?.title}</span>
-                                <p className="content">{el?.contents}</p>
+
                                 <div className="post-info">
                                     <span>
                                         {el?.MoimUsers[0]?.User?.nickName}
@@ -117,8 +110,8 @@ const PostDesc = () => {
                                             size="20px"
                                             color="#6B76FF"
                                         />
-                                        {el?.location?.split(' ')[0]}{' '}
-                                        {el?.location?.split(' ')[1]}
+
+                                        {el?.location}
                                     </p>
                                     <span className="location">
                                         <Icon
@@ -150,14 +143,14 @@ const PostDesc = () => {
                                 ) === -1 ? (
                                     <Icon
                                         icon="heart"
-                                        size="20px"
+                                        size="1rem"
                                         color="lightgray"
                                     />
                                 ) : (
                                     <Icon
                                         icon="heart"
-                                        size="20px"
-                                        color="red"
+                                        size="1rem"
+                                        color="#FD8787"
                                     />
                                 )}
                                 <span>

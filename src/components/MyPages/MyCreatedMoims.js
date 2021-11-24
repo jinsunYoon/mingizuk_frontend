@@ -2,15 +2,14 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { history } from '../../redux/store'
 import Icon from '../icons/Icon'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
-
 import { myMoimCreateMD } from '../../redux/async/myMoim'
 
 const MyCreatedMoims = () => {
     const dispatch = useDispatch()
     const create_list = useSelector((state) => state.myMoim.my_moims)
-
+    const loginuserNick = useSelector(
+        (state) => state.user.userInfo.userNickname
+    )
     useEffect(() => {
         dispatch(myMoimCreateMD())
     }, [])
@@ -35,7 +34,7 @@ const MyCreatedMoims = () => {
                             <div
                                 className="postbox"
                                 onClick={() =>
-                                    history.push(`/moim/detail/${i.moimId}`)
+                                    history.push(`/moim/detail/${i.id}`)
                                 }
                                 key={idx}
                             >
@@ -52,35 +51,53 @@ const MyCreatedMoims = () => {
                                         <span className="title">
                                             {i?.title}
                                         </span>
-                                        <div class="etcbox">
-                                            <div>
-                                                <span className="date">
-                                                    {
-                                                        i?.createdAt?.split([
-                                                            'T',
-                                                        ])[0]
-                                                    }
-                                                </span>
-                                            </div>
-                                            <span className="join">
-                                                <Icon
-                                                    icon="user-person"
-                                                    size="20px"
-                                                    color="#A5ABB0"
-                                                />
-                                                {i?.MoimUsers?.length}
+                                    </div>
+                                    <div class="etcbox">
+                                        <div>
+                                            <span className="date">
+                                                {i?.createdAt?.split(['T'])[0]}
                                             </span>
                                         </div>
+                                        <span className="join">
+                                            <Icon
+                                                icon="user-person"
+                                                size="20px"
+                                                color="#A5ABB0"
+                                            />
+                                            {i?.MoimUsers?.length}
+                                        </span>
                                     </div>
                                 </div>
                                 <div className="commentbox">
                                     <div>
-                                        <FavoriteBorderIcon />
-                                        좋아요 {(i?.Likes).length}
+                                        {i?.Likes?.findIndex(
+                                            (User) =>
+                                                User?.nickname === loginuserNick
+                                        ) === -1 ? (
+                                            <Icon
+                                                icon="heart"
+                                                size="1rem"
+                                                color="lightgray"
+                                            />
+                                        ) : (
+                                            <Icon
+                                                icon="heart"
+                                                size="1rem"
+                                                color="#FD8787"
+                                            />
+                                        )}
+                                        <span>
+                                            좋아요
+                                            {i?.Likes?.length}개
+                                        </span>
                                     </div>
-                                    <div>
-                                        <ChatBubbleOutlineIcon />
-                                        댓글 {(i?.Comments).length}개
+                                    <div className="icon-text">
+                                        <Icon
+                                            icon={'message'}
+                                            size="20px"
+                                            color="#A5ABB0"
+                                        />
+                                        <span>댓글{i?.Comments?.length}개</span>
                                     </div>
                                 </div>
                             </div>

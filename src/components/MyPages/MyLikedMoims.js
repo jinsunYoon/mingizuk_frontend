@@ -16,6 +16,10 @@ import { myMoimLikeMD } from '../../redux/async/myMoim'
 const MyLike = () => {
     const dispatch = useDispatch()
     const like_list = useSelector((state) => state.myMoim.my_likes)
+    const loginuserNick = useSelector(
+        (state) => state.user.userInfo.userNickname
+    )
+
     console.log('>>>', like_list)
     console.log
 
@@ -44,7 +48,7 @@ const MyLike = () => {
                             <div
                                 className="postbox"
                                 onClick={() => {
-                                    history.push(`/moim/detail/${i?.moimId}`)
+                                    history.push(`/moim/detail/${i?.id}`)
                                 }}
                                 key={idx}
                             >
@@ -84,12 +88,34 @@ const MyLike = () => {
                                 </div>
                                 <div className="commentbox">
                                     <div>
-                                        <FavoriteBorderIcon />
-                                        좋아요 {i?.Likes?.length}
+                                        {i?.Likes?.findIndex(
+                                            (User) =>
+                                                User?.nickname === loginuserNick
+                                        ) === -1 ? (
+                                            <Icon
+                                                icon="heart"
+                                                size="1rem"
+                                                color="lightgray"
+                                            />
+                                        ) : (
+                                            <Icon
+                                                icon="heart"
+                                                size="1rem"
+                                                color="#FD8787"
+                                            />
+                                        )}
+                                        <span>
+                                            좋아요
+                                            {i?.Likes?.length}개
+                                        </span>
                                     </div>
-                                    <div>
-                                        <ChatBubbleOutlineIcon />
-                                        댓글 {i?.Comments?.length}개
+                                    <div className="icon-text">
+                                        <Icon
+                                            icon={'message'}
+                                            size="20px"
+                                            color="#A5ABB0"
+                                        />
+                                        <span>댓글{i?.Comments?.length}개</span>
                                     </div>
                                 </div>
                             </div>

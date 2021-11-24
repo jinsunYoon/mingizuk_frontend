@@ -259,7 +259,7 @@ const moimCreateAPI = (data) => {
         startAt: data.startAt,
         finishAt: data.finishAt,
         location: data.location,
-        // locationGu: data.locationGu,
+        filter: data.filter,
     })
 }
 
@@ -319,11 +319,9 @@ const moimUpdateReviewAPI = (data) => {
     })
 }
 
-const moimLocationAPI = (locationGu) => {
-    console.log('>>>>>!', locationGu)
-    return instance.post(`/api/moims/search`, {
-        locationGu: locationGu,
-    })
+const moimLocationAPI = (locationFilter) => {
+    console.log('>>>>>!', locationFilter)
+    return instance.post(`/api/moims/search`, { filter: locationFilter })
 }
 
 // * history , habittraker

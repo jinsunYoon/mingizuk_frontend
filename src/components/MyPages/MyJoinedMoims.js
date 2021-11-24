@@ -3,15 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { history } from '../../redux/store'
 
 import Icon from '../icons/Icon'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
-
-import { NavBar } from '../index'
 import { myMoimJoinMD } from '../../redux/async/myMoim'
 
 const MyJoin = () => {
     const dispatch = useDispatch()
     const join_list = useSelector((state) => state.myMoim.my_joins)
+    const loginuserNick = useSelector(
+        (state) => state.user.userInfo.userNickname
+    )
     console.log('>>>', 'join', join_list)
     React.useEffect(() => {
         dispatch(myMoimJoinMD())
@@ -37,7 +36,7 @@ const MyJoin = () => {
                             <div
                                 className="postbox"
                                 onClick={() => {
-                                    history.push(`/moim/detail/${i?.moimId}`)
+                                    history.push(`/moim/detail/${i?.id}`)
                                 }}
                                 key={idx}
                             >
@@ -59,7 +58,6 @@ const MyJoin = () => {
                                     <div className="etcbox">
                                         <div>
                                             <span className="writer">
-                                                작성자{' '}
                                                 {
                                                     i?.MoimUsers[0]?.User
                                                         ?.nickName
@@ -81,12 +79,34 @@ const MyJoin = () => {
                                 </div>
                                 <div className="commentbox">
                                     <div>
-                                        <FavoriteBorderIcon />
-                                        좋아요 {(i?.Likes).length}
+                                        {i?.Likes?.findIndex(
+                                            (User) =>
+                                                User?.nickname === loginuserNick
+                                        ) === -1 ? (
+                                            <Icon
+                                                icon="heart"
+                                                size="1rem"
+                                                color="lightgray"
+                                            />
+                                        ) : (
+                                            <Icon
+                                                icon="heart"
+                                                size="1rem"
+                                                color="#FD8787"
+                                            />
+                                        )}
+                                        <span>
+                                            좋아요
+                                            {i?.Likes?.length}개
+                                        </span>
                                     </div>
-                                    <div>
-                                        <ChatBubbleOutlineIcon />
-                                        댓글 {(i?.Comments).length}개
+                                    <div className="icon-text">
+                                        <Icon
+                                            icon={'message'}
+                                            size="20px"
+                                            color="#A5ABB0"
+                                        />
+                                        <span>댓글{i?.Comments?.length}개</span>
                                     </div>
                                 </div>
                             </div>

@@ -42,7 +42,7 @@ const MyComment = () => {
                             <div
                                 className="postbox"
                                 onClick={() =>
-                                    history.push(`/moim/detail/${i?.moimId}`)
+                                    history.push(`/moim/detail/${i?.id}`)
                                 }
                                 key={idx}
                             >
@@ -53,7 +53,7 @@ const MyComment = () => {
                                         <MoreVertIcon />
                                     </span>
                                     <span className="comments">
-                                        내 댓글 : {i?.contents}
+                                        {i?.contents}
                                     </span>
                                 </div>
                             </div>

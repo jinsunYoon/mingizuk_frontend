@@ -184,6 +184,9 @@ const Filter = (props) => {
     const [filterState, setFilterState] = useState(false)
     const [filterUIState, setFilterUIState] = useState(false)
 
+    const locationfilter = location1 + ' ' + location2
+
+    console.log('>>>>>!', locationfilter)
     console.log('>>>>>', filterState)
 
     return (
@@ -241,7 +244,7 @@ const Filter = (props) => {
                         </select>
                         <button
                             onClick={() => {
-                                dispatch(moimLocationMD(location2))
+                                dispatch(moimLocationMD(locationfilter))
                                 setFilterUIState(false)
                                 setFilterState(true)
                             }}
