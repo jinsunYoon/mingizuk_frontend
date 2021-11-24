@@ -27,50 +27,79 @@ const MyLike = () => {
     return (
         <>
             <section className="mymoim-contents">
-                {like_list?.map((i, idx) => (
-                    <div
-                        className="postbox"
-                        onClick={() => {
-                            history.push(`/moim/detail/${i?.moimId}`)
-                        }}
-                        key={idx}
-                    >
-                        <div className="contentsbox">
-                            <span className="location">위치!!!!!!</span>
-                            <div className="titlebox">
-                                <span className="title">{i?.Moim?.title}</span>
-                            </div>
-
-                            <div className="etcbox">
-                                <div>
-                                    <span className="writer">
-                                        작성자{' '}
-                                        {/* {i?.Moim.MoimUsers[0]?.User?.nickName} */}
-                                    </span>
-                                    <span className="date">
-                                        {i?.Moim?.createdAt?.split(['T'])[0]}
-                                    </span>
-                                </div>
-                                <span className="join">
-                                    <PersonOutlineIcon />
-                                    {/* {i?.Moim?.MoimUsers?.length} */}
-                                </span>
-                            </div>
-                        </div>
-                        <div className="commentbox">
-                            <div>
-                                <FavoriteBorderIcon />
-                                좋아요 {i?.Moim?.Likes?.length}
-                            </div>
-                            <div>
-                                <ChatBubbleOutlineIcon />
-                                댓글 {i?.Moim?.Comments?.length}개
-                            </div>
-                        </div>
+                {like_list.length === 0 ? (
+                    <div className="contents-none">
+                        <p>
+                            내가 좋아요한 모임이 없네요!
+                            <br />
+                            모임게시판에서 새로운 모임을 찾아보세요.
+                        </p>
+                        <button onClick={() => history.push('/moim')}>
+                            모임게시판 바로가기
+                        </button>
                     </div>
-                ))}
+                ) : (
+                    <>
+                        {like_list?.map((i, idx) => (
+                            <div
+                                className="postbox"
+                                onClick={() => {
+                                    history.push(`/moim/detail/${i?.moimId}`)
+                                }}
+                                key={idx}
+                            >
+                                <div className="contentsbox">
+                                    <span className="location">
+                                        <Icon
+                                            icon="place"
+                                            size="20px"
+                                            color="#6B76FF"
+                                        />
+                                    </span>
+                                    <div className="titlebox">
+                                        <span className="title">
+                                            {i?.Moim?.title}
+                                        </span>
+                                    </div>
+
+                                    <div className="etcbox">
+                                        <div>
+                                            <span className="writer">
+                                                작성자
+                                            </span>
+                                            <span className="date">
+                                                {
+                                                    i?.Moim?.createdAt?.split([
+                                                        'T',
+                                                    ])[0]
+                                                }
+                                            </span>
+                                        </div>
+                                        <span className="join">
+                                            <Icon
+                                                icon="user-person"
+                                                size="20px"
+                                                color="#A5ABB0"
+                                            />
+                                            {/* {i?.Moim?.MoimUsers?.length} */}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="commentbox">
+                                    <div>
+                                        <FavoriteBorderIcon />
+                                        좋아요 {i?.Moim?.Likes?.length}
+                                    </div>
+                                    <div>
+                                        <ChatBubbleOutlineIcon />
+                                        댓글 {i?.Moim?.Comments?.length}개
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </>
+                )}
             </section>
-            <NavBar />
         </>
     )
 }
