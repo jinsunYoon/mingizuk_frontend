@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React from 'react'
 
 //* components
 import { CollectionItem } from '../index'
@@ -6,7 +6,6 @@ import { CollectionItem } from '../index'
 //* sytle
 import styled from 'styled-components'
 
-// 단계별(1,2,3)
 const CollectionList = () => {
     return (
         <>
@@ -43,7 +42,7 @@ const Flex = styled.div`
     align-content: space-around;
     flex-direction: row;
     border: none;
-    padding: 35px 0;
+    padding: 25px 0;
     width: 100%;
 `
 

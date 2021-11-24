@@ -47,7 +47,7 @@ export const myMoimLikeMD = createAsyncThunk(
         try {
             const response = await myMoimLikeAPI()
             if (response) {
-                console.log('>>>', 'like', response)
+                console.log('>>>!!', 'like', response)
                 return response
             }
         } catch (err) {

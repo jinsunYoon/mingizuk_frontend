@@ -115,7 +115,6 @@ const Signup = () => {
                         id="passwordConfirm"
                         type="password"
                         placeholder="비밀번호를 확인해주세요."
-                        onKeyPress={onKeyPress}
                         onChange={(e) =>
                             e.target.value === userPw
                                 ? setUserPwChk(e.target.value)
@@ -132,6 +131,7 @@ const Signup = () => {
                         id="nick"
                         placeholder="닉네임을 입력해주세요."
                         onChange={(e) => setNickName(e.target.value)}
+                        onKeyPress={onKeyPress}
                     />
                 </div>
                 <div className="btn-container">

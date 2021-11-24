@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+//* 리덕스, 데이터
+import { useDispatch } from 'react-redux'
+import { myMoimCreateMD } from '../../redux/async/myMoim'
 //* 컴포넌트, 엘리먼트
 import { ActiveUnderLine } from '../../elements'
 //* 페이지
@@ -11,7 +14,11 @@ import '../../styles/mypage/mymoim.scss'
 
 const MyMoim = () => {
     const [tabState, setTabState] = useState('')
-
+    const dispatch = useDispatch()
+    // const state = useSelector((state) => state?>)
+    React.useEffect(() => {
+        setTabState('a')
+    }, [])
     return (
         <>
             <div className="mymoim-layout">

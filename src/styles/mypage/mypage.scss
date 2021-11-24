@@ -6,6 +6,7 @@
     padding: 0;
     width: 100%;
     max-width: $tablet;
+    padding: 0;
 
     .user-profile {
         @include flexbox();
@@ -37,13 +38,13 @@
     .mypage-list {
         width: 100%;
         box-sizing: border-box;
-        padding: 0;
 
         li {
             @include flexbox();
             width: 100%;
             height: 56px;
-            padding: 16px;
+            padding: 1rem 1.5rem 1rem 0;
+            margin-left: 1rem;
             box-sizing: border-box;
             text-decoration: none;
             justify-content: space-between;
@@ -51,6 +52,11 @@
             font-weight: 500;
             border-bottom: 1px solid #eee;
             background-color: $white;
+            color: #a5abb0;
+
+            span {
+                color: $black;
+            }
 
             &:hover {
                 cursor: pointer;
