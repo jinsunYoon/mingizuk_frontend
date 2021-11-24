@@ -12,7 +12,7 @@ import {
     moimLeaveMD,
 } from '../../redux/async/moim'
 import MoimReview from '../../components/Moim/MoimReview'
-import { moimUpdate } from '../../redux/modules/moimSlice'
+import { moimUpdate, setChatHost } from '../../redux/modules/moimSlice'
 import '../../styles/moim/moim-detail.scss'
 import 'moment/locale/ko'
 import moment from 'moment'
@@ -164,7 +164,10 @@ const MoimDetail = () => {
                         <div className="join-user-container">
                             <button
                                 className="join"
-                                onClick={() => history.push(`/chat/${post_id}`)}
+                                onClick={() => {
+                                    history.push(`/moim/chat/${post_id}`)
+                                    dispatch(setChatHost(join_useres[0]))
+                                }}
                             >
                                 <Icon
                                     icon="message"

@@ -6,11 +6,12 @@
 }
 
 .chat-zone {
-    @include column-flexbox(start, center);
+    @include column-flexbox(start, between);
     width: 100vw;
     height: 92%;
-    padding: 0 1rem;
+    padding: 0 1.2rem;
     padding-top: 4rem;
+    padding-bottom: 5rem;
 }
 
 .chat-others-container,

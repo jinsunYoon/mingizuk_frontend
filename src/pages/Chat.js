@@ -3,11 +3,13 @@ import Swal from 'sweetalert2'
 import '../styles/moim/chat.scss'
 import 'moment/locale/ko'
 import moment from 'moment'
-import io, { Socket } from 'socket.io-client'
+import socketIOClient from 'socket.io-client'
 import { history } from '../redux/store'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { getToken } from '../shared/utils'
+
+const socketMoim = socketIOClient('https://mingijuk.shop/chat')
 
 const Chat = () => {
     // ! toast
@@ -24,72 +26,84 @@ const Chat = () => {
     })
     // ! axios 설정
     const instance = axios.create({
-        baseURL: 'http://localhost:8080',
+        baseURL: 'https://mingijuk.shop',
     })
     instance.interceptors.request.use(async (config) => {
-        config.headers['accessToken'] =
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm92aWRlcklkIjoibG9jYWx0ZXN0MUB0ZXN0LmNvbSIsImlhdCI6MTYzNzU5NDkyNSwiZXhwIjoxNjM3NjgxMzI1LCJpc3MiOiJtaW5naWp1ayJ9.FrXV2XRvYpZ3EWXWfUFYbkvmz2kzVw0AGshi1wGLMXc'
-        config.headers['refreshToken'] =
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm92aWRlcklkIjoibG9jYWx0ZXN0MUB0ZXN0LmNvbSIsImlhdCI6MTYzNzU5NDkyNSwiZXhwIjoxNjM4ODA0NTI1LCJpc3MiOiJtaW5naWp1ayJ9.mXjDtX7dK79SNvI-VtLoX7ys5kPk3wQD9BkG-Zsz_Fk'
+        config.headers['accessToken'] = getToken().accessToken
+        config.headers['refreshToken'] = getToken().refreshToken
         return config
     })
 
     const userNick = useSelector((state) => state?.user?.userInfo?.nickName)
+    const userID = useSelector((state) => state?.user?.userInfo?.userID)
+    const host = useSelector((state) => state?.moim?.chat_host)
     const [roomId, setRoomId] = React.useState(-1)
     const moimId = history?.location?.pathname?.split('/').slice(-1)
-    const [msgValue, setMsgValue] = React.useState(false)
+    const [msgValue, setMsgValue] = React.useState('')
     const [messageArray, setMessageArray] = React.useState([])
-    const [newMsgArray, setNewMsgArray] = React.useState(['a'])
+    const [newMsgArray, setNewMsgArray] = React.useState([])
 
-    // ! 최초 연결
-    const socketMoim = io.connect(`http://localhost:8080/chat`)
     React.useEffect(() => {
         socketMoim.on('connect', () => {
-            console.log('<<><', '연결시 connect 하는 대상의 닉네임', userNick)
+            console.log(
+                '<>',
+                '연결시 connect 하는 대상의 닉네임',
+                userNick,
+                userID
+            )
         })
-        // ! room id 요청 api
         instance
             .post(`/api/moims/${moimId}/chatRoom`)
             .then((res) => {
                 socketMoim.emit('enterNewUser', userNick, res.data.roomId)
                 setRoomId(res.data.roomId)
+                console.log('<>roomIdpost', res.data.roomId)
                 return res.data.roomId
             })
             .then((res) => {
-                instance.get(`/api/moims/${moimId}/${res}`).then((res) => {
-                    setMessageArray(res.data.chats)
+                instance.get(`/api/moims/${moimId}/${res}`).then((resp) => {
+                    console.log('<>get', resp)
+                    setMessageArray(resp.data.chats)
                 })
             })
-    }, [])
+        socketMoim.on('updateMsg', (data) => {
+            if (data.name === 'SERVER') {
+                Toast.fire({
+                    icon: 'info',
+                    title: data.msg,
+                })
+            } else if (data.name !== 'SERVER') {
+                console.log('<>update', data)
+                setNewMsgArray((newMsgArray) => [...newMsgArray, data])
+            }
+        })
 
-    socketMoim.on('updateMsg', (data) => {
-        if (data.name === 'SERVER') {
-            Toast.fire({
-                icon: 'info',
-                title: data.msg,
-            })
-        } else if (data.name !== 'SERVER') {
-            setNewMsgArray((newMsgArray) => [...newMsgArray, data])
+        return () => {
+            socketMoim.emit('leaveRoom', userNick, roomId)
         }
-    })
+    }, [])
 
     // ! message 보내기 ( +post api )
     const sendMessage = () => {
         if (!msgValue) return false
-        instance.post(`/api/moims/${moimId}/${roomId}`, {
-            contents: msgValue,
-        })
-        socketMoim.emit('sendMsg', userNick, msgValue)
+        instance
+            .post(`/api/moims/${moimId}/${roomId}`, {
+                contents: msgValue,
+            })
+            .then((res) => console.log('<>res', res))
+            .catch((error) => console.log('<>error', error))
+        socketMoim.emit('sendMsg', userNick, msgValue, roomId)
         setMsgValue('')
+        console.log('<>send', msgValue, roomId)
     }
 
     return (
         <>
             <div className="chat-warp">
                 <section className="chat-zone">
-                    {messageArray.map(
-                        (msg, idx) =>
-                            msg.MoimUser?.User?.nickName === 'kk123123' && (
+                    {messageArray.map((msg, idx) => (
+                        <div key={idx}>
+                            {msg.MoimUser?.User?.nickName === userNick ? (
                                 <div className="chat-me-container" key={idx}>
                                     <span className="chat-time">
                                         {moment(msg.createdAt).fromNow()}
@@ -98,42 +112,61 @@ const Chat = () => {
                                         {msg.contents}
                                     </p>
                                 </div>
-                            )
-                    )}
-                    {newMsgArray.map((message, idx) => (
-                        <div className="chat-me-container" key={idx}>
-                            <span className="chat-time">
-                                {moment(message.time).fromNow()}
-                            </span>
-                            <p className="chat-content">{message.msg}</p>
+                            ) : (
+                                <div className="chat-others-container">
+                                    <div className="chat-img" />
+                                    <div className="chat-contents">
+                                        <span className="chat-title">
+                                            {msg.MoimUser?.User?.nickName}
+                                        </span>
+                                        <div>
+                                            <p className="chat-content">
+                                                {msg?.contents}
+                                            </p>
+                                            <span className="chat-time">
+                                                {moment(
+                                                    msg.createdAt
+                                                ).fromNow()}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     ))}
-
-                    <div className="chat-others-container">
-                        <div className="chat-img" />
-                        <div className="chat-contents">
-                            <span className="chat-title">모임장 닉넴</span>
-                            <div>
-                                <p className="chat-content">
-                                    대화내용내용내용내용
-                                </p>
-                                <span className="chat-time">시간나오는곳</span>
-                            </div>
+                    {newMsgArray.map((message, idx) => (
+                        <div key={idx}>
+                            {message?.name === userNick ? (
+                                <div className="chat-me-container" key={idx}>
+                                    <span className="chat-time">
+                                        {moment(message?.time).fromNow()}
+                                    </span>
+                                    <p className="chat-content">
+                                        {message?.msg}
+                                    </p>
+                                </div>
+                            ) : (
+                                <div className="chat-others-container">
+                                    <div className="chat-img" />
+                                    <div className="chat-contents">
+                                        <span className="chat-title">
+                                            {message?.name}
+                                        </span>
+                                        <div>
+                                            <p className="chat-content">
+                                                {message?.msg}
+                                            </p>
+                                            <span className="chat-time">
+                                                {moment(
+                                                    message?.time
+                                                ).fromNow()}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
-                    </div>
-                    <div className="chat-others-container">
-                        <div
-                            style={{
-                                width: '2.5rem',
-                                height: '2.5rem',
-                                marginRight: '0.5rem',
-                            }}
-                        />
-                        <div>
-                            <p className="chat-content">대화내용내용내용내용</p>
-                            <span className="chat-time">시간나오는곳</span>
-                        </div>
-                    </div>
+                    ))}
                 </section>
                 <div className="input-container">
                     <input

@@ -34,6 +34,7 @@ const initialState = {
     moim_ref_update: {},
     address: '',
     place: '',
+    chat_host: '',
 }
 
 const moimSlice = createSlice({
@@ -50,6 +51,9 @@ const moimSlice = createSlice({
         setPlace: (state, action) => {
             state.place = action.payload
             console.log('setPlace', action.payload)
+        },
+        setChatHost: (state, { payload }) => {
+            state.chat_host = payload
         },
     },
     extraReducers: {
@@ -142,7 +146,8 @@ const moimSlice = createSlice({
 })
 
 //* reducer export
-export const { moimUpdate, setAddress, setPlace } = moimSlice.actions
+export const { moimUpdate, setAddress, setPlace, setChatHost } =
+    moimSlice.actions
 
 //* slice export
 export default moimSlice
