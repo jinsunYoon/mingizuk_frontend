@@ -34,6 +34,7 @@ const initialState = {
     moim_ref_update: {},
     address: '',
     place: '',
+    filter: '',
 }
 
 const moimSlice = createSlice({
@@ -136,8 +137,9 @@ const moimSlice = createSlice({
             })
         },
         [moimLocationMD.fulfilled]: (state, { payload }) => {
-            console.log('>>>>>!', payload)
-            
+            console.log('>>>>>!><', payload)
+
+            // location
         },
     },
 })
