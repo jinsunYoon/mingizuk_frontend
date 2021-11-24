@@ -104,7 +104,7 @@ const App = () => {
                     <Route path={'/users/moim'} exact>
                         <Header type="back" name="내 모임" />
                     </Route>
-                    <Route path={'/chat/:id'} exact>
+                    <Route path={'/moim/chat/:id'} exact>
                         <Header type="back" name="모임 참여자 채팅" />
                     </Route>
 

@@ -17,7 +17,7 @@ const MoimWritePost = () => {
     const [selectedFile, setSelectedFile] = React.useState(null)
     const [startDate, setStartDate] = React.useState(new Date())
     const [endDate, setEndDate] = React.useState(
-        new Date(new Date().setDate(new Date().getDate() + 7))
+        new Date(new Date().setDate(startDate.getDate() + 7))
     )
     const [imgState, setImageState] = React.useState(false)
 
@@ -35,8 +35,6 @@ const MoimWritePost = () => {
 
     const getAddress = useSelector((state) => state.moim.address)
     const getPlace = useSelector((state) => state.moim.place)
-
-    console.log('<<<<<', getAddress)
 
     // * upload S3
     const handleFileInput = (e) => {
@@ -143,10 +141,12 @@ const MoimWritePost = () => {
                     <DatePicker
                         selected={startDate}
                         onChange={(date) => setStartDate(date)}
+                        minDate={new Date()}
                     />
                     <DatePicker
                         selected={endDate}
                         onChange={(date) => setEndDate(date)}
+                        minDate={new Date()}
                     />
                 </div>
                 <h4 className="post-subtitle">이미지 첨부</h4>

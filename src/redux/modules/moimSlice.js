@@ -20,8 +20,8 @@ const Toast = Swal.mixin({
     toast: true,
     position: 'center',
     showConfirmButton: false,
-    timer: 1000,
-    timerProgressBar: true,
+    timer: 500,
+    timerProgressBar: false,
     didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -35,6 +35,7 @@ const initialState = {
     address: '',
     place: '',
     filter: '',
+    chat_host: '',
 }
 
 const moimSlice = createSlice({
@@ -51,6 +52,9 @@ const moimSlice = createSlice({
         setPlace: (state, action) => {
             state.place = action.payload
             console.log('setPlace', action.payload)
+        },
+        setChatHost: (state, { payload }) => {
+            state.chat_host = payload
         },
     },
     extraReducers: {
@@ -145,7 +149,8 @@ const moimSlice = createSlice({
 })
 
 //* reducer export
-export const { moimUpdate, setAddress, setPlace } = moimSlice.actions
+export const { moimUpdate, setAddress, setPlace, setChatHost } =
+    moimSlice.actions
 
 //* slice export
 export default moimSlice
