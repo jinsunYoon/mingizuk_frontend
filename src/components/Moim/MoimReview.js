@@ -7,6 +7,8 @@ import {
     moimDeleteReviewMD,
     moimUpdateReviewMD,
 } from '../../redux/async/moim'
+import 'moment/locale/ko'
+import moment from 'moment'
 
 const MoimReview = (props) => {
     const dispatch = useDispatch()
@@ -66,61 +68,69 @@ const MoimReview = (props) => {
                     <br />이 모임에 관심이 있다면 댓글을 남겨보세요 !{' '}
                 </p>
             )}
-            {review?.map((rev, idx) => (
-                <section className="post-review-container" key={idx}>
-                    <div className="post-review-box">
-                        <span>{rev?.User?.nickName}</span>
-                        <p>{rev?.contents}</p>
-                        {loginNickName === rev?.User?.nickName && (
-                            <div className="review-opt-warp">
-                                <div
-                                    className="opt-icon"
-                                    onClick={() => {
-                                        setOptModalStatus(true)
-                                    }}
-                                >
-                                    <Icon icon={'opt-btn'} size="20px" />
-                                </div>
-                            </div>
-                        )}
-                        {optModalStatus && (
-                            <div
-                                className="option-background"
-                                onClick={() => {
-                                    setOptModalStatus(false)
-                                }}
-                            >
-                                <div className="opt-warp">
+            <div style={{ paddingBottom: '3rem' }}>
+                {review?.map((rev, idx) => (
+                    <section className="post-review-container" key={idx}>
+                        <div className="post-review-box">
+                            <span>{rev?.User?.nickName}</span>
+                            <span className="post-reivew-date">
+                                {moment(rev?.createdAt).fromNow()}
+                            </span>
+                            <p>{rev?.contents}</p>
+                            {loginNickName === rev?.User?.nickName && (
+                                <div className="review-opt-warp">
                                     <div
-                                        className="option-container"
-                                        onClick={(e) => e.stopPropagation()}
+                                        className="opt-icon"
+                                        onClick={() => {
+                                            setOptModalStatus(true)
+                                        }}
                                     >
-                                        <button
-                                            onClick={() => {
-                                                updateReview(rev?.id)
-                                            }}
-                                        >
-                                            <Icon icon="ic_edit" size="24px" />
-                                            <span>수정</span>
-                                        </button>
-                                        <button
-                                            onClick={() => {
-                                                deleteReview(rev?.id)
-                                            }}
-                                        >
-                                            <Icon
-                                                icon="Trash_light"
-                                                size="24px"
-                                            />
-                                            <span>삭제</span>
-                                        </button>
+                                        <Icon icon={'opt-btn'} size="20px" />
                                     </div>
                                 </div>
-                            </div>
-                        )}
-                    </div>
-                </section>
-            ))}
+                            )}
+                            {optModalStatus && (
+                                <div
+                                    className="option-background"
+                                    onClick={() => {
+                                        setOptModalStatus(false)
+                                    }}
+                                >
+                                    <div className="opt-warp">
+                                        <div
+                                            className="option-container"
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            <button
+                                                onClick={() => {
+                                                    updateReview(rev?.id)
+                                                }}
+                                            >
+                                                <Icon
+                                                    icon="ic_edit"
+                                                    size="24px"
+                                                />
+                                                <span>수정</span>
+                                            </button>
+                                            <button
+                                                onClick={() => {
+                                                    deleteReview(rev?.id)
+                                                }}
+                                            >
+                                                <Icon
+                                                    icon="Trash_light"
+                                                    size="24px"
+                                                />
+                                                <span>삭제</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </section>
+                ))}
+            </div>
         </>
     )
 }

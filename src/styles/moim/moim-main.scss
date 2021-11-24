@@ -62,7 +62,7 @@
 .ectbox {
     @include flexbox(start, center);
     width: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     max-width: 768px;
     background-color: $white;
     border: none;

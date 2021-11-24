@@ -22,17 +22,17 @@ const Onboarding = () => {
     const slideContent = [
         {
             title: '작은 운동 습관부터',
-            desc: '거창한 운동일 필요 없어요. 밍기적과 함께 매일 소소한 건강 루틴을 함께해요.',
+            desc: '밍기적과 함께 매일 소소한 건강 루틴을 함께해요.',
             src: 'https://test-pwa-kyuung.s3.ap-northeast-2.amazonaws.com/on1.png',
         },
         {
             title: '귀여운 친구들을 모아보세요',
-            desc: '밍기적 캐릭터와 함께 밍기적 습관을 기르세요! 루틴을 완료할 때마다 포인트가 쌓여 레벨업 합니다.',
+            desc: '루틴을 완료할 때마다 포인트가 쌓여 레벨업 합니다.',
             src: 'https://test-pwa-kyuung.s3.ap-northeast-2.amazonaws.com/on2.png',
         },
         {
             title: '액션과 루틴 기록을 한눈에!',
-            desc: '밍기적 캐릭터와 함께 밍기적 습관을 기르세요! 루틴을 완료할 때마다 포인트가 쌓여 성장합니다.',
+            desc: '루틴을 완료할 때마다 포인트가 쌓여 성장합니다.',
             src: 'https://test-pwa-kyuung.s3.ap-northeast-2.amazonaws.com/on3.png',
         },
         {
