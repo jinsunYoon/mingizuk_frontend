@@ -204,9 +204,10 @@ export const moimLeaveMD = createAsyncThunk(
 
 export const moimLocationMD = createAsyncThunk(
     'moim/location',
-    async (locationGu, thunkAPI) => {
+    async (locationFilter, thunkAPI) => {
         try {
-            const response = await moimLocationAPI(locationGu)
+            const response = await moimLocationAPI(locationFilter)
+            console.log('>>>>>!', response)
             if (response) {
                 return response
             }

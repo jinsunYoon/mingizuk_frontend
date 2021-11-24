@@ -74,8 +74,10 @@
             .location {
                 @include text-style-12(12px, 0.15px, $text-gray);
                 display: flex;
-                align-items: center;
-                padding: 1rem;
+                align-items: flex-end;
+                height: 40px;
+                margin-left: 2rem;
+                line-height: 1.2rem;
             }
 
             .titlebox {
@@ -83,7 +85,7 @@
                 flex-direction: column;
                 width: 100%;
                 text-align: left;
-                padding-left: 1rem;
+                margin-left: 2rem;
 
                 .title {
                     @include text-style-16(24px, 0.15px, #2e3a59);
@@ -101,29 +103,26 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-                align-items: baseline;
-                margin-top: 1rem;
-                margin-bottom: 1rem;
+                padding: 1rem 2rem;
 
                 .writer {
-                    margin: 1rem 1rem 0;
+                    padding-right: 1rem;
                 }
 
                 .join {
                     display: flex;
                     align-items: center;
-                    margin-top: 1rem;
-                    margin-right: 1rem;
                 }
             }
 
             .commentbox {
                 @include text-style-12(12px, 0.15px, $text-gray);
                 width: 100%;
+                height: 40px;
                 display: flex;
                 flex-direction: row;
                 border-top: 1px solid #eee;
-                padding: 0.7rem 1rem;
+                padding: 0rem 2rem;
 
                 div {
                     display: flex;
@@ -136,7 +135,7 @@
 
     //mycomment
     .mycomment-titlebox {
-        padding: 1rem;
+        padding: 1rem 2rem;
         .title {
             display: flex;
             justify-content: space-between;

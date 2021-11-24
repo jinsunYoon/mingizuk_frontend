@@ -22,22 +22,29 @@
     @include column-flexbox(center, start);
     width: 100%;
     max-width: 768px;
+    height: auto;
     background-color: $white;
     padding: 0 2rem;
 
     .location {
-        @include text-style-12(0.75rem, 0.15px, $text-gray);
+        @include text-style-12(1.5rem, auto, $text-gray);
         @include flexbox();
+        align-items: flex-end;
         padding-top: 1rem;
+        letter-spacing: 0.15px;
+
+        span {
+            display: inline-block;
+            padding: 0 0.15rem;
+        }
     }
+
     .title {
-        @include text-style-18(0.75rem, 0.15px, $black);
+        @include text-style-18(1rem, 0.15px, #2e3a59);
+        line-height: 24px;
+        letter-spacing: 0.15px;
         font-weight: 700;
-        padding: 0.5rem 0;
-    }
-    .content {
-        @include text-style-14(1.25rem, 1.2px, $black);
-        padding: 0.5rem 0;
+        padding: 1rem 0;
     }
     .imgbox {
         @include flexbox(center, center);
@@ -50,9 +57,17 @@
     }
 
     .post-info {
-        @include flexbox(between, center);
+        @include flexbox();
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
+        height: 40px;
         padding-bottom: 0.5rem;
+    }
+
+    svg {
+        align-items: center;
+        font-size: 1rem;
     }
     span {
         @include text-style-12(1.5rem, auto, $text-gray);
@@ -73,6 +88,8 @@
         @include flexbox(center, center);
         span {
             @include text-style-12(12px, 0.15px, $text-gray);
+            display: inline-block;
+            padding: 0 0.3rem;
         }
         &:first-child {
             margin-right: 2.188rem;
@@ -108,6 +125,7 @@
     }
 }
 
+// ***** filter
 .filters-container {
     width: 100%;
     max-width: $tablet;
@@ -122,6 +140,7 @@
     max-width: $tablet;
     height: auto;
     border: none;
+    margin-left: 1rem;
 }
 
 .location-filter-btn {

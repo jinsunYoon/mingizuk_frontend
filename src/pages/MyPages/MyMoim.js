@@ -67,7 +67,7 @@ const MyMoim = () => {
                                     setTabState('c')
                                 }}
                             >
-                                좋아요 한 모임
+                                내가 좋아요한 모임
                             </ActiveUnderLine>
                         ) : (
                             <ActiveUnderLine
@@ -75,7 +75,7 @@ const MyMoim = () => {
                                     setTabState('c')
                                 }}
                             >
-                                좋아요 한 모임
+                                내가 좋아요한 모임
                             </ActiveUnderLine>
                         )}
                         {tabState === 'd' ? (

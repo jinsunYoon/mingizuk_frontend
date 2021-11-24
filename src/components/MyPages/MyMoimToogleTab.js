@@ -11,7 +11,6 @@ import '../../styles/mypage/mymoim.scss'
 const MyMoimToogleTab = () => {
     return (
         <>
-
             <div className="toogle-layout">
                 {tabState === 'a' ? (
                     <ActiveUnderLine
@@ -56,7 +55,7 @@ const MyMoimToogleTab = () => {
                             setTabState('c')
                         }}
                     >
-                        좋아요 한 모임
+                        내가 좋아요한 모임
                     </ActiveUnderLine>
                 ) : (
                     <ActiveUnderLine
@@ -64,7 +63,7 @@ const MyMoimToogleTab = () => {
                             setTabState('c')
                         }}
                     >
-                        좋아요 한 모임
+                        내가 좋아요한 모임
                     </ActiveUnderLine>
                 )}
                 {tabState === 'd' ? (
@@ -95,6 +94,5 @@ const MyMoimToogleTab = () => {
         </>
     )
 }
-
 
 export default MyMoimToogleTab

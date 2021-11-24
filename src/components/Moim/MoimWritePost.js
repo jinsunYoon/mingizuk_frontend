@@ -51,8 +51,13 @@ const MoimWritePost = () => {
                         imgSrc: data.location,
                         startAt: startDate,
                         finishAt: endDate,
-                        location: `${getAddress}${getPlace}`,
+                        location: `${getAddress} ${getPlace}`,
+                        filter: `${getAddress.split(' ')[0]} ${
+                            getAddress.split(' ')[1]
+                        }`,
                     }
+                    console.log('???', req.filter)
+
                     if (title === '') {
                         Toast.fire({
                             icon: 'error',
@@ -90,7 +95,11 @@ const MoimWritePost = () => {
                 startAt: startDate,
                 finishAt: endDate,
                 location: `${getAddress}${getPlace}`,
+                filter: `${getAddress.split(' ')[0]} ${
+                    getAddress.split(' ')[1]
+                }`,
             }
+            console.log('???', req.filter)
             if (title === '') {
                 Toast.fire({
                     icon: 'error',

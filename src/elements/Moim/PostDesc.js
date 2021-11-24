@@ -13,14 +13,10 @@ const PostDesc = () => {
 
     const dispatch = useDispatch()
     const [posts, setPosts] = useState('')
-    const [renderingPost, setRenderingPost] = useState(false)
-
+    const [textColor, setTextColor] = useState(false)
     React.useEffect(() => {
-        if (post_data_all === '') {
-            setPosts(post_data_all)
-            setRenderingPost(false)
-        }
-    }, [renderingPost, posts, post_data_all])
+        setPosts(post_data_all)
+    }, [posts, post_data_all])
 
     const handleClickLikeOrderButton = () => {
         setPosts(
@@ -28,7 +24,6 @@ const PostDesc = () => {
                 .slice()
                 .sort((postA, postB) => postB.Likes.length - postA.Likes.length)
         )
-        setRenderingPost(true)
     }
 
     const handleClickLastestOrderButton = () => {
@@ -40,19 +35,21 @@ const PostDesc = () => {
                         moment(postB.createdAt) - moment(postA.createdAt)
                 )
         )
-        setRenderingPost(true)
+        setTextColor(true)
     }
 
     return (
         <>
             <div className="filters-container">
                 <Filter />
+
                 <button
                     className="latest-filter-btn filter-btn"
                     onClick={handleClickLastestOrderButton}
                 >
                     최신순
                 </button>
+
                 <button
                     className="liked-filter-btn filter-btn"
                     onClick={handleClickLikeOrderButton}
@@ -71,15 +68,14 @@ const PostDesc = () => {
                                 }}
                             >
                                 <div className="post-info">
-                                    <span className="location">
+                                    <p className="location">
                                         <Icon
                                             icon="place"
                                             size="20px"
-                                            color="#273B4A"
+                                            color="#6B76FF"
                                         />
-                                        {el?.location?.split(' ')[0]}{' '}
-                                        {el?.location?.split(' ')[1]}
-                                    </span>
+                                        {el?.location}
+                                    </p>
                                     <span className="location">
                                         <Icon
                                             icon="user-person"
@@ -90,7 +86,7 @@ const PostDesc = () => {
                                     </span>
                                 </div>
                                 <span className="title">{el?.title}</span>
-                                <p className="content">{el?.contents}</p>
+
                                 <div className="post-info">
                                     <span>
                                         {el?.MoimUsers[0]?.User?.nickName}
@@ -112,12 +108,17 @@ const PostDesc = () => {
                                         <Icon
                                             icon="place"
                                             size="20px"
-                                            color="#273B4A"
+                                            color="#6B76FF"
                                         />
-                                        {el?.location?.split(' ')[0]}{' '}
-                                        {el?.location?.split(' ')[1]}
+
+                                        {el?.location}
                                     </p>
-                                    <span>
+                                    <span className="location">
+                                        <Icon
+                                            icon="user-person"
+                                            size="20px"
+                                            color="#A5ABB0"
+                                        />
                                         참여자 {el?.MoimUsers?.length}명
                                     </span>
                                 </div>
@@ -142,14 +143,14 @@ const PostDesc = () => {
                                 ) === -1 ? (
                                     <Icon
                                         icon="heart"
-                                        size="20px"
+                                        size="1rem"
                                         color="lightgray"
                                     />
                                 ) : (
                                     <Icon
                                         icon="heart"
-                                        size="20px"
-                                        color="red"
+                                        size="1rem"
+                                        color="#FD8787"
                                     />
                                 )}
                                 <span>
