@@ -15,7 +15,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 const MyComment = () => {
     const dispatch = useDispatch()
-    const comment_list = useSelector((state) => state.myMoim.my_comment_list)
+    const comment_list = useSelector((state) => state.myMoim.my_comments)
     console.log('><', 'comment', comment_list)
 
     React.useEffect(() => {
@@ -38,24 +38,22 @@ const MyComment = () => {
                     </div>
                 ) : (
                     <>
-                        {comment_list?.map((comment_list, idx) => (
+                        {comment_list?.map((i, idx) => (
                             <div
                                 className="postbox"
                                 onClick={() =>
-                                    history.push(
-                                        `/moim/detail/${comment_list?.moimId}`
-                                    )
+                                    history.push(`/moim/detail/${i?.moimId}`)
                                 }
                                 key={idx}
                             >
                                 <div className="mycomment-titlebox">
                                     <span className="title">
-                                        {comment_list?.Moim?.title}
+                                        {i?.Moim?.title}
 
                                         <MoreVertIcon />
                                     </span>
                                     <span className="comments">
-                                        내 댓글 : {comment_list?.contents}
+                                        내 댓글 : {i?.contents}
                                     </span>
                                 </div>
                             </div>

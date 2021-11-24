@@ -185,20 +185,20 @@ const userInfoAPI = (data) => {
 
 // mymoim
 const myMoimCreateAPI = (data) => {
-    return instance.post('/api/users/moims', { userType: 1 })
+    return instance.post('/api/moims/mymoims', { userType: 1 })
 }
 
 const myMoimJoinAPI = (data) => {
-    return instance.post('/api/users/moims', { userType: 0 })
+    return instance.post('/api/moims/mymoims', { userType: 0 })
 }
 
 const myMoimCommentAPI = () => {
-    return instance.get('/api/users/comments')
+    return instance.get('/api/moims/comment/mycomments')
 }
 
 const myMoimLikeAPI = () => {
     console.log('>>>!!', 'api')
-    return instance.get('/api/moims/like')
+    return instance.get('/api/moims/like/mylikes')
 }
 
 // * ------------------------------------------------
@@ -259,7 +259,7 @@ const moimCreateAPI = (data) => {
         startAt: data.startAt,
         finishAt: data.finishAt,
         location: data.location,
-        // locationGu: data.locationGu
+        // locationGu: data.locationGu,
     })
 }
 

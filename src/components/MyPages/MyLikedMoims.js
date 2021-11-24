@@ -15,7 +15,7 @@ import { myMoimLikeMD } from '../../redux/async/myMoim'
 
 const MyLike = () => {
     const dispatch = useDispatch()
-    const like_list = useSelector((state) => state.myMoim.my_like)
+    const like_list = useSelector((state) => state.myMoim.my_likes)
     console.log('>>>', like_list)
     console.log
 
@@ -27,7 +27,7 @@ const MyLike = () => {
     return (
         <>
             <section className="mymoim-contents">
-                {like_list.length === 0 ? (
+                {like_list === undefined ? (
                     <div className="contents-none">
                         <p>
                             내가 좋아요한 모임이 없네요!
@@ -55,10 +55,11 @@ const MyLike = () => {
                                             size="20px"
                                             color="#6B76FF"
                                         />
+                                        {i?.location}
                                     </span>
                                     <div className="titlebox">
                                         <span className="title">
-                                            {i?.Moim?.title}
+                                            {i?.title}
                                         </span>
                                     </div>
 
@@ -68,11 +69,7 @@ const MyLike = () => {
                                                 작성자
                                             </span>
                                             <span className="date">
-                                                {
-                                                    i?.Moim?.createdAt?.split([
-                                                        'T',
-                                                    ])[0]
-                                                }
+                                                {i?.createdAt?.split(['T'])[0]}
                                             </span>
                                         </div>
                                         <span className="join">
@@ -81,18 +78,18 @@ const MyLike = () => {
                                                 size="20px"
                                                 color="#A5ABB0"
                                             />
-                                            {/* {i?.Moim?.MoimUsers?.length} */}
+                                            {i?.MoimUsers?.length}
                                         </span>
                                     </div>
                                 </div>
                                 <div className="commentbox">
                                     <div>
                                         <FavoriteBorderIcon />
-                                        좋아요 {i?.Moim?.Likes?.length}
+                                        좋아요 {i?.Likes?.length}
                                     </div>
                                     <div>
                                         <ChatBubbleOutlineIcon />
-                                        댓글 {i?.Moim?.Comments?.length}개
+                                        댓글 {i?.Comments?.length}개
                                     </div>
                                 </div>
                             </div>

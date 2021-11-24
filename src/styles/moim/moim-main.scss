@@ -50,9 +50,19 @@
     }
 
     .post-info {
-        @include flexbox(between, center);
+        @include flexbox();
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
         padding-bottom: 0.5rem;
+    }
+    .location {
+        @include text-style-12(1.5rem, auto, $text-gray);
+        @include flexbox();
+        align-items: baseline;
+    }
+    svg {
+        align-items: center;
     }
     span {
         @include text-style-12(1.5rem, auto, $text-gray);
@@ -122,6 +132,7 @@
     max-width: $tablet;
     height: auto;
     border: none;
+    margin-left: 1rem;
 }
 
 .location-filter-btn {

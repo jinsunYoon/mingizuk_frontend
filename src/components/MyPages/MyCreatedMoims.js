@@ -9,9 +9,8 @@ import { myMoimCreateMD } from '../../redux/async/myMoim'
 
 const MyCreatedMoims = () => {
     const dispatch = useDispatch()
-    const create_list = useSelector((state) => state.myMoim.my_moim)
+    const create_list = useSelector((state) => state.myMoim.my_moims)
 
-    console.log('><', create_list)
     useEffect(() => {
         dispatch(myMoimCreateMD())
     }, [])
@@ -47,21 +46,19 @@ const MyCreatedMoims = () => {
                                             size="20px"
                                             color="#6B76FF"
                                         />
-                                        {i?.Moim?.location?.split(' ')[0]}{' '}
-                                        {i?.Moim?.location?.split(' ')[1]}{' '}
-                                        {i?.Moim?.location?.split(' ')[2]}
+                                        {i?.location}
                                     </span>
                                     <div className="titlebox">
                                         <span className="title">
-                                            {i?.Moim?.title}
+                                            {i?.title}
                                         </span>
                                         <div class="etcbox">
                                             <div>
                                                 <span className="date">
                                                     {
-                                                        i?.Moim?.createdAt?.split(
-                                                            ['T']
-                                                        )[0]
+                                                        i?.createdAt?.split([
+                                                            'T',
+                                                        ])[0]
                                                     }
                                                 </span>
                                             </div>
@@ -71,7 +68,7 @@ const MyCreatedMoims = () => {
                                                     size="20px"
                                                     color="#A5ABB0"
                                                 />
-                                                {i?.Moim?.MoimUsers?.length}
+                                                {i?.MoimUsers?.length}
                                             </span>
                                         </div>
                                     </div>
@@ -79,11 +76,11 @@ const MyCreatedMoims = () => {
                                 <div className="commentbox">
                                     <div>
                                         <FavoriteBorderIcon />
-                                        좋아요 {(i?.Moim?.Likes).length}
+                                        좋아요 {(i?.Likes).length}
                                     </div>
                                     <div>
                                         <ChatBubbleOutlineIcon />
-                                        댓글 {(i?.Moim?.Comments).length}개
+                                        댓글 {(i?.Comments).length}개
                                     </div>
                                 </div>
                             </div>

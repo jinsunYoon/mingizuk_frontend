@@ -189,17 +189,30 @@ const Filter = (props) => {
     return (
         <>
             <div className="location-filter-container">
-                <button
-                    className="location-filter-btn"
-                    onClick={() => {
-                        setFilterUIState(true)
-                        setFilterState(false)
-                    }}
-                >
-                    <Icon icon="place" size="20px" color="#a5abb0" />
-                    {!filterState ? '위치필터' : `${location1} ${location2}`}
-                    {/* <KeyboardArrowDownIcon /> */}
-                </button>
+                {!filterState ? (
+                    <button
+                        className="location-filter-btn"
+                        onClick={() => {
+                            setFilterUIState(true)
+                            setFilterState(false)
+                        }}
+                    >
+                        <Icon icon="place" size="20px" color="#a5abb0" />
+                        {`위치필터`}
+                    </button>
+                ) : (
+                    <button
+                        className="location-filter-btn"
+                        onClick={() => {
+                            setFilterUIState(true)
+                            setFilterState(false)
+                        }}
+                        style={{ color: '#6B76FF' }}
+                    >
+                        <Icon icon="place" size="20px" color="#6B76FF" />
+                        {`${location1} ${location2}`}
+                    </button>
+                )}
                 {filterUIState && (
                     <div className="location-select-container">
                         <select
