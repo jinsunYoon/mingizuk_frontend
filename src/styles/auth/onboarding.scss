@@ -9,7 +9,7 @@
 
 .onBoarding-container {
     @include column-flexbox(start, center);
-    padding: 3rem 3.5rem 90px 3.5rem;
+    padding: 1rem 3.5rem 90px 3.5rem;
     width: 100%;
     max-width: 768px;
     height: inherit;
@@ -28,7 +28,7 @@
             margin-right: 0;
         }
     }
-    margin-bottom: 56px;
+    margin-bottom: 28px;
 }
 
 .onBoarding-group {
@@ -42,19 +42,26 @@
         font-size: 1.5rem;
         letter-spacing: 0.15px;
         line-height: 2.25rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 1rem;
+        @media screen and (max-width: 320px) {
+            font-size: 1.3rem;
+        }
     }
     p {
         font-size: 12px;
         line-height: 18px;
         letter-spacing: 0.15px;
-        margin-bottom: 5.6rem;
+        margin-bottom: 7rem;
     }
     img {
         width: 18rem;
         height: auto;
         position: relative;
         bottom: 3rem;
+        @media screen and (max-width: 320px) {
+            width: 16rem;
+            bottom: 5rem;
+        }
     }
 }
 

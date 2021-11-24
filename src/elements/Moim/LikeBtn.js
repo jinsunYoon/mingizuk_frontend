@@ -7,7 +7,6 @@ const LikeBtn = (props) => {
     const { moim_id, likeUsers, user_id } = props
     const dispatch = useDispatch()
     const confirm = likeUsers?.findIndex(({ userId }) => userId === user_id)
-    console.log('<<', confirm, moim_id, likeUsers, user_id)
 
     return (
         <>

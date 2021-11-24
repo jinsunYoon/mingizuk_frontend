@@ -4,6 +4,7 @@ import { kakaoLoginMD, loginMD } from '../redux/async/user'
 import { history } from '../redux/store'
 import clsx from 'clsx'
 import '../styles/auth/auth.scss'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
     const dispatch = useDispatch()

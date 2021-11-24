@@ -143,7 +143,11 @@ const RoutineDesc = (props) => {
                         </button>
                     ))}
                     {myset?.length === 0 && (
-                        <p className="no-routine">내 루틴이 없습니다 ㅠㅠ</p>
+                        <p className="no-routine">
+                            아직 루틴이 없네요!
+                            <br />
+                            아래 + 버튼을 눌러서 새 루틴을 만들어보세요.
+                        </p>
                     )}
                 </div>
             )}

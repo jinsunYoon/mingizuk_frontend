@@ -2,18 +2,6 @@ import { createSlice } from '@reduxjs/toolkit'
 import { getMainRoutineMD, setMainRoutineMD } from '../async/routine'
 import Swal from 'sweetalert2'
 
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'center',
-    showConfirmButton: false,
-    timer: 1000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-    },
-})
-
 const initialState = {
     mainRoutine: [],
     isMain: '',
@@ -44,12 +32,7 @@ const mainRoutineSlice = createSlice({
                 )
             }
         },
-        [setMainRoutineMD.fulfilled]: (state, action) => {
-            Toast.fire({
-                icon: 'success',
-                title: '메인 루틴으로 설정되었어요.',
-            })
-        },
+        [setMainRoutineMD.fulfilled]: (state, action) => {},
     },
 })
 

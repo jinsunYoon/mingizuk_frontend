@@ -46,7 +46,7 @@ const MoimDetail = () => {
     // * post delete
     const deletePost = (data) => {
         swal({
-            title: '게시글을 지우시겠습니까 ?',
+            text: '게시글을 지우시겠습니까 ?',
             buttons: true,
             dangerMode: true,
         }).then((willDelete) => {
