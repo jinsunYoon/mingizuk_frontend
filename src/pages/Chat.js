@@ -56,8 +56,8 @@ const Chat = () => {
             .post(`/api/moims/${moimId}/chatRoom`)
             .then((res) => {
                 socketMoim.emit('enterNewUser', userNick, res.data.roomId)
-                setRoomId(res.data.roomId)
-                console.log('<>roomIdpost', res.data.roomId)
+                setRoomId(res?.data?.roomId)
+                console.log('<>roomIdpost', res?.data?.roomId, res)
                 return res.data.roomId
             })
             .then((res) => {

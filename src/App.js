@@ -1,6 +1,6 @@
 // * basic import for route
 import React, { Suspense, lazy } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect, Link } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
 import ProtectedRoutes from './routes/ProtectedRoutes' //Authenticated routes
 import PublicRoute from './routes/PublicRoute'
@@ -38,6 +38,7 @@ const App = () => {
         '/users/info',
         '/users/collection',
         '/users/moim',
+        '/routine/mypage',
     ]
 
     // *social login
