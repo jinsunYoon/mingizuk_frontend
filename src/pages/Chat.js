@@ -36,9 +36,9 @@ const Chat = () => {
 
     const userNick = useSelector((state) => state?.user?.userInfo?.nickName)
     const userID = useSelector((state) => state?.user?.userInfo?.userID)
-    const host = useSelector((state) => state?.moim?.chat_host)
-    const [roomId, setRoomId] = React.useState(-1)
     const moimId = history?.location?.pathname?.split('/').slice(-1)
+
+    const [roomId, setRoomId] = React.useState(-1)
     const [msgValue, setMsgValue] = React.useState('')
     const [messageArray, setMessageArray] = React.useState([])
     const [newMsgArray, setNewMsgArray] = React.useState([])

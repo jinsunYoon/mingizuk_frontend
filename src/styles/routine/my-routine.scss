@@ -65,6 +65,7 @@
 .setting-btn {
     @include primary-btn();
     @include text-style-14(1rem, 0.009rem, $white);
+    z-index: 3;
 }
 
 .add-btn {
