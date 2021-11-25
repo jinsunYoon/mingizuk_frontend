@@ -59,9 +59,6 @@ const completeSlice = createSlice({
             state.result = payload
         },
         setFakeResult: (state, { payload }) => {
-            state.fakeResult.push(payload)
-        },
-        setFakeResultClear: (state, { payload }) => {
             state.fakeResult = payload
         },
     },
@@ -93,7 +90,6 @@ export const {
     setFinDate,
     setResult,
     setFakeResult,
-    setFakeResultClear,
     setTempRoutineId,
 } = completeSlice.actions
 

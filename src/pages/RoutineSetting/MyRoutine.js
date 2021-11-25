@@ -9,6 +9,7 @@ import {
     setOptionModal,
     updateRoutine,
 } from '../../redux/modules/routineSlice'
+import { setResult, setFakeResult } from '../../redux/modules/completeSlice'
 import Icon from '../../components/icons/Icon'
 import { myRoutineDeleteMD } from '../../redux/async/routine'
 import Swal from 'sweetalert2'
@@ -19,6 +20,7 @@ const MyRoutine = () => {
     const optionStatus = useSelector((state) => state.routine.optionStatus)
     const optInfo = useSelector((state) => state.routine.info)
     const dispatch = useDispatch()
+    const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
 
     return (
         <>
@@ -89,6 +91,13 @@ const MyRoutine = () => {
                                                             optInfo.id
                                                         )
                                                     )
+                                                }
+                                                if (
+                                                    optInfo.routineName ==
+                                                    mainRoutine.routineName
+                                                ) {
+                                                    dispatch(setResult([]))
+                                                    dispatch(setFakeResult([]))
                                                 }
                                             })
                                         }}

@@ -15,7 +15,7 @@ import {
 } from '../../redux/modules/routineSlice'
 import {
     setResult,
-    setFakeResultClear,
+    setFakeResult,
     setTempRoutineId,
 } from '../../redux/modules/completeSlice'
 import Swal from 'sweetalert2'
@@ -75,11 +75,11 @@ const RoutineDesc = (props) => {
                 const data = getTempRoutineId
                 console.log('바꾸고싶은 루틴아디', data)
                 dispatch(setResult([]))
-                dispatch(setFakeResultClear([]))
+                dispatch(setFakeResult([]))
                 dispatch(setMainRoutineMD(data))
                 Toast.fire({
                     icon: 'success',
-                    title: '루틴이 초기화되었습니다.',
+                    title: '메인루틴으로 설정되었습니다',
                 })
                 history.push('/')
             } else return
@@ -222,14 +222,15 @@ const RoutineDesc = (props) => {
                                 resetRoutine(routineId)
                             }
                             if (
-                                getResult?.length == 0 &&
-                                getFakeResult?.length == 0
+                                (getResult?.length == 0 &&
+                                    getFakeResult?.length == 0) ||
+                                typeof mainRoutine == 'undefined'
                             ) {
                                 const data = getTempRoutineId
                                 console.log('data', data)
                                 dispatch(setMainRoutineMD(data))
                                 dispatch(setResult([]))
-                                dispatch(setFakeResultClear([]))
+                                dispatch(setFakeResult([]))
                                 history.push('/')
                             }
                         }}
