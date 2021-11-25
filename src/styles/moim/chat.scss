@@ -89,3 +89,35 @@
         @include text-style-14(21px, auto, $white);
     }
 }
+
+.chat-notice {
+    @include flexbox(start, center);
+    padding-left: 1rem;
+    position: fixed;
+    width: 100vw;
+    background-color: $white;
+    height: 3rem;
+    top: 3rem;
+    border-bottom: 1px solid #eeeeee;
+    span {
+        @include text-style-12(1.5rem, 0.15px, $black);
+        font-weight: 700;
+    }
+    p {
+        @include text-style-12(1.5rem, 0.15px, $black);
+        margin-left: 0.8rem;
+    }
+    button {
+        position: absolute;
+        right: 3rem;
+    }
+}
+
+.chat-notice-icon {
+    position: fixed;
+    height: 3rem;
+    @include flexbox(end, center);
+    right: 1rem;
+
+    z-index: 5;
+}

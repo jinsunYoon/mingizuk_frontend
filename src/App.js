@@ -1,6 +1,6 @@
 // * basic import for route
 import React, { Suspense, lazy } from 'react'
-import { Route, Switch, Redirect, Link } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
 import ProtectedRoutes from './routes/ProtectedRoutes' //Authenticated routes
 import PublicRoute from './routes/PublicRoute'
@@ -105,9 +105,9 @@ const App = () => {
                     <Route path={'/users/moim'} exact>
                         <Header type="back" name="내 모임" />
                     </Route>
-                    <Route path={'/moim/chat/:id'} exact>
+                    {/* <Route path={'/moim/chat/:id'} exact>
                         <Header type="back" name="모임 참여자 채팅" />
-                    </Route>
+                    </Route> */}
 
                     <Switch>
                         <PublicRoute
