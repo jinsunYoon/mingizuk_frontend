@@ -12,12 +12,17 @@
         height: 100%;
         overflow-x: scroll;
         border-bottom: 1px solid #eee;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
 
         .toogle-container {
             min-width: 480px;
             height: 100%;
             display: flex;
             justify-content: space-evenly;
+        }
+        &::-webkit-scrollbar {
+            display: none;
         }
     }
     .mymoim-list {

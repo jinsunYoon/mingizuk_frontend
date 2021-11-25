@@ -39,7 +39,7 @@ const Header = (props) => {
                             left: '1rem',
                         }}
                     >
-                        {type === 'menu' && <MenuModal />}
+                        {type === 'menu' && <div />}
                         {type === 'back' && <GoBack />}
                     </div>
                     <ButtonOutlined
