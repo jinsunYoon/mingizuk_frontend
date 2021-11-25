@@ -34,7 +34,7 @@ const initialState = {
     moim_ref_update: {},
     address: '',
     place: '',
-    filter: '',
+    filter: {},
     chat_host: '',
 }
 
@@ -142,8 +142,7 @@ const moimSlice = createSlice({
         },
         [moimLocationMD.fulfilled]: (state, { payload }) => {
             console.log('>>>>>!><', payload)
-
-            // location
+            state.filter = payload.data.filterMoims
         },
     },
 })
