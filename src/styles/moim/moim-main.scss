@@ -21,6 +21,7 @@
 .moim-post-box {
     @include column-flexbox(center, start);
     width: 100%;
+
     max-width: 768px;
     height: auto;
     background-color: $white;
@@ -51,8 +52,8 @@
         width: 100%;
 
         img {
-            width: auto;
-            height: 10rem;
+            width: 80vw;
+            height: auto;
         }
     }
 

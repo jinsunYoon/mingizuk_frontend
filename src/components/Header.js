@@ -23,6 +23,7 @@ const Header = (props) => {
                     position: 'fixed',
                     top: 0,
                     zIndex: 5,
+                    backgroundColor: 'white',
                 }}
             >
                 <FlexRow

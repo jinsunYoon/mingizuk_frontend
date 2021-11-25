@@ -204,6 +204,7 @@ const RoutineDesc = (props) => {
                         width: '100vw',
                         display: 'flex',
                         justifyContent: 'center',
+                        zIndex: 5,
                     }}
                 >
                     <button

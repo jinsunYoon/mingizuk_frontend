@@ -123,8 +123,21 @@ const MoimDetail = () => {
                 <article className="moim-detail-article">
                     <div className="location-btn">
                         <p className="detail-location">
-                            {post_data?.location?.split(' ')[0]}{' '}
-                            {post_data?.location?.split(' ')[1]}
+                            {' '}
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }}
+                            >
+                                <Icon
+                                    icon="place"
+                                    size="20px"
+                                    color="#6B76FF"
+                                />
+                                {post_data?.location}
+                            </div>
                         </p>
                         {Object.keys(post_data).length > 0 &&
                             post_data?.MoimUsers[0]?.User?.nickName ===

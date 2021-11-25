@@ -74,7 +74,9 @@ const PostDesc = () => {
                                             size="20px"
                                             color="#6B76FF"
                                         />
-                                        {el?.location}
+                                        {el?.location?.split(' ')[0]}{' '}
+                                        {el?.location?.split(' ')[1]}{' '}
+                                        {el?.location?.split(' ')[2]}{' '}
                                     </p>
                                     <span className="location">
                                         <Icon
@@ -110,8 +112,9 @@ const PostDesc = () => {
                                             size="20px"
                                             color="#6B76FF"
                                         />
-
-                                        {el?.location}
+                                        {el?.location?.split(' ')[0]}{' '}
+                                        {el?.location?.split(' ')[1]}{' '}
+                                        {el?.location?.split(' ')[2]}{' '}
                                     </p>
                                     <span className="location">
                                         <Icon
