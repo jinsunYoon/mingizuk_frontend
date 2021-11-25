@@ -58,9 +58,29 @@ const MainRoutineList = (props) => {
                             _justify={'start'}
                         >
                             {routine?.actionType == 'stretching' ? (
+                                result?.length > 0 &&
+                                result?.length - 1 >= idx ? (
+                                    <Img
+                                        _src={
+                                            'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/stretchdone.png'
+                                        }
+                                        _width={'3rem'}
+                                        _height={'3rem'}
+                                    />
+                                ) : (
+                                    <Img
+                                        _src={
+                                            'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/stretch.png'
+                                        }
+                                        _width={'3rem'}
+                                        _height={'3rem'}
+                                    />
+                                )
+                            ) : result?.length > 0 &&
+                              result?.length - 1 >= idx ? (
                                 <Img
                                     _src={
-                                        'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/stretch.png'
+                                        'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/exercisedone.png'
                                     }
                                     _width={'3rem'}
                                     _height={'3rem'}

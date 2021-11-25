@@ -17,7 +17,6 @@ import {
     setRoutineId,
     setFakeResult,
     setResult,
-    setFakeResultClear,
 } from '../redux/modules/completeSlice'
 import Swal from 'sweetalert2'
 
@@ -113,7 +112,11 @@ const ActionStart = (props) => {
                             zIndex: 4,
                         }}
                         onClick={() => {
-                            setActionModal(false)
+                            if (active) {
+                                return
+                            } else if (active == false) {
+                                setActionModal(false)
+                            }
                         }}
                     ></div>
                     {action1 && (
@@ -227,7 +230,7 @@ const ActionStart = (props) => {
                                         _margin={'0px'}
                                         _onClick={() => {
                                             setActionModal(false)
-                                            dispatch(setFakeResult('result'))
+                                            dispatch(setFakeResult(result))
                                             setNext(false)
                                         }}
                                     >
@@ -248,9 +251,7 @@ const ActionStart = (props) => {
                                                 setAction2(true)
                                                 setActionStart(true)
                                                 setNext(false)
-                                                dispatch(
-                                                    setFakeResult('result')
-                                                )
+                                                dispatch(setFakeResult(result))
                                             }}
                                         >
                                             다음 운동으로
@@ -370,7 +371,7 @@ const ActionStart = (props) => {
                                         _margin={'0px'}
                                         _onClick={() => {
                                             setActionModal(false)
-                                            dispatch(setFakeResult('result'))
+                                            dispatch(setFakeResult(result))
                                             setNext(false)
                                         }}
                                     >
@@ -391,9 +392,7 @@ const ActionStart = (props) => {
                                                 setAction3(true)
                                                 setActionStart(true)
                                                 setNext(false)
-                                                dispatch(
-                                                    setFakeResult('result')
-                                                )
+                                                dispatch(setFakeResult(result))
                                             }}
                                         >
                                             다음 운동으로
@@ -513,7 +512,7 @@ const ActionStart = (props) => {
                                         _margin={'0px'}
                                         _onClick={() => {
                                             setActionModal(false)
-                                            dispatch(setFakeResult('result'))
+                                            dispatch(setFakeResult(result))
                                             setNext(false)
                                         }}
                                     >
@@ -534,9 +533,7 @@ const ActionStart = (props) => {
                                                 setAction4(true)
                                                 setActionStart(true)
                                                 setNext(false)
-                                                dispatch(
-                                                    setFakeResult('result')
-                                                )
+                                                dispatch(setFakeResult(result))
                                             }}
                                         >
                                             다음 운동으로
@@ -656,7 +653,7 @@ const ActionStart = (props) => {
                                         _margin={'0px'}
                                         _onClick={() => {
                                             setActionModal(false)
-                                            dispatch(setFakeResult('result'))
+                                            dispatch(setFakeResult(result))
                                             setNext(false)
                                         }}
                                     >
@@ -677,9 +674,7 @@ const ActionStart = (props) => {
                                                 setAction5(true)
                                                 setActionStart(true)
                                                 setNext(false)
-                                                dispatch(
-                                                    setFakeResult('result')
-                                                )
+                                                dispatch(setFakeResult(result))
                                             }}
                                         >
                                             다음 운동으로
@@ -798,7 +793,7 @@ const ActionStart = (props) => {
                                         _margin={'0px'}
                                         _onClick={() => {
                                             setActionModal(false)
-                                            dispatch(setFakeResult('result'))
+                                            dispatch(setFakeResult(result))
                                             setNext(false)
                                         }}
                                     >
@@ -876,7 +871,7 @@ const ActionStart = (props) => {
                         console.log('루틴아이디', routineId)
                         dispatch(actionRestartMD(routineId))
                         dispatch(setResult([]))
-                        dispatch(setFakeResultClear([]))
+                        dispatch(setFakeResult([]))
                         setNext(false)
                         setActionStart(true)
                     }}

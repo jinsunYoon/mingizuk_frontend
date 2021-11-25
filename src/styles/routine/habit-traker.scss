@@ -13,7 +13,7 @@
     width: 24px;
     height: 24px;
     background-color: #f9f9f9;
-    margin: 4px;
+    margin: auto;
     border-radius: 4px;
 }
 
@@ -60,10 +60,11 @@
 }
 
 .habit-box-dark {
+    position: relative;
     width: 24px;
     height: 24px;
     background-color: $gray;
-    margin: 4px;
+    margin: auto;
     border-radius: 4px;
 }
 
