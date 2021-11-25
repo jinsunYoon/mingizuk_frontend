@@ -7,6 +7,7 @@ import moment from 'moment'
 import Filter from '../../components/Filter'
 import '../../styles/moim/moim-main.scss'
 import { moimLocationMD } from '../../redux/async/moim'
+import { set } from 'date-fns'
 
 const PostDesc = () => {
     const dispatch = useDispatch()
@@ -202,13 +203,7 @@ const PostDesc = () => {
         } else if (filter_data_all?.length == 0) {
             setPosts(post_data_all)
         }
-    }, [post_data_all, posts, filter_data_all])
-
-    const handleClickLikeOrderButton = () => {
-        posts.slice().sort((postA, postB) => {
-            postB.Likes.length - postA.Likes.length
-        })
-    }
+    }, [post_data_all, filter_data_all])
 
     const handleClickLocationFilterButton = () => {
         dispatch(moimLocationMD(locationfilter))
@@ -226,11 +221,11 @@ const PostDesc = () => {
                         <button
                             className="location-filter-btn"
                             onClick={() => {
-                                setFilterState(true)
+                                setFilterState(false)
                             }}
                         >
                             <Icon icon="place" size="20px" color="#a5abb0" />
-                            {`위치필터`}
+                            위치필터
                         </button>
                     ) : (
                         <button
@@ -281,22 +276,15 @@ const PostDesc = () => {
                 <button
                     className="latest-filter-btn filter-btn"
                     onClick={() => {
-                        posts
-                            .slice()
-                            .sort(
-                                (postA, postB) =>
-                                    moment(postB.createdAt) -
-                                    moment(postA.createdAt)
+                        let temp = [...posts]
+                        temp.sort(function (a, b) {
+                            return (
+                                new Date(b.createdAt).getTime() -
+                                new Date(a.createdAt).getTime()
                             )
-                        console.log(
-                            posts
-                                .slice()
-                                .sort(
-                                    (postA, postB) =>
-                                        moment(postB.createdAt) -
-                                        moment(postA.createdAt)
-                                )
-                        )
+                        })
+                        setPosts(temp)
+                        console.log(posts)
                     }}
                 >
                     최신순
@@ -305,9 +293,9 @@ const PostDesc = () => {
                 <button
                     className="liked-filter-btn filter-btn"
                     onClick={() => {
-                        let temp = posts
-                        temp.slice().sort((postA, postB) => {
-                            return postB.Likes.length - postA.Likes.length
+                        let temp = [...posts]
+                        temp.sort(function (a, b) {
+                            return b.Likes.length - a.Likes.length
                         })
                         setPosts(temp)
                         // console.log(posts, temp)
@@ -431,130 +419,6 @@ const PostDesc = () => {
                         </div>
                     </div>
                 ))}
-            {/*
-            FILTERING POST && SORT 
-            {filter_data_all?.length > 0 &&
-                filter_data_all?.map((el, idx) => (
-                    <div key={idx} className="post-warp">
-                        {el?.imgSrc === null ? (
-                            <div
-                                className="moim-post-box"
-                                onClick={() => {
-                                    history.push(`/moim/detail/${el?.id}`)
-                                }}
-                            >
-                                <div className="post-info">
-                                    <p className="location">
-                                        <Icon
-                                            icon="place"
-                                            size="20px"
-                                            color="#6B76FF"
-                                        />
-                                        {el?.location}
-                                    </p>
-                                    <span className="location">
-                                        <Icon
-                                            icon="user-person"
-                                            size="20px"
-                                            color="#A5ABB0"
-                                        />
-                                        참여자 {el?.MoimUsers?.length}명
-                                    </span>
-                                </div>
-                                <span className="title">{el?.title}</span>
-
-                                <div className="post-info">
-                                    <span>
-                                        {el?.MoimUsers[0]?.User?.nickName}
-                                    </span>
-                                    <span>
-                                        {moment(el?.createdAt).fromNow()}
-                                    </span>
-                                </div>
-                            </div>
-                        ) : (
-                            <div
-                                className="moim-post-box"
-                                onClick={() => {
-                                    history.push(`/moim/detail/${el?.id}`)
-                                }}
-                            >
-                                <div className="post-info">
-                                    <p className="location">
-                                        <Icon
-                                            icon="place"
-                                            size="20px"
-                                            color="#6B76FF"
-                                        />
-
-                                        {el?.location}
-                                    </p>
-                                    <span className="location">
-                                        <Icon
-                                            icon="user-person"
-                                            size="20px"
-                                            color="#A5ABB0"
-                                        />
-                                        참여자 {el?.MoimUsers?.length}명
-                                    </span>
-                                </div>
-                                <p className="title">{el?.title}</p>
-                                <div className="imgbox">
-                                    <img src={el.imgSrc} />
-                                </div>
-                                <div className="post-info">
-                                    <span>
-                                        {el?.MoimUsers[0]?.User?.nickName}
-                                    </span>
-                                    <span>
-                                        {moment(el?.createdAt).fromNow()}
-                                    </span>
-                                </div>
-                            </div>
-                        )}
-                        <div className="ectbox">
-                            <div className="icon-text">
-                                {el?.Likes?.findIndex(
-                                    (user) => user?.userId === loginuserID
-                                ) === -1 ? (
-                                    <Icon
-                                        icon="heart"
-                                        size="1rem"
-                                        color="lightgray"
-                                    />
-                                ) : (
-                                    <Icon
-                                        icon="heart"
-                                        size="1rem"
-                                        color="#FD8787"
-                                    />
-                                )}
-                                <span>
-                                    좋아요
-                                    {el?.Likes?.length}개
-                                </span>
-                            </div>
-                            <div className="icon-text">
-                                <Icon
-                                    icon={'message'}
-                                    size="20px"
-                                    color="#A5ABB0"
-                                />
-                                <span>댓글{el?.Comments?.length}개</span>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-
-             FILTERING NOTING 
-            {filter_data_all?.length == 0 && (
-                <>
-                    <p>
-                        {`${location1}  ${location2}`}에 모임을 개설해보세요~!
-                    </p>
-                </>
-            )}
-            */}
         </>
     )
 }
