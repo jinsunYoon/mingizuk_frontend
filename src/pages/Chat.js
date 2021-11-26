@@ -29,6 +29,7 @@ const Chat = () => {
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         },
     })
+
     // ! axios config
     const instance = axios.create({
         baseURL: 'https://mingijuk.shop',
@@ -50,6 +51,7 @@ const Chat = () => {
     const [msgValue, setMsgValue] = React.useState('')
     const [noticeValue, setNoticeValue] = React.useState('')
     const [noticeId, setNoticeId] = React.useState(false)
+    const [noticeContent, setNoticeContent] = React.useState('')
     const [noticeStatus, setNoticeStatue] = React.useState(true)
     const [noticeOptStatus, setNoticeOptStatus] = React.useState(false)
     const [messageArray, setMessageArray] = React.useState([])
@@ -75,17 +77,27 @@ const Chat = () => {
         instance
             .get(`/api/moims/${moimId}/${roomId}/notice`)
             .then(({ data }) => {
-                setNoticeValue(data.targetNotice.contents)
-                setNoticeId(data.targetNotice.id)
+                if (data.targetNotice !== null) {
+                    console.log('[][]]notnull', data)
+                    setNoticeContent(data.targetNotice.contents)
+                    setNoticeId(data.targetNotice.id)
+                }
             })
     )
     const deleteNotice = useMutation(() => {
-        return instance.delete(`/api/moims/${moimId}/${roomId}/${noticeId}`)
+        return instance
+            .delete(`/api/moims/${moimId}/${roomId}/${noticeId}`)
+            .then((res) => {
+                setNoticeContent('')
+                setNoticeOptStatus(false)
+            })
     })
     const updateNotice = useMutation((data) => {
-        return instance.put(`/api/moims/${moimId}/${roomId}/${noticeId}`, {
-            contents: data,
-        })
+        return instance
+            .put(`/api/moims/${moimId}/${roomId}/${noticeId}`, {
+                contents: data,
+            })
+            .then((res) => setNoticeId(res.data.nowNotice.id))
     })
 
     // ! go to scroll bottom
@@ -144,7 +156,7 @@ const Chat = () => {
 
     // ! post / update Notice
     const postNotice = (noticeValue) => {
-        if (noticeValue === '') {
+        if (noticeContent === '') {
             Swal.fire({
                 text: '공지로 등록하시겠어요 ?',
                 showCancelButton: true,
@@ -158,7 +170,11 @@ const Chat = () => {
                         .post(`/api/moims/${moimId}/${roomId}/notice`, {
                             contents: noticeValue,
                         })
-                        .then((res) => setNoticeValue(noticeValue))
+                        .then((res) => {
+                            setNoticeContent(noticeValue)
+                            console.log('[][][][][]', res)
+                            setNoticeId(res.data.noticeId)
+                        })
                         .catch((error) => console.log('<>error', error))
                 }
             })
@@ -173,7 +189,7 @@ const Chat = () => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     updateNotice.mutate(noticeValue)
-                    setNoticeValue(noticeValue)
+                    setNoticeContent(noticeValue)
                 }
             })
         }
@@ -199,11 +215,11 @@ const Chat = () => {
                         <Icon icon="notice" size="24px" />
                     </button>
                 )}
-                {noticeValue !== '' && noticeStatus && (
+                {noticeContent !== '' && noticeStatus && (
                     <div className="chat-notice">
                         <div style={{ display: 'flex' }}>
                             <span>모임장 공지</span>
-                            <p>{noticeValue}</p>
+                            <p>{noticeContent}</p>
                         </div>
                         <div className="chat-notice-option-btn">
                             <div onClick={() => setNoticeOptStatus(true)}>
@@ -334,7 +350,6 @@ const Chat = () => {
                                     }).then((result) => {
                                         if (result.isConfirmed) {
                                             deleteNotice.mutate()
-                                            setNoticeValue('')
                                         }
                                     })
                                 }}
