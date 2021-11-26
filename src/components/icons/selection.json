@@ -925,7 +925,7 @@
                 "attrs": [
                     {
                         "fill": "none",
-                        "stroke": "rgb(165, 171, 176)",
+                        "stroke": "#C4C4C4",
                         "strokeLinejoin": "miter",
                         "strokeLinecap": "butt",
                         "strokeMiterlimit": "4",
@@ -942,7 +942,7 @@
             "attrs": [
                 {
                     "fill": "none",
-                    "stroke": "rgb(165, 171, 176)",
+                    "stroke": "#C4C4C4",
                     "strokeLinejoin": "miter",
                     "strokeLinecap": "butt",
                     "strokeMiterlimit": "4",
@@ -959,6 +959,142 @@
             "setIdx": 0,
             "setId": 3,
             "iconIdx": 2
+        },
+        {
+            "icon": {
+                "paths": [
+                    "M83.339 994.708l482.702-482.702-482.702-482.702-80.498 80.441 402.318 402.261-402.318 402.261 80.498 80.441z"
+                ],
+                "attrs": [{ "fill": "#C4C4C4" }],
+                "width": 569,
+                "isMulticolor": false,
+                "isMulticolor2": false,
+                "grid": 0,
+                "tags": ["coolicon"],
+                "colorPermutations": {
+                    "147153159119619619614658891": [{ "f": 2 }]
+                }
+            },
+            "attrs": [{ "fill": "#C4C4C4" }],
+            "properties": {
+                "order": 17,
+                "id": 7,
+                "name": "right-tri-2",
+                "prevSize": 32,
+                "code": 59648
+            },
+            "setIdx": 0,
+            "setId": 8,
+            "iconIdx": 0
+        },
+        {
+            "icon": {
+                "paths": [
+                    "M485.55 29.292l-482.702 482.702 482.702 482.703 80.498-80.441-402.318-402.262 402.318-402.261-80.498-80.441z"
+                ],
+                "attrs": [{ "fill": "#C4C4C4" }],
+                "width": 569,
+                "isMulticolor": false,
+                "isMulticolor2": false,
+                "grid": 0,
+                "tags": ["coolicon"],
+                "colorPermutations": {
+                    "147153159119619619614658891": [{ "f": 2 }]
+                }
+            },
+            "attrs": [{ "fill": "#C4C4C4" }],
+            "properties": {
+                "order": 16,
+                "id": 6,
+                "name": "left-tri",
+                "prevSize": 32,
+                "code": 59648
+            },
+            "setIdx": 0,
+            "setId": 8,
+            "iconIdx": 0
+        },
+        {
+            "icon": {
+                "paths": [
+                    "M938.667 341.333h-213.333v256h213.333v-256z",
+                    "M725.333 341.333l-554.667-170.667v597.333l554.667-186.667v-240z",
+                    "M725.333 917.333v-320h106.667v320h-106.667z"
+                ],
+                "attrs": [
+                    {
+                        "fill": "none",
+                        "stroke": "rgb(46, 58, 89)",
+                        "strokeLinejoin": "miter",
+                        "strokeLinecap": "butt",
+                        "strokeMiterlimit": "4",
+                        "strokeWidth": 42.666666666666664
+                    },
+                    {
+                        "fill": "none",
+                        "stroke": "#2E3A59",
+                        "strokeLinejoin": "miter",
+                        "strokeLinecap": "butt",
+                        "strokeMiterlimit": "4",
+                        "strokeWidth": 42.666666666666664
+                    },
+                    {
+                        "fill": "none",
+                        "stroke": "#2E3A59",
+                        "strokeLinejoin": "miter",
+                        "strokeLinecap": "butt",
+                        "strokeMiterlimit": "4",
+                        "strokeWidth": 42.666666666666664
+                    }
+                ],
+                "isMulticolor": false,
+                "isMulticolor2": false,
+                "grid": 0,
+                "tags": ["notice"],
+                "colorPermutations": {
+                    "147153159119619619614658891": [
+                        { "s": 0 },
+                        { "s": 0 },
+                        { "s": 0 }
+                    ]
+                }
+            },
+            "attrs": [
+                {
+                    "fill": "none",
+                    "stroke": "rgb(46, 58, 89)",
+                    "strokeLinejoin": "miter",
+                    "strokeLinecap": "butt",
+                    "strokeMiterlimit": "4",
+                    "strokeWidth": 42.666666666666664
+                },
+                {
+                    "fill": "none",
+                    "stroke": "rgb(46, 58, 89)",
+                    "strokeLinejoin": "miter",
+                    "strokeLinecap": "butt",
+                    "strokeMiterlimit": "4",
+                    "strokeWidth": 42.666666666666664
+                },
+                {
+                    "fill": "none",
+                    "stroke": "rgb(46, 58, 89)",
+                    "strokeLinejoin": "miter",
+                    "strokeLinecap": "butt",
+                    "strokeMiterlimit": "4",
+                    "strokeWidth": 42.666666666666664
+                }
+            ],
+            "properties": {
+                "order": 15,
+                "id": 5,
+                "name": "notice",
+                "prevSize": 32,
+                "code": 59649
+            },
+            "setIdx": 0,
+            "setId": 8,
+            "iconIdx": 1
         },
         {
             "icon": {

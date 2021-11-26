@@ -10,6 +10,7 @@ import axios from 'axios'
 import { getToken } from '../shared/utils'
 import Header from '../components/Header'
 import { useMutation, useQuery } from 'react-query'
+import Icon from '../components/icons/Icon'
 
 const socketMoim = socketIOClient('https://mingijuk.shop/chat')
 
@@ -48,6 +49,9 @@ const Chat = () => {
     const [roomId, setRoomId] = React.useState(false)
     const [msgValue, setMsgValue] = React.useState('')
     const [noticeValue, setNoticeValue] = React.useState('')
+    const [noticeId, setNoticeId] = React.useState(false)
+    const [noticeStatus, setNoticeStatue] = React.useState(true)
+    const [noticeOptStatus, setNoticeOptStatus] = React.useState(false)
     const [messageArray, setMessageArray] = React.useState([])
     const [newMsgArray, setNewMsgArray] = React.useState([])
 
@@ -57,17 +61,32 @@ const Chat = () => {
     }
     const getChatRoom = useMutation(setChatRoom)
     const getHistoryChats = useQuery(['getHistoryChats', roomId], () =>
-        instance.get(`/api/moims/${moimId}/${roomId}`).then(({ data }) => {
-            console.log('[]', data)
-            setMessageArray(data?.chats)
-        })
+        instance
+            .get(`/api/moims/${moimId}/${roomId}`)
+            .then(({ data }) => {
+                console.log('[][]', data)
+                setMessageArray(data?.chats)
+            })
+            .catch((err) => {
+                console.log('[]', err)
+            })
     )
-    // const getNotice =
-    //     (['getHistoryChats', roomId],
-    //     () =>
-    //         instance.get(`/api/moims/${moimId}/${roomId}`).then(({ data }) => {
-    //             setMessageArray(data?.chats)
-    //         }))
+    const getHistoryNotice = useQuery(['getHistoryNotice', roomId], () =>
+        instance
+            .get(`/api/moims/${moimId}/${roomId}/notice`)
+            .then(({ data }) => {
+                setNoticeValue(data.targetNotice.contents)
+                setNoticeId(data.targetNotice.id)
+            })
+    )
+    const deleteNotice = useMutation(() => {
+        return instance.delete(`/api/moims/${moimId}/${roomId}/${noticeId}`)
+    })
+    const updateNotice = useMutation((data) => {
+        return instance.put(`/api/moims/${moimId}/${roomId}/${noticeId}`, {
+            contents: data,
+        })
+    })
 
     // ! go to scroll bottom
     React.useEffect(() => {
@@ -81,7 +100,6 @@ const Chat = () => {
         getChatRoom.mutateAsync(moimId).then(({ data }) => {
             socketMoim.emit('enterNewUser', userNick, data?.roomId)
             setRoomId(data?.roomId)
-            console.log('<>왜징', data?.roomId)
         })
 
         socketMoim.on('connect', () => {
@@ -122,28 +140,43 @@ const Chat = () => {
             .catch((error) => console.log('<>error', error))
         socketMoim.emit('sendMsg', userNick, msgValue, roomId)
         setMsgValue('')
-        console.log('<>send', msgValue, roomId)
     }
 
-    // ! post Notice
+    // ! post / update Notice
     const postNotice = (noticeValue) => {
-        Swal.fire({
-            text: '공지로 등록하시겠어요 ?',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '등록',
-            cancelButtonText: '취소',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                instance
-                    .post(`/api/moims/${moimId}/${roomId}/notice`, {
-                        contents: noticeValue,
-                    })
-                    .then((res) => setNoticeValue(noticeValue))
-                    .catch((error) => console.log('<>error', error))
-            }
-        })
+        if (noticeValue === '') {
+            Swal.fire({
+                text: '공지로 등록하시겠어요 ?',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '등록',
+                cancelButtonText: '취소',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    instance
+                        .post(`/api/moims/${moimId}/${roomId}/notice`, {
+                            contents: noticeValue,
+                        })
+                        .then((res) => setNoticeValue(noticeValue))
+                        .catch((error) => console.log('<>error', error))
+                }
+            })
+        } else {
+            Swal.fire({
+                text: '공지를 수정하시겠어요 ?',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '수정',
+                cancelButtonText: '취소',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    updateNotice.mutate(noticeValue)
+                    setNoticeValue(noticeValue)
+                }
+            })
+        }
     }
 
     return (
@@ -153,15 +186,32 @@ const Chat = () => {
                     socketMoim.emit('leaveRoom', userNick, roomId)
                 }}
             >
-                <Header name="모임 참여자 채팅" type="back" />
-                <button className="chat-notice-icon">공지</button>
-                <div className="chat-notice">
-                    <div>
-                        <span>모임장 공지</span>
-                        <p>{noticeValue}</p>
+                <Header name="참여자 채팅" type="back" />
+                {noticeValue !== '' && (
+                    <button
+                        className="chat-notice-icon"
+                        onClick={() =>
+                            noticeStatus
+                                ? setNoticeStatue(false)
+                                : setNoticeStatue(true)
+                        }
+                    >
+                        <Icon icon="notice" size="24px" />
+                    </button>
+                )}
+                {noticeValue !== '' && noticeStatus && (
+                    <div className="chat-notice">
+                        <div style={{ display: 'flex' }}>
+                            <span>모임장 공지</span>
+                            <p>{noticeValue}</p>
+                        </div>
+                        <div className="chat-notice-option-btn">
+                            <div onClick={() => setNoticeOptStatus(true)}>
+                                ...
+                            </div>
+                        </div>
                     </div>
-                    <button>삭제</button>
-                </div>
+                )}
             </div>
 
             <div className="chat-warp">
@@ -258,6 +308,44 @@ const Chat = () => {
                     <button onClick={() => sendMessage()}>전송</button>
                 </div>
             </div>
+            {noticeOptStatus && (
+                <div
+                    className="option-background"
+                    onClick={() => setNoticeOptStatus(false)}
+                >
+                    <div className="opt-warp">
+                        <div
+                            className="option-container"
+                            onClick={(e) => e.stopPropagation()}
+                            style={{ height: '7rem' }}
+                        >
+                            <button
+                                onClick={() => {
+                                    Swal.fire({
+                                        text: '공지를 삭제하시겠어요 ?',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#6B76FF',
+                                        cancelButtonColor: '#DEDEDE',
+                                        confirmButtonText: '삭제',
+                                        cancelButtonText: '취소',
+                                        width: '30rem',
+                                        height: '15rem',
+                                        reverseButtons: true,
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            deleteNotice.mutate()
+                                            setNoticeValue('')
+                                        }
+                                    })
+                                }}
+                            >
+                                <Icon icon="Trash_light" size="24px" />
+                                <span>삭제하기</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     )
 }

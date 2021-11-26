@@ -3,6 +3,7 @@ import { BarChart, Bar, XAxis, LabelList } from 'recharts'
 import { format, addDays } from 'date-fns'
 import { finRoutinesActionsMD } from '../redux/async/routine'
 import { useDispatch, useSelector } from 'react-redux'
+import Icon from '../components/icons/Icon'
 
 const HistoryGraph = (props) => {
     const { select } = props
@@ -100,14 +101,27 @@ const HistoryGraph = (props) => {
             }
         })
         history.map((data) => {
-            graphActionData.push({
-                name: data.date.slice(5, 10).replace('-', '/'),
-                actionCtn: data.actions.length,
-            })
-            graphRoutineData.push({
-                name: data.date.slice(5, 10).replace('-', '/'),
-                routineCtn: data.routines.length,
-            })
+            if (data.date === format(new Date(), 'yyyy-MM-dd')) {
+                graphRoutineData.push({
+                    today: ['오늘'],
+                    name: data.date.slice(5, 10).replace('-', '/'),
+                    routineCtn: data.routines.length,
+                })
+                graphActionData.push({
+                    today: ['오늘'],
+                    name: data.date.slice(5, 10).replace('-', '/'),
+                    actionCtn: data.actions.length,
+                })
+            } else {
+                graphRoutineData.push({
+                    name: data.date.slice(5, 10).replace('-', '/'),
+                    routineCtn: data.routines.length,
+                })
+                graphActionData.push({
+                    name: data.date.slice(5, 10).replace('-', '/'),
+                    actionCtn: data.actions.length,
+                })
+            }
         })
         return _inital
     }
@@ -137,7 +151,7 @@ const HistoryGraph = (props) => {
                             } else return
                         }}
                     >
-                        &lt;
+                        <Icon icon="left-tri" size="18px" />
                     </button>
                     <h3>밍기적 {week}주차</h3>
                     <button
@@ -149,7 +163,7 @@ const HistoryGraph = (props) => {
                             } else return
                         }}
                     >
-                        &gt;
+                        <Icon icon="right-tri-2" size="18px" />
                     </button>
                 </section>
                 <section className="graph-container">
@@ -159,14 +173,15 @@ const HistoryGraph = (props) => {
                     {graph === 'action' && (
                         <BarChart
                             width={340}
-                            height={270}
+                            height={295}
                             data={graphActionDataDivSeven}
-                            margin={{ top: 25 }}
+                            margin={{ top: 55 }}
                         >
                             <XAxis
                                 dataKey="name"
                                 axisLine={false}
                                 tickLine={false}
+                                height={30}
                                 style={{
                                     fill: '#A5ABB0',
                                     fontSize: '12px',
@@ -184,9 +199,19 @@ const HistoryGraph = (props) => {
                             >
                                 <LabelList
                                     dataKey="actionCtn"
-                                    position="top"
+                                    offset={-230}
+                                    position="bottom"
                                     style={{
                                         fill: '#6B76FF',
+                                        fontSize: '12px',
+                                    }}
+                                />
+                                <LabelList
+                                    dataKey="today"
+                                    position="bottom"
+                                    offset={-260}
+                                    style={{
+                                        fill: '#FD8787',
                                         fontSize: '12px',
                                     }}
                                 />
@@ -196,9 +221,9 @@ const HistoryGraph = (props) => {
                     {graph === 'routine' && (
                         <BarChart
                             width={340}
-                            height={270}
+                            height={295}
                             data={graphRoutineDataDivSeven}
-                            margin={{ top: 25 }}
+                            margin={{ top: 55 }}
                         >
                             <XAxis
                                 dataKey="name"
@@ -221,9 +246,19 @@ const HistoryGraph = (props) => {
                             >
                                 <LabelList
                                     dataKey="routineCtn"
-                                    position="top"
+                                    offset={-230}
+                                    position="bottom"
                                     style={{
                                         fill: '#6B76FF',
+                                        fontSize: '12px',
+                                    }}
+                                />
+                                <LabelList
+                                    dataKey="today"
+                                    position="bottom"
+                                    offset={-260}
+                                    style={{
+                                        fill: '#FD8787',
                                         fontSize: '12px',
                                     }}
                                 />
