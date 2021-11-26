@@ -16,8 +16,6 @@ const PostDesc = () => {
     const post_data_all = useSelector((state) => state.moim.moim_all)
     const loginuserID = useSelector((state) => state.user.userInfo.userID)
 
-    console.log(post_data_all)
-
     // Filter - Location
     const locations = {
         지역: [
@@ -189,16 +187,29 @@ const PostDesc = () => {
     const [location1, setLocation1] = useState('')
     const [location2, setLocation2] = useState('')
     const [filterState, setFilterState] = useState(false)
+    const [filterTextState, setFilterTextState] = useState(false)
 
     const locationfilter = location1 + ' ' + location2
     const filter_data_all = useSelector((state) => state.moim.filter)
 
     const filter_data_none = '모임이개설된 지역이 없습니다'
 
+    const sortarr = () => {
+        let temp = [...posts]
+        temp.sort(function (a, b) {
+            return (
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+            )
+        })
+        setPosts(temp)
+    }
+
     React.useEffect(() => {
         setPosts(post_data_all)
 
         if (filter_data_all?.length > 0) {
+            sortarr(posts)
             setPosts(filter_data_all)
         } else if (filter_data_all?.length == 0) {
             setPosts(post_data_all)
@@ -210,8 +221,8 @@ const PostDesc = () => {
         setFilterState(false)
         setPosts(filter_data_all)
     }
-
     console.log('><><><>', posts)
+
     return (
         <>
             {/* ******** FILTER ****** */}
@@ -221,6 +232,7 @@ const PostDesc = () => {
                         <button
                             className="location-filter-btn"
                             onClick={() => {
+                                setFilterTextState(false)
                                 setFilterState(false)
                             }}
                         >
@@ -231,12 +243,15 @@ const PostDesc = () => {
                         <button
                             className="location-filter-btn"
                             onClick={() => {
+                                setFilterTextState(true)
                                 setFilterState(true)
                             }}
                             style={{ color: '#6B76FF' }}
                         >
                             <Icon icon="place" size="20px" color="#6B76FF" />
-                            {`${location1} ${location2}`}
+                            {filterTextState === false
+                                ? `위치필터`
+                                : `${location1} ${location2}`}
                         </button>
                     )}
 
@@ -276,15 +291,7 @@ const PostDesc = () => {
                 <button
                     className="latest-filter-btn filter-btn"
                     onClick={() => {
-                        let temp = [...posts]
-                        temp.sort(function (a, b) {
-                            return (
-                                new Date(b.createdAt).getTime() -
-                                new Date(a.createdAt).getTime()
-                            )
-                        })
-                        setPosts(temp)
-                        console.log(posts)
+                        sortarr()
                     }}
                 >
                     최신순
@@ -298,7 +305,6 @@ const PostDesc = () => {
                             return b.Likes.length - a.Likes.length
                         })
                         setPosts(temp)
-                        // console.log(posts, temp)
                     }}
                 >
                     좋아요순
@@ -306,7 +312,7 @@ const PostDesc = () => {
             </div>
 
             {/* ******** POST ********* */}
-            {console.log('>>posts state값', posts)}
+
             {posts?.length > 0 &&
                 posts?.map((el, idx) => (
                     <div key={idx} className="post-warp">
@@ -332,7 +338,7 @@ const PostDesc = () => {
                                             size="20px"
                                             color="#A5ABB0"
                                         />
-                                        참여자 {el?.MoimUsers?.length}명
+                                        {el?.MoimUsers?.length}
                                     </span>
                                 </div>
                                 <span className="title">{el?.title}</span>
@@ -369,7 +375,7 @@ const PostDesc = () => {
                                             size="20px"
                                             color="#A5ABB0"
                                         />
-                                        참여자 {el?.MoimUsers?.length}명
+                                        {el?.MoimUsers?.length}
                                     </span>
                                 </div>
                                 <p className="title">{el?.title}</p>
