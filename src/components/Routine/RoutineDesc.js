@@ -117,29 +117,29 @@ const RoutineDesc = (props) => {
                         >
                             <div className="text-box">
                                 <h3>{routine?.routineName}</h3>
-                                <p>
-                                    {routine?.Actions?.map((action, idx) =>
-                                        routine?.Actions?.length - 1 === idx
-                                            ? `${action?.actionName}`
-                                            : action?.actionName?.length > 5
-                                            ? `${action?.actionName?.slice(
-                                                  0,
-                                                  3
-                                              )}.. / `
-                                            : `${action?.actionName} / `
-                                    )}
-                                </p>
-                            </div>
-                            <div className="icon-box">
                                 <div
                                     onClick={() => {
                                         dispatch(setOptionModal(true))
                                         dispatch(setRoutineInfo(routine))
                                     }}
                                 >
-                                    ...
+                                    <div className="icon-box"></div>
+                                    <div className="icon-box"></div>
+                                    <div className="icon-box"></div>
                                 </div>
                             </div>
+                            <p>
+                                {routine?.Actions?.map((action, idx) =>
+                                    routine?.Actions?.length - 1 === idx
+                                        ? `${action?.actionName}`
+                                        : action?.actionName?.length > 5
+                                        ? `${action?.actionName?.slice(
+                                              0,
+                                              3
+                                          )}.. / `
+                                        : `${action?.actionName} / `
+                                )}
+                            </p>
                         </button>
                     ))}
                     {myset?.length === 0 && (

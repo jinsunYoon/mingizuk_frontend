@@ -6,7 +6,7 @@
     width: 100%;
     height: 5.313rem;
     border: 1px solid #dadada;
-    @include flexbox(between, center);
+    @include column-flexbox(between, start);
     padding: 1.25rem 1.25rem;
     border-radius: 0.438rem;
     margin-bottom: 20px;
@@ -54,12 +54,17 @@
 }
 
 .icon-box {
-    @include flexbox(between, center);
-    width: 1.875rem;
+    @include flexbox(between, start);
+    width: 2px;
+    height: 2px;
+    margin-bottom: 4px;
+    background-color: black;
 }
 
 .text-box {
-    @include column-flexbox(start, start);
+    @include flexbox(between, center);
+    width: 100%;
+    height: 1.5rem;
 }
 
 .setting-btn {

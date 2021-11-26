@@ -19,7 +19,7 @@ const HabitToolTip = (props) => {
                     <Text>
                         {moment().format('MM')}월 {day}일
                     </Text>
-                    <Text>액션 n개 !</Text>
+                    <Text>동작 n개 !</Text>
                     <Text>루틴 n개 !</Text>
                 </FlexColumn>
             </ToolTip>

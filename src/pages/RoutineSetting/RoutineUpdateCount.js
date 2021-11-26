@@ -33,7 +33,7 @@ const RoutineUpdateCount = () => {
             <div className="routine-layout">
                 <section className="container">
                     <h3 className="count-title">
-                        루틴 제목과 액션 횟수를 수정해주세요.
+                        루틴 제목과 동작 횟수를 수정해주세요.
                     </h3>
                     <input
                         className="routineIn"

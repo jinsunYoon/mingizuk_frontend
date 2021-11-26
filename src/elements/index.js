@@ -9,6 +9,7 @@ import Title from './Title'
 import SubTitle from './SubTitle'
 import Text from './Text'
 import GoBack from './GoBack'
+import GoMain from './GoMain'
 import LikeBtn from './Moim/LikeBtn'
 
 export {
@@ -23,5 +24,6 @@ export {
     Text,
     ActiveUnderLine,
     GoBack,
+    GoMain,
     LikeBtn,
 }

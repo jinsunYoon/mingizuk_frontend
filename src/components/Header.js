@@ -1,6 +1,12 @@
 import React from 'react'
 
-import { ButtonOutlined, FlexRow, GoBack, Text } from '../elements/index'
+import {
+    ButtonOutlined,
+    FlexRow,
+    GoBack,
+    GoMain,
+    Text,
+} from '../elements/index'
 
 import { MenuModal } from '../components/index'
 
@@ -41,6 +47,7 @@ const Header = (props) => {
                     >
                         {type === 'menu' && <div />}
                         {type === 'back' && <GoBack />}
+                        {type === 'goMain' && <GoMain />}
                     </div>
                     <ButtonOutlined
                         _border={'none'}

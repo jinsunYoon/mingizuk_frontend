@@ -122,7 +122,7 @@ const Main = (props) => {
                                     _padding={'0px 0px 0.2rem 0px'}
                                     _color={'#6B76FF'}
                                 >
-                                    총 {mainRoutine?.Actions?.length}개의 액션
+                                    총 {mainRoutine?.Actions?.length}개의 동작
                                 </Text>
                             </FlexRow>
                             <FlexColumn
@@ -227,7 +227,7 @@ const Main = (props) => {
                                 _padding={'0px 0px 0.2rem 0px'}
                                 _color={'#6B76FF'}
                             >
-                                총 0개의 액션
+                                총 0개의 동작
                             </Text>
                         </FlexRow>
                         {curChara ? (

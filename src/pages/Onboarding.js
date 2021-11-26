@@ -31,7 +31,7 @@ const Onboarding = () => {
             src: 'https://test-pwa-kyuung.s3.ap-northeast-2.amazonaws.com/on2.png',
         },
         {
-            title: '액션과 루틴 기록을 한눈에!',
+            title: '동작과 루틴 기록을 한눈에!',
             desc: '루틴을 완료할 때마다 포인트가 쌓여 성장합니다.',
             src: 'https://test-pwa-kyuung.s3.ap-northeast-2.amazonaws.com/on3.png',
         },

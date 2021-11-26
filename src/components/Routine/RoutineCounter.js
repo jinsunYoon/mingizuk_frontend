@@ -41,7 +41,7 @@ const RoutineCounter = () => {
                                 ? dispatch(
                                       minusAction({ value: count.actionName })
                                   )
-                                : alert('액션은 1개 이상이어야 합니다.')
+                                : alert('동작은 1개 이상이어야 합니다.')
                         }
                     >
                         X

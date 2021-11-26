@@ -40,7 +40,7 @@ const Login = () => {
                 <section className="contents">
                     <div className="login-title">
                         <img src="https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png" />
-                        <h1 className="logo">Minggijuk</h1>
+                        <h1 className="logo">Mingizuk</h1>
                     </div>
                     <div className="login-container">
                         <input

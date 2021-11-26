@@ -23,7 +23,7 @@ const History = () => {
                 }}
             >
                 <ToggleTab
-                    firstValue={'액션'}
+                    firstValue={'동작'}
                     secondValue={'루틴'}
                     select={status}
                 />

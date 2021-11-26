@@ -58,7 +58,7 @@ const MyRoutine = () => {
                                     <button
                                         onClick={() => {
                                             dispatch(updateRoutine(optInfo.id))
-                                            history.push('/routine/update')
+                                            history.replace('/routine/update')
                                             dispatch(setOptionModal(false))
                                             dispatch(setRoutineModal(false))
                                         }}
