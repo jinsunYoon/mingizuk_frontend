@@ -108,9 +108,13 @@ const MapSearch = () => {
                 }}
             >
                 <Icon icon={'create'} size={13} />
-                {getPlace
-                    ? `${getPlace} - ${getAddress}`
-                    : '위치를 선택해주세요'}
+                {getPlace ? (
+                    <div style={{ color: 'black' }}>
+                        {getPlace} - {getAddress}
+                    </div>
+                ) : (
+                    '위치를 선택해주세요'
+                )}
             </button>
         </>
     )

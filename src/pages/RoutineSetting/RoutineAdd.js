@@ -19,7 +19,7 @@ const RoutineAdd = () => {
                         secondValue={'맨몸 운동'}
                     />
                     <div className="routine-add-title">
-                        <h3>액션을 선택 해주세요.</h3>
+                        <h3>동작을 선택 해주세요.</h3>
                         <span>(최대 5개)</span>
                     </div>
                     <RoutineSelect select={status} />

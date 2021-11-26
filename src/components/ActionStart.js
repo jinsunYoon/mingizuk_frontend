@@ -58,7 +58,7 @@ const ActionStart = (props) => {
 
     const successAction = () => {
         const data = { actionId: getActionId, routineId: getRoutineId }
-        console.log('액션컴플리트데이터', data)
+        console.log('동작컴플리트데이터', data)
 
         dispatch(actionCompleteMD(data))
         setComplete(false)
@@ -70,7 +70,7 @@ const ActionStart = (props) => {
         const thisRoutineId = mainRoutine?.Actions[num]?.routineId
         dispatch(setActionId(thisActionId))
         dispatch(setRoutineId(thisRoutineId))
-        console.log('this 액션아디, 루틴아디', thisActionId, thisRoutineId)
+        console.log('this 동작아디, 루틴아디', thisActionId, thisRoutineId)
     }
 
     const imgGif = (name) => {
@@ -178,7 +178,7 @@ const ActionStart = (props) => {
                                         completeBtn()
                                     }}
                                 >
-                                    액션 시작!
+                                    한 동작 시작!
                                 </ButtonOutlined>
                             )}
                             {active && (
@@ -192,7 +192,7 @@ const ActionStart = (props) => {
                                     _bradius={'0.5rem'}
                                     _color={'#999999'}
                                 >
-                                    액션 진행중...
+                                    한 동작 진행중...
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -320,7 +320,7 @@ const ActionStart = (props) => {
                                         completeBtn()
                                     }}
                                 >
-                                    액션 시작!
+                                    한 동작 시작!
                                 </ButtonOutlined>
                             )}
                             {active && (
@@ -334,7 +334,7 @@ const ActionStart = (props) => {
                                     _bradius={'0.5rem'}
                                     _color={'#999999'}
                                 >
-                                    액션 진행중...
+                                    한 동작 진행중...
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -461,7 +461,7 @@ const ActionStart = (props) => {
                                         completeBtn()
                                     }}
                                 >
-                                    액션 시작!
+                                    한 동작 시작!
                                 </ButtonOutlined>
                             )}
                             {active && (
@@ -475,7 +475,7 @@ const ActionStart = (props) => {
                                     _bradius={'0.5rem'}
                                     _color={'#999999'}
                                 >
-                                    액션 진행중...
+                                    한 동작 진행중...
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -602,7 +602,7 @@ const ActionStart = (props) => {
                                         completeBtn()
                                     }}
                                 >
-                                    액션 시작!
+                                    한 동작 시작!
                                 </ButtonOutlined>
                             )}
                             {active && (
@@ -616,7 +616,7 @@ const ActionStart = (props) => {
                                     _bradius={'0.5rem'}
                                     _color={'#999999'}
                                 >
-                                    액션 진행중...
+                                    한 동작 진행중...
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -742,7 +742,7 @@ const ActionStart = (props) => {
                                         completeBtn()
                                     }}
                                 >
-                                    액션 시작!
+                                    한 동작 시작!
                                 </ButtonOutlined>
                             )}
                             {active && (
@@ -756,7 +756,7 @@ const ActionStart = (props) => {
                                     _bradius={'0.5rem'}
                                     _color={'#999999'}
                                 >
-                                    액션 진행중...
+                                    한 동작 진행중...
                                 </ButtonFill>
                             )}
                             {complete && (

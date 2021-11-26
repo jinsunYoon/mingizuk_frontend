@@ -23,7 +23,7 @@ const RoutineSelect = (props) => {
 
     const changeActions = (newAct) => {
         if (selectList.length === 5) {
-            window.alert('액션은 최대 5개까지만 선택 할 수 있어요.')
+            window.alert('동작은 최대 5개까지만 선택할 수 있어요.')
             return
         } else {
             const confirm = addedActions?.findIndex(

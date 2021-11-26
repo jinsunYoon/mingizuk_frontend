@@ -67,7 +67,7 @@ const App = () => {
                         <Header type="menu" name="통계" />
                     </Route>
                     <Route path={'/routine/mypage'} exact>
-                        <Header name="루틴" type="back" />
+                        <Header name="루틴" type="goMain" />
                     </Route>
                     <Route path={'/routine/update'} exact>
                         <Header name="내 루틴 수정하기 ( 1 / 2 )" type="back" />

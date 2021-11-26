@@ -77,7 +77,7 @@ const MoimDetail = () => {
     const join = (data) => {
         {
             Swal.fire({
-                title: '모임에 참여하시겠어요 ?',
+                title: '모임에 참여 신청하기',
                 text: '참여하시면 모임 참여자 채팅방에 참여 가능해요.',
                 showCancelButton: true,
                 confirmButtonColor: '#6B76FF',
@@ -170,7 +170,7 @@ const MoimDetail = () => {
                                 join(data)
                             }}
                         >
-                            모임참여하기
+                            모임 참여하기
                         </button>
                     )}
                     {join_useres?.includes(user_nick) && (
