@@ -1,11 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { moimLocationMD } from '../redux/async/moim'
+import Icon from '../components/icons/Icon'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
-const Filter = () => {
+import '../styles/moim/moim-main.scss'
+
+const Filter = (props) => {
     const dispatch = useDispatch()
     const locations = {
-        _a: [
+        지역: [
+            '서울',
+            '부산',
+            '인천',
+            '대구',
+            '대전',
+            '광주',
+            '울산',
+            '세종',
+            '제주',
+            '경기도',
+            '강원도',
+            '충청북도',
+            '충청남도',
+            '경상북도',
+            '경상남도',
+            '전라북도',
+            '전라남도',
+        ],
+        서울: [
             '강남구',
             '강동구',
             '강북구',
@@ -32,7 +55,7 @@ const Filter = () => {
             '중구',
             '중랑구',
         ],
-        _b: [
+        부산: [
             '강서구',
             '금정구',
             '남구',
@@ -49,7 +72,7 @@ const Filter = () => {
             '중구',
             '해운대구',
         ],
-        _c: [
+        인천: [
             '중구',
             '동구',
             '미추홀구',
@@ -59,12 +82,13 @@ const Filter = () => {
             '계양구',
             '서구',
         ],
-        _d: ['남구', '달서구', '동구', '북구', '서구', '수성구', '중구'],
-        _e: ['대덕구', '동구', '서구', '유성구', '중구'],
-        _f: ['광산구', '남구', '동구', '북구', '서구'],
-        _g: ['남구', '동구', '북구', '중구'],
-        _h: ['-'],
-        _i: [
+        대구: ['남구', '달서구', '동구', '북구', '서구', '수성구', '중구'],
+        대전: ['대덕구', '동구', '서구', '유성구', '중구'],
+        광주: ['광산구', '남구', '동구', '북구', '서구'],
+        울산: ['남구', '동구', '북구', '중구'],
+        세종: ['세종시'],
+        제주: ['서귀포시', '제주시'],
+        경기도: [
             '수원시',
             '성남시',
             '의정부시',
@@ -94,7 +118,7 @@ const Filter = () => {
             '포천시',
             '여주시',
         ],
-        _j: [
+        강원도: [
             '춘천시',
             '원주시',
             '강릉시',
@@ -103,8 +127,8 @@ const Filter = () => {
             '속초시',
             '삼척시',
         ],
-        _k: ['청주시', '충추시', '제천시'],
-        _l: [
+        충청북도: ['청주시', '충추시', '제천시'],
+        충청남도: [
             '천안시',
             '공주시',
             '보령시',
@@ -114,7 +138,7 @@ const Filter = () => {
             '계룡시',
             '당진시',
         ],
-        _m: [
+        경상북도: [
             '포항시',
             '경주시',
             '김천시',
@@ -126,7 +150,7 @@ const Filter = () => {
             '문경시',
             '경산시',
         ],
-        _n: [
+        경상남도: [
             '창원시',
             '통영시',
             '사천시',
@@ -136,7 +160,7 @@ const Filter = () => {
             '거제시',
             '양산시',
         ],
-        _o: [
+        전라북도: [
             '전주시',
             '완산구',
             '덕진구',
@@ -146,45 +170,84 @@ const Filter = () => {
             '남원시',
             '김제시',
         ],
-        _p: ['목포시', '여수시', '순천시', '나주시', '광양시'],
+        전라남도: ['목포시', '여수시', '순천시', '나주시', '광양시'],
     }
-
     const locationGu = useSelector((state) => state.moim.moim_all)
+    const [location1, setLocation1] = useState('')
+    const [location2, setLocation2] = useState('')
+    const [filterState, setFilterState] = useState(false)
+    const [filterUIState, setFilterUIState] = useState(false)
 
-    const [location1, setLocation1] = React.useState('_a')
-    const [location2, setLocation2] = React.useState('a')
+    const locationfilter = location1 + ' ' + location2
 
-    console.log('>>>>>', locationGu)
-    console.log('>>>>>', location2)
+    console.log('>>>>>!', locationfilter)
+    console.log('>>>>>', filterState)
+
     return (
         <>
-            <select onChange={(e) => setLocation1(`_${e.target.value}`)}>
-                <option value="a">서울특별시</option>
-                <option value="b">부산광역시</option>
-                <option value="c">인천광역시</option>
-                <option value="d">대구광역시</option>
-                <option value="e">대전광역시</option>
-                <option value="f">광주광역시</option>
-                <option value="g">울산광역시</option>
-                <option value="h">세종특별자치시</option>
+            <div className="location-filter-container">
+                {!filterState ? (
+                    <button
+                        className="location-filter-btn"
+                        onClick={() => {
+                            setFilterUIState(true)
+                            setFilterState(false)
+                        }}
+                    >
+                        <Icon icon="place" size="20px" color="#a5abb0" />
+                        {`위치필터`}
+                    </button>
+                ) : (
+                    <button
+                        className="location-filter-btn"
+                        onClick={() => {
+                            setFilterUIState(true)
+                            setFilterState(false)
+                        }}
+                        style={{ color: '#6B76FF' }}
+                    >
+                        <Icon icon="place" size="20px" color="#6B76FF" />
+                        {`${location1} ${location2}`}
+                    </button>
+                )}
+                {filterUIState && (
+                    <div className="location-select-container">
+                        <select
+                            className="location-select"
+                            onChange={(e) => setLocation1(e.target.value)}
+                        >
+                            <option selected>선택하세요</option>
+                            {locations['지역']?.map((e, idx) => (
+                                <option key={idx} value={e}>
+                                    {e}
+                                </option>
+                            ))}
+                        </select>
+                        <select
+                            className="location-select"
+                            onChange={(e) => setLocation2(e.target.value)}
+                        >
+                            <option selected>선택하세요</option>
 
-                <option value="i">경기도</option>
-                <option value="j">강원도</option>
-                <option value="k">충청북도</option>
-                <option value="l">충청남도</option>
-                <option value="m">경상북도</option>
-                <option value="n">경상남도</option>
-                <option value="o">전라북도</option>
-                <option value="p">전라남도</option>
-            </select>
-            <select onChange={(e) => setLocation2(e.target.value)}>
-                {locations[location1]?.map((e) => (
-                    <option value={e}> {e}</option>
-                ))}
-            </select>
-            <button onClick={() => dispatch(moimLocationMD(location2))}>
-                검색하기
-            </button>
+                            {locations[location1]?.map((e, idx) => (
+                                <option key={idx} value={e}>
+                                    {' '}
+                                    {e}
+                                </option>
+                            ))}
+                        </select>
+                        <button
+                            onClick={() => {
+                                dispatch(moimLocationMD(locationfilter))
+                                setFilterUIState(false)
+                                setFilterState(true)
+                            }}
+                        >
+                            적용
+                        </button>
+                    </div>
+                )}
+            </div>
         </>
     )
 }

@@ -12,6 +12,10 @@ const ToggleTab = (props) => {
     const [recommedTab, setrecommedTab] = React.useState(false)
 
     React.useEffect(() => {
+        dispatch(changeMyPageModal('first'))
+    }, [])
+
+    React.useEffect(() => {
         if (select === 'first') {
             setmytab(true)
             setrecommedTab(false)

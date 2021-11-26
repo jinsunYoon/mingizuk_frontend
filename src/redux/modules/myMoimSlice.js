@@ -7,9 +7,10 @@ import {
 } from '../async/myMoim'
 
 const initialState = {
-    my_moim: [],
-    my_like: [],
-    my_comment_list: [],
+    my_moims: [],
+    my_joins: [],
+    my_likes: [],
+    my_comments: [],
 }
 
 const myMoimSlice = createSlice({
@@ -19,32 +20,28 @@ const myMoimSlice = createSlice({
 
     extraReducers: {
         [myMoimCreateMD.fulfilled]: (state, { payload }) => {
-            state.my_moim = payload.data.allMyMoim
-            console.log('>>', 'create', state.my_moim)
+            state.my_moims = payload.data.allMyMoims
         },
         [myMoimCreateMD.rejected]: (state, { payload }) => {
             console.log('errormsg')
         },
 
         [myMoimJoinMD.fulfilled]: (state, { payload }) => {
-            state.my_join = payload.data.allMyMoim
-            console.log(state.my_join, 'join??????')
+            state.my_joins = payload.data.allMyMoims
         },
         [myMoimJoinMD.rejected]: (state, { payload }) => {
             console.log('errormsg')
         },
 
         [myMoimLikeMD.fulfilled]: (state, { payload }) => {
-            console.log('>>>', 'like', payload)
-            state.my_like = payload?.data?.myLikes
+            state.my_likes = payload.data.likedMoims
         },
         [myMoimLikeMD.rejected]: (state, { payload }) => {
             console.log('errormsg')
-            console.log('>>>', 'like', payload)
         },
 
         [myMoimCommentMD.fulfilled]: (state, { payload }) => {
-            state.my_comment_list = payload.data.myCommentList
+            state.my_comments = payload.data.myCommentList
         },
         [myMoimCommentMD.rejected]: (state, { payload }) => {
             console.log('errormsg')

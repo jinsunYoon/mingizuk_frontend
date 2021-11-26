@@ -6,7 +6,7 @@
     width: 100%;
     height: 5.313rem;
     border: 1px solid #dadada;
-    @include flexbox(between, center);
+    @include column-flexbox(between, start);
     padding: 1.25rem 1.25rem;
     border-radius: 0.438rem;
     margin-bottom: 20px;
@@ -54,17 +54,23 @@
 }
 
 .icon-box {
-    @include flexbox(between, center);
-    width: 1.875rem;
+    @include flexbox(between, start);
+    width: 2px;
+    height: 2px;
+    margin-bottom: 4px;
+    background-color: black;
 }
 
 .text-box {
-    @include column-flexbox(start, start);
+    @include flexbox(between, center);
+    width: 100%;
+    height: 1.5rem;
 }
 
 .setting-btn {
     @include primary-btn();
     @include text-style-14(1rem, 0.009rem, $white);
+    z-index: 3;
 }
 
 .add-btn {
@@ -73,6 +79,7 @@
 
 .option-background {
     width: 100vw;
+    @include flexbox(center, center);
     height: 100vh;
     position: fixed;
     top: 0;
@@ -81,9 +88,16 @@
     z-index: 6;
 }
 
+.opt-warp {
+    width: 100vw;
+    height: 100vh;
+    @include flexbox(center, center);
+}
+
 .option-container {
-    @include column-flexbox(center, start);
+    @include column-flexbox(center, center);
     position: fixed;
+    max-width: 768px;
     bottom: 0;
     width: 100vw;
     height: 10rem;
@@ -104,9 +118,11 @@
         }
         span {
             @include text-style-16(1rem, auto, $black);
+            @include flexbox(start, center);
             font-weight: 700;
             padding-left: 2rem;
             width: 100%;
+            height: inherit;
             text-align: left;
             &:hover,
             :active {
@@ -115,4 +131,9 @@
             }
         }
     }
+}
+
+.no-routine {
+    text-align: center;
+    line-height: 2rem;
 }

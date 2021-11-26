@@ -1,17 +1,28 @@
 @import '../shared/common.scss';
 
-.chat-zone {
-    @include column-flexbox(start, center);
+.chat-warp {
     width: 100vw;
-    height: 100vh;
-    padding-top: 3rem;
+    height: 100%;
+}
+
+.chat-zone {
+    @include column-flexbox(center, between);
+    width: 100vw;
+    padding: 0 1.2rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
 }
 
 .chat-others-container,
 .chat-me-container {
+    @include flexbox(start, center);
     width: 100%;
     max-width: 768px;
     margin-bottom: 1rem;
+}
+
+.chat-contents {
+    @include column-flexbox(center, start);
 }
 
 .chat-me-container {
@@ -21,9 +32,12 @@
     }
 }
 
+// -----------------------------------
+
 .chat-title {
     @include text-style-12(0.75rem, auto);
-    margin-bottom: 1rem;
+    margin-left: 0.3rem;
+    margin-bottom: 0.4rem;
 }
 
 .chat-content {
@@ -43,4 +57,79 @@
     font-size: 0.625rem;
     color: $text-gray;
     margin-left: 1rem;
+}
+
+.chat-img {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: $primary;
+    border-radius: 2.5rem;
+    margin-right: 0.5rem;
+}
+
+.input-container {
+    width: 100%;
+    height: 4rem;
+    position: fixed;
+    bottom: 0;
+    border-radius: 0.5rem;
+    input {
+        width: 85%;
+        height: inherit;
+        border: none;
+        border-top: 1px solid #eeeeee;
+        padding-left: 0.8rem;
+        @include text-style-14(21px, auto, $black);
+    }
+    button {
+        width: 15%;
+        height: inherit;
+        border: none;
+        background-color: $primary;
+        @include text-style-14(21px, auto, $white);
+    }
+}
+
+.chat-notice {
+    @include flexbox(start, center);
+    padding-left: 1rem;
+    position: fixed;
+    width: 100vw;
+    background-color: $white;
+    height: 3rem;
+    top: 3rem;
+    border-bottom: 1px solid #eeeeee;
+    span {
+        @include text-style-12(1.5rem, 0.15px, $black);
+        font-weight: 700;
+    }
+    p {
+        @include text-style-12(1.5rem, 0.15px, $black);
+        margin-left: 0.8rem;
+    }
+    button {
+        position: absolute;
+        right: 3rem;
+    }
+}
+
+.chat-notice-icon {
+    position: fixed;
+    height: 3rem;
+    @include flexbox(end, center);
+    right: 1rem;
+    width: 3rem;
+    border: none;
+    background-color: $white;
+
+    z-index: 5;
+}
+
+.chat-notice-option-btn {
+    @include flexbox();
+    position: absolute;
+    right: 0;
+    padding-left: 1rem;
+    height: 3rem;
+    width: 5rem;
 }

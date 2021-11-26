@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 //* sytle
 import '../../styles/mypage/mypage.scss'
 import Icon from '../../components/icons/Icon'
+import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 
 const MyPage = (props) => {
     const [userInfo, setUserInfo] = useState('')
@@ -42,20 +43,11 @@ const MyPage = (props) => {
                     <ul className="mypage-list">
                         <li onClick={() => history.push('/users/collection')}>
                             <span>내 캐릭터 콜렉션</span>
-                            <Icon
-                                className="list-icon"
-                                icon="chevron-right-lg"
-                                size="12px"
-                                color="#A5ABB0"
-                            />
+                            <ChevronRightIcon />
                         </li>
                         <li onClick={() => history.push('/users/moim')}>
                             <span>내 모임</span>
-                            <Icon
-                                icon="chevron-right-lg"
-                                size="12px"
-                                color="#A5ABB0"
-                            />
+                            <ChevronRightIcon />
                         </li>
                     </ul>
                 </section>

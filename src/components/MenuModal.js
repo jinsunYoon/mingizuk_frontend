@@ -22,178 +22,6 @@ const MenuModal = () => {
     const [modalStatus, setModalStatue] = React.useState(false)
     const nickName = useSelector((state) => state.user.userInfo.nickName)
 
-    if (is_login) {
-        return (
-            <React.Fragment>
-                {modalStatus && (
-                    <FlexRow _border={'none'}>
-                        <div
-                            style={{
-                                width: '100vw',
-                                height: '100vh',
-                                padding: '1rem',
-                                boxSizing: 'border-box',
-                                backgroundColor: 'black',
-                                opacity: '0.3',
-                                position: 'fixed',
-                                top: '2.875rem',
-                                left: '0rem',
-                            }}
-                            onClick={() => {
-                                {
-                                    modalStatus && setModalStatue(false)
-                                }
-                            }}
-                        ></div>
-                        <div
-                            style={{
-                                width: '12.5rem',
-                                height: '100vh',
-                                padding: '1rem',
-                                boxSizing: 'border-box',
-                                backgroundColor: '#fff',
-                                position: 'fixed',
-                                top: '2.875rem',
-                                left: '0rem',
-                            }}
-                        >
-                            <FlexColumn
-                                _border={'none'}
-                                _width={'100%'}
-                                _height={'100%'}
-                                _justify={'start'}
-                            >
-                                <FlexRow
-                                    _justify={'space-between'}
-                                    _border={'none'}
-                                    _others={
-                                        'padding-bottom:0.313rem; border-bottom:1px solid #dbdbdb'
-                                    }
-                                >
-                                    <FlexRow
-                                        _border={'none'}
-                                        _width={'false'}
-                                        _justify={'start'}
-                                    >
-                                        <AccountCircleRounded
-                                            style={{
-                                                marginRight: '0.625rem',
-                                                color: '#6dddd0',
-                                                fontSize: '1.688rem',
-                                                background: '#fff',
-                                                borderRadius: '3.125rem',
-                                            }}
-                                        />
-                                        <Text _margin={'0px'} _padding={'0px'}>
-                                            <span style={{ fontWeight: '700' }}>
-                                                {nickName}
-                                            </span>{' '}
-                                            님
-                                        </Text>
-                                    </FlexRow>
-                                    <div
-                                        onClick={() => {
-                                            logout()
-                                        }}
-                                    >
-                                        <ExitToAppRounded
-                                            style={{
-                                                color: '#c1c1c1',
-                                                fontSize: '27px',
-                                                background: '#fff',
-                                                borderRadius: '3.125rem',
-                                                cursor: 'pointer',
-                                            }}
-                                        />
-                                    </div>
-                                </FlexRow>
-                                <FlexColumn
-                                    _height={'100vh'}
-                                    _align={'start'}
-                                    _justify={'space-between'}
-                                    _border={'none'}
-                                >
-                                    <FlexColumn
-                                        _height={'false'}
-                                        _align={'start'}
-                                        _border={'none'}
-                                    >
-                                        <ButtonOutlined
-                                            _border={'none'}
-                                            _padding={'0px'}
-                                            _margin={'0px'}
-                                            _width={'false'}
-                                            _onClick={() => {
-                                                history.push('/users')
-                                            }}
-                                        >
-                                            <Text
-                                                _fontSize={'0.9rem'}
-                                                _fontWeight={'700'}
-                                                _padding={'1rem 0px 0px 0px'}
-                                                _margin={'0px'}
-                                            >
-                                                마이페이지
-                                            </Text>
-                                        </ButtonOutlined>
-                                        <ButtonOutlined
-                                            _border={'none'}
-                                            _padding={'0px'}
-                                            _margin={'0px'}
-                                            _width={'false'}
-                                            _onClick={() => {
-                                                history.push('/history')
-                                            }}
-                                        >
-                                            <Text
-                                                _fontSize={'0.9rem'}
-                                                _fontWeight={'700'}
-                                                _padding={'1rem 0px 0px 0px'}
-                                                _margin={'0px'}
-                                            >
-                                                히스토리
-                                            </Text>
-                                        </ButtonOutlined>
-                                        <ButtonOutlined
-                                            _border={'none'}
-                                            _padding={'0px'}
-                                            _margin={'0px'}
-                                            _width={'false'}
-                                            _onClick={() => {
-                                                history.push('/moim')
-                                            }}
-                                        >
-                                            <Text
-                                                _fontSize={'0.9rem'}
-                                                _fontWeight={'700'}
-                                                _padding={'1rem 0px 0px 0px'}
-                                                _margin={'0px'}
-                                            >
-                                                모임 게시판
-                                            </Text>
-                                        </ButtonOutlined>
-                                    </FlexColumn>
-                                    <Footer />
-                                </FlexColumn>
-                            </FlexColumn>
-                        </div>
-                    </FlexRow>
-                )}
-                <ButtonOutlined
-                    navIcon
-                    _icon={'nav-menu'}
-                    _onClick={() => {
-                        {
-                            modalStatus
-                                ? setModalStatue(false)
-                                : setModalStatue(true)
-                        }
-                    }}
-                />
-            </React.Fragment>
-        )
-    }
-
     return (
         <React.Fragment>
             {modalStatus && (
@@ -206,9 +34,10 @@ const MenuModal = () => {
                             boxSizing: 'border-box',
                             backgroundColor: 'black',
                             opacity: '0.3',
-                            position: 'fixed',
-                            top: '2.875rem',
-                            left: '0rem',
+                            position: 'absolute',
+                            top: '2.5rem',
+                            left: '-1rem',
+                            maxWidth: '48rem',
                         }}
                         onClick={() => {
                             {
@@ -223,9 +52,9 @@ const MenuModal = () => {
                             padding: '1rem',
                             boxSizing: 'border-box',
                             backgroundColor: '#fff',
-                            position: 'fixed',
-                            top: '2.875rem',
-                            left: '0rem',
+                            position: 'absolute',
+                            top: '2rem',
+                            left: '-1rem',
                         }}
                     >
                         <FlexColumn
@@ -234,54 +63,113 @@ const MenuModal = () => {
                             _height={'100%'}
                             _justify={'start'}
                         >
+                            <FlexRow
+                                _justify={'space-between'}
+                                _border={'none'}
+                                _others={
+                                    'padding-bottom:0.313rem; border-bottom:1px solid #dbdbdb'
+                                }
+                            >
+                                <FlexRow
+                                    _border={'none'}
+                                    _width={'false'}
+                                    _justify={'start'}
+                                >
+                                    <AccountCircleRounded
+                                        style={{
+                                            marginRight: '0.625rem',
+                                            color: '#6dddd0',
+                                            fontSize: '1.688rem',
+                                            background: '#fff',
+                                            borderRadius: '3.125rem',
+                                        }}
+                                    />
+                                    <Text _margin={'0px'} _padding={'0px'}>
+                                        <span style={{ fontWeight: '700' }}>
+                                            {nickName}
+                                        </span>{' '}
+                                        님
+                                    </Text>
+                                </FlexRow>
+                                <div
+                                    onClick={() => {
+                                        logout()
+                                    }}
+                                >
+                                    <ExitToAppRounded
+                                        style={{
+                                            color: '#c1c1c1',
+                                            fontSize: '27px',
+                                            background: '#fff',
+                                            borderRadius: '3.125rem',
+                                            cursor: 'pointer',
+                                        }}
+                                    />
+                                </div>
+                            </FlexRow>
                             <FlexColumn
                                 _height={'100vh'}
+                                _align={'start'}
                                 _justify={'space-between'}
                                 _border={'none'}
                             >
                                 <FlexColumn
-                                    _border={'none'}
-                                    _others={'padding-bottom:5px; '}
                                     _height={'false'}
+                                    _align={'start'}
+                                    _border={'none'}
                                 >
-                                    <FlexColumn
-                                        _border={'none'}
-                                        _others={
-                                            'border-bottom: 1px solid lightgray'
-                                        }
-                                        _height={'false'}
-                                    >
-                                        <Text
-                                            _color={'gray'}
-                                            _margin={'1rem 0px'}
-                                        >
-                                            로그인 후 이용해주세요.
-                                        </Text>
-                                        <ButtonOutlined
-                                            _margin={'0px 0px 1rem 0px'}
-                                            _onClick={() => {
-                                                history.push('/login')
-                                            }}
-                                        >
-                                            <Text
-                                                _margin={'0px'}
-                                                _padding={'0px'}
-                                            >
-                                                로그인 하기
-                                            </Text>
-                                        </ButtonOutlined>
-                                    </FlexColumn>
-                                    <Text _color={'gray'} _margin={'1rem 0px'}>
-                                        아직 회원가입 전이라면?
-                                    </Text>
                                     <ButtonOutlined
+                                        _border={'none'}
+                                        _padding={'0px'}
                                         _margin={'0px'}
+                                        _width={'false'}
                                         _onClick={() => {
-                                            history.push('/signup')
+                                            history.push('/users')
                                         }}
                                     >
-                                        <Text _margin={'0px'} _padding={'0px'}>
-                                            회원가입 하기
+                                        <Text
+                                            _fontSize={'0.9rem'}
+                                            _fontWeight={'700'}
+                                            _padding={'1rem 0px 0px 0px'}
+                                            _margin={'0px'}
+                                        >
+                                            마이페이지
+                                        </Text>
+                                    </ButtonOutlined>
+                                    <ButtonOutlined
+                                        _border={'none'}
+                                        _padding={'0px'}
+                                        _margin={'0px'}
+                                        _width={'false'}
+                                        _onClick={() => {
+                                            history.push('/history')
+                                        }}
+                                    >
+                                        <Text
+                                            _fontSize={'0.9rem'}
+                                            _fontWeight={'700'}
+                                            _padding={'1rem 0px 0px 0px'}
+                                            _margin={'0px'}
+                                        >
+                                            히스토리
+                                        </Text>
+                                    </ButtonOutlined>
+                                    <ButtonOutlined
+                                        _border={'none'}
+                                        _padding={'0px'}
+                                        _margin={'0px'}
+                                        _width={'false'}
+                                        _onClick={() => {
+                                            history.push('/moim')
+                                        }}
+                                    >
+                                        <Text
+                                            _fontSize={'0.9rem'}
+                                            _fontWeight={'700'}
+                                            _padding={'1rem 0px 0px 0px'}
+                                            _margin={'0px'}
+                                        >
+                                            모임 게시판
                                         </Text>
                                     </ButtonOutlined>
                                 </FlexColumn>

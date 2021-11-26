@@ -58,8 +58,8 @@
     width: 90vw;
     height: 2.5rem;
     padding: 0.875rem 0;
-    border-top: 1px solid $text-gray;
-    border-bottom: 1px solid $text-gray;
+    border-bottom: 1px solid #eeeeee;
+    margin-bottom: 1rem;
     .option-child {
         @include flexbox();
         width: 12.5rem;
@@ -76,16 +76,16 @@
     width: 100%;
     position: fixed;
     bottom: 0;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
 
     input {
-        width: 80%;
-        height: 2.5rem;
+        width: 100%;
+        height: 3rem;
+        padding-left: 0.8rem;
+        border: 1px solid #ececec;
     }
     button {
-        width: 18%;
-        height: 2.5rem;
+        width: 4rem;
+        height: 3rem;
         border: none;
     }
 }
@@ -123,8 +123,8 @@
 .post-review-container {
     position: relative;
     width: 100%;
+    padding: 0 1rem;
     max-width: 768px;
-    height: 3.125rem;
     display: grid;
     place-items: center center;
     --column-count: 1;
@@ -140,26 +140,44 @@
     &::-webkit-scrollbar {
         display: none;
     }
+    margin-bottom: 1rem;
+
     .post-review-box {
         width: 100%;
         max-width: 768px;
-        border-bottom: 1px solid lightgray;
         @include column-flexbox(center, start);
+        span {
+            @include text-style-12(24px, auto);
+        }
+        p {
+            @include text-style-14(24px, auto);
+        }
+        .post-reivew-date {
+            @include text-style-12(18px, 0.15px, $text-gray);
+            margin-bottom: 0.2rem;
+        }
+    }
+    .review-opt-warp {
+        position: absolute;
+        right: 0;
     }
     .review-btn-container {
         @include flexbox();
         position: absolute;
-        right: 0;
+        right: 1.3rem;
         button {
+            @include flexbox();
             border: none;
             background-color: $primary;
-            width: 3rem;
-            height: 2rem;
+            width: 2.5rem;
+            height: 1.5rem;
             color: $white;
             border-radius: 0.5rem;
             &:first-child {
                 margin-right: 0.5rem;
             }
+            font-size: 12px;
+            text-align: center;
         }
     }
 }
@@ -171,4 +189,66 @@
     @include flexbox();
     text-align: center;
     margin: 2rem 0;
+}
+
+.opt-icon {
+    width: 2rem;
+    height: 2rem;
+    @include column-flexbox();
+}
+
+.option-background {
+    width: 100vw;
+    @include flexbox(center, center);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: rgba(144, 144, 144, 0.5);
+    z-index: 6;
+}
+
+.opt-warp {
+    width: 100vw;
+    height: 100vh;
+    @include flexbox(center, center);
+}
+
+.option-container {
+    @include column-flexbox(center, center);
+    position: fixed;
+    max-width: 768px;
+    bottom: 0;
+    width: 100vw;
+    height: 10rem;
+    background-color: $white;
+    border: none;
+    border-top-right-radius: 1.125rem;
+    border-top-left-radius: 1.125rem;
+    button {
+        @include flexbox(start, center);
+        border: none;
+        background-color: inherit;
+        height: 3.75rem;
+        width: 100%;
+        padding-left: 1.125rem;
+        &:hover,
+        :active {
+            background-color: $primary;
+        }
+        span {
+            @include text-style-16(1rem, auto, $black);
+            @include flexbox(start, center);
+            font-weight: 700;
+            padding-left: 2rem;
+            width: 100%;
+            height: inherit;
+            text-align: left;
+            &:hover,
+            :active {
+                background-color: $primary;
+                color: $white;
+            }
+        }
+    }
 }

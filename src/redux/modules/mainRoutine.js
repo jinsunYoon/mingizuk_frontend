@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { getMainRoutineMD, setMainRoutineMD } from '../async/routine'
+import Swal from 'sweetalert2'
 
 const initialState = {
     mainRoutine: [],
@@ -31,9 +32,7 @@ const mainRoutineSlice = createSlice({
                 )
             }
         },
-        [setMainRoutineMD.fulfilled]: (state, action) => {
-            console.log('셋메인루틴풀필드', action)
-        },
+        [setMainRoutineMD.fulfilled]: (state, action) => {},
     },
 })
 

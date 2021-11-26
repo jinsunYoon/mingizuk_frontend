@@ -18,19 +18,24 @@ const RoutineUpdate = () => {
 
     return (
         <>
-            <section className="container">
-                <ToggleTab firstValue={'스트레칭'} secondValue={'맨몸 운동'} />
-                <RoutineUpdateSelect select={status} />
-                <button
-                    className="next-btn"
-                    onClick={() =>
-                        selectList?.length > 0 &&
-                        history.push('/routine/update/count')
-                    }
-                >
-                    {selectNum}
-                </button>
-            </section>
+            <div className="routine-layout">
+                <section className="container">
+                    <ToggleTab
+                        firstValue={'스트레칭'}
+                        secondValue={'맨몸 운동'}
+                    />
+                    <RoutineUpdateSelect select={status} />
+                    <button
+                        className="next-btn"
+                        onClick={() =>
+                            selectList?.length > 0 &&
+                            history.push('/routine/update/count')
+                        }
+                    >
+                        {selectNum}
+                    </button>
+                </section>
+            </div>
         </>
     )
 }

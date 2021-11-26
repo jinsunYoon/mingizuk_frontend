@@ -1,6 +1,12 @@
 import React from 'react'
 
-import { ButtonOutlined, FlexRow, GoBack, Text } from '../elements/index'
+import {
+    ButtonOutlined,
+    FlexRow,
+    GoBack,
+    GoMain,
+    Text,
+} from '../elements/index'
 
 import { MenuModal } from '../components/index'
 
@@ -23,19 +29,30 @@ const Header = (props) => {
                     position: 'fixed',
                     top: 0,
                     zIndex: 5,
+                    backgroundColor: 'white',
                 }}
             >
                 <FlexRow
                     _width={'100%'}
                     _height={'100%'}
                     _border={'none'}
-                    _others={'position: fixed, top:0; max-width: 48rem;'}
+                    _others={'position:relative;max-width: 48rem;'}
                 >
-                    {type === 'menu' && <MenuModal />}
-                    {type === 'back' && <GoBack />}
+                    <div
+                        style={{
+                            position: 'absolute',
+                            top: '0.5rem',
+                            left: '1rem',
+                        }}
+                    >
+                        {type === 'menu' && <div />}
+                        {type === 'back' && <GoBack />}
+                        {type === 'goMain' && <GoMain />}
+                    </div>
                     <ButtonOutlined
                         _border={'none'}
-                        _width={'70%'}
+                        _width={'false'}
+                        _others={'position: fixed, top:0;'}
                         _onClick={() => {
                             history.push('/')
                         }}

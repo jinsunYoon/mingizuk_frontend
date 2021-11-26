@@ -4,53 +4,73 @@
 
 .moim-main-layout {
     width: 100vw;
+    height: 100%;
     @include column-flexbox(center, center);
-    padding-top: 3rem;
-    padding-bottom: 65px;
+    margin-top: 3rem;
+    margin-bottom: 65px;
+    position: relative;
 }
 
 .post-warp {
     width: 100vw;
+    height: 100%;
     max-width: 768px;
     @include column-flexbox(center, center);
-    background-color: $bg-light-gray;
+    background-color: #efefef;
 }
 
 //PostDesc
 .moim-post-box {
     @include column-flexbox(center, start);
     width: 100%;
+
     max-width: 768px;
+    height: auto;
     background-color: $white;
     padding: 0 2rem;
 
     .location {
-        @include text-style-12(0.75rem, 0.15px, $text-gray);
-        padding: 2rem 0;
+        @include text-style-12(1.5rem, auto, $text-gray);
+        @include flexbox();
+        align-items: flex-end;
+        padding-top: 1rem;
+        letter-spacing: 0.15px;
+
+        span {
+            display: inline-block;
+            padding: 0 0.15rem;
+        }
     }
+
     .title {
-        @include text-style-18(0.75rem, 0.15px, $black);
+        @include text-style-18(1rem, 0.15px, #2e3a59);
+        line-height: 24px;
+        letter-spacing: 0.15px;
         font-weight: 700;
-        padding: 0.5rem 0;
-    }
-    .content {
-        @include text-style-14(1.25rem, 1.2px, $black);
-        padding: 0.5rem 0;
+        padding: 1rem 0;
     }
     .imgbox {
         @include flexbox(center, center);
         width: 100%;
 
         img {
-            width: auto;
-            height: 10rem;
+            width: 80vw;
+            height: auto;
         }
     }
 
     .post-info {
-        @include flexbox(between, center);
+        @include flexbox();
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
+        height: 40px;
         padding-bottom: 0.5rem;
+    }
+
+    svg {
+        align-items: center;
+        font-size: 1rem;
     }
     span {
         @include text-style-12(1.5rem, auto, $text-gray);
@@ -60,16 +80,19 @@
 .ectbox {
     @include flexbox(start, center);
     width: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     max-width: 768px;
     background-color: $white;
-    border: 1px solid $bg-light-gray;
+    border: none;
+    border-top: 1px solid #efefef;
     height: 2.5rem;
     padding-left: 2rem;
     .icon-text {
         @include flexbox(center, center);
         span {
             @include text-style-12(12px, 0.15px, $text-gray);
+            display: inline-block;
+            padding: 0 0.3rem;
         }
         &:first-child {
             margin-right: 2.188rem;
@@ -78,5 +101,143 @@
 }
 
 .moim-add-btn {
-    @include add-btn();
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: $primary;
+    color: $white;
+    position: fixed;
+    border: none;
+    font-size: 35px;
+    right: 5%;
+    bottom: 90px;
+    @media screen and (min-width: 768px) {
+        right: 10vw;
+    }
+    @media screen and (min-width: 920px) {
+        right: 14vw;
+    }
+    @media screen and (min-width: 1000px) {
+        right: 18vw;
+    }
+    @media screen and (min-width: 1100px) {
+        right: 24vw;
+    }
+    @media screen and (min-width: 1400px) {
+        right: 28vw;
+    }
+}
+
+// ***** filter
+.filters-container {
+    width: 100%;
+    max-width: $tablet;
+    height: auto;
+    box-sizing: border-box;
+    position: relative;
+    border: none;
+}
+
+.location-filter-container {
+    width: 100%;
+    max-width: $tablet;
+    height: auto;
+    border: none;
+    padding-left: 1rem;
+}
+
+.location-filter-btn {
+    width: auto;
+    height: 2.125rem;
+    padding: 0.5rem;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid #a5abb0;
+    color: #a5abb0;
+    background-color: #fff;
+}
+
+.filter-btn {
+    width: auto;
+    height: 2.125rem;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border-radius: 20px;
+    border: 1px solid #a5abb0;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    margin-right: 1rem;
+    color: #a5abb0;
+    background-color: #fff;
+}
+
+.latest-filter-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+.liked-filter-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 4.5rem;
+}
+
+.filter-btn {
+    &:hover {
+        background: $primary;
+        color: $white;
+        cursor: pointer;
+    }
+}
+.location-filter-btn {
+    margin: 0.5rem;
+    &:hover {
+        color: $primary;
+        border: $primary 1px solid;
+        cursor: pointer;
+    }
+}
+
+.location-select-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: $tablet;
+    height: 3.125rem;
+    background-color: #f0f0f0;
+
+    & select,
+    & button {
+        width: auto;
+        padding: 0.25rem 0.5rem;
+        height: 2.125rem;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        color: #a5abb0;
+        margin-left: 1rem;
+        background: #fff;
+    }
+
+    & button {
+        &:hover {
+            background: $primary;
+            color: $white;
+        }
+    }
+
+    & select {
+        &:hover {
+            color: $primary;
+        }
+    }
 }

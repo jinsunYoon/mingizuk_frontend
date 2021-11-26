@@ -9,8 +9,10 @@ import {
     setOptionModal,
     updateRoutine,
 } from '../../redux/modules/routineSlice'
+import { setResult, setFakeResult } from '../../redux/modules/completeSlice'
 import Icon from '../../components/icons/Icon'
 import { myRoutineDeleteMD } from '../../redux/async/routine'
+import Swal from 'sweetalert2'
 
 const MyRoutine = () => {
     const status = useSelector((state) => state.routine.myPage)
@@ -18,6 +20,7 @@ const MyRoutine = () => {
     const optionStatus = useSelector((state) => state.routine.optionStatus)
     const optInfo = useSelector((state) => state.routine.info)
     const dispatch = useDispatch()
+    const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
 
     return (
         <>
@@ -47,39 +50,62 @@ const MyRoutine = () => {
                                 dispatch(setOptionModal(false))
                             }}
                         >
-                            <div
-                                className="option-container"
-                                onClick={(e) => e.stopPropagation()}
-                            >
-                                <button
-                                    onClick={() => {
-                                        dispatch(updateRoutine(optInfo.id))
-                                        history.push('/routine/update')
-                                        dispatch(setOptionModal(false))
-                                        dispatch(setRoutineModal(false))
-                                    }}
+                            <div className="opt-warp">
+                                <div
+                                    className="option-container"
+                                    onClick={(e) => e.stopPropagation()}
                                 >
-                                    <Icon icon="ic_edit" size="24px" />
-                                    <span>수정하기</span>
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        const result =
-                                            window.confirm(
-                                                '루틴을 삭제하시겠습니까?'
-                                            )
-                                        if (result) {
+                                    <button
+                                        onClick={() => {
+                                            dispatch(updateRoutine(optInfo.id))
+                                            history.replace('/routine/update')
                                             dispatch(setOptionModal(false))
                                             dispatch(setRoutineModal(false))
-                                            dispatch(
-                                                myRoutineDeleteMD(optInfo.id)
-                                            )
-                                        } else return
-                                    }}
-                                >
-                                    <Icon icon="Trash_light" size="24px" />
-                                    <span>삭제하기</span>
-                                </button>
+                                        }}
+                                    >
+                                        <Icon icon="ic_edit" size="24px" />
+                                        <span>수정하기</span>
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            Swal.fire({
+                                                text: '루틴을 삭제하시겠어요 ?',
+                                                showCancelButton: true,
+                                                confirmButtonColor: '#6B76FF',
+                                                cancelButtonColor: '#DEDEDE',
+                                                confirmButtonText: '삭제',
+                                                cancelButtonText: '취소',
+                                                width: '30rem',
+                                                height: '15rem',
+                                                reverseButtons: true,
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    dispatch(
+                                                        setOptionModal(false)
+                                                    )
+                                                    dispatch(
+                                                        setRoutineModal(false)
+                                                    )
+                                                    dispatch(
+                                                        myRoutineDeleteMD(
+                                                            optInfo.id
+                                                        )
+                                                    )
+                                                }
+                                                if (
+                                                    optInfo.routineName ==
+                                                    mainRoutine.routineName
+                                                ) {
+                                                    dispatch(setResult([]))
+                                                    dispatch(setFakeResult([]))
+                                                }
+                                            })
+                                        }}
+                                    >
+                                        <Icon icon="Trash_light" size="24px" />
+                                        <span>삭제하기</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     )}

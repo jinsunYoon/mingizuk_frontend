@@ -14,6 +14,19 @@ import {
     moimUpdateReviewMD,
     moimLocationMD,
 } from '../async/moim'
+import Swal from 'sweetalert2'
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'center',
+    showConfirmButton: false,
+    timer: 500,
+    timerProgressBar: false,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    },
+})
 
 const initialState = {
     moim_all: {},
@@ -21,6 +34,8 @@ const initialState = {
     moim_ref_update: {},
     address: '',
     place: '',
+    filter: {},
+    chat_host: '',
 }
 
 const moimSlice = createSlice({
@@ -38,10 +53,16 @@ const moimSlice = createSlice({
             state.place = action.payload
             console.log('setPlace', action.payload)
         },
+        setChatHost: (state, { payload }) => {
+            state.chat_host = payload
+        },
     },
     extraReducers: {
         [moimCreateMD.fulfilled]: (state, { payload }) => {
-            console.log(payload)
+            Toast.fire({
+                icon: 'success',
+                title: '모임 글이 게시되었습니다.',
+            })
         },
         [moimCreateMD.rejected]: (state, { payload }) => {
             console.log(payload)
@@ -64,13 +85,13 @@ const moimSlice = createSlice({
             console.log(payload)
         },
         [moimLikeMD.fulfilled]: (state, { payload }) => {
-            console.log('><>', payload)
-            const likeUser = payload.data.msg.slice(0, 1)
+            const likeUser = payload.data.msg.split(' ')[0]
+            console.log('<<', likeUser)
             state.moim_detail.Likes.push({ userId: Number(likeUser) })
         },
         [moimUnlikeMD.fulfilled]: (state, { payload }) => {
             const likeUser = state.moim_detail.Likes
-            const unlikeUser = payload.data.msg.slice(0, 1)
+            const unlikeUser = payload.data.msg.split(' ')[0]
             const result = state.moim_detail.Likes.filter(
                 (likeUser) => likeUser.userId !== Number(unlikeUser)
             )
@@ -78,7 +99,7 @@ const moimSlice = createSlice({
         },
         [moimJoinMD.fulfilled]: (state, { payload }) => {
             state.moim_detail.MoimUsers.push({
-                User: { nickName: payload.nickName },
+                User: { nickName: payload?.nickName },
             })
         },
         [moimLeaveMD.fulfilled]: (state, { payload }) => {
@@ -104,21 +125,31 @@ const moimSlice = createSlice({
                 (comment) => comment.id !== payload.reviewId
             )
             state.moim_detail.Comments = refReviews
+            Toast.fire({
+                icon: 'success',
+                title: '댓글을 삭제하였어요.',
+            })
         },
         [moimUpdateReviewMD.fulfilled]: (state, { payload }) => {
             const refIdx = state.moim_detail.Comments.findIndex(
                 (comment) => comment.id === payload.commentId
             )
             state.moim_detail.Comments[refIdx].contents = payload.contents
+            Toast.fire({
+                icon: 'success',
+                title: '댓글을 수정했어요.',
+            })
         },
         [moimLocationMD.fulfilled]: (state, { payload }) => {
-            console.log('>>>>><', payload)
+            console.log('>>>>>!><', payload)
+            state.filter = payload.data.filterMoims
         },
     },
 })
 
 //* reducer export
-export const { moimUpdate, setAddress, setPlace } = moimSlice.actions
+export const { moimUpdate, setAddress, setPlace, setChatHost } =
+    moimSlice.actions
 
 //* slice export
 export default moimSlice

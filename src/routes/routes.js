@@ -84,7 +84,7 @@ const routes = [
         exact: true,
     },
     {
-        path: 'chat',
+        path: 'moim/chat/:id',
         component: lazy(() => import('../pages/Chat')),
         exact: true,
     },

@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+//* 리덕스, 데이터
+import { useDispatch } from 'react-redux'
+import { myMoimCreateMD } from '../../redux/async/myMoim'
 //* 컴포넌트, 엘리먼트
 import { ActiveUnderLine } from '../../elements'
 //* 페이지
@@ -6,12 +9,16 @@ import MyCreateMoim from '../../components/MyPages/MyCreatedMoims'
 import MyJoinMoim from '../../components/MyPages/MyJoinedMoims'
 import MyLikeMoim from '../../components/MyPages/MyLikedMoims'
 import MyCommentMoim from '../../components/MyPages/MyCommentMoims'
-// *스타일
+// * 스타일
 import '../../styles/mypage/mymoim.scss'
 
 const MyMoim = () => {
     const [tabState, setTabState] = useState('')
-
+    const dispatch = useDispatch()
+    // const state = useSelector((state) => state?>)
+    React.useEffect(() => {
+        setTabState('a')
+    }, [])
     return (
         <>
             <div className="mymoim-layout">
@@ -60,7 +67,7 @@ const MyMoim = () => {
                                     setTabState('c')
                                 }}
                             >
-                                좋아요 한 모임
+                                내가 좋아요한 모임
                             </ActiveUnderLine>
                         ) : (
                             <ActiveUnderLine
@@ -68,7 +75,7 @@ const MyMoim = () => {
                                     setTabState('c')
                                 }}
                             >
-                                좋아요 한 모임
+                                내가 좋아요한 모임
                             </ActiveUnderLine>
                         )}
                         {tabState === 'd' ? (

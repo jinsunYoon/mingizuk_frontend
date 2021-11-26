@@ -17,8 +17,8 @@ import {
     setRoutineId,
     setFakeResult,
     setResult,
-    setFakeResultClear,
 } from '../redux/modules/completeSlice'
+import Swal from 'sweetalert2'
 
 const ActionStart = (props) => {
     const dispatch = useDispatch()
@@ -35,7 +35,6 @@ const ActionStart = (props) => {
     const [actionStart, setActionStart] = useState(true)
 
     const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
-    const modalImg = useSelector((state) => state.actionComplete.ImgSrc)
     const result = useSelector((state) => state.actionComplete.result)
     const getActionId = useSelector((state) => state?.actionComplete?.actionId)
     const getRoutineId = useSelector(
@@ -46,6 +45,10 @@ const ActionStart = (props) => {
     )
     console.log('가짜루틴완료', getFakeResult)
 
+    const charList = useSelector((state) => state.character.charList)
+    const curChara =
+        charList.length > 0 && charList[charList.length - 1].charName
+
     const completeBtn = () => {
         return setTimeout(function () {
             setActive(false)
@@ -55,7 +58,7 @@ const ActionStart = (props) => {
 
     const successAction = () => {
         const data = { actionId: getActionId, routineId: getRoutineId }
-        console.log('액션컴플리트데이터', data)
+        console.log('동작컴플리트데이터', data)
 
         dispatch(actionCompleteMD(data))
         setComplete(false)
@@ -67,8 +70,30 @@ const ActionStart = (props) => {
         const thisRoutineId = mainRoutine?.Actions[num]?.routineId
         dispatch(setActionId(thisActionId))
         dispatch(setRoutineId(thisRoutineId))
-        console.log('this 액션아디, 루틴아디', thisActionId, thisRoutineId)
+        console.log('this 동작아디, 루틴아디', thisActionId, thisRoutineId)
     }
+
+    const imgGif = (name) => {
+        if (name == '라이온') {
+            return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming2.gif'
+        } else if (name == '무지') {
+            return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming3.gif'
+        } else if (name == '제이지') {
+            return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming4.gif'
+        }
+    }
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+    })
 
     return (
         <>
@@ -87,7 +112,11 @@ const ActionStart = (props) => {
                             zIndex: 4,
                         }}
                         onClick={() => {
-                            setActionModal(false)
+                            if (active) {
+                                return
+                            } else if (active == false) {
+                                setActionModal(false)
+                            }
                         }}
                     ></div>
                     {action1 && (
@@ -126,7 +155,7 @@ const ActionStart = (props) => {
                                         </Text>
                                     </FlexRow>
                                     <Img
-                                        _src={modalImg}
+                                        _src={imgGif(curChara)}
                                         _width={'13rem'}
                                         _height={'13rem'}
                                         _bradius={'0px'}
@@ -149,7 +178,7 @@ const ActionStart = (props) => {
                                         completeBtn()
                                     }}
                                 >
-                                    액션 시작!
+                                    한 동작 시작!
                                 </ButtonOutlined>
                             )}
                             {active && (
@@ -163,7 +192,7 @@ const ActionStart = (props) => {
                                     _bradius={'0.5rem'}
                                     _color={'#999999'}
                                 >
-                                    완료!
+                                    한 동작 진행중...
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -176,9 +205,13 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
+                                        Toast.fire({
+                                            icon: 'success',
+                                            title: '100 포인트를 지급받았습니다!',
+                                        })
                                     }}
                                 >
-                                    완료!
+                                    완료하기!
                                 </ButtonOutlined>
                             )}
                             {next && (
@@ -197,7 +230,7 @@ const ActionStart = (props) => {
                                         _margin={'0px'}
                                         _onClick={() => {
                                             setActionModal(false)
-                                            dispatch(setFakeResult('result'))
+                                            dispatch(setFakeResult(result))
                                             setNext(false)
                                         }}
                                     >
@@ -218,9 +251,7 @@ const ActionStart = (props) => {
                                                 setAction2(true)
                                                 setActionStart(true)
                                                 setNext(false)
-                                                dispatch(
-                                                    setFakeResult('result')
-                                                )
+                                                dispatch(setFakeResult(result))
                                             }}
                                         >
                                             다음 운동으로
@@ -266,7 +297,7 @@ const ActionStart = (props) => {
                                         </Text>
                                     </FlexRow>
                                     <Img
-                                        _src={modalImg}
+                                        _src={imgGif(curChara)}
                                         _width={'13rem'}
                                         _height={'13rem'}
                                         _bradius={'0px'}
@@ -289,7 +320,7 @@ const ActionStart = (props) => {
                                         completeBtn()
                                     }}
                                 >
-                                    액션 시작!
+                                    한 동작 시작!
                                 </ButtonOutlined>
                             )}
                             {active && (
@@ -303,7 +334,7 @@ const ActionStart = (props) => {
                                     _bradius={'0.5rem'}
                                     _color={'#999999'}
                                 >
-                                    완료!
+                                    한 동작 진행중...
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -316,9 +347,13 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
+                                        Toast.fire({
+                                            icon: 'success',
+                                            title: '100 포인트를 지급받았습니다!',
+                                        })
                                     }}
                                 >
-                                    완료!
+                                    완료하기!
                                 </ButtonOutlined>
                             )}
                             {next && (
@@ -336,7 +371,7 @@ const ActionStart = (props) => {
                                         _margin={'0px'}
                                         _onClick={() => {
                                             setActionModal(false)
-                                            dispatch(setFakeResult('result'))
+                                            dispatch(setFakeResult(result))
                                             setNext(false)
                                         }}
                                     >
@@ -357,9 +392,7 @@ const ActionStart = (props) => {
                                                 setAction3(true)
                                                 setActionStart(true)
                                                 setNext(false)
-                                                dispatch(
-                                                    setFakeResult('result')
-                                                )
+                                                dispatch(setFakeResult(result))
                                             }}
                                         >
                                             다음 운동으로
@@ -405,7 +438,7 @@ const ActionStart = (props) => {
                                         </Text>
                                     </FlexRow>
                                     <Img
-                                        _src={modalImg}
+                                        _src={imgGif(curChara)}
                                         _width={'13rem'}
                                         _height={'13rem'}
                                         _bradius={'0px'}
@@ -428,7 +461,7 @@ const ActionStart = (props) => {
                                         completeBtn()
                                     }}
                                 >
-                                    액션 시작!
+                                    한 동작 시작!
                                 </ButtonOutlined>
                             )}
                             {active && (
@@ -442,7 +475,7 @@ const ActionStart = (props) => {
                                     _bradius={'0.5rem'}
                                     _color={'#999999'}
                                 >
-                                    완료!
+                                    한 동작 진행중...
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -455,9 +488,13 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
+                                        Toast.fire({
+                                            icon: 'success',
+                                            title: '100 포인트를 지급받았습니다!',
+                                        })
                                     }}
                                 >
-                                    완료!
+                                    완료하기!
                                 </ButtonOutlined>
                             )}
                             {next && (
@@ -475,7 +512,7 @@ const ActionStart = (props) => {
                                         _margin={'0px'}
                                         _onClick={() => {
                                             setActionModal(false)
-                                            dispatch(setFakeResult('result'))
+                                            dispatch(setFakeResult(result))
                                             setNext(false)
                                         }}
                                     >
@@ -496,9 +533,7 @@ const ActionStart = (props) => {
                                                 setAction4(true)
                                                 setActionStart(true)
                                                 setNext(false)
-                                                dispatch(
-                                                    setFakeResult('result')
-                                                )
+                                                dispatch(setFakeResult(result))
                                             }}
                                         >
                                             다음 운동으로
@@ -544,7 +579,7 @@ const ActionStart = (props) => {
                                         </Text>
                                     </FlexRow>
                                     <Img
-                                        _src={modalImg}
+                                        _src={imgGif(curChara)}
                                         _width={'13rem'}
                                         _height={'13rem'}
                                         _bradius={'0px'}
@@ -567,7 +602,7 @@ const ActionStart = (props) => {
                                         completeBtn()
                                     }}
                                 >
-                                    액션 시작!
+                                    한 동작 시작!
                                 </ButtonOutlined>
                             )}
                             {active && (
@@ -581,7 +616,7 @@ const ActionStart = (props) => {
                                     _bradius={'0.5rem'}
                                     _color={'#999999'}
                                 >
-                                    완료!
+                                    한 동작 진행중...
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -594,9 +629,13 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
+                                        Toast.fire({
+                                            icon: 'success',
+                                            title: '100 포인트를 지급받았습니다!',
+                                        })
                                     }}
                                 >
-                                    완료!
+                                    완료하기!
                                 </ButtonOutlined>
                             )}
                             {next && (
@@ -614,7 +653,7 @@ const ActionStart = (props) => {
                                         _margin={'0px'}
                                         _onClick={() => {
                                             setActionModal(false)
-                                            dispatch(setFakeResult('result'))
+                                            dispatch(setFakeResult(result))
                                             setNext(false)
                                         }}
                                     >
@@ -635,9 +674,7 @@ const ActionStart = (props) => {
                                                 setAction5(true)
                                                 setActionStart(true)
                                                 setNext(false)
-                                                dispatch(
-                                                    setFakeResult('result')
-                                                )
+                                                dispatch(setFakeResult(result))
                                             }}
                                         >
                                             다음 운동으로
@@ -682,7 +719,7 @@ const ActionStart = (props) => {
                                         </Text>
                                     </FlexRow>
                                     <Img
-                                        _src={modalImg}
+                                        _src={imgGif(curChara)}
                                         _width={'13rem'}
                                         _height={'13rem'}
                                         _bradius={'0px'}
@@ -705,7 +742,7 @@ const ActionStart = (props) => {
                                         completeBtn()
                                     }}
                                 >
-                                    액션 시작!
+                                    한 동작 시작!
                                 </ButtonOutlined>
                             )}
                             {active && (
@@ -719,7 +756,7 @@ const ActionStart = (props) => {
                                     _bradius={'0.5rem'}
                                     _color={'#999999'}
                                 >
-                                    완료!
+                                    한 동작 진행중...
                                 </ButtonFill>
                             )}
                             {complete && (
@@ -732,9 +769,13 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
+                                        Toast.fire({
+                                            icon: 'success',
+                                            title: '100 포인트를 지급받았습니다!',
+                                        })
                                     }}
                                 >
-                                    완료!
+                                    완료하기!
                                 </ButtonOutlined>
                             )}
                             {next && (
@@ -752,7 +793,7 @@ const ActionStart = (props) => {
                                         _margin={'0px'}
                                         _onClick={() => {
                                             setActionModal(false)
-                                            dispatch(setFakeResult('result'))
+                                            dispatch(setFakeResult(result))
                                             setNext(false)
                                         }}
                                     >
@@ -830,7 +871,7 @@ const ActionStart = (props) => {
                         console.log('루틴아이디', routineId)
                         dispatch(actionRestartMD(routineId))
                         dispatch(setResult([]))
-                        dispatch(setFakeResultClear([]))
+                        dispatch(setFakeResult([]))
                         setNext(false)
                         setActionStart(true)
                     }}

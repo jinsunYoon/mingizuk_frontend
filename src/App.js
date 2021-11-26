@@ -1,6 +1,6 @@
 // * basic import for route
 import React, { Suspense, lazy } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
 import ProtectedRoutes from './routes/ProtectedRoutes' //Authenticated routes
 import PublicRoute from './routes/PublicRoute'
@@ -18,6 +18,7 @@ const notLoggedIn = lazy(() => import('./pages/notLoggedIn'))
 const Onboarding = lazy(() => import('./pages/Onboarding'))
 const Header = lazy(() => import('./components/Header.js'))
 const NavBar = lazy(() => import('./components/NavBar.js'))
+const ReLogin = lazy(() => import('./pages/ReLogin'))
 
 const App = () => {
     const dispatch = useDispatch()
@@ -37,6 +38,7 @@ const App = () => {
         '/users/info',
         '/users/collection',
         '/users/moim',
+        '/routine/mypage',
     ]
 
     // *social login
@@ -55,6 +57,9 @@ const App = () => {
         <>
             <ConnectedRouter history={history}>
                 <Suspense fallback={<div>Loading..</div>}>
+                    <Route path={'/signup'} exact>
+                        <Header type="none" name="회원가입" />
+                    </Route>
                     <Route path={'/main'} exact>
                         <Header type="menu" />
                     </Route>
@@ -62,7 +67,7 @@ const App = () => {
                         <Header type="menu" name="통계" />
                     </Route>
                     <Route path={'/routine/mypage'} exact>
-                        <Header name="루틴" type="back" />
+                        <Header name="루틴" type="goMain" />
                     </Route>
                     <Route path={'/routine/update'} exact>
                         <Header name="내 루틴 수정하기 ( 1 / 2 )" type="back" />
@@ -100,6 +105,9 @@ const App = () => {
                     <Route path={'/users/moim'} exact>
                         <Header type="back" name="내 모임" />
                     </Route>
+                    {/* <Route path={'/moim/chat/:id'} exact>
+                        <Header type="back" name="모임 참여자 채팅" />
+                    </Route> */}
 
                     <Switch>
                         <PublicRoute
@@ -124,7 +132,7 @@ const App = () => {
                             <Signup />
                         </PublicRoute>
                         <PublicRoute
-                            path="/notLoggedIn"
+                            path="/ReLogin"
                             exact
                             isAuthenticated={isAuthenticated}
                         >

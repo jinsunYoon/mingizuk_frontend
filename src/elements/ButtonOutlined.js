@@ -82,11 +82,8 @@ const ElButton = styled.button`
 const NavIcon = styled.div`
     margin: 0px;
     padding: 0px;
-    position: fixed;
     background: none;
     border: none;
-    top: 0.6rem;
-    left: 1rem;
     cursor: pointer;
 `
 

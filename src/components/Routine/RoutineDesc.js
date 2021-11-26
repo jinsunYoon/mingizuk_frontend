@@ -13,6 +13,12 @@ import {
     setRoutineInfo,
     setOptionModal,
 } from '../../redux/modules/routineSlice'
+import {
+    setResult,
+    setFakeResult,
+    setTempRoutineId,
+} from '../../redux/modules/completeSlice'
+import Swal from 'sweetalert2'
 
 const RoutineDesc = (props) => {
     const dispatch = useDispatch()
@@ -22,8 +28,14 @@ const RoutineDesc = (props) => {
     const myset = useSelector((state) => state.routine.myRoutine)
     const BtnStatus = useSelector((state) => state.routine.BtnStatus)
     const getRoutineId = useSelector((state) => state.setAction.routineId)
-    const result = useSelector((state) => state.actionComplete.result)
-    console.log('result', result)
+    const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
+    const getTempRoutineId = useSelector(
+        (state) => state.actionComplete.tempRoutineId
+    )
+    const getResult = useSelector((state) => state.actionComplete.result)
+    const getFakeResult = useSelector(
+        (state) => state.actionComplete.fakeResult
+    )
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -39,6 +51,40 @@ const RoutineDesc = (props) => {
         dispatch(myRoutinePresetMD())
         dispatch(myRoutineListMD())
     }, [])
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+    })
+
+    const resetRoutine = (routineId) => {
+        swal({
+            text: '진행중이던 루틴을 초기화 하시겠습니까?',
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                dispatch(actionResetMD(routineId))
+                const data = getTempRoutineId
+                console.log('바꾸고싶은 루틴아디', data)
+                dispatch(setResult([]))
+                dispatch(setFakeResult([]))
+                dispatch(setMainRoutineMD(data))
+                Toast.fire({
+                    icon: 'success',
+                    title: '메인루틴으로 설정되었습니다',
+                })
+                history.push('/')
+            } else return
+        })
+    }
 
     return (
         <>
@@ -58,40 +104,51 @@ const RoutineDesc = (props) => {
                                 dispatch(setRoutineModal(true))
                                 if (routine.Actions.length > 0) {
                                     dispatch(
-                                        setRoutineId(
+                                        setTempRoutineId(
                                             routine?.Actions[0].routineId
                                         )
+                                    )
+                                    console.log(
+                                        '선택한 루틴',
+                                        routine?.Actions[0].routineId
                                     )
                                 }
                             }}
                         >
                             <div className="text-box">
                                 <h3>{routine?.routineName}</h3>
-                                <p>
-                                    {routine?.Actions?.map((action, idx) =>
-                                        routine?.Actions?.length - 1 === idx
-                                            ? `${action?.actionName}`
-                                            : action?.actionName?.length > 5
-                                            ? `${action?.actionName?.slice(
-                                                  0,
-                                                  3
-                                              )}.. / `
-                                            : `${action?.actionName} / `
-                                    )}
-                                </p>
-                            </div>
-                            <div className="icon-box">
                                 <div
                                     onClick={() => {
                                         dispatch(setOptionModal(true))
                                         dispatch(setRoutineInfo(routine))
                                     }}
                                 >
-                                    ...
+                                    <div className="icon-box"></div>
+                                    <div className="icon-box"></div>
+                                    <div className="icon-box"></div>
                                 </div>
                             </div>
+                            <p>
+                                {routine?.Actions?.map((action, idx) =>
+                                    routine?.Actions?.length - 1 === idx
+                                        ? `${action?.actionName}`
+                                        : action?.actionName?.length > 5
+                                        ? `${action?.actionName?.slice(
+                                              0,
+                                              3
+                                          )}.. / `
+                                        : `${action?.actionName} / `
+                                )}
+                            </p>
                         </button>
                     ))}
+                    {myset?.length === 0 && (
+                        <p className="no-routine">
+                            아직 루틴이 없네요!
+                            <br />
+                            아래 + 버튼을 눌러서 새 루틴을 만들어보세요.
+                        </p>
+                    )}
                 </div>
             )}
             {desc === 'recommendRoutine' && (
@@ -104,14 +161,19 @@ const RoutineDesc = (props) => {
                     {preset.length > 0 &&
                         preset?.map((routine, idx) => (
                             <button
+                                key={idx}
                                 className="recommend-routine-box"
                                 onClick={() => {
                                     dispatch(setRoutineModal(true))
                                     if (routine.Actions.length > 0) {
                                         dispatch(
-                                            setRoutineId(
+                                            setTempRoutineId(
                                                 routine?.Actions[0].routineId
                                             )
+                                        )
+                                        console.log(
+                                            '선택한 루틴',
+                                            routine?.Actions[0].routineId
                                         )
                                     }
                                 }}
@@ -139,20 +201,38 @@ const RoutineDesc = (props) => {
                 <div
                     style={{
                         zIndex: '3',
+                        width: '100vw',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        zIndex: 5,
                     }}
                 >
                     <button
                         className="setting-btn"
                         onClick={() => {
-                            const data = getRoutineId
-                            console.log('data', data)
-                            dispatch(setMainRoutineMD(data))
-                            if (result?.length > 0) {
-                                const routineId = getRoutineId
+                            if (
+                                getResult?.length > 0 &&
+                                getFakeResult?.length > 0
+                            ) {
+                                const routineId =
+                                    mainRoutine.Actions.length > 0 &&
+                                    mainRoutine.Actions[0].routineId
+                                dispatch(setRoutineId(routineId))
                                 console.log('리셋할 루틴아디', routineId)
-                                dispatch(actionResetMD(routineId))
+                                resetRoutine(routineId)
                             }
-                            history.push('/')
+                            if (
+                                (getResult?.length == 0 &&
+                                    getFakeResult?.length == 0) ||
+                                typeof mainRoutine == 'undefined'
+                            ) {
+                                const data = getTempRoutineId
+                                console.log('data', data)
+                                dispatch(setMainRoutineMD(data))
+                                dispatch(setResult([]))
+                                dispatch(setFakeResult([]))
+                                history.push('/')
+                            }
                         }}
                     >
                         메인 루틴으로 설정하기

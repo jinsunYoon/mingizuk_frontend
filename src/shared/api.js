@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useMutation, useQuery } from 'react-query'
+import { history } from '../redux/store'
 import { getToken } from './utils'
 
 const BASE_URL = 'https://mingijuk.shop'
@@ -37,6 +38,14 @@ instance.interceptors.response.use(
     },
     async (error) => {
         console.log(error)
+        if (
+            error.response.data.msg ===
+            'accessToken이 재발급되었습니다. 다시 로그인해주세요'
+        ) {
+            history.push('/login')
+
+            return
+        }
         window.alert(error.response.data.msg)
     }
 )
@@ -105,7 +114,33 @@ const logoutAPI = () => {
 }
 
 const loginCheckAPI = () => {
-    return instance.get('/api/auth/me')
+    return axios
+        .get(`${BASE_URL}/api/auth/me`, {
+            headers: {
+                ['accessToken']: getToken().accessToken,
+                ['refreshToken']: getToken().refreshToken,
+            },
+        })
+        .then(function (response) {
+            if (response?.data?.result === true) {
+                console.log('>><<만료 안됨', response)
+                return response
+            } else if (response?.data?.msg === 'accessToken 재발급') {
+                console.log('>><<, aces재발급', response)
+                sessionStorage.setItem('accessToken', response.data.accessToken)
+                return response
+            } else if (response?.data?.msg === 'refreshToken 재발급') {
+                sessionStorage.setItem(
+                    'refreshToken',
+                    response.data.refreshToken
+                )
+                return response
+            }
+        })
+        .catch(function (error) {
+            console.log('<><>', error)
+        })
+    // return instance.get('/api/auth/me')
 }
 
 // *---------------------------------------------
@@ -150,20 +185,20 @@ const userInfoAPI = (data) => {
 
 // mymoim
 const myMoimCreateAPI = (data) => {
-    return instance.post('/api/users/moims', { userType: 1 })
+    return instance.post('/api/moims/mymoims', { userType: 1 })
 }
 
 const myMoimJoinAPI = (data) => {
-    return instance.post('/api/users/moims', { userType: 0 })
+    return instance.post('/api/moims/mymoims', { userType: 0 })
 }
 
 const myMoimCommentAPI = () => {
-    return instance.get('/api/users/comments')
+    return instance.get('/api/moims/comment/mycomments')
 }
 
 const myMoimLikeAPI = () => {
-    console.log('>>', 'api')
-    return instance.get('/api/moims/like')
+    console.log('>>>!!', 'api')
+    return instance.get('/api/moims/like/mylikes')
 }
 
 // * ------------------------------------------------
@@ -224,7 +259,7 @@ const moimCreateAPI = (data) => {
         startAt: data.startAt,
         finishAt: data.finishAt,
         location: data.location,
-        // locationGu: data.locationGu
+        filter: data.filter,
     })
 }
 
@@ -233,10 +268,13 @@ const moimReadAPI = () => {
 }
 
 const moimUpdateAPI = (data) => {
+    console.log(data)
     return instance.put(`/api/moims/${data.moimId}`, {
         title: data.title,
         contents: data.contents,
         imgSrc: data.imgSrc,
+        finishAt: data.finishAt,
+        startAt: data.startAt,
     })
 }
 
@@ -281,11 +319,9 @@ const moimUpdateReviewAPI = (data) => {
     })
 }
 
-const moimLocationAPI = (locationGu) => {
-    console.log('>>>>>', locationGu)
-    return instance.post(`/api/moims/search`, {
-        locationGu: locationGu,
-    })
+const moimLocationAPI = (locationFilter) => {
+    console.log('>>>>>!', locationFilter)
+    return instance.post(`/api/moims/search`, { filter: locationFilter })
 }
 
 // * history , habittraker

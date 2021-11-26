@@ -14,7 +14,7 @@ const LikeBtn = (props) => {
                 <Icon
                     icon="heart"
                     size="20px"
-                    color="red"
+                    color="#FD8787"
                     _onClick={() => {
                         dispatch(moimUnlikeMD(moim_id))
                     }}

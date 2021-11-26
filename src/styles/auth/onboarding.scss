@@ -4,11 +4,12 @@
     @include flexbox();
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
 }
 
 .onBoarding-container {
     @include column-flexbox(start, center);
-    padding: 5.6rem 1rem 90px 1rem;
+    padding: 1rem 3.5rem 90px 3.5rem;
     width: 100%;
     max-width: 768px;
     height: inherit;
@@ -27,7 +28,7 @@
             margin-right: 0;
         }
     }
-    margin-bottom: 56px;
+    margin-bottom: 28px;
 }
 
 .onBoarding-group {
@@ -41,18 +42,26 @@
         font-size: 1.5rem;
         letter-spacing: 0.15px;
         line-height: 2.25rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 1rem;
+        @media screen and (max-width: 320px) {
+            font-size: 1.3rem;
+        }
     }
     p {
         font-size: 12px;
         line-height: 18px;
         letter-spacing: 0.15px;
-        margin-bottom: 5.6rem;
+        margin-bottom: 7rem;
     }
-    div {
-        width: 328px;
-        height: 205px;
-        background-color: lightcoral;
+    img {
+        width: 18rem;
+        height: auto;
+        position: relative;
+        bottom: 3rem;
+        @media screen and (max-width: 320px) {
+            width: 16rem;
+            bottom: 5rem;
+        }
     }
 }
 
@@ -64,14 +73,38 @@
     background-color: #a1a7e7 !important;
 }
 
-.getting-start {
-    @include flexbox();
+.onBoarding-btn-box {
+    @include flexbox(start, center);
     position: fixed;
-    bottom: 3rem;
-    background-color: $white;
-    color: $primary;
-    border-radius: 0.5rem;
-    border: none;
-    width: 20.5rem;
-    height: 3rem;
+    bottom: 0;
+    width: 100vw;
+    height: 3.5rem;
+    max-width: 768px;
+    button {
+        width: 50vw;
+        height: 3.5rem;
+        background-color: #f0f1ff;
+        color: #6b76ff;
+        border: none;
+        cursor: pointer;
+        &:first-child {
+            @include flexbox(start, center);
+            padding-left: 2rem;
+        }
+        &:last-child {
+            @include flexbox(end, center);
+            padding-right: 2rem;
+        }
+    }
+}
+
+.rion-main {
+    width: 100vw;
+    height: 100vh;
+    @include column-flexbox(center, center);
+    font-size: 1.5rem;
+    letter-spacing: 0.15px;
+    line-height: 2.25rem;
+    margin-bottom: 0.5rem;
+    color: $white;
 }

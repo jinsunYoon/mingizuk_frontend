@@ -24,9 +24,6 @@ export const moimCreateMD = createAsyncThunk(
         try {
             const response = await moimCreateAPI(data)
             if (response) {
-                swal('Good job!', 'You clicked the button!', 'success', {
-                    button: 'Aww yiss!',
-                })
                 history.push('/moim')
                 return response
             }
@@ -58,11 +55,10 @@ export const moimUpdateMD = createAsyncThunk(
         try {
             const response = await moimUpdateAPI(data)
             if (response) {
-                console.log(response)
+                history.push('/moim')
                 return data
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -119,11 +115,9 @@ export const moimUnlikeMD = createAsyncThunk(
         try {
             const response = await moimUnlikeAPI(data)
             if (response) {
-                console.log(response)
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -150,7 +144,6 @@ export const moimReviewCreateMD = createAsyncThunk(
         try {
             const response = await moimCreateReviewAPI(data)
             if (response) {
-                Swal.fire('리뷰를 작성하였습니다.')
                 const _data = { response, data }
                 return _data
             }
@@ -211,10 +204,10 @@ export const moimLeaveMD = createAsyncThunk(
 
 export const moimLocationMD = createAsyncThunk(
     'moim/location',
-    async (locationGu, thunkAPI) => {
+    async (locationFilter, thunkAPI) => {
         try {
-            console.log('>>>>>', locationGu)
-            const response = await moimLocationAPI(locationGu)
+            const response = await moimLocationAPI(locationFilter)
+            console.log('>>>>>!', response)
             if (response) {
                 return response
             }

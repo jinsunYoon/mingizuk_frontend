@@ -25,20 +25,22 @@ const RoutineCount = () => {
     }
     return (
         <>
-            <section className="container">
-                <h3 className="count-title">
-                    루틴 제목과 액션 횟수를 정해주세요.
-                </h3>
-                <input
-                    className="routineIn"
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                />
-                <RoutineCounter />
-                <button className="next-btn" onClick={() => addRoutine()}>
-                    완료
-                </button>
-            </section>
+            <div className="routine-layout">
+                <section className="container">
+                    <h3 className="count-title">
+                        루틴 제목과 동작 횟수를 정해주세요.
+                    </h3>
+                    <input
+                        className="routineIn"
+                        onChange={(e) => setName(e.target.value)}
+                        value={name}
+                    />
+                    <RoutineCounter />
+                    <button className="next-btn" onClick={() => addRoutine()}>
+                        완료
+                    </button>
+                </section>
+            </div>
         </>
     )
 }

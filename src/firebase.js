@@ -1,49 +1,21 @@
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/messaging'
+// Import the functions you need from the SDKs you need
+import { initializeApp } from 'firebase/app'
+import { getAnalytics, logEvent } from 'firebase/analytics'
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-// * fcm test
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_apiKey,
-    authDomain: process.env.REACT_APP_authDomain,
-    projectId: process.env.REACT_APP_projectId,
-    storageBucket: process.env.REACT_APP_storageBucket,
-    messagingSenderId: process.env.REACT_APP_messagingSenderId,
-    appId: process.env.REACT_APP_appId,
-    measurementId: process.env.REACT_APP_measurementId,
+    apiKey: 'AIzaSyAyURaPvFcXB7ReNDqu5n3BbmfOpmOLnfM',
+    authDomain: 'ming-gi-jeog.firebaseapp.com',
+    projectId: 'ming-gi-jeog',
+    storageBucket: 'ming-gi-jeog.appspot.com',
+    messagingSenderId: '155965299981',
+    appId: '1:155965299981:web:4337b58f5bc232fdae6444',
+    measurementId: 'G-XH2R1628ML',
 }
 
-firebase.initializeApp(firebaseConfig)
-const messaging = firebase.messaging()
-
-export const getToken = (setTokenFound) => {
-    return messaging
-        .getToken({
-            vapidKey:
-                'BPBRPYBLojf8IWb4aDRCf6WpA_3drCEnbwTUwQoH5iTsF66eJ5LlTmeDO0pn1q4vZAY8D-nOmUhNDzPilZn7XAI',
-        })
-        .then((currentToken) => {
-            if (currentToken) {
-                console.log('current token for client: ', currentToken)
-                setTokenFound(true)
-                // Track the token -> client mapping, by sending to backend server
-                // show on the UI that permission is secured
-            } else {
-                console.log(
-                    'No registration token available. Request permission to generate one.'
-                )
-                setTokenFound(false)
-                // shows on the UI that permission is required
-            }
-        })
-        .catch((err) => {
-            console.log('An error occurred while retrieving token. ', err)
-            // catch error while creating client token
-        })
-}
-
-export const onMessageListener = () =>
-    new Promise((resolve) => {
-        messaging.onMessage((payload) => {
-            resolve(payload)
-        })
-    })
+// Initialize Firebase
+const app = initializeApp(firebaseConfig)
+const analytics = getAnalytics(app)
