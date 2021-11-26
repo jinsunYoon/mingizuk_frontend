@@ -101,9 +101,9 @@ const routineSlice = createSlice({
             })
         },
         [finRoutinesActionsMD.fulfilled]: (state, { payload }) => {
-            const data = payload.data
-            const finActions = data.finActions
-            const finRoutines = data.finRoutines
+            const data = payload?.data
+            const finActions = data?.finActions
+            const finRoutines = data?.finRoutines
             let actionsWithDate = []
             let routienWithDate = []
 

@@ -107,7 +107,7 @@ const Signup = () => {
                     />
                     {userPw === '' && (
                         <p className="auth-warning">
-                            특수문자, 영문, 숫자 모두 필요합니다.
+                            특수문자, 영문, 숫자로 8자 이상이 필요합니다.
                         </p>
                     )}
                     <label htmlFor="passwordConfirm">비밀번호 확인</label>
