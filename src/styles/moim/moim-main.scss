@@ -4,14 +4,16 @@
 
 .moim-main-layout {
     width: 100vw;
+    height: 100%;
     @include column-flexbox(center, center);
-    padding-top: 3rem;
-    padding-bottom: 65px;
+    margin-top: 3rem;
+    margin-bottom: 65px;
     position: relative;
 }
 
 .post-warp {
     width: 100vw;
+    height: 100%;
     max-width: 768px;
     @include column-flexbox(center, center);
     background-color: #efefef;
@@ -141,7 +143,7 @@
     max-width: $tablet;
     height: auto;
     border: none;
-    margin-left: 1rem;
+    padding-left: 1rem;
 }
 
 .location-filter-btn {
