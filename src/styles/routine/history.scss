@@ -48,7 +48,7 @@ $history_width: 90vw;
 .graph-desc {
     @include text-style-14(16px, auto);
     @include flexbox();
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     width: 240px;
     height: 35px;
     border: 1px solid $primary;

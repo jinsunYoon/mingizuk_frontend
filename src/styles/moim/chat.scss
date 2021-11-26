@@ -118,6 +118,18 @@
     height: 3rem;
     @include flexbox(end, center);
     right: 1rem;
+    width: 3rem;
+    border: none;
+    background-color: $white;
 
     z-index: 5;
+}
+
+.chat-notice-option-btn {
+    @include flexbox();
+    position: absolute;
+    right: 0;
+    padding-left: 1rem;
+    height: 3rem;
+    width: 5rem;
 }
