@@ -51,7 +51,7 @@ const Header = (props) => {
                     </div>
                     <ButtonOutlined
                         _border={'none'}
-                        _width={'5rem'}
+                        _width={'false'}
                         _others={'position: fixed, top:0;'}
                         _onClick={() => {
                             history.push('/')
