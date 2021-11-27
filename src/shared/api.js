@@ -324,6 +324,15 @@ const moimLocationAPI = (locationFilter) => {
     return instance.post(`/api/moims/search`, { filter: locationFilter })
 }
 
+const moimScrollAPI = (lastID) => {
+    console.log('>>>>', lastID)
+    return instance.post(`/api/moims/scroll/${lastID}`)
+}
+
+const moimLocationScrollAPI = (lastID) => {
+    return instance.post(`/api/moims/scroll-location/${lastID}`)
+}
+
 // * history , habittraker
 const finRoutinesActionsAPI = () => {
     return instance.get('/api/main/trackerHistory')
@@ -376,4 +385,6 @@ export {
     getCharacterAPI,
     postCharacterAPI,
     moimLocationAPI,
+    moimScrollAPI,
+    moimLocationScrollAPI,
 }
