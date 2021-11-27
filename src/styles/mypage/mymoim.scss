@@ -81,7 +81,7 @@
                 display: flex;
                 align-items: flex-end;
                 height: 40px;
-                margin-left: 2rem;
+                padding-left: 2rem;
                 line-height: 1.2rem;
             }
 
@@ -90,7 +90,7 @@
                 flex-direction: column;
                 width: 100%;
                 text-align: left;
-                margin-left: 2rem;
+                padding-left: 2rem;
 
                 .title {
                     @include text-style-16(24px, 0.15px, #2e3a59);
