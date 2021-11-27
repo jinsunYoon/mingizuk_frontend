@@ -97,7 +97,7 @@ const App = () => {
                         <Header type="back" name="마이페이지" />
                     </Route>
                     <Route path={'/users/info'} exact>
-                        <Header type="back" name="프로필 수정" />
+                        <Header type="back" name="회원정보 수정하기" />
                     </Route>
                     <Route path={'/users/collection'} exact>
                         <Header type="back" name="내 캐릭터" />
@@ -144,6 +144,7 @@ const App = () => {
                         >
                             <ProtectedRoutes />
                         </PrivateRoute>
+
                         <Route path="*">
                             <NotFound />
                         </Route>

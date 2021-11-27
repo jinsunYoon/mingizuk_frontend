@@ -27,10 +27,12 @@ const HistoryGraph = (props) => {
     )
 
     React.useEffect(() => {
-        if (joinDate) return
-        else {
-            dispatch(finRoutinesActionsMD())
-        }
+        dispatch(finRoutinesActionsMD())
+        // if (joinDate) return
+        // else {
+        //     dispatch(finRoutinesActionsMD())
+        //     dispatch(changeMyPageModal('second'))
+        // }
     }, [])
 
     React.useEffect(() => {

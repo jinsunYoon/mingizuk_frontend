@@ -64,7 +64,7 @@
     }
 
     .kakao-btn {
-        @include auth-button(#f7e600, $white);
+        @include auth-button(#FAEF3F, $black);
     }
     .naver-btn {
         @include auth-button(#2db400, $white);

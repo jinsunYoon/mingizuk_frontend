@@ -103,7 +103,7 @@ const NavBar = () => {
                                     <Icon
                                         icon="nav-routine-active"
                                         size="22px"
-                                        color="#93999F"
+                                        color="#6B76FF"
                                     />
                                     <Text
                                         _padding="2px 0 0"

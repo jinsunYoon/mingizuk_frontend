@@ -127,15 +127,14 @@ const Main = (props) => {
                             </FlexRow>
                             <FlexColumn
                                 _width={'100%'}
-                                _height={'false'}
-                                _justify={'start'}
+                                _height={'100%'}
+                                _padding={'1rem 0'}
                                 _others={
                                     'border-radius: 0.5rem; min-height:11.25rem'
                                 }
                             >
                                 <FlexRow
                                     _justify={'start'}
-                                    _align={'end'}
                                     _width={'100%'}
                                     _border={'none'}
                                     _others={'border-radius: 0.5rem;'}
@@ -143,7 +142,7 @@ const Main = (props) => {
                                     <Text
                                         _fontSize={'1rem'}
                                         _color={'#5C5C5C'}
-                                        _padding={'1rem 0.3rem 0px 0.75rem'}
+                                        _padding={'0 0 1rem 1rem'}
                                     >
                                         {mainRoutine.routineName}
                                     </Text>
