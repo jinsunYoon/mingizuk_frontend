@@ -810,7 +810,7 @@ const ActionStart = (props) => {
                     <ButtonOutlined
                         _width={'13rem'}
                         _others={'height:3rem'}
-                        _margin={'0.5rem 0 1rem 0'}
+                        _margin={'0.5rem 0 0.5rem 0'}
                         _border={'1px solid #6B76FF'}
                         _color={'#6B76FF'}
                         _bradius={'0.5rem'}
@@ -827,7 +827,7 @@ const ActionStart = (props) => {
                     <ButtonOutlined
                         _width={'13rem'}
                         _others={'height:3rem'}
-                        _margin={'0.5rem 0 1rem 0'}
+                        _margin={'0.5rem 0 0.5rem 0'}
                         _border={'1px solid #6B76FF'}
                         _color={'#6B76FF'}
                         _bradius={'0.5rem'}

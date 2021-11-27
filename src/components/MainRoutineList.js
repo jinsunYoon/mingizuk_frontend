@@ -20,16 +20,14 @@ const MainRoutineList = (props) => {
     if (mainRoutine?.Actions?.length == result?.length) {
         return (
             <div style={{ display: 'flex', zIndex: '2' }}>
-                <FlexColumn
-                    _width={'100%'}
-                    _height={'100%'}
-                    _color={'black'}
-                    _border={'none'}
-                    _others={'min-height:6.25rem'}
-                >
-                    <Text _fontSize={'1.2rem'} _fontWeight={'700'}>
-                        루틴을 끝마치셨습니다
-                        <br /> 축하드립니다~!
+                <FlexColumn _width={'100%'} _height={'false'} _border={'none'}>
+                    <Text
+                        _fontSize={'0.875rem'}
+                        _fontWeight={'500'}
+                        _color={'#8F8F8F'}
+                        _padding={'0.5rem 0 1rem 0'}
+                    >
+                        짝짝짝 ~ 🙌 루틴을 모두 마쳤어요.
                     </Text>
                 </FlexColumn>
             </div>
@@ -54,7 +52,7 @@ const MainRoutineList = (props) => {
                             _width={'100%'}
                             _height={'100%'}
                             _border={'none'}
-                            _padding={'0.7rem 0px 0px 0px'}
+                            _padding={'0px'}
                             _justify={'start'}
                         >
                             {routine?.actionType == 'stretching' ? (

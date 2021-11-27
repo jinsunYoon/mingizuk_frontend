@@ -7,38 +7,48 @@ import '../../styles/mypage/mypage.scss'
 import Icon from '../../components/icons/Icon'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 
-//* MD
-import { logoutMD } from '../../redux/async/user'
-
 const MyPage = (props) => {
     const [userInfo, setUserInfo] = useState('')
     const dispatch = useDispatch()
     const nickName = useSelector((state) => state.user.userInfo.nickName)
     const pwd = useSelector((state) => state.user.userInfo.userPw)
     const email = useSelector((state) => state.user.userInfo.userEmail)
+    const charList = useSelector((state) => state.character.charList)
+    const curChara =
+        charList.length > 0 && charList[charList.length - 1].charName
 
-    const logout = () => {
-        if (window.confirm('로그아웃 하시겠습니까 ?')) {
-            dispatch(logoutMD())
-        } else {
-            return
-        }
-    }
     console.log(nickName, '>>nickname')
     console.log(pwd, '>>pwd')
-    const char = useSelector((state) => state.user.userInfo.charUrl)
-
 
     return (
         <>
             <div className="mypage-layout">
                 <section className="contents">
                     <div className="user-profile">
-                        <div
-                            className="user-image"
-                            style={{ backgroundImage: `url(${char})` }}
-                        />
-
+                        {curChara == '라이온' && (
+                            <div
+                                className="user-image"
+                                style={{
+                                    backgroundImage: `url(https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/char1.png)`,
+                                }}
+                            />
+                        )}
+                        {curChara == '무지' && (
+                            <div
+                                className="user-image"
+                                style={{
+                                    backgroundImage: `url(https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/char3.png)`,
+                                }}
+                            />
+                        )}
+                        {curChara == '제이지' && (
+                            <div
+                                className="user-image"
+                                style={{
+                                    backgroundImage: `url(https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/char2.png)`,
+                                }}
+                            />
+                        )}
                         <div className="user-info">
                             <div style={{ display: 'flex' }}>
                                 <span className="user-nickname">
@@ -65,10 +75,6 @@ const MyPage = (props) => {
                         </li>
                         <li onClick={() => history.push('/users/moim')}>
                             <span>내 모임</span>
-                            <ChevronRightIcon />
-                        </li>
-                        <li onClick={() => logout()}>
-                            <span>로그아웃</span>
                             <ChevronRightIcon />
                         </li>
                     </ul>
