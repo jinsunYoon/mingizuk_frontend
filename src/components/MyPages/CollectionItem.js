@@ -16,7 +16,7 @@ const CollectionItem = () => {
                 </ItemContainer>
             ) : (
                 <ItemContainer>
-                    <LockIcon />
+                    <LockIcon style={{ color: '#6B76FF' }} />
                 </ItemContainer>
             )}
         </>
@@ -25,11 +25,10 @@ const CollectionItem = () => {
 
 const Item = styled.img`
     border: 1px solid #000;
-    width: 5rem;
-    height: 5rem;
+    width: 6rem;
+    height: 6rem;
     border-radius: 50%;
     display: flex;
-    position: absolute;
 `
 
 const ItemContainer = styled.div`
@@ -39,8 +38,8 @@ const ItemContainer = styled.div`
     align-content: space-around;
     flex-direction: row;
     border: none;
-    width: 76px;
-    height: 76px;
+    width: 5.5rem;
+    height: 5.5rem;
     border-radius: 50%;
     background-color: #efefef;
 `
