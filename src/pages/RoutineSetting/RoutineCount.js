@@ -32,10 +32,9 @@ const RoutineCount = () => {
                     </h3>
                     <input
                         className="routineIn"
-                        placeholder="루틴 제목을 입력해주세요."
+                        placeHolder="ex. 회사에서 하는 루틴"
                         onChange={(e) => setName(e.target.value)}
                         value={name}
-                        placeholder="루틴 이름을 지어주세요."
                     />
                     <RoutineCounter />
                     <button className="next-btn" onClick={() => addRoutine()}>

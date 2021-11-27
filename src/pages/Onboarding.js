@@ -32,12 +32,12 @@ const Onboarding = () => {
         },
         {
             title: '동작과 루틴 기록을 한눈에!',
-            desc: '루틴을 완료할 때마다 포인트가 쌓여 성장합니다.',
+            desc: '데일리 통계와 달성 현황을 제공합니다.',
             src: 'https://test-pwa-kyuung.s3.ap-northeast-2.amazonaws.com/on3.png',
         },
         {
             title: '지역 기반 모임 참여',
-            desc: '원하는 지역에서 건강한 습관 만들기 모임을 참여해보세요.',
+            desc: '원하는 지역에서 건강한 습관 만들기 모임에 참여해보세요.',
             src: 'https://test-pwa-kyuung.s3.ap-northeast-2.amazonaws.com/on4.png',
         },
     ]
