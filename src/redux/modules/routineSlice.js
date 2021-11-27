@@ -82,7 +82,8 @@ const routineSlice = createSlice({
         [myRoutineCreateMD.rejected]: (state, { payload }) => {},
         // * ----
         [myRoutineListMD.fulfilled]: (state, { payload }) => {
-            state.myRoutine = payload.data.routines
+            state.myRoutine = payload.data.routinesAndActions
+            console.log('[][]', payload)
         },
         // * ----
         [myRoutineDeleteMD.fulfilled]: (state, { payload }) => {

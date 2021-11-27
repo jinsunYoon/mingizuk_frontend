@@ -203,7 +203,7 @@ const Chat = () => {
                 }}
             >
                 <Header name="참여자 채팅" type="back" />
-                {noticeValue !== '' && (
+                {noticeContent !== '' && (
                     <button
                         className="chat-notice-icon"
                         onClick={() =>
@@ -286,7 +286,14 @@ const Chat = () => {
                                         <span className="chat-time">
                                             {moment(message?.time).fromNow()}
                                         </span>
-                                        <p className="chat-content">
+                                        <p
+                                            className="chat-content"
+                                            onClick={() => {
+                                                console.log('[][][]', 'click')
+                                                userNick === host &&
+                                                    postNotice(message?.msg)
+                                            }}
+                                        >
                                             {message?.msg}
                                         </p>
                                     </div>

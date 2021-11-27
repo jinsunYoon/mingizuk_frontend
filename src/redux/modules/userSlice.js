@@ -15,6 +15,7 @@ const initialState = {
         nickName: '',
         userPw: '',
         userID: '',
+        charUrl: '',
     },
 }
 
@@ -54,7 +55,16 @@ const userSlice = createSlice({
             state.userInfo.nickName = payload?.data?.user?.nickName
             state.userInfo.userPw = payload?.data?.user?.userPw
             state.userInfo.userID = payload?.data?.user?.id
-            console.log('>><<슬라이스', payload)
+            if (payload?.data?.character?.characterName === '라이온') {
+                state.userInfo.charUrl =
+                    'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png'
+            } else if (payload?.data?.character?.characterName === '제이지') {
+                state.userInfo.charUrl =
+                    'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_1+1.png'
+            } else if (payload?.data?.character?.characterName === '무지') {
+                state.userInfo.charUrl =
+                    'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_1+1.png'
+            }
         },
         [loginCheckMD.rejected]: (state, { payload }) => {
             state.isLogin = false

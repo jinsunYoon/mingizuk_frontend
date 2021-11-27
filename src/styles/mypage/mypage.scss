@@ -24,7 +24,9 @@
             -moz-border-radius: 50%;
             -ms-border-radius: 50%;
             -o-border-radius: 50%;
-            background-color: $light-gray;
+            background-position: center;
+            background-size: contain;
+            background-color: $white;
         }
 
         .user-info {

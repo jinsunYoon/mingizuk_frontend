@@ -10,12 +10,15 @@ const MyPage = (props) => {
     const [userInfo, setUserInfo] = useState('')
     const nickName = useSelector((state) => state.user.userInfo.nickName)
     const email = useSelector((state) => state.user.userInfo.userEmail)
+    const char = useSelector((state) => state.user.userInfo.charUrl)
 
     return (
         <>
             <section className="contents">
                 <div className="user-profile">
-                    <div className="user-image">{/* 캐릭터이미지 */}</div>
+                    <div className="user-image">
+                        <img src={char} />
+                    </div>
                     <div className="user-info">
                         <div style={{ display: 'flex' }}>
                             <span className="user-nickname">{nickName}</span>

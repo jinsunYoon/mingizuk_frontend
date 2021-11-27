@@ -23,14 +23,14 @@ const mainRoutineSlice = createSlice({
     extraReducers: {
         [getMainRoutineMD.fulfilled]: (state, action) => {
             // state.mainRoutine = action.payload.data.mainRoutine
-            if (action) {
-                state.mainRoutine = action?.payload?.data?.mainRoutine[0]
-                state.isMain = action?.payload?.data?.mainRoutine[0]?.isMain
-                console.log(
-                    '겟메인루틴풀필드',
-                    action?.payload?.data?.mainRoutine[0]?.Actions
-                )
-            }
+            // if (action) {
+            //     state.mainRoutine = action?.payload?.data?.mainRoutine[0]
+            //     state.isMain = action?.payload?.data?.mainRoutine[0]?.isMain
+            //     console.log(
+            //         '겟메인루틴풀필드',
+            //         action?.payload?.data?.mainRoutine[0]?.Actions
+            //     )
+            // }
         },
         [setMainRoutineMD.fulfilled]: (state, action) => {},
     },

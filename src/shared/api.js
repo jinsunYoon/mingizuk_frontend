@@ -122,6 +122,7 @@ const loginCheckAPI = () => {
             },
         })
         .then(function (response) {
+            console.log('<>[]', response)
             if (response?.data?.result === true) {
                 console.log('>><<만료 안됨', response)
                 return response
