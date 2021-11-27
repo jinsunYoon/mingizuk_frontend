@@ -31,7 +31,7 @@ const NavBar = () => {
                     _border="none"
                     _width="100%"
                     _justify="space-between"
-                    _others="max-width:48rem"
+                    _others="max-width:48rem; border-top: 1px solid #BDC5CD;"
                 >
                     <FlexColumn _border="none" _height="4.063rem">
                         <ButtonOutlined
@@ -103,7 +103,7 @@ const NavBar = () => {
                                     <Icon
                                         icon="nav-routine-active"
                                         size="22px"
-                                        color="#93999F"
+                                        color="#6B76FF"
                                     />
                                     <Text
                                         _padding="2px 0 0"

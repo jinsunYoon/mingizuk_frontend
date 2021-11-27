@@ -33,7 +33,7 @@ const MyRoutine = () => {
                 >
                     <ToggleTab
                         firstValue={'내 루틴'}
-                        secondValue={'추천 루틴'}
+                        secondValue={'밍기적 추천 루틴'}
                         select={status}
                     />
                     <RoutineDesc select={status} />

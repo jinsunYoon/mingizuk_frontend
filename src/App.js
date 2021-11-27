@@ -144,6 +144,7 @@ const App = () => {
                         >
                             <ProtectedRoutes />
                         </PrivateRoute>
+
                         <Route path="*">
                             <NotFound />
                         </Route>

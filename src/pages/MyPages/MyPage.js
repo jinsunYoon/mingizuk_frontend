@@ -16,6 +16,7 @@ const MyPage = (props) => {
     const nickName = useSelector((state) => state.user.userInfo.nickName)
     const pwd = useSelector((state) => state.user.userInfo.userPw)
     const email = useSelector((state) => state.user.userInfo.userEmail)
+
     const logout = () => {
         if (window.confirm('로그아웃 하시겠습니까 ?')) {
             dispatch(logoutMD())
@@ -25,13 +26,19 @@ const MyPage = (props) => {
     }
     console.log(nickName, '>>nickname')
     console.log(pwd, '>>pwd')
+    const char = useSelector((state) => state.user.userInfo.charUrl)
+
 
     return (
         <>
             <div className="mypage-layout">
                 <section className="contents">
                     <div className="user-profile">
-                        <div className="user-image">{/* 캐릭터이미지 */}</div>
+                        <div
+                            className="user-image"
+                            style={{ backgroundImage: `url(${char})` }}
+                        />
+
                         <div className="user-info">
                             <div style={{ display: 'flex' }}>
                                 <span className="user-nickname">

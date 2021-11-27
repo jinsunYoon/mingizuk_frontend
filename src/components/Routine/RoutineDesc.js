@@ -123,9 +123,11 @@ const RoutineDesc = (props) => {
                                         dispatch(setRoutineInfo(routine))
                                     }}
                                 >
-                                    <div className="icon-box"></div>
-                                    <div className="icon-box"></div>
-                                    <div className="icon-box"></div>
+                                    <div className="ic-box-container">
+                                        <div className="icon-box"></div>
+                                        <div className="icon-box"></div>
+                                        <div className="icon-box"></div>
+                                    </div>
                                 </div>
                             </div>
                             <p>

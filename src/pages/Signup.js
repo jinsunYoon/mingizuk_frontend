@@ -47,10 +47,15 @@ const Signup = () => {
                 title: '빈칸을 전부 채워주세요.',
             })
             return
-        } else if (userPw.length < 8 || userPw.length > 17) {
+        } else if (userEmail.length > 30) {
             Toast.fire({
                 icon: 'error',
-                title: '비밀번호는 8~16자를 사용해주세요.',
+                title: '이메일은 30자 이하로 채워주세요.',
+            })
+        } else if (nickName.length > 8) {
+            Toast.fire({
+                icon: 'error',
+                title: '닉네임은 8자 이하로 채워주세요.',
             })
         }
 
@@ -107,7 +112,7 @@ const Signup = () => {
                     />
                     {userPw === '' && (
                         <p className="auth-warning">
-                            특수문자, 영문, 숫자 모두 필요합니다.
+                            특수문자, 영문, 숫자로 8자 이상이 필요합니다.
                         </p>
                     )}
                     <label htmlFor="passwordConfirm">비밀번호 확인</label>
