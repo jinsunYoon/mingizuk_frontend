@@ -1,17 +1,28 @@
 import React, { useState } from 'react'
 import { history } from '../../redux/store'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 //* sytle
 import '../../styles/mypage/mypage.scss'
 import Icon from '../../components/icons/Icon'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 
+//* MD
+import { logoutMD } from '../../redux/async/user'
+
 const MyPage = (props) => {
     const [userInfo, setUserInfo] = useState('')
+    const dispatch = useDispatch()
     const nickName = useSelector((state) => state.user.userInfo.nickName)
     const pwd = useSelector((state) => state.user.userInfo.userPw)
     const email = useSelector((state) => state.user.userInfo.userEmail)
+    const logout = () => {
+        if (window.confirm('로그아웃 하시겠습니까 ?')) {
+            dispatch(logoutMD())
+        } else {
+            return
+        }
+    }
     console.log(nickName, '>>nickname')
     console.log(pwd, '>>pwd')
 
@@ -47,6 +58,10 @@ const MyPage = (props) => {
                         </li>
                         <li onClick={() => history.push('/users/moim')}>
                             <span>내 모임</span>
+                            <ChevronRightIcon />
+                        </li>
+                        <li onClick={() => logout()}>
+                            <span>로그아웃</span>
                             <ChevronRightIcon />
                         </li>
                     </ul>
