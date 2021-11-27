@@ -47,10 +47,15 @@ const Signup = () => {
                 title: '빈칸을 전부 채워주세요.',
             })
             return
-        } else if (userPw.length < 8 || userPw.length > 17) {
+        } else if (userEmail.length > 30) {
             Toast.fire({
                 icon: 'error',
-                title: '비밀번호는 8~16자를 사용해주세요.',
+                title: '이메일은 30자 이하로 채워주세요.',
+            })
+        } else if (nickName.length > 8) {
+            Toast.fire({
+                icon: 'error',
+                title: '닉네임은 8자 이하로 채워주세요.',
             })
         }
 

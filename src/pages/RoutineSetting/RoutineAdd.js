@@ -20,7 +20,7 @@ const RoutineAdd = () => {
                     />
                     <div className="routine-add-title">
                         <h3>동작을 선택 해주세요.</h3>
-                        <span>(최대 5개)</span>
+                        <span>(스트레칭, 맨몸운동 합쳐서 최대 5개)</span>
                     </div>
                     <RoutineSelect select={status} />
                     <button

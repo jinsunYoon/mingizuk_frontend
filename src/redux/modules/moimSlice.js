@@ -30,7 +30,7 @@ const Toast = Swal.mixin({
 
 const initialState = {
     moim_all: {},
-    moim_detail: {},
+    moim_detail: '',
     moim_ref_update: {},
     address: '',
     place: '',
@@ -86,16 +86,46 @@ const moimSlice = createSlice({
         },
         [moimLikeMD.fulfilled]: (state, { payload }) => {
             const likeUser = payload.data.msg.split(' ')[0]
-            console.log('<<', likeUser)
-            state.moim_detail.Likes.push({ userId: Number(likeUser) })
+            const likePost = payload.data.msg.split(' ')[2]
+
+            if (state.moim_detail !== '') {
+                state.moim_detail.Likes.push({ userId: Number(likeUser) })
+                state.moim_all.filter(
+                    (post) =>
+                        post.id === Number(likePost) &&
+                        post.Likes.push({ userId: Number(likeUser) })
+                )
+            } else {
+                state.moim_all.filter(
+                    (post) =>
+                        post.id === Number(likePost) &&
+                        post.Likes.push({ userId: Number(likeUser) })
+                )
+            }
         },
         [moimUnlikeMD.fulfilled]: (state, { payload }) => {
-            const likeUser = state.moim_detail.Likes
             const unlikeUser = payload.data.msg.split(' ')[0]
-            const result = state.moim_detail.Likes.filter(
-                (likeUser) => likeUser.userId !== Number(unlikeUser)
-            )
-            state.moim_detail.Likes = result
+            const unlikePost = payload.data.msg.split(' ')[2]
+            if (state.moim_detail !== '') {
+                const result = state.moim_detail.Likes.filter(
+                    (likeUser) => likeUser.userId !== Number(unlikeUser)
+                )
+                state.moim_detail.Likes = result
+
+                const result2 = state.moim_all.filter(
+                    (post) => post.id === Number(unlikePost)
+                )
+                // state.moim_all = result2
+            } else {
+                state.moim_all.map((post) => {
+                    if (post.id === Number(unlikePost)) {
+                        const temp = post.Likes.filter(
+                            (like) => like.userId !== Number(unlikeUser)
+                        )
+                        post.Likes = temp
+                    }
+                })
+            }
         },
         [moimJoinMD.fulfilled]: (state, { payload }) => {
             state.moim_detail.MoimUsers.push({

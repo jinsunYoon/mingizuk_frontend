@@ -7,7 +7,7 @@
     height: 5.313rem;
     border: 1px solid #dadada;
     @include column-flexbox(between, start);
-    padding: 1.25rem 1.25rem;
+    padding: 1.25rem 0 1.25rem 1.25rem;
     border-radius: 0.438rem;
     margin-bottom: 20px;
     background-color: $white;
@@ -136,4 +136,11 @@
 .no-routine {
     text-align: center;
     line-height: 2rem;
+}
+
+.ic-box-container {
+    width: 2rem;
+    height: 2rem;
+    @include column-flexbox(center, start);
+    padding-right: 1.25rem;
 }
