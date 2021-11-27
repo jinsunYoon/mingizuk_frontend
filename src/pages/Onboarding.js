@@ -88,7 +88,13 @@ const Onboarding = () => {
                                 style={rionImg}
                                 src="https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png"
                             />
-                            <h1>Mingizuk</h1>
+                            <h1
+                                style={{
+                                    fontFamily: "'Montserrat', sans-serif",
+                                }}
+                            >
+                                Mingizuk
+                            </h1>
                         </article>
                     )}
                     {pageState !== -1 && (
