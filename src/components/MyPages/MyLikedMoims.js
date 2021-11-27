@@ -59,21 +59,28 @@ const MyLike = () => {
                                             size="20px"
                                             color="#6B76FF"
                                         />
-                                        {i?.location}
+                                        {i?.Moim?.location}
                                     </span>
                                     <div className="titlebox">
                                         <span className="title">
-                                            {i?.title}
+                                            {i?.Moim?.title}
                                         </span>
                                     </div>
 
                                     <div className="etcbox">
                                         <div>
                                             <span className="writer">
-                                                작성자
+                                                {
+                                                    i?.Moim?.MoimUsers[0]?.User
+                                                        ?.nickName
+                                                }
                                             </span>
                                             <span className="date">
-                                                {i?.createdAt?.split(['T'])[0]}
+                                                {
+                                                    i?.Moim?.createdAt?.split([
+                                                        'T',
+                                                    ])[0]
+                                                }
                                             </span>
                                         </div>
                                         <span className="join">
@@ -82,7 +89,7 @@ const MyLike = () => {
                                                 size="20px"
                                                 color="#A5ABB0"
                                             />
-                                            {i?.MoimUsers?.length}
+                                            {i?.Moim?.MoimUsers?.length}
                                         </span>
                                     </div>
                                 </div>
@@ -106,7 +113,7 @@ const MyLike = () => {
                                         )}
                                         <span>
                                             좋아요
-                                            {i?.Likes?.length}개
+                                            {i?.Moim?.Likes?.length}개
                                         </span>
                                     </div>
                                     <div className="icon-text">
@@ -115,7 +122,9 @@ const MyLike = () => {
                                             size="20px"
                                             color="#A5ABB0"
                                         />
-                                        <span>댓글{i?.Comments?.length}개</span>
+                                        <span>
+                                            댓글{i?.Moim?.Comments?.length}개
+                                        </span>
                                     </div>
                                 </div>
                             </div>
