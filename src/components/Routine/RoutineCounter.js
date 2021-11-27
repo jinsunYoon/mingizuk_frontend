@@ -28,7 +28,8 @@ const RoutineCounter = () => {
                         <button
                             className="count-btn"
                             onClick={() => {
-                                dispatch(addCount(count.actionName))
+                                count.actionCnt < 99 &&
+                                    dispatch(addCount(count.actionName))
                             }}
                         >
                             +

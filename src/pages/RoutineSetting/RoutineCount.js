@@ -35,6 +35,7 @@ const RoutineCount = () => {
                         placeholder="루틴 제목을 입력해주세요."
                         onChange={(e) => setName(e.target.value)}
                         value={name}
+                        placeholder="루틴 이름을 지어주세요."
                     />
                     <RoutineCounter />
                     <button className="next-btn" onClick={() => addRoutine()}>
