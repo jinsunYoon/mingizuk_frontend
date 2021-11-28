@@ -227,6 +227,19 @@
         margin-left: 1rem;
         background: #fff;
     }
+    &select {
+        /*ios대응*/
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+        /*화살표 배경 넣기*/
+        background: url('https://w7.pngwing.com/pngs/163/176/png-transparent-antares-wood-floors-icon-down-arrow-angle-web-design-building-thumbnail.png')
+            no-repeat 98% 50% #fff; /*화살표 select박스 오른쪽 중앙 배치,배경 흰색*/
+        select::-ms-expand {
+            display: none; /* 화살표 없애기 for IE10, 11*/
+        }
+    }
 
     & button {
         &:hover {
