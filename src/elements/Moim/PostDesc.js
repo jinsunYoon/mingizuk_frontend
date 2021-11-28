@@ -4,10 +4,12 @@ import { history } from '../../redux/store'
 import Icon from '../../components/icons/Icon'
 import 'moment/locale/ko'
 import moment from 'moment'
-import Filter from '../../components/Filter'
 import '../../styles/moim/moim-main.scss'
-import { moimLocationMD } from '../../redux/async/moim'
-import { set } from 'date-fns'
+import {
+    moimLikeMD,
+    moimLocationMD,
+    moimUnlikeMD,
+} from '../../redux/async/moim'
 
 const PostDesc = () => {
     const dispatch = useDispatch()
@@ -221,7 +223,6 @@ const PostDesc = () => {
         setFilterState(false)
         setPosts(filter_data_all)
     }
-    console.log('><><><>', posts)
 
     return (
         <>
@@ -404,12 +405,18 @@ const PostDesc = () => {
                                         icon="heart"
                                         size="1rem"
                                         color="lightgray"
+                                        _onClick={() =>
+                                            dispatch(moimLikeMD(el.id))
+                                        }
                                     />
                                 ) : (
                                     <Icon
                                         icon="heart"
                                         size="1rem"
                                         color="#FD8787"
+                                        _onClick={() =>
+                                            dispatch(moimUnlikeMD(el.id))
+                                        }
                                     />
                                 )}
                                 <span>

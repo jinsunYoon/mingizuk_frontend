@@ -22,7 +22,7 @@ const mainRoutineSlice = createSlice({
 
     extraReducers: {
         [getMainRoutineMD.fulfilled]: (state, action) => {
-            // state.mainRoutine = action.payload.data.mainRoutine
+            state.mainRoutine = action.payload.data.mainRoutine
             if (action) {
                 state.mainRoutine = action?.payload?.data?.mainRoutine
                 state.isMain = action?.payload?.data?.mainRoutine?.isMain

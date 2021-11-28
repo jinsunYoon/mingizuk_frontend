@@ -5,13 +5,12 @@ import { CollectionItem } from '../index'
 
 //* sytle
 import styled from 'styled-components'
-import Div100vh from 'react-div-100vh'
 
 const CollectionList = () => {
     return (
         <>
-            <section className="contents">
-                <Div100vh>
+            <div className="mypage-layout">
+                <section className="contents">
                     <Flex>
                         <Item>
                             <CollectionItem />
@@ -29,8 +28,8 @@ const CollectionList = () => {
                         </Item>
                         <More>더 많은 캐릭터들을 기다려주세요!</More>
                     </Flex>
-                </Div100vh>
-            </section>
+                </section>
+            </div>
         </>
     )
 }
@@ -40,7 +39,8 @@ const Flex = styled.div`
     border: none;
     flex-direction: column;
     align-items: center;
-    padding: 2rem 1.125rem 2rem 1.125rem;
+    justify-content: space-between;
+    padding: 1rem;
     width: 100%;
     height: 100%;
 `
@@ -48,13 +48,16 @@ const Flex = styled.div`
 const Item = styled.div`
     display: flex;
     flex-wrap: wrap;
+    flex: 1 1 95%;
     justify-content: space-around;
+    align-content: space-around;
 `
 
 const More = styled.div`
     font-size: 0.813rem;
     font-weight: 500;
     color: #a5abb0;
+    flex: 1 1 5%;
 `
 
 export default CollectionList

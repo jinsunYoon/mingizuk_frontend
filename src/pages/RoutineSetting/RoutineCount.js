@@ -32,6 +32,7 @@ const RoutineCount = () => {
                     </h3>
                     <input
                         className="routineIn"
+                        placeHolder="ex. 회사에서 하는 루틴"
                         onChange={(e) => setName(e.target.value)}
                         value={name}
                     />
