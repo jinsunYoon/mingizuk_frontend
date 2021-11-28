@@ -194,8 +194,6 @@ const PostDesc = () => {
     const locationfilter = location1 + ' ' + location2
     const filter_data_all = useSelector((state) => state.moim.filter)
 
-    const filter_data_none = '모임이개설된 지역이 없습니다'
-
     console.log('<><>?', filter_data_all)
     const sortarr = () => {
         let temp = [...posts]
@@ -210,12 +208,16 @@ const PostDesc = () => {
 
     React.useEffect(() => {
         setPosts(post_data_all)
-
         if (filter_data_all?.length > 0) {
+            console.log('이거실행aaaabbb', posts)
             sortarr()
             setPosts(filter_data_all)
         } else if (filter_data_all === '') {
             filterState && setPosts('')
+        }
+        return () => {
+            setPosts(post_data_all)
+            console.log('이거실행?', post_data_all)
         }
     }, [post_data_all, filter_data_all])
 
