@@ -10,6 +10,7 @@ const MapSearch = () => {
     const [InputText, setInputText] = useState('')
     const [Place, setPlace] = useState('')
     const [map, setMap] = useState(false)
+    const [reset, setReset] = useState(false)
 
     const getAddress = useSelector((state) => state.moim.address)
     const getPlace = useSelector((state) => state.moim.place)
@@ -46,6 +47,7 @@ const MapSearch = () => {
                             padding: '4rem 1rem 4.5rem 1rem',
                             flexDirection: 'column',
                             justifyContent: 'start',
+                            alignItems: 'center',
                         }}
                     >
                         <FlexRow _width={'100%'} _others={'max-width:48rem'}>
@@ -90,6 +92,7 @@ const MapSearch = () => {
                             _others={'height:3.5rem; max-width:48rem'}
                             _onClick={() => {
                                 setMap(false)
+                                setReset(true)
                             }}
                         >
                             위치 선택 완료
@@ -104,7 +107,7 @@ const MapSearch = () => {
                 }}
             >
                 <Icon icon={'create'} size={13} />
-                {getPlace ? (
+                {reset && getPlace ? (
                     <div style={{ color: 'black' }}>
                         {getPlace} - {getAddress}
                     </div>

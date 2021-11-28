@@ -84,7 +84,7 @@ const MapContainer = ({ searchPlace }) => {
         <>
             <FlexColumn
                 _width={'100%'}
-                _height={'80%'}
+                _height={'100%'}
                 _alignItems={'start'}
                 _bgColor={'#fff'}
                 _others={'max-width:48rem'}
@@ -104,9 +104,16 @@ const MapContainer = ({ searchPlace }) => {
                     _width={'100%'}
                     _border={'none'}
                     _justify={'start'}
+                    _border={'1px solid lightgray'}
                     _others={'overflow-y: auto; flex: 1 1 50%'}
                 >
-                    <div id="result-list" style={{ width: '100%' }}>
+                    <div
+                        id="result-list"
+                        style={{
+                            width: '100%',
+                            height: '10rem',
+                        }}
+                    >
                         {Places.map((item, i) => (
                             <div
                                 key={i}
@@ -140,11 +147,11 @@ const MapContainer = ({ searchPlace }) => {
                                         item?.place_name &&
                                             dispatch(setPlace(item?.place_name))
                                     }
-                                    setSelect(true)
                                 }}
                             >
                                 <FlexColumn
                                     _border={'1px solid lightgray'}
+                                    _height={'false'}
                                     _width={'100%'}
                                     _align={'start'}
                                     _padding={'1rem'}
@@ -165,16 +172,16 @@ const MapContainer = ({ searchPlace }) => {
                         ))}
                     </div>
                 </FlexColumn>
+                <FlexRow
+                    _margin={'1rem 0 0 0'}
+                    _width={'100%'}
+                    _others={'max-width:48rem'}
+                >
+                    <Text _padding={'1rem'}>
+                        {`선택한 주소 : ${placeName} - ${addressName}`}
+                    </Text>
+                </FlexRow>
             </FlexColumn>
-            <FlexRow
-                _margin={'1rem 0 0 0'}
-                _width={'100%'}
-                _others={'max-width:48rem'}
-            >
-                <Text _padding={'1rem'}>
-                    {`선택한 주소 : ${placeName} - ${addressName}`}
-                </Text>
-            </FlexRow>
         </>
     )
 }
