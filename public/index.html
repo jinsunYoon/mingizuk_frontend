@@ -9,7 +9,10 @@
             name="description"
             content="Web site created using create-react-app"
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
         <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
         <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
         <script
@@ -19,20 +22,30 @@
         <script src="/__/firebase/9.4.1/firebase-app-compat.js"></script>
         <script src="/__/firebase/9.4.1/firebase-messaging-compat.js"></script>
         <script src="/__/firebase/init.js"></script>
-        <script>document.documentElement.addEventListener('touchstart', function (event) {
-            if (event.touches.length > 1) {
-                    event.preventDefault(); 
-                } 
-            }, false);
-        
-            var lastTouchEnd = 0; 
-            
-            document.documentElement.addEventListener('touchend', function (event) {
-                var now = (new Date()).getTime();
-                if (now - lastTouchEnd <= 300) {
-                        event.preventDefault(); 
-                    } lastTouchEnd = now; 
-                }, false);
+        <script>
+            document.documentElement.addEventListener(
+                'touchstart',
+                function (event) {
+                    if (event.touches.length > 1) {
+                        event.preventDefault()
+                    }
+                },
+                false
+            )
+
+            var lastTouchEnd = 0
+
+            document.documentElement.addEventListener(
+                'touchend',
+                function (event) {
+                    var now = new Date().getTime()
+                    if (now - lastTouchEnd <= 300) {
+                        event.preventDefault()
+                    }
+                    lastTouchEnd = now
+                },
+                false
+            )
         </script>
         <!-- <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"></script>

@@ -18,8 +18,6 @@ const notLoggedIn = lazy(() => import('./pages/notLoggedIn'))
 const Onboarding = lazy(() => import('./pages/Onboarding'))
 const Header = lazy(() => import('./components/Header.js'))
 const NavBar = lazy(() => import('./components/NavBar.js'))
-const ReLogin = lazy(() => import('./pages/ReLogin'))
-const SocialLogin = lazy(() => import('./pages/ReLogin'))
 
 const App = () => {
     const dispatch = useDispatch()
@@ -52,7 +50,6 @@ const App = () => {
         localStorage.setItem('refreshToken', refreshToken)
         localStorage.setItem('accessToken', accessToken)
         history.replace('/')
-        console.log('abc')
     }
 
     return (
@@ -107,13 +104,7 @@ const App = () => {
                     <Route path={'/users/moim'} exact>
                         <Header type="back" name="내 모임" />
                     </Route>
-                    {/* <Route path={'/moim/chat/:id'} exact>
-                        <Header type="back" name="모임 참여자 채팅" />
-                    </Route> */}
 
-                    <Route>
-                        <Route path="/sociallogin" component={SocialLogin} />
-                    </Route>
                     <Switch>
                         <PublicRoute
                             path="/"
@@ -137,13 +128,7 @@ const App = () => {
                         >
                             <Signup />
                         </PublicRoute>
-                        <PublicRoute
-                            path="/ReLogin"
-                            exact
-                            isAuthenticated={isAuthenticated}
-                        >
-                            <notLoggedIn />
-                        </PublicRoute>
+
                         <PrivateRoute
                             path="/"
                             isAuthenticated={isAuthenticated}

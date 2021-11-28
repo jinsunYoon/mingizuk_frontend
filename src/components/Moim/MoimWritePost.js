@@ -56,7 +56,7 @@ const MoimWritePost = () => {
                             getAddress.split(' ')[1]
                         }`,
                     }
-                    console.log('???', req.data)
+                    console.log('???', req.location)
 
                     if (title === '') {
                         Toast.fire({
@@ -99,7 +99,7 @@ const MoimWritePost = () => {
                     getAddress.split(' ')[1]
                 }`,
             }
-            console.log('???', req.filter)
+
             if (title === '') {
                 Toast.fire({
                     icon: 'error',
