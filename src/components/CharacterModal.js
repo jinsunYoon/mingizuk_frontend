@@ -65,7 +65,13 @@ const CharacterModal = () => {
                             className="char"
                             src={charList[charList?.length - 1]?.charSrc}
                         />
-                        <p>{charList[charList?.length - 1]?.charName}</p>
+                        {charList[charList?.length - 1]?.charName ==
+                            '라이온' && <p>밍기</p>}
+                        {charList[charList?.length - 1]?.charName == '무지' && (
+                            <p>무너</p>
+                        )}
+                        {charList[charList?.length - 1]?.charName ==
+                            '제이지' && <p>몽실이</p>}
                         <LevelBar
                             exp={charList[charList?.length - 1]?.exp}
                             expMax={charList[charList?.length - 1]?.expMax}
@@ -84,13 +90,17 @@ const CharacterModal = () => {
                             <div className="modal">
                                 <h3 className="charName">
                                     <span className="color name">
-                                        {charName !== '' && charName}
+                                        {charName !== '' &&
+                                            charName == '라이온' &&
+                                            '밍기'}
+                                        {charName !== '' &&
+                                            charName == '무지' &&
+                                            '무너'}
+                                        {charName !== '' &&
+                                            charName == '제이지' &&
+                                            '몽실이'}
                                     </span>
-                                    {charName === '무지' ||
-                                    charName === '제이지'
-                                        ? '가'
-                                        : '이'}{' '}
-                                    찾아왔어요!
+                                    가 찾아왔어요!
                                     <br />
                                     <span>
                                         생성한 캐릭터는 획득한{' '}

@@ -4,12 +4,14 @@ import ToggleTab from '../components/ToggleTab'
 import { useDispatch, useSelector } from 'react-redux'
 import '../styles/routine/history.scss'
 import { finRoutinesActionsMD } from '../redux/async/routine'
+import { changeNav } from '../redux/modules/userSlice'
 
 const History = () => {
     const status = useSelector((state) => state.routine.myPage)
     const dispatch = useDispatch()
     React.useEffect(() => {
         dispatch(finRoutinesActionsMD())
+        dispatch(changeNav('historyI'))
     }, [])
     return (
         <>

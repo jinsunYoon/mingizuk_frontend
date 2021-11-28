@@ -19,6 +19,7 @@ import { useHistory } from 'react-router'
 //* MD
 import { logoutMD } from '../../redux/async/user'
 import { userInfoMD } from '../../redux/async/user'
+import { changeNav } from '../../redux/modules/userSlice'
 
 const ProfileUpdate = () => {
     const history = useHistory()
@@ -39,6 +40,9 @@ const ProfileUpdate = () => {
             return
         }
     }
+    React.useEffect(() => {
+        dispatch(changeNav('mypage'))
+    }, [])
 
     return (
         <>

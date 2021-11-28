@@ -17,6 +17,13 @@ const initialState = {
         userID: '',
         charUrl: '',
     },
+    nav: {
+        home: false,
+        routine: false,
+        moim: false,
+        historyI: false,
+        mypage: false,
+    },
 }
 
 const userSlice = createSlice({
@@ -25,7 +32,14 @@ const userSlice = createSlice({
     reducers: {
         userReducer: (state, { payload }) => {
             state.isLogin = payload
-            //일반 리덕스
+        },
+        changeNav: (state, { payload }) => {
+            state.nav.home = false
+            state.nav.routine = false
+            state.nav.moim = false
+            state.nav.historyI = false
+            state.nav.mypage = false
+            state.nav[payload] = true
         },
     },
 
@@ -34,8 +48,8 @@ const userSlice = createSlice({
         [loginMD.fulfilled]: (state, { payload }) => {
             const accessToken = payload.data.accessToken
             const refreshToken = payload.data.refreshToken
-            sessionStorage.setItem('accessToken', accessToken)
-            sessionStorage.setItem('refreshToken', refreshToken)
+            localStorage.setItem('accessToken', accessToken)
+            localStorage.setItem('refreshToken', refreshToken)
             state.isLogin = true
         },
 
@@ -43,8 +57,8 @@ const userSlice = createSlice({
         [logoutMD.fulfilled]: (state, { payload }) => {
             const accessToken = getToken().accessToken
             const refreshToken = getToken().refreshToken
-            sessionStorage.removeItem('accessToken')
-            sessionStorage.removeItem('refreshToken')
+            localStorage.removeItem('accessToken')
+            localStorage.removeItem('refreshToken')
             state.isLogin = false
         },
 
@@ -83,5 +97,5 @@ const userSlice = createSlice({
     },
 })
 
-export const { userReducer } = userSlice.actions
+export const { userReducer, changeNav } = userSlice.actions
 export default userSlice
