@@ -4,11 +4,13 @@ import { moimReadMD } from '../../redux/async/moim'
 import { history } from '../../redux/store'
 import PostDesc from '../../elements/Moim/PostDesc'
 import '../../styles/moim/moim-main.scss'
+import { changeNav } from '../../redux/modules/userSlice'
 
 const MoimMain = () => {
     const dispatch = useDispatch()
     React.useEffect(() => {
         dispatch(moimReadMD())
+        dispatch(changeNav('moim'))
     }, [])
     return (
         <>

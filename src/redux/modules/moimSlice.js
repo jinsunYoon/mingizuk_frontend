@@ -36,6 +36,7 @@ const initialState = {
     place: '',
     filter: {},
     chat_host: '',
+    detail_loading: false,
 }
 
 const moimSlice = createSlice({
@@ -55,6 +56,9 @@ const moimSlice = createSlice({
         },
         setChatHost: (state, { payload }) => {
             state.chat_host = payload
+        },
+        setLoadingFalse: (state, { payload }) => {
+            state.detail_loading = false
         },
     },
     extraReducers: {
@@ -82,7 +86,7 @@ const moimSlice = createSlice({
         },
         [moimDetailMD.fulfilled]: (state, { payload }) => {
             state.moim_detail = payload.data.targetMoim
-            console.log(payload)
+            state.detail_loading = true
         },
         [moimLikeMD.fulfilled]: (state, { payload }) => {
             const likeUser = payload.data.msg.split(' ')[0]
@@ -112,10 +116,14 @@ const moimSlice = createSlice({
                 )
                 state.moim_detail.Likes = result
 
-                const result2 = state.moim_all.filter(
-                    (post) => post.id === Number(unlikePost)
-                )
-                // state.moim_all = result2
+                state.moim_all.map((post) => {
+                    if (post.id === Number(unlikePost)) {
+                        const temp = post.Likes.filter(
+                            (like) => like.userId !== Number(unlikeUser)
+                        )
+                        post.Likes = temp
+                    }
+                })
             } else {
                 state.moim_all.map((post) => {
                     if (post.id === Number(unlikePost)) {
@@ -178,8 +186,13 @@ const moimSlice = createSlice({
 })
 
 //* reducer export
-export const { moimUpdate, setAddress, setPlace, setChatHost } =
-    moimSlice.actions
+export const {
+    moimUpdate,
+    setAddress,
+    setPlace,
+    setChatHost,
+    setLoadingFalse,
+} = moimSlice.actions
 
 //* slice export
 export default moimSlice

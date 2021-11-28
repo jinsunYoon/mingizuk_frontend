@@ -13,6 +13,7 @@ import { setResult, setFakeResult } from '../../redux/modules/completeSlice'
 import Icon from '../../components/icons/Icon'
 import { myRoutineDeleteMD } from '../../redux/async/routine'
 import Swal from 'sweetalert2'
+import { changeNav } from '../../redux/modules/userSlice'
 
 const MyRoutine = () => {
     const status = useSelector((state) => state.routine.myPage)
@@ -21,6 +22,9 @@ const MyRoutine = () => {
     const optInfo = useSelector((state) => state.routine.info)
     const dispatch = useDispatch()
     const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
+    React.useEffect(() => {
+        dispatch(changeNav('routine'))
+    }, [])
 
     return (
         <>

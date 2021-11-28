@@ -15,7 +15,7 @@ import {
     moimLocationAPI,
 } from '../../shared/api'
 import { history } from '../store'
-import swal from 'sweetalert'
+import { seDispatch, useDispatch } from 'react-redux'
 import Swal from 'sweetalert2'
 
 export const moimCreateMD = createAsyncThunk(

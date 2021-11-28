@@ -8,7 +8,6 @@ import {
 } from '../elements/index'
 import { CharacterModal, MainRoutineList } from '../components/index'
 import { setFakeResult, setResult } from '../redux/modules/completeSlice'
-import Icon from '../components/icons/Icon'
 
 import { history } from '../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
@@ -21,6 +20,7 @@ import { chageMyHabitModal } from '../redux/modules/routineSlice'
 import ActionStart from '../components/ActionStart'
 import HabitTraker from '../components/Routine/HabitTraker'
 import { getCharacterMD } from '../redux/async/character'
+import { changeNav } from '../redux/modules/userSlice'
 
 const Main = (props) => {
     const dispatch = useDispatch()
@@ -38,15 +38,14 @@ const Main = (props) => {
     const ActionFins = mainRoutine?.Actions?.map((action) => action?.ActionFins)
     const finDate = ActionFins?.map((fin) => fin[fin.length - 1].date)
     const fins = finDate?.filter((fin) => fin !== null)
-    console.log('fins', fins)
 
     const array = []
     for (let i = 0; i < fins?.length; i++) {
         array.push('result')
     }
-    console.log('array', array)
 
     React.useEffect(() => {
+        dispatch(changeNav('home'))
         dispatch(loginCheckMD())
         dispatch(getMainRoutineMD())
         console.log('실행됨', array.length)
