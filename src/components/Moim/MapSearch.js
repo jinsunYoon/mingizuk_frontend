@@ -33,7 +33,6 @@ const MapSearch = () => {
                         top: 0,
                         left: 0,
                         width: '100vw',
-                        height: '100vh',
                         backgroundColor: '#fff',
                         zIndex: 4,
                     }}
@@ -42,14 +41,11 @@ const MapSearch = () => {
                         onSubmit={handleSubmit}
                         style={{
                             width: '100%',
+                            height: '100vh',
                             display: 'flex',
-                            marginTop: '2.938rem',
-                            padding: '1rem',
+                            padding: '4rem 1rem 4.5rem 1rem',
                             flexDirection: 'column',
-                            justifyContent: 'center',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
+                            justifyContent: 'start',
                         }}
                     >
                         <FlexRow _width={'100%'} _others={'max-width:48rem'}>

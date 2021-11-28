@@ -24,7 +24,6 @@ const MapContainer = ({ searchPlace }) => {
     const [longitude, setLongitude] = React.useState('')
     const [addressName, setAddressName] = React.useState('')
     const [placeName, setPlaceName] = React.useState('')
-    const [select, setSelect] = React.useState(false)
 
     navigator.geolocation.getCurrentPosition((position) => {
         setLatitude(position?.coords?.latitude)
@@ -76,7 +75,6 @@ const MapContainer = ({ searchPlace }) => {
                 setPlaceName(place?.place_name)
                 dispatch(setPlace(place?.place_name))
                 dispatch(setAddress(place?.address_name))
-                setSelect(true)
                 console.log('place', place)
             })
         }
@@ -86,26 +84,29 @@ const MapContainer = ({ searchPlace }) => {
         <>
             <FlexColumn
                 _width={'100%'}
-                _alignItems={'center'}
-                _border={'1px solid lightgray'}
-                _height={'100%'}
+                _height={'80%'}
+                _alignItems={'start'}
+                _bgColor={'#fff'}
                 _others={'max-width:48rem'}
+                _border={'none'}
             >
                 <div
                     id="myMap"
                     style={{
                         width: '100%',
-                        height: '20rem',
+                        display: 'flex',
+                        flex: '1 1 50%',
+                        marginTop: '1rem',
+                        border: '1px solid lightgray',
                     }}
                 ></div>
                 <FlexColumn
                     _width={'100%'}
-                    _height={'7.5rem'}
                     _border={'none'}
                     _justify={'start'}
-                    _others={'overflow-y: auto;'}
+                    _others={'overflow-y: auto; flex: 1 1 50%'}
                 >
-                    <div id="result-list">
+                    <div id="result-list" style={{ width: '100%' }}>
                         {Places.map((item, i) => (
                             <div
                                 key={i}
@@ -143,14 +144,10 @@ const MapContainer = ({ searchPlace }) => {
                                 }}
                             >
                                 <FlexColumn
-                                    _border={'none'}
+                                    _border={'1px solid lightgray'}
                                     _width={'100%'}
                                     _align={'start'}
-                                    _height={'false'}
                                     _padding={'1rem'}
-                                    _others={
-                                        'border-bottom: 1px solid lightgray'
-                                    }
                                 >
                                     <h5>{item?.place_name}</h5>
                                     {item?.road_address_name ? (
@@ -169,17 +166,15 @@ const MapContainer = ({ searchPlace }) => {
                     </div>
                 </FlexColumn>
             </FlexColumn>
-            {select && (
-                <FlexRow
-                    _margin={'1rem 0 3.5rem 0'}
-                    _width={'100%'}
-                    _others={'max-width:48rem'}
-                >
-                    <Text _padding={'1rem'}>
-                        {`선택한 주소 : ${placeName} - ${addressName}`}
-                    </Text>
-                </FlexRow>
-            )}
+            <FlexRow
+                _margin={'1rem 0 0 0'}
+                _width={'100%'}
+                _others={'max-width:48rem'}
+            >
+                <Text _padding={'1rem'}>
+                    {`선택한 주소 : ${placeName} - ${addressName}`}
+                </Text>
+            </FlexRow>
         </>
     )
 }
