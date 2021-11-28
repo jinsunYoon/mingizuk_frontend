@@ -19,6 +19,7 @@ const Onboarding = lazy(() => import('./pages/Onboarding'))
 const Header = lazy(() => import('./components/Header.js'))
 const NavBar = lazy(() => import('./components/NavBar.js'))
 const ReLogin = lazy(() => import('./pages/ReLogin'))
+const SocialLogin = lazy(() => import('./pages/ReLogin'))
 
 const App = () => {
     const dispatch = useDispatch()
@@ -48,9 +49,10 @@ const App = () => {
             .split('&')[0]
         const accessToken = window.location.pathname.split('=')[2]
 
-        sessionStorage.setItem('refreshToken', refreshToken)
-        sessionStorage.setItem('accessToken', accessToken)
+        localStorage.setItem('refreshToken', refreshToken)
+        localStorage.setItem('accessToken', accessToken)
         history.replace('/')
+        console.log('abc')
     }
 
     return (
@@ -109,6 +111,9 @@ const App = () => {
                         <Header type="back" name="모임 참여자 채팅" />
                     </Route> */}
 
+                    <Route>
+                        <Route path="/sociallogin" component={SocialLogin} />
+                    </Route>
                     <Switch>
                         <PublicRoute
                             path="/"
@@ -117,6 +122,7 @@ const App = () => {
                         >
                             <Onboarding />
                         </PublicRoute>
+
                         <PublicRoute
                             path="/login"
                             exact

@@ -10,9 +10,16 @@ const Onboarding = () => {
         if (touchStart !== num && touchStart - 150 > num) {
             setPageState(pageState < 3 ? pageState + 1 : pageState)
         } else if (touchStart !== num && touchStart - 150 < num) {
-            setPageState(pageState > -1 ? pageState - 1 : pageState)
+            setPageState(pageState > 0 ? pageState - 1 : pageState)
         }
     }
+
+    React.useEffect(() => {
+        pageState === -1 &&
+            setTimeout(() => {
+                setPageState(0)
+            }, 1000)
+    }, [])
 
     const rionImg = {
         width: '6.7rem',
@@ -82,7 +89,7 @@ const Onboarding = () => {
                     {pageState === -1 && (
                         <article
                             className="rion-main"
-                            onClick={() => setPageState(0)}
+                            // onClick={() => setPageState(0)}
                         >
                             <img
                                 style={rionImg}

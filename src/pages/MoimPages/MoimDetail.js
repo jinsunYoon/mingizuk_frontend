@@ -8,15 +8,20 @@ import {
     moimReviewCreateMD,
     moimDeleteMD,
     moimJoinMD,
-    moimLikeMD,
     moimLeaveMD,
 } from '../../redux/async/moim'
 import MoimReview from '../../components/Moim/MoimReview'
-import { moimUpdate, setChatHost } from '../../redux/modules/moimSlice'
+import {
+    moimUpdate,
+    setChatHost,
+    setLoadingFalse,
+} from '../../redux/modules/moimSlice'
 import '../../styles/moim/moim-detail.scss'
 import 'moment/locale/ko'
 import moment from 'moment'
 import Swal from 'sweetalert2'
+import Loading from '../../components/Loading'
+import { changeNav } from '../../redux/modules/userSlice'
 
 const MoimDetail = () => {
     const post_id = history?.location?.pathname?.split('/').slice(-1)
@@ -25,7 +30,11 @@ const MoimDetail = () => {
     const post_data = useSelector((state) => state?.moim?.moim_detail)
     const user_id = useSelector((state) => state?.user?.userInfo?.userID)
     const join_useres = post_data?.MoimUsers?.map(({ User }) => User.nickName)
+    const is_loading = useSelector((state) => state?.moim?.detail_loading)
     const [optModalStatus, setOptModalStatus] = React.useState(false)
+    React.useEffect(() => {
+        dispatch(changeNav('routine'))
+    }, [])
 
     const Toast = Swal.mixin({
         toast: true,
@@ -41,6 +50,9 @@ const MoimDetail = () => {
 
     React.useEffect(() => {
         dispatch(moimDetailMD(post_id))
+        return () => {
+            dispatch(setLoadingFalse(false))
+        }
     }, [])
 
     // * post delete
@@ -117,8 +129,12 @@ const MoimDetail = () => {
         })
     }
 
-    return (
-        <>
+    return !is_loading ? (
+        <p>
+            <Loading />
+        </p>
+    ) : (
+        <div>
             <article className="detail-layout">
                 <article className="moim-detail-article">
                     <div className="location-btn">
@@ -278,7 +294,7 @@ const MoimDetail = () => {
                     </div>
                 </div>
             )}
-        </>
+        </div>
     )
 }
 

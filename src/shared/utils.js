@@ -1,6 +1,6 @@
 const getToken = () => {
-    const accessToken = sessionStorage.getItem('accessToken')
-    const refreshToken = sessionStorage.getItem('refreshToken')
+    const accessToken = localStorage.getItem('accessToken')
+    const refreshToken = localStorage.getItem('refreshToken')
     if (accessToken) {
         let tokens = {
             accessToken: `Bearer ${accessToken}`,

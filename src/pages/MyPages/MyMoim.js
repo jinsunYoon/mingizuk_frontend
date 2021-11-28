@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 //* 리덕스, 데이터
 import { useDispatch } from 'react-redux'
-import { myMoimCreateMD } from '../../redux/async/myMoim'
+import { changeNav } from '../../redux/modules/userSlice'
 //* 컴포넌트, 엘리먼트
 import { ActiveUnderLine } from '../../elements'
 //* 페이지
@@ -17,6 +17,7 @@ const MyMoim = () => {
     const dispatch = useDispatch()
     // const state = useSelector((state) => state?>)
     React.useEffect(() => {
+        dispatch(changeNav('mypage'))
         setTabState('a')
     }, [])
     return (

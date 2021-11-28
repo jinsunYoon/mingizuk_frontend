@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { history } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux'
+import { changeNav } from '../../redux/modules/userSlice'
 
 //* sytle
 import '../../styles/mypage/mypage.scss'
@@ -16,9 +17,9 @@ const MyPage = (props) => {
     const charList = useSelector((state) => state.character.charList)
     const curChara =
         charList.length > 0 && charList[charList.length - 1].charName
-
-    console.log(nickName, '>>nickname')
-    console.log(pwd, '>>pwd')
+    React.useEffect(() => {
+        dispatch(changeNav('mypage'))
+    }, [])
 
     return (
         <>

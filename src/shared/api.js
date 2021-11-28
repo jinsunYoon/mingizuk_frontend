@@ -128,13 +128,10 @@ const loginCheckAPI = () => {
                 return response
             } else if (response?.data?.msg === 'accessToken 재발급') {
                 console.log('>><<, aces재발급', response)
-                sessionStorage.setItem('accessToken', response.data.accessToken)
+                localStorage.setItem('accessToken', response.data.accessToken)
                 return response
             } else if (response?.data?.msg === 'refreshToken 재발급') {
-                sessionStorage.setItem(
-                    'refreshToken',
-                    response.data.refreshToken
-                )
+                localStorage.setItem('refreshToken', response.data.refreshToken)
                 return response
             }
         })
