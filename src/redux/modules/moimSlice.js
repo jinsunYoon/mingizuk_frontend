@@ -13,6 +13,8 @@ import {
     moimDeleteReviewMD,
     moimUpdateReviewMD,
     moimLocationMD,
+    moimScrollMD,
+    moimLocationScrollMD,
 } from '../async/moim'
 import Swal from 'sweetalert2'
 
@@ -37,6 +39,8 @@ const initialState = {
     filter: {},
     chat_host: '',
     detail_loading: false,
+    moim_scroll: [],
+    moim_filter_scroll: {},
 }
 
 const moimSlice = createSlice({
@@ -179,8 +183,16 @@ const moimSlice = createSlice({
             })
         },
         [moimLocationMD.fulfilled]: (state, { payload }) => {
-            console.log('>>>>>!><', payload)
+            console.log('>>필터', payload)
             state.filter = payload.data.filterMoims
+        },
+        [moimScrollMD.fulfilled]: (state, { payload }) => {
+            console.log('>>>>>datapayload', payload)
+            state.moim_scroll.push(payload.data.moreMoims)
+        },
+        [moimLocationScrollMD.fulfilled]: (state, { payload }) => {
+            console.log('>>무한스크롤모임필터데이터', payload)
+            state.moim_filter_scroll = payload.data
         },
     },
 })

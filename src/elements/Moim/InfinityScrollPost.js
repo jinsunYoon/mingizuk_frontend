@@ -1,24 +1,33 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { history } from '../../redux/store'
+import _ from 'lodash'
+
+//* component
 import Icon from '../../components/icons/Icon'
+import LikeBtn from './LikeBtn'
+
+// * date
 import 'moment/locale/ko'
 import moment from 'moment'
-import '../../styles/moim/moim-main.scss'
+import { set } from 'date-fns'
+
+// * middleware
 import {
-    moimLikeMD,
     moimLocationMD,
-    moimUnlikeMD,
+    moimScrollMD,
+    moimLocationScrollMD,
 } from '../../redux/async/moim'
 
-const PostDesc = () => {
+// * style
+import '../../styles/moim/moim-main.scss'
+
+const InfinityScrollPost = () => {
     const dispatch = useDispatch()
-
     const [posts, setPosts] = useState('')
-    const post_data_all = useSelector((state) => state.moim.moim_all)
-    const loginuserID = useSelector((state) => state.user.userInfo.userID)
+    const [is_next, setIs_next] = useState(false)
 
-    // Filter - Location
+    // Filter - 지역명배열
     const locations = {
         지역: [
             '서울',
@@ -184,49 +193,115 @@ const PostDesc = () => {
         전라남도: ['목포시', '여수시', '순천시', '나주시', '광양시'],
     }
 
-    const [liked, setLiked] = useState('')
-    const [latest, setLatest] = useState('')
+    // Filter - 상태
     const [location1, setLocation1] = useState('')
     const [location2, setLocation2] = useState('')
     const [filterState, setFilterState] = useState(false)
     const [filterTextState, setFilterTextState] = useState(false)
+    const [test, setTest] = React.useState(false)
 
-    const locationfilter = location1 + ' ' + location2
-    const filter_data_all = useSelector((state) => state.moim.filter)
+    // * 무한스크롤 - 데이터변수에담기
+    const moimScrollData = useSelector((state) => state.moim.moim_scroll)
 
-    const filter_data_none = '모임이개설된 지역이 없습니다'
+    // console.log('>>', last, moreMoims, result)
 
-    console.log('<><>?', filter_data_all)
-    const sortarr = () => {
-        let temp = [...posts]
-        temp.sort(function (a, b) {
-            return (
-                new Date(b.createdAt).getTime() -
-                new Date(a.createdAt).getTime()
-            )
-        })
-        setPosts(temp)
-    }
+    const _handleScroll = _.throttle(() => {
+        const { innerHeight } = window
+        const { scrollHeight } = document.body
+
+        const scrollTop =
+            (document.documentElement && document.documentElement.scrollTop) ||
+            document.body.scrollTop
+
+        if (scrollHeight - innerHeight - scrollTop < 200) {
+            if (posts !== '') {
+                console.log('<<<<', typeof posts, posts?.length - 1)
+                !isNaN(posts?.length) &&
+                    dispatch(moimScrollMD(posts[posts?.length - 1]?.id))
+                // console.log('>>>>>>>>???????', posts[posts.length - 1]?.id)
+            }
+        }
+    }, 1000)
+
+    // React.useEffect(_handleScroll, [posts])
 
     React.useEffect(() => {
-        setPosts(post_data_all)
-
-        if (filter_data_all?.length > 0) {
-            sortarr()
-            setPosts(filter_data_all)
-        } else if (filter_data_all === '') {
-            filterState && setPosts('')
+        if (posts !== '') {
+            _handleScroll()
         }
-    }, [post_data_all, filter_data_all])
+    }, [posts])
+    // const handleScroll = React.useCallback(_handleScroll, [loading]);
 
+    React.useEffect(() => {
+        if (posts === '') {
+            dispatch(moimScrollMD(0))
+        }
+        setPosts(moimScrollData[0])
+
+        // _handleScroll()
+
+        // dispatch(moimScrollMD())
+
+        // dispatch(moimScrollMD(moreMoims[moreMoims.length-1].id))
+        // * 무한스크롤 - 데이터가져오기
+
+        // const onScroll = () => {
+        //     if (
+        //         window.scrollY + document.documentElement.clientHeight >
+        //         document.documentElement.scrollHeight - 10
+        //     ) {
+        //         if (!last && result && moreMoims) {
+        //             dispatch(moimScrollMD(moreMoims[moreMoims.length - 1].id))
+        //         }
+        //     }
+        // }
+        // console.log('>>', onScroll())
+
+        /*
+        setPosts(moreMoims)
+        window.addEventListener('scroll', scroll)
+        return () => {
+            window.removeEventListener('scroll', onScroll)
+        }
+        */
+        // setPosts(moreMoims)
+        /*if(
+            //해당 post의 top+10px이 화면하단에 닿는순간,  
+         )*/
+        {
+            //dispatch를 이용 서버로 scroll의 lastId값을 넘겨줌
+            // return dispatch(moimScrollMD(posts))
+        }
+    }, [moimScrollData, posts])
+
+    // * 무한스크롤 핸들러
+    // const handleScroll = () => {
+    //     const scrollHeight = document.documentElement.scrollHeight
+    //     const scrollTop = document.documentElement.scrollTop
+    //     const clientHeight = document.documentElement.clientHeight
+
+    //     if (scrollTop + clientHeight >= scrollHeight && posts) {
+    //     }
+    // }
+
+    //* Filter Click Button - 무한스크롤 최신순 데이터부터 해결하고 하기
     const handleClickLocationFilterButton = () => {
-        dispatch(moimLocationMD(locationfilter))
-        setFilterState(false)
-        setPosts(filter_data_all)
+        // dispatch(moimLocationMD(locationfilter))
+        // setFilterState(false)
+        // setPosts(filter_data_all)
     }
+
+    console.log(']]posts', posts)
 
     return (
         <>
+            <button
+                onClick={() => {
+                    dispatch(moimScrollMD(5))
+                }}
+            >
+                so
+            </button>
             {/* ******** FILTER ****** */}
             <div className="filters-container">
                 <div className="location-filter-container">
@@ -314,8 +389,7 @@ const PostDesc = () => {
             </div>
 
             {/* ******** POST ********* */}
-
-            {posts?.length > 0 && filter_data_all.length !== 0 ? (
+            {posts?.length > 0 &&
                 posts?.map((el, idx) => (
                     <div key={idx} className="post-warp">
                         {el?.imgSrc === null ? (
@@ -360,7 +434,7 @@ const PostDesc = () => {
                             <div
                                 className="moim-post-box"
                                 onClick={() => {
-                                    history.push(`/moim/detail/${el?.moimId}`)
+                                    history.push(`/moim/detail/${el?.id}`)
                                 }}
                             >
                                 <div className="post-info">
@@ -389,7 +463,8 @@ const PostDesc = () => {
                                 </div>
                                 <div className="post-info">
                                     <span>
-                                        {el?.MoimUsers[0]?.User?.nickName}
+                                        {el?.MoimUsers?.length > 0 &&
+                                            el?.MoimUsers[0]?.User?.nickName}
                                     </span>
                                     <span>
                                         {moment(el?.createdAt).fromNow()}
@@ -399,27 +474,6 @@ const PostDesc = () => {
                         )}
                         <div className="ectbox">
                             <div className="icon-text">
-                                {el?.Likes?.findIndex(
-                                    (user) => user?.userId === loginuserID
-                                ) === -1 ? (
-                                    <Icon
-                                        icon="heart"
-                                        size="1rem"
-                                        color="lightgray"
-                                        _onClick={() =>
-                                            dispatch(moimLikeMD(el.id))
-                                        }
-                                    />
-                                ) : (
-                                    <Icon
-                                        icon="heart"
-                                        size="1rem"
-                                        color="#FD8787"
-                                        _onClick={() =>
-                                            dispatch(moimUnlikeMD(el.id))
-                                        }
-                                    />
-                                )}
                                 <span>
                                     좋아요
                                     {el?.Likes?.length}개
@@ -435,25 +489,9 @@ const PostDesc = () => {
                             </div>
                         </div>
                     </div>
-                ))
-            ) : (
-                <div className="nomoim">
-                    <p>
-                        해당 지역에 개설된 모임이 없습니다
-                        <br />
-                        새로운 모임을 만들고 사람들과 함께하세요~!
-                    </p>
-                    <button
-                        onClick={() => {
-                            history.push('/moim/write')
-                        }}
-                    >
-                        모임 개설 하러가기
-                    </button>
-                </div>
-            )}
+                ))}
         </>
     )
 }
 
-export default PostDesc
+export default InfinityScrollPost

@@ -13,6 +13,8 @@ import {
     moimUnlikeAPI,
     moimLeaveAPI,
     moimLocationAPI,
+    moimScrollAPI,
+    moimLocationScrollAPI,
 } from '../../shared/api'
 import { history } from '../store'
 import { seDispatch, useDispatch } from 'react-redux'
@@ -213,6 +215,36 @@ export const moimLocationMD = createAsyncThunk(
             }
         } catch (err) {
             console.log(err)
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const moimScrollMD = createAsyncThunk(
+    'moim/scroll',
+    async (lastId, thunkAPI) => {
+        try {
+            const response = await moimScrollAPI(lastId)
+            console.log('>>>>', response)
+            if (response) {
+                return response
+            }
+        } catch (err) {
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const moimLocationScrollMD = createAsyncThunk(
+    'moim/locationScroll',
+    async (lastId, thunkAPI) => {
+        try {
+            const response = await moimScrollAPI(lastId)
+            console.log('>>>>', response)
+            if (response) {
+                return response
+            }
+        } catch (err) {
             return thunkAPI.rejectWithValue(err)
         }
     }

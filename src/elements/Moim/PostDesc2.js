@@ -1,15 +1,25 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { history } from '../../redux/store'
+
+//* component
 import Icon from '../../components/icons/Icon'
+import LikeBtn from '../../elements/Moim/LikeBtn'
+
+// * date
 import 'moment/locale/ko'
 import moment from 'moment'
-import '../../styles/moim/moim-main.scss'
+import { set } from 'date-fns'
+
+// * middleware
 import {
-    moimLikeMD,
     moimLocationMD,
-    moimUnlikeMD,
+    moimScrollMD,
+    moimLocationScrollMD,
 } from '../../redux/async/moim'
+
+// * style
+import '../../styles/moim/moim-main.scss'
 
 const PostDesc = () => {
     const dispatch = useDispatch()
@@ -191,12 +201,16 @@ const PostDesc = () => {
     const [filterState, setFilterState] = useState(false)
     const [filterTextState, setFilterTextState] = useState(false)
 
+    // * infinite-scroll data
+    const { last, moreMoims, result } = useSelector(
+        (state) => state.moim.moim_scroll
+    )
+    const filter = useSelector((state) => state.moim.moim_filter_scroll)
+
+    // * moim filter data(구버전)
     const locationfilter = location1 + ' ' + location2
     const filter_data_all = useSelector((state) => state.moim.filter)
 
-    const filter_data_none = '모임이개설된 지역이 없습니다'
-
-    console.log('<><>?', filter_data_all)
     const sortarr = () => {
         let temp = [...posts]
         temp.sort(function (a, b) {
@@ -209,24 +223,53 @@ const PostDesc = () => {
     }
 
     React.useEffect(() => {
+        // * infinite-scroll
+
+        const onScroll = () => {
+            if (
+                window.scrollY + document.documentElement.clientHeight >
+                document.documentElement.scrollHeight - 10
+            ) {
+                if (!last && result && moreMoims) {
+                    dispatch(moimScrollMD(moreMoims[2].id))
+                }
+            }
+            window.addEventListener('scroll', scroll)
+            return () => {
+                window.removeEventListener('scroll', onScroll)
+            }
+        },[last, result, moreMoims]
+/*
         setPosts(post_data_all)
+        posts
 
         if (filter_data_all?.length > 0) {
-            sortarr()
+            sortarr(posts)
             setPosts(filter_data_all)
-        } else if (filter_data_all === '') {
-            filterState && setPosts('')
+        } else if (filter_data_all?.length == 0) {
+            setPosts(post_data_all)
         }
+    
     }, [post_data_all, filter_data_all])
-
+*/
+},  [mainPosts, hasMorePosts, listPostLoading]);
     const handleClickLocationFilterButton = () => {
         dispatch(moimLocationMD(locationfilter))
         setFilterState(false)
         setPosts(filter_data_all)
     }
+    console.log('><><><>', posts)
 
     return (
         <>
+            <button
+                onClick={() => {
+                    dispatch(moimScrollMD(5))
+                    console.log(']]', moreMoims[2].id)
+                }}
+            >
+                test
+            </button>
             {/* ******** FILTER ****** */}
             <div className="filters-container">
                 <div className="location-filter-container">
@@ -314,8 +357,7 @@ const PostDesc = () => {
             </div>
 
             {/* ******** POST ********* */}
-
-            {posts?.length > 0 && filter_data_all.length !== 0 ? (
+            {posts?.length > 0 &&
                 posts?.map((el, idx) => (
                     <div key={idx} className="post-warp">
                         {el?.imgSrc === null ? (
@@ -360,7 +402,7 @@ const PostDesc = () => {
                             <div
                                 className="moim-post-box"
                                 onClick={() => {
-                                    history.push(`/moim/detail/${el?.moimId}`)
+                                    history.push(`/moim/detail/${el?.id}`)
                                 }}
                             >
                                 <div className="post-info">
@@ -399,6 +441,8 @@ const PostDesc = () => {
                         )}
                         <div className="ectbox">
                             <div className="icon-text">
+                                {/*
+                                좋아요 클릭한 애들만 색 바꿈 
                                 {el?.Likes?.findIndex(
                                     (user) => user?.userId === loginuserID
                                 ) === -1 ? (
@@ -406,20 +450,21 @@ const PostDesc = () => {
                                         icon="heart"
                                         size="1rem"
                                         color="lightgray"
-                                        _onClick={() =>
-                                            dispatch(moimLikeMD(el.id))
-                                        }
                                     />
                                 ) : (
                                     <Icon
                                         icon="heart"
                                         size="1rem"
                                         color="#FD8787"
-                                        _onClick={() =>
-                                            dispatch(moimUnlikeMD(el.id))
-                                        }
                                     />
-                                )}
+                                )} */}
+                                {/* 
+                                좋아요 클릭시 색 바꿈 ===> push 에러떠서 안돼!!!!!!
+                                <LikeBtn
+                                    moim_id={el?.id}
+                                    likeUsers={el?.Likes}
+                                    user_id={el?.user_id}
+                                /> */}
                                 <span>
                                     좋아요
                                     {el?.Likes?.length}개
@@ -435,23 +480,7 @@ const PostDesc = () => {
                             </div>
                         </div>
                     </div>
-                ))
-            ) : (
-                <div className="nomoim">
-                    <p>
-                        해당 지역에 개설된 모임이 없습니다
-                        <br />
-                        새로운 모임을 만들고 사람들과 함께하세요~!
-                    </p>
-                    <button
-                        onClick={() => {
-                            history.push('/moim/write')
-                        }}
-                    >
-                        모임 개설 하러가기
-                    </button>
-                </div>
-            )}
+                ))}
         </>
     )
 }
