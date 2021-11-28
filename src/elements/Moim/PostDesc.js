@@ -194,6 +194,7 @@ const PostDesc = () => {
 
     const filter_data_none = '모임이개설된 지역이 없습니다'
 
+    console.log('<><>?', filter_data_all)
     const sortarr = () => {
         let temp = [...posts]
         temp.sort(function (a, b) {
@@ -209,10 +210,10 @@ const PostDesc = () => {
         setPosts(post_data_all)
 
         if (filter_data_all?.length > 0) {
-            sortarr(posts)
+            sortarr()
             setPosts(filter_data_all)
-        } else if (filter_data_all?.length == 0) {
-            setPosts(post_data_all)
+        } else if (filter_data_all === '') {
+            filterState && setPosts('')
         }
     }, [post_data_all, filter_data_all])
 
@@ -313,7 +314,7 @@ const PostDesc = () => {
 
             {/* ******** POST ********* */}
 
-            {posts?.length > 0 &&
+            {posts?.length > 0 && filter_data_all.length !== 0 ? (
                 posts?.map((el, idx) => (
                     <div key={idx} className="post-warp">
                         {el?.imgSrc === null ? (
@@ -358,7 +359,7 @@ const PostDesc = () => {
                             <div
                                 className="moim-post-box"
                                 onClick={() => {
-                                    history.push(`/moim/detail/${el?.id}`)
+                                    history.push(`/moim/detail/${el?.moimId}`)
                                 }}
                             >
                                 <div className="post-info">
@@ -427,7 +428,23 @@ const PostDesc = () => {
                             </div>
                         </div>
                     </div>
-                ))}
+                ))
+            ) : (
+                <div className="nomoim">
+                    <p>
+                        해당 지역에 개설된 모임이 없습니다
+                        <br />
+                        새로운 모임을 만들고 사람들과 함께하세요~!
+                    </p>
+                    <button
+                        onClick={() => {
+                            history.push('/moim/write')
+                        }}
+                    >
+                        모임 개설 하러가기
+                    </button>
+                </div>
+            )}
         </>
     )
 }

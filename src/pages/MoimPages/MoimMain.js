@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { moimReadMD } from '../../redux/async/moim'
 import { history } from '../../redux/store'
 import InfinityScrollPost from '../../elements/Moim/InfinityScrollPost'
+import PostDesc from '../../elements/Moim/PostDesc'
 import '../../styles/moim/moim-main.scss'
 
 const MoimMain = () => {
@@ -13,7 +14,7 @@ const MoimMain = () => {
     return (
         <>
             <section className="moim-main-layout">
-                <InfinityScrollPost />
+                <PostDesc />
                 <button
                     className="moim-add-btn"
                     onClick={() => {
