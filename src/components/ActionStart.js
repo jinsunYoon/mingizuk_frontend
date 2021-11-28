@@ -49,6 +49,17 @@ const ActionStart = (props) => {
     const curChara =
         charList.length > 0 && charList[charList.length - 1].charName
 
+    React.useEffect(() => {
+        return () => {
+            if (active) {
+                setActive(false)
+            } else if (complete) {
+                setActive(false)
+                setComplete(false)
+            }
+        }
+    }, [])
+
     const completeBtn = () => {
         return setTimeout(function () {
             setActive(false)
@@ -79,7 +90,7 @@ const ActionStart = (props) => {
         } else if (name == '무지') {
             return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming3.gif'
         } else if (name == '제이지') {
-            return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming4.gif'
+            return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming_3.gif'
         }
     }
 
@@ -850,6 +861,9 @@ const ActionStart = (props) => {
                                     setAction5(true)
                                     setActionStart(true)
                                     break
+                            }
+                            if (complete) {
+                                setActionStart(false)
                             }
                         }}
                     >
