@@ -7,6 +7,15 @@
     overflow: hidden;
 }
 
+.pleaz {
+    @include flexbox();
+    padding-top: 2.2rem;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: $primary;
+}
+
 .onBoarding-container {
     @include column-flexbox(start, center);
     padding: 1rem 3.5rem 90px 3.5rem;
@@ -110,20 +119,32 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-.install-btn {
-    display: inline-block;
-    min-width: 18rem;
-    padding: 0 1.3rem;
-    height: 2.8rem;
-    margin-top: 1.3rem;
-    border: none;
-    color: $primary;
-    background-color: $white;
-    border-radius: 10rem;
+.install-btn-warp {
+    width: 90vw;
+    max-width: 768px;
+    @include column-flexbox();
+
+    .install-btn {
+        display: inline-block;
+        min-width: 18rem;
+        padding: 0 1.3rem;
+        height: 2.8rem;
+        margin-top: 1.3rem;
+        border: none;
+        color: $primary;
+        background-color: $white;
+        border-radius: 10rem;
+    }
+    h2 {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+    }
 }
 
 .install-desc {
     font-size: 1rem;
     width: inherit;
-    text-align: center;
+    text-align: left;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
 }
