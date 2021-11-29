@@ -57,7 +57,7 @@ const MoimDetail = () => {
 
     // * post delete
     const deletePost = (data) => {
-        swal({
+        Swal.fire({
             text: '게시글을 지우시겠습니까 ?',
             buttons: true,
             dangerMode: true,

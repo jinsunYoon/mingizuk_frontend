@@ -34,11 +34,21 @@ const ProfileUpdate = () => {
         charList.length > 0 && charList[charList.length - 1].charName
 
     const logout = () => {
-        if (window.confirm('로그아웃 하시겠습니까 ?')) {
-            dispatch(logoutMD())
-        } else {
-            return
-        }
+        Swal.fire({
+            text: '로그아웃 하시겠어요 ?',
+            showCancelButton: true,
+            confirmButtonColor: '#6B76FF',
+            cancelButtonColor: '#DEDEDE',
+            confirmButtonText: '네',
+            cancelButtonText: '아니요',
+            width: '30rem',
+            height: '15rem',
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(logoutMD())
+            } else return
+        })
     }
     React.useEffect(() => {
         dispatch(changeNav('mypage'))
