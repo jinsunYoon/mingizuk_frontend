@@ -30,22 +30,22 @@ const Onboarding = () => {
         {
             title: '작은 운동 습관부터',
             desc: '밍기적과 함께 매일 소소한 건강 루틴을 함께해요.',
-            src: 'https://test-pwa-kyuung.s3.ap-northeast-2.amazonaws.com/on1.png',
+            src: 'https://my-speak-app.s3.ap-northeast-2.amazonaws.com/1-2.png',
         },
         {
             title: '귀여운 친구들을 모아보세요',
             desc: '루틴을 완료할 때마다 포인트가 쌓여 레벨업 합니다.',
-            src: 'https://test-pwa-kyuung.s3.ap-northeast-2.amazonaws.com/on2.png',
+            src: 'https://my-speak-app.s3.ap-northeast-2.amazonaws.com/2-2.png',
         },
         {
             title: '동작과 루틴 기록을 한눈에!',
             desc: '데일리 통계와 달성 현황을 제공합니다.',
-            src: 'https://test-pwa-kyuung.s3.ap-northeast-2.amazonaws.com/on3.png',
+            src: 'https://my-speak-app.s3.ap-northeast-2.amazonaws.com/3-2.png',
         },
         {
             title: '지역 기반 모임 참여',
             desc: '원하는 지역에서 건강한 습관 만들기 모임에 참여해보세요.',
-            src: 'https://test-pwa-kyuung.s3.ap-northeast-2.amazonaws.com/on4.png',
+            src: 'https://my-speak-app.s3.ap-northeast-2.amazonaws.com/4-2.png',
         },
     ]
     return (

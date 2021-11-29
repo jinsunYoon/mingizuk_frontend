@@ -1,5 +1,6 @@
 import { createSlice, isFulfilled } from '@reduxjs/toolkit'
 import { getToken } from '../../shared/utils'
+import Swal from 'sweetalert2'
 import {
     signupMD,
     loginMD,
@@ -7,7 +8,18 @@ import {
     loginCheckMD,
     userInfoMD,
 } from '../async/user'
-import { history } from '../store'
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'center',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: false,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    },
+})
 
 const initialState = {
     isLogin: false,
@@ -46,11 +58,18 @@ const userSlice = createSlice({
     extraReducers: {
         // * login
         [loginMD.fulfilled]: (state, { payload }) => {
-            const accessToken = payload.data.accessToken
-            const refreshToken = payload.data.refreshToken
-            localStorage.setItem('accessToken', accessToken)
-            localStorage.setItem('refreshToken', refreshToken)
-            state.isLogin = true
+            if (payload !== undefined) {
+                const accessToken = payload?.data?.accessToken
+                const refreshToken = payload?.data?.refreshToken
+                localStorage.setItem('accessToken', accessToken)
+                localStorage.setItem('refreshToken', refreshToken)
+                state.isLogin = true
+            } else if (payload === undefined) {
+                Toast.fire({
+                    icon: 'error',
+                    title: '아이디나 비밀번호를 다시 확인해주세요.',
+                })
+            }
         },
 
         // * logout
