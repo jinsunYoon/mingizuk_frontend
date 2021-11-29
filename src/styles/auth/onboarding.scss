@@ -109,3 +109,15 @@
     color: $white;
     font-family: 'Montserrat', sans-serif;
 }
+
+.install-btn {
+    display: inline-block;
+    min-width: 18rem;
+    padding: 0 2rem;
+    height: 2.8rem;
+    margin-top: 1.3rem;
+    border: none;
+    color: $primary;
+    background-color: $white;
+    border-radius: 10rem;
+}

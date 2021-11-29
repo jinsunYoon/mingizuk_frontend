@@ -18,6 +18,7 @@ const notLoggedIn = lazy(() => import('./pages/notLoggedIn'))
 const Onboarding = lazy(() => import('./pages/Onboarding'))
 const Header = lazy(() => import('./components/Header.js'))
 const NavBar = lazy(() => import('./components/NavBar.js'))
+const Download = lazy(() => import('./pages/Download.js'))
 
 const App = () => {
     const dispatch = useDispatch()
@@ -107,11 +108,18 @@ const App = () => {
 
                     <Switch>
                         <PublicRoute
-                            path="/"
+                            path="/onboarding"
                             exact
                             isAuthenticated={isAuthenticated}
                         >
                             <Onboarding />
+                        </PublicRoute>
+                        <PublicRoute
+                            path="/"
+                            exact
+                            isAuthenticated={isAuthenticated}
+                        >
+                            <Download />
                         </PublicRoute>
 
                         <PublicRoute
