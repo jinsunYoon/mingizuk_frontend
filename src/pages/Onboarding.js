@@ -87,10 +87,7 @@ const Onboarding = () => {
                         </div>
                     )}
                     {pageState === -1 && (
-                        <article
-                            className="rion-main"
-                            // onClick={() => setPageState(0)}
-                        >
+                        <article className="rion-main">
                             <img
                                 style={rionImg}
                                 src="https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png"

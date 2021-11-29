@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
+import ReactPWAInstallProvider from 'react-pwa-install'
 import store from './redux/store'
 import { Provider } from 'react-redux'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -15,7 +16,9 @@ ReactDOM.render(
     <Provider store={store}>
         <QueryClientProvider client={queryClient}>
             <ReactQueryDevtools initialIsOpen={false} />
-            <App />
+            <ReactPWAInstallProvider enableLogging>
+                <App />
+            </ReactPWAInstallProvider>
         </QueryClientProvider>
     </Provider>,
     document.getElementById('root')
