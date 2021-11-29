@@ -59,8 +59,14 @@ const MoimDetail = () => {
     const deletePost = (data) => {
         Swal.fire({
             text: '게시글을 지우시겠습니까 ?',
-            buttons: true,
-            dangerMode: true,
+            showCancelButton: true,
+            confirmButtonColor: '#6B76FF',
+            cancelButtonColor: '#DEDEDE',
+            confirmButtonText: '삭제',
+            cancelButtonText: '취소',
+            width: '30rem',
+            height: '15rem',
+            reverseButtons: true,
         }).then((willDelete) => {
             if (willDelete) {
                 dispatch(moimDeleteMD(data))
