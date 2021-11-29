@@ -16,7 +16,6 @@ export const myMoimCreateMD = createAsyncThunk(
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -32,7 +31,6 @@ export const myMoimJoinMD = createAsyncThunk(
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -47,7 +45,6 @@ export const myMoimLikeMD = createAsyncThunk(
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -58,12 +55,11 @@ export const myMoimCommentMD = createAsyncThunk(
     async (data, thunkAPI) => {
         try {
             const response = await myMoimCommentAPI()
-            console.log(response)
+
             if (response) {
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }

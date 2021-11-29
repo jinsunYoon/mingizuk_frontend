@@ -26,7 +26,6 @@ const mainRoutineSlice = createSlice({
             if (action) {
                 state.mainRoutine = action?.payload?.data?.mainRoutine
                 state.isMain = action?.payload?.data?.mainRoutine?.isMain
-                console.log('겟메인루틴풀필드', action?.payload)
             }
         },
         [setMainRoutineMD.fulfilled]: (state, action) => {},

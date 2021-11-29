@@ -258,14 +258,14 @@ const PostDesc = () => {
         setFilterState(false)
         setPosts(filter_data_all)
     }
-    console.log('><><><>', posts)
+
 
     return (
         <>
             <button
                 onClick={() => {
                     dispatch(moimScrollMD(5))
-                    console.log(']]', moreMoims[2].id)
+                   
                 }}
             >
                 test

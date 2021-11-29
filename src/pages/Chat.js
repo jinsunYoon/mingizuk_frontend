@@ -66,19 +66,15 @@ const Chat = () => {
         instance
             .get(`/api/moims/${moimId}/${roomId}`)
             .then(({ data }) => {
-                console.log('[][]', data)
                 setMessageArray(data?.chats)
             })
-            .catch((err) => {
-                console.log('[]', err)
-            })
+            .catch((err) => {})
     )
     const getHistoryNotice = useQuery(['getHistoryNotice', roomId], () =>
         instance
             .get(`/api/moims/${moimId}/${roomId}/notice`)
             .then(({ data }) => {
                 if (data.targetNotice !== null) {
-                    console.log('[][]]notnull', data)
                     setNoticeContent(data.targetNotice.contents)
                     setNoticeId(data.targetNotice.id)
                 }
@@ -131,7 +127,6 @@ const Chat = () => {
                         title: data.msg,
                     })
                 } else if (data.name !== 'SERVER') {
-                    console.log('<>update', data)
                     setNewMsgArray((newMsgArray) => [...newMsgArray, data])
                 }
             }
@@ -148,8 +143,8 @@ const Chat = () => {
             .post(`/api/moims/${moimId}/${roomId}`, {
                 contents: msgValue,
             })
-            .then((res) => console.log('<>res', res))
-            .catch((error) => console.log('<>error', error))
+            .then((res) => {})
+            .catch((error) => {})
         socketMoim.emit('sendMsg', userNick, msgValue, roomId)
         setMsgValue('')
     }
@@ -172,10 +167,9 @@ const Chat = () => {
                         })
                         .then((res) => {
                             setNoticeContent(noticeValue)
-                            console.log('[][][][][]', res)
                             setNoticeId(res.data.noticeId)
                         })
-                        .catch((error) => console.log('<>error', error))
+                        .catch((error) => {})
                 }
             })
         } else {
@@ -289,7 +283,6 @@ const Chat = () => {
                                         <p
                                             className="chat-content"
                                             onClick={() => {
-                                                console.log('[][][]', 'click')
                                                 userNick === host &&
                                                     postNotice(message?.msg)
                                             }}

@@ -180,9 +180,6 @@ const Filter = (props) => {
 
     const locationfilter = location1 + ' ' + location2
 
-    console.log('>>>>>!', locationfilter)
-    console.log('>>>>>', filterState)
-
     return (
         <>
             <div className="location-filter-container">

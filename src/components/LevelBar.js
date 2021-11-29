@@ -37,8 +37,6 @@ const LevelBar = ({ exp, expMax }) => {
         return result
     }
     const calcLevelBar = (exp - (level(exp) - 1) * 10000) / 100
-    console.log('>>', calcLevelBar)
-    console.log('>>', level(exp), exp, expMax)
 
     return (
         <>

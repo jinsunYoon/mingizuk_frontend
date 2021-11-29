@@ -52,11 +52,9 @@ const moimSlice = createSlice({
         },
         setAddress: (state, action) => {
             state.address = action.payload
-            console.log('setAddress', action.payload)
         },
         setPlace: (state, action) => {
             state.place = action.payload
-            console.log('setPlace', action.payload)
         },
         setChatHost: (state, { payload }) => {
             state.chat_host = payload
@@ -72,17 +70,13 @@ const moimSlice = createSlice({
                 title: '모임 글이 게시되었습니다.',
             })
         },
-        [moimCreateMD.rejected]: (state, { payload }) => {
-            console.log(payload)
-        },
+        [moimCreateMD.rejected]: (state, { payload }) => {},
         [moimReadMD.fulfilled]: (state, { payload }) => {
-            console.log(payload)
             state.moim_all = payload.data.allMoims
         },
         [moimReadMD.rejected]: (state, { payload }) => {},
         [moimUpdateMD.fulfilled]: (state, { payload }) => {},
         [moimDeleteMD.fulfilled]: (state, { payload }) => {
-            console.log('<<', state.moim_all)
             const ref_moim_post = state.moim_all.filter(
                 (post) => post.id !== payload
             )
@@ -155,7 +149,6 @@ const moimSlice = createSlice({
             state.moim_detail.MoimUsers = result
         },
         [moimReviewCreateMD.fulfilled]: (state, { payload }) => {
-            console.log(payload)
             state.moim_detail.Comments.push({
                 contents: payload.data.contents,
                 id: payload.response.data.newCommentId,
@@ -183,15 +176,12 @@ const moimSlice = createSlice({
             })
         },
         [moimLocationMD.fulfilled]: (state, { payload }) => {
-            console.log('>>필터', payload)
             state.filter = payload.data.filterMoims
         },
         [moimScrollMD.fulfilled]: (state, { payload }) => {
-            console.log('>>>>>datapayload', payload)
             state.moim_scroll.push(payload.data.moreMoims)
         },
         [moimLocationScrollMD.fulfilled]: (state, { payload }) => {
-            console.log('>>무한스크롤모임필터데이터', payload)
             state.moim_filter_scroll = payload.data
         },
     },

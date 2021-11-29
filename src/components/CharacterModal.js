@@ -40,8 +40,6 @@ const CharacterModal = () => {
     const charList = useSelector((state) => state.character.charList)
     const charName = useSelector((state) => state.character.characterName)
 
-    console.log('>>', charName)
-
     useEffect(() => {
         dispatch(getCharacterMD())
     }, [])

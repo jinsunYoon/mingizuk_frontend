@@ -27,13 +27,12 @@ const Main = (props) => {
 
     const is_login = useSelector((state) => state.user.isLogin)
     const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
-    console.log('메인루틴', mainRoutine)
+
     const isMain = useSelector((state) => state.setAction.isMain)
     const nickName = useSelector((state) => state.user.userInfo.nickName)
     const charList = useSelector((state) => state.character.charList)
     const curChara =
         charList.length > 0 && charList[charList.length - 1].charName
-    console.log('charList', charList)
 
     const ActionFins = mainRoutine?.Actions?.map((action) => action?.ActionFins)
     const finDate = ActionFins?.map((fin) => fin[fin.length - 1].date)
@@ -48,11 +47,10 @@ const Main = (props) => {
         dispatch(changeNav('home'))
         dispatch(loginCheckMD())
         dispatch(getMainRoutineMD())
-        console.log('실행됨', array.length)
+
         if (array.length !== 0) {
             dispatch(setResult(array))
             dispatch(setFakeResult(array))
-            console.log('이거 실행', array.length)
         } else if (array.length == 0) {
             dispatch(setResult([]))
             dispatch(setFakeResult([]))

@@ -83,11 +83,9 @@ const routineSlice = createSlice({
         // * ----
         [myRoutineListMD.fulfilled]: (state, { payload }) => {
             state.myRoutine = payload.data.routines
-            console.log('[][]', payload)
         },
         // * ----
         [myRoutineDeleteMD.fulfilled]: (state, { payload }) => {
-            console.log('<<', payload)
             const result = state.myRoutine.filter(
                 (routine) => routine.id !== payload
             )

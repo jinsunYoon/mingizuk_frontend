@@ -17,11 +17,9 @@ export const myRoutinePresetMD = createAsyncThunk(
         try {
             const response = await myRoutinePresetAPI()
             if (response) {
-                console.log(response)
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -31,14 +29,12 @@ export const myRoutineCreateMD = createAsyncThunk(
     'routine/create',
     async (data, thunkAPI) => {
         try {
-            console.log('2', data)
             const response = await myRoutineCreateAPI(data)
             if (response) {
                 history.push('/routine/mypage')
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -53,7 +49,6 @@ export const myRoutineListMD = createAsyncThunk(
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -68,7 +63,6 @@ export const myRoutineDeleteMD = createAsyncThunk(
                 return routineId
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -98,7 +92,6 @@ export const getMainRoutineMD = createAsyncThunk(
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -110,11 +103,9 @@ export const setMainRoutineMD = createAsyncThunk(
         try {
             const response = await setmainRoutineAPI(data)
             if (response) {
-                console.log(response)
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -130,7 +121,6 @@ export const finRoutinesActionsMD = createAsyncThunk(
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }

@@ -12,11 +12,9 @@ export const actionCompleteMD = createAsyncThunk(
         try {
             const response = await actionCompleteAPI(data)
             if (response) {
-                console.log(response)
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -28,11 +26,9 @@ export const actionRestartMD = createAsyncThunk(
         try {
             const response = await actionRestartAPI(data)
             if (response) {
-                console.log(response)
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -44,11 +40,9 @@ export const actionResetMD = createAsyncThunk(
         try {
             const response = await actionResetAPI(data)
             if (response) {
-                console.log(response)
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }

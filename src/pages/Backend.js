@@ -17,13 +17,7 @@ const Backend = () => {
                     <br /> 테스트 공간
                 </SubTitle>
                 <Text>행복한 테스트 시간 가지시기 바랍니다.</Text>
-                <ButtonOutlined
-                    _onClick={() => {
-                        console.log('행복한 백엔드의 테스트 버튼')
-                    }}
-                >
-                    테스트 버튼
-                </ButtonOutlined>
+                <ButtonOutlined _onClick={() => {}}>테스트 버튼</ButtonOutlined>
             </FlexColumn>
         </>
     )

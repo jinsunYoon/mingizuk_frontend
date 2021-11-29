@@ -33,11 +33,9 @@ instanceSign.interceptors.request.use(async (config) => {
 // interceptor를 통한 response 설정
 instance.interceptors.response.use(
     async (response) => {
-        console.log(response)
         return response
     },
     async (error) => {
-        console.log(error)
         if (
             error.response.data.msg ===
             'accessToken이 재발급되었습니다. 다시 로그인해주세요'
@@ -52,11 +50,9 @@ instance.interceptors.response.use(
 
 instanceSign.interceptors.response.use(
     async (response) => {
-        console.log(response)
         return response
     },
     async (error) => {
-        console.log(error)
         return
         // window.alert(error.response.data.msg)
     }
@@ -109,9 +105,7 @@ const loginAPI = (data) => {
             userEmail: data.userEmail,
             userPw: data.userPw,
         })
-        .catch((err) => {
-            console.log(err)
-        })
+        .catch((err) => {})
 }
 
 const logoutAPI = () => {
@@ -137,9 +131,7 @@ const loginCheckAPI = () => {
                 return response
             }
         })
-        .catch(function (error) {
-            console.log('<><>', error)
-        })
+        .catch(function (error) {})
     // return instance.get('/api/auth/me')
 }
 
@@ -152,7 +144,6 @@ const getMainRoutineAPI = () => {
 }
 
 const actionCompleteAPI = (data) => {
-    console.log('이거 api 데이터', data)
     return instance.put('/api/actions', {
         actionId: data.actionId,
         routineId: data.routineId,
@@ -161,12 +152,10 @@ const actionCompleteAPI = (data) => {
 }
 
 const actionRestartAPI = (routineId) => {
-    console.log('이거 api 데이터', routineId)
     return instance.post(`/api/routines/create/${routineId}`)
 }
 
 const actionResetAPI = (routineId) => {
-    console.log('이거 api 데이터', routineId)
     return instance.put(`/api/routines/reset/${routineId}`)
 }
 
@@ -174,7 +163,6 @@ const actionResetAPI = (routineId) => {
 
 // mypage
 const userInfoAPI = (data) => {
-    console.log(data)
     return instance.put('/api/users/info', {
         nickName: data.newNickName,
         userPw: data.newPwd,
@@ -197,7 +185,6 @@ const myMoimCommentAPI = () => {
 }
 
 const myMoimLikeAPI = () => {
-    console.log('>>>!!', 'api')
     return instance.get('/api/moims/like/mylikes')
 }
 
@@ -241,7 +228,6 @@ const setmainRoutineAPI = (data) => {
 
 // moim
 const moimCreateAPI = (data) => {
-    console.log('<<<<<<>', data.location)
     const locationSp = data.location.split(' ')
     let gu = locationSp.find((e) => {
         return e.charAt(e.length - 1) === '구'
@@ -251,7 +237,7 @@ const moimCreateAPI = (data) => {
             return e.charAt(e.length - 1) === '시'
         })
     }
-    console.log('<<<<<<>', gu)
+
     return instance.post('api/moims', {
         title: data.title,
         contents: data.contents,
@@ -268,7 +254,6 @@ const moimReadAPI = () => {
 }
 
 const moimUpdateAPI = (data) => {
-    console.log(data)
     return instance.put(`/api/moims/${data.moimId}`, {
         title: data.title,
         contents: data.contents,
@@ -320,12 +305,10 @@ const moimUpdateReviewAPI = (data) => {
 }
 
 const moimLocationAPI = (locationFilter) => {
-    console.log('>>>>>!', locationFilter)
     return instance.post(`/api/moims/search`, { filter: locationFilter })
 }
 
 const moimScrollAPI = (lastID) => {
-    console.log('>>>>', lastID)
     return instance.post(`/api/moims/scroll/${lastID}`)
 }
 

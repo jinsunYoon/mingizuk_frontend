@@ -35,20 +35,12 @@ const RoutineSelect = (props) => {
     })
 
     const changeActions = (newAct) => {
-        if (selectList.length === 5) {
-            Toast.fire({
-                icon: 'error',
-                title: '동작은 최대 5개까지만 선택할 수 있어요.',
-            })
-            return
-        } else {
-            const confirm = addedActions?.findIndex(
-                ({ actionName }) => actionName === newAct.value
-            )
-            confirm === -1
-                ? dispatch(addAction(newAct))
-                : dispatch(minusAction(newAct))
-        }
+        const confirm = addedActions?.findIndex(
+            ({ actionName }) => actionName === newAct.value
+        )
+        confirm === -1
+            ? dispatch(addAction(newAct))
+            : dispatch(minusAction(newAct))
     }
 
     const checkColor = (name) => {

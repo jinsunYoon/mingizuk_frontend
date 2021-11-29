@@ -73,7 +73,7 @@ const RoutineDesc = (props) => {
             if (willDelete) {
                 dispatch(actionResetMD(routineId))
                 const data = getTempRoutineId
-                console.log('바꾸고싶은 루틴아디', data)
+
                 dispatch(setResult([]))
                 dispatch(setFakeResult([]))
                 dispatch(setMainRoutineMD(data))
@@ -107,10 +107,6 @@ const RoutineDesc = (props) => {
                                         setTempRoutineId(
                                             routine?.Actions[0].routineId
                                         )
-                                    )
-                                    console.log(
-                                        '선택한 루틴',
-                                        routine?.Actions[0].routineId
                                     )
                                 }
                             }}
@@ -173,10 +169,6 @@ const RoutineDesc = (props) => {
                                                 routine?.Actions[0].routineId
                                             )
                                         )
-                                        console.log(
-                                            '선택한 루틴',
-                                            routine?.Actions[0].routineId
-                                        )
                                     }
                                 }}
                             >
@@ -220,7 +212,6 @@ const RoutineDesc = (props) => {
                                     mainRoutine.Actions.length > 0 &&
                                     mainRoutine.Actions[0].routineId
                                 dispatch(setRoutineId(routineId))
-                                console.log('리셋할 루틴아디', routineId)
                                 resetRoutine(routineId)
                             }
                             if (
@@ -229,7 +220,6 @@ const RoutineDesc = (props) => {
                                 typeof mainRoutine == 'undefined'
                             ) {
                                 const data = getTempRoutineId
-                                console.log('data', data)
                                 dispatch(setMainRoutineMD(data))
                                 dispatch(setResult([]))
                                 dispatch(setFakeResult([]))
