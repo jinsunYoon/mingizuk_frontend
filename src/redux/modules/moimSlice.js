@@ -13,6 +13,8 @@ import {
     moimDeleteReviewMD,
     moimUpdateReviewMD,
     moimLocationMD,
+    moimScrollMD,
+    moimLocationScrollMD,
 } from '../async/moim'
 import Swal from 'sweetalert2'
 
@@ -36,6 +38,9 @@ const initialState = {
     place: '',
     filter: {},
     chat_host: '',
+    detail_loading: false,
+    moim_scroll: [],
+    moim_filter_scroll: {},
 }
 
 const moimSlice = createSlice({
@@ -55,6 +60,9 @@ const moimSlice = createSlice({
         },
         setChatHost: (state, { payload }) => {
             state.chat_host = payload
+        },
+        setLoadingFalse: (state, { payload }) => {
+            state.detail_loading = false
         },
     },
     extraReducers: {
@@ -82,7 +90,7 @@ const moimSlice = createSlice({
         },
         [moimDetailMD.fulfilled]: (state, { payload }) => {
             state.moim_detail = payload.data.targetMoim
-            console.log(payload)
+            state.detail_loading = true
         },
         [moimLikeMD.fulfilled]: (state, { payload }) => {
             const likeUser = payload.data.msg.split(' ')[0]
@@ -112,10 +120,14 @@ const moimSlice = createSlice({
                 )
                 state.moim_detail.Likes = result
 
-                const result2 = state.moim_all.filter(
-                    (post) => post.id === Number(unlikePost)
-                )
-                // state.moim_all = result2
+                state.moim_all.map((post) => {
+                    if (post.id === Number(unlikePost)) {
+                        const temp = post.Likes.filter(
+                            (like) => like.userId !== Number(unlikeUser)
+                        )
+                        post.Likes = temp
+                    }
+                })
             } else {
                 state.moim_all.map((post) => {
                     if (post.id === Number(unlikePost)) {
@@ -171,15 +183,28 @@ const moimSlice = createSlice({
             })
         },
         [moimLocationMD.fulfilled]: (state, { payload }) => {
-            console.log('>>>>>!><', payload)
+            console.log('>>필터', payload)
             state.filter = payload.data.filterMoims
+        },
+        [moimScrollMD.fulfilled]: (state, { payload }) => {
+            console.log('>>>>>datapayload', payload)
+            state.moim_scroll.push(payload.data.moreMoims)
+        },
+        [moimLocationScrollMD.fulfilled]: (state, { payload }) => {
+            console.log('>>무한스크롤모임필터데이터', payload)
+            state.moim_filter_scroll = payload.data
         },
     },
 })
 
 //* reducer export
-export const { moimUpdate, setAddress, setPlace, setChatHost } =
-    moimSlice.actions
+export const {
+    moimUpdate,
+    setAddress,
+    setPlace,
+    setChatHost,
+    setLoadingFalse,
+} = moimSlice.actions
 
 //* slice export
 export default moimSlice

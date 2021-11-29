@@ -13,18 +13,26 @@ const CollectionList = () => {
                 <section className="contents">
                     <Flex>
                         <Item>
-                            <CollectionItem />
-                            <CollectionItem />
-                            <CollectionItem />
-                            <CollectionItem />
-                            <CollectionItem />
-                            <CollectionItem />
-                            <CollectionItem />
-                            <CollectionItem />
-                            <CollectionItem />
-                            <CollectionItem />
-                            <CollectionItem />
-                            <CollectionItem />
+                            <Row>
+                                <CollectionItem />
+                                <CollectionItem />
+                                <CollectionItem />
+                            </Row>
+                            <Row>
+                                <CollectionItem />
+                                <CollectionItem />
+                                <CollectionItem />
+                            </Row>
+                            <Row>
+                                <CollectionItem />
+                                <CollectionItem />
+                                <CollectionItem />
+                            </Row>
+                            <Row>
+                                <CollectionItem />
+                                <CollectionItem />
+                                <CollectionItem />
+                            </Row>
                         </Item>
                         <More>더 많은 캐릭터들을 기다려주세요!</More>
                     </Flex>
@@ -39,7 +47,6 @@ const Flex = styled.div`
     border: none;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     padding: 1rem;
     width: 100%;
     height: 100%;
@@ -47,10 +54,17 @@ const Flex = styled.div`
 
 const Item = styled.div`
     display: flex;
-    flex-wrap: wrap;
+    width: 100%;
     flex: 1 1 95%;
+    flex-direction: column;
     justify-content: space-around;
     align-content: space-around;
+`
+
+const Row = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 `
 
 const More = styled.div`

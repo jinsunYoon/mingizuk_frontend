@@ -87,12 +87,12 @@ const Login = () => {
                         >
                             카카오톡으로 로그인하기
                         </a>
-                        {/* <a
+                        <a
                             href="https://mingijuk.shop/api/auth/naver"
                             className="naver-btn"
                         >
                             네이버로 로그인하기
-                        </a> */}
+                        </a>
                         <a
                             href="https://mingijuk.shop/api/auth/google"
                             className="google-btn"

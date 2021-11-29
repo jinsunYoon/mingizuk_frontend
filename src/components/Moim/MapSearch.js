@@ -10,6 +10,7 @@ const MapSearch = () => {
     const [InputText, setInputText] = useState('')
     const [Place, setPlace] = useState('')
     const [map, setMap] = useState(false)
+    const [reset, setReset] = useState(false)
 
     const getAddress = useSelector((state) => state.moim.address)
     const getPlace = useSelector((state) => state.moim.place)
@@ -33,7 +34,6 @@ const MapSearch = () => {
                         top: 0,
                         left: 0,
                         width: '100vw',
-                        height: '100vh',
                         backgroundColor: '#fff',
                         zIndex: 4,
                     }}
@@ -42,13 +42,11 @@ const MapSearch = () => {
                         onSubmit={handleSubmit}
                         style={{
                             width: '100%',
+                            height: '100vh',
                             display: 'flex',
-                            marginTop: '2.938rem',
-                            padding: '1rem',
+                            padding: '4rem 1rem 4.5rem 1rem',
                             flexDirection: 'column',
-                            justifyContent: 'center',
-                            display: 'flex',
-                            flexDirection: 'column',
+                            justifyContent: 'start',
                             alignItems: 'center',
                         }}
                     >
@@ -94,6 +92,7 @@ const MapSearch = () => {
                             _others={'height:3.5rem; max-width:48rem'}
                             _onClick={() => {
                                 setMap(false)
+                                setReset(true)
                             }}
                         >
                             위치 선택 완료
@@ -108,7 +107,7 @@ const MapSearch = () => {
                 }}
             >
                 <Icon icon={'create'} size={13} />
-                {getPlace ? (
+                {reset && getPlace ? (
                     <div style={{ color: 'black' }}>
                         {getPlace} - {getAddress}
                     </div>

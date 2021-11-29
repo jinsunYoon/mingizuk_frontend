@@ -49,20 +49,21 @@
                 font-size: 1rem;
             }
             button {
-                margin-top: 7rem;
-                color: $text-gray;
-                background-color: #fff;
-                border: 1px solid $secondary;
-                border-radius: 0.5rem;
-                font-size: 0.8rem;
-                padding: 0.5rem;
-                -webkit-border-radius: 0.5rem;
-                -moz-border-radius: 0.5rem;
-                -ms-border-radius: 0.5rem;
-                -o-border-radius: 0.5rem;
+                font-size: 0.85rem;
+                color: $primary;
+                width: 208px;
+                height: 48px;
+                margin: 2rem;
+                border: $primary 1px solid;
+                border-radius: 10px;
+                background-color: $white;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                -ms-border-radius: 10px;
+                -o-border-radius: 10px;
 
                 &:hover {
-                    background: $primary;
+                    background-color: $primary;
                     color: $white;
                 }
             }
@@ -132,6 +133,11 @@
                 div {
                     display: flex;
                     align-items: center;
+                    justify-content: center;
+                    margin-right: 0.2rem;
+                }
+                span {
+                    display: inline-block;
                     margin-right: 1rem;
                 }
             }

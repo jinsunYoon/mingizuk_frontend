@@ -8,6 +8,7 @@ import { Text, FlexColumn, FlexRow, ButtonOutlined } from '../elements/index'
 
 //* icons
 import Icon from '../components/icons/Icon'
+import { useSelector } from 'react-redux'
 
 const NavBar = () => {
     const navPosition = {
@@ -18,11 +19,9 @@ const NavBar = () => {
         zIndex: 3,
         bottom: 0,
     }
-    const [home, setHome] = React.useState(true)
-    const [routine, setRoutine] = React.useState(false)
-    const [moim, setMoim] = React.useState(false)
-    const [historyI, setHistoryI] = React.useState(false)
-    const [mypage, setMypage] = React.useState(false)
+
+    const status = useSelector((state) => state?.user?.nav)
+    const { historyI, home, moim, mypage, routine } = status
 
     return (
         <>
@@ -42,11 +41,6 @@ const NavBar = () => {
                             _border="none"
                             _onClick={() => {
                                 history.push('/')
-                                setHome(true)
-                                setRoutine(false)
-                                setMoim(false)
-                                setHistoryI(false)
-                                setMypage(false)
                             }}
                         >
                             {home ? (
@@ -91,11 +85,6 @@ const NavBar = () => {
                             _border="none"
                             _onClick={() => {
                                 history.push('/routine/mypage')
-                                setHome(false)
-                                setRoutine(true)
-                                setMoim(false)
-                                setHistoryI(false)
-                                setMypage(false)
                             }}
                         >
                             {routine ? (
@@ -140,11 +129,6 @@ const NavBar = () => {
                             _border="none"
                             _onClick={() => {
                                 history.push('/moim')
-                                setHome(false)
-                                setRoutine(false)
-                                setMoim(true)
-                                setHistoryI(false)
-                                setMypage(false)
                             }}
                         >
                             {moim ? (
@@ -189,11 +173,6 @@ const NavBar = () => {
                             _border="none"
                             _onClick={() => {
                                 history.push('/history')
-                                setHome(false)
-                                setRoutine(false)
-                                setMoim(false)
-                                setHistoryI(true)
-                                setMypage(false)
                             }}
                         >
                             {historyI ? (
@@ -238,11 +217,6 @@ const NavBar = () => {
                             _border="none"
                             _onClick={() => {
                                 history.push('/users')
-                                setHome(false)
-                                setRoutine(false)
-                                setMoim(false)
-                                setHistoryI(false)
-                                setMypage(true)
                             }}
                         >
                             {mypage ? (

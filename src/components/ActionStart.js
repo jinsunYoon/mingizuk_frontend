@@ -86,11 +86,11 @@ const ActionStart = (props) => {
 
     const imgGif = (name) => {
         if (name == '라이온') {
-            return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming2.gif'
+            return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming1.gif'
         } else if (name == '무지') {
-            return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming3.gif'
+            return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming2.gif'
         } else if (name == '제이지') {
-            return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming_3.gif'
+            return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming3.gif'
         }
     }
 

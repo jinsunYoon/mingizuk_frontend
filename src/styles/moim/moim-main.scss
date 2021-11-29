@@ -9,6 +9,7 @@
     margin-top: 3rem;
     margin-bottom: 65px;
     position: relative;
+    padding-bottom: 4rem;
 }
 
 .post-warp {
@@ -238,6 +239,38 @@
     & select {
         &:hover {
             color: $primary;
+        }
+    }
+}
+
+.nomoim {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    p {
+        margin-top: 10rem;
+        font-size: 1rem;
+        color: #8f8f8f;
+    }
+    button {
+        font-size: 0.85rem;
+        color: $primary;
+        width: 208px;
+        height: 48px;
+        margin: 2rem;
+        border: $primary 1px solid;
+        border-radius: 10px;
+        background-color: $white;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+
+        &:hover {
+            background-color: $primary;
+            color: $white;
         }
     }
 }
