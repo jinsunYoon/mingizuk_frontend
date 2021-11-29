@@ -27,8 +27,9 @@ export const loginMD = createAsyncThunk(
     async (data, thunkAPI) => {
         try {
             const response = await loginAPI(data)
-            history.push('/')
             if (response) {
+                console.log('<><>', response)
+
                 return response
             }
         } catch (err) {
