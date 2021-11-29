@@ -1,6 +1,6 @@
 {
     "hosting": {
-        "site": "ming-gi-jeog",
+        "site": "mingizuk",
         "public": "build",
         "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
         "rewrites": [
