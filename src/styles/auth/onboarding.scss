@@ -124,14 +124,10 @@
     max-width: 768px;
     @include column-flexbox();
     padding: 0 4.5rem;
-    transition: opacity 200ms ease-in-out;
 
     h2 {
         font-size: 1.2rem;
         margin-top: 1rem;
-    }
-    &:hover {
-        opacity: 0.7;
     }
 }
 
@@ -153,6 +149,11 @@
     color: $primary;
     background-color: $white;
     border-radius: 10rem;
+    cursor: pointer;
+    transition: opacity 200ms ease-in-out;
+    &:hover {
+        opacity: 0.7;
+    }
 }
 
 .mingi-modal-container {
@@ -173,4 +174,16 @@
     text-align: right;
     right: 2rem;
     opacity: 0.8;
+}
+
+.error-a {
+    color: $primary;
+    text-decoration: none;
+    outline: none;
+}
+
+.error-a:hover,
+.error-a:active {
+    text-decoration: none;
+    color: $primary;
 }

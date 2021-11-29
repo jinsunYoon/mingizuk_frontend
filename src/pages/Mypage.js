@@ -41,10 +41,14 @@ const MyPage = (props) => {
                         <span>내 캐릭터 콜렉션</span>
                         <Icon icon="right-tri" size="12px" color="#A5ABB0" />
                     </li>
-                    <li onClick={() => history.push('/users/moim')}>
+                    <a
+                        className="error-a"
+                        href="mailto:miraculous0006@gmail.com"
+                        target="_blank"
+                    >
                         <span>내 모임</span>
                         <Icon icon="right-tri" size="12px" color="#A5ABB0" />
-                    </li>
+                    </a>
                 </ul>
             </section>
         </>
