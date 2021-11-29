@@ -1,22 +1,40 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { kakaoLoginMD, loginMD } from '../redux/async/user'
+import Swal from 'sweetalert2'
 import { history } from '../redux/store'
 import clsx from 'clsx'
 import '../styles/auth/auth.scss'
-import { Link } from 'react-router-dom'
 
 const Login = () => {
     const dispatch = useDispatch()
     const [id, setId] = useState('')
     const [pwd, setPwd] = useState('')
 
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: false,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+    })
+
     const emailLogin = () => {
         if (id === '') {
-            window.alert('아이디를 입력해주세요 ! ')
+            Toast.fire({
+                icon: 'error',
+                title: '아이디를 입력해주세요.',
+            })
             return
         } else if (pwd === '') {
-            window.alert('비밀번호를 입력해주세요 ! ')
+            Toast.fire({
+                icon: 'error',
+                title: '비밀번호를 입력해주세요.',
+            })
             return
         } else {
             const data = {

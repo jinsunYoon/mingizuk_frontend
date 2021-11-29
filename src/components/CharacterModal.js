@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
-import { ButtonOutlined, FlexRow, Text } from '../elements/index'
-import { CancelRounded, ContactlessOutlined } from '@material-ui/icons'
+import Swal from 'sweetalert2'
 import '../styles/character/character.scss'
 import { getCharacterMD, postCharacterMD } from '../redux/async/character'
 import LevelBar from '../components/LevelBar'
 
 const CharacterModal = () => {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: false,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+    })
     const charLv1 = [
         'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png',
         'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_1+1.png',
@@ -51,7 +60,10 @@ const CharacterModal = () => {
                                     setModalState(true)
                                     dispatch(postCharacterMD())
                                 } else {
-                                    window.alert('로그인 후 이용해주세요.')
+                                    Toast.fire({
+                                        icon: 'error',
+                                        title: '로그인 후 이용해주세요.',
+                                    })
                                 }
                             }}
                         >

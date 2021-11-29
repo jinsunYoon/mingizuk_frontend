@@ -65,7 +65,7 @@ const completeSlice = createSlice({
 
     extraReducers: {
         [actionCompleteMD.fulfilled]: (state, action) => {
-            console.log('완료풀필드', action?.payload?.data?.result)
+            console.log('완료풀필드', action?.payload?.data)
             state.result.push(action?.payload?.data?.result)
         },
         [actionRestartMD.fulfilled]: (state, action) => {

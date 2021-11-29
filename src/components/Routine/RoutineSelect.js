@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addAction, minusAction } from '../../redux/modules/updateRoutine'
 import Icon from '../../components/icons/Icon'
 import clsx from 'clsx'
+import Swal from 'sweetalert2'
 
 const RoutineSelect = (props) => {
     const dispatch = useDispatch()
@@ -10,6 +11,18 @@ const RoutineSelect = (props) => {
     const selectList = useSelector((state) => state.updateAction.actions)
     const { stretching, body_exercise, select } = props
     const [desc, setDesc] = React.useState('first')
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: false,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+    })
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -23,7 +36,10 @@ const RoutineSelect = (props) => {
 
     const changeActions = (newAct) => {
         if (selectList.length === 5) {
-            window.alert('동작은 최대 5개까지만 선택할 수 있어요.')
+            Toast.fire({
+                icon: 'error',
+                title: '동작은 최대 5개까지만 선택할 수 있어요.',
+            })
             return
         } else {
             const confirm = addedActions?.findIndex(
@@ -133,9 +149,17 @@ RoutineSelect.defaultProps = {
         '목 돌리기',
         '어깨 돌리기',
         '허리 돌리기',
+        '팔 돌리기',
+        '손목, 발목 돌리기',
         '무릎 돌리기',
+        '고양이 자세하기',
+        '머리 위로 손 뻗기',
+        '허리 굽히기',
+        '숨고르기',
+        '목 늘리기',
+        '누워서 팔다리 위로 뻗기',
     ],
-    body_exercise: ['스쿼트', '런지', '플랭크', '푸쉬업'],
+    body_exercise: ['스쿼트', '런지', '플랭크', '푸쉬업', '하늘 자전거'],
     select: 'first',
 }
 
