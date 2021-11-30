@@ -108,7 +108,7 @@ const routineSlice = createSlice({
 
             // * kind of dates (action & routine)
             const dates = []
-            finActions.forEach(({ ActionFins }) => {
+            finActions?.forEach(({ ActionFins }) => {
                 const actionDates = ActionFins.map(({ date }) =>
                     date.slice(0, 10)
                 )
@@ -125,7 +125,7 @@ const routineSlice = createSlice({
 
             // ! actions
             // * { date:'2021-11-11' , actions:[action1, action2...]
-            finActions.forEach(({ actionName, ActionFins }) => {
+            finActions?.forEach(({ actionName, ActionFins }) => {
                 const actionDates = ActionFins.map(({ date }) =>
                     setDates.findIndex((day) => day === date.slice(0, 10))
                 )

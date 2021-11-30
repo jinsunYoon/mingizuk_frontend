@@ -384,7 +384,12 @@ const PostDesc = () => {
                                 </div>
                                 <p className="title">{el?.title}</p>
                                 <div className="imgbox">
-                                    <img src={el.imgSrc} />
+                                    <div
+                                        className="divimg"
+                                        style={{
+                                            backgroundImage: `url(${el.imgSrc})`,
+                                        }}
+                                    ></div>
                                 </div>
                                 <div className="post-info">
                                     <span>

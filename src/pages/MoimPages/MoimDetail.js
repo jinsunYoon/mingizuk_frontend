@@ -177,7 +177,12 @@ const MoimDetail = () => {
                     <h6>{post_data?.title}</h6>
                     <article className="img-desc-container">
                         {post_data?.imgSrc !== null && (
-                            <img src={post_data?.imgSrc} />
+                            <div
+                                className="divimg"
+                                style={{
+                                    backgroundImage: `url(${post_data?.imgSrc})`,
+                                }}
+                            ></div>
                         )}
                         <p className="detail-desc">{post_data?.contents}</p>
                     </article>
