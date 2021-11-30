@@ -46,7 +46,7 @@ instance.interceptors.response.use(
 
             return
         }
-        window.alert(error.response.data.msg)
+        // window.alert(error.response.data.msg)
     }
 )
 
@@ -57,7 +57,8 @@ instanceSign.interceptors.response.use(
     },
     async (error) => {
         console.log(error)
-        window.alert(error.response.data.msg)
+        return
+        // window.alert(error.response.data.msg)
     }
 )
 
@@ -103,10 +104,14 @@ const signupAPI = (data) => {
 }
 
 const loginAPI = (data) => {
-    return instanceSign.post('/api/auth/local', {
-        userEmail: data.userEmail,
-        userPw: data.userPw,
-    })
+    return instanceSign
+        .post('/api/auth/local', {
+            userEmail: data.userEmail,
+            userPw: data.userPw,
+        })
+        .catch((err) => {
+            console.log(err)
+        })
 }
 
 const logoutAPI = () => {
@@ -122,12 +127,9 @@ const loginCheckAPI = () => {
             },
         })
         .then(function (response) {
-            console.log('<>[]', response)
             if (response?.data?.result === true) {
-                console.log('>><<만료 안됨', response)
                 return response
             } else if (response?.data?.msg === 'accessToken 재발급') {
-                console.log('>><<, aces재발급', response)
                 localStorage.setItem('accessToken', response.data.accessToken)
                 return response
             } else if (response?.data?.msg === 'refreshToken 재발급') {
