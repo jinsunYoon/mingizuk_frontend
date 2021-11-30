@@ -90,75 +90,67 @@ const CharacterModal = () => {
                 )
             }
 
-            {setModalState && (
+            {modalState && (
                 <div className="modal-container">
-                    {modalState && (
-                        <div
-                            className="modal-bg"
-                            onClick={() => setModalState(false)}
-                        >
-                            <div className="modal">
-                                <h3 className="charName">
-                                    <span className="color name">
-                                        {charName !== '' &&
-                                            charName == '라이온' &&
-                                            '밍기'}
-                                        {charName !== '' &&
-                                            charName == '무지' &&
-                                            '무너'}
-                                        {charName !== '' &&
-                                            charName == '제이지' &&
-                                            '몽실이'}
-                                    </span>
-                                    가 찾아왔어요!
-                                    <br />
-                                    <span>
-                                        생성한 캐릭터는 획득한{' '}
-                                        <span className="color">포인트</span>에
-                                        따라{' '}
-                                        <span className="color">3단계</span>로
-                                        진화합니다!
-                                    </span>
-                                </h3>
+                    <div className="modal" onClick={() => setModalState(false)}>
+                        <h3 className="charName">
+                            <span className="color name">
+                                {charName !== '' &&
+                                    charName == '라이온' &&
+                                    '밍기'}
+                                {charName !== '' &&
+                                    charName == '무지' &&
+                                    '무너'}
+                                {charName !== '' &&
+                                    charName == '제이지' &&
+                                    '몽실이'}
+                            </span>
+                            가 찾아왔어요!
+                        </h3>
+                        <div className="subTitle">
+                            <span>
+                                생성한 캐릭터는 획득한{' '}
+                                <span className="color">포인트</span>에 따라{' '}
+                                <span className="color">3단계</span>로
+                                진화합니다!
+                            </span>
+                        </div>
 
-                                <div className="charlevelbox">
-                                    <div className="charlevel">
-                                        <span>Lv.1</span>
-                                        <br />
-                                        {charLv1Select()}
-                                    </div>
+                        <div className="charlevelbox">
+                            <div className="charlevel">
+                                <span>Lv.1</span>
+                                <br />
+                                {charLv1Select()}
+                            </div>
 
-                                    <div className="charlevel">
-                                        <span>Lv.4</span>
-                                        <br />
-                                        <img src={charEx[0]} />
-                                    </div>
-                                    <div className="charlevel">
-                                        <span>Lv.7</span>
-                                        <br />
-                                        <img src={charEx[1]} />
-                                    </div>
-                                </div>
-                                <div className="newchar">
-                                    {charLv1Select()}
-                                    <p>
-                                        이 슬라임은 세상에 나온지 얼마안돼서
-                                        <br />
-                                        궁금한게 너무나도 많은 아이랍니다!
-                                        <br /> 함께라면 기적을 일으킬 수 있겠죠?
-                                    </p>
-                                </div>
-                                <div
-                                    className="close-btn"
-                                    onClick={() => {
-                                        setModalState(false)
-                                    }}
-                                >
-                                    밍기적 일으키러 가기
-                                </div>
+                            <div className="charlevel">
+                                <span>Lv.4</span>
+                                <br />
+                                <img src={charEx[0]} />
+                            </div>
+                            <div className="charlevel">
+                                <span>Lv.7</span>
+                                <br />
+                                <img src={charEx[1]} />
                             </div>
                         </div>
-                    )}
+                        <div className="newchar">
+                            {charLv1Select()}
+                            <p>
+                                세상에 나온지 얼마 안돼서 궁금한 게 너무나도
+                                많은 아이랍니다! <br />
+                                함께라면 기적을 일으킬 수 있겠죠?
+                            </p>
+                        </div>
+                        <div
+                            className="close-btn"
+                            onClick={() => {
+                                setModalState(false)
+                            }}
+                        >
+                            밍기적 일으키러 가기
+                        </div>
+                    </div>
                 </div>
             )}
         </>
