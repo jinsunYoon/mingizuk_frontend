@@ -74,7 +74,18 @@ const MoimWritePost = () => {
                             icon: 'error',
                             title: '위치를 입력해주세요.',
                         })
-
+                        return
+                    } else if (contents.length > 500) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: '내용은 500자 미만으로 입력 가능합니다.',
+                        })
+                        return
+                    } else if (title.length > 30) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: '제목은 30자 이내로 입력 가능합니다.',
+                        })
                         return
                     }
                     dispatch(moimCreateMD(req))
@@ -117,6 +128,18 @@ const MoimWritePost = () => {
                     title: '위치를 입력해주세요.',
                 })
                 return
+            } else if (contents.length > 500) {
+                Toast.fire({
+                    icon: 'error',
+                    title: '내용은 500자 이내로 입력 가능합니다.',
+                })
+                return
+            } else if (title.length > 30) {
+                Toast.fire({
+                    icon: 'error',
+                    title: '제목은 30자 이내로 입력 가능합니다.',
+                })
+                return
             }
             dispatch(moimCreateMD(req))
         }
@@ -132,7 +155,11 @@ const MoimWritePost = () => {
                     onChange={(e) => setTitle(e.target.value)}
                 />
                 <h4 className="post-subtitle">모임 내용</h4>
-                <textarea onChange={(e) => setContents(e.target.value)} />
+                <textarea
+                    onChange={(e) => {
+                        setContents(e.target.value)
+                    }}
+                />
                 <h4 className="post-subtitle">모임 위치 설정</h4>
                 <MapSearch />
                 <h4 className="post-subtitle">모임 기간 설정</h4>
