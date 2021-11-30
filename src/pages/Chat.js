@@ -192,32 +192,23 @@ const Chat = () => {
     return (
         <>
             <div
+                className="notice-warp"
                 onClick={() => {
                     socketMoim.emit('leaveRoom', userNick, roomId)
                 }}
             >
                 <Header name="참여자 채팅" type="back" />
-                {noticeContent !== '' && (
-                    <button
-                        className="chat-notice-icon"
-                        onClick={() =>
-                            noticeStatus
-                                ? setNoticeStatue(false)
-                                : setNoticeStatue(true)
-                        }
-                    >
-                        <Icon icon="notice" size="24px" />
-                    </button>
-                )}
                 {noticeContent !== '' && noticeStatus && (
-                    <div className="chat-notice">
-                        <div style={{ display: 'flex' }}>
-                            <span>모임장 공지</span>
-                            <p>{noticeContent}</p>
-                        </div>
-                        <div className="chat-notice-option-btn">
-                            <div onClick={() => setNoticeOptStatus(true)}>
-                                ...
+                    <div className="notice-warp">
+                        <div className="chat-notice">
+                            <div style={{ display: 'flex' }}>
+                                <span>모임장 공지</span>
+                                <p>{noticeContent}</p>
+                            </div>
+                            <div className="chat-notice-option-btn">
+                                <div onClick={() => setNoticeOptStatus(true)}>
+                                    ...
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -225,6 +216,16 @@ const Chat = () => {
             </div>
 
             <div className="chat-warp">
+                <button
+                    className="chat-notice-icon"
+                    onClick={() =>
+                        noticeStatus
+                            ? setNoticeStatue(false)
+                            : setNoticeStatue(true)
+                    }
+                >
+                    <Icon icon="notice" size="24px" />
+                </button>
                 <section className="chat-zone" ref={chatzoneRef}>
                     {messageArray.length > 0 &&
                         messageArray.map((msg, idx) => (
