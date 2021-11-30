@@ -5,9 +5,11 @@
 .next-btn {
     @include primary-btn();
     @include text-style-14(1rem, 0.009, $white);
-    @media screen and (min-width: 768px) {
-        @include pos-center-x();
-    }
+    @include pos-center-x(fixed);
+    bottom: 0;
+    // @media screen and (min-width: 768px) {
+    //     @include pos-center-x(fixed);
+    // }
 }
 
 .routine-container {
@@ -27,6 +29,9 @@
         @include text-style-14(1.5rem, auto, inherit);
         font-weight: 500;
         margin: 0.938rem 0;
+    }
+    &:last-child {
+        margin-bottom: 4rem;
     }
 }
 

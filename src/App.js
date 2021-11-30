@@ -33,7 +33,6 @@ const App = () => {
         '/moim',
         '/main',
         '/history',
-        'routine/mypage',
         '/users',
         '/users/info',
         '/users/collection',
