@@ -78,7 +78,7 @@ const MoimUpdateWrite = () => {
                     value={contents}
                 />
                 <h4 className="post-subtitle">모임 위치 수정</h4>
-                <MapSearch />
+                <MapSearch mapUpdate="true" />
                 <h4 className="post-subtitle">모임 날짜 수정</h4>
                 <div className="date-container">
                     <DatePicker
