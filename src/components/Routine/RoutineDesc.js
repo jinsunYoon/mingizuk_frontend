@@ -68,21 +68,27 @@ const RoutineDesc = (props) => {
     })
 
     const resetRoutine = (routineId) => {
-        swal({
+        Swal.fire({
             text: '진행중이던 루틴을 초기화 하시겠습니까?',
-            buttons: true,
-            dangerMode: true,
+            showCancelButton: true,
+            confirmButtonColor: '#6B76FF',
+            cancelButtonColor: '#DEDEDE',
+            confirmButtonText: '삭제',
+            cancelButtonText: '취소',
+            width: '30rem',
+            height: '15rem',
+            reverseButtons: true,
         }).then((willDelete) => {
             if (willDelete) {
                 dispatch(actionResetMD(routineId))
-                const data = getTempRoutineId
-
+                const data = getRoutineId
+                console.log('data', data)
+                dispatch(setMainRoutineMD(data))
                 dispatch(setResult([]))
                 dispatch(setFakeResult([]))
-                dispatch(setMainRoutineMD(data))
                 Toast.fire({
                     icon: 'success',
-                    title: '메인루틴으로 설정되었습니다',
+                    title: '메인루틴으로 변경되었습니다.',
                 })
                 history.push('/')
             } else return
@@ -110,6 +116,10 @@ const RoutineDesc = (props) => {
                                         setTempRoutineId(
                                             routine?.Actions[0].routineId
                                         )
+                                    )
+                                    console.log(
+                                        '루틴선택',
+                                        routine?.Actions[0].routineId
                                     )
                                 }
                             }}
@@ -180,6 +190,10 @@ const RoutineDesc = (props) => {
                                                 routine?.Actions[0].routineId
                                             )
                                         )
+                                        console.log(
+                                            '프리셋선택',
+                                            routine?.Actions[0].routineId
+                                        )
                                     }
                                 }}
                             >
@@ -222,6 +236,7 @@ const RoutineDesc = (props) => {
                                 const routineId =
                                     mainRoutine.Actions.length > 0 &&
                                     mainRoutine.Actions[0].routineId
+                                console.log('바꼈나', routineId)
                                 dispatch(setRoutineId(routineId))
                                 resetRoutine(routineId)
                             }
