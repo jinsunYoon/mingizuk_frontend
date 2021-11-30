@@ -359,7 +359,7 @@ const PostDesc = () => {
                             <div
                                 className="moim-post-box"
                                 onClick={() => {
-                                    history.push(`/moim/detail/${el?.moimId}`)
+                                    history.push(`/moim/detail/${el?.id}`)
                                 }}
                             >
                                 <div className="post-info">

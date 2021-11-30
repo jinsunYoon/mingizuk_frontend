@@ -12,6 +12,7 @@
     .contents {
         max-width: $tablet;
         padding: 0;
+        width: 100%;
 
         .user-profile {
             @include flexbox();
