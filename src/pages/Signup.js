@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
+import '../styles/auth/auth.scss'
 import { useDispatch } from 'react-redux'
 import clsx from 'clsx'
 import { history } from '../redux/store'
 import { signupMD } from '../redux/async/user'
-import '../styles/auth/auth.scss'
 import Swal from 'sweetalert2'
 
 const Toast = Swal.mixin({

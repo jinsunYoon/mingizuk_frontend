@@ -11,6 +11,7 @@ import { getToken } from '../shared/utils'
 import Header from '../components/Header'
 import { useMutation, useQuery } from 'react-query'
 import Icon from '../components/icons/Icon'
+import clsx from 'clsx'
 
 const socketMoim = socketIOClient('https://mingijuk.shop/chat')
 
@@ -216,17 +217,25 @@ const Chat = () => {
             </div>
 
             <div className="chat-warp">
-                <button
-                    className="chat-notice-icon"
-                    onClick={() =>
-                        noticeStatus
-                            ? setNoticeStatue(false)
-                            : setNoticeStatue(true)
-                    }
+                {noticeContent !== '' && (
+                    <button
+                        className="chat-notice-icon"
+                        onClick={() =>
+                            noticeStatus
+                                ? setNoticeStatue(false)
+                                : setNoticeStatue(true)
+                        }
+                    >
+                        <Icon icon="notice" size="24px" color="white" />
+                    </button>
+                )}
+                <section
+                    className={clsx(
+                        'chat-zone',
+                        !noticeStatus && noticeContent !== '' && 'chat-zone-b'
+                    )}
+                    ref={chatzoneRef}
                 >
-                    <Icon icon="notice" size="24px" />
-                </button>
-                <section className="chat-zone" ref={chatzoneRef}>
                     {messageArray.length > 0 &&
                         messageArray.map((msg, idx) => (
                             <div key={idx}>

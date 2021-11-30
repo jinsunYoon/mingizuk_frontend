@@ -106,7 +106,7 @@ const MapSearch = () => {
                     setMap(true)
                 }}
             >
-                <Icon icon={'create'} size={13} />
+                {/* <Icon icon={'create'} size={13} /> */}
                 {reset && getPlace ? (
                     <div style={{ color: 'black' }}>
                         {getPlace} - {getAddress}

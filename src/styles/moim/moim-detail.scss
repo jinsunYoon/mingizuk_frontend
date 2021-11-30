@@ -109,14 +109,18 @@
     button {
         margin-top: 1rem !important;
         &:hover,
-        active {
-            opacity: 80%;
+        &:active {
+            opacity: 85%;
         }
     }
     .leave {
         background-color: $white;
         border: 1px solid $primary;
         color: $primary;
+        &:hover,
+        &:active {
+            opacity: 85%;
+        }
     }
 }
 
@@ -250,5 +254,18 @@
                 color: $white;
             }
         }
+    }
+}
+
+.not-allowed {
+    cursor: not-allowed !important;
+}
+
+.post-detail-btn {
+    width: 100vw !important;
+    max-width: 768px !important;
+    &:hover,
+    &:active {
+        opacity: 85%;
     }
 }
