@@ -22,6 +22,10 @@ const MyRoutine = () => {
     const optInfo = useSelector((state) => state.routine.info)
     const dispatch = useDispatch()
     const mainRoutine = useSelector((state) => state.setAction.mainRoutine)
+    const charList = useSelector((state) => state.character.charList)
+    const curChara =
+        charList.length > 0 && charList[charList.length - 1].charName
+
     React.useEffect(() => {
         dispatch(changeNav('routine'))
     }, [])
@@ -41,12 +45,14 @@ const MyRoutine = () => {
                         select={status}
                     />
                     <RoutineDesc select={status} />
-                    <button
-                        className="add-btn"
-                        onClick={() => history.push('/routine/add')}
-                    >
-                        +
-                    </button>
+                    {curChara && (
+                        <button
+                            className="add-btn"
+                            onClick={() => history.push('/routine/add')}
+                        >
+                            +
+                        </button>
+                    )}
                     {optionStatus && (
                         <div
                             className="option-background"
