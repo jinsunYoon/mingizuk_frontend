@@ -193,21 +193,24 @@ const PostDesc = () => {
     const filter_data_all = useSelector((state) => state.moim.filter)
 
     const sortarr = () => {
-        let temp = [...posts]
-        temp.sort(function (a, b) {
-            return (
-                new Date(b.createdAt).getTime() -
-                new Date(a.createdAt).getTime()
-            )
-        })
-        setPosts(temp)
+        // let temp = [...posts]
+        // temp.sort(function (a, b) {
+        //     return (
+        //         new Date(b.createdAt).getTime() -
+        //         new Date(a.createdAt).getTime()
+        //     )
+        // })
+        // setPosts(temp)
+        console.log(posts)
     }
 
     React.useEffect(() => {
         setPosts(post_data_all)
         if (filter_data_all?.length > 0) {
-            sortarr()
             setPosts(filter_data_all)
+
+            sortarr()
+            console.log(posts)
         } else if (filter_data_all === '') {
             filterState && setPosts('')
         }
@@ -286,7 +289,16 @@ const PostDesc = () => {
                         </div>
                     )}
                 </div>
-
+                <button
+                    className="all-btn filter-btn"
+                    onClick={() => {
+                        setFilterTextState(false)
+                        setFilterState(false)
+                        setPosts(post_data_all)
+                    }}
+                >
+                    전체보기
+                </button>
                 <button
                     className="latest-filter-btn filter-btn"
                     onClick={() => {
