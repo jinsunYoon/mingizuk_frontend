@@ -83,6 +83,7 @@ const moimSlice = createSlice({
             state.moim_all = ref_moim_post
         },
         [moimDetailMD.fulfilled]: (state, { payload }) => {
+            console.log('<>', payload)
             state.moim_detail = payload.data.targetMoim
             state.detail_loading = true
         },
@@ -92,11 +93,13 @@ const moimSlice = createSlice({
 
             if (state.moim_detail !== '') {
                 state.moim_detail.Likes.push({ userId: Number(likeUser) })
-                state.moim_all.filter(
-                    (post) =>
-                        post.id === Number(likePost) &&
-                        post.Likes.push({ userId: Number(likeUser) })
-                )
+                if (state.moim_all?.length !== undefined) {
+                    state.moim_all.filter(
+                        (post) =>
+                            post.id === Number(likePost) &&
+                            post.Likes.push({ userId: Number(likeUser) })
+                    )
+                }
             } else {
                 state.moim_all.filter(
                     (post) =>
@@ -114,14 +117,16 @@ const moimSlice = createSlice({
                 )
                 state.moim_detail.Likes = result
 
-                state.moim_all.map((post) => {
-                    if (post.id === Number(unlikePost)) {
-                        const temp = post.Likes.filter(
-                            (like) => like.userId !== Number(unlikeUser)
-                        )
-                        post.Likes = temp
-                    }
-                })
+                if (state?.moim_all?.length !== undefined) {
+                    state.moim_all.map((post) => {
+                        if (post.id === Number(unlikePost)) {
+                            const temp = post.Likes.filter(
+                                (like) => like.userId !== Number(unlikeUser)
+                            )
+                            post.Likes = temp
+                        }
+                    })
+                }
             } else {
                 state.moim_all.map((post) => {
                     if (post.id === Number(unlikePost)) {

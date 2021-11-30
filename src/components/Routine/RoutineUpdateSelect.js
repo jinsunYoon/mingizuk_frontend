@@ -19,6 +19,7 @@ const RoutineUpdateSelect = (props) => {
             setDesc('stretching')
         }
     }, [select])
+    console.log(updateActions)
 
     // * for pre_select_check
     const myset = useSelector((state) => state.routine.myRoutine)

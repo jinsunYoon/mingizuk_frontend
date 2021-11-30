@@ -39,7 +39,6 @@ const RoutineDesc = (props) => {
     const charList = useSelector((state) => state.character.charList)
     const curChara =
         charList.length > 0 && charList[charList.length - 1].charName
-    console.log('컬차라', curChara)
 
     React.useEffect(() => {
         if (select === 'first') {
