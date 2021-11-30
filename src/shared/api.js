@@ -2,6 +2,19 @@ import axios from 'axios'
 import { useMutation, useQuery } from 'react-query'
 import { history } from '../redux/store'
 import { getToken } from './utils'
+import Swal from 'sweetalert2'
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'center',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    },
+})
 
 const BASE_URL = 'https://mingijuk.shop'
 
@@ -53,8 +66,18 @@ instanceSign.interceptors.response.use(
         return response
     },
     async (error) => {
-        return
-        // window.alert(error.response.data.msg)
+        if (error.response.data.msg.includes('이미 존재하는 이메일')) {
+            Toast.fire({
+                icon: 'error',
+                title: '이미 존재하는 이메일입니다.',
+            })
+            return
+        } else if (error.response.data.msg.includes('이미 존재하는 닉네임')) {
+            Toast.fire({
+                icon: 'error',
+                title: '이미 존재하는 닉네임입니다.',
+            })
+        }
     }
 )
 

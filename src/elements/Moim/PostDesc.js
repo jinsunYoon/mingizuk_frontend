@@ -184,8 +184,6 @@ const PostDesc = () => {
         전라남도: ['목포시', '여수시', '순천시', '나주시', '광양시'],
     }
 
-    const [liked, setLiked] = useState('')
-    const [latest, setLatest] = useState('')
     const [location1, setLocation1] = useState('')
     const [location2, setLocation2] = useState('')
     const [filterState, setFilterState] = useState(false)
@@ -319,13 +317,14 @@ const PostDesc = () => {
                     <div key={idx} className="post-warp">
                         {el?.imgSrc === null ? (
                             <div
+                                key={idx}
                                 className="moim-post-box"
                                 onClick={() => {
                                     history.push(`/moim/detail/${el?.id}`)
                                 }}
                             >
                                 <div className="post-info">
-                                    <p className="location">
+                                    <div className="location">
                                         <Icon
                                             icon="place"
                                             size="20px"
@@ -334,7 +333,7 @@ const PostDesc = () => {
                                         {el?.location?.split(' ')[0]}{' '}
                                         {el?.location?.split(' ')[1]}{' '}
                                         {el?.location?.split(' ')[2]}{' '}
-                                    </p>
+                                    </div>
                                     <span className="location">
                                         <Icon
                                             icon="user-person"
@@ -363,7 +362,7 @@ const PostDesc = () => {
                                 }}
                             >
                                 <div className="post-info">
-                                    <p className="location">
+                                    <div className="location">
                                         <Icon
                                             icon="place"
                                             size="20px"
@@ -372,7 +371,7 @@ const PostDesc = () => {
                                         {el?.location?.split(' ')[0]}{' '}
                                         {el?.location?.split(' ')[1]}{' '}
                                         {el?.location?.split(' ')[2]}{' '}
-                                    </p>
+                                    </div>
                                     <span className="location">
                                         <Icon
                                             icon="user-person"
@@ -382,7 +381,7 @@ const PostDesc = () => {
                                         {el?.MoimUsers?.length}
                                     </span>
                                 </div>
-                                <p className="title">{el?.title}</p>
+                                <div className="title">{el?.title}</div>
                                 <div className="imgbox">
                                     <div
                                         className="divimg"
