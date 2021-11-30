@@ -16,13 +16,15 @@ const MoimUpdateWrite = () => {
     const beforeImgSrc = refPost?.imgSrc
     const moimId = refPost?.id
 
+    console.log(refPost)
+
     // * update 할 요소들
     const [title, setTitle] = React.useState(beforeTitle)
     const [contents, setContents] = React.useState(beforeContent)
     const [selectedFile, setSelectedFile] = React.useState(null)
 
-    const [startDate, setStartDate] = React.useState(new Date())
-    const [endDate, setEndDate] = React.useState(new Date())
+    const [startDate, setStartDate] = React.useState(new Date(refPost?.startAt))
+    const [endDate, setEndDate] = React.useState(new Date(refPost?.finishAt))
 
     // * upload S3 & update
     const handleFileInput = (e) => {
@@ -84,10 +86,12 @@ const MoimUpdateWrite = () => {
                     <DatePicker
                         selected={startDate}
                         onChange={(date) => setStartDate(date)}
+                        minDate={new Date()}
                     />
                     <DatePicker
                         selected={endDate}
                         onChange={(date) => setEndDate(date)}
+                        minDate={new Date()}
                     />
                 </div>
                 <h4 className="post-subtitle">이미지 수정</h4>

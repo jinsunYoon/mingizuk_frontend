@@ -33,6 +33,18 @@ const ProfileUpdate = () => {
     const curChara =
         charList.length > 0 && charList[charList.length - 1].charName
 
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+    })
+
     const logout = () => {
         Swal.fire({
             text: '로그아웃 하시겠어요 ?',
@@ -183,22 +195,34 @@ const ProfileUpdate = () => {
                 }
                 _onClick={() => {
                     const data = { newNickName, newPwd }
-                    Swal.fire({
-                        text: '회원 정보를 수정하시겠어요 ?',
-                        showCancelButton: true,
-                        confirmButtonColor: '#6B76FF',
-                        cancelButtonColor: '#DEDEDE',
-                        confirmButtonText: '참여',
-                        cancelButtonText: '취소',
-                        width: '30rem',
-                        height: '15rem',
-                        reverseButtons: true,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            dispatch(userInfoMD(data))
-                            history.push('/users')
-                        } else return
-                    })
+                    if (newNickName.length > 9) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: '닉네임은 8자 이하로 가능합니다.',
+                        })
+                    } else if (newPwd.length < 7 || newPwd.length > 17) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: '비밀번호는 8자에서 16글자 입니다.',
+                        })
+                    } else {
+                        Swal.fire({
+                            text: '회원 정보를 수정하시겠어요 ?',
+                            showCancelButton: true,
+                            confirmButtonColor: '#6B76FF',
+                            cancelButtonColor: '#DEDEDE',
+                            confirmButtonText: '참여',
+                            cancelButtonText: '취소',
+                            width: '30rem',
+                            height: '15rem',
+                            reverseButtons: true,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                dispatch(userInfoMD(data))
+                                history.push('/users')
+                            } else return
+                        })
+                    }
                 }}
             >
                 수정하기

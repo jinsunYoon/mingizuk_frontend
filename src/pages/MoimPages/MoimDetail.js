@@ -92,8 +92,22 @@ const MoimDetail = () => {
             contents,
             writer: user_nick,
         }
-        dispatch(moimReviewCreateMD(data))
-        setContents('')
+        if (contents.length > 50) {
+            Toast.fire({
+                icon: 'error',
+                title: '리뷰는 50자까지 가능합니다',
+            })
+            return
+        } else if (contents.length === 0) {
+            Toast.fire({
+                icon: 'error',
+                title: '댓글 내용을 입력해주세요',
+            })
+            return
+        } else {
+            dispatch(moimReviewCreateMD(data))
+            setContents('')
+        }
     }
 
     // * join Moim
