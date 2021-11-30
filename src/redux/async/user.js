@@ -28,8 +28,6 @@ export const loginMD = createAsyncThunk(
         try {
             const response = await loginAPI(data)
             if (response) {
-                console.log('<><>', response)
-
                 return response
             }
         } catch (err) {
@@ -70,7 +68,6 @@ export const userInfoMD = createAsyncThunk(
         try {
             const response = await userInfoAPI(data)
             if (response) {
-                console.log('userInfoMd', data)
                 return data
             }
         } catch (err) {

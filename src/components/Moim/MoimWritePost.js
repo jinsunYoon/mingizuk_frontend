@@ -56,7 +56,6 @@ const MoimWritePost = () => {
                             getAddress.split(' ')[1]
                         }`,
                     }
-                    console.log('???', req.location)
 
                     if (title === '') {
                         Toast.fire({

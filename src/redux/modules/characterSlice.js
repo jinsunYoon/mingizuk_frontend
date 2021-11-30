@@ -93,9 +93,7 @@ const characterSlice = createSlice({
             )
             state.charList = charData
         },
-        [getCharacterMD.rejected]: (state, { payload }) => {
-            console.log('erromsg')
-        },
+        [getCharacterMD.rejected]: (state, { payload }) => {},
 
         //* 캐릭터 뽑기
         [postCharacterMD.fulfilled]: (state, { payload }) => {

@@ -11,6 +11,7 @@ import { getToken } from '../shared/utils'
 import Header from '../components/Header'
 import { useMutation, useQuery } from 'react-query'
 import Icon from '../components/icons/Icon'
+import clsx from 'clsx'
 
 const socketMoim = socketIOClient('https://mingijuk.shop/chat')
 
@@ -66,19 +67,15 @@ const Chat = () => {
         instance
             .get(`/api/moims/${moimId}/${roomId}`)
             .then(({ data }) => {
-                console.log('[][]', data)
                 setMessageArray(data?.chats)
             })
-            .catch((err) => {
-                console.log('[]', err)
-            })
+            .catch((err) => {})
     )
     const getHistoryNotice = useQuery(['getHistoryNotice', roomId], () =>
         instance
             .get(`/api/moims/${moimId}/${roomId}/notice`)
             .then(({ data }) => {
                 if (data.targetNotice !== null) {
-                    console.log('[][]]notnull', data)
                     setNoticeContent(data.targetNotice.contents)
                     setNoticeId(data.targetNotice.id)
                 }
@@ -131,7 +128,6 @@ const Chat = () => {
                         title: data.msg,
                     })
                 } else if (data.name !== 'SERVER') {
-                    console.log('<>update', data)
                     setNewMsgArray((newMsgArray) => [...newMsgArray, data])
                 }
             }
@@ -148,8 +144,8 @@ const Chat = () => {
             .post(`/api/moims/${moimId}/${roomId}`, {
                 contents: msgValue,
             })
-            .then((res) => console.log('<>res', res))
-            .catch((error) => console.log('<>error', error))
+            .then((res) => {})
+            .catch((error) => {})
         socketMoim.emit('sendMsg', userNick, msgValue, roomId)
         setMsgValue('')
     }
@@ -172,10 +168,9 @@ const Chat = () => {
                         })
                         .then((res) => {
                             setNoticeContent(noticeValue)
-                            console.log('[][][][][]', res)
                             setNoticeId(res.data.noticeId)
                         })
-                        .catch((error) => console.log('<>error', error))
+                        .catch((error) => {})
                 }
             })
         } else {
@@ -198,11 +193,30 @@ const Chat = () => {
     return (
         <>
             <div
+                className="notice-warp"
                 onClick={() => {
                     socketMoim.emit('leaveRoom', userNick, roomId)
                 }}
             >
                 <Header name="참여자 채팅" type="back" />
+                {noticeContent !== '' && noticeStatus && (
+                    <div className="notice-warp">
+                        <div className="chat-notice">
+                            <div style={{ display: 'flex' }}>
+                                <span>모임장 공지</span>
+                                <p>{noticeContent}</p>
+                            </div>
+                            <div className="chat-notice-option-btn">
+                                <div onClick={() => setNoticeOptStatus(true)}>
+                                    ...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            <div className="chat-warp">
                 {noticeContent !== '' && (
                     <button
                         className="chat-notice-icon"
@@ -212,26 +226,16 @@ const Chat = () => {
                                 : setNoticeStatue(true)
                         }
                     >
-                        <Icon icon="notice" size="24px" />
+                        <Icon icon="notice" size="24px" color="white" />
                     </button>
                 )}
-                {noticeContent !== '' && noticeStatus && (
-                    <div className="chat-notice">
-                        <div style={{ display: 'flex' }}>
-                            <span>모임장 공지</span>
-                            <p>{noticeContent}</p>
-                        </div>
-                        <div className="chat-notice-option-btn">
-                            <div onClick={() => setNoticeOptStatus(true)}>
-                                ...
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </div>
-
-            <div className="chat-warp">
-                <section className="chat-zone" ref={chatzoneRef}>
+                <section
+                    className={clsx(
+                        'chat-zone',
+                        !noticeStatus && noticeContent !== '' && 'chat-zone-b'
+                    )}
+                    ref={chatzoneRef}
+                >
                     {messageArray.length > 0 &&
                         messageArray.map((msg, idx) => (
                             <div key={idx}>
@@ -289,7 +293,6 @@ const Chat = () => {
                                         <p
                                             className="chat-content"
                                             onClick={() => {
-                                                console.log('[][][]', 'click')
                                                 userNick === host &&
                                                     postNotice(message?.msg)
                                             }}

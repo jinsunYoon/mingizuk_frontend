@@ -140,7 +140,7 @@ const Onboarding = () => {
                                 justifyContent: 'center',
                             }}
                             onClick={() => {
-                                history.push('/signup')
+                                history.push('/login')
                             }}
                         >
                             밍기적 시작하기

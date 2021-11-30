@@ -11,7 +11,7 @@ const MyJoin = () => {
     const loginuserNick = useSelector(
         (state) => state.user.userInfo.userNickname
     )
-    console.log('>>>', 'join', join_list)
+
     React.useEffect(() => {
         dispatch(myMoimJoinMD())
     }, [])

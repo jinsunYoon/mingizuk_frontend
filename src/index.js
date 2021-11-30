@@ -15,7 +15,6 @@ const queryClient = new QueryClient()
 ReactDOM.render(
     <Provider store={store}>
         <QueryClientProvider client={queryClient}>
-            <ReactQueryDevtools initialIsOpen={false} />
             <ReactPWAInstallProvider enableLogging>
                 <App />
             </ReactPWAInstallProvider>
