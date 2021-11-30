@@ -20,9 +20,6 @@ const MyLike = () => {
         (state) => state.user.userInfo.userNickname
     )
 
-    console.log('>>>', like_list)
-    console.log
-
     React.useEffect(() => {
         dispatch(myMoimLikeMD())
     }, [])

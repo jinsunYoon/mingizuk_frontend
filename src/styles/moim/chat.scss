@@ -3,6 +3,7 @@
 .chat-warp {
     width: 100vw;
     height: 100%;
+    @include flexbox();
 }
 
 .chat-zone {
@@ -11,6 +12,16 @@
     padding: 0 1.2rem;
     padding-top: 4rem;
     padding-bottom: 4rem;
+    max-width: 768px;
+}
+
+.chat-zone-b {
+    @include column-flexbox(center, between);
+    width: 100vw;
+    padding: 0 1.2rem;
+    padding-top: 7rem;
+    padding-bottom: 4rem;
+    max-width: 768px;
 }
 
 .chat-others-container,
@@ -73,6 +84,7 @@
     position: fixed;
     bottom: 0;
     border-radius: 0.5rem;
+    max-width: 768px;
     input {
         width: 85%;
         height: inherit;
@@ -90,15 +102,24 @@
     }
 }
 
+.notice-warp {
+    @include flexbox(center, center);
+    position: relative;
+    width: 100vw;
+    margin-bottom: 3rem;
+}
+
 .chat-notice {
     @include flexbox(start, center);
     padding-left: 1rem;
-    position: fixed;
-    width: 100vw;
+    @include pos-center(fixed);
+    width: 100%;
+    max-width: 768px;
     background-color: $white;
     height: 3rem;
-    top: 3rem;
+    top: 4.5rem;
     border-bottom: 1px solid #eeeeee;
+
     span {
         @include text-style-12(1.5rem, 0.15px, $black);
         font-weight: 700;
@@ -110,19 +131,30 @@
     button {
         position: absolute;
         right: 3rem;
+        cursor: pointer;
     }
 }
 
 .chat-notice-icon {
+    right: 0;
+    @include flexbox(center, center);
     position: fixed;
-    height: 3rem;
-    @include flexbox(end, center);
-    right: 1rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(650%, 50%);
     width: 3rem;
+    height: 3rem;
     border: none;
-    background-color: $white;
-
-    z-index: 5;
+    background-color: $primary;
+    top: 5rem;
+    border-radius: 3rem;
+    cursor: pointer;
+    @media screen and (max-width: 740px) {
+        position: fixed;
+        transform: translate(0, 0);
+        top: 11%;
+        left: 85%;
+    }
 }
 
 .chat-notice-option-btn {
@@ -132,4 +164,5 @@
     padding-left: 1rem;
     height: 3rem;
     width: 5rem;
+    cursor: pointer;
 }

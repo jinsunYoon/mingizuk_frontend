@@ -15,7 +15,6 @@ const RoutineUpdateCount = () => {
         .routineName
 
     const [name, setName] = React.useState(myRoutineRef)
-    console.log(name)
 
     const updateRoutine = () => {
         const data = {
@@ -24,7 +23,7 @@ const RoutineUpdateCount = () => {
             actions: actionSet,
             isMain: false,
         }
-        console.log(data)
+
         dispatch(myRoutineUpdateMD(data))
         dispatch(resetAction())
     }

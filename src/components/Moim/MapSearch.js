@@ -6,7 +6,7 @@ import { FlexRow, ButtonOutlined, ButtonFill } from '../../elements/index'
 import { history } from '../../redux/store'
 import Icon from '../../components/icons/Icon'
 
-const MapSearch = () => {
+const MapSearch = (props) => {
     const [InputText, setInputText] = useState('')
     const [Place, setPlace] = useState('')
     const [map, setMap] = useState(false)
@@ -14,6 +14,7 @@ const MapSearch = () => {
 
     const getAddress = useSelector((state) => state.moim.address)
     const getPlace = useSelector((state) => state.moim.place)
+    const post_data = useSelector((state) => state?.moim?.moim_detail)
 
     const onChange = (e) => {
         setInputText(e.target.value)
@@ -106,11 +107,13 @@ const MapSearch = () => {
                     setMap(true)
                 }}
             >
-                <Icon icon={'create'} size={13} />
+                {/* <Icon icon={'create'} size={13} /> */}
                 {reset && getPlace ? (
                     <div style={{ color: 'black' }}>
                         {getPlace} - {getAddress}
                     </div>
+                ) : props.mapUpdate && post_data ? (
+                    <div style={{ color: 'black' }}>{post_data?.location}</div>
                 ) : (
                     '위치를 선택해주세요'
                 )}

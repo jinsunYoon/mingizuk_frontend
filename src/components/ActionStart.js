@@ -43,7 +43,6 @@ const ActionStart = (props) => {
     const getFakeResult = useSelector(
         (state) => state?.actionComplete?.fakeResult
     )
-    console.log('가짜루틴완료', getFakeResult)
 
     const charList = useSelector((state) => state.character.charList)
     const curChara =
@@ -69,7 +68,6 @@ const ActionStart = (props) => {
 
     const successAction = () => {
         const data = { actionId: getActionId, routineId: getRoutineId }
-        console.log('동작컴플리트데이터', data)
 
         dispatch(actionCompleteMD(data))
         setComplete(false)
@@ -81,7 +79,6 @@ const ActionStart = (props) => {
         const thisRoutineId = mainRoutine?.Actions[num]?.routineId
         dispatch(setActionId(thisActionId))
         dispatch(setRoutineId(thisRoutineId))
-        console.log('this 동작아디, 루틴아디', thisActionId, thisRoutineId)
     }
 
     const imgGif = (name) => {
@@ -882,7 +879,6 @@ const ActionStart = (props) => {
                         const routineId =
                             mainRoutine.Actions.length > 0 &&
                             mainRoutine.Actions[0].routineId
-                        console.log('루틴아이디', routineId)
                         dispatch(actionRestartMD(routineId))
                         dispatch(setResult([]))
                         dispatch(setFakeResult([]))

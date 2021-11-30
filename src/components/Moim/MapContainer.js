@@ -75,7 +75,6 @@ const MapContainer = ({ searchPlace }) => {
                 setPlaceName(place?.place_name)
                 dispatch(setPlace(place?.place_name))
                 dispatch(setAddress(place?.address_name))
-                console.log('place', place)
             })
         }
     }, [searchPlace, latitude, longitude])

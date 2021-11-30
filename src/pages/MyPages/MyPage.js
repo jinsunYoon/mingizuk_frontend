@@ -78,6 +78,16 @@ const MyPage = (props) => {
                             <span>내 모임</span>
                             <ChevronRightIcon />
                         </li>
+                        <li>
+                            <a
+                                className="error-mail"
+                                href="mailto:miraculous0006@gmail.com"
+                                target="_blank"
+                            >
+                                <span>오류 문의</span>
+                            </a>
+                            <ChevronRightIcon />
+                        </li>
                     </ul>
                 </section>
             </div>

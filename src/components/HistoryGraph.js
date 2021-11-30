@@ -39,7 +39,6 @@ const HistoryGraph = (props) => {
         if (select === 'first') {
             setGraph('action')
         } else if (select === 'second') {
-            console.log('secondfffe')
             setGraph('routine')
         } else {
             setGraph('action')

@@ -22,30 +22,22 @@ const myMoimSlice = createSlice({
         [myMoimCreateMD.fulfilled]: (state, { payload }) => {
             state.my_moims = payload.data.allMyMoims
         },
-        [myMoimCreateMD.rejected]: (state, { payload }) => {
-            console.log('errormsg')
-        },
+        [myMoimCreateMD.rejected]: (state, { payload }) => {},
 
         [myMoimJoinMD.fulfilled]: (state, { payload }) => {
             state.my_joins = payload.data.allMyMoims
         },
-        [myMoimJoinMD.rejected]: (state, { payload }) => {
-            console.log('errormsg')
-        },
+        [myMoimJoinMD.rejected]: (state, { payload }) => {},
 
         [myMoimLikeMD.fulfilled]: (state, { payload }) => {
             state.my_likes = payload.data.likedMoims
         },
-        [myMoimLikeMD.rejected]: (state, { payload }) => {
-            console.log('errormsg')
-        },
+        [myMoimLikeMD.rejected]: (state, { payload }) => {},
 
         [myMoimCommentMD.fulfilled]: (state, { payload }) => {
             state.my_comments = payload.data.myCommentList
         },
-        [myMoimCommentMD.rejected]: (state, { payload }) => {
-            console.log('errormsg')
-        },
+        [myMoimCommentMD.rejected]: (state, { payload }) => {},
     },
 })
 

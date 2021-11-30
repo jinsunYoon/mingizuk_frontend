@@ -36,6 +36,10 @@ const RoutineDesc = (props) => {
     const getFakeResult = useSelector(
         (state) => state.actionComplete.fakeResult
     )
+    const charList = useSelector((state) => state.character.charList)
+    const curChara =
+        charList.length > 0 && charList[charList.length - 1].charName
+    console.log('컬차라', curChara)
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -73,7 +77,7 @@ const RoutineDesc = (props) => {
             if (willDelete) {
                 dispatch(actionResetMD(routineId))
                 const data = getTempRoutineId
-                console.log('바꾸고싶은 루틴아디', data)
+
                 dispatch(setResult([]))
                 dispatch(setFakeResult([]))
                 dispatch(setMainRoutineMD(data))
@@ -108,10 +112,6 @@ const RoutineDesc = (props) => {
                                             routine?.Actions[0].routineId
                                         )
                                     )
-                                    console.log(
-                                        '선택한 루틴',
-                                        routine?.Actions[0].routineId
-                                    )
                                 }
                             }}
                         >
@@ -144,11 +144,19 @@ const RoutineDesc = (props) => {
                             </p>
                         </button>
                     ))}
-                    {myset?.length === 0 && (
+                    {curChara && myset?.length === 0 && (
                         <p className="no-routine">
                             아직 루틴이 없네요!
                             <br />
-                            아래 + 버튼을 눌러서 새 루틴을 만들어보세요.
+                            아래 + 버튼을 눌러서
+                            <br />새 루틴을 만들어보세요😊
+                        </p>
+                    )}
+                    {curChara === false && (
+                        <p className="no-routine">
+                            아직 캐릭터를 받지 않으셨군요!
+                            <br />
+                            홈에서 캐릭터 먼저 받아주세요😉
                         </p>
                     )}
                 </div>
@@ -172,10 +180,6 @@ const RoutineDesc = (props) => {
                                             setTempRoutineId(
                                                 routine?.Actions[0].routineId
                                             )
-                                        )
-                                        console.log(
-                                            '선택한 루틴',
-                                            routine?.Actions[0].routineId
                                         )
                                     }
                                 }}
@@ -220,7 +224,6 @@ const RoutineDesc = (props) => {
                                     mainRoutine.Actions.length > 0 &&
                                     mainRoutine.Actions[0].routineId
                                 dispatch(setRoutineId(routineId))
-                                console.log('리셋할 루틴아디', routineId)
                                 resetRoutine(routineId)
                             }
                             if (
@@ -229,7 +232,6 @@ const RoutineDesc = (props) => {
                                 typeof mainRoutine == 'undefined'
                             ) {
                                 const data = getTempRoutineId
-                                console.log('data', data)
                                 dispatch(setMainRoutineMD(data))
                                 dispatch(setResult([]))
                                 dispatch(setFakeResult([]))

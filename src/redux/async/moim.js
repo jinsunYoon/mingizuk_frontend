@@ -30,7 +30,6 @@ export const moimCreateMD = createAsyncThunk(
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -45,7 +44,6 @@ export const moimReadMD = createAsyncThunk(
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -75,7 +73,6 @@ export const moimDeleteMD = createAsyncThunk(
                 return data
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -90,7 +87,6 @@ export const moimDetailMD = createAsyncThunk(
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -105,7 +101,6 @@ export const moimLikeMD = createAsyncThunk(
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -134,7 +129,6 @@ export const moimJoinMD = createAsyncThunk(
                 return data
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -150,7 +144,6 @@ export const moimReviewCreateMD = createAsyncThunk(
                 return _data
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -166,7 +159,6 @@ export const moimDeleteReviewMD = createAsyncThunk(
                 return data
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -182,7 +174,6 @@ export const moimUpdateReviewMD = createAsyncThunk(
                 return data
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -192,13 +183,11 @@ export const moimLeaveMD = createAsyncThunk(
     'moim/leave',
     async (data, thunkAPI) => {
         try {
-            console.log(data.moimId)
             const response = await moimLeaveAPI(data)
             if (response) {
                 return data
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -209,12 +198,11 @@ export const moimLocationMD = createAsyncThunk(
     async (locationFilter, thunkAPI) => {
         try {
             const response = await moimLocationAPI(locationFilter)
-            console.log('>>>>>!', response)
+
             if (response) {
                 return response
             }
         } catch (err) {
-            console.log(err)
             return thunkAPI.rejectWithValue(err)
         }
     }
@@ -225,7 +213,7 @@ export const moimScrollMD = createAsyncThunk(
     async (lastId, thunkAPI) => {
         try {
             const response = await moimScrollAPI(lastId)
-            console.log('>>>>', response)
+
             if (response) {
                 return response
             }
@@ -240,7 +228,7 @@ export const moimLocationScrollMD = createAsyncThunk(
     async (lastId, thunkAPI) => {
         try {
             const response = await moimScrollAPI(lastId)
-            console.log('>>>>', response)
+
             if (response) {
                 return response
             }

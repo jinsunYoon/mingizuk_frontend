@@ -32,6 +32,7 @@ const MoimDetail = () => {
     const join_useres = post_data?.MoimUsers?.map(({ User }) => User.nickName)
     const is_loading = useSelector((state) => state?.moim?.detail_loading)
     const [optModalStatus, setOptModalStatus] = React.useState(false)
+
     React.useEffect(() => {
         dispatch(changeNav('routine'))
     }, [])
@@ -55,12 +56,22 @@ const MoimDetail = () => {
         }
     }, [])
 
+    const checkIsFinsih = () => {
+        return new Date(post_data?.finishAt).getTime() - new Date().getTime()
+    }
+
     // * post delete
     const deletePost = (data) => {
         Swal.fire({
             text: '게시글을 지우시겠습니까 ?',
-            buttons: true,
-            dangerMode: true,
+            showCancelButton: true,
+            confirmButtonColor: '#6B76FF',
+            cancelButtonColor: '#DEDEDE',
+            confirmButtonText: '삭제',
+            cancelButtonText: '취소',
+            width: '30rem',
+            height: '15rem',
+            reverseButtons: true,
         }).then((willDelete) => {
             if (willDelete) {
                 dispatch(moimDeleteMD(data))
@@ -171,48 +182,77 @@ const MoimDetail = () => {
                     <h6>{post_data?.title}</h6>
                     <article className="img-desc-container">
                         {post_data?.imgSrc !== null && (
-                            <img src={post_data?.imgSrc} />
+                            <div
+                                className="divimg"
+                                style={{
+                                    backgroundImage: `url(${post_data?.imgSrc})`,
+                                    marginTop: '1rem',
+                                }}
+                            ></div>
                         )}
                         <p className="detail-desc">{post_data?.contents}</p>
                     </article>
+
                     {!join_useres?.includes(user_nick) && (
-                        <button
-                            onClick={() => {
-                                const data = {
-                                    moimId: post_data?.id,
-                                    userId: post_data?.MoimUsers[0]?.userId,
-                                    nickName: user_nick,
-                                }
-                                join(data)
-                            }}
-                        >
-                            모임 참여하기
-                        </button>
-                    )}
-                    {join_useres?.includes(user_nick) && (
-                        <div className="join-user-container">
-                            <button
-                                className="join"
-                                onClick={() => {
-                                    history.push(`/moim/chat/${post_id}`)
-                                    dispatch(setChatHost(join_useres[0]))
-                                }}
-                            >
-                                <Icon
-                                    icon="message"
-                                    size="24px"
-                                    color="white"
-                                />
-                                채팅방 참여하기
-                            </button>
-                            {join_useres[0] !== user_nick && (
+                        <div>
+                            {checkIsFinsih() > 0 ? (
                                 <button
-                                    className="leave"
+                                    className="post-detail-btn"
                                     onClick={() => {
-                                        leave()
+                                        const data = {
+                                            moimId: post_data?.id,
+                                            userId: post_data?.MoimUsers[0]
+                                                ?.userId,
+                                            nickName: user_nick,
+                                        }
+                                        join(data)
                                     }}
                                 >
-                                    모임 그만하기
+                                    모임 참여하기
+                                </button>
+                            ) : (
+                                <button className="not-allowed post-detail-btn">
+                                    이미 종료된 모임입니다
+                                </button>
+                            )}
+                        </div>
+                    )}
+                    {join_useres?.includes(user_nick) && (
+                        <div>
+                            {checkIsFinsih() > 0 ? (
+                                <div className="join-user-container">
+                                    <button
+                                        className="join post-detail-btn"
+                                        onClick={() => {
+                                            history.push(
+                                                `/moim/chat/${post_id}`
+                                            )
+                                            dispatch(
+                                                setChatHost(join_useres[0])
+                                            )
+                                        }}
+                                    >
+                                        <Icon
+                                            icon="message"
+                                            size="24px"
+                                            color="white"
+                                        />
+                                        채팅방 참여하기
+                                    </button>
+                                    {join_useres[0] !== user_nick && (
+                                        <button
+                                            className="post-detail-btn"
+                                            onClick={() => {
+                                                leave()
+                                            }}
+                                        >
+                                            모임 그만하기
+                                        </button>
+                                    )}
+                                </div>
+                            ) : (
+                                <button className="not-allowed post-detail-btn">
+                                    이미 종료된 모임입니다
                                 </button>
                             )}
                         </div>

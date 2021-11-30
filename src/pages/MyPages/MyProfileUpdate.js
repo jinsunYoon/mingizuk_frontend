@@ -55,13 +55,21 @@ const ProfileUpdate = () => {
     }, [])
 
     return (
-        <>
+        <div
+            style={{
+                width: '100vw',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}
+        >
             <FlexColumn
                 _width="100%"
                 _height="false"
                 _border="none"
                 _padding={'2rem 1rem 1rem 1rem'}
                 _margin={'3rem 0 0 0'}
+                _others={'max-width:760px'}
             >
                 {curChara == '라이온' && (
                     <div
@@ -113,21 +121,6 @@ const ProfileUpdate = () => {
                         _others={'border-radius:4px'}
                         _onChange={(e) => setNewNickName(e.target.value)}
                     />
-                    {/* <Text
-                        _margin="1rem 0 0.5rem 0"
-                        _fontSize={'0.75rem'}
-                        _fontWeight={'500'}
-                    >
-                        현재 비밀번호
-                    </Text>
-                    <Input
-                        _ph="현재 비밀번호를 입력하세요"
-                        _margin="30px"
-                        _type="password"
-                        _width="100%"
-                        _others={'border-radius:4px'}
-                        _onChange={(e) => setNewPwd(e.target.value)}
-                    /> */}
                     <Text
                         _margin="1rem 0 0.5rem 0"
                         _fontSize={'0.75rem'}
@@ -150,6 +143,7 @@ const ProfileUpdate = () => {
                         height: '1rem',
                         margin: '1rem 0',
                         backgroundColor: '#EFEFEF',
+                        maxWidth: '735px',
                     }}
                 />
                 <ButtonOutlined
@@ -184,7 +178,9 @@ const ProfileUpdate = () => {
                 _margin="0px 0 4rem 0"
                 _padding={'0'}
                 _bgColor="#6B76FF"
-                _others={'position: fixed; bottom:0; height:4.1rem;'}
+                _others={
+                    'position: fixed; bottom:0; height:4.1rem;max-width:768px'
+                }
                 _onClick={() => {
                     const data = { newNickName, newPwd }
                     Swal.fire({
@@ -207,7 +203,7 @@ const ProfileUpdate = () => {
             >
                 수정하기
             </ButtonFill>
-        </>
+        </div>
     )
 }
 

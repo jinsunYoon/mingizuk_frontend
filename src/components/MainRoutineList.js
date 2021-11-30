@@ -10,12 +10,6 @@ const MainRoutineList = (props) => {
     const result = useSelector((state) => state.actionComplete.result)
 
     const actionComplete = useSelector((state) => state.actionComplete)
-    console.log('메인루틴완료', actionComplete)
-    console.log(
-        '메인루틴, result',
-        mainRoutine?.Actions?.length,
-        result?.length
-    )
 
     if (mainRoutine?.Actions?.length == result?.length) {
         return (

@@ -16,7 +16,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 const MyComment = () => {
     const dispatch = useDispatch()
     const comment_list = useSelector((state) => state.myMoim.my_comments)
-    console.log('><', 'comment', comment_list)
 
     React.useEffect(() => {
         dispatch(myMoimCommentMD())

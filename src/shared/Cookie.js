@@ -25,7 +25,6 @@ const deleteCookie = () => {
 const getToken = () => {
     const token = getCookie('token')
     if (!token) {
-        console.log('로그인을 해주세요!')
         return
     }
 
