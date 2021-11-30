@@ -49,7 +49,7 @@ const HabitTraker = () => {
         })
         return monthMap
     }
-    getExerciseData()
+    // console.log(finActions)
 
     return (
         <div className="all-container">

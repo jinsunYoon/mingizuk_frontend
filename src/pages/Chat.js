@@ -140,14 +140,21 @@ const Chat = () => {
     // ! post message ( +post api )
     const sendMessage = () => {
         if (msgValue === '') return false
-        instance
-            .post(`/api/moims/${moimId}/${roomId}`, {
-                contents: msgValue,
+        if (msgValue.length < 251) {
+            instance
+                .post(`/api/moims/${moimId}/${roomId}`, {
+                    contents: msgValue,
+                })
+                .then((res) => {})
+                .catch((error) => {})
+            socketMoim.emit('sendMsg', userNick, msgValue, roomId)
+            setMsgValue('')
+        } else {
+            Toast.fire({
+                icon: 'error',
+                title: '글자수는 250자 이하만 가능합니다.',
             })
-            .then((res) => {})
-            .catch((error) => {})
-        socketMoim.emit('sendMsg', userNick, msgValue, roomId)
-        setMsgValue('')
+        }
     }
 
     // ! post / update Notice
@@ -264,7 +271,7 @@ const Chat = () => {
                                             <span className="chat-title">
                                                 {msg.MoimUser?.User?.nickName}
                                             </span>
-                                            <div>
+                                            <div className="chat-column">
                                                 <p className="chat-content">
                                                     {msg?.contents}
                                                 </p>
