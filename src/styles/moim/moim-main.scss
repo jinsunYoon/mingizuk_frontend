@@ -228,6 +228,21 @@
         margin-left: 1rem;
         background: #fff;
     }
+    & select {
+        width: 7rem;
+        /*ios대응*/
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+        /*화살표 배경 넣기*/
+        background: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>")
+            no-repeat 98% 50% #fff; /*화살표 select박스 오른쪽 중앙 배치,배경 흰색*/
+
+        select::-ms-expand {
+            display: none; /* 화살표 없애기 for IE10, 11*/
+        }
+    }
 
     & button {
         &:hover {
