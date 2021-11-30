@@ -286,16 +286,16 @@ const PostDesc = () => {
                         </div>
                     )}
                 </div>
-                <button
+                {/* <button
                     className="filter-btn"
                     onClick={() => {
                         setFilterTextState(false)
                         setFilterState(false)
-                        filterState
+                        setPosts(post_data_all)
                     }}
                 >
                     전체보기
-                </button>
+                </button> */}
                 <button
                     className="latest-filter-btn filter-btn"
                     onClick={() => {
