@@ -55,8 +55,9 @@
         width: 100%;
 
         img {
-            width: 80vw;
+            width: 70vw;
             height: auto;
+            max-width: 500px;
         }
     }
 
@@ -273,4 +274,12 @@
             color: $white;
         }
     }
+}
+
+.divimg {
+    width: 20rem;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
