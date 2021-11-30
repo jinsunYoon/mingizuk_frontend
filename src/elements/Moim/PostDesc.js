@@ -296,7 +296,7 @@ const PostDesc = () => {
                     onClick={() => {
                         setFilterTextState(false)
                         setFilterState(false)
-                        filterStates
+                        filterState
                     }}
                 >
                     전체보기
