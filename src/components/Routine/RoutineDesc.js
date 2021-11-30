@@ -39,6 +39,7 @@ const RoutineDesc = (props) => {
     const charList = useSelector((state) => state.character.charList)
     const curChara =
         charList.length > 0 && charList[charList.length - 1].charName
+    console.log('컬차라', curChara)
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -143,15 +144,17 @@ const RoutineDesc = (props) => {
                             </p>
                         </button>
                     ))}
-                    {curChara && myset?.length === 0 ? (
+                    {curChara && myset?.length === 0 && (
                         <p className="no-routine">
                             아직 루틴이 없네요!
                             <br />
-                            아래 + 버튼을 눌러서 새 루틴을 만들어보세요.
+                            아래 + 버튼을 눌러서
+                            <br />새 루틴을 만들어보세요😊
                         </p>
-                    ) : (
+                    )}
+                    {curChara === false && (
                         <p className="no-routine">
-                            아직 캐릭터를 안받으셨네요!
+                            아직 캐릭터를 받지 않으셨군요!
                             <br />
                             홈에서 캐릭터 먼저 받아주세요😉
                         </p>
