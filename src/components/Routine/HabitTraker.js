@@ -54,10 +54,12 @@ const HabitTraker = () => {
     return (
         <div className="all-container">
             <p className="habit-title">이번달 해빗 트래커</p>
-            <section className="habit-container">
-                {designMap.map((day, idx) => (
-                    <div className="habit-box" key={idx} />
-                ))}
+            <div className="section-container">
+                <section className="habit-container">
+                    {designMap.map((day, idx) => (
+                        <div className="habit-box" key={idx} />
+                    ))}
+                </section>
                 <section className="day-container">
                     {monthMap.map((day, idx) => (
                         <div key={idx}>
@@ -77,7 +79,7 @@ const HabitTraker = () => {
                         </div>
                     ))}
                 </section>
-            </section>
+            </div>
         </div>
     )
 }
