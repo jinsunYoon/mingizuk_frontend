@@ -111,22 +111,32 @@ const ActionStart = (props) => {
                         style={{
                             width: '100vw',
                             height: '100vh',
-                            backgroundColor: 'black',
                             padding: '0px',
-                            opacity: '0.3',
                             position: 'fixed',
+                            display: 'flex',
+                            justifyContent: 'center',
                             top: '0',
-                            left: '0',
                             zIndex: 4,
                         }}
-                        onClick={() => {
-                            if (active) {
-                                return
-                            } else if (active == false) {
-                                setActionModal(false)
-                            }
-                        }}
-                    ></div>
+                    >
+                        <div
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                maxWidth: '48rem',
+                                backgroundColor: 'black',
+                                opacity: '0.3',
+                                display: 'flex',
+                            }}
+                            onClick={() => {
+                                if (active) {
+                                    return
+                                } else if (active == false) {
+                                    setActionModal(false)
+                                }
+                            }}
+                        ></div>
+                    </div>
                     {action1 && (
                         <ModalEl>
                             {mainRoutine?.Actions?.length > 0 && (
@@ -862,6 +872,9 @@ const ActionStart = (props) => {
                             if (complete) {
                                 setActionStart(false)
                             }
+                            if (next) {
+                                setActionStart(false)
+                            }
                         }}
                     >
                         이어서 하기
@@ -906,8 +919,8 @@ const ModalEl = styled.div`
     flex-direction: column;
     align-items: center;
     bottom: 0;
-    left: 0;
     z-index: 5;
+    max-width: 48rem;
 `
 
 export default ActionStart
