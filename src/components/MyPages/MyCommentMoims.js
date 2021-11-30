@@ -41,7 +41,7 @@ const MyComment = () => {
                             <div
                                 className="postbox"
                                 onClick={() =>
-                                    history.push(`/moim/detail/${i?.id}`)
+                                    history.push(`/moim/detail/${i?.moimId}`)
                                 }
                                 key={idx}
                             >

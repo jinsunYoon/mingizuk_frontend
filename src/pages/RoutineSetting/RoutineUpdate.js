@@ -24,6 +24,10 @@ const RoutineUpdate = () => {
                         firstValue={'스트레칭'}
                         secondValue={'맨몸 운동'}
                     />
+                    <div className="routine-add-title">
+                        <h3>동작을 선택 해주세요.</h3>
+                        <span>(스트레칭, 맨몸운동 합쳐서 최대 5개)</span>
+                    </div>
                     <RoutineUpdateSelect select={status} />
                     <button
                         className="next-btn"

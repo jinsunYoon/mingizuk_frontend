@@ -347,7 +347,11 @@ const PostDesc = () => {
 
                                 <div className="post-info">
                                     <span>
-                                        {el?.MoimUsers[0]?.User?.nickName}
+                                        {
+                                            el?.MoimUsers?.filter(
+                                                ({ host }) => host === 1
+                                            )[0]?.User?.nickName
+                                        }
                                     </span>
                                     <span>
                                         {moment(el?.createdAt).fromNow()}

@@ -26,6 +26,7 @@ const MyRoutine = () => {
     const curChara =
         charList.length > 0 && charList[charList.length - 1].charName
 
+    console.log(optInfo)
     React.useEffect(() => {
         dispatch(changeNav('routine'))
     }, [])
@@ -103,8 +104,8 @@ const MyRoutine = () => {
                                                     )
                                                 }
                                                 if (
-                                                    optInfo.routineName ==
-                                                    mainRoutine.routineName
+                                                    optInfo?.routineName ==
+                                                    mainRoutine?.routineName
                                                 ) {
                                                     dispatch(setResult([]))
                                                     dispatch(setFakeResult([]))
