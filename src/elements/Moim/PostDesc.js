@@ -193,24 +193,28 @@ const PostDesc = () => {
     const filter_data_all = useSelector((state) => state.moim.filter)
 
     const sortarr = () => {
-        // let temp = [...posts]
-        // temp.sort(function (a, b) {
-        //     return (
-        //         new Date(b.createdAt).getTime() -
-        //         new Date(a.createdAt).getTime()
-        //     )
-        // })
-        // setPosts(temp)
-        console.log(posts)
+        let temp = [...posts]
+        temp.sort(function (a, b) {
+            return (
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+            )
+        })
+        setPosts(temp)
     }
 
     React.useEffect(() => {
         setPosts(post_data_all)
-        if (filter_data_all?.length > 0) {
-            setPosts(filter_data_all)
 
-            sortarr()
-            console.log(posts)
+        if (filter_data_all?.length > 0) {
+            let temp = [...filter_data_all]
+            temp?.sort((a, b) => {
+                return (
+                    new Date(b?.createdAt).getTime() -
+                    new Date(a?.createdAt).getTime()
+                )
+            })
+            setPosts(temp)
         } else if (filter_data_all === '') {
             filterState && setPosts('')
         }
