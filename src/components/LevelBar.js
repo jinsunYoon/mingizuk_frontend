@@ -13,30 +13,30 @@ const LevelBar = ({ exp, expMax }) => {
 
     const level = () => {
         let result
-        // if (exp <= 10000) {
-        //     result = 1
-        // } else if (exp >= 10000 && exp < 20000) {
-        //     result = 2
-        // } else if (exp >= 20000 && exp < 30000) {
-        //     result = 3
-        // } else if (exp >= 30000 && exp < 40000) {
-        //     result = 4
-        // } else if (exp >= 40000 && exp < 50000) {
-        //     result = 5
-        // } else if (exp >= 50000 && exp < 60000) {
-        //     result = 6
-        // } else if (exp >= 60000 && exp < 70000) {
-        //     result = 7
-        // } else if (exp >= 70000 && exp < 80000) {
-        //     result = 8
-        // } else if (exp >= 80000 && exp < 90000) {
-        //     result = 9
-        // } else if (exp >= 90000 && exp <= 100000) {
-        //     result = 10
-        // }
-        // return result
+        if (exp <= 10000) {
+            result = 1
+        } else if (exp >= 10000 && exp < 20000) {
+            result = 2
+        } else if (exp >= 20000 && exp < 30000) {
+            result = 3
+        } else if (exp >= 30000 && exp < 40000) {
+            result = 4
+        } else if (exp >= 40000 && exp < 50000) {
+            result = 5
+        } else if (exp >= 50000 && exp < 60000) {
+            result = 6
+        } else if (exp >= 60000 && exp < 70000) {
+            result = 7
+        } else if (exp >= 70000 && exp < 80000) {
+            result = 8
+        } else if (exp >= 80000 && exp < 90000) {
+            result = 9
+        } else if (exp >= 90000 && exp <= 100000) {
+            result = 10
+        }
+        return result
 
-        result = Math.floor((exp + 10000) / 10000)
+        // result = Math.floor((exp + 10000) / 10000)
     }
     const calcLevelBar = (exp - (level(exp) - 1) * 10000) / 100
 
