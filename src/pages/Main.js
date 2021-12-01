@@ -46,7 +46,6 @@ const Main = (props) => {
     React.useEffect(() => {
         dispatch(loginCheckMD())
         dispatch(changeNav('home'))
-        dispatch(loginCheckMD())
         dispatch(getMainRoutineMD())
 
         if (array.length !== 0) {

@@ -107,12 +107,14 @@ const userSlice = createSlice({
                 state.isLogin = false
                 localStorage.setItem('accessToken', payload.data.accessToken)
                 state.isLogin = true
-                console.log('Accccc')
+                console.log('<<access재발급')
+                window.location.reload()
             } else if (payload?.data?.msg === 'refreshToken 재발급') {
                 state.isLogin = false
                 localStorage.setItem('refreshToken', payload.data.refreshToken)
                 state.isLogin = true
-                console.log('Reffff')
+                console.log('<<refresh재발급')
+                window.location.reload()
             }
         },
         [loginCheckMD.rejected]: (state, { payload }) => {

@@ -8,9 +8,11 @@ import { Text, FlexColumn, FlexRow, ButtonOutlined } from '../elements/index'
 
 //* icons
 import Icon from '../components/icons/Icon'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { loginCheckMD } from '../redux/async/user'
 
 const NavBar = () => {
+    const dispatch = useDispatch()
     const navPosition = {
         width: '100vw',
         position: 'fixed',
@@ -25,7 +27,7 @@ const NavBar = () => {
 
     return (
         <>
-            <div style={navPosition}>
+            <div style={navPosition} onClick={() => dispatch(loginCheckMD())}>
                 <FlexRow
                     _border="none"
                     _width="100%"

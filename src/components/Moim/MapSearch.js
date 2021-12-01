@@ -3,8 +3,6 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import MapContainer from './MapContainer'
 import { FlexRow, ButtonOutlined, ButtonFill } from '../../elements/index'
-import { history } from '../../redux/store'
-import Icon from '../../components/icons/Icon'
 
 const MapSearch = (props) => {
     const [InputText, setInputText] = useState('')

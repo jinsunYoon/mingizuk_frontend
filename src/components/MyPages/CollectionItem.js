@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+
 //*style
 import styled from 'styled-components'
 import Icon from '../../components/icons/Icon'

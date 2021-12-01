@@ -32,7 +32,7 @@ export const myRoutineCreateMD = createAsyncThunk(
             const response = await myRoutineCreateAPI(data)
             if (response) {
                 history.push('/routine/mypage')
-                return response
+                return data
             }
         } catch (err) {
             return thunkAPI.rejectWithValue(err)

@@ -72,12 +72,7 @@ const routineSlice = createSlice({
         [myRoutinePresetMD.pending]: (state, { payload }) => {},
         [myRoutinePresetMD.rejected]: (state, { payload }) => {},
         // * ----
-        [myRoutineCreateMD.fulfilled]: (state, { payload }) => {
-            // Toast.fire({
-            //     icon: 'success',
-            //     title: '루틴이 추가되었어요.',
-            // })
-        },
+        [myRoutineCreateMD.fulfilled]: (state, { payload }) => {},
         [myRoutineCreateMD.pending]: (state, { payload }) => {},
         [myRoutineCreateMD.rejected]: (state, { payload }) => {},
         // * ----

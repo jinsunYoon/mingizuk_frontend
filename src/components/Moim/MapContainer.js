@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {
-    FlexRow,
-    FlexColumn,
-    SubTitle,
-    Title,
-    Input,
-    ButtonFill,
-    ButtonOutlined,
-    Text,
-} from '../../elements/index'
+import { FlexRow, FlexColumn, Text } from '../../elements/index'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPlace, setAddress } from '../../redux/modules/moimSlice'
 

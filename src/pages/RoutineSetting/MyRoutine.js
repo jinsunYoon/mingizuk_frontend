@@ -34,7 +34,7 @@ const MyRoutine = () => {
 
     return (
         <>
-            <div className="routine-layout">
+            <div className="routine-layout amargin">
                 <section
                     className="container"
                     onClick={() =>
