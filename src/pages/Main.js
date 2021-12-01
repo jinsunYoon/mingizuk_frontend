@@ -2,7 +2,7 @@ import React from 'react'
 import {
     FlexRow,
     FlexColumn,
-    SubTitle,
+    Img,
     ButtonOutlined,
     Text,
 } from '../elements/index'
@@ -156,6 +156,24 @@ const Main = (props) => {
                         >
                             <HabitTraker />
                         </div>
+
+                        <FlexColumn
+                            _width={'100%'}
+                            _height={'100%'}
+                            _margin={'0 0 1rem 0 '}
+                            _border={'none'}
+                            _bgColor={'none'}
+                        >
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe_GetE9cIdFGLfQ12qsuPy0_SIF4Mnl89suVUsr58J0lxSYQ/viewform">
+                                <Img
+                                    _width={'100%'}
+                                    _height={'100%'}
+                                    _src={
+                                        'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/48rem.png'
+                                    }
+                                />
+                            </a>
+                        </FlexColumn>
                     </FlexColumn>
                 </Container>
             </React.Fragment>
@@ -282,8 +300,24 @@ const Main = (props) => {
                     >
                         <HabitTraker />
                     </div>
+                    <FlexColumn
+                        _width={'100%'}
+                        _height={'100%'}
+                        _margin={'0 0 1rem 0 '}
+                        _border={'none'}
+                        _bgColor={'none'}
+                    >
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe_GetE9cIdFGLfQ12qsuPy0_SIF4Mnl89suVUsr58J0lxSYQ/viewform">
+                            <Img
+                                _width={'100%'}
+                                _height={'100%'}
+                                _src={
+                                    'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/48rem.png'
+                                }
+                            />
+                        </a>
+                    </FlexColumn>
                 </FlexColumn>
-                {/* <Feedback></Feedback> */}
             </Container>
         </React.Fragment>
     )
