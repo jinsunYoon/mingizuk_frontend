@@ -74,8 +74,8 @@ const MoimDetail = () => {
             width: '30rem',
             height: '15rem',
             reverseButtons: true,
-        }).then((willDelete) => {
-            if (willDelete) {
+        }).then((result) => {
+            if (result.isConfirmed) {
                 dispatch(moimDeleteMD(data))
                 Toast.fire({
                     icon: 'success',
