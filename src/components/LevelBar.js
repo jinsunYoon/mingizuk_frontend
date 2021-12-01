@@ -71,16 +71,17 @@ const FullGauge = styled.div`
     width: 40%;
     background-color: lightgray;
     height: 0.875rem;
-    border-radius: 5rem;
+    border-radius: 5px;
     margin: 0.5rem 0px;
 `
 
 const ExpGauge = styled.div`
+    wudtg: inherit;
     height: inherit;
     background-color: #6b76ff;
     z-index: 1;
     position: absolute;
-    border-radius: 5rem;
+    border-radius: 5px;
 `
 
 export default LevelBar

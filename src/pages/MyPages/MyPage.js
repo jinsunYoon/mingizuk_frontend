@@ -21,35 +21,16 @@ const MyPage = (props) => {
         dispatch(changeNav('mypage'))
     }, [])
 
+    console.log('?>', charList[charList?.length - 1]?.charSrc)
     return (
         <>
             <div className="mypage-layout">
                 <section className="contents">
                     <div className="user-profile">
-                        {curChara == '라이온' && (
-                            <div
-                                className="user-image"
-                                style={{
-                                    backgroundImage: `url(https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/char1.png)`,
-                                }}
-                            />
-                        )}
-                        {curChara == '무지' && (
-                            <div
-                                className="user-image"
-                                style={{
-                                    backgroundImage: `url(https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/char3.png)`,
-                                }}
-                            />
-                        )}
-                        {curChara == '제이지' && (
-                            <div
-                                className="user-image"
-                                style={{
-                                    backgroundImage: `url(https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/char2.png)`,
-                                }}
-                            />
-                        )}
+                        <img
+                            className="user-image"
+                            src={charList[charList?.length - 1]?.charSrc}
+                        />
                         <div className="user-info">
                             <div style={{ display: 'flex' }}>
                                 <span className="user-nickname">

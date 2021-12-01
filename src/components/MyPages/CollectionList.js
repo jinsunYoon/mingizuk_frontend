@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 //* components
 import { CollectionItem } from '../index'
@@ -6,7 +7,38 @@ import { CollectionItem } from '../index'
 //* sytle
 import styled from 'styled-components'
 
-const CollectionList = () => {
+const CollectionList = (props) => {
+    const char = useSelector((state) => state.character.charList)
+
+    const firstchar = () => {
+        let result
+        if (char.charName === '라이온')
+            result = (
+                <img
+                    src="
+                    https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png
+        "
+                    style={{ width: '6rem', height: '6rem' }}
+                />
+            )
+        else if (char.charName === '무지')
+            result = (
+                <img
+                    src="https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_1+1.png"
+                    style={{ width: '6rem', height: '6rem' }}
+                />
+            )
+        else if (char.charName === '제이지')
+            result = (
+                <img
+                    src="https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_1+1.png"
+                    style={{ width: '6rem', height: '6rem' }}
+                />
+            )
+
+        return result
+    }
+
     return (
         <>
             <div className="mypage-layout">
@@ -14,7 +46,10 @@ const CollectionList = () => {
                     <Flex>
                         <Item>
                             <Row>
-                                <CollectionItem />
+                                <img
+                                    src="https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_1+1.png"
+                                    style={{ width: '6rem', height: '6rem' }}
+                                />
                                 <CollectionItem />
                                 <CollectionItem />
                             </Row>
@@ -47,9 +82,11 @@ const Flex = styled.div`
     border: none;
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     width: 100%;
+    max-width: 500px;
     height: 100%;
+    margin: 0 auto;
 `
 
 const Item = styled.div`

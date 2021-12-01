@@ -57,6 +57,7 @@ const Main = (props) => {
         }
     }, [array.length])
 
+    console.log(']]', isMain)
     if (isMain) {
         return (
             <React.Fragment>
