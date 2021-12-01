@@ -31,7 +31,7 @@ const LevelBar = ({ exp, expMax }) => {
             result = 8
         } else if (exp >= 80000 && exp < 90000) {
             result = 9
-        } else if (exp >= 90000 && exp <= 92000) {
+        } else if (exp >= 90000 && exp <= 100000) {
             result = 10
         }
         return result
@@ -80,8 +80,7 @@ const ExpGauge = styled.div`
     background-color: #6b76ff;
     z-index: 1;
     position: absolute;
-    border-top-left-radius: 3rem;
-    border-bottom-left-radius: 3rem;
+    border-radius: 5rem;
 `
 
 export default LevelBar

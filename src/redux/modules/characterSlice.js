@@ -18,6 +18,7 @@ const characterSlice = createSlice({
     extraReducers: {
         //* 캐릭터 정보조회
         [getCharacterMD.fulfilled]: (state, { payload }) => {
+            // 경험치에 따른 레벨업
             const getLevel = (exp) => {
                 let result
                 if (exp <= 10000) {
@@ -38,46 +39,41 @@ const characterSlice = createSlice({
                     result = 8
                 } else if (exp >= 80000 && exp < 90000) {
                     result = 9
-                } else if (exp >= 90000 && exp <= 92000) {
+                } else if (exp >= 90000 && exp < 100000) {
                     result = 10
                 }
                 return result
             }
 
+            // 캐릭터이름에 따른 레벨-캐릭터이미지
             const getSrc = (name, level) => {
                 let result
                 if (name === '라이온') {
-                    if (level === 1 || 2 || 3) {
-                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png`
-                    } else if (level === 4 || 5 || 6) {
-                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-2.png`
-                    } else if (level === 7 || 8 || 9 || 10) {
-                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-3.png`
+                    if (level >= 1 && level <= 3) {
+                        result = `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png`
+                    } else if (level >= 4 && level <= 6) {
+                        result = `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-2.png`
+                    } else if (level >= 7 && level <= 10) {
+                        result = `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-3.png`
                     }
-                    return result
-                }
-
-                if (name === '제이지') {
-                    if (level === 1 || 2 || 3) {
-                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_1+1.png`
-                    } else if (level === 4 || 5 || 6) {
-                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_2+1.png`
-                    } else if (level === 7 || 8 || 9 || 10) {
-                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_3+1.png`
+                } else if (name === '제이지') {
+                    if (level >= 1 && level <= 3) {
+                        result = `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_1+1.png`
+                    } else if (level >= 4 && level <= 6) {
+                        result = `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_2+1.png`
+                    } else if (level >= 7 && level <= 10) {
+                        result = `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_3+1.png`
                     }
-                    return result
-                }
-
-                if (name === '무지') {
-                    if (level === 1 || 2 || 3) {
-                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_1+1.png`
-                    } else if (level === 4 || 5 || 6) {
-                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_2+1.png`
-                    } else if (level === 7 || 8 || 9 || 10) {
-                        return `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_3+1.png`
+                } else if (name === '무지') {
+                    if (level >= 1 && level <= 3) {
+                        result = `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_1+1.png`
+                    } else if (level >= 4 && level <= 6) {
+                        result = `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_2+1.png`
+                    } else if (level >= 7 && level <= 10) {
+                        result = `https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_3+1.png`
                     }
-                    return result
                 }
+                return result
             }
 
             const charData = []
@@ -92,6 +88,8 @@ const characterSlice = createSlice({
                 })
             )
             state.charList = charData
+
+            console.log('?', charData)
         },
         [getCharacterMD.rejected]: (state, { payload }) => {},
 
