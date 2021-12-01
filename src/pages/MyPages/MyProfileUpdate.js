@@ -104,7 +104,7 @@ const ProfileUpdate = () => {
                 _height="false"
                 _border="none"
                 _padding={'2rem 1rem 1rem 1rem'}
-                _margin={'3rem 0 0 0'}
+                _margin={'3rem 0 8rem 0'}
                 _others={'max-width:760px'}
             >
                 {curChara == '라이온' && (
