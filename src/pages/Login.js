@@ -62,7 +62,7 @@ const Login = () => {
                     </div>
                     <div className="login-container">
                         <input
-                            placeholder="이메일를 입력하세요."
+                            placeholder="이메일을 입력하세요."
                             onChange={(e) => setId(e.target.value)}
                         />
                         <input

@@ -5,6 +5,7 @@ import {
     logoutAPI,
     loginCheckAPI,
     userInfoAPI,
+    byeAPI,
 } from '../../shared/api'
 import { history } from '../store'
 
@@ -70,6 +71,18 @@ export const userInfoMD = createAsyncThunk(
             if (response) {
                 return data
             }
+        } catch (err) {
+            return thunkAPI.rejectWithValue(err)
+        }
+    }
+)
+
+export const byeMD = createAsyncThunk(
+    '/api/users/bye',
+    async (data, thunkAPI) => {
+        try {
+            const response = await byeAPI()
+            return response
         } catch (err) {
             return thunkAPI.rejectWithValue(err)
         }

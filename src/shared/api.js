@@ -158,6 +158,10 @@ const loginCheckAPI = () => {
     // return instance.get('/api/auth/me')
 }
 
+const byeAPI = () => {
+    return instance.delete('/api/users/bye')
+}
+
 // *---------------------------------------------
 
 //mainpage
@@ -393,4 +397,5 @@ export {
     moimLocationAPI,
     moimScrollAPI,
     moimLocationScrollAPI,
+    byeAPI,
 }

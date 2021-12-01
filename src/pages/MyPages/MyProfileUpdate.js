@@ -17,8 +17,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import { useHistory } from 'react-router'
 
 //* MD
-import { logoutMD } from '../../redux/async/user'
-import { userInfoMD } from '../../redux/async/user'
+import { logoutMD, byeMD, userInfoMD } from '../../redux/async/user'
 import { changeNav } from '../../redux/modules/userSlice'
 
 const ProfileUpdate = () => {
@@ -62,6 +61,25 @@ const ProfileUpdate = () => {
             } else return
         })
     }
+
+    const bye = () => {
+        Swal.fire({
+            text: '정말 회원 탈퇴하시겠어요 ?',
+            showCancelButton: true,
+            confirmButtonColor: '#6B76FF',
+            cancelButtonColor: '#DEDEDE',
+            confirmButtonText: '네',
+            cancelButtonText: '아니요',
+            width: '30rem',
+            height: '15rem',
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(byeMD())
+            } else return
+        })
+    }
+
     React.useEffect(() => {
         dispatch(changeNav('mypage'))
     }, [])
@@ -180,6 +198,32 @@ const ProfileUpdate = () => {
                             _color="#2E3A59"
                         >
                             로그아웃
+                        </Text>
+                        <ChevronRightIcon style={{ color: '#A5ABB0' }} />
+                    </FlexRow>
+                </ButtonOutlined>
+                <ButtonOutlined
+                    _width="100%"
+                    _padding="0"
+                    _margin="0"
+                    _border="none"
+                    _others="border-bottom:1px solid #EEE"
+                    _onClick={() => bye()}
+                >
+                    <FlexRow
+                        _width="100%"
+                        _height="3.5rem"
+                        _justify="space-between"
+                        _border="none"
+                        _padding="0"
+                        _margin="0"
+                    >
+                        <Text
+                            _fontSize="0.875rem"
+                            _fontWeight="500"
+                            _color="#2E3A59"
+                        >
+                            탈퇴하기
                         </Text>
                         <ChevronRightIcon style={{ color: '#A5ABB0' }} />
                     </FlexRow>
