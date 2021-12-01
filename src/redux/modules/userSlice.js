@@ -7,6 +7,7 @@ import {
     logoutMD,
     loginCheckMD,
     userInfoMD,
+    byeMD,
 } from '../async/user'
 import { history } from '../store'
 
@@ -127,6 +128,15 @@ const userSlice = createSlice({
             state.userInfo.nickName = payload.newNickName
             state.userInfo.userPw = payload.userPw
             state.userInfo.userID = payload.userID
+        },
+
+        [byeMD.fulfilled]: (state, { payload }) => {
+            console.log('바이풀필드', payload)
+            const accessToken = getToken().accessToken
+            const refreshToken = getToken().refreshToken
+            localStorage.removeItem('accessToken')
+            localStorage.removeItem('refreshToken')
+            state.isLogin = false
         },
     },
 })
