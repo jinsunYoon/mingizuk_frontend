@@ -17,16 +17,16 @@ const Downlaod = () => {
         })
     }
 
-    let checkInterver = setInterval(() => {
-        console.log('**************************************************')
-        setIsSupport(supported())
-        let temp = supported()
-        if (temp) {
-            setIsSupport(supported())
-            clearInterval(checkInterver)
-        }
-        setIsLoading(true)
-    }, 2500)
+    // let checkInterver = setInterval(() => {
+    //     console.log('**************************************************')
+    //     setIsSupport(supported())
+    //     let temp = supported()
+    //     if (temp) {
+    //         setIsSupport(supported())
+    //         clearInterval(checkInterver)
+    //     }
+    //     setIsLoading(true)
+    // }, 2500)
 
     const rionImg = {
         width: '6.7rem',

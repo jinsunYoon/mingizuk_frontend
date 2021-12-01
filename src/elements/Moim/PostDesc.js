@@ -15,8 +15,11 @@ const PostDesc = () => {
     const dispatch = useDispatch()
 
     const [posts, setPosts] = useState('')
+    const [empty, setEmpty] = useState(false)
     const post_data_all = useSelector((state) => state.moim.moim_all)
     const loginuserID = useSelector((state) => state.user.userInfo.userID)
+
+    console.log('empty', empty)
 
     // Filter - Location
     const locations = {
@@ -215,8 +218,10 @@ const PostDesc = () => {
                 )
             })
             setPosts(temp)
-        } else if (filter_data_all === '') {
+            setEmpty(false)
+        } else if (filter_data_all.length === 0) {
             filterState && setPosts('')
+            setEmpty(true)
         }
         return () => {
             setPosts(post_data_all)
@@ -228,6 +233,8 @@ const PostDesc = () => {
         setFilterState(false)
         setPosts(filter_data_all)
     }
+
+    console.log(posts, filter_data_all, filter_data_all.length)
 
     return (
         <>
