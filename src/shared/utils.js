@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2'
+
 const getToken = () => {
     const accessToken = localStorage.getItem('accessToken')
     const refreshToken = localStorage.getItem('refreshToken')

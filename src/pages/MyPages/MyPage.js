@@ -6,7 +6,6 @@ import { changeNav } from '../../redux/modules/userSlice'
 //* sytle
 import '../../styles/mypage/mypage.scss'
 import Icon from '../../components/icons/Icon'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import { loginCheckMD } from '../../redux/async/user'
 
 const MyPage = (props) => {
@@ -55,11 +54,23 @@ const MyPage = (props) => {
                     <ul className="mypage-list">
                         <li onClick={() => history.push('/users/collection')}>
                             <span>내 캐릭터 콜렉션</span>
-                            <ChevronRightIcon />
+                            <div style={{ marginRight: '0.3rem' }}>
+                                <Icon
+                                    icon="right-tri"
+                                    size="14px"
+                                    color="A5ABB0"
+                                />
+                            </div>
                         </li>
                         <li onClick={() => history.push('/users/moim')}>
                             <span>내 모임</span>
-                            <ChevronRightIcon />
+                            <div style={{ marginRight: '0.3rem' }}>
+                                <Icon
+                                    icon="right-tri"
+                                    size="14px"
+                                    color="A5ABB0"
+                                />
+                            </div>
                         </li>
                         <li>
                             <a
@@ -69,7 +80,13 @@ const MyPage = (props) => {
                             >
                                 <span>오류 문의</span>
                             </a>
-                            <ChevronRightIcon />
+                            <div style={{ marginRight: '0.3rem' }}>
+                                <Icon
+                                    icon="right-tri"
+                                    size="14px"
+                                    color="A5ABB0"
+                                />
+                            </div>
                         </li>
                     </ul>
                 </section>

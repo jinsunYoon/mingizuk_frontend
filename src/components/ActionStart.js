@@ -8,7 +8,6 @@ import {
     Text,
     Img,
 } from '../elements/index'
-import { CancelRounded } from '@material-ui/icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { actionCompleteMD } from '../redux/async/actionComplete'
 import { actionRestartMD } from '../redux/async/actionComplete'

@@ -1,6 +1,5 @@
 import React from 'react'
-import { FlexRow, FlexColumn, Text, Img } from '../elements/index'
-import Icon from './icons/Icon'
+import { FlexColumn, Text, Img } from '../elements/index'
 import { useSelector } from 'react-redux'
 
 const MainRoutineList = (props) => {

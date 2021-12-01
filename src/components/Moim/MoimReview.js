@@ -58,8 +58,7 @@ const MoimReview = (props) => {
                 }
                 if (data.contents.length > 50) {
                     toast(600, false, 'error', '리뷰는 50자까지 가능합니다')
-
-                    return
+                   return
                 } else if (data.contents.length === 0) {
                     toast(600, false, 'error', '댓글 내용을 입력해주세요')
 

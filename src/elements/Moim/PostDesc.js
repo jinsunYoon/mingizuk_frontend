@@ -15,6 +15,8 @@ const PostDesc = () => {
     const dispatch = useDispatch()
 
     const [posts, setPosts] = useState('')
+
+    const [empty, setEmpty] = useState(false)
     const post_data_all = useSelector((state) => state.moim.moim_all)
     const loginuserID = useSelector((state) => state.user.userInfo.userID)
 
@@ -215,8 +217,10 @@ const PostDesc = () => {
                 )
             })
             setPosts(temp)
-        } else if (filter_data_all === '') {
+            setEmpty(false)
+        } else if (filter_data_all.length === 0) {
             filterState && setPosts('')
+            setEmpty(true)
         }
         return () => {
             setPosts(post_data_all)
@@ -228,6 +232,8 @@ const PostDesc = () => {
         setFilterState(false)
         setPosts(filter_data_all)
     }
+
+    console.log(posts, filter_data_all, filter_data_all.length)
 
     return (
         <>
@@ -296,6 +302,7 @@ const PostDesc = () => {
                 <button
                     className="all-btn filter-btn"
                     onClick={() => {
+                        setEmpty(false)
                         setFilterTextState(false)
                         setFilterState(false)
                         setPosts(post_data_all)
@@ -360,7 +367,30 @@ const PostDesc = () => {
                                     </div>
                                     <span className="title">{el?.title}</span>
 
-                                    <div className="post-info">
+
+            {!empty ? (
+                posts?.length > 0 &&
+                posts?.map((el, idx) => (
+                    <div key={idx} className="post-warp">
+                        {el?.imgSrc === null ? (
+                            <div
+                                key={idx}
+                                className="moim-post-box"
+                                onClick={() => {
+                                    history.push(`/moim/detail/${el?.id}`)
+                                }}
+                            >
+                                <div className="post-info">
+                                    <div className="location">
+                                        <Icon
+                                            icon="place"
+                                            size="20px"
+                                            color="#6B76FF"
+                                        />
+                                        {el?.location?.split(' ')[0]}{' '}
+                                        {el?.location?.split(' ')[1]}{' '}
+                                        {el?.location?.split(' ')[2]}{' '}
+
                                         <span>
                                             {
                                                 el?.MoimUsers?.filter(
