@@ -4,14 +4,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { history } from '../../redux/store'
 
 import styled from 'styled-components'
-import { Text } from '../../elements/index'
-import { NavBar } from '../index'
 
 import { myMoimCommentMD } from '../../redux/async/myMoim'
 
 import '../../styles/mypage/mymoim.scss'
-import Icon from '../icons/Icon'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 const MyComment = () => {
     const dispatch = useDispatch()
@@ -48,8 +44,6 @@ const MyComment = () => {
                                 <div className="mycomment-titlebox">
                                     <span className="title">
                                         {i?.Moim?.title}
-
-                                        <MoreVertIcon />
                                     </span>
                                     <span className="comments">
                                         {i?.contents}

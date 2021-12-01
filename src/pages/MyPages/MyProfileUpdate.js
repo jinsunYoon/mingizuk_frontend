@@ -13,11 +13,16 @@ import {
 } from '../../elements/index'
 
 //* style
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import { useHistory } from 'react-router'
+import Icon from '../../components/icons/Icon'
 
 //* MD
-import { logoutMD, byeMD, userInfoMD,loginCheckMD } from '../../redux/async/user'
+import {
+    logoutMD,
+    byeMD,
+    userInfoMD,
+    loginCheckMD,
+} from '../../redux/async/user'
 import { changeNav } from '../../redux/modules/userSlice'
 
 const ProfileUpdate = () => {
@@ -200,7 +205,9 @@ const ProfileUpdate = () => {
                         >
                             로그아웃
                         </Text>
-                        <ChevronRightIcon style={{ color: '#A5ABB0' }} />
+                        <div style={{ marginRight: '0.3rem' }}>
+                            <Icon icon="right-tri" size="14px" color="A5ABB0" />
+                        </div>
                     </FlexRow>
                 </ButtonOutlined>
                 <ButtonOutlined
@@ -226,7 +233,9 @@ const ProfileUpdate = () => {
                         >
                             탈퇴하기
                         </Text>
-                        <ChevronRightIcon style={{ color: '#A5ABB0' }} />
+                        <div style={{ marginRight: '0.3rem' }}>
+                            <Icon icon="right-tri" size="14px" color="A5ABB0" />
+                        </div>
                     </FlexRow>
                 </ButtonOutlined>
             </FlexColumn>

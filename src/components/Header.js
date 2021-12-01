@@ -8,8 +8,6 @@ import {
     Text,
 } from '../elements/index'
 
-import { MenuModal } from '../components/index'
-
 import { history } from '../redux/store'
 
 const Header = (props) => {
