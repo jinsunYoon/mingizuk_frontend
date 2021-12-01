@@ -15,11 +15,10 @@ const PostDesc = () => {
     const dispatch = useDispatch()
 
     const [posts, setPosts] = useState('')
+
     const [empty, setEmpty] = useState(false)
     const post_data_all = useSelector((state) => state.moim.moim_all)
     const loginuserID = useSelector((state) => state.user.userInfo.userID)
-
-    console.log('empty', empty)
 
     // Filter - Location
     const locations = {
@@ -303,6 +302,7 @@ const PostDesc = () => {
                 <button
                     className="all-btn filter-btn"
                     onClick={() => {
+                        setEmpty(false)
                         setFilterTextState(false)
                         setFilterState(false)
                         setPosts(post_data_all)
@@ -335,7 +335,8 @@ const PostDesc = () => {
 
             {/* ******** POST ********* */}
 
-            {posts?.length > 0 && filter_data_all.length !== 0 ? (
+            {!empty ? (
+                posts?.length > 0 &&
                 posts?.map((el, idx) => (
                     <div key={idx} className="post-warp">
                         {el?.imgSrc === null ? (
