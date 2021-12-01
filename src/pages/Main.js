@@ -283,6 +283,7 @@ const Main = (props) => {
                         <HabitTraker />
                     </div>
                 </FlexColumn>
+                {/* <Feedback></Feedback> */}
             </Container>
         </React.Fragment>
     )
@@ -310,6 +311,22 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100vw;
+`
+
+const Feedback = styled.div`
+    display: flex;
+    justify-contetns: center;
+    align-items: center;
+    text-align: center;
+    font-size: 0.5rem;
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    bottom: 70px;
+    right: 20px;
+    border-radius: 50%;
+    background: cyan;
+    color: $white;
 `
 
 export default Main

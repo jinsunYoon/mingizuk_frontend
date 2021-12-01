@@ -21,17 +21,6 @@ const Chat = () => {
     const disptach = useDispatch()
 
     // ! toast
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 1200,
-        timerProgressBar: false,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
 
     // ! axios config
     const instance = axios.create({
@@ -126,10 +115,7 @@ const Chat = () => {
         socketMoim.on('updateMsg', (data) => {
             if (isSubscribe) {
                 if (data.name === 'SERVER') {
-                    Toast.fire({
-                        icon: 'info',
-                        title: data.msg,
-                    })
+                    toast(600, true, 'info', data.msg)
                 } else if (data.name !== 'SERVER') {
                     setNewMsgArray((newMsgArray) => [...newMsgArray, data])
                 }
@@ -153,10 +139,7 @@ const Chat = () => {
             socketMoim.emit('sendMsg', userNick, msgValue, roomId)
             setMsgValue('')
         } else {
-            Toast.fire({
-                icon: 'error',
-                title: '글자수는 250자 이하만 가능합니다.',
-            })
+            toast(600, true, 'errpr', '글자수는 250자 이하만 가능합니다.')
         }
     }
 

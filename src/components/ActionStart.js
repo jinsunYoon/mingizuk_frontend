@@ -18,6 +18,7 @@ import {
     setResult,
 } from '../redux/modules/completeSlice'
 import Swal from 'sweetalert2'
+import { toast } from '../shared/utils'
 
 const ActionStart = (props) => {
     const dispatch = useDispatch()
@@ -89,18 +90,6 @@ const ActionStart = (props) => {
             return 'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/ming3.gif'
         }
     }
-
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
 
     return (
         <>
@@ -222,10 +211,12 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
-                                        Toast.fire({
-                                            icon: 'success',
-                                            title: '100 포인트를 지급받았습니다!',
-                                        })
+                                        toast(
+                                            1500,
+                                            true,
+                                            'success',
+                                            '100 포인트를 지급받았습니다!'
+                                        )
                                     }}
                                 >
                                     완료하기!
@@ -364,10 +355,12 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
-                                        Toast.fire({
-                                            icon: 'success',
-                                            title: '100 포인트를 지급받았습니다!',
-                                        })
+                                        toast(
+                                            1500,
+                                            true,
+                                            'success',
+                                            '100 포인트를 지급받았습니다!'
+                                        )
                                     }}
                                 >
                                     완료하기!
@@ -505,10 +498,12 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
-                                        Toast.fire({
-                                            icon: 'success',
-                                            title: '100 포인트를 지급받았습니다!',
-                                        })
+                                        toast(
+                                            1500,
+                                            true,
+                                            'success',
+                                            '100 포인트를 지급받았습니다!'
+                                        )
                                     }}
                                 >
                                     완료하기!
@@ -646,10 +641,12 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
-                                        Toast.fire({
-                                            icon: 'success',
-                                            title: '100 포인트를 지급받았습니다!',
-                                        })
+                                        toast(
+                                            1500,
+                                            true,
+                                            'success',
+                                            '100 포인트를 지급받았습니다!'
+                                        )
                                     }}
                                 >
                                     완료하기!
@@ -786,10 +783,12 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
-                                        Toast.fire({
-                                            icon: 'success',
-                                            title: '100 포인트를 지급받았습니다!',
-                                        })
+                                        toast(
+                                            1500,
+                                            true,
+                                            'success',
+                                            '100 포인트를 지급받았습니다!'
+                                        )
                                     }}
                                 >
                                     완료하기!

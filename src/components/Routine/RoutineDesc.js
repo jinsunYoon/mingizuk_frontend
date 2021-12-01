@@ -55,18 +55,6 @@ const RoutineDesc = (props) => {
         dispatch(myRoutineListMD())
     }, [])
 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 1000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
-
     const resetRoutine = (routineId) => {
         Swal.fire({
             text: '진행중이던 루틴을 초기화 하시겠습니까?',
@@ -86,10 +74,7 @@ const RoutineDesc = (props) => {
                 dispatch(setMainRoutineMD(data))
                 dispatch(setResult([]))
                 dispatch(setFakeResult([]))
-                Toast.fire({
-                    icon: 'success',
-                    title: '메인루틴으로 변경되었습니다.',
-                })
+                toast(1000, true, 'success', '메인루틴으로 변경되었습니다.')
                 history.push('/')
                 console.log('>>> 초기화')
             } else {
