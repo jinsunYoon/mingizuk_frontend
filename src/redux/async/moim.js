@@ -14,11 +14,8 @@ import {
     moimLeaveAPI,
     moimLocationAPI,
     moimScrollAPI,
-    moimLocationScrollAPI,
 } from '../../shared/api'
 import { history } from '../store'
-import { seDispatch, useDispatch } from 'react-redux'
-import Swal from 'sweetalert2'
 
 export const moimCreateMD = createAsyncThunk(
     'moim/create',
@@ -155,7 +152,6 @@ export const moimDeleteReviewMD = createAsyncThunk(
         try {
             const response = await moimDeleteReviewAPI(data.reviewId)
             if (response) {
-                Swal.fire('리뷰를 삭제하였습니다.')
                 return data
             }
         } catch (err) {
@@ -170,7 +166,6 @@ export const moimUpdateReviewMD = createAsyncThunk(
         try {
             const response = await moimUpdateReviewAPI(data)
             if (response) {
-                Swal.fire('리뷰를 수정하였습니다.')
                 return data
             }
         } catch (err) {

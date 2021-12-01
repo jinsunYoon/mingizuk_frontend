@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { kakaoLoginMD, loginMD } from '../redux/async/user'
-import Swal from 'sweetalert2'
 import { history } from '../redux/store'
 import clsx from 'clsx'
 import '../styles/auth/auth.scss'

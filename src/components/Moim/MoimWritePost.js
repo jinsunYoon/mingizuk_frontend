@@ -8,7 +8,6 @@ import config from '../../shared/aws_config'
 import { uploadFile } from 'react-s3'
 import MapSearch from './MapSearch'
 import Icon from '../../components/icons/Icon'
-import Swal from 'sweetalert2'
 import clsx from 'clsx'
 import { toast } from '../../shared/utils'
 
@@ -22,18 +21,6 @@ const MoimWritePost = () => {
         new Date(new Date().setDate(startDate.getDate() + 7))
     )
     const [imgState, setImageState] = React.useState(false)
-
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 1200,
-        timerProgressBar: false,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
 
     const getAddress = useSelector((state) => state.moim.address)
     const getPlace = useSelector((state) => state.moim.place)
@@ -108,34 +95,30 @@ const MoimWritePost = () => {
             }
 
             if (title === '') {
-                Toast.fire({
-                    icon: 'error',
-                    title: '제목을 입력해주세요',
-                })
+                toast(600, false, 'error', '제목을 입력해주세요')
                 return
             } else if (contents === '') {
-                Toast.fire({
-                    icon: 'error',
-                    title: '내용을 입력해주세요.',
-                })
+                toast(600, false, 'error', '내용을 입력해주세요')
                 return
             } else if (req.location === '') {
-                Toast.fire({
-                    icon: 'error',
-                    title: '위치를 입력해주세요.',
-                })
+                toast(600, false, 'error', '위치를 입력해주세요')
                 return
             } else if (contents.length > 500) {
-                Toast.fire({
-                    icon: 'error',
-                    title: '내용은 500자 이내로 입력 가능합니다.',
-                })
+                toast(
+                    600,
+                    false,
+                    'error',
+                    '내용은 500자 이내로 입력 가능합니다.'
+                )
+
                 return
             } else if (title.length > 30) {
-                Toast.fire({
-                    icon: 'error',
-                    title: '제목은 30자 이내로 입력 가능합니다.',
-                })
+                toast(
+                    600,
+                    false,
+                    'error',
+                    '제목은 30자 이내로 입력 가능합니다.'
+                )
                 return
             }
             dispatch(moimCreateMD(req))

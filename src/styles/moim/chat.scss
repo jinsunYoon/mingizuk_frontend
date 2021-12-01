@@ -60,6 +60,7 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     @include text-style-14(21px, 0.15px);
     height: auto;
     min-height: 2.335rem;

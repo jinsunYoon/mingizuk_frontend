@@ -2,11 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
 import Icon from '../../components/icons/Icon'
-import {
-    moimReviewCreateMD,
-    moimDeleteReviewMD,
-    moimUpdateReviewMD,
-} from '../../redux/async/moim'
+import { moimDeleteReviewMD, moimUpdateReviewMD } from '../../redux/async/moim'
 import 'moment/locale/ko'
 import moment from 'moment'
 import { toast } from '../../shared/utils'
@@ -58,7 +54,7 @@ const MoimReview = (props) => {
                 }
                 if (data.contents.length > 50) {
                     toast(600, false, 'error', '리뷰는 50자까지 가능합니다')
-                   return
+                    return
                 } else if (data.contents.length === 0) {
                     toast(600, false, 'error', '댓글 내용을 입력해주세요')
 

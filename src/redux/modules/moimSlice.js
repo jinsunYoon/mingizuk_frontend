@@ -16,19 +16,7 @@ import {
     moimScrollMD,
     moimLocationScrollMD,
 } from '../async/moim'
-import Swal from 'sweetalert2'
-
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'center',
-    showConfirmButton: false,
-    timer: 500,
-    timerProgressBar: false,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-    },
-})
+import { toast } from '../../shared/utils'
 
 const initialState = {
     moim_all: {},
@@ -65,10 +53,7 @@ const moimSlice = createSlice({
     },
     extraReducers: {
         [moimCreateMD.fulfilled]: (state, { payload }) => {
-            Toast.fire({
-                icon: 'success',
-                title: '모임 글이 게시되었습니다.',
-            })
+            toast(600, false, 'success', '모임 글이 게시되었습니다.')
         },
         [moimCreateMD.rejected]: (state, { payload }) => {},
         [moimReadMD.fulfilled]: (state, { payload }) => {
@@ -83,7 +68,6 @@ const moimSlice = createSlice({
             state.moim_all = ref_moim_post
         },
         [moimDetailMD.fulfilled]: (state, { payload }) => {
-            console.log('<>', payload)
             state.moim_detail = payload.data.targetMoim
             state.detail_loading = true
         },

@@ -5,7 +5,6 @@ import {
     minusAction,
     minusCount,
 } from '../../redux/modules/updateRoutine'
-import Swal from 'sweetalert2'
 import { toast } from '../../shared/utils'
 
 const RoutineCounter = () => {

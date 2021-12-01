@@ -17,7 +17,6 @@ import {
     setFakeResult,
     setResult,
 } from '../redux/modules/completeSlice'
-import Swal from 'sweetalert2'
 import { toast } from '../shared/utils'
 
 const ActionStart = (props) => {
