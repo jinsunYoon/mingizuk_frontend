@@ -73,16 +73,16 @@ const RoutineDesc = (props) => {
             showCancelButton: true,
             confirmButtonColor: '#6B76FF',
             cancelButtonColor: '#DEDEDE',
-            confirmButtonText: '삭제',
+            confirmButtonText: '초기화',
             cancelButtonText: '취소',
             width: '30rem',
             height: '15rem',
             reverseButtons: true,
-        }).then((willDelete) => {
-            if (willDelete) {
+        }).then((result) => {
+            if (result.isConfirmed) {
                 dispatch(actionResetMD(routineId))
-                const data = getRoutineId
-                console.log('data', data)
+                const data = getTempRoutineId
+                console.log('메인루틴바꿀것, 초기화할것', data, routineId)
                 dispatch(setMainRoutineMD(data))
                 dispatch(setResult([]))
                 dispatch(setFakeResult([]))
@@ -91,7 +91,10 @@ const RoutineDesc = (props) => {
                     title: '메인루틴으로 변경되었습니다.',
                 })
                 history.push('/')
-            } else return
+                console.log('>>> 초기화')
+            } else {
+                console.log('>>> 취소')
+            }
         })
     }
 
@@ -236,9 +239,9 @@ const RoutineDesc = (props) => {
                                 const routineId =
                                     mainRoutine.Actions.length > 0 &&
                                     mainRoutine.Actions[0].routineId
-                                console.log('바꼈나', routineId)
                                 dispatch(setRoutineId(routineId))
                                 resetRoutine(routineId)
+                                console.log('리셋루틴함수 실행')
                             }
                             if (
                                 (getResult?.length == 0 &&
