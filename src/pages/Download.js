@@ -6,7 +6,7 @@ import Loading from '../components/Loading'
 
 const Downlaod = () => {
     const { pwaInstall, supported, isInstalled } = useReactPWAInstall()
-    const [isLoading, setIsLoading] = React.useState(false)
+    const [isLoading, setIsLoading] = React.useState(true)
     const [isSupport, setIsSupport] = React.useState(supported())
     const [descModal, setDescModal] = React.useState(false)
 
@@ -17,16 +17,16 @@ const Downlaod = () => {
         })
     }
 
-    // let checkInterver = setInterval(() => {
-    //     console.log('**************************************************')
-    //     setIsSupport(supported())
-    //     let temp = supported()
-    //     if (temp) {
-    //         setIsSupport(supported())
-    //         clearInterval(checkInterver)
-    //     }
-    //     setIsLoading(true)
-    // }, 2500)
+    let checkInterver = setInterval(() => {
+        console.log('**************************************************')
+        setIsSupport(supported())
+        let temp = supported()
+        if (temp) {
+            setIsSupport(supported())
+            clearInterval(checkInterver)
+        }
+        setIsLoading(true)
+    }, 2500)
 
     const rionImg = {
         width: '6.7rem',
@@ -63,7 +63,7 @@ const Downlaod = () => {
                                             type="button"
                                             onClick={handleClick}
                                         >
-                                            다운받기 : 앱으로만 이용 하실 수
+                                            다운받기 : 앱으로 이용 하실 수
                                             있어요 ❤️
                                         </button>
                                     </div>

@@ -5,18 +5,20 @@ import 'moment/locale/ko'
 import moment from 'moment'
 import socketIOClient from 'socket.io-client'
 import { history } from '../redux/store'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { getToken } from '../shared/utils'
 import Header from '../components/Header'
 import { useMutation, useQuery } from 'react-query'
 import Icon from '../components/icons/Icon'
 import clsx from 'clsx'
+import { loginCheckMD } from '../redux/async/user'
 
 const socketMoim = socketIOClient('https://mingijuk.shop/chat')
 
 const Chat = () => {
     const chatzoneRef = React.useRef(null)
+    const disptach = useDispatch()
 
     // ! toast
     const Toast = Swal.mixin({
@@ -99,6 +101,7 @@ const Chat = () => {
 
     // ! go to scroll bottom
     React.useEffect(() => {
+        disptach(loginCheckMD())
         window.scrollTo(0, chatzoneRef.current.scrollHeight)
     }, [messageArray, newMsgArray])
 
@@ -154,6 +157,12 @@ const Chat = () => {
                 icon: 'error',
                 title: '글자수는 250자 이하만 가능합니다.',
             })
+        }
+    }
+
+    const onKeyPress = (e) => {
+        if (e.key == 'Enter') {
+            sendMessage()
         }
     }
 
@@ -332,6 +341,7 @@ const Chat = () => {
                 </section>
                 <div className="input-container">
                     <input
+                        onKeyPress={onKeyPress}
                         placeholder="메세지"
                         value={msgValue}
                         onChange={(e) => {
