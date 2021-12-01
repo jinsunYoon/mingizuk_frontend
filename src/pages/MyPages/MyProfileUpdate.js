@@ -17,7 +17,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import { useHistory } from 'react-router'
 
 //* MD
-import { logoutMD } from '../../redux/async/user'
+import { loginCheckMD, logoutMD } from '../../redux/async/user'
 import { userInfoMD } from '../../redux/async/user'
 import { changeNav } from '../../redux/modules/userSlice'
 
@@ -63,6 +63,7 @@ const ProfileUpdate = () => {
         })
     }
     React.useEffect(() => {
+        dispatch(loginCheckMD())
         dispatch(changeNav('mypage'))
     }, [])
 

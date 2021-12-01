@@ -2,14 +2,15 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { moimReadMD } from '../../redux/async/moim'
 import { history } from '../../redux/store'
-import InfinityScrollPost from '../../elements/Moim/InfinityScrollPost'
 import PostDesc from '../../elements/Moim/PostDesc'
 import '../../styles/moim/moim-main.scss'
 import { changeNav } from '../../redux/modules/userSlice'
+import { loginCheckMD } from '../../redux/async/user'
 
 const MoimMain = () => {
     const dispatch = useDispatch()
     React.useEffect(() => {
+        dispatch(loginCheckMD())
         dispatch(moimReadMD())
         dispatch(changeNav('moim'))
     }, [])

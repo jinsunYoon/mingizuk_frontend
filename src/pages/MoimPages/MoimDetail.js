@@ -22,6 +22,7 @@ import moment from 'moment'
 import Swal from 'sweetalert2'
 import Loading from '../../components/Loading'
 import { changeNav } from '../../redux/modules/userSlice'
+import { loginCheckMD } from '../../redux/async/user'
 
 const MoimDetail = () => {
     const post_id = history?.location?.pathname?.split('/').slice(-1)
@@ -34,6 +35,7 @@ const MoimDetail = () => {
     const [optModalStatus, setOptModalStatus] = React.useState(false)
 
     React.useEffect(() => {
+        dispatch(loginCheckMD())
         dispatch(changeNav('routine'))
     }, [])
 
