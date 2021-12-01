@@ -17,8 +17,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import { useHistory } from 'react-router'
 
 //* MD
-import { logoutMD } from '../../redux/async/user'
-import { userInfoMD } from '../../redux/async/user'
+import { logoutMD, byeMD, userInfoMD,loginCheckMD } from '../../redux/async/user'
 import { changeNav } from '../../redux/modules/userSlice'
 
 const ProfileUpdate = () => {
@@ -32,6 +31,18 @@ const ProfileUpdate = () => {
     const charList = useSelector((state) => state.character.charList)
     const curChara =
         charList.length > 0 && charList[charList.length - 1].charName
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+    })
 
     const logout = () => {
         Swal.fire({
@@ -50,7 +61,27 @@ const ProfileUpdate = () => {
             } else return
         })
     }
+
+    const bye = () => {
+        Swal.fire({
+            text: '정말 회원 탈퇴하시겠어요 ?',
+            showCancelButton: true,
+            confirmButtonColor: '#6B76FF',
+            cancelButtonColor: '#DEDEDE',
+            confirmButtonText: '네',
+            cancelButtonText: '아니요',
+            width: '30rem',
+            height: '15rem',
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(byeMD())
+            } else return
+        })
+    }
+
     React.useEffect(() => {
+        dispatch(loginCheckMD())
         dispatch(changeNav('mypage'))
     }, [])
 
@@ -172,6 +203,32 @@ const ProfileUpdate = () => {
                         <ChevronRightIcon style={{ color: '#A5ABB0' }} />
                     </FlexRow>
                 </ButtonOutlined>
+                <ButtonOutlined
+                    _width="100%"
+                    _padding="0"
+                    _margin="0"
+                    _border="none"
+                    _others="border-bottom:1px solid #EEE"
+                    _onClick={() => bye()}
+                >
+                    <FlexRow
+                        _width="100%"
+                        _height="3.5rem"
+                        _justify="space-between"
+                        _border="none"
+                        _padding="0"
+                        _margin="0"
+                    >
+                        <Text
+                            _fontSize="0.875rem"
+                            _fontWeight="500"
+                            _color="#2E3A59"
+                        >
+                            탈퇴하기
+                        </Text>
+                        <ChevronRightIcon style={{ color: '#A5ABB0' }} />
+                    </FlexRow>
+                </ButtonOutlined>
             </FlexColumn>
             <ButtonFill
                 _width="100%"
@@ -183,22 +240,34 @@ const ProfileUpdate = () => {
                 }
                 _onClick={() => {
                     const data = { newNickName, newPwd }
-                    Swal.fire({
-                        text: '회원 정보를 수정하시겠어요 ?',
-                        showCancelButton: true,
-                        confirmButtonColor: '#6B76FF',
-                        cancelButtonColor: '#DEDEDE',
-                        confirmButtonText: '참여',
-                        cancelButtonText: '취소',
-                        width: '30rem',
-                        height: '15rem',
-                        reverseButtons: true,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            dispatch(userInfoMD(data))
-                            history.push('/users')
-                        } else return
-                    })
+                    if (newNickName.length > 9) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: '닉네임은 8자 이하로 가능합니다.',
+                        })
+                    } else if (newPwd.length < 7 || newPwd.length > 17) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: '비밀번호는 8자에서 16글자 입니다.',
+                        })
+                    } else {
+                        Swal.fire({
+                            text: '회원 정보를 수정하시겠어요 ?',
+                            showCancelButton: true,
+                            confirmButtonColor: '#6B76FF',
+                            cancelButtonColor: '#DEDEDE',
+                            confirmButtonText: '참여',
+                            cancelButtonText: '취소',
+                            width: '30rem',
+                            height: '15rem',
+                            reverseButtons: true,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                dispatch(userInfoMD(data))
+                                history.push('/users')
+                            } else return
+                        })
+                    }
                 }}
             >
                 수정하기

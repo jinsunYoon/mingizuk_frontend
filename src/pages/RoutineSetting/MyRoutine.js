@@ -14,6 +14,7 @@ import Icon from '../../components/icons/Icon'
 import { myRoutineDeleteMD } from '../../redux/async/routine'
 import Swal from 'sweetalert2'
 import { changeNav } from '../../redux/modules/userSlice'
+import { loginCheckMD } from '../../redux/async/user'
 
 const MyRoutine = () => {
     const status = useSelector((state) => state.routine.myPage)
@@ -26,8 +27,8 @@ const MyRoutine = () => {
     const curChara =
         charList.length > 0 && charList[charList.length - 1].charName
 
-    console.log(optInfo)
     React.useEffect(() => {
+        dispatch(loginCheckMD())
         dispatch(changeNav('routine'))
     }, [])
 
@@ -107,6 +108,11 @@ const MyRoutine = () => {
                                                     optInfo?.routineName ==
                                                     mainRoutine?.routineName
                                                 ) {
+                                                    console.log(
+                                                        '옵션인포=메인루틴?',
+                                                        optInfo?.routineName,
+                                                        mainRoutine?.routineName
+                                                    )
                                                     dispatch(setResult([]))
                                                     dispatch(setFakeResult([]))
                                                 }

@@ -7,7 +7,9 @@ import {
     logoutMD,
     loginCheckMD,
     userInfoMD,
+    byeMD,
 } from '../async/user'
+import { history } from '../store'
 
 const Toast = Swal.mixin({
     toast: true,
@@ -83,20 +85,34 @@ const userSlice = createSlice({
 
         // * loginCheck
         [loginCheckMD.fulfilled]: (state, { payload }) => {
-            state.isLogin = true
-            state.userInfo.userEmail = payload?.data?.user?.userEmail
-            state.userInfo.nickName = payload?.data?.user?.nickName
-            state.userInfo.userPw = payload?.data?.user?.userPw
-            state.userInfo.userID = payload?.data?.user?.id
-            if (payload?.data?.character?.characterName === '라이온') {
-                state.userInfo.charUrl =
-                    'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png'
-            } else if (payload?.data?.character?.characterName === '제이지') {
-                state.userInfo.charUrl =
-                    'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_1+1.png'
-            } else if (payload?.data?.character?.characterName === '무지') {
-                state.userInfo.charUrl =
-                    'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_1+1.png'
+            if (payload?.data?.result === true) {
+                state.isLogin = true
+                state.userInfo.userEmail = payload?.data?.user?.userEmail
+                state.userInfo.nickName = payload?.data?.user?.nickName
+                state.userInfo.userPw = payload?.data?.user?.userPw
+                state.userInfo.userID = payload?.data?.user?.id
+                if (payload?.data?.character?.characterName === '라이온') {
+                    state.userInfo.charUrl =
+                        'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png'
+                } else if (
+                    payload?.data?.character?.characterName === '제이지'
+                ) {
+                    state.userInfo.charUrl =
+                        'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_1+1.png'
+                } else if (payload?.data?.character?.characterName === '무지') {
+                    state.userInfo.charUrl =
+                        'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_1+1.png'
+                }
+            } else if (payload?.data?.msg === 'accessToken 재발급') {
+                state.isLogin = false
+                localStorage.setItem('accessToken', payload.data.accessToken)
+                state.isLogin = true
+                console.log('Accccc')
+            } else if (payload?.data?.msg === 'refreshToken 재발급') {
+                state.isLogin = false
+                localStorage.setItem('refreshToken', payload.data.refreshToken)
+                state.isLogin = true
+                console.log('Reffff')
             }
         },
         [loginCheckMD.rejected]: (state, { payload }) => {
@@ -112,6 +128,15 @@ const userSlice = createSlice({
             state.userInfo.nickName = payload.newNickName
             state.userInfo.userPw = payload.userPw
             state.userInfo.userID = payload.userID
+        },
+
+        [byeMD.fulfilled]: (state, { payload }) => {
+            console.log('바이풀필드', payload)
+            const accessToken = getToken().accessToken
+            const refreshToken = getToken().refreshToken
+            localStorage.removeItem('accessToken')
+            localStorage.removeItem('refreshToken')
+            state.isLogin = false
         },
     },
 })

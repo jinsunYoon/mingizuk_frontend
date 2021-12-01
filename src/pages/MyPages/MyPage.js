@@ -7,6 +7,7 @@ import { changeNav } from '../../redux/modules/userSlice'
 import '../../styles/mypage/mypage.scss'
 import Icon from '../../components/icons/Icon'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import { loginCheckMD } from '../../redux/async/user'
 
 const MyPage = (props) => {
     const [userInfo, setUserInfo] = useState('')
@@ -18,6 +19,7 @@ const MyPage = (props) => {
     const curChara =
         charList.length > 0 && charList[charList.length - 1].charName
     React.useEffect(() => {
+        dispatch(loginCheckMD())
         dispatch(changeNav('mypage'))
     }, [])
 

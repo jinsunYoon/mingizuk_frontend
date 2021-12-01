@@ -11,12 +11,14 @@ import MyLikeMoim from '../../components/MyPages/MyLikedMoims'
 import MyCommentMoim from '../../components/MyPages/MyCommentMoims'
 // * 스타일
 import '../../styles/mypage/mymoim.scss'
+import { loginCheckMD } from '../../redux/async/user'
 
 const MyMoim = () => {
     const [tabState, setTabState] = useState('')
     const dispatch = useDispatch()
     // const state = useSelector((state) => state?>)
     React.useEffect(() => {
+        dispatch(loginCheckMD())
         dispatch(changeNav('mypage'))
         setTabState('a')
     }, [])

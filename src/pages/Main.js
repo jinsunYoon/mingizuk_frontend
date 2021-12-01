@@ -44,6 +44,7 @@ const Main = (props) => {
     }
 
     React.useEffect(() => {
+        dispatch(loginCheckMD())
         dispatch(changeNav('home'))
         dispatch(loginCheckMD())
         dispatch(getMainRoutineMD())
@@ -241,9 +242,9 @@ const Main = (props) => {
                                     _color={'#8F8F8F'}
                                     _padding={'2.25rem 0px 1.8rem 0px'}
                                 >
-                                    아직 루틴이 없습니다.
+                                    아직 지정된 메인루틴이 없습니다 !
                                     <br />
-                                    루틴을 만들어주세요 ! 💪
+                                    메인루틴 설정부터 해주세요~ 💪
                                 </Text>
                                 <ButtonOutlined
                                     _width={'13rem'}
@@ -256,7 +257,7 @@ const Main = (props) => {
                                         history.push('/routine/mypage')
                                     }}
                                 >
-                                    루틴 만들기
+                                    메인루틴 설정하기
                                 </ButtonOutlined>
                             </FlexColumn>
                         ) : (

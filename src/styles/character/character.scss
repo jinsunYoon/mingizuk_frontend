@@ -52,6 +52,7 @@
 .modal-container {
     width: 100vw;
     height: 100vh;
+
     .modal {
         @include column-flexbox();
         width: 100%;
@@ -161,5 +162,6 @@
         width: 100%;
         bottom: 4rem;
         z-index: 7;
+        max-width: 48rem;
     }
 }

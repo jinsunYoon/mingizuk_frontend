@@ -73,10 +73,10 @@ const routineSlice = createSlice({
         [myRoutinePresetMD.rejected]: (state, { payload }) => {},
         // * ----
         [myRoutineCreateMD.fulfilled]: (state, { payload }) => {
-            Toast.fire({
-                icon: 'success',
-                title: '루틴이 추가되었어요.',
-            })
+            // Toast.fire({
+            //     icon: 'success',
+            //     title: '루틴이 추가되었어요.',
+            // })
         },
         [myRoutineCreateMD.pending]: (state, { payload }) => {},
         [myRoutineCreateMD.rejected]: (state, { payload }) => {},
@@ -135,7 +135,7 @@ const routineSlice = createSlice({
             })
 
             // ! routines
-            finRoutines.forEach(({ routineName, RoutineFins }) => {
+            finRoutines?.forEach(({ routineName, RoutineFins }) => {
                 const routineDates = RoutineFins.map(({ date }) =>
                     setDates.findIndex((day) => day === date.slice(0, 10))
                 )
@@ -144,7 +144,7 @@ const routineSlice = createSlice({
                 )
             })
 
-            state.fin.joinDate = data.finUser.createdAt
+            state.fin.joinDate = data?.finUser?.createdAt
             state.fin.finActions = actionsWithDate
             state.fin.finRoutines = routienWithDate
         },
