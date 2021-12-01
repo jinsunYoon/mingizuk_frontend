@@ -4,7 +4,6 @@ import { history } from '../../redux/store'
 import Icon from '../../components/icons/Icon'
 import 'moment/locale/ko'
 import moment from 'moment'
-import '../../styles/moim/moim-main.scss'
 import {
     moimLikeMD,
     moimLocationMD,
@@ -411,12 +410,7 @@ const PostDesc = () => {
                                 </div>
                                 <div className="title">{el?.title}</div>
                                 <div className="imgbox">
-                                    <div
-                                        className="divimg"
-                                        style={{
-                                            backgroundImage: `url(${el.imgSrc})`,
-                                        }}
-                                    ></div>
+                                    <img src={el.imgSrc} />
                                 </div>
                                 <div className="post-info">
                                     <span>

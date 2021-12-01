@@ -24,6 +24,12 @@
         .img-desc-container {
             @include column-flexbox(center, center);
             width: 100%;
+            img {
+                margin-top: 1rem;
+                width: 80vw;
+                height: 200px;
+                object-fit: contain;
+            }
         }
         .detail-desc {
             @include text-style-14(24px, 0.15px, $black);

@@ -66,10 +66,8 @@ const MoimDetail = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(moimDeleteMD(data))
-                Toast.fire({
-                    icon: 'success',
-                    title: '게시글이 지워졌습니다.',
-                })
+                toast(600, false, 'success', '게시글이 지워졌습니다.')
+
                 history.push('/moim')
             } else return
         })
@@ -141,15 +139,15 @@ const MoimDetail = () => {
     }
 
     return !is_loading ? (
-        <p>
+        <div>
             <Loading />
-        </p>
+        </div>
     ) : (
         <div>
             <article className="detail-layout">
                 <article className="moim-detail-article">
                     <div className="location-btn">
-                        <p className="detail-location">
+                        <div className="detail-location">
                             {' '}
                             <div
                                 style={{
@@ -165,7 +163,7 @@ const MoimDetail = () => {
                                 />
                                 {post_data?.location}
                             </div>
-                        </p>
+                        </div>
                         {Object.keys(post_data).length > 0 &&
                             post_data?.MoimUsers[0]?.User?.nickName ===
                                 user_nick && (
@@ -182,13 +180,7 @@ const MoimDetail = () => {
                     <h6>{post_data?.title}</h6>
                     <article className="img-desc-container">
                         {post_data?.imgSrc !== null && (
-                            <div
-                                className="divimg"
-                                style={{
-                                    backgroundImage: `url(${post_data?.imgSrc})`,
-                                    marginTop: '1rem',
-                                }}
-                            ></div>
+                            <img src={post_data?.imgSrc}></img>
                         )}
                         <p className="detail-desc">{post_data?.contents}</p>
                     </article>

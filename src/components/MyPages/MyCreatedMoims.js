@@ -52,7 +52,7 @@ const MyCreatedMoims = () => {
                                             {i?.Moim?.title}
                                         </span>
                                     </div>
-                                    <div class="etcbox">
+                                    <div className="etcbox">
                                         <div>
                                             <span className="date">
                                                 {

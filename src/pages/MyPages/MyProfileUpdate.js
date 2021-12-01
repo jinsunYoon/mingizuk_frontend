@@ -265,7 +265,7 @@ const ProfileUpdate = () => {
                             showCancelButton: true,
                             confirmButtonColor: '#6B76FF',
                             cancelButtonColor: '#DEDEDE',
-                            confirmButtonText: '참여',
+                            confirmButtonText: '수정',
                             cancelButtonText: '취소',
                             width: '30rem',
                             height: '15rem',

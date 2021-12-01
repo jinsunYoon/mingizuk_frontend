@@ -55,9 +55,9 @@
         width: 100%;
 
         img {
-            width: 70vw;
-            height: auto;
-            max-width: 500px;
+            width: 80vw;
+            height: 200px;
+            object-fit: contain;
         }
     }
 
@@ -299,7 +299,7 @@
 .divimg {
     width: 20rem;
     height: 300px;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
