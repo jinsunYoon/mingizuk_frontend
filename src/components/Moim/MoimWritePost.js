@@ -10,6 +10,7 @@ import MapSearch from './MapSearch'
 import Icon from '../../components/icons/Icon'
 import Swal from 'sweetalert2'
 import clsx from 'clsx'
+import { toast } from '../../shared/utils'
 
 const MoimWritePost = () => {
     const dispatch = useDispatch()
@@ -59,34 +60,29 @@ const MoimWritePost = () => {
                     }
 
                     if (title === '') {
-                        Toast.fire({
-                            icon: 'error',
-                            title: '제목을 입력해주세요',
-                        })
+                        toast(600, false, 'error', '제목을 입력해주세요.')
                         return
                     } else if (contents === '') {
-                        Toast.fire({
-                            icon: 'error',
-                            title: '내용을 입력해주세요.',
-                        })
+                        toast(600, false, 'error', '내용을 입력해주세요.')
                         return
                     } else if (req.location === '') {
-                        Toast.fire({
-                            icon: 'error',
-                            title: '위치를 입력해주세요.',
-                        })
+                        toast(600, false, 'error', '위치를 입력해주세요.')
                         return
                     } else if (contents.length > 500) {
-                        Toast.fire({
-                            icon: 'error',
-                            title: '내용은 500자 미만으로 입력 가능합니다.',
-                        })
+                        toast(
+                            600,
+                            false,
+                            'error',
+                            '내용은 500자 미만으로 입력 가능합니다.'
+                        )
                         return
                     } else if (title.length > 30) {
-                        Toast.fire({
-                            icon: 'error',
-                            title: '제목은 30자 이내로 입력 가능합니다.',
-                        })
+                        toast(
+                            600,
+                            false,
+                            'error',
+                            '제목은 30자 이내로 입력 가능합니다.'
+                        )
                         return
                     }
                     dispatch(moimCreateMD(req))

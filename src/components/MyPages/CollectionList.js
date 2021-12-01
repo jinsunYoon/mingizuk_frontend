@@ -8,34 +8,22 @@ import { CollectionItem } from '../index'
 import styled from 'styled-components'
 
 const CollectionList = (props) => {
-    const char = useSelector((state) => state.character.charList)
+    const charList = useSelector((state) => state.character.charList)
 
-    const firstchar = () => {
+    const saveFirstchar = () => {
         let result
-        if (char.charName === '라이온')
-            result = (
-                <img
-                    src="
-                    https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png
-        "
-                    style={{ width: '6rem', height: '6rem' }}
-                />
-            )
-        else if (char.charName === '무지')
-            result = (
-                <img
-                    src="https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_1+1.png"
-                    style={{ width: '6rem', height: '6rem' }}
-                />
-            )
-        else if (char.charName === '제이지')
-            result = (
-                <img
-                    src="https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_1+1.png"
-                    style={{ width: '6rem', height: '6rem' }}
-                />
-            )
+        if (charList[0].charName === '라이온')
+            result =
+                'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1-1.png'
+        else if (charList[0].charName === '무지')
+            result =
+                'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_1+1.png'
+        else if (charList[0].charName === '제이지')
+            result =
+                'https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_1_1+1.png'
 
+        console.log('>>>', charList)
+        console.log('>>', result)
         return result
     }
 
@@ -47,7 +35,7 @@ const CollectionList = (props) => {
                         <Item>
                             <Row>
                                 <img
-                                    src="https://minggizuk.s3.ap-northeast-2.amazonaws.com/character_2_1+1.png"
+                                    src={saveFirstchar()}
                                     style={{ width: '6rem', height: '6rem' }}
                                 />
                                 <CollectionItem />

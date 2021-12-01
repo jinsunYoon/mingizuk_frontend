@@ -23,6 +23,7 @@ import Swal from 'sweetalert2'
 import Loading from '../../components/Loading'
 import { changeNav } from '../../redux/modules/userSlice'
 import { loginCheckMD } from '../../redux/async/user'
+import { toast } from '../../shared/utils'
 
 const MoimDetail = () => {
     const post_id = history?.location?.pathname?.split('/').slice(-1)
@@ -38,18 +39,6 @@ const MoimDetail = () => {
         dispatch(loginCheckMD())
         dispatch(changeNav('routine'))
     }, [])
-
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 1000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
 
     React.useEffect(() => {
         dispatch(moimDetailMD(post_id))
@@ -95,16 +84,11 @@ const MoimDetail = () => {
             writer: user_nick,
         }
         if (contents.length > 50) {
-            Toast.fire({
-                icon: 'error',
-                title: '리뷰는 50자까지 가능합니다',
-            })
+            toast(1000, true, 'error', '리뷰는 50자까지 가능합니다')
             return
         } else if (contents.length === 0) {
-            Toast.fire({
-                icon: 'error',
-                title: '댓글 내용을 입력해주세요',
-            })
+            toast(1000, true, 'error', '댓글 내용을 입력해주세요')
+
             return
         } else {
             dispatch(moimReviewCreateMD(data))
