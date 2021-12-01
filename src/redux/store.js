@@ -34,10 +34,10 @@ const reducer = combineReducers({
 const middlewares = [thunkMiddleware]
 const env = process.env.NODE_ENV
 
-if (env === 'development') {
-    const { logger } = require('redux-logger')
-    middlewares.push(logger)
-}
+// if (env === 'development') {
+//     const { logger } = require('redux-logger')
+//     middlewares.push(logger)
+// }
 
 const store = configureStore({
     reducer,

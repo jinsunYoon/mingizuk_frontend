@@ -13,6 +13,7 @@ const History = () => {
         dispatch(finRoutinesActionsMD())
         dispatch(changeNav('historyI'))
     }, [])
+
     return (
         <>
             <div
