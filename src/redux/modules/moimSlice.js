@@ -149,20 +149,14 @@ const moimSlice = createSlice({
                 (comment) => comment.id !== payload.reviewId
             )
             state.moim_detail.Comments = refReviews
-            Toast.fire({
-                icon: 'success',
-                title: '댓글을 삭제하였어요.',
-            })
+            toast(600, false, 'success', '댓글을 삭제하였어요.')
         },
         [moimUpdateReviewMD.fulfilled]: (state, { payload }) => {
             const refIdx = state.moim_detail.Comments.findIndex(
                 (comment) => comment.id === payload.commentId
             )
             state.moim_detail.Comments[refIdx].contents = payload.contents
-            Toast.fire({
-                icon: 'success',
-                title: '댓글을 수정했어요.',
-            })
+            toast(600, false, 'success', '댓글을 수정했어요.')
         },
         [moimLocationMD.fulfilled]: (state, { payload }) => {
             state.filter = payload.data.filterMoims
