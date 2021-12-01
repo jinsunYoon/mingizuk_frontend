@@ -7,7 +7,6 @@ import config from '../../shared/aws_config'
 import { uploadFile } from 'react-s3'
 import MapSearch from './MapSearch'
 import Icon from '../../components/icons/Icon'
-import Swal from 'sweetalert2'
 import clsx from 'clsx'
 import { toast } from '../../shared/utils'
 

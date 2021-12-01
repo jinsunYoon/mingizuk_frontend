@@ -332,41 +332,8 @@ const PostDesc = () => {
                     좋아요순
                 </button>
             </div>
-            {/* ******** POST ********* */}
-            {
-                posts?.length > 0 && filter_data_all.length > 0 ? (
-                    posts?.map((el, idx) => (
-                        <div key={idx} className="post-warp">
-                            {el?.imgSrc === null ? (
-                                <div
-                                    key={idx}
-                                    className="moim-post-box"
-                                    onClick={() => {
-                                        history.push(`/moim/detail/${el?.id}`)
-                                    }}
-                                >
-                                    <div className="post-info">
-                                        <div className="location">
-                                            <Icon
-                                                icon="place"
-                                                size="20px"
-                                                color="#6B76FF"
-                                            />
-                                            {el?.location?.split(' ')[0]}{' '}
-                                            {el?.location?.split(' ')[1]}{' '}
-                                            {el?.location?.split(' ')[2]}{' '}
-                                        </div>
-                                        <span className="location">
-                                            <Icon
-                                                icon="user-person"
-                                                size="20px"
-                                                color="#A5ABB0"
-                                            />
-                                            {el?.MoimUsers?.length}
-                                        </span>
-                                    </div>
-                                    <span className="title">{el?.title}</span>
 
+            {/* ******** POST ********* */}
 
             {!empty ? (
                 posts?.length > 0 &&
@@ -390,125 +357,132 @@ const PostDesc = () => {
                                         {el?.location?.split(' ')[0]}{' '}
                                         {el?.location?.split(' ')[1]}{' '}
                                         {el?.location?.split(' ')[2]}{' '}
-
-                                        <span>
-                                            {
-                                                el?.MoimUsers?.filter(
-                                                    ({ host }) => host === 1
-                                                )[0]?.User?.nickName
-                                            }
-                                        </span>
-                                        <span>
-                                            {moment(el?.createdAt).fromNow()}
-                                        </span>
                                     </div>
-                                </div>
-                            ) : (
-                                <div
-                                    className="moim-post-box"
-                                    onClick={() => {
-                                        history.push(`/moim/detail/${el?.id}`)
-                                    }}
-                                >
-                                    <div className="post-info">
-                                        <div className="location">
-                                            <Icon
-                                                icon="place"
-                                                size="20px"
-                                                color="#6B76FF"
-                                            />
-                                            {el?.location?.split(' ')[0]}{' '}
-                                            {el?.location?.split(' ')[1]}{' '}
-                                            {el?.location?.split(' ')[2]}{' '}
-                                        </div>
-                                        <span className="location">
-                                            <Icon
-                                                icon="user-person"
-                                                size="20px"
-                                                color="#A5ABB0"
-                                            />
-                                            {el?.MoimUsers?.length}
-                                        </span>
-                                    </div>
-                                    <div className="title">{el?.title}</div>
-                                    <div className="imgbox">
-                                        <div
-                                            className="divimg"
-                                            style={{
-                                                backgroundImage: `url(${el.imgSrc})`,
-                                            }}
-                                        ></div>
-                                    </div>
-                                    <div className="post-info">
-                                        <span>
-                                            {el?.MoimUsers[0]?.User?.nickName}
-                                        </span>
-                                        <span>
-                                            {moment(el?.createdAt).fromNow()}
-                                        </span>
-                                    </div>
-                                </div>
-                            )}
-                            <div className="ectbox">
-                                <div className="icon-text">
-                                    {el?.Likes?.findIndex(
-                                        (user) => user?.userId === loginuserID
-                                    ) === -1 ? (
+                                    <span className="location">
                                         <Icon
-                                            icon="heart"
-                                            size="1rem"
-                                            color="lightgray"
-                                            _onClick={() =>
-                                                dispatch(moimLikeMD(el.id))
-                                            }
+                                            icon="user-person"
+                                            size="20px"
+                                            color="#A5ABB0"
                                         />
-                                    ) : (
-                                        <Icon
-                                            icon="heart"
-                                            size="1rem"
-                                            color="#FD8787"
-                                            _onClick={() =>
-                                                dispatch(moimUnlikeMD(el.id))
-                                            }
-                                        />
-                                    )}
-                                    <span>
-                                        좋아요
-                                        {el?.Likes?.length}개
+                                        {el?.MoimUsers?.length}
                                     </span>
                                 </div>
-                                <div className="icon-text">
-                                    <Icon
-                                        icon={'message'}
-                                        size="20px"
-                                        color="#A5ABB0"
-                                    />
-                                    <span>댓글{el?.Comments?.length}개</span>
+                                <span className="title">{el?.title}</span>
+
+                                <div className="post-info">
+                                    <span>
+                                        {
+                                            el?.MoimUsers?.filter(
+                                                ({ host }) => host === 1
+                                            )[0]?.User?.nickName
+                                        }
+                                    </span>
+                                    <span>
+                                        {moment(el?.createdAt).fromNow()}
+                                    </span>
                                 </div>
                             </div>
+                        ) : (
+                            <div
+                                className="moim-post-box"
+                                onClick={() => {
+                                    history.push(`/moim/detail/${el?.id}`)
+                                }}
+                            >
+                                <div className="post-info">
+                                    <div className="location">
+                                        <Icon
+                                            icon="place"
+                                            size="20px"
+                                            color="#6B76FF"
+                                        />
+                                        {el?.location?.split(' ')[0]}{' '}
+                                        {el?.location?.split(' ')[1]}{' '}
+                                        {el?.location?.split(' ')[2]}{' '}
+                                    </div>
+                                    <span className="location">
+                                        <Icon
+                                            icon="user-person"
+                                            size="20px"
+                                            color="#A5ABB0"
+                                        />
+                                        {el?.MoimUsers?.length}
+                                    </span>
+                                </div>
+                                <div className="title">{el?.title}</div>
+                                <div className="imgbox">
+                                    <div
+                                        className="divimg"
+                                        style={{
+                                            backgroundImage: `url(${el.imgSrc})`,
+                                        }}
+                                    ></div>
+                                </div>
+                                <div className="post-info">
+                                    <span>
+                                        {el?.MoimUsers[0]?.User?.nickName}
+                                    </span>
+                                    <span>
+                                        {moment(el?.createdAt).fromNow()}
+                                    </span>
+                                </div>
+                            </div>
+                        )}
+                        <div className="ectbox">
+                            <div className="icon-text">
+                                {el?.Likes?.findIndex(
+                                    (user) => user?.userId === loginuserID
+                                ) === -1 ? (
+                                    <Icon
+                                        icon="heart"
+                                        size="1rem"
+                                        color="lightgray"
+                                        _onClick={() =>
+                                            dispatch(moimLikeMD(el.id))
+                                        }
+                                    />
+                                ) : (
+                                    <Icon
+                                        icon="heart"
+                                        size="1rem"
+                                        color="#FD8787"
+                                        _onClick={() =>
+                                            dispatch(moimUnlikeMD(el.id))
+                                        }
+                                    />
+                                )}
+                                <span>
+                                    좋아요
+                                    {el?.Likes?.length}개
+                                </span>
+                            </div>
+                            <div className="icon-text">
+                                <Icon
+                                    icon={'message'}
+                                    size="20px"
+                                    color="#A5ABB0"
+                                />
+                                <span>댓글{el?.Comments?.length}개</span>
+                            </div>
                         </div>
-                    ))
-                ) : (
-                    //filterState ? (
-                    <div className="nomoim">
-                        <p>
-                            해당 지역에 개설된 모임이 없습니다
-                            <br />
-                            새로운 모임을 만들고 사람들과 함께하세요~!
-                        </p>
-                        <button
-                            onClick={() => {
-                                history.push('/moim/write')
-                            }}
-                        >
-                            모임 개설 하러가기
-                        </button>
                     </div>
-                )
-                //) : (
-                //    setPosts(post_data_all)
-                //)
-            }
+                ))
+            ) : (
+                <div className="nomoim">
+                    <p>
+                        해당 지역에 개설된 모임이 없습니다
+                        <br />
+                        새로운 모임을 만들고 사람들과 함께하세요~!
+                    </p>
+                    <button
+                        onClick={() => {
+                            history.push('/moim/write')
+                        }}
+                    >
+                        모임 개설 하러가기
+                    </button>
+                </div>
+            )}
         </>
     )
 }

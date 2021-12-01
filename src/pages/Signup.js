@@ -4,20 +4,7 @@ import { useDispatch } from 'react-redux'
 import clsx from 'clsx'
 import { history } from '../redux/store'
 import { signupMD } from '../redux/async/user'
-import Swal from 'sweetalert2'
 import { toast } from '../shared/utils'
-
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'center',
-    showConfirmButton: false,
-    timer: 500,
-    timerProgressBar: false,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-    },
-})
 
 const Signup = () => {
     const dispatch = useDispatch()

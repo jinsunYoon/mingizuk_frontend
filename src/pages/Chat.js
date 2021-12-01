@@ -7,7 +7,7 @@ import socketIOClient from 'socket.io-client'
 import { history } from '../redux/store'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { getToken } from '../shared/utils'
+import { getToken, toast } from '../shared/utils'
 import Header from '../components/Header'
 import { useMutation, useQuery } from 'react-query'
 import Icon from '../components/icons/Icon'
@@ -139,7 +139,8 @@ const Chat = () => {
             socketMoim.emit('sendMsg', userNick, msgValue, roomId)
             setMsgValue('')
         } else {
-            toast(600, true, 'errpr', '글자수는 250자 이하만 가능합니다.')
+            toast(600, false, 'error', '글자수는 250자 이하만 가능합니다.')
+            return
         }
     }
 

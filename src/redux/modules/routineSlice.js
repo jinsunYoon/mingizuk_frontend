@@ -7,19 +7,7 @@ import {
     myRoutineUpdateMD,
     finRoutinesActionsMD,
 } from '../async/routine'
-import Swal from 'sweetalert2'
-
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'center',
-    showConfirmButton: false,
-    timer: 1000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-    },
-})
+import { toast } from '../../shared/utils'
 
 const initialState = {
     myPage: '',
@@ -89,10 +77,7 @@ const routineSlice = createSlice({
         [myRoutineDeleteMD.rejected]: (state, { payload }) => {},
         // * ----
         [myRoutineUpdateMD.fulfilled]: (state, { payload }) => {
-            Toast.fire({
-                icon: 'success',
-                title: '루틴을 수정하였어요.',
-            })
+            toast(600, true, 'success', '루틴을 수정하였어요.')
         },
         [finRoutinesActionsMD.fulfilled]: (state, { payload }) => {
             const data = payload?.data

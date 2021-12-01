@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import Swal from 'sweetalert2'
 import '../styles/character/character.scss'
 import { getCharacterMD, postCharacterMD } from '../redux/async/character'
 import LevelBar from '../components/LevelBar'

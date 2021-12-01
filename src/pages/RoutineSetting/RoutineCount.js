@@ -4,30 +4,16 @@ import RoutineCounter from '../../components/Routine/RoutineCounter'
 import { myRoutineCreateMD } from '../../redux/async/routine'
 import { resetAction } from '../../redux/modules/updateRoutine'
 import '../../styles/routine/count-routine.scss'
-import Swal from 'sweetalert2'
+import { toast } from '../../shared/utils'
 
 const RoutineCount = () => {
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 600,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
     const dispatch = useDispatch()
 
     const actionSet = useSelector((state) => state.updateAction.actions)
     const [name, setName] = React.useState('')
     const addRoutine = () => {
         if (name === '') {
-            Toast.fire({
-                icon: 'error',
-                title: '루틴 이름을 입력해주세요.',
-            })
+            toast(600, true, 'error', '루틴 이름을 입력해주세요.')
             return
         } else {
             const data = {

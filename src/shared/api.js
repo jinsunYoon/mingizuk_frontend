@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useMutation, useQuery } from 'react-query'
+import { useQuery } from 'react-query'
 import { history } from '../redux/store'
 import { getToken } from './utils'
 import Swal from 'sweetalert2'
