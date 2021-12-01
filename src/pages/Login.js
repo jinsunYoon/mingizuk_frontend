@@ -5,36 +5,19 @@ import Swal from 'sweetalert2'
 import { history } from '../redux/store'
 import clsx from 'clsx'
 import '../styles/auth/auth.scss'
+import { toast } from '../shared/utils'
 
 const Login = () => {
     const dispatch = useDispatch()
     const [id, setId] = useState('')
     const [pwd, setPwd] = useState('')
 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 1000,
-        timerProgressBar: false,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
-
     const emailLogin = () => {
         if (id === '') {
-            Toast.fire({
-                icon: 'error',
-                title: '아이디를 입력해주세요.',
-            })
+            toast(1000, false, 'error', '아이디를 입력해주세요.')
             return
         } else if (pwd === '') {
-            Toast.fire({
-                icon: 'error',
-                title: '비밀번호를 입력해주세요.',
-            })
+            toast(1000, false, 'error', '비밀번호를 입력해주세요.')
             return
         } else {
             const data = {
@@ -105,12 +88,12 @@ const Login = () => {
                         >
                             카카오톡으로 로그인하기
                         </a>
-                        {/* <a
+                        <a
                             href="https://mingijuk.shop/api/auth/naver"
                             className="naver-btn"
                         >
                             네이버로 로그인하기
-                        </a> */}
+                        </a>
                         <a
                             href="https://mingijuk.shop/api/auth/google"
                             className="google-btn"

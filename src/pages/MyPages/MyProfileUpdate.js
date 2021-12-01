@@ -17,7 +17,12 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import { useHistory } from 'react-router'
 
 //* MD
-import { logoutMD, byeMD, userInfoMD,loginCheckMD } from '../../redux/async/user'
+import {
+    logoutMD,
+    byeMD,
+    userInfoMD,
+    loginCheckMD,
+} from '../../redux/async/user'
 import { changeNav } from '../../redux/modules/userSlice'
 
 const ProfileUpdate = () => {

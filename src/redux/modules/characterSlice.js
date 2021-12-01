@@ -43,6 +43,7 @@ const characterSlice = createSlice({
                     result = 10
                 }
                 return result
+                // result = Math.floor((exp + 10000) / 10000)
             }
 
             // 캐릭터이름에 따른 레벨-캐릭터이미지
@@ -87,6 +88,7 @@ const characterSlice = createSlice({
                     charSrc: getSrc(char.characterName, getLevel(char.exp)),
                 })
             )
+
             state.charList = charData
 
             console.log('?', charData)

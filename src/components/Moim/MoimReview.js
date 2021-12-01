@@ -9,20 +9,9 @@ import {
 } from '../../redux/async/moim'
 import 'moment/locale/ko'
 import moment from 'moment'
+import { toast } from '../../shared/utils'
 
 const MoimReview = (props) => {
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 600,
-        timerProgressBar: false,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
-
     const dispatch = useDispatch()
     const loginNickName = useSelector((state) => state.user.userInfo.nickName)
     const review = useSelector((state) => state.moim.moim_detail.Comments)
@@ -68,16 +57,12 @@ const MoimReview = (props) => {
                     contents: text,
                 }
                 if (data.contents.length > 50) {
-                    Toast.fire({
-                        icon: 'error',
-                        title: '리뷰는 50자까지 가능합니다',
-                    })
+                    toast(600, false, 'error', '리뷰는 50자까지 가능합니다')
+
                     return
                 } else if (data.contents.length === 0) {
-                    Toast.fire({
-                        icon: 'error',
-                        title: '댓글 내용을 입력해주세요',
-                    })
+                    toast(600, false, 'error', '댓글 내용을 입력해주세요')
+
                     return
                 } else {
                     dispatch(moimUpdateReviewMD(data))

@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import { history } from '../redux/store'
 import { signupMD } from '../redux/async/user'
 import Swal from 'sweetalert2'
+import { toast } from '../shared/utils'
 
 const Toast = Swal.mixin({
     toast: true,
@@ -42,21 +43,13 @@ const Signup = () => {
             nickName === false ||
             userPwChk === false
         ) {
-            Toast.fire({
-                icon: 'error',
-                title: '빈칸을 전부 채워주세요.',
-            })
+            toast(500, false, 'error', '빈칸을 전부 채워주세요.')
             return
         } else if (userEmail.length > 30) {
-            Toast.fire({
-                icon: 'error',
-                title: '이메일은 30자 이하로 채워주세요.',
-            })
+            toast(500, false, 'error', '이메일은 30자 이하로 채워주세요.')
+            return
         } else if (nickName.length > 8) {
-            Toast.fire({
-                icon: 'error',
-                title: '닉네임은 8자 이하로 채워주세요.',
-            })
+            toast(500, false, 'error', '닉네임은 8자 이하로 채워주세요.')
         }
 
         const data = {
