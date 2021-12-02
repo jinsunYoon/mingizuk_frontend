@@ -9,6 +9,7 @@ import {
     moimLocationMD,
     moimUnlikeMD,
 } from '../../redux/async/moim'
+import { clearFilter } from '../../redux/modules/moimSlice'
 
 const PostDesc = () => {
     const dispatch = useDispatch()
@@ -191,7 +192,7 @@ const PostDesc = () => {
     const [filterTextState, setFilterTextState] = useState(false)
 
     const locationfilter = location1 + ' ' + location2
-    const filter_data_all = useSelector((state) => state.moim.filter)
+    let filter_data_all = useSelector((state) => state.moim.filter)
 
     const sortarr = () => {
         let temp = [...posts]
@@ -204,9 +205,27 @@ const PostDesc = () => {
         setPosts(temp)
     }
 
+    console.log(
+        'post : ',
+        posts,
+        'empty :',
+        empty,
+        'filter_data :',
+        filter_data_all
+    )
+
+    React.useEffect(() => {
+        filter_data_all = true
+        console.log('a', filter_data_all)
+    }, [])
+
+    console.log('aa', filter_data_all?.length)
+
     React.useEffect(() => {
         setPosts(post_data_all)
-
+        if (posts > 0 && filter_data_all?.length === undefined) {
+            setEmpty(false)
+        }
         if (filter_data_all?.length > 0) {
             let temp = [...filter_data_all]
             temp?.sort((a, b) => {
@@ -215,14 +234,17 @@ const PostDesc = () => {
                     new Date(a?.createdAt).getTime()
                 )
             })
+            console.log('s 111')
             setPosts(temp)
             setEmpty(false)
-        } else if (filter_data_all.length === 0) {
-            filterState && setPosts('')
+        } else if (filter_data_all === false) {
             setEmpty(true)
+            setPosts(post_data_all)
+            console.log('s 2')
         }
         return () => {
-            setPosts(post_data_all)
+            filter_data_all === true
+            dispatch(clearFilter())
         }
     }, [post_data_all, filter_data_all])
 
@@ -232,7 +254,13 @@ const PostDesc = () => {
         setPosts(filter_data_all)
     }
 
-    console.log(posts, filter_data_all, filter_data_all.length)
+    console.log(
+        posts,
+        'filter_data_all:',
+        filter_data_all,
+        'filter_data_all.length :',
+        filter_data_all.length
+    )
 
     return (
         <>
@@ -305,6 +333,8 @@ const PostDesc = () => {
                         setFilterTextState(false)
                         setFilterState(false)
                         setPosts(post_data_all)
+                        filter_data_all = undefined
+                        console.log(filter_data_all)
                     }}
                 >
                     전체보기
@@ -334,7 +364,7 @@ const PostDesc = () => {
 
             {/* ******** POST ********* */}
 
-            {!empty ? (
+            {!empty && post_data_all?.length > 0 ? (
                 posts?.length > 0 &&
                 posts?.map((el, idx) => (
                     <div key={idx} className="post-warp">

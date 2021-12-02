@@ -50,6 +50,9 @@ const moimSlice = createSlice({
         setLoadingFalse: (state, { payload }) => {
             state.detail_loading = false
         },
+        clearFilter: (state, { payload }) => {
+            state.filter = true
+        },
     },
     extraReducers: {
         [moimCreateMD.fulfilled]: (state, { payload }) => {
@@ -159,7 +162,12 @@ const moimSlice = createSlice({
             toast(600, false, 'success', '댓글을 수정했어요.')
         },
         [moimLocationMD.fulfilled]: (state, { payload }) => {
-            state.filter = payload.data.filterMoims
+            if (payload?.data?.filterMoims?.length === 0) {
+                state.filter = false
+                console.log('없는데?')
+            } else {
+                state.filter = payload.data.filterMoims
+            }
         },
         [moimScrollMD.fulfilled]: (state, { payload }) => {
             state.moim_scroll.push(payload.data.moreMoims)
@@ -177,6 +185,7 @@ export const {
     setPlace,
     setChatHost,
     setLoadingFalse,
+    clearFilter,
 } = moimSlice.actions
 
 //* slice export
