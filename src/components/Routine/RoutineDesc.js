@@ -19,6 +19,7 @@ import {
     setTempRoutineId,
 } from '../../redux/modules/completeSlice'
 import Swal from 'sweetalert2'
+import { toast } from '../../shared/utils'
 
 const RoutineDesc = (props) => {
     const dispatch = useDispatch()
@@ -39,7 +40,6 @@ const RoutineDesc = (props) => {
     const charList = useSelector((state) => state.character.charList)
     const curChara =
         charList.length > 0 && charList[charList.length - 1].charName
-    console.log('컬차라', curChara)
 
     React.useEffect(() => {
         if (select === 'first') {
@@ -56,37 +56,31 @@ const RoutineDesc = (props) => {
         dispatch(myRoutineListMD())
     }, [])
 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 1000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
-
     const resetRoutine = (routineId) => {
-        swal({
+        Swal.fire({
             text: '진행중이던 루틴을 초기화 하시겠습니까?',
-            buttons: true,
-            dangerMode: true,
-        }).then((willDelete) => {
-            if (willDelete) {
+            showCancelButton: true,
+            confirmButtonColor: '#6B76FF',
+            cancelButtonColor: '#DEDEDE',
+            confirmButtonText: '초기화',
+            cancelButtonText: '취소',
+            width: '30rem',
+            height: '15rem',
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
                 dispatch(actionResetMD(routineId))
                 const data = getTempRoutineId
-
+                console.log('메인루틴바꿀것, 초기화할것', data, routineId)
+                dispatch(setMainRoutineMD(data))
                 dispatch(setResult([]))
                 dispatch(setFakeResult([]))
-                dispatch(setMainRoutineMD(data))
-                Toast.fire({
-                    icon: 'success',
-                    title: '메인루틴으로 설정되었습니다',
-                })
+                toast(1000, true, 'success', '메인루틴으로 변경되었습니다.')
                 history.push('/')
-            } else return
+                console.log('>>> 초기화')
+            } else {
+                console.log('>>> 취소')
+            }
         })
     }
 
@@ -111,6 +105,10 @@ const RoutineDesc = (props) => {
                                         setTempRoutineId(
                                             routine?.Actions[0].routineId
                                         )
+                                    )
+                                    console.log(
+                                        '루틴선택',
+                                        routine?.Actions[0].routineId
                                     )
                                 }
                             }}
@@ -181,6 +179,10 @@ const RoutineDesc = (props) => {
                                                 routine?.Actions[0].routineId
                                             )
                                         )
+                                        console.log(
+                                            '프리셋선택',
+                                            routine?.Actions[0].routineId
+                                        )
                                     }
                                 }}
                             >
@@ -225,6 +227,7 @@ const RoutineDesc = (props) => {
                                     mainRoutine.Actions[0].routineId
                                 dispatch(setRoutineId(routineId))
                                 resetRoutine(routineId)
+                                console.log('리셋루틴함수 실행')
                             }
                             if (
                                 (getResult?.length == 0 &&

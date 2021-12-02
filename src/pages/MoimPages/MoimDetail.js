@@ -22,6 +22,8 @@ import moment from 'moment'
 import Swal from 'sweetalert2'
 import Loading from '../../components/Loading'
 import { changeNav } from '../../redux/modules/userSlice'
+import { loginCheckMD } from '../../redux/async/user'
+import { toast } from '../../shared/utils'
 
 const MoimDetail = () => {
     const post_id = history?.location?.pathname?.split('/').slice(-1)
@@ -34,20 +36,9 @@ const MoimDetail = () => {
     const [optModalStatus, setOptModalStatus] = React.useState(false)
 
     React.useEffect(() => {
+        dispatch(loginCheckMD())
         dispatch(changeNav('routine'))
     }, [])
-
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 1000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
 
     React.useEffect(() => {
         dispatch(moimDetailMD(post_id))
@@ -72,13 +63,11 @@ const MoimDetail = () => {
             width: '30rem',
             height: '15rem',
             reverseButtons: true,
-        }).then((willDelete) => {
-            if (willDelete) {
+        }).then((result) => {
+            if (result.isConfirmed) {
                 dispatch(moimDeleteMD(data))
-                Toast.fire({
-                    icon: 'success',
-                    title: '게시글이 지워졌습니다.',
-                })
+                toast(600, false, 'success', '게시글이 지워졌습니다.')
+
                 history.push('/moim')
             } else return
         })
@@ -92,8 +81,17 @@ const MoimDetail = () => {
             contents,
             writer: user_nick,
         }
-        dispatch(moimReviewCreateMD(data))
-        setContents('')
+        if (contents.length > 50) {
+            toast(1000, true, 'error', '리뷰는 50자까지 가능합니다')
+            return
+        } else if (contents.length === 0) {
+            toast(1000, true, 'error', '댓글 내용을 입력해주세요')
+
+            return
+        } else {
+            dispatch(moimReviewCreateMD(data))
+            setContents('')
+        }
     }
 
     // * join Moim
@@ -141,15 +139,15 @@ const MoimDetail = () => {
     }
 
     return !is_loading ? (
-        <p>
+        <div>
             <Loading />
-        </p>
+        </div>
     ) : (
         <div>
             <article className="detail-layout">
                 <article className="moim-detail-article">
                     <div className="location-btn">
-                        <p className="detail-location">
+                        <div className="detail-location">
                             {' '}
                             <div
                                 style={{
@@ -165,7 +163,7 @@ const MoimDetail = () => {
                                 />
                                 {post_data?.location}
                             </div>
-                        </p>
+                        </div>
                         {Object.keys(post_data).length > 0 &&
                             post_data?.MoimUsers[0]?.User?.nickName ===
                                 user_nick && (
@@ -182,13 +180,7 @@ const MoimDetail = () => {
                     <h6>{post_data?.title}</h6>
                     <article className="img-desc-container">
                         {post_data?.imgSrc !== null && (
-                            <div
-                                className="divimg"
-                                style={{
-                                    backgroundImage: `url(${post_data?.imgSrc})`,
-                                    marginTop: '1rem',
-                                }}
-                            ></div>
+                            <img src={post_data?.imgSrc}></img>
                         )}
                         <p className="detail-desc">{post_data?.contents}</p>
                     </article>

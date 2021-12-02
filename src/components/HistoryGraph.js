@@ -49,6 +49,8 @@ const HistoryGraph = (props) => {
     const [endDay, setEndDay] = React.useState(7)
     const [week, setWeek] = React.useState(1)
 
+    console.log(finActions, finRoutines)
+
     // * history에 쓰일 날짜들 전부
     const getHistory = () => {
         let history_date = []

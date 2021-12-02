@@ -5,22 +5,11 @@ import {
     minusAction,
     minusCount,
 } from '../../redux/modules/updateRoutine'
-import Swal from 'sweetalert2'
+import { toast } from '../../shared/utils'
 
 const RoutineCounter = () => {
     const dispatch = useDispatch()
     const countSet = useSelector((state) => state.updateAction.actions)
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 600,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
 
     return (
         <>
@@ -54,10 +43,12 @@ const RoutineCounter = () => {
                                 ? dispatch(
                                       minusAction({ value: count.actionName })
                                   )
-                                : Toast.fire({
-                                      icon: 'error',
-                                      title: '동작은 1개 이상이어야 합니다.',
-                                  })
+                                : toast(
+                                      600,
+                                      true,
+                                      'error',
+                                      '동작은 1개 이상이어야 합니다.'
+                                  )
                         }
                     >
                         X

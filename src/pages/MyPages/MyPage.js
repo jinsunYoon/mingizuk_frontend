@@ -6,7 +6,7 @@ import { changeNav } from '../../redux/modules/userSlice'
 //* sytle
 import '../../styles/mypage/mypage.scss'
 import Icon from '../../components/icons/Icon'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import { loginCheckMD } from '../../redux/async/user'
 
 const MyPage = (props) => {
     const [userInfo, setUserInfo] = useState('')
@@ -18,38 +18,20 @@ const MyPage = (props) => {
     const curChara =
         charList.length > 0 && charList[charList.length - 1].charName
     React.useEffect(() => {
+        dispatch(loginCheckMD())
         dispatch(changeNav('mypage'))
     }, [])
 
+    console.log('?>', charList[charList?.length - 1]?.charSrc)
     return (
         <>
             <div className="mypage-layout">
                 <section className="contents">
                     <div className="user-profile">
-                        {curChara == '라이온' && (
-                            <div
-                                className="user-image"
-                                style={{
-                                    backgroundImage: `url(https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/char1.png)`,
-                                }}
-                            />
-                        )}
-                        {curChara == '무지' && (
-                            <div
-                                className="user-image"
-                                style={{
-                                    backgroundImage: `url(https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/char3.png)`,
-                                }}
-                            />
-                        )}
-                        {curChara == '제이지' && (
-                            <div
-                                className="user-image"
-                                style={{
-                                    backgroundImage: `url(https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/char2.png)`,
-                                }}
-                            />
-                        )}
+                        <img
+                            className="user-image"
+                            src={charList[charList?.length - 1]?.charSrc}
+                        />
                         <div className="user-info">
                             <div style={{ display: 'flex' }}>
                                 <span className="user-nickname">
@@ -72,11 +54,23 @@ const MyPage = (props) => {
                     <ul className="mypage-list">
                         <li onClick={() => history.push('/users/collection')}>
                             <span>내 캐릭터 콜렉션</span>
-                            <ChevronRightIcon />
+                            <div style={{ marginRight: '0.3rem' }}>
+                                <Icon
+                                    icon="right-tri"
+                                    size="14px"
+                                    color="A5ABB0"
+                                />
+                            </div>
                         </li>
                         <li onClick={() => history.push('/users/moim')}>
                             <span>내 모임</span>
-                            <ChevronRightIcon />
+                            <div style={{ marginRight: '0.3rem' }}>
+                                <Icon
+                                    icon="right-tri"
+                                    size="14px"
+                                    color="A5ABB0"
+                                />
+                            </div>
                         </li>
                         <li>
                             <a
@@ -86,7 +80,13 @@ const MyPage = (props) => {
                             >
                                 <span>오류 문의</span>
                             </a>
-                            <ChevronRightIcon />
+                            <div style={{ marginRight: '0.3rem' }}>
+                                <Icon
+                                    icon="right-tri"
+                                    size="14px"
+                                    color="A5ABB0"
+                                />
+                            </div>
                         </li>
                     </ul>
                 </section>

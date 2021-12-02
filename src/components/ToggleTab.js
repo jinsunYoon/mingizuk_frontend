@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { ActiveUnderLine } from '../elements/index'
 import { FlexRow, Text } from '../elements/index'
 import { changeMyPageModal } from '../redux/modules/routineSlice'

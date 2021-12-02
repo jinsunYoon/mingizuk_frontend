@@ -26,10 +26,14 @@
 
 .chat-others-container,
 .chat-me-container {
-    @include flexbox(start, center);
+    @include flexbox(start, start);
     width: 100%;
     max-width: 768px;
     margin-bottom: 1rem;
+}
+
+.chat-column {
+    @include flexbox(end, end);
 }
 
 .chat-contents {
@@ -37,9 +41,10 @@
 }
 
 .chat-me-container {
-    @include flexbox(end, center);
+    @include flexbox(end, end);
     .chat-time {
         margin-right: 1rem;
+        margin-bottom: 0.5rem;
     }
 }
 
@@ -55,8 +60,10 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     @include text-style-14(21px, 0.15px);
-    height: 2.313rem;
+    height: auto;
+    min-height: 2.335rem;
     flex-wrap: wrap;
     max-width: 250px;
     background-color: $gray;
@@ -68,6 +75,7 @@
     font-size: 0.625rem;
     color: $text-gray;
     margin-left: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .chat-img {

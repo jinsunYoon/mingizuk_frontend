@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { moimLocationMD } from '../redux/async/moim'
 import Icon from '../components/icons/Icon'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
 import '../styles/moim/moim-main.scss'
 

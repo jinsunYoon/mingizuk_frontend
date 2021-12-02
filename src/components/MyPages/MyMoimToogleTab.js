@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import styled from 'styled-components'
+import React from 'react'
 import { ActiveUnderLine, FlexRow } from '../../elements'
 import MyCreate from './MyCreatedMoims'
 import MyJoin from './MyJoinedMoims'

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useMutation, useQuery } from 'react-query'
+import { useQuery } from 'react-query'
 import { history } from '../redux/store'
 import { getToken } from './utils'
 import Swal from 'sweetalert2'
@@ -56,8 +56,18 @@ instance.interceptors.response.use(
             history.push('/login')
 
             return
+        } else if (
+            error.response.data.msg.includes(
+                '이미 동일한 이름으로 등록된 루틴이 있습니다.'
+            )
+        ) {
+            Toast.fire({
+                icon: 'error',
+                title: '이미 동일한 이름으로 등록된 루틴이 있습니다.',
+            })
+            history.push('/routine/mypage')
+            return
         }
-        // window.alert(error.response.data.msg)
     }
 )
 
@@ -136,26 +146,16 @@ const logoutAPI = () => {
 }
 
 const loginCheckAPI = () => {
-    return axios
-        .get(`${BASE_URL}/api/auth/me`, {
-            headers: {
-                ['accessToken']: getToken().accessToken,
-                ['refreshToken']: getToken().refreshToken,
-            },
-        })
-        .then(function (response) {
-            if (response?.data?.result === true) {
-                return response
-            } else if (response?.data?.msg === 'accessToken 재발급') {
-                localStorage.setItem('accessToken', response.data.accessToken)
-                return response
-            } else if (response?.data?.msg === 'refreshToken 재발급') {
-                localStorage.setItem('refreshToken', response.data.refreshToken)
-                return response
-            }
-        })
-        .catch(function (error) {})
-    // return instance.get('/api/auth/me')
+    return axios.get(`${BASE_URL}/api/auth/me`, {
+        headers: {
+            ['accessToken']: getToken().accessToken,
+            ['refreshToken']: getToken().refreshToken,
+        },
+    })
+}
+
+const byeAPI = () => {
+    return instance.delete('/api/users/bye')
 }
 
 // *---------------------------------------------
@@ -224,6 +224,12 @@ const myRoutineCreateAPI = (data) => {
         actions: data.actions,
         isMain: data.isMain,
     })
+    // .then(() => {
+    //     Toast.fire({
+    //         icon: 'success',
+    //         title: '루틴이 추가되었어요.',
+    //     })
+    // })
 }
 
 const myRoutineListAPI = () => {
@@ -393,4 +399,5 @@ export {
     moimLocationAPI,
     moimScrollAPI,
     moimLocationScrollAPI,
+    byeAPI,
 }

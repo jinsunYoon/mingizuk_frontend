@@ -2,7 +2,7 @@ import React from 'react'
 import {
     FlexRow,
     FlexColumn,
-    SubTitle,
+    Img,
     ButtonOutlined,
     Text,
 } from '../elements/index'
@@ -44,8 +44,8 @@ const Main = (props) => {
     }
 
     React.useEffect(() => {
-        dispatch(changeNav('home'))
         dispatch(loginCheckMD())
+        dispatch(changeNav('home'))
         dispatch(getMainRoutineMD())
 
         if (array.length !== 0) {
@@ -57,6 +57,7 @@ const Main = (props) => {
         }
     }, [array.length])
 
+    console.log(']]', isMain)
     if (isMain) {
         return (
             <React.Fragment>
@@ -155,6 +156,24 @@ const Main = (props) => {
                         >
                             <HabitTraker />
                         </div>
+
+                        <FlexColumn
+                            _width={'100%'}
+                            _height={'100%'}
+                            _margin={'0 0 1rem 0 '}
+                            _border={'none'}
+                            _bgColor={'none'}
+                        >
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe_GetE9cIdFGLfQ12qsuPy0_SIF4Mnl89suVUsr58J0lxSYQ/viewform">
+                                <Img
+                                    _width={'100%'}
+                                    _height={'100%'}
+                                    _src={
+                                        'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/48rem.png'
+                                    }
+                                />
+                            </a>
+                        </FlexColumn>
                     </FlexColumn>
                 </Container>
             </React.Fragment>
@@ -240,9 +259,9 @@ const Main = (props) => {
                                     _color={'#8F8F8F'}
                                     _padding={'2.25rem 0px 1.8rem 0px'}
                                 >
-                                    아직 루틴이 없습니다.
+                                    아직 지정된 메인루틴이 없습니다 !
                                     <br />
-                                    루틴을 만들어주세요 ! 💪
+                                    메인루틴 설정부터 해주세요~ 💪
                                 </Text>
                                 <ButtonOutlined
                                     _width={'13rem'}
@@ -255,7 +274,7 @@ const Main = (props) => {
                                         history.push('/routine/mypage')
                                     }}
                                 >
-                                    루틴 만들기
+                                    메인루틴 설정하기
                                 </ButtonOutlined>
                             </FlexColumn>
                         ) : (
@@ -281,6 +300,23 @@ const Main = (props) => {
                     >
                         <HabitTraker />
                     </div>
+                    <FlexColumn
+                        _width={'100%'}
+                        _height={'100%'}
+                        _margin={'0 0 1rem 0 '}
+                        _border={'none'}
+                        _bgColor={'none'}
+                    >
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe_GetE9cIdFGLfQ12qsuPy0_SIF4Mnl89suVUsr58J0lxSYQ/viewform">
+                            <Img
+                                _width={'100%'}
+                                _height={'100%'}
+                                _src={
+                                    'https://s3.ap-northeast-2.amazonaws.com/sunnieee.shop/48rem.png'
+                                }
+                            />
+                        </a>
+                    </FlexColumn>
                 </FlexColumn>
             </Container>
         </React.Fragment>
@@ -309,6 +345,22 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100vw;
+`
+
+const Feedback = styled.div`
+    display: flex;
+    justify-contetns: center;
+    align-items: center;
+    text-align: center;
+    font-size: 0.5rem;
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    bottom: 70px;
+    right: 20px;
+    border-radius: 50%;
+    background: cyan;
+    color: $white;
 `
 
 export default Main

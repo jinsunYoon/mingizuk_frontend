@@ -8,7 +8,8 @@ import config from '../../shared/aws_config'
 import { uploadFile } from 'react-s3'
 import MapSearch from './MapSearch'
 import Icon from '../../components/icons/Icon'
-import Swal from 'sweetalert2'
+import clsx from 'clsx'
+import { toast } from '../../shared/utils'
 
 const MoimWritePost = () => {
     const dispatch = useDispatch()
@@ -20,18 +21,6 @@ const MoimWritePost = () => {
         new Date(new Date().setDate(startDate.getDate() + 7))
     )
     const [imgState, setImageState] = React.useState(false)
-
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 1200,
-        timerProgressBar: false,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
 
     const getAddress = useSelector((state) => state.moim.address)
     const getPlace = useSelector((state) => state.moim.place)
@@ -58,23 +47,29 @@ const MoimWritePost = () => {
                     }
 
                     if (title === '') {
-                        Toast.fire({
-                            icon: 'error',
-                            title: '제목을 입력해주세요',
-                        })
+                        toast(600, false, 'error', '제목을 입력해주세요.')
                         return
                     } else if (contents === '') {
-                        Toast.fire({
-                            icon: 'error',
-                            title: '내용을 입력해주세요.',
-                        })
+                        toast(600, false, 'error', '내용을 입력해주세요.')
                         return
                     } else if (req.location === '') {
-                        Toast.fire({
-                            icon: 'error',
-                            title: '위치를 입력해주세요.',
-                        })
-
+                        toast(600, false, 'error', '위치를 입력해주세요.')
+                        return
+                    } else if (contents.length > 500) {
+                        toast(
+                            600,
+                            false,
+                            'error',
+                            '내용은 500자 미만으로 입력 가능합니다.'
+                        )
+                        return
+                    } else if (title.length > 30) {
+                        toast(
+                            600,
+                            false,
+                            'error',
+                            '제목은 30자 이내로 입력 가능합니다.'
+                        )
                         return
                     }
                     dispatch(moimCreateMD(req))
@@ -100,22 +95,30 @@ const MoimWritePost = () => {
             }
 
             if (title === '') {
-                Toast.fire({
-                    icon: 'error',
-                    title: '제목을 입력해주세요',
-                })
+                toast(600, false, 'error', '제목을 입력해주세요')
                 return
             } else if (contents === '') {
-                Toast.fire({
-                    icon: 'error',
-                    title: '내용을 입력해주세요.',
-                })
+                toast(600, false, 'error', '내용을 입력해주세요')
                 return
             } else if (req.location === '') {
-                Toast.fire({
-                    icon: 'error',
-                    title: '위치를 입력해주세요.',
-                })
+                toast(600, false, 'error', '위치를 입력해주세요')
+                return
+            } else if (contents.length > 500) {
+                toast(
+                    600,
+                    false,
+                    'error',
+                    '내용은 500자 이내로 입력 가능합니다.'
+                )
+
+                return
+            } else if (title.length > 30) {
+                toast(
+                    600,
+                    false,
+                    'error',
+                    '제목은 30자 이내로 입력 가능합니다.'
+                )
                 return
             }
             dispatch(moimCreateMD(req))
@@ -127,12 +130,30 @@ const MoimWritePost = () => {
             <section className="moim-post">
                 <h4 className="post-subtitle">모임 제목</h4>
                 <input
-                    className="moim-post"
+                    className={clsx(
+                        'moim-post',
+                        title.length > 30 && 'error-input'
+                    )}
                     placeholder="모임 제목을 입력하세요. (ex. 한강 러닝 모집)"
                     onChange={(e) => setTitle(e.target.value)}
                 />
+                {title.length > 30 && (
+                    <p className="error-desc">
+                        모임 제목은 30자 이내로 작성해주세요.
+                    </p>
+                )}
                 <h4 className="post-subtitle">모임 내용</h4>
-                <textarea onChange={(e) => setContents(e.target.value)} />
+                <textarea
+                    className={clsx('', contents.length > 500 && 'error-input')}
+                    onChange={(e) => {
+                        setContents(e.target.value)
+                    }}
+                />
+                {contents.length > 500 && (
+                    <p className="error-desc">
+                        모임 내용은 500자 이내로 작성해주세요.
+                    </p>
+                )}
                 <h4 className="post-subtitle">모임 위치 설정</h4>
                 <MapSearch />
                 <h4 className="post-subtitle">모임 기간 설정</h4>

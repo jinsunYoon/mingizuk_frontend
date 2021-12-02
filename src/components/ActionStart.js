@@ -8,7 +8,6 @@ import {
     Text,
     Img,
 } from '../elements/index'
-import { CancelRounded } from '@material-ui/icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { actionCompleteMD } from '../redux/async/actionComplete'
 import { actionRestartMD } from '../redux/async/actionComplete'
@@ -18,7 +17,7 @@ import {
     setFakeResult,
     setResult,
 } from '../redux/modules/completeSlice'
-import Swal from 'sweetalert2'
+import { toast } from '../shared/utils'
 
 const ActionStart = (props) => {
     const dispatch = useDispatch()
@@ -91,18 +90,6 @@ const ActionStart = (props) => {
         }
     }
 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
-
     return (
         <>
             {actionModal && (
@@ -111,22 +98,32 @@ const ActionStart = (props) => {
                         style={{
                             width: '100vw',
                             height: '100vh',
-                            backgroundColor: 'black',
                             padding: '0px',
-                            opacity: '0.3',
                             position: 'fixed',
+                            display: 'flex',
+                            justifyContent: 'center',
                             top: '0',
-                            left: '0',
                             zIndex: 4,
                         }}
-                        onClick={() => {
-                            if (active) {
-                                return
-                            } else if (active == false) {
-                                setActionModal(false)
-                            }
-                        }}
-                    ></div>
+                    >
+                        <div
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                maxWidth: '48rem',
+                                backgroundColor: 'black',
+                                opacity: '0.3',
+                                display: 'flex',
+                            }}
+                            onClick={() => {
+                                if (active) {
+                                    return
+                                } else if (active == false) {
+                                    setActionModal(false)
+                                }
+                            }}
+                        ></div>
+                    </div>
                     {action1 && (
                         <ModalEl>
                             {mainRoutine?.Actions?.length > 0 && (
@@ -213,10 +210,12 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
-                                        Toast.fire({
-                                            icon: 'success',
-                                            title: '100 포인트를 지급받았습니다!',
-                                        })
+                                        toast(
+                                            1500,
+                                            true,
+                                            'success',
+                                            '100 포인트를 지급받았습니다!'
+                                        )
                                     }}
                                 >
                                     완료하기!
@@ -355,10 +354,12 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
-                                        Toast.fire({
-                                            icon: 'success',
-                                            title: '100 포인트를 지급받았습니다!',
-                                        })
+                                        toast(
+                                            1500,
+                                            true,
+                                            'success',
+                                            '100 포인트를 지급받았습니다!'
+                                        )
                                     }}
                                 >
                                     완료하기!
@@ -496,10 +497,12 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
-                                        Toast.fire({
-                                            icon: 'success',
-                                            title: '100 포인트를 지급받았습니다!',
-                                        })
+                                        toast(
+                                            1500,
+                                            true,
+                                            'success',
+                                            '100 포인트를 지급받았습니다!'
+                                        )
                                     }}
                                 >
                                     완료하기!
@@ -637,10 +640,12 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
-                                        Toast.fire({
-                                            icon: 'success',
-                                            title: '100 포인트를 지급받았습니다!',
-                                        })
+                                        toast(
+                                            1500,
+                                            true,
+                                            'success',
+                                            '100 포인트를 지급받았습니다!'
+                                        )
                                     }}
                                 >
                                     완료하기!
@@ -777,10 +782,12 @@ const ActionStart = (props) => {
                                     _color={'#6B76FF'}
                                     _onClick={() => {
                                         successAction()
-                                        Toast.fire({
-                                            icon: 'success',
-                                            title: '100 포인트를 지급받았습니다!',
-                                        })
+                                        toast(
+                                            1500,
+                                            true,
+                                            'success',
+                                            '100 포인트를 지급받았습니다!'
+                                        )
                                     }}
                                 >
                                     완료하기!
@@ -862,6 +869,9 @@ const ActionStart = (props) => {
                             if (complete) {
                                 setActionStart(false)
                             }
+                            if (next) {
+                                setActionStart(false)
+                            }
                         }}
                     >
                         이어서 하기
@@ -906,8 +916,8 @@ const ModalEl = styled.div`
     flex-direction: column;
     align-items: center;
     bottom: 0;
-    left: 0;
     z-index: 5;
+    max-width: 48rem;
 `
 
 export default ActionStart

@@ -6,6 +6,9 @@ import { moimUpdateMD } from '../../redux/async/moim'
 import config from '../../shared/aws_config'
 import { uploadFile } from 'react-s3'
 import MapSearch from './MapSearch'
+import Icon from '../../components/icons/Icon'
+import clsx from 'clsx'
+import { toast } from '../../shared/utils'
 
 const MoimUpdateWrite = () => {
     const dispatch = useDispatch()
@@ -21,12 +24,15 @@ const MoimUpdateWrite = () => {
     const [contents, setContents] = React.useState(beforeContent)
     const [selectedFile, setSelectedFile] = React.useState(null)
 
-    const [startDate, setStartDate] = React.useState(new Date())
-    const [endDate, setEndDate] = React.useState(new Date())
+    const [startDate, setStartDate] = React.useState(new Date(refPost?.startAt))
+    const [endDate, setEndDate] = React.useState(new Date(refPost?.finishAt))
+
+    const [imgState, setImageState] = React.useState(false)
 
     // * upload S3 & update
     const handleFileInput = (e) => {
         setSelectedFile(e.target.files[0])
+        setImageState(true)
     }
     const handleUpload = async (file) => {
         if (selectedFile !== null) {
@@ -39,6 +45,31 @@ const MoimUpdateWrite = () => {
                         finishAt: endDate,
                         imgSrc: data.location,
                         moimId,
+                    }
+                    if (title === '') {
+                        toast(1200, false, 'error', '제목을 입력해주세요')
+                        return
+                    } else if (contents === '') {
+                        toast(1200, false, 'error', '내용을 입력해주세요')
+
+                        return
+                    } else if (contents.length > 500) {
+                        toast(
+                            1200,
+                            false,
+                            'error',
+                            '내용은 500자 미만으로 입력 가능합니다.'
+                        )
+
+                        return
+                    } else if (title.length > 30) {
+                        toast(
+                            1200,
+                            false,
+                            'error',
+                            '내용은 30자 이내로 입력 가능합니다.'
+                        )
+                        return
                     }
                     dispatch(moimUpdateMD(req))
                 })
@@ -57,6 +88,30 @@ const MoimUpdateWrite = () => {
                 startAt: startDate,
                 finishAt: endDate,
             }
+            if (title === '') {
+                toast(1200, false, 'error', '제목을 입력해주세요')
+                return
+            } else if (contents === '') {
+                toast(1200, false, 'error', '내용을 입력해주세요')
+
+                return
+            } else if (contents.length > 500) {
+                toast(
+                    1200,
+                    false,
+                    'error',
+                    '내용은 500자 미만으로 입력 가능합니다.'
+                )
+                return
+            } else if (title.length > 30) {
+                toast(
+                    1200,
+                    false,
+                    'error',
+                    '내용은 30자 이내로 입력 가능합니다.'
+                )
+                return
+            }
             dispatch(moimUpdateMD(req))
         }
     }
@@ -67,16 +122,30 @@ const MoimUpdateWrite = () => {
             <section className="moim-post">
                 <h4 className="post-subtitle">모임 제목 수정</h4>
                 <input
-                    className="moim-post"
+                    className={clsx(
+                        'moim-post',
+                        title.length > 30 && 'error-input'
+                    )}
                     placeholder="모임 제목을 입력하세요. (ex. 한강 러닝 모집)"
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}
                 />
+                {title.length > 30 && (
+                    <p className="error-desc">
+                        모임 제목은 30자 이내로 작성해주세요.
+                    </p>
+                )}
                 <h4 className="post-subtitle">모임 내용 수정</h4>
                 <textarea
+                    className={clsx('', contents.length > 500 && 'error-input')}
                     onChange={(e) => setContents(e.target.value)}
                     value={contents}
                 />
+                {contents.length > 500 && (
+                    <p className="error-desc">
+                        모임 내용은 500자 이내로 작성해주세요.
+                    </p>
+                )}
                 <h4 className="post-subtitle">모임 위치 수정</h4>
                 <MapSearch mapUpdate="true" />
                 <h4 className="post-subtitle">모임 날짜 수정</h4>
@@ -84,16 +153,24 @@ const MoimUpdateWrite = () => {
                     <DatePicker
                         selected={startDate}
                         onChange={(date) => setStartDate(date)}
+                        minDate={new Date()}
                     />
                     <DatePicker
                         selected={endDate}
                         onChange={(date) => setEndDate(date)}
+                        minDate={new Date()}
                     />
                 </div>
                 <h4 className="post-subtitle">이미지 수정</h4>
-                <label className="image-input" htmlFor="image">
-                    +
-                </label>
+                {imgState ? (
+                    <label className="image-input" htmlFor="image">
+                        <Icon icon="check" size="3rem" color="white" />
+                    </label>
+                ) : (
+                    <label className="image-input" htmlFor="image">
+                        +
+                    </label>
+                )}
                 <input
                     id="image"
                     type="file"

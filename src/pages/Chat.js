@@ -5,31 +5,22 @@ import 'moment/locale/ko'
 import moment from 'moment'
 import socketIOClient from 'socket.io-client'
 import { history } from '../redux/store'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { getToken } from '../shared/utils'
+import { getToken, toast } from '../shared/utils'
 import Header from '../components/Header'
 import { useMutation, useQuery } from 'react-query'
 import Icon from '../components/icons/Icon'
 import clsx from 'clsx'
+import { loginCheckMD } from '../redux/async/user'
 
 const socketMoim = socketIOClient('https://mingijuk.shop/chat')
 
 const Chat = () => {
     const chatzoneRef = React.useRef(null)
+    const disptach = useDispatch()
 
     // ! toast
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'center',
-        showConfirmButton: false,
-        timer: 1200,
-        timerProgressBar: false,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
 
     // ! axios config
     const instance = axios.create({
@@ -99,6 +90,7 @@ const Chat = () => {
 
     // ! go to scroll bottom
     React.useEffect(() => {
+        disptach(loginCheckMD())
         window.scrollTo(0, chatzoneRef.current.scrollHeight)
     }, [messageArray, newMsgArray])
 
@@ -123,10 +115,7 @@ const Chat = () => {
         socketMoim.on('updateMsg', (data) => {
             if (isSubscribe) {
                 if (data.name === 'SERVER') {
-                    Toast.fire({
-                        icon: 'info',
-                        title: data.msg,
-                    })
+                    toast(600, true, 'info', data.msg)
                 } else if (data.name !== 'SERVER') {
                     setNewMsgArray((newMsgArray) => [...newMsgArray, data])
                 }
@@ -140,14 +129,25 @@ const Chat = () => {
     // ! post message ( +post api )
     const sendMessage = () => {
         if (msgValue === '') return false
-        instance
-            .post(`/api/moims/${moimId}/${roomId}`, {
-                contents: msgValue,
-            })
-            .then((res) => {})
-            .catch((error) => {})
-        socketMoim.emit('sendMsg', userNick, msgValue, roomId)
-        setMsgValue('')
+        if (msgValue.length < 251) {
+            instance
+                .post(`/api/moims/${moimId}/${roomId}`, {
+                    contents: msgValue,
+                })
+                .then((res) => {})
+                .catch((error) => {})
+            socketMoim.emit('sendMsg', userNick, msgValue, roomId)
+            setMsgValue('')
+        } else {
+            toast(600, false, 'error', '글자수는 250자 이하만 가능합니다.')
+            return
+        }
+    }
+
+    const onKeyPress = (e) => {
+        if (e.key == 'Enter') {
+            sendMessage()
+        }
     }
 
     // ! post / update Notice
@@ -264,7 +264,7 @@ const Chat = () => {
                                             <span className="chat-title">
                                                 {msg.MoimUser?.User?.nickName}
                                             </span>
-                                            <div>
+                                            <div className="chat-column">
                                                 <p className="chat-content">
                                                     {msg?.contents}
                                                 </p>
@@ -325,6 +325,7 @@ const Chat = () => {
                 </section>
                 <div className="input-container">
                     <input
+                        onKeyPress={onKeyPress}
                         placeholder="메세지"
                         value={msgValue}
                         onChange={(e) => {

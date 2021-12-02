@@ -4,17 +4,19 @@ import { history } from '../../redux/store'
 import Icon from '../../components/icons/Icon'
 import 'moment/locale/ko'
 import moment from 'moment'
-import '../../styles/moim/moim-main.scss'
 import {
     moimLikeMD,
     moimLocationMD,
     moimUnlikeMD,
 } from '../../redux/async/moim'
+import { clearFilter } from '../../redux/modules/moimSlice'
 
 const PostDesc = () => {
     const dispatch = useDispatch()
 
     const [posts, setPosts] = useState('')
+
+    const [empty, setEmpty] = useState(false)
     const post_data_all = useSelector((state) => state.moim.moim_all)
     const loginuserID = useSelector((state) => state.user.userInfo.userID)
 
@@ -190,7 +192,7 @@ const PostDesc = () => {
     const [filterTextState, setFilterTextState] = useState(false)
 
     const locationfilter = location1 + ' ' + location2
-    const filter_data_all = useSelector((state) => state.moim.filter)
+    let filter_data_all = useSelector((state) => state.moim.filter)
 
     const sortarr = () => {
         let temp = [...posts]
@@ -203,16 +205,46 @@ const PostDesc = () => {
         setPosts(temp)
     }
 
+    console.log(
+        'post : ',
+        posts,
+        'empty :',
+        empty,
+        'filter_data :',
+        filter_data_all
+    )
+
+    React.useEffect(() => {
+        filter_data_all = true
+        console.log('a', filter_data_all)
+    }, [])
+
+    console.log('aa', filter_data_all?.length)
+
     React.useEffect(() => {
         setPosts(post_data_all)
+        if (posts > 0 && filter_data_all?.length === undefined) {
+            setEmpty(false)
+        }
         if (filter_data_all?.length > 0) {
-            sortarr()
-            setPosts(filter_data_all)
-        } else if (filter_data_all === '') {
-            filterState && setPosts('')
+            let temp = [...filter_data_all]
+            temp?.sort((a, b) => {
+                return (
+                    new Date(b?.createdAt).getTime() -
+                    new Date(a?.createdAt).getTime()
+                )
+            })
+            console.log('s 111')
+            setPosts(temp)
+            setEmpty(false)
+        } else if (filter_data_all === false) {
+            setEmpty(true)
+            setPosts(post_data_all)
+            console.log('s 2')
         }
         return () => {
-            setPosts(post_data_all)
+            filter_data_all === true
+            dispatch(clearFilter())
         }
     }, [post_data_all, filter_data_all])
 
@@ -221,6 +253,14 @@ const PostDesc = () => {
         setFilterState(false)
         setPosts(filter_data_all)
     }
+
+    console.log(
+        posts,
+        'filter_data_all:',
+        filter_data_all,
+        'filter_data_all.length :',
+        filter_data_all.length
+    )
 
     return (
         <>
@@ -286,16 +326,19 @@ const PostDesc = () => {
                         </div>
                     )}
                 </div>
-                {/* <button
-                    className="filter-btn"
+                <button
+                    className="all-btn filter-btn"
                     onClick={() => {
+                        setEmpty(false)
                         setFilterTextState(false)
                         setFilterState(false)
                         setPosts(post_data_all)
+                        filter_data_all = undefined
+                        console.log(filter_data_all)
                     }}
                 >
                     전체보기
-                </button> */}
+                </button>
                 <button
                     className="latest-filter-btn filter-btn"
                     onClick={() => {
@@ -321,7 +364,8 @@ const PostDesc = () => {
 
             {/* ******** POST ********* */}
 
-            {posts?.length > 0 && filter_data_all.length !== 0 ? (
+            {!empty && post_data_all?.length > 0 ? (
+                posts?.length > 0 &&
                 posts?.map((el, idx) => (
                     <div key={idx} className="post-warp">
                         {el?.imgSrc === null ? (
@@ -356,7 +400,11 @@ const PostDesc = () => {
 
                                 <div className="post-info">
                                     <span>
-                                        {el?.MoimUsers[0]?.User?.nickName}
+                                        {
+                                            el?.MoimUsers?.filter(
+                                                ({ host }) => host === 1
+                                            )[0]?.User?.nickName
+                                        }
                                     </span>
                                     <span>
                                         {moment(el?.createdAt).fromNow()}
@@ -392,12 +440,7 @@ const PostDesc = () => {
                                 </div>
                                 <div className="title">{el?.title}</div>
                                 <div className="imgbox">
-                                    <div
-                                        className="divimg"
-                                        style={{
-                                            backgroundImage: `url(${el.imgSrc})`,
-                                        }}
-                                    ></div>
+                                    <img src={el.imgSrc} />
                                 </div>
                                 <div className="post-info">
                                     <span>

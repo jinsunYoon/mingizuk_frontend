@@ -16,19 +16,7 @@ import {
     moimScrollMD,
     moimLocationScrollMD,
 } from '../async/moim'
-import Swal from 'sweetalert2'
-
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'center',
-    showConfirmButton: false,
-    timer: 500,
-    timerProgressBar: false,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-    },
-})
+import { toast } from '../../shared/utils'
 
 const initialState = {
     moim_all: {},
@@ -62,13 +50,13 @@ const moimSlice = createSlice({
         setLoadingFalse: (state, { payload }) => {
             state.detail_loading = false
         },
+        clearFilter: (state, { payload }) => {
+            state.filter = true
+        },
     },
     extraReducers: {
         [moimCreateMD.fulfilled]: (state, { payload }) => {
-            Toast.fire({
-                icon: 'success',
-                title: '모임 글이 게시되었습니다.',
-            })
+            toast(600, false, 'success', '모임 글이 게시되었습니다.')
         },
         [moimCreateMD.rejected]: (state, { payload }) => {},
         [moimReadMD.fulfilled]: (state, { payload }) => {
@@ -92,11 +80,13 @@ const moimSlice = createSlice({
 
             if (state.moim_detail !== '') {
                 state.moim_detail.Likes.push({ userId: Number(likeUser) })
-                state.moim_all.filter(
-                    (post) =>
-                        post.id === Number(likePost) &&
-                        post.Likes.push({ userId: Number(likeUser) })
-                )
+                if (state.moim_all?.length !== undefined) {
+                    state.moim_all.filter(
+                        (post) =>
+                            post.id === Number(likePost) &&
+                            post.Likes.push({ userId: Number(likeUser) })
+                    )
+                }
             } else {
                 state.moim_all.filter(
                     (post) =>
@@ -114,14 +104,16 @@ const moimSlice = createSlice({
                 )
                 state.moim_detail.Likes = result
 
-                state.moim_all.map((post) => {
-                    if (post.id === Number(unlikePost)) {
-                        const temp = post.Likes.filter(
-                            (like) => like.userId !== Number(unlikeUser)
-                        )
-                        post.Likes = temp
-                    }
-                })
+                if (state?.moim_all?.length !== undefined) {
+                    state.moim_all.map((post) => {
+                        if (post.id === Number(unlikePost)) {
+                            const temp = post.Likes.filter(
+                                (like) => like.userId !== Number(unlikeUser)
+                            )
+                            post.Likes = temp
+                        }
+                    })
+                }
             } else {
                 state.moim_all.map((post) => {
                     if (post.id === Number(unlikePost)) {
@@ -160,23 +152,22 @@ const moimSlice = createSlice({
                 (comment) => comment.id !== payload.reviewId
             )
             state.moim_detail.Comments = refReviews
-            Toast.fire({
-                icon: 'success',
-                title: '댓글을 삭제하였어요.',
-            })
+            toast(600, false, 'success', '댓글을 삭제하였어요.')
         },
         [moimUpdateReviewMD.fulfilled]: (state, { payload }) => {
             const refIdx = state.moim_detail.Comments.findIndex(
                 (comment) => comment.id === payload.commentId
             )
             state.moim_detail.Comments[refIdx].contents = payload.contents
-            Toast.fire({
-                icon: 'success',
-                title: '댓글을 수정했어요.',
-            })
+            toast(600, false, 'success', '댓글을 수정했어요.')
         },
         [moimLocationMD.fulfilled]: (state, { payload }) => {
-            state.filter = payload.data.filterMoims
+            if (payload?.data?.filterMoims?.length === 0) {
+                state.filter = false
+                console.log('없는데?')
+            } else {
+                state.filter = payload.data.filterMoims
+            }
         },
         [moimScrollMD.fulfilled]: (state, { payload }) => {
             state.moim_scroll.push(payload.data.moreMoims)
@@ -194,6 +185,7 @@ export const {
     setPlace,
     setChatHost,
     setLoadingFalse,
+    clearFilter,
 } = moimSlice.actions
 
 //* slice export

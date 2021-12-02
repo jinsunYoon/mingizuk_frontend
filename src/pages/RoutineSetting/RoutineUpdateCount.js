@@ -23,6 +23,7 @@ const RoutineUpdateCount = () => {
             actions: actionSet,
             isMain: false,
         }
+        console.log(data)
 
         dispatch(myRoutineUpdateMD(data))
         dispatch(resetAction())

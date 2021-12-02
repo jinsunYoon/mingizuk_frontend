@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 //*style
 import styled from 'styled-components'
-import LockIcon from '@mui/icons-material/Lock'
+import Icon from '../../components/icons/Icon'
 
 // 레벨별(1.Lv ~10.Lv)
 const CollectionItem = () => {
@@ -11,12 +11,10 @@ const CollectionItem = () => {
     return (
         <>
             {collection ? (
-                <ItemContainer>
-                    <Item />
-                </ItemContainer>
+                <ItemContainer></ItemContainer>
             ) : (
                 <ItemContainer>
-                    <LockIcon style={{ color: '#6B76FF' }} />
+                    <Icon icon="bx_bx-lock" size="24px" />
                 </ItemContainer>
             )}
         </>

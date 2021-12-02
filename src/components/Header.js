@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
 import {
     ButtonOutlined,
@@ -7,13 +8,12 @@ import {
     GoMain,
     Text,
 } from '../elements/index'
-
-import { MenuModal } from '../components/index'
-
+import { loginCheckMD } from '../redux/async/user'
 import { history } from '../redux/store'
 
 const Header = (props) => {
     const { name, type } = props
+    const dispatch = useDispatch()
     return (
         <React.Fragment>
             <div
@@ -61,6 +61,7 @@ const Header = (props) => {
                             _width={'false'}
                             _others={'position: fixed, top:0;'}
                             _onClick={() => {
+                                dispatch(loginCheckMD())
                                 history.push('/')
                             }}
                         >

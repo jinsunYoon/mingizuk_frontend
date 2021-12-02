@@ -31,10 +31,12 @@ const LevelBar = ({ exp, expMax }) => {
             result = 8
         } else if (exp >= 80000 && exp < 90000) {
             result = 9
-        } else if (exp >= 90000 && exp <= 92000) {
+        } else if (exp >= 90000 && exp <= 100000) {
             result = 10
         }
         return result
+
+        // result = Math.floor((exp + 10000) / 10000)
     }
     const calcLevelBar = (exp - (level(exp) - 1) * 10000) / 100
 
@@ -71,17 +73,17 @@ const FullGauge = styled.div`
     width: 40%;
     background-color: lightgray;
     height: 0.875rem;
-    border-radius: 5rem;
+    border-radius: 5px;
     margin: 0.5rem 0px;
 `
 
 const ExpGauge = styled.div`
+    wudtg: inherit;
     height: inherit;
     background-color: #6b76ff;
     z-index: 1;
     position: absolute;
-    border-top-left-radius: 3rem;
-    border-bottom-left-radius: 3rem;
+    border-radius: 5px;
 `
 
 export default LevelBar

@@ -34,7 +34,7 @@ const MyCreatedMoims = () => {
                             <div
                                 className="postbox"
                                 onClick={() =>
-                                    history.push(`/moim/detail/${i.id}`)
+                                    history.push(`/moim/detail/${i?.moimId}`)
                                 }
                                 key={idx}
                             >
@@ -52,7 +52,7 @@ const MyCreatedMoims = () => {
                                             {i?.Moim?.title}
                                         </span>
                                     </div>
-                                    <div class="etcbox">
+                                    <div className="etcbox">
                                         <div>
                                             <span className="date">
                                                 {

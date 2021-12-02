@@ -24,12 +24,13 @@ const App = () => {
     const dispatch = useDispatch()
 
     const isAuthenticated = useSelector((state) => state?.user?.isLogin)
+
     React.useEffect(() => {
-        dispatch(loginCheckMD())
-        // if (!isAuthenticated) {
-        //     dispatch(loginCheckMD())
-        // }
+        if (!isAuthenticated) {
+            dispatch(loginCheckMD())
+        }
     }, [])
+
     const nav = [
         '/moim',
         '/main',
