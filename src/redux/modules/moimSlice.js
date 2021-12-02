@@ -51,7 +51,7 @@ const moimSlice = createSlice({
             state.detail_loading = false
         },
         clearFilter: (state, { payload }) => {
-            state.filter = true
+            state.filter = undefined
         },
     },
     extraReducers: {
@@ -162,12 +162,7 @@ const moimSlice = createSlice({
             toast(600, false, 'success', '댓글을 수정했어요.')
         },
         [moimLocationMD.fulfilled]: (state, { payload }) => {
-            if (payload?.data?.filterMoims?.length === 0) {
-                state.filter = false
-                console.log('없는데?')
-            } else {
-                state.filter = payload.data.filterMoims
-            }
+            state.filter = payload.data.filterMoims
         },
         [moimScrollMD.fulfilled]: (state, { payload }) => {
             state.moim_scroll.push(payload.data.moreMoims)
