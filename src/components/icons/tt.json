@@ -1,0 +1,56 @@
+{
+    "IcoMoonType": "selection",
+    "icons": [
+        {
+            "icon": {
+                "paths": [
+                    "M491.52 92.56c-112.927 0-204.8 91.29-204.8 203.499v81.4h-40.96c-45.179 0-81.92 36.507-81.92 81.399v366.297c0 44.892 36.741 81.4 81.92 81.4h491.52c45.179 0 81.92-36.508 81.92-81.4v-366.297c0-44.892-36.741-81.399-81.92-81.399h-40.96v-81.4c0-112.21-91.873-203.499-204.8-203.499zM368.64 296.059c0-67.318 55.132-122.1 122.88-122.1s122.88 54.782 122.88 122.1v81.4h-245.76v-81.4zM737.362 825.156h-204.882v-92.713c24.371-14.123 40.96-40.088 40.96-70.087 0-44.888-36.741-81.396-81.92-81.396s-81.92 36.508-81.92 81.396c0 29.958 16.589 55.964 40.96 70.087v92.713h-204.8v-366.297h491.52l0.082 366.297z"
+                ],
+                "attrs": [{ "fill": "rgb(107, 118, 255)" }],
+                "width": 983,
+                "isMulticolor": false,
+                "isMulticolor2": false,
+                "grid": 0,
+                "tags": ["bx_bx-lock"],
+                "colorPermutations": { "10711825511651711761": [{ "f": 1 }] }
+            },
+            "attrs": [{ "fill": "rgb(107, 118, 255)" }],
+            "properties": {
+                "order": 19,
+                "id": 1,
+                "name": "bx_bx-lock",
+                "prevSize": 32,
+                "code": 59648
+            },
+            "setIdx": 1,
+            "setId": 7,
+            "iconIdx": 0
+        }
+    ],
+    "height": 1024,
+    "metadata": { "name": "icomoon" },
+    "preferences": {
+        "showGlyphs": true,
+        "showQuickUse": true,
+        "showQuickUse2": true,
+        "showSVGs": true,
+        "fontPref": {
+            "prefix": "icon-",
+            "metadata": { "fontFamily": "icomoon" },
+            "metrics": { "emSize": 1024, "baseline": 6.25, "whitespace": 50 },
+            "embed": false
+        },
+        "imagePref": {
+            "prefix": "icon-",
+            "png": true,
+            "useClassSelector": true,
+            "color": 0,
+            "bgColor": 16777215,
+            "classSelector": ".icon",
+            "name": "icomoon"
+        },
+        "historySize": 50,
+        "showCodes": true,
+        "gridSize": 16
+    }
+}

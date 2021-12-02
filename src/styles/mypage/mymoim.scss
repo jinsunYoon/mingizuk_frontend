@@ -1,0 +1,169 @@
+//mymoim
+@import '../shared/common.scss';
+
+.mymoim-layout {
+    max-width: $tablet;
+    height: auto;
+    margin: 50px auto;
+    -webkit-appearance: none;
+
+    .toogle-layout {
+        position: sticky;
+        min-width: 100%;
+        height: 100%;
+        overflow-x: scroll;
+        border-bottom: 1px solid #eee;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        .toogle-container {
+            min-width: 480px;
+            height: 100%;
+            display: flex;
+            justify-content: space-evenly;
+        }
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+    .mymoim-list {
+        overflow-y: auto;
+        height: calc(100vh - 150px);
+    }
+
+    //mymoim - create , join, liked, comment
+    .mymoim-contents {
+        max-width: $tablet;
+        background-color: #eee;
+        .contents-none {
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+
+            p {
+                margin-top: 10rem;
+                color: $text-gray;
+
+                font-size: 1rem;
+            }
+            button {
+                font-size: 0.85rem;
+                color: $primary;
+                width: 208px;
+                height: 48px;
+                margin: 2rem;
+                border: $primary 1px solid;
+                border-radius: 10px;
+                background-color: $white;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                -ms-border-radius: 10px;
+                -o-border-radius: 10px;
+
+                &:hover {
+                    background-color: $primary;
+                    color: $white;
+                }
+            }
+        }
+
+        .postbox {
+            width: 100%;
+            height: auto;
+            border: none;
+            background: $white;
+            margin-bottom: 1rem;
+            box-sizing: border-box;
+
+            .location {
+                @include text-style-12(12px, 0.15px, $text-gray);
+                display: flex;
+                align-items: flex-end;
+                height: 40px;
+                padding-left: 2rem;
+                line-height: 1.2rem;
+            }
+
+            .titlebox {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                text-align: left;
+                padding-left: 2rem;
+
+                .title {
+                    @include text-style-16(24px, 0.15px, #2e3a59);
+                    margin-top: 1rem;
+                }
+                .comments {
+                    @include text-style-14(20px, 0.15px, gray);
+                    margin-top: 0.5rem;
+                }
+            }
+
+            .etcbox {
+                @include text-style-12(12px, 0.15px, $text-gray);
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 1rem 2rem;
+
+                .writer {
+                    padding-right: 1rem;
+                }
+
+                .join {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+
+            .commentbox {
+                @include text-style-12(12px, 0.15px, $text-gray);
+                width: 100%;
+                height: 40px;
+                display: flex;
+                flex-direction: row;
+                border-top: 1px solid #eee;
+                padding: 0rem 2rem;
+
+                div {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-right: 0.2rem;
+                }
+                span {
+                    display: inline-block;
+                    margin-right: 1rem;
+                }
+            }
+        }
+    }
+
+    //mycomment
+    .mycomment-titlebox {
+        padding: 1rem 2rem;
+        .title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            line-height: 24px;
+            color: $black;
+            svg {
+                color: $text-gray;
+                font-size: 1rem;
+            }
+        }
+        .comments {
+            font-size: 0.75rem;
+            line-height: 24px;
+            color: $text-gray;
+        }
+    }
+}

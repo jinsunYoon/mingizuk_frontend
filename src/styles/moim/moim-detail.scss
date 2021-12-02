@@ -1,0 +1,278 @@
+@import '../shared/common.scss';
+
+.detail-layout {
+    width: 100%;
+    padding: 0 1rem;
+    margin-top: 4rem;
+    @include column-flexbox();
+
+    .moim-detail-article {
+        @include column-flexbox(center, start);
+        max-width: 768px;
+        width: 100%;
+        .detail-location {
+            @include text-style-12(0.75rem, 0.009rem, $text-gray);
+            margin-bottom: 1.563rem;
+        }
+        h6 {
+            @include text-style-16(1.5rem, 0.009rem, $black);
+        }
+        img {
+            width: auto;
+            height: 10rem;
+        }
+        .img-desc-container {
+            @include column-flexbox(center, center);
+            width: 100%;
+            img {
+                margin-top: 1rem;
+                width: 80vw;
+                height: 200px;
+                object-fit: contain;
+            }
+        }
+        .detail-desc {
+            @include text-style-14(24px, 0.15px, $black);
+            text-align: left;
+            width: inherit;
+            margin-top: 1.688rem;
+        }
+        button {
+            @include flexbox();
+            width: 100%;
+            background-color: $primary;
+            color: $white;
+            height: 3rem;
+            border: none;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        .detail-post-info {
+            display: grid;
+            grid-template-columns: 3fr 7fr 2fr;
+            margin-top: 1.25rem;
+            span {
+                @include text-style-12(24px, 0.15px, $text-gray);
+            }
+        }
+    }
+}
+
+.detail-option {
+    @include flexbox(start, center);
+    max-width: 768px;
+    margin-top: 8px;
+    width: 90vw;
+    height: 2.5rem;
+    padding: 0.875rem 0;
+    border-bottom: 1px solid #eeeeee;
+    margin-bottom: 1rem;
+    .option-child {
+        @include flexbox();
+        width: 12.5rem;
+        height: inherit;
+        margin: 0 10px 0;
+        font-size: 11px;
+        color: $text-gray;
+    }
+}
+
+.review-input-container {
+    @include flexbox(between, center);
+    max-width: 768px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+
+    input {
+        width: 100%;
+        height: 3rem;
+        padding-left: 0.8rem;
+        border: 1px solid #ececec;
+    }
+    button {
+        width: 4rem;
+        height: 3rem;
+        border: none;
+    }
+}
+
+.post-detail-btns-container {
+    @include flexbox(center, end);
+    button {
+        width: 3rem;
+        height: 2rem;
+        margin-left: 0.5rem !important;
+    }
+}
+
+.location-btn {
+    @include flexbox(between, center);
+    width: 100%;
+}
+
+.join-user-container {
+    width: 100%;
+    button {
+        margin-top: 1rem !important;
+        &:hover,
+        &:active {
+            cursor: pointer;
+        }
+    }
+    .leave {
+        background-color: $white;
+        border: 1px solid $primary;
+        color: $primary;
+        &:hover,
+        &:active {
+            cursor: pointer;
+        }
+    }
+}
+
+.post-review-container {
+    position: relative;
+    width: 100%;
+    padding: 0 1rem;
+    max-width: 768px;
+    display: grid;
+    place-items: center center;
+    --column-count: 1;
+    overflow-y: auto;
+    grid-template-rows: repeat(1, auto);
+    scroll-padding: 0px 24px;
+    scroll-snap-type: y mandatory;
+    grid-auto-flow: row;
+    gap: 0.75rem;
+    row-gap: 0.75rem;
+    column-gap: 0.75rem;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    margin-bottom: 1rem;
+
+    .post-review-box {
+        width: 100%;
+        max-width: 768px;
+        @include column-flexbox(center, start);
+        span {
+            @include text-style-12(24px, auto);
+        }
+        p {
+            @include text-style-14(24px, auto);
+        }
+        .post-reivew-date {
+            @include text-style-12(18px, 0.15px, $text-gray);
+            margin-bottom: 0.2rem;
+        }
+    }
+    .review-opt-warp {
+        position: absolute;
+        right: 0;
+    }
+    .review-btn-container {
+        @include flexbox();
+        position: absolute;
+        right: 1.3rem;
+        button {
+            @include flexbox();
+            border: none;
+            background-color: $primary;
+            width: 2.5rem;
+            height: 1.5rem;
+            color: $white;
+            border-radius: 0.5rem;
+            &:first-child {
+                margin-right: 0.5rem;
+            }
+            font-size: 12px;
+            text-align: center;
+        }
+    }
+}
+
+.empty-review {
+    width: 100%;
+    @include text-style-12(1.5rem, 0.15px, $text-gray);
+    max-width: 768px;
+    @include flexbox();
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.opt-icon {
+    width: 2rem;
+    height: 2rem;
+    @include column-flexbox();
+}
+
+.option-background {
+    width: 100vw;
+    @include flexbox(center, center);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: rgba(144, 144, 144, 0.5);
+    z-index: 6;
+}
+
+.opt-warp {
+    width: 100vw;
+    height: 100vh;
+    @include flexbox(center, center);
+}
+
+.option-container {
+    @include column-flexbox(center, center);
+    position: fixed;
+    max-width: 768px;
+    bottom: 0;
+    width: 100vw;
+    height: 10rem;
+    background-color: $white;
+    border: none;
+    border-top-right-radius: 1.125rem;
+    border-top-left-radius: 1.125rem;
+    button {
+        @include flexbox(start, center);
+        border: none;
+        background-color: inherit;
+        height: 3.75rem;
+        width: 100%;
+        padding-left: 1.125rem;
+        &:hover,
+        :active {
+            background-color: $primary;
+        }
+        span {
+            @include text-style-16(1rem, auto, $black);
+            @include flexbox(start, center);
+            font-weight: 700;
+            padding-left: 2rem;
+            width: 100%;
+            height: inherit;
+            text-align: left;
+            &:hover,
+            :active {
+                background-color: $primary;
+                color: $white;
+            }
+        }
+    }
+}
+
+.not-allowed {
+    cursor: not-allowed !important;
+}
+
+.post-detail-btn {
+    width: 90vw !important;
+    max-width: 768px !important;
+    &:hover,
+    &:active {
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+        <meta property="og:title" content="밍기적" />
+        <meta property="og:description" content="숨쉬기 운동도 힘겨운 사람들을 위한 운동 앱" />
+        <meta property="og:image" content="{{ url_for('public', filename='ogimage.jpg') }}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="theme-color" content="#000000" />
+        <meta
+            name="description"
+            content="Web site created using create-react-app"
+        />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        <script
+            type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9ca95a8cc57c39bc0f4c84a237e8510&libraries=services"
+        ></script>
+        <script>
+            document.documentElement.addEventListener(
+                'touchstart',
+                function (event) {
+                    if (event.touches.length > 1) {
+                        event.preventDefault()
+                    }
+                },
+                false
+            )
+
+            var lastTouchEnd = 0
+
+            document.documentElement.addEventListener(
+                'touchend',
+                function (event) {
+                    var now = new Date().getTime()
+                    if (now - lastTouchEnd <= 300) {
+                        event.preventDefault()
+                    }
+                    lastTouchEnd = now
+                },
+                false
+            )
+        </script>
+        <!-- <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-messaging.js"></script> -->
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+KR:wght@500;700&display=swap');
+        </style>
+        <title>Mingizuk</title>
+    </head>
+    <body>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="root"></div>
+    </body>
+</html>

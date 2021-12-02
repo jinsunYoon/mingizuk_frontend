@@ -1,0 +1,189 @@
+@import '../shared/common.scss';
+
+.onBoarding-warp {
+    @include flexbox();
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.pleaz {
+    @include flexbox();
+    padding-top: 4rem;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: $primary;
+}
+
+.onBoarding-container {
+    @include column-flexbox(start, center);
+    padding: 1rem 3.5rem 90px 3.5rem;
+    width: 100%;
+    max-width: 768px;
+    height: inherit;
+    background-color: $primary;
+}
+
+.onBoarding-btn-container {
+    button {
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: $white;
+        margin-right: 0.875rem;
+        border: none;
+        border-radius: 0.5rem;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    margin-bottom: 28px;
+}
+
+.onBoarding-group {
+    @include column-flexbox(center, center);
+    h1,
+    p {
+        color: $white;
+        text-align: center;
+    }
+    h1 {
+        font-size: 1.5rem;
+        letter-spacing: 0.15px;
+        line-height: 2.25rem;
+        margin-bottom: 1rem;
+        @media screen and (max-width: 320px) {
+            font-size: 1.3rem;
+        }
+    }
+    p {
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0.15px;
+        margin-bottom: 7rem;
+    }
+    img {
+        width: 18rem;
+        height: auto;
+        position: relative;
+        bottom: 3rem;
+        @media screen and (max-width: 320px) {
+            width: 16rem;
+            bottom: 5rem;
+        }
+    }
+}
+
+.act-on-btn {
+    background-color: #434bb5 !important;
+}
+
+.act-in-btn {
+    background-color: #a1a7e7 !important;
+}
+
+.onBoarding-btn-box {
+    @include flexbox(start, center);
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 3.5rem;
+    max-width: 768px;
+    button {
+        width: 50vw;
+        height: 3.5rem;
+        background-color: #f0f1ff;
+        color: #6b76ff;
+        border: none;
+        cursor: pointer;
+        &:first-child {
+            @include flexbox(start, center);
+            padding-left: 2rem;
+        }
+        &:last-child {
+            @include flexbox(end, center);
+            padding-right: 2rem;
+        }
+    }
+}
+
+.rion-main {
+    width: 100vw;
+    height: 100vh;
+    @include column-flexbox(center, center);
+    font-size: 1.5rem;
+    letter-spacing: 0.15px;
+    line-height: 2.25rem;
+    margin-bottom: 0.5rem;
+    color: $white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.install-btn-warp {
+    width: 100vw;
+    max-width: 768px;
+    @include column-flexbox();
+    padding: 0 4.5rem;
+
+    h2 {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+    }
+}
+
+.install-desc {
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 1.3rem;
+}
+
+.install-btn {
+    display: inline-block;
+    min-width: 18rem;
+    padding: 0 1.3rem;
+    height: 2.8rem;
+    margin-top: 1.3rem;
+    border: none;
+    color: $primary;
+    background-color: $white;
+    border-radius: 10rem;
+    cursor: pointer;
+    transition: opacity 200ms ease-in-out;
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.mingi-modal-container {
+    position: fixed;
+    @include flexbox();
+    width: 85vw;
+    height: 20rem;
+    background-color: $white;
+    border-radius: 3rem;
+    padding: 1rem;
+    color: $primary;
+    max-width: 700px;
+}
+
+.error {
+    position: absolute;
+    bottom: 2rem;
+    text-align: right;
+    right: 2rem;
+    opacity: 0.8;
+}
+
+.error-a {
+    color: $primary;
+    text-decoration: none;
+    outline: none;
+}
+
+.error-a:hover,
+.error-a:active {
+    text-decoration: none;
+    color: $primary;
+}

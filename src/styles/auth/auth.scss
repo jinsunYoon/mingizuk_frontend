@@ -1,0 +1,158 @@
+@import '../shared/common.scss';
+
+.auth-layout {
+    @include flexbox(center, start);
+    width: 100vw;
+    height: 100vh;
+}
+
+.contents {
+    @include column-flexbox(start, center);
+    width: 100%;
+    height: 100%;
+    max-width: 768px;
+    padding: 1rem 2rem;
+
+    label {
+        @include text-style-12(0.9rem, auto);
+        width: 100%;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .input-container {
+        @include column-flexbox();
+        width: 100%;
+        margin-top: 3rem;
+        @media screen and (max-height: 568px) {
+            margin-top: 2.5rem;
+        }
+
+        input {
+            width: 100%;
+            height: 3rem;
+            padding-left: 0.8rem;
+            border: 1px solid #d0d0d0;
+            border-radius: 0.25rem;
+            font-size: text-style-14($text-gray);
+            &::placeholder {
+                color: $text-gray;
+            }
+        }
+        label {
+            @include text-style-14(0.9rem, auto);
+        }
+    }
+}
+
+@mixin auth-button($bg, $color) {
+    @include flexbox();
+    width: 100%;
+    height: 3rem;
+    background-color: $bg;
+    color: $color;
+    border: none;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.btn-container {
+    width: 100%;
+
+    .login-btn {
+        @include auth-button($white, $primary);
+        border: 1px solid $primary !important;
+    }
+
+    .kakao-btn {
+        @include auth-button(#FAEF3F, $black);
+    }
+    .naver-btn {
+        @include auth-button(#2db400, $white);
+    }
+
+    .google-btn {
+        @include auth-button(#ef5350, $white);
+    }
+
+    .signup-btn {
+        @include auth-button($primary, $white);
+    }
+
+    .main-btn {
+        @include auth-button($white, $primary);
+        border: 1px solid $primary !important;
+    }
+    .dis-btn {
+        @include auth-button($gray, #999999);
+        cursor: not-allowed;
+    }
+}
+
+.slogin-title {
+    @include flexbox();
+    hr {
+        width: 30%;
+        color: $text-gray;
+        height: 1px;
+    }
+    h3 {
+        width: 40%;
+        color: $text-gray;
+        font-size: 14px;
+        padding: 16px;
+        text-align: center;
+    }
+}
+
+.auth-warning {
+    @include text-style-12(0.9rem, auto, #ff4040);
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.input-warning {
+    border: 1px solid #ff4040 !important;
+}
+
+button {
+    cursor: pointer;
+}
+
+.login-title {
+    @include flexbox();
+    padding: 2rem;
+    margin-left: -1rem;
+    @media screen and (max-height: 568px) {
+        padding: 1rem;
+    }
+    img {
+        width: 2.5rem;
+        height: auto;
+    }
+    h1 {
+        font-size: 1.5rem;
+        color: $primary;
+        margin-left: 9px;
+        font-family: 'Montserrat', sans-serif;
+    }
+}
+
+.login-container {
+    width: 100%;
+    @include column-flexbox();
+    input {
+        @include text-style-14(21px, auto, $black);
+        border: none;
+        width: 100%;
+        border-bottom: 1px solid #eeeeee;
+        height: 2.5rem;
+        padding-left: 0.8rem;
+        &:first-child {
+            margin-bottom: 24px;
+        }
+    }
+    margin-bottom: 1rem;
+}
